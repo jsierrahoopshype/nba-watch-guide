@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 import shutil
 from dataclasses import asdict
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -67,10 +67,19 @@ def write_schedule_cache(path: Path, games: list[Game], season: str) -> None:
     }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
+# Training camp and pre-season sit-outs matter in the days before opening
+# night, so the availability cut-off reaches back a month from the first
+# regular-season game. The previous season ended months earlier, so nothing
+# from it slips through.
+AVAILABILITY_LOOKBACK_DAYS = 30
+
+
 def season_start(games: list[Game]) -> str:
-    """First game date of the season. Anything the availability feed recorded
-    before this belongs to a season that is over."""
-    return min((g.date_et for g in games), default="")
+    """The earliest date the availability feed may be read from."""
+    first = min((g.date_et for g in games), default="")
+    if not first:
+        return ""
+    return (date.fromisoformat(first) - timedelta(days=AVAILABILITY_LOOKBACK_DAYS)).isoformat()
 
 
 def config_tz():
