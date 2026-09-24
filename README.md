@@ -34,9 +34,10 @@ real price and renders as "Free"; `null` is a missing one. A service with
 `carries_verified: false` is still listed with its price and a line saying its
 coverage is unconfirmed, but it counts for no games and stays out of the
 cheapest-combination maths. The "Prices checked" line above the price list
-comes from `_meta.all_prices_checked`. League Pass (`nba_league_pass`) has an
-empty `carries` list on purpose: its coverage comes from
-`rules.league_pass_blackouts`, and the build fails if that service is missing.
+comes from `_meta.all_prices_checked`. League Pass (`nba_league_pass`) gets its
+coverage from `rules.league_pass_blackouts`; its `carries` list holds only
+channels bundled with it (NBA TV), which share its in-market blackout. The
+build fails if that service is missing.
 A team only shows
 local TV once its `local_tv.json` entry is `verified: true`; until then the
 in-market view says "Local details coming".

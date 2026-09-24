@@ -9,7 +9,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from watchguide.coverage import OUT_OF_MARKET, build_state_coverage, carriers_for_game
+from watchguide.coverage import IN_MARKET, OUT_OF_MARKET, build_state_coverage, carriers_for_game
 from watchguide.model import Game, load_services
 
 TEAM = "BOS"
@@ -95,10 +95,11 @@ def test_zero_price_is_free_coverage_and_null_stays_out(shipped):
     assert nbc.has_price and nbc.is_free
     assert not nba_tv.has_price and not nba_tv.is_free
 
-    # Nine free-to-air games and one on NBA TV, which only the unpriced NBA TV carries.
+    # Nine free-to-air games and one on NBA TV. In-market, League Pass (which
+    # bundles NBA TV) is blacked out, so only the unpriced NBA TV carries it.
     games = [game(i, national=["ABC" if i % 2 else "NBC"]) for i in range(9)]
     games.append(game(9, national=["NBA TV"]))
-    cov = build_state_coverage(games, TEAM, shipped, None, OUT_OF_MARKET)
+    cov = build_state_coverage(games, TEAM, shipped, None, IN_MARKET)
     counts = {c.service.id: c.covered for c in cov.per_service}
     assert counts["nba_tv"] == 1                  # coverage still counted
     assert cov.cheapest_full is None              # but it has no price to add up
@@ -133,7 +134,7 @@ def test_prices_checked_line_comes_from_meta(built_site, shipped):
 
 def test_league_pass_is_wired_to_the_rules_block(shipped):
     assert shipped.league_pass_service_id == "nba_league_pass"
-    assert shipped.by_id("nba_league_pass").carries == []
+    assert shipped.by_id("nba_league_pass").carries == ["NBA TV"]
     assert {b.applies_to for b in shipped.blackouts} == {"national_broadcast", "in_market_local"}
     assert "nba_league_pass" in carriers_for_game(game(0), TEAM, shipped, None, OUT_OF_MARKET)
     assert "nba_league_pass" not in carriers_for_game(
@@ -156,3 +157,23 @@ def test_missing_league_pass_service_fails_loudly(tmp_path):
     (tmp_path / "services.json").write_text(json.dumps(raw), encoding="utf-8")
     with pytest.raises(ValueError, match="League Pass"):
         load_services(tmp_path)
+
+
+def test_nba_tv_through_league_pass_only_counts_out_of_market(shipped):
+    # League Pass includes NBA TV, but it is blacked out in-market, so an
+    # in-market reader gains nothing from it. NBA TV itself has no price.
+    nba_tv_game = game(0, national=["NBA TV"])
+    out = carriers_for_game(nba_tv_game, TEAM, shipped, None, OUT_OF_MARKET)
+    assert out == {"nba_league_pass", "nba_tv"}
+    inside = carriers_for_game(nba_tv_game, TEAM, shipped, None, IN_MARKET)
+    assert inside == {"nba_tv"}
+
+
+def test_league_pass_makes_full_out_of_market_coverage_possible(shipped):
+    games = [game(0, national=["NBA TV"]), game(1), game(2, national=["ESPN"])]
+    out = build_state_coverage(games, TEAM, shipped, None, OUT_OF_MARKET)
+    assert sorted(s.id for s in out.cheapest_full.services) == ["espn_unlimited", "nba_league_pass"]
+    inside = build_state_coverage(games, TEAM, shipped, None, IN_MARKET)
+    counts = {c.service.id: c.covered for c in inside.per_service}
+    assert counts["nba_league_pass"] == 0
+    assert inside.cheapest_full is None
