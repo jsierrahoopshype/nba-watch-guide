@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  sched:
+  inj:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v5
@@ -15,39 +15,33 @@ jobs:
       - run: |
           python - <<'PY'
           from curl_cffi import requests
-          from collections import Counter
           import json
-          H={"Referer":"https://www.nba.com/","Origin":"https://www.nba.com"}
-          d=requests.get("https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
-                         impersonate="chrome",timeout=90,headers=H).json()
-          ls=d["leagueSchedule"]; gds=ls["gameDates"]
-          out={}
-          out["seasonYear"]=ls.get("seasonYear")
-          out["lsKeys"]=list(ls.keys())
-          out["gameDates"]=len(gds); out["first"]=gds[0]["gameDate"]; out["last"]=gds[-1]["gameDate"]
-          pref=Counter(); natl=Counter(); ott=Counter(); loc=Counter(); nat_games=0; reg=0; nolocal=0
-          weeks=set(); sample=None
-          for gd in gds:
-            for g in gd["games"]:
-              pref[g["gameId"][:3]]+=1
-              if g["gameId"][:3]!="002": continue
-              reg+=1; weeks.add(g.get("weekNumber"))
-              b=g.get("broadcasters") or {}
-              n=b.get("nationalTvBroadcasters") or []; o=b.get("nationalOttBroadcasters") or []
-              if n or o: nat_games+=1
-              for x in n: natl[x.get("broadcasterAbbreviation")]+=1
-              for x in o: ott[x.get("broadcasterAbbreviation")]+=1
-              ht=b.get("homeTvBroadcasters") or []; at=b.get("awayTvBroadcasters") or []
-              for x in ht+at: loc[x.get("broadcasterAbbreviation")]+=1
-              if not ht and not at and not n and not o: nolocal+=1
-              if sample is None: sample={k:g.get(k) for k in ("gameId","gameCode","gameStatus","gameStatusText","gameDateEst","gameTimeEst","gameDateTimeEst","gameDateUTC","gameDateTimeUTC","weekNumber","arenaName","arenaCity","arenaState","gameLabel","seriesText")}
-                                 
-          out["prefixes"]=dict(pref); out["regular"]=reg; out["nationalGames"]=nat_games
-          out["noBroadcasterAtAll"]=nolocal
-          out["nationalTv"]=natl.most_common(); out["nationalOtt"]=ott.most_common()
-          out["localCodes"]=loc.most_common(90)
-          out["sampleGame"]=sample
-          out["gameKeys"]=sorted(gds[0]["games"][0].keys())
-          out["homeTeamKeys"]=sorted(gds[0]["games"][0]["homeTeam"].keys())
-          print("###JSON###"); print(json.dumps(out, indent=1))
+          u="https://aderoa.github.io/Injuries/injuries.json"
+          r=requests.get(u, impersonate="chrome", timeout=60)
+          print("STATUS", r.status_code, len(r.content), r.headers.get("last-modified"))
+          d=r.json()
+          print("TYPE", type(d).__name__)
+          if isinstance(d, dict):
+            print("KEYS", list(d.keys())[:40])
+            for k in list(d.keys())[:4]:
+              print("  ", k, "=>", json.dumps(d[k])[:600])
+          else:
+            print("LEN", len(d))
+            print(json.dumps(d[:6], indent=1)[:2500])
+            vals=set()
+            for row in d:
+              if isinstance(row, dict):
+                for key in ("status","Status","injuryStatus"):
+                  if key in row: vals.add((key, str(row[key])))
+            print("STATUS_VALUES", sorted(vals)[:40])
+            if d and isinstance(d[0], dict): print("ROWKEYS", sorted(d[0].keys()))
+          PY
+      - name: how depth-charts uses it
+        run: |
+          python - <<'PY'
+          from curl_cffi import requests
+          import re
+          t = requests.get("https://hoopsmatic.com/depth-charts", impersonate="chrome", timeout=60).text
+          i = t.find("aderoa.github.io/Injuries")
+          print(t[max(0,i-1500):i+2500])
           PY
