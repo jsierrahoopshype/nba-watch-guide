@@ -21,16 +21,27 @@ def _out(args) -> Path:
     return Path(args.out).resolve()
 
 
-def cmd_build(args) -> int:
-    for line in full_build(_out(args), today=args.today, offline=args.offline):
+# Exit 3 means the pages were written and can be published, but the run had to
+# fall back on old availability data. The workflow publishes, then goes red.
+DEGRADED_EXIT = 3
+
+
+def _report(outcome) -> int:
+    for line in outcome.notes:
         print(line)
+    if outcome.degraded:
+        print(f"::warning::{outcome.degraded}")
+        print(outcome.degraded, file=sys.stderr)
+        return DEGRADED_EXIT
     return 0
+
+
+def cmd_build(args) -> int:
+    return _report(full_build(_out(args), today=args.today, offline=args.offline))
 
 
 def cmd_refresh(args) -> int:
-    for line in refresh_build(_out(args), today=args.today):
-        print(line)
-    return 0
+    return _report(refresh_build(_out(args), today=args.today))
 
 
 def cmd_games_today(args) -> int:
@@ -48,6 +59,8 @@ def cmd_games_today(args) -> int:
 
 def cmd_verify(args) -> int:
     """Hit the live feeds and print what came back. Useful on its own."""
+    from .build import broadcast_report, broadcast_summary
+    from .context import today_et
     from .sources import injuries as injuries_source
     from .sources import schedule as schedule_source
 
@@ -56,8 +69,7 @@ def cmd_verify(args) -> int:
         games = schedule_source.fetch()
         print(f"schedule OK: {len(games)} regular-season games for {config.SEASON}")
         print(f"  first {games[0].date_et}, last {games[-1].date_et}")
-        national = sum(1 for g in games if g.is_national)
-        print(f"  {national} games carry a national broadcaster")
+        print("  " + broadcast_summary(broadcast_report(games, today_et())))
     except Exception as exc:
         ok = False
         print(f"schedule FAILED: {exc}")

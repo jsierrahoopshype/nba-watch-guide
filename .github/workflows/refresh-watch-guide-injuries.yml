@@ -50,16 +50,26 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Refresh availability
+        id: refresh
         if: steps.games.outputs.has_games == 'true'
         env:
           NBA_PROXY_BASE: ${{ vars.NBA_PROXY_BASE }}
           INJURY_FEED_URL: ${{ vars.INJURY_FEED_URL }}
-        run: python -m watchguide --out site refresh
+        run: |
+          set +e
+          python -m watchguide --out site refresh
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -ne 0 ] && [ "$code" -ne 3 ]; then exit "$code"; fi
 
       - name: Check the output
         if: steps.games.outputs.has_games == 'true'
         run: |
           ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
+
+      - name: Commit the raw availability copy
+        if: steps.games.outputs.has_games == 'true'
+        run: ./scripts/commit-raw-injuries.sh
 
       - name: Publish to gh-pages
         if: steps.games.outputs.has_games == 'true'
@@ -67,3 +77,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: ./scripts/publish.sh site gh-pages
+
+      - name: Fail if the availability feed was not trusted
+        if: steps.refresh.outputs.exit_code == '3'
+        run: |
+          echo "The pages were published from the last good availability data." >&2
+          echo "See the warning in the refresh step for what went wrong." >&2
+          exit 1

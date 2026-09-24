@@ -67,18 +67,44 @@ def fixture_games(teams):
     return games
 
 
-@pytest.fixture(scope="session")
-def built_site(tmp_path_factory, fixture_games):
-    """The whole site, rendered offline from the fixture schedule."""
-    out = tmp_path_factory.mktemp("site")
+def _copy_data(tmp_path_factory, label: str):
+    """A writable copy of data/ so a test can change one setting."""
+    data_dir = tmp_path_factory.mktemp(label)
+    src = Path(__file__).resolve().parent.parent / "data"
+    for name in ("teams.json", "services.json", "local_tv.json", "copy.json"):
+        (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
+    return data_dir
+
+
+def _build(tmp_path_factory, fixture_games, label: str, data_dir=None, injuries=None):
+    out = tmp_path_factory.mktemp(label)
     cache = out / "data" / "schedule.json"
     cache.parent.mkdir(parents=True, exist_ok=True)
     cache.write_text(json.dumps({
         "season": "2026-27", "updated_at": TODAY,
         "count": len(fixture_games), "games": [asdict(g) for g in fixture_games],
     }), encoding="utf-8")
-    full_build(out, today=TODAY, offline=True)
+    if injuries is not None:
+        (out / "data" / "injuries.json").write_text(json.dumps(injuries), encoding="utf-8")
+    full_build(out, today=TODAY, offline=True, data_dir=data_dir)
     return out
+
+
+@pytest.fixture(scope="session")
+def built_site(tmp_path_factory, fixture_games):
+    """The whole site, rendered offline from the fixture schedule, with the
+    shipped data files (so noindex is on)."""
+    return _build(tmp_path_factory, fixture_games, "site")
+
+
+@pytest.fixture(scope="session")
+def built_site_indexed(tmp_path_factory, fixture_games):
+    """The same site with noindex turned off in data/copy.json."""
+    data_dir = _copy_data(tmp_path_factory, "data-indexed")
+    copy = json.loads((data_dir / "copy.json").read_text(encoding="utf-8"))
+    copy["noindex"] = False
+    (data_dir / "copy.json").write_text(json.dumps(copy), encoding="utf-8")
+    return _build(tmp_path_factory, fixture_games, "site-indexed", data_dir=data_dir)
 
 
 @pytest.fixture
@@ -113,11 +139,7 @@ def priced_services():
 def built_site_priced(tmp_path_factory, fixture_games):
     """The same site built with a few prices filled in, so the cheapest
     combination and the affiliate disclosure actually render."""
-    data_dir = tmp_path_factory.mktemp("data")
-    src = Path(__file__).resolve().parent.parent / "data"
-    for name in ("teams.json", "services.json", "local_tv.json", "copy.json"):
-        (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
-
+    data_dir = _copy_data(tmp_path_factory, "data-priced")
     services = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
     prices = {"abc": 0.0, "nbc": 0.0, "espn": 11.99, "nba-tv": 6.99, "nba-league-pass": 16.99}
     for svc in services["services"]:
@@ -129,13 +151,4 @@ def built_site_priced(tmp_path_factory, fixture_games):
         if svc["id"] == "nba-league-pass":
             svc["affiliate_url"] = "https://example.test/league-pass?ref=test"
     (data_dir / "services.json").write_text(json.dumps(services), encoding="utf-8")
-
-    out = tmp_path_factory.mktemp("site-priced")
-    cache = out / "data" / "schedule.json"
-    cache.parent.mkdir(parents=True, exist_ok=True)
-    cache.write_text(json.dumps({
-        "season": "2026-27", "updated_at": TODAY,
-        "count": len(fixture_games), "games": [asdict(g) for g in fixture_games],
-    }), encoding="utf-8")
-    full_build(out, today=TODAY, offline=True, data_dir=data_dir)
-    return out
+    return _build(tmp_path_factory, fixture_games, "site-priced", data_dir=data_dir)
