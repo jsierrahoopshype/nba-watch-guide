@@ -244,7 +244,8 @@ def write_extras(out_dir: Path) -> None:
 # Commands
 # --------------------------------------------------------------------------
 
-def full_build(out_dir: Path, today: str | None = None, offline: bool = False) -> list[str]:
+def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
+               data_dir: Path | None = None) -> list[str]:
     """Rebuild everything. Returns log lines. Raises BuildError on real failure."""
     notes: list[str] = []
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -262,7 +263,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False) -
         injuries, updated_at, as_of, inote = load_injuries(out_dir, since=season_start(games))
         notes.append(inote)
 
-    ctx = load_context(games, injuries, updated_at, as_of, today=today)
+    ctx = load_context(games, injuries, updated_at, as_of, data_dir=data_dir, today=today)
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
 

@@ -107,3 +107,35 @@ def priced_services():
         ],
         league_pass_service_id="league-pass",
     )
+
+
+@pytest.fixture(scope="session")
+def built_site_priced(tmp_path_factory, fixture_games):
+    """The same site built with a few prices filled in, so the cheapest
+    combination and the affiliate disclosure actually render."""
+    data_dir = tmp_path_factory.mktemp("data")
+    src = Path(__file__).resolve().parent.parent / "data"
+    for name in ("teams.json", "services.json", "local_tv.json", "copy.json"):
+        (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
+
+    services = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
+    prices = {"abc": 0.0, "nbc": 0.0, "espn": 11.99, "nba-tv": 6.99, "nba-league-pass": 16.99}
+    for svc in services["services"]:
+        if svc["id"] in prices:
+            svc["monthly_price_usd"] = prices[svc["id"]]
+            svc["source_url"] = "https://example.test/pricing"
+            svc["last_verified"] = "2027-01-02"
+            svc["verified"] = True
+        if svc["id"] == "nba-league-pass":
+            svc["affiliate_url"] = "https://example.test/league-pass?ref=test"
+    (data_dir / "services.json").write_text(json.dumps(services), encoding="utf-8")
+
+    out = tmp_path_factory.mktemp("site-priced")
+    cache = out / "data" / "schedule.json"
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps({
+        "season": "2026-27", "updated_at": TODAY,
+        "count": len(fixture_games), "games": [asdict(g) for g in fixture_games],
+    }), encoding="utf-8")
+    full_build(out, today=TODAY, offline=True, data_dir=data_dir)
+    return out

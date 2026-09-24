@@ -8,7 +8,7 @@
     <li><span>{{ svc.name }}</span><span class="price">{{ svc.monthly_price_usd|usd }}</span></li>
     {%- endfor %}
   </ul>
-  <p class="small muted" style="margin-top:10px">
+  <p class="small muted combo-note">
     {%- if combo.missed %}{{ labels.misses_prefix }} {{ combo.missed|length }} of {{ combo.total }}:
       {{ combo.missed[:6]|map(attribute='date_et')|join(', ') }}{% if combo.missed|length > 6 %} and more{% endif %}.
     {%- else %}{{ labels.misses_none }}{% endif %}

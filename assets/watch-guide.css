@@ -229,6 +229,7 @@ a:hover { color: var(--accent); }
 .combo-label { font-weight: 600; }
 .combo-total { font-family: var(--mono); font-size: 1.3rem; font-weight: 700; }
 .combo-parts { margin: 10px 0 0; padding: 0; list-style: none; }
+.combo-note { margin: 10px 0 0; }
 .combo-parts li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-top: 1px solid var(--border-soft); font-size: 0.9rem; }
 
 /* ---------- schedule: table on wide screens, cards on phones ---------- */
