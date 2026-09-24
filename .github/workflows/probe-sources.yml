@@ -12,96 +12,42 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
       - run: pip install curl_cffi
-      - name: Schedule structure only
-        run: |
+      - run: |
           python - <<'PY'
           from curl_cffi import requests
           from collections import Counter
           import json
-          H = {"Referer": "https://www.nba.com/", "Origin": "https://www.nba.com"}
-          r = requests.get("https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
-                           impersonate="chrome", timeout=90, headers=H)
-          print("STATUS", r.status_code, len(r.content))
-          d = r.json(); ls = d["leagueSchedule"]; gds = ls["gameDates"]
-          print("TOP", list(d.keys())); print("LS", list(ls.keys()))
-          print("SEASONYEAR", repr(ls.get("seasonYear")))
-          print("GAMEDATES", len(gds), "FIRST", gds[0]["gameDate"], "LAST", gds[-1]["gameDate"])
-          pref=Counter(); natl=Counter(); ott=Counter(); loc=Counter(); tbd=0; reg=0
-          s_nat=None; s_loc=None
+          H={"Referer":"https://www.nba.com/","Origin":"https://www.nba.com"}
+          d=requests.get("https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+                         impersonate="chrome",timeout=90,headers=H).json()
+          ls=d["leagueSchedule"]; gds=ls["gameDates"]
+          out={}
+          out["seasonYear"]=ls.get("seasonYear")
+          out["lsKeys"]=list(ls.keys())
+          out["gameDates"]=len(gds); out["first"]=gds[0]["gameDate"]; out["last"]=gds[-1]["gameDate"]
+          pref=Counter(); natl=Counter(); ott=Counter(); loc=Counter(); nat_games=0; reg=0; nolocal=0
+          weeks=set(); sample=None
           for gd in gds:
             for g in gd["games"]:
               pref[g["gameId"][:3]]+=1
               if g["gameId"][:3]!="002": continue
-              reg+=1
+              reg+=1; weeks.add(g.get("weekNumber"))
               b=g.get("broadcasters") or {}
               n=b.get("nationalTvBroadcasters") or []; o=b.get("nationalOttBroadcasters") or []
+              if n or o: nat_games+=1
               for x in n: natl[x.get("broadcasterAbbreviation")]+=1
               for x in o: ott[x.get("broadcasterAbbreviation")]+=1
-              for k in ("homeTvBroadcasters","awayTvBroadcasters"):
-                for x in b.get(k) or []: loc[x.get("broadcasterAbbreviation")]+=1
-              if not n and not o and not (b.get("homeTvBroadcasters") or b.get("awayTvBroadcasters")): tbd+=1
-              if s_nat is None and n: s_nat=g
-              if s_loc is None and (b.get("homeTvBroadcasters")): s_loc=g
-          print("PREFIXES", dict(pref), "REG", reg, "NO_BROADCASTER_AT_ALL", tbd)
-          print("NATIONAL_TV", natl.most_common())
-          print("NATIONAL_OTT", ott.most_common())
-          print("LOCAL_TV_CODES", loc.most_common(90))
-          print("GAME_KEYS", sorted((s_nat or {}).keys()))
-          print("TEAM_KEYS", sorted(((s_nat or {}).get("homeTeam") or {}).keys()))
-          print("BCAST_KEYS", sorted(((s_nat or {}).get("broadcasters") or {}).keys()))
-          for k in ("gameId","gameCode","gameStatus","gameStatusText","gameDateEst","gameTimeEst","gameDateTimeEst","gameDateUTC","gameDateTimeUTC","weekNumber","arenaName","arenaCity","arenaState","seriesText","gameLabel"):
-            print("  F", k, "=", repr((s_nat or {}).get(k)))
-          print("SAMPLE_NAT_BCAST", json.dumps((s_nat or {}).get("broadcasters"), indent=0)[:1400])
-          print("SAMPLE_LOC_BCAST", json.dumps((s_loc or {}).get("broadcasters"), indent=0)[:1400])
-          print("SAMPLE_HOMETEAM", json.dumps((s_nat or {}).get("homeTeam"), indent=0)[:600])
-          teams={}
-          for gd in gds:
-            for g in gd["games"]:
-              if g["gameId"][:3]!="002": continue
-              for k in ("homeTeam","awayTeam"):
-                t=g[k]
-                if t.get("teamId"): teams[t["teamId"]]=(t.get("teamTricode"),t.get("teamCity"),t.get("teamName"),t.get("teamSlug"))
-          print("TEAMCOUNT", len(teams))
-          print("TEAMLIST", json.dumps(sorted(teams.items(), key=lambda x:x[1][0])))
-          PY
-  injury:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.11' }
-      - run: pip install curl_cffi
-      - name: Injury feed discovery
-        run: |
-          python - <<'PY'
-          from curl_cffi import requests
-          import re, json
-          # 1. HoopsMatic depth charts: is injury status embedded, and is there an API?
-          r = requests.get("https://hoopsmatic.com/depth-charts", impersonate="chrome", timeout=60)
-          t = r.text
-          print("depth-charts", r.status_code, len(t))
-          for pat in [r'/api/[a-z0-9\-/?=&]+', r'https?://[^"\'\s<>]*\.json', r'"(?:OUT|Out|Questionable|Doubtful|Probable)"']:
-            print(" ", pat, "->", sorted(set(re.findall(pat, t)))[:20])
-          for kw in ["Questionable","Doubtful","Probable","injur","status","updated"]:
-            print(f"  count[{kw}] =", t.lower().count(kw.lower()))
-          m = re.search(r'.{200}Questionable.{300}', t)
-          print("  ctx:", (m.group(0) if m else "")[:500].replace("\n"," "))
-          # 2. candidate hoopsmatic api endpoints
-          for u in ["https://hoopsmatic.com/api/injuries","https://hoopsmatic.com/api/depth-charts",
-                    "https://hoopsmatic.com/api/offseason-moves","https://hoopsmatic.com/api/roster"]:
-            try:
-              rr = requests.get(u, impersonate="chrome", timeout=40)
-              print(u, rr.status_code, len(rr.content), rr.text[:150].replace("\n"," "))
-            except Exception as e: print(u, "ERR", str(e)[:80])
-          # 3. injury report pdf hosts
-          for u in ["https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-01-15_05PM.pdf",
-                    "https://official.nba.com/wp-content/uploads/sites/4/2026/01/Injury-Report_2026-01-15_05PM.pdf",
-                    "https://official.nba.com/nba-injury-report-2025-26-season/"]:
-            try:
-              rr = requests.get(u, impersonate="chrome", timeout=40, headers={"Referer":"https://official.nba.com/"})
-              print(u, rr.status_code, len(rr.content), (rr.headers.get("content-type") or "")[:30])
-              if "html" in (rr.headers.get("content-type") or ""):
-                print("   pdf links:", sorted(set(re.findall(r'https?://[^"\'\s<>]+\.pdf', rr.text)))[:10])
-                print("   iframes:", sorted(set(re.findall(r'<iframe[^>]+src="([^"]+)"', rr.text)))[:5])
-                print("   scripts:", sorted(set(re.findall(r'<script[^>]+src="([^"]+)"', rr.text)))[:15])
-            except Exception as e: print(u, "ERR", str(e)[:80])
+              ht=b.get("homeTvBroadcasters") or []; at=b.get("awayTvBroadcasters") or []
+              for x in ht+at: loc[x.get("broadcasterAbbreviation")]+=1
+              if not ht and not at and not n and not o: nolocal+=1
+              if sample is None: sample={k:g.get(k) for k in ("gameId","gameCode","gameStatus","gameStatusText","gameDateEst","gameTimeEst","gameDateTimeEst","gameDateUTC","gameDateTimeUTC","weekNumber","arenaName","arenaCity","arenaState","gameLabel","seriesText")}
+                                 
+          out["prefixes"]=dict(pref); out["regular"]=reg; out["nationalGames"]=nat_games
+          out["noBroadcasterAtAll"]=nolocal
+          out["nationalTv"]=natl.most_common(); out["nationalOtt"]=ott.most_common()
+          out["localCodes"]=loc.most_common(90)
+          out["sampleGame"]=sample
+          out["gameKeys"]=sorted(gds[0]["games"][0].keys())
+          out["homeTeamKeys"]=sorted(gds[0]["games"][0]["homeTeam"].keys())
+          print("###JSON###"); print(json.dumps(out, indent=1))
           PY
