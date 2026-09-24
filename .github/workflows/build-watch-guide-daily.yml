@@ -4,6 +4,13 @@ on:
   schedule:
     - cron: '0 10 * * *'
   workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Push the result to gh-pages'
+        type: boolean
+        default: true
+  push:
+    branches: [claude/tender-carson-2ars87]   # TEMPORARY: dry run on the feature branch
 
 permissions:
   contents: write
@@ -48,10 +55,17 @@ jobs:
       - name: Check the output
         run: |
           test -f site/sitemap.xml
-          grep -c '<loc>' site/sitemap.xml
+          echo "pages: $(find site -name index.html | wc -l)"
+          echo "sitemap urls: $(grep -c '<loc>' site/sitemap.xml)"
+          echo "games today: $(python -c "import json;d=json.load(open('site/data/tonight.json'));print(len(d['games']))")"
+          echo "players listed: $(python -c "import json;d=json.load(open('site/data/injuries.json'));print(len(d['players']))")"
+          echo "schedule games: $(python -c "import json;d=json.load(open('site/data/schedule.json'));print(d['count'])")"
+          echo "--- celtics page channel sample:"
+          grep -o 'badge-[a-z]*">[^<]*<' site/boston-celtics/index.html | head -8
           ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
 
       - name: Publish to gh-pages
+        if: github.event_name != 'push' && inputs.publish != false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
