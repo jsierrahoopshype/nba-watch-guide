@@ -9,104 +9,21 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install curl_cffi
-      - name: Probe NBA schedule
-        run: |
-          python - <<'PY'
-          from curl_cffi import requests
-          import json
-          url = "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json"
-          r = requests.get(url, impersonate="chrome", timeout=60)
-          print("STATUS", r.status_code, "BYTES", len(r.content))
-          d = r.json()
-          ls = d["leagueSchedule"]
-          print("TOPKEYS", list(d.keys()))
-          print("LSKEYS", list(ls.keys()))
-          print("SEASONYEAR", ls.get("seasonYear"))
-          gds = ls["gameDates"]
-          print("NUM_GAMEDATES", len(gds))
-          print("FIRST_DATE", gds[0]["gameDate"], "LAST_DATE", gds[-1]["gameDate"])
-          from collections import Counter
-          c = Counter()
-          for gd in gds:
-              for g in gd["games"]:
-                  c[g["gameId"][:3]] += 1
-          print("GAMEID_PREFIXES", dict(c))
-          # find a regular season game with national broadcaster
-          sample = None
-          for gd in gds:
-              for g in gd["games"]:
-                  if g["gameId"][:3] == "002" and g.get("broadcasters",{}).get("nationalTvBroadcasters"):
-                      sample = g; break
-              if sample: break
-          print("SAMPLE_REG_NATIONAL:")
-          print(json.dumps(sample, indent=1)[:4000])
-          # all distinct national tv abbreviations
-          natl=Counter(); home=Counter(); away=Counter(); ott=Counter()
-          for gd in gds:
-              for g in gd["games"]:
-                  if g["gameId"][:3] != "002": continue
-                  b=g.get("broadcasters",{}) or {}
-                  for x in b.get("nationalTvBroadcasters") or []: natl[x.get("broadcasterAbbreviation")]+=1
-                  for x in b.get("nationalOttBroadcasters") or []: ott[x.get("broadcasterAbbreviation")]+=1
-                  for x in b.get("homeTvBroadcasters") or []: home[x.get("broadcasterAbbreviation")]+=1
-                  for x in b.get("awayTvBroadcasters") or []: away[x.get("broadcasterAbbreviation")]+=1
-          print("NATIONAL_TV", natl.most_common())
-          print("NATIONAL_OTT", ott.most_common())
-          print("HOME_TV", home.most_common(60))
-          print("AWAY_TV", away.most_common(60))
-          # team list
-          teams={}
-          for gd in gds:
-              for g in gd["games"]:
-                  for k in ("homeTeam","awayTeam"):
-                      t=g[k]
-                      if t.get("teamId"): teams[t["teamId"]]=(t.get("teamTricode"), t.get("teamCity"), t.get("teamName"))
-          print("TEAMS", len(teams))
-          for tid,v in sorted(teams.items()): print(" ", tid, v)
-          PY
-  probe-look:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Probe HoopsMatic look + depth charts feed
+      - name: Raw responses
         run: |
           set +e
-          for u in https://hoopsmatic.com/ https://hoopsmatic.com/compare https://hoopsmatic.com/depth-charts; do
-            echo "=================== $u"
-            curl -sSL --max-time 45 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131 Safari/537.36" "$u" -o /tmp/page.html -w "HTTP %{http_code} BYTES %{size_download}\n"
-            echo "--- stylesheet/script refs:"
-            grep -oE '(href|src)="[^"]+\.(css|js)[^"]*"' /tmp/page.html | sort -u | head -40
-            echo "--- inline css var / color hints:"
-            grep -oE '\-\-[a-z0-9-]+ *: *[^;]+;' /tmp/page.html | sort -u | head -60
-            echo "--- font hints:"
-            grep -oiE 'font-family[^;}]*' /tmp/page.html | sort -u | head -20
-            grep -oE 'fonts.googleapis.com[^"]*' /tmp/page.html | sort -u | head -10
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+          for u in \
+            https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json \
+            https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json \
+            https://stats.nba.com/stats/scoreboardv3?GameDate=2026-10-21&LeagueID=00 \
+            https://data.nba.net/prod/v1/today.json \
+            https://official.nba.com/ \
+            https://www.nba.com/schedule ; do
+            echo "=========== $u"
+            curl -s -D /tmp/h.txt -o /tmp/b.bin --max-time 30 -H "User-Agent: $UA" -H "Referer: https://www.nba.com/" -H "Accept: application/json, text/plain, */*" "$u"
+            head -1 /tmp/h.txt; grep -iE '^(server|x-reference-error|content-type|cf-ray)' /tmp/h.txt | head -5
+            echo "--- body head:"; head -c 300 /tmp/b.bin; echo
           done
-      - name: Depth charts data URLs
-        run: |
-          set +e
-          curl -sSL --max-time 45 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131" https://hoopsmatic.com/depth-charts -o /tmp/dc.html
-          echo "--- fetch()/url strings in page:"
-          grep -oE "(fetch\(|https?://|/data/|\.json)[^\"')<> ]{0,120}" /tmp/dc.html | sort -u | head -80
-          echo "--- external scripts, fetched and scanned:"
-          for s in $(grep -oE 'src="[^"]+\.js[^"]*"' /tmp/dc.html | sed 's/src="//;s/"$//' | head -12); do
-            case "$s" in /*) full="https://hoopsmatic.com$s";; http*) full="$s";; *) full="https://hoopsmatic.com/$s";; esac
-            echo "### $full"
-            curl -sSL --max-time 45 "$full" -o /tmp/s.js -w "HTTP %{http_code} BYTES %{size_download}\n"
-            grep -oE "(https?://[^\"')<> ]+|['\"][^\"']{0,80}\.json['\"])" /tmp/s.js | sort -u | head -40
-          done
-      - name: NBA injury report URL pattern
-        run: |
-          set +e
-          for d in 2026-09-24 2026-09-23; do
-            for t in 05PM 01PM 08PM 11AM; do
-              u="https://ak-static.cms.nba.com/referee/injury/Injury-Report_${d}_${t}.pdf"
-              echo -n "$u -> "; curl -sSL -o /dev/null --max-time 25 -w "%{http_code} %{size_download}\n" "$u"
-            done
-          done
-          echo "--- official page:"
-          curl -sSL --max-time 30 -o /dev/null -w "official_report_page %{http_code}\n" https://official.nba.com/nba-injury-report-2025-26-season/
-          curl -sSL --max-time 30 -o /dev/null -w "official_report_page_2627 %{http_code}\n" https://official.nba.com/nba-injury-report-2026-27-season/
+          echo "=========== egress IP"
+          curl -s --max-time 20 https://api.github.com/meta -o /dev/null -w "github_meta %{http_code}\n"
