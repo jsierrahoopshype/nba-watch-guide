@@ -1,5 +1,6 @@
 {
-  "_note": "All page wording lives here. {team} is the team short name (Lakers), {full_team} the official full name, {season} the season label (2026-27). Titles are cut to 60 characters, descriptions to 155, so keep them short.",
+  "_note": "All page wording lives here. {team} is the team short name (Lakers), {full_team} the official full name, {season} the season label (2026-27). Titles are cut to 60 characters, descriptions to 155, so keep them short. Set noindex false to let search engines index the site: while it is true every page carries a noindex robots tag and sitemap.xml is generated but lists no URLs.",
+  "noindex": true,
   "season_label": "2026-27",
   "site_name": "HoopsMatic",
   "hub": {
@@ -64,7 +65,8 @@
     "misses_prefix": "Misses",
     "no_players_listed": "Nobody listed.",
     "players_unknown": "Details coming",
-    "availability_on_game_day": "Player availability shows here on game day."
+    "availability_on_game_day": "Player availability shows here on game day.",
+    "no_injury_report": "No injury report yet."
   },
   "faq": [
     {
