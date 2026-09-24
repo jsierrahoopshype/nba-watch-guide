@@ -47,8 +47,9 @@ def has_affiliate_link(ctx: SiteContext) -> bool:
 
 def empty_players_label(ctx: SiteContext) -> str:
     """Tell apart 'we have the report and this team has nobody on it' from
-    'we have no availability data at all'."""
+    'there is no report for this season yet'. Neither case is an error, and
+    neither renders as a bare empty list."""
     labels = ctx.labels()
-    if ctx.injuries:
+    if ctx.has_injury_data:
         return labels.get("no_players_listed", "Nobody listed.")
-    return labels.get("players_unknown", "Details coming")
+    return labels.get("no_injury_report", "No injury report yet.")
