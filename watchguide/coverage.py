@@ -75,7 +75,10 @@ def carriers_for_game(
     if lp and service_data.by_id(lp) and not league_pass_blocked(game, state, service_data):
         carriers.add(lp)
 
-    return carriers
+    # A service whose carries list is not checked yet counts for nothing, so it
+    # stays out of the per-service counts and the cheapest-combination maths.
+    return {sid for sid in carriers
+            if (svc := service_data.by_id(sid)) is None or svc.carries_verified}
 
 
 def channels_for_game(game: Game, tricode: str, local: LocalTV | None,

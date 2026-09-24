@@ -134,6 +134,10 @@ class Service:
     source_url: str
     last_verified: str
     verified: bool
+    # False means the carries list has not been checked yet: the service is
+    # still listed with its price, but it counts for no games.
+    carries_verified: bool = True
+    carries_check: str = ""
 
     @property
     def has_price(self) -> bool:
@@ -143,6 +147,11 @@ class Service:
     @property
     def price(self) -> float:
         return float(self.monthly_price_usd) if self.has_price else 0.0
+
+    @property
+    def is_free(self) -> bool:
+        """A confirmed price of 0 is a real price: free, not missing."""
+        return self.has_price and self.price == 0
 
     @property
     def link(self) -> str:
@@ -169,6 +178,7 @@ class ServiceData:
     services: list[Service]
     blackouts: list[BlackoutRule]
     league_pass_service_id: str
+    prices_checked: str = ""     # _meta.all_prices_checked, YYYY-MM-DD
 
     def by_id(self, sid: str) -> Service | None:
         for s in self.services:
@@ -198,6 +208,8 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             source_url=s.get("source_url", ""),
             last_verified=s.get("last_verified", ""),
             verified=bool(s.get("verified")),
+            carries_verified=bool(s.get("carries_verified", True)),
+            carries_check=s.get("carries_check", ""),
         ))
     rules = raw.get("rules") or {}
     blackouts = [
@@ -212,11 +224,41 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
         )
         for b in (rules.get("blackouts") or [])
     ]
+    blackouts += _league_pass_blackouts(rules.get("league_pass_blackouts"))
+
+    lp_id = rules.get("league_pass_service_id") or config.LEAGUE_PASS_SERVICE_ID
+    if not any(s.id == lp_id for s in services):
+        # League Pass has an empty carries list on purpose, so without this
+        # link to the rules block it would cover nothing and quietly vanish.
+        raise ValueError(f"data/services.json has no League Pass service with id {lp_id!r}")
+
+    meta = raw.get("_meta") or {}
     return ServiceData(
         services=services,
         blackouts=blackouts,
-        league_pass_service_id=rules.get("league_pass_service_id", ""),
+        league_pass_service_id=lp_id,
+        prices_checked=meta.get("all_prices_checked", ""),
     )
+
+
+# Keys of rules.league_pass_blackouts that are blackout rules, and what each
+# one applies to in the coverage maths.
+_LP_BLACKOUT_KEYS = {"national": "national_broadcast", "local": "in_market_local"}
+
+
+def _league_pass_blackouts(block: dict[str, Any] | None) -> list[BlackoutRule]:
+    """Read the flat rules.league_pass_blackouts block into BlackoutRule rows."""
+    if not block:
+        return []
+    source_url = block.get("source_url", "")
+    last_verified = block.get("last_verified", "")
+    return [
+        BlackoutRule(id=f"league-pass-{key}", applies_to=applies_to, active=True,
+                     label=block[key], source_url=source_url, last_verified=last_verified,
+                     verified=bool(source_url and last_verified))
+        for key, applies_to in _LP_BLACKOUT_KEYS.items()
+        if block.get(key)
+    ]
 
 
 # --------------------------------------------------------------------------

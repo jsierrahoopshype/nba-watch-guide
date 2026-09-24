@@ -24,7 +24,10 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
     # The coverage panel only lists services that carry at least one game. The
     # rest are counted in a single line, so a page with unfilled channel lists
     # does not read as thirty rows of zero.
-    covering = [c for c in coverage.per_service if c.covered]
+    # League Pass is always listed: its carries list is empty on purpose (the
+    # rules block drives it), so at zero games it would otherwise disappear.
+    lp_id = ctx.services.league_pass_service_id
+    covering = [c for c in coverage.per_service if c.covered or c.service.id == lp_id]
     return {
         "state": state,
         "hidden": in_market,                      # out-of-market is the default view
@@ -108,6 +111,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             stale=ctx.availability_is_stale(),
             empty_players_label=empty_players_label(ctx),
             show_affiliate_disclosure=show_disclosure,
+            prices_checked=ctx.services.prices_checked,
             trail=crumb_trail(ctx, team.full_name, url),
         )
         pages.append(Page(out_path=f"{team.slug}/index.html", url=url, html=html,

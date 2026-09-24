@@ -24,6 +24,10 @@ EASTERN = "America/New_York"
 # Season the generator expects in the schedule feed. Bump this each summer.
 SEASON = os.environ.get("WATCH_GUIDE_SEASON", "2026-27")
 
+# Service id in data/services.json that the League Pass blackout rules apply to,
+# used when the rules block does not name one itself.
+LEAGUE_PASS_SERVICE_ID = "nba_league_pass"
+
 # Regular-season games have game ids starting 002. 001 preseason, 003 all-star,
 # 004 playoffs, 005 play-in.
 REGULAR_SEASON_PREFIX = "002"

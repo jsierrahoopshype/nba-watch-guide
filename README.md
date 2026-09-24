@@ -29,7 +29,15 @@ guide in search results.
 
 A service only shows a price once it has `monthly_price_usd`, a `source_url`, a
 `last_verified` date and `verified: true`. Anything else renders as "Price not
-confirmed" and stays out of the cheapest-combination maths. A team only shows
+confirmed" and stays out of the cheapest-combination maths. A price of `0` is a
+real price and renders as "Free"; `null` is a missing one. A service with
+`carries_verified: false` is still listed with its price and a line saying its
+coverage is unconfirmed, but it counts for no games and stays out of the
+cheapest-combination maths. The "Prices checked" line above the price list
+comes from `_meta.all_prices_checked`. League Pass (`nba_league_pass`) has an
+empty `carries` list on purpose: its coverage comes from
+`rules.league_pass_blackouts`, and the build fails if that service is missing.
+A team only shows
 local TV once its `local_tv.json` entry is `verified: true`; until then the
 in-market view says "Local details coming".
 
@@ -63,9 +71,9 @@ National TV sits under `broadcasters.nationalBroadcasters`. There is no
 version of the generator reported zero national games. `nationalBroadcasters`
 can carry radio entries, and `nationalRadioBroadcasters` lists SiriusXM on all
 1206 games, so anything whose `broadcasterMedia` is radio is skipped: radio is
-not a way to watch. Codes seen for 2026-27, with game counts, are kept in
-`data/services.json` under `_broadcaster_codes_seen`, so you know which strings
-to put in a service's `carries` list.
+not a way to watch. The codes to put in a service's `carries` list are listed
+in `data/services.json` under `_meta.carries_note`, and the codes deliberately
+left unmapped (NBCSN, Telemundo) under `_meta.unmapped_broadcaster_codes`.
 
 Every build writes `data/broadcast-coverage.json` and prints a summary line, so
 the count of games with national TV is visible on each run. That is how you see
