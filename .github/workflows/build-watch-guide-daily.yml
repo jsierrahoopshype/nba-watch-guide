@@ -42,23 +42,35 @@ jobs:
           python -m pytest
 
       - name: Build every page
+        id: build
         env:
           # Optional. Set this to a plain pass-through proxy origin if the
           # runner's IP range is ever refused by cdn.nba.com. No key involved.
           NBA_PROXY_BASE: ${{ vars.NBA_PROXY_BASE }}
           # Optional. Point the availability feed somewhere else.
           INJURY_FEED_URL: ${{ vars.INJURY_FEED_URL }}
-        run: python -m watchguide --out site build
+        run: |
+          set +e
+          python -m watchguide --out site build
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 3 means the pages were written from the last good availability data.
+          # Publish them, then fail the run at the end.
+          if [ "$code" -ne 0 ] && [ "$code" -ne 3 ]; then exit "$code"; fi
+
+      - name: Broadcaster coverage
+        run: ./scripts/report-broadcasters.sh site
 
       - name: Check the output
         run: |
           test -f site/sitemap.xml
+          test -f site/data/how-to-watch-links.html
           echo "pages: $(find site -name index.html | wc -l)"
-          echo "sitemap urls: $(grep -c '<loc>' site/sitemap.xml)"
-          echo "games today: $(python -c "import json;d=json.load(open('site/data/tonight.json'));print(len(d['games']))")"
-          echo "players listed: $(python -c "import json;d=json.load(open('site/data/injuries.json'));print(len(d['players']), d['as_of'])")"
-          echo "schedule games: $(python -c "import json;d=json.load(open('site/data/schedule.json'));print(d['count'])")"
+          echo "sitemap urls: $(grep -c '<loc>' site/sitemap.xml || true)"
           ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
+
+      - name: Commit the raw availability copy
+        run: ./scripts/commit-raw-injuries.sh
 
       - name: Publish to gh-pages
         if: inputs.publish != false
@@ -66,3 +78,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: ./scripts/publish.sh site gh-pages
+
+      - name: Fail if the availability feed was not trusted
+        if: steps.build.outputs.exit_code == '3'
+        run: |
+          echo "The pages were published from the last good availability data." >&2
+          echo "See the warning in the build step for what went wrong." >&2
+          exit 1

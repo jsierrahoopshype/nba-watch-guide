@@ -19,6 +19,13 @@ expected.
 | Affiliate links | `data/services.json`, the `affiliate_url` on each service |
 | Page titles, descriptions, headings, FAQ wording | `data/copy.json` |
 | Team names and slugs | `data/teams.json` |
+| Whether search engines may index the site | `data/copy.json`, the top-level `noindex` flag |
+
+`noindex` ships as `true`. While it is on, every page carries
+`<meta name="robots" content="noindex,follow">`, `sitemap.xml` is still written
+but lists no URLs, and `robots.txt` does not point at it. Canonicals do not
+change either way. Set it to `false` when the Worker is live and you want the
+guide in search results.
 
 A service only shows a price once it has `monthly_price_usd`, a `source_url`, a
 `last_verified` date and `verified: true`. Anything else renders as "Price not
@@ -51,13 +58,37 @@ rejects non-browser TLS fingerprints, so the request goes through `curl_cffi`
 with a Chrome profile and an `nba.com` Referer. Eastern tip-off times are worked
 out from `gameDateTimeUTC` with `zoneinfo`, which keeps daylight saving right.
 
+National TV sits under `broadcasters.nationalBroadcasters`. There is no
+`nationalTvBroadcasters` key in this feed, and reading for one is why the first
+version of the generator reported zero national games. `nationalBroadcasters`
+can carry radio entries, and `nationalRadioBroadcasters` lists SiriusXM on all
+1206 games, so anything whose `broadcasterMedia` is radio is skipped: radio is
+not a way to watch. Codes seen for 2026-27, with game counts, are kept in
+`data/services.json` under `_broadcaster_codes_seen`, so you know which strings
+to put in a service's `carries` list.
+
+Every build writes `data/broadcast-coverage.json` and prints a summary line, so
+the count of games with national TV is visible on each run. That is how you see
+the day the league fills in the rest of the season.
+
 **Availability.** `https://aderoa.github.io/Injuries/injuries.json`, the keyless
 public feed that hoopsmatic.com/depth-charts reads. Rows are
-`{player, status, injury, date}`. The feed carries no team, so players are
-matched to a team through the NBA's public player index at
-`https://cdn.nba.com/static/json/staticData/playerIndex.json`. Only the five
-published statuses are kept: Out, Doubtful, Questionable, Probable, Available.
-Anything else, such as "Left Game", is left out rather than reinterpreted.
+`{player, status, injury, date, prevStatus}`, a change log rather than a
+snapshot, so the current status of a player is their latest row. The feed
+carries no team, so players are matched to a team through the NBA's public
+player index at `https://cdn.nba.com/static/json/staticData/playerIndex.json`.
+Only the five published statuses are kept: Out, Doubtful, Questionable,
+Probable, Available. Anything else, such as "Left Game", is left out rather than
+reinterpreted.
+
+Every run saves the raw response to `data/injuries-raw-latest.json` and commits
+it. That file is both the fallback when the feed breaks and the baseline the
+next run compares against. If a fetch fails, or the feed comes back more than
+50% shorter than the last good copy, the run keeps the last good copy, marks the
+pages out of date and exits 3. The workflow publishes those pages and then goes
+red, so a broken feed is loud but the site does not go blank. When the feed has
+no rows for the current season at all, which is the case right now, pages say
+"No injury report yet." rather than showing an empty list.
 
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.
@@ -82,6 +113,9 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - Both market states are in the HTML of every team page, so a crawler reads both.
 - A failed fetch keeps the last published data and makes the job go red rather
   than publishing an empty page.
+- `data/how-to-watch-links.html` is written on every build: a plain block of
+  absolute links to the hub, the tonight page and all 30 teams, for pasting into
+  the Worker so the guide has an internal crawl path.
 
 ## Automation
 
@@ -91,6 +125,9 @@ availability feed somewhere else. Both are optional and neither is a secret.
   are no games on the Eastern date.
 - Both use `permissions: contents: write` and share the `watch-guide-publish`
   concurrency group, so they never push over each other.
+- Both commit `data/injuries-raw-latest.json` back to the working branch when it
+  changes, and both fail at the end of the run if the availability feed could not
+  be trusted.
 
 ## Adding a page type later
 
