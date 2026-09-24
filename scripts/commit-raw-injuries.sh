@@ -17,13 +17,16 @@ fi
 git config user.name "${GIT_AUTHOR_NAME:-github-actions[bot]}"
 git config user.email "${GIT_AUTHOR_EMAIL:-41898282+github-actions[bot]@users.noreply.github.com}"
 
-if git diff --quiet -- "$FILE"; then
+# Stage first, then compare against the index. `git diff` on the working tree
+# ignores untracked files, so on the very first run it reported the file as
+# unchanged and the copy was never committed at all.
+git add "$FILE"
+if git diff --cached --quiet -- "$FILE"; then
   echo "commit-raw: $FILE is unchanged"
   exit 0
 fi
 
 ROWS=$(python -c "import json,sys;print(json.load(open('$FILE'))['row_count'])")
-git add "$FILE"
 git commit -q -m "Save raw availability feed ($ROWS rows)"
 
 # Another run may have pushed in between. Rebase onto it and try again rather
