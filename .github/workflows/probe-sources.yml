@@ -16,7 +16,7 @@ jobs:
           for u in \
             https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json \
             https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json \
-            https://stats.nba.com/stats/scoreboardv3?GameDate=2026-10-21&LeagueID=00 \
+            "https://stats.nba.com/stats/scoreboardv3?GameDate=2026-10-21&LeagueID=00" \
             https://data.nba.net/prod/v1/today.json \
             https://official.nba.com/ \
             https://www.nba.com/schedule ; do
