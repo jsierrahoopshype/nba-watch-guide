@@ -47,6 +47,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         text=text,
         games=rows,
         updated_label=updated_label(ctx),
+        stale=ctx.availability_is_stale(),
         empty_players_label=empty_players_label(ctx),
         trail=crumb_trail(ctx, text["h1"], url),
     )

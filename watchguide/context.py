@@ -31,7 +31,8 @@ class SiteContext:
     local_tv: dict[str, LocalTV]
     copy: dict[str, Any]
     injuries: dict[str, list[dict[str, str]]]   # tricode to player rows
-    injuries_updated_at: str
+    injuries_updated_at: str                    # when this build fetched the feed
+    injuries_as_of: str                         # newest date the feed itself carries
     today: str
     generated_at: str
 
@@ -75,10 +76,19 @@ class SiteContext:
         return self.copy.get("season_label", config.SEASON)
 
 
+    def availability_is_stale(self) -> bool:
+        """True when the feed's own newest entry is behind today and there are
+        games on. The page then shows the notice without waiting for JS."""
+        if not self.games_today():
+            return False
+        return not self.injuries_as_of or self.injuries_as_of < self.today
+
+
 def load_context(
     games: list[Game],
     injuries: dict[str, list[dict[str, str]]] | None = None,
     injuries_updated_at: str = "",
+    injuries_as_of: str = "",
     data_dir: Path | None = None,
     today: str | None = None,
 ) -> SiteContext:
@@ -90,6 +100,7 @@ def load_context(
         copy=load_copy(data_dir),
         injuries=injuries or {},
         injuries_updated_at=injuries_updated_at,
+        injuries_as_of=injuries_as_of,
         today=today or today_et(),
         generated_at=datetime.now(ET).isoformat(timespec="seconds"),
     )

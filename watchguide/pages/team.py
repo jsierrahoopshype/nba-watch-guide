@@ -105,6 +105,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             schedule=schedule,
             next_game=next_card,
             updated_label=updated_label(ctx),
+            stale=ctx.availability_is_stale(),
             empty_players_label=empty_players_label(ctx),
             show_affiliate_disclosure=show_disclosure,
             trail=crumb_trail(ctx, team.full_name, url),

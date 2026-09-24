@@ -2,9 +2,17 @@
 
 Source, found on 2026-09-24 by reading the page JavaScript of
 hoopsmatic.com/depth-charts, which reads it as INJURIES_JSON_URL. It is a
-keyless public JSON file, a flat list of
-{"player", "status", "injury", "date"}. Statuses seen in the live file:
-Available, Doubtful, Left Game, Out, Probable, Questionable.
+keyless public JSON file.
+
+The file is a change log, not a snapshot: one row per status change, shaped
+{"player", "status", "injury", "date", "prevStatus"}. Checked on 2026-09-24 it
+held 4906 rows going back over past seasons, so a player's current status is
+the latest row carrying their name. Rows dated before the season started are
+dropped, otherwise a player left Out at the end of one season would still read
+as Out at the start of the next.
+
+Statuses seen in the live file: Available, Doubtful, Left Game, Out, Probable,
+Questionable.
 
 The feed carries no team, so players are matched to a team through the NBA's
 public player index:
@@ -99,30 +107,56 @@ def fetch_raw() -> list[dict[str, Any]]:
     return data
 
 
-def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str]) -> dict[str, Any]:
-    """Group the feed by team tricode, keeping only the five statuses."""
-    by_team: dict[str, list[dict[str, str]]] = {}
-    unmatched: list[str] = []
-    skipped_status = 0
-
+def latest_per_player(raw: list[dict[str, Any]], since: str = "") -> dict[str, dict[str, Any]]:
+    """The most recent row for each player, ignoring anything before `since`."""
+    latest: dict[str, dict[str, Any]] = {}
     for row in raw:
         if not isinstance(row, dict):
             continue
         name = (row.get("player") or "").strip()
-        status = normalize_status(row.get("status") or "")
         if not name:
             continue
+        when = (row.get("date") or "")[:10]
+        if since and when < since:
+            continue
+        key = normalize_name(name)
+        if not key:
+            continue
+        current = latest.get(key)
+        if current is None or when >= (current.get("date") or "")[:10]:
+            latest[key] = row
+    return latest
+
+
+def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str],
+              since: str = "") -> dict[str, Any]:
+    """Current status per player, grouped by team tricode.
+
+    `since` is normally the first game date of the season, so last season's
+    entries never carry over.
+    """
+    by_team: dict[str, list[dict[str, str]]] = {}
+    unmatched: list[str] = []
+    skipped_status = 0
+    as_of = ""
+
+    for key, row in latest_per_player(raw, since).items():
+        name = (row.get("player") or "").strip()
+        status = normalize_status(row.get("status") or "")
         if status is None:
             skipped_status += 1
             continue
-        tricode = player_teams.get(normalize_name(name))
+        tricode = player_teams.get(key)
         if not tricode:
             unmatched.append(name)
             continue
+        when = (row.get("date") or "")[:10]
+        as_of = max(as_of, when)
         by_team.setdefault(tricode, []).append({
             "player": name,
             "status": status,
             "injury": (row.get("injury") or "").strip(),
+            "date": when,
         })
 
     for players in by_team.values():
@@ -130,10 +164,11 @@ def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str]) -> dict[s
 
     return {
         "by_team": by_team,
+        "as_of": as_of,
         "unmatched": sorted(set(unmatched)),
         "skipped_status": skipped_status,
     }
 
 
-def fetch() -> dict[str, Any]:
-    return normalize(fetch_raw(), fetch_player_teams())
+def fetch(since: str = "") -> dict[str, Any]:
+    return normalize(fetch_raw(), fetch_player_teams(), since=since)

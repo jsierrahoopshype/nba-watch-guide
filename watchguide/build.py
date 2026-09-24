@@ -67,6 +67,12 @@ def write_schedule_cache(path: Path, games: list[Game], season: str) -> None:
     }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
+def season_start(games: list[Game]) -> str:
+    """First game date of the season. Anything the availability feed recorded
+    before this belongs to a season that is over."""
+    return min((g.date_et for g in games), default="")
+
+
 def config_tz():
     from zoneinfo import ZoneInfo
     return ZoneInfo(config.EASTERN)
@@ -92,37 +98,38 @@ def load_schedule(out_dir: Path, allow_cache: bool = True) -> tuple[list[Game], 
 # Injuries
 # --------------------------------------------------------------------------
 
-def read_injuries_file(path: Path) -> tuple[dict[str, list[dict[str, str]]], str]:
+def read_injuries_file(path: Path) -> tuple[dict[str, list[dict[str, str]]], str, str]:
+    """(by_team, updated_at, as_of) from a previously published file."""
     if not path.exists():
-        return {}, ""
+        return {}, "", ""
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return {}, ""
+        return {}, "", ""
     by_team: dict[str, list[dict[str, str]]] = {}
     for row in payload.get("players", []):
         by_team.setdefault(row.get("team", ""), []).append(
             {"player": row.get("player", ""), "status": row.get("status", ""),
-             "injury": row.get("injury", "")})
-    return by_team, payload.get("updated_at", "")
+             "injury": row.get("injury", ""), "date": row.get("date", "")})
+    return by_team, payload.get("updated_at", ""), payload.get("as_of", "")
 
 
-def load_injuries(out_dir: Path, allow_cache: bool = True) -> tuple[dict, str, str]:
-    """(by_team, updated_at, note)."""
+def load_injuries(out_dir: Path, since: str = "", allow_cache: bool = True) -> tuple[dict, str, str, str]:
+    """(by_team, updated_at, as_of, note)."""
     path = out_dir / INJURIES_FILE
     try:
-        result = injuries_source.fetch()
+        result = injuries_source.fetch(since=since)
         updated = datetime.now(config_tz()).isoformat(timespec="seconds")
         note = (f"injuries: {sum(len(v) for v in result['by_team'].values())} players "
-                f"across {len(result['by_team'])} teams")
+                f"across {len(result['by_team'])} teams, feed as of {result['as_of'] or 'unknown'}")
         if result["unmatched"]:
             note += f"; {len(result['unmatched'])} names had no current team"
-        return result["by_team"], updated, note
+        return result["by_team"], updated, result["as_of"], note
     except FetchError as exc:
         if not allow_cache:
             raise BuildError(str(exc)) from exc
-        cached, updated = read_injuries_file(path)
-        return cached, updated, f"injuries: fetch failed ({exc}); kept last good data"
+        cached, updated, as_of = read_injuries_file(path)
+        return cached, updated, as_of, f"injuries: fetch failed ({exc}); kept last good data"
 
 
 # --------------------------------------------------------------------------
@@ -134,7 +141,8 @@ def _player_rows(ctx: SiteContext, tricodes: list[str]) -> list[dict[str, str]]:
     for tricode in tricodes:
         for player in ctx.players_for(tricode):
             rows.append({"player": player["player"], "status": player["status"],
-                         "injury": player.get("injury", ""), "team": tricode})
+                         "injury": player.get("injury", ""),
+                         "date": player.get("date", ""), "team": tricode})
     return rows
 
 
@@ -144,6 +152,7 @@ def injuries_payload(ctx: SiteContext) -> dict[str, Any]:
     playing = sorted({g.home_tricode for g in today} | {g.away_tricode for g in today})
     return {
         "updated_at": ctx.injuries_updated_at,
+        "as_of": ctx.injuries_as_of,
         "source_id": injuries_source.SOURCE_ID,
         "date_et": ctx.today,
         "has_games_today": bool(today),
@@ -169,6 +178,7 @@ def tonight_payload(ctx: SiteContext) -> dict[str, Any]:
         })
     return {
         "updated_at": ctx.injuries_updated_at,
+        "as_of": ctx.injuries_as_of,
         "source_id": injuries_source.SOURCE_ID,
         "date_et": ctx.today,
         "has_games_today": bool(games),
@@ -235,15 +245,15 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False) -
         if not games:
             raise BuildError("offline build needs a cached data/schedule.json")
         notes.append(f"schedule: offline, {len(games)} cached games")
-        injuries, updated_at = read_injuries_file(out_dir / INJURIES_FILE)
+        injuries, updated_at, as_of = read_injuries_file(out_dir / INJURIES_FILE)
         notes.append("injuries: offline, using last published file")
     else:
         games, note = load_schedule(out_dir)
         notes.append(note)
-        injuries, updated_at, inote = load_injuries(out_dir)
+        injuries, updated_at, as_of, inote = load_injuries(out_dir, since=season_start(games))
         notes.append(inote)
 
-    ctx = load_context(games, injuries, updated_at, today=today)
+    ctx = load_context(games, injuries, updated_at, as_of, today=today)
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
 
@@ -275,10 +285,10 @@ def refresh_build(out_dir: Path, today: str | None = None) -> list[str]:
     if not playing:
         return ["no games today, nothing to refresh"]
 
-    injuries, updated_at, inote = load_injuries(out_dir)
+    injuries, updated_at, as_of, inote = load_injuries(out_dir, since=season_start(games))
     notes.append(inote)
 
-    ctx = load_context(games, injuries, updated_at, today=day)
+    ctx = load_context(games, injuries, updated_at, as_of, today=day)
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
     wanted = [p for p in pages

@@ -5,7 +5,7 @@
 <h1>{{ text.h1 }}</h1>
 <p class="lede">{{ text.intro }}</p>
 <p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
-<div class="notice is-hidden" data-stale-notice>{{ labels.stale_notice }}</div>
+<div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice>{{ labels.stale_notice }}</div>
 
 {%- if games %}
 {%- for row in games %}

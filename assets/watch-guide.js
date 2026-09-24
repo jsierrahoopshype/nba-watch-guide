@@ -75,17 +75,21 @@
     return hour >= 12 || hour < 1;
   }
 
-  function showUpdated(updatedAt, hasGamesToday) {
-    var mins = minutesSince(updatedAt);
-    if (mins === null) return;
-    $$('[data-updated]').forEach(function (node) {
-      node.textContent = node.getAttribute('data-updated-prefix') || 'Updated';
-      node.textContent += ' ' + (mins < 1 ? 'just now' : mins + ' min ago');
-    });
-    var stale = $('[data-stale-notice]');
-    if (stale && hasGamesToday && mins > STALE_MINUTES && inEveningWindow()) {
-      stale.classList.remove('is-hidden');
+  function showUpdated(data) {
+    var mins = minutesSince(data.updated_at);
+    if (mins !== null) {
+      $$('[data-updated]').forEach(function (node) {
+        node.textContent = node.getAttribute('data-updated-prefix') || 'Updated';
+        node.textContent += ' ' + (mins < 1 ? 'just now' : mins + ' min ago');
+      });
     }
+    var notice = $('[data-stale-notice]');
+    if (!notice || data.has_games_today === false) return;
+    // Two ways to be out of date: our own refresh has not run for a while, or
+    // the feed itself has not moved on to today.
+    var lateRefresh = mins !== null && mins > STALE_MINUTES && inEveningWindow();
+    var oldFeed = !data.as_of || (data.date_et && data.as_of < data.date_et);
+    if (lateRefresh || oldFeed) notice.classList.remove('is-hidden');
   }
 
   /* ---------------- availability badges ---------------- */
@@ -122,7 +126,7 @@
         (g.players || []).forEach(function (p) { byPlayer[p.player] = p.status; });
       });
       applyStatuses(byPlayer);
-      showUpdated(data.updated_at, data.has_games_today !== false);
+      showUpdated(data);
     }).catch(function () { /* keep the prerendered values */ });
   }
 

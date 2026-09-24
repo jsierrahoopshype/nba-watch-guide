@@ -35,30 +35,6 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: TEMP feed shape
-        run: |
-          python - <<'PY'
-          from watchguide.sources.http import get
-          from watchguide.sources.injuries import feed_url, normalize_name
-          from collections import Counter, defaultdict
-          rows = get(feed_url(), expect_json=True)
-          print("ROWS", len(rows))
-          dates = Counter(r.get("date") for r in rows)
-          print("DISTINCT_DATES", len(dates))
-          print("NEWEST", sorted(dates)[-6:])
-          print("OLDEST", sorted(dates)[:4])
-          print("ROWS_ON_NEWEST", dates[sorted(dates)[-1]])
-          players = defaultdict(list)
-          for r in rows: players[normalize_name(r.get("player",""))].append(r)
-          print("DISTINCT_PLAYERS", len(players))
-          multi = [k for k,v in players.items() if len(v) > 1]
-          print("PLAYERS_WITH_MULTIPLE_ROWS", len(multi))
-          k = max(players, key=lambda k: len(players[k]))
-          print("EXAMPLE", k, len(players[k]))
-          for r in sorted(players[k], key=lambda r: r.get("date",""))[-6:]: print("   ", r)
-          print("STATUS_ON_NEWEST", Counter(r["status"] for r in rows if r.get("date")==sorted(dates)[-1]))
-          PY
-
       - name: Restore the last publish
         run: ./scripts/restore-published.sh site
 
@@ -82,7 +58,7 @@ jobs:
           echo "pages: $(find site -name index.html | wc -l)"
           echo "sitemap urls: $(grep -c '<loc>' site/sitemap.xml)"
           echo "games today: $(python -c "import json;d=json.load(open('site/data/tonight.json'));print(len(d['games']))")"
-          echo "players listed: $(python -c "import json;d=json.load(open('site/data/injuries.json'));print(len(d['players']))")"
+          echo "players listed: $(python -c "import json;d=json.load(open('site/data/injuries.json'));print(len(d['players']), d['as_of'])")"
           echo "schedule games: $(python -c "import json;d=json.load(open('site/data/schedule.json'));print(d['count'])")"
           echo "--- celtics page channel sample:"
           grep -o 'badge-[a-z]*">[^<]*<' site/boston-celtics/index.html | head -8
