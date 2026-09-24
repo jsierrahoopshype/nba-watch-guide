@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
+{% block content %}
+<h1>{{ text.h1 }}</h1>
+<p class="lede">{{ text.intro }}</p>
+
+{%- if next_game %}
+<h2>{{ text.next_game_heading }}</h2>
+<p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+<div class="notice is-hidden" data-stale-notice>{{ labels.stale_notice }}</div>
+<article class="game">
+  <div class="game-head">
+    <span class="game-teams">{{ next_game.away_name }} at {{ next_game.home_name }}</span>
+    {% with game = next_game.game, with_date = true %}{% include "partials/game_time.html" %}{% endwith %}
+  </div>
+  <p class="game-channels">{% with channels = next_game.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
+  <div class="game-sides">
+    {% with heading = next_game.away_name, players = next_game.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
+    {% with heading = next_game.home_name, players = next_game.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
+  </div>
+</article>
+{%- endif %}
+
+<h2 id="market">{{ labels.toggle_heading }}</h2>
+<div class="toggle" role="tablist" aria-label="{{ labels.toggle_heading }}">
+  <button type="button" role="tab" data-state-btn="out_of_market" aria-selected="true">{{ text.out_of_market_label }}</button>
+  <button type="button" role="tab" data-state-btn="in_market" aria-selected="false">{{ text.in_market_label }}</button>
+</div>
+
+{%- for view in views %}
+{% include "partials/state_panel.html" %}
+{%- endfor %}
+
+<hr class="rule">
+<h2>{{ text.schedule_heading }}</h2>
+{%- if schedule %}
+<table class="sched">
+  <caption>{{ schedule|length }} games</caption>
+  <thead>
+    <tr><th scope="col">Date</th><th scope="col">Opponent</th><th scope="col">Tip-off (ET)</th><th scope="col">Channel</th></tr>
+  </thead>
+  <tbody>
+    {%- for row in schedule %}
+    <tr>
+      <td class="when" data-label="Date">{{ row.date_label }}</td>
+      <td class="opp" data-label="Opponent">{{ row.opponent_label }}</td>
+      <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
+      <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+</table>
+{%- else %}
+<div class="card"><p>{{ text.no_games }}</p></div>
+{%- endif %}
+{% endblock %}
+
+{% block disclosure %}
+{%- if show_affiliate_disclosure %}
+<p class="disclosure">{{ text.affiliate_disclosure }}</p>
+{%- endif %}
+{% endblock %}

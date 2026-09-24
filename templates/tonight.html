@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
+{% block content %}
+<div data-tonight hidden></div>
+<h1>{{ text.h1 }}</h1>
+<p class="lede">{{ text.intro }}</p>
+<p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+<div class="notice is-hidden" data-stale-notice>{{ labels.stale_notice }}</div>
+
+{%- if games %}
+{%- for row in games %}
+<article class="game">
+  <div class="game-head">
+    <span class="game-teams">{{ row.away_name }} at {{ row.home_name }}</span>
+    {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
+  </div>
+  <p class="game-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
+  <div class="game-sides">
+    {% with heading = row.away_name, players = row.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
+    {% with heading = row.home_name, players = row.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
+  </div>
+</article>
+{%- endfor %}
+{%- else %}
+<div class="card"><p>{{ text.no_games }}</p></div>
+{%- endif %}
+{% endblock %}

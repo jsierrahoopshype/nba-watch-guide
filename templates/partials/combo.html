@@ -1,0 +1,16 @@
+<div class="combo">
+  <div class="combo-head">
+    <span class="combo-label">{{ combo_label }}</span>
+    <span class="combo-total">{{ combo.total_price|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
+  </div>
+  <ul class="combo-parts">
+    {%- for svc in combo.services %}
+    <li><span>{{ svc.name }}</span><span class="price">{{ svc.monthly_price_usd|usd }}</span></li>
+    {%- endfor %}
+  </ul>
+  <p class="small muted" style="margin-top:10px">
+    {%- if combo.missed %}{{ labels.misses_prefix }} {{ combo.missed|length }} of {{ combo.total }}:
+      {{ combo.missed[:6]|map(attribute='date_et')|join(', ') }}{% if combo.missed|length > 6 %} and more{% endif %}.
+    {%- else %}{{ labels.misses_none }}{% endif %}
+  </p>
+</div>

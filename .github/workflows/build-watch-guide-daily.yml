@@ -1,0 +1,58 @@
+name: build-watch-guide-daily
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shared with the injury refresh so the two never push over each other.
+concurrency:
+  group: watch-guide-publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Restore the last publish
+        run: ./scripts/restore-published.sh site
+
+      - name: Run tests
+        run: |
+          pip install pytest
+          python -m pytest
+
+      - name: Build every page
+        env:
+          # Optional. Set this to a plain pass-through proxy origin if the
+          # runner's IP range is ever refused by cdn.nba.com. No key involved.
+          NBA_PROXY_BASE: ${{ vars.NBA_PROXY_BASE }}
+          # Optional. Point the availability feed somewhere else.
+          INJURY_FEED_URL: ${{ vars.INJURY_FEED_URL }}
+        run: python -m watchguide --out site build
+
+      - name: Check the output
+        run: |
+          test -f site/sitemap.xml
+          grep -c '<loc>' site/sitemap.xml
+          ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
+
+      - name: Publish to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: ./scripts/publish.sh site gh-pages

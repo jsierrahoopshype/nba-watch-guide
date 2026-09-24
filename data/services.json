@@ -1,0 +1,218 @@
+{
+  "_note": "Hand-edited. One entry per subscription service. Set monthly_price_usd, source_url, last_verified and verified true for a price to show. Anything with verified false renders as 'Price not confirmed' and is left out of the cheapest-combination maths.",
+  "_fields": {
+    "monthly_price_usd": "Number in US dollars per month, or null if not confirmed.",
+    "billing_note": "Short line shown under the price, e.g. season pricing or a required bundle.",
+    "carries": "Broadcaster codes from the NBA schedule feed that this service gives you.",
+    "affiliate_url": "Leave empty until you have a link. When any service on a page has one, that page shows the affiliate disclosure."
+  },
+  "services": [
+    {
+      "id": "abc",
+      "name": "ABC",
+      "kind": "ota",
+      "monthly_price_usd": null,
+      "billing_note": "Free over the air with an antenna, or included with a live TV plan.",
+      "carries": [
+        "ABC"
+      ],
+      "carries_note": "ABC national games. Confirm the broadcaster code the schedule feed uses before setting verified.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "nbc",
+      "name": "NBC",
+      "kind": "ota",
+      "monthly_price_usd": null,
+      "billing_note": "Free over the air with an antenna, or included with a live TV plan.",
+      "carries": [
+        "NBC"
+      ],
+      "carries_note": "NBC national games.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "espn",
+      "name": "ESPN",
+      "kind": "streaming",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [
+        "ESPN",
+        "ESPN2",
+        "ESPNU"
+      ],
+      "carries_note": "ESPN national games. Add or remove codes if the feed uses different ones.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "peacock",
+      "name": "Peacock",
+      "kind": "streaming",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [
+        "Peacock"
+      ],
+      "carries_note": "Peacock exclusive national games.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "prime-video",
+      "name": "Prime Video",
+      "kind": "streaming",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [
+        "Prime Video"
+      ],
+      "carries_note": "Prime Video national games. Check the exact abbreviation in the feed (Prime Video / Prime / AMZN).",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "nba-league-pass",
+      "name": "NBA League Pass",
+      "kind": "league",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "League Pass coverage is worked out from the rules block below, not from this list. Leave carries empty.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "nba-tv",
+      "name": "NBA TV",
+      "kind": "streaming",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [
+        "NBA TV",
+        "NBATV"
+      ],
+      "carries_note": "NBA TV national games.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "youtube-tv",
+      "name": "YouTube TV",
+      "kind": "live_tv",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "Channel line-up varies by market. Add the broadcaster codes it carries once checked, then set verified.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "hulu-live-tv",
+      "name": "Hulu + Live TV",
+      "kind": "live_tv",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "Channel line-up varies by market. Add codes once checked.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "sling-tv",
+      "name": "Sling TV",
+      "kind": "live_tv",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "Channel line-up varies by package and market. Add codes once checked.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "fubo",
+      "name": "Fubo",
+      "kind": "live_tv",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "Channel line-up varies by market. Add codes once checked.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "id": "directv-stream",
+      "name": "DirecTV Stream",
+      "kind": "live_tv",
+      "monthly_price_usd": null,
+      "billing_note": "",
+      "carries": [],
+      "carries_note": "Channel line-up varies by package and market. Add codes once checked.",
+      "signup_url": "",
+      "affiliate_url": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    }
+  ],
+  "rules": {
+    "_note": "League Pass blackout rules. The generator reads applies_to to work out coverage; it never hardcodes them. Paste the official League Pass help page into source_url and set verified true once the wording is checked.",
+    "league_pass_service_id": "nba-league-pass",
+    "blackouts": [
+      {
+        "id": "national-broadcast",
+        "applies_to": "national_broadcast",
+        "active": true,
+        "label": "Games shown on a national broadcast are blacked out on League Pass.",
+        "source_url": "",
+        "last_verified": "",
+        "verified": false
+      },
+      {
+        "id": "in-market-local",
+        "applies_to": "in_market_local",
+        "active": true,
+        "label": "Your local team's games are blacked out on League Pass inside its home market.",
+        "source_url": "",
+        "last_verified": "",
+        "verified": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "_note": "All page wording lives here. {team} is the team short name (Lakers), {full_team} the official full name, {season} the season label (2026-27). Titles are cut to 60 characters, descriptions to 155, so keep them short.",
+  "season_label": "2026-27",
+  "site_name": "HoopsMatic",
+  "hub": {
+    "title": "How to Watch NBA Games {season}: TV & Streaming",
+    "description": "Where every NBA team plays on TV and streaming in {season}, what each service costs and the cheapest way to follow your team.",
+    "h1": "How to watch the NBA in {season}",
+    "intro": "Pick your team to see every game, the channel it is on and what you need to pay to watch it. Anything the league or a service has not confirmed yet is marked as such rather than guessed.",
+    "teams_heading": "All 30 teams",
+    "national_heading": "National TV and streaming partners",
+    "national_intro": "These are the broadcasters listed on national games in the league schedule feed for {season}.",
+    "national_empty": "National broadcasters will show here once the {season} schedule is loaded.",
+    "tonight_link_label": "See tonight's games and channels",
+    "faq_heading": "Questions people ask"
+  },
+  "team": {
+    "title": "How to Watch {team} Games {season}: TV & Streaming",
+    "description": "Every {full_team} game in {season}, the channel it is on, what each service costs and the cheapest combination to watch them all.",
+    "h1": "How to watch the {full_team} in {season}",
+    "intro": "Every remaining {full_team} regular-season game, the channel it is on and what it costs to watch. Switch between outside the market and inside it below.",
+    "out_of_market_label": "Outside the {team} market",
+    "in_market_label": "In the {team} market",
+    "coverage_heading": "What each service covers",
+    "coverage_line": "Covers {covered} of {total} remaining games",
+    "cheapest_heading": "Cheapest way to watch",
+    "cheapest_full_label": "Every remaining game",
+    "cheapest_ninety_label": "At least 90% of remaining games",
+    "cheapest_unavailable": "The cheapest combination will show here once service prices are confirmed.",
+    "cheapest_impossible": "No combination of these services covers every remaining game yet.",
+    "services_heading": "Services and prices",
+    "next_game_heading": "Next game",
+    "schedule_heading": "Full {season} schedule",
+    "local_heading": "Local TV",
+    "local_missing": "Local details coming.",
+    "no_games": "No remaining regular-season games.",
+    "affiliate_disclosure": "Some links on this page earn HoopsMatic a commission. It does not change what you pay.",
+    "coverage_none": "No service on this list carries a {team} game yet. Channels for these games are still listed as TBA in the league schedule.",
+    "coverage_more": "{count} more services have no confirmed channel list yet."
+  },
+  "tonight": {
+    "title": "NBA Games Tonight: TV Channels & Start Times",
+    "description": "Every NBA game today in ET order, the channel each one is on and which players are out, doubtful or questionable.",
+    "h1": "NBA games today",
+    "intro": "Every game on today's schedule in Eastern Time order, with the channel and the players listed as out, doubtful or questionable.",
+    "no_games": "No NBA games scheduled today.",
+    "injuries_heading": "Player availability"
+  },
+  "labels": {
+    "tba": "TBA",
+    "details_coming": "Details coming",
+    "price_unconfirmed": "Price not confirmed",
+    "prices_checked": "Prices checked {month_year}",
+    "prices_unchecked": "Price not confirmed",
+    "national": "National",
+    "local": "Local",
+    "free_ota": "Free over the air",
+    "stale_notice": "Status may be out of date.",
+    "updated_prefix": "Updated",
+    "toggle_heading": "Where do you watch from?",
+    "breadcrumb_home": "How to watch",
+    "per_month": "/mo",
+    "misses_none": "Misses nothing.",
+    "misses_prefix": "Misses",
+    "no_players_listed": "Nobody listed.",
+    "players_unknown": "Details coming"
+  },
+  "faq": [
+    {
+      "id": "blackouts",
+      "q": "Why can I not watch some games on NBA League Pass?",
+      "a_intro": "League Pass has blackouts. These are the rules that apply:",
+      "a_fallback": "The blackout rules for this season are not confirmed yet."
+    },
+    {
+      "id": "free",
+      "q": "Which NBA games can I watch for free?",
+      "a_intro": "Games on a free over-the-air channel need only an antenna. Right now that covers:",
+      "a_fallback": "Free over-the-air options are not confirmed yet."
+    },
+    {
+      "id": "in-market",
+      "q": "What is the difference between in-market and out-of-market?",
+      "a": "In-market means you live in the area a team's local broadcaster covers. Those local games are on that broadcaster and are blacked out on League Pass. Out-of-market means you live anywhere else, so the local broadcast is not available to you but League Pass is."
+    },
+    {
+      "id": "prices",
+      "q": "How current are these prices?",
+      "a": "Each service carries the date its price was last checked. Anything without a confirmed price shows as not confirmed instead of a number."
+    }
+  ]
+}

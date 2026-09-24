@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="{{ page.canonical }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ copy.site_name }}">
+<meta property="og:url" content="{{ page.canonical }}">
+<meta property="og:title" content="{{ page.og_title }}">
+<meta property="og:description" content="{{ page.og_description }}">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="{{ asset('assets/watch-guide.css') }}">
+{% if page.jsonld %}<script type="application/ld+json">{{ page.jsonld }}</script>
+{% endif %}
+</head>
+<body>
+<main class="wrap">
+{% block crumbs %}{% endblock %}
+{% block content %}{% endblock %}
+{% block disclosure %}{% endblock %}
+</main>
+<script src="{{ asset('assets/watch-guide.js') }}" defer></script>
+</body>
+</html>

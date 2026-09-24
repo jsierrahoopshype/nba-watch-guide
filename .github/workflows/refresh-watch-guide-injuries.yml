@@ -1,0 +1,69 @@
+name: refresh-watch-guide-injuries
+
+on:
+  # Every 30 minutes from 16:00 to 04:30 UTC, which covers a full NBA evening.
+  schedule:
+    - cron: '0,30 16-23 * * *'
+    - cron: '0,30 0-4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watch-guide-publish
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Restore the last publish
+        run: ./scripts/restore-published.sh site
+
+      - name: Any games today?
+        id: games
+        run: |
+          # Reads the published schedule only. No network call, so a quiet day
+          # costs a couple of seconds.
+          python - <<'PY'
+          import json, os, pathlib
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          today = datetime.now(ZoneInfo("America/New_York")).date().isoformat()
+          path = pathlib.Path("site/data/schedule.json")
+          games = json.loads(path.read_text())["games"] if path.exists() else []
+          count = sum(1 for g in games if g.get("date_et") == today)
+          print(f"{today}: {count} games")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+              fh.write(f"has_games={'true' if count else 'false'}\n")
+          PY
+
+      - if: steps.games.outputs.has_games == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Refresh availability
+        if: steps.games.outputs.has_games == 'true'
+        env:
+          NBA_PROXY_BASE: ${{ vars.NBA_PROXY_BASE }}
+          INJURY_FEED_URL: ${{ vars.INJURY_FEED_URL }}
+        run: python -m watchguide --out site refresh
+
+      - name: Check the output
+        if: steps.games.outputs.has_games == 'true'
+        run: |
+          ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
+
+      - name: Publish to gh-pages
+        if: steps.games.outputs.has_games == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: ./scripts/publish.sh site gh-pages

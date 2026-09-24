@@ -1,0 +1,8 @@
+{#- ET time is in the HTML. JS swaps in the reader's own zone. -#}
+{%- if game.tipoff_utc -%}
+<span class="game-when" data-utc="{{ game.tipoff_utc }}"{% if with_date %} data-with-date{% endif %}>
+  <span data-local-slot>{{ game|et_label(with_date) }}</span>
+</span>
+{%- else -%}
+<span class="game-when">{{ game.status_text or labels.tba }}</span>
+{%- endif -%}
