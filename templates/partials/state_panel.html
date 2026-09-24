@@ -18,11 +18,7 @@
           <div class="bar"><span style="width: {{ item.percent|round(0, 'floor')|int }}%"></span></div>
         </div>
         <div class="row-side">
-          {%- if item.service.has_price %}
-          <span class="price">{{ item.service.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
-          {%- else %}
-          <span class="price-none">{{ labels.price_unconfirmed }}</span>
-          {%- endif %}
+          {% with svc = item.service %}{% include "partials/price.html" %}{% endwith %}
         </div>
       </div>
       {%- endfor %}
@@ -51,6 +47,9 @@
 
   <h2>{{ text.services_heading }}</h2>
   <div class="card">
+    {%- if prices_checked %}
+    <p class="small muted" data-prices-checked>{{ labels.prices_checked.format(month_year=prices_checked|month_year) }}</p>
+    {%- endif %}
     <div class="rows">
       {%- for item in view.per_service %}
       <div class="row">
@@ -59,14 +58,13 @@
           {%- if item.service.billing_note %}
           <div class="row-note">{{ item.service.billing_note }}</div>
           {%- endif %}
+          {%- if not item.service.carries_verified %}
+          <div class="row-note" data-coverage-unconfirmed>{{ labels.coverage_unconfirmed }}</div>
+          {%- endif %}
           <div class="row-note">{% if item.service.verified and item.service.last_verified %}{{ labels.prices_checked.format(month_year=item.service.last_verified|month_year) }}{% else %}{{ labels.prices_unchecked }}{% endif %}</div>
         </div>
         <div class="row-side">
-          {%- if item.service.has_price %}
-          <span class="price">{{ item.service.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
-          {%- else %}
-          <span class="price-none">{{ labels.price_unconfirmed }}</span>
-          {%- endif %}
+          {% with svc = item.service %}{% include "partials/price.html" %}{% endwith %}
         </div>
       </div>
       {%- endfor %}

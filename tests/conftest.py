@@ -141,14 +141,15 @@ def built_site_priced(tmp_path_factory, fixture_games):
     combination and the affiliate disclosure actually render."""
     data_dir = _copy_data(tmp_path_factory, "data-priced")
     services = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
-    prices = {"abc": 0.0, "nbc": 0.0, "espn": 11.99, "nba-tv": 6.99, "nba-league-pass": 16.99}
+    prices = {"antenna_abc": 0.0, "antenna_nbc": 0.0, "espn_unlimited": 11.99,
+              "nba_tv": 6.99, "nba_league_pass": 16.99}
     for svc in services["services"]:
         if svc["id"] in prices:
             svc["monthly_price_usd"] = prices[svc["id"]]
             svc["source_url"] = "https://example.test/pricing"
             svc["last_verified"] = "2027-01-02"
             svc["verified"] = True
-        if svc["id"] == "nba-league-pass":
+        if svc["id"] == "nba_league_pass":
             svc["affiliate_url"] = "https://example.test/league-pass?ref=test"
     (data_dir / "services.json").write_text(json.dumps(services), encoding="utf-8")
     return _build(tmp_path_factory, fixture_games, "site-priced", data_dir=data_dir)

@@ -1,245 +1,187 @@
 {
-  "_note": "Hand-edited. One entry per subscription service. Set monthly_price_usd, source_url, last_verified and verified true for a price to show. Anything with verified false renders as 'Price not confirmed' and is left out of the cheapest-combination maths.",
-  "_fields": {
-    "monthly_price_usd": "Number in US dollars per month, or null if not confirmed.",
-    "billing_note": "Short line shown under the price, e.g. season pricing or a required bundle.",
-    "carries": "Broadcaster codes from the NBA schedule feed that this service gives you.",
-    "affiliate_url": "Leave empty until you have a link. When any service on a page has one, that page shows the affiliate disclosure."
+  "_meta": {
+    "purpose": "Subscription services for the HoopsMatic How to Watch guide. Replaces data/services.json in jsierrahoopshype/nba-watch-guide.",
+    "currency": "USD",
+    "all_prices_checked": "2026-09-25",
+    "unmapped_broadcaster_codes": {
+      "NBCSN": "30 games in the NBA schedule feed. Deliberately not mapped to any service: the original NBC Sports Network shut down in 2021 and what this code refers to in 2026-27 is unconfirmed. These games render TBA until verified.",
+      "Telemundo": "10 games. Spanish-language coverage. Deliberately not counted as coverage for an English-language reader; show it as a separate note on those games."
+    },
+    "carries_note": "carries lists the broadcaster codes as they appear in cdn.nba.com scheduleLeagueV2.json: ABC, ESPN, NBC, Peacock, Amazon, NBA TV. Entries with carries_verified false must not be trusted for coverage maths until checked."
   },
   "services": [
     {
-      "id": "abc",
-      "name": "ABC",
-      "kind": "ota",
-      "monthly_price_usd": null,
-      "billing_note": "Free over the air with an antenna, or included with a live TV plan.",
-      "carries": [
-        "ABC"
-      ],
-      "carries_note": "ABC national games. The feed uses ABC on 21 games.",
+      "id": "antenna_abc",
+      "name": "ABC (over the air)",
+      "monthly_price_usd": 0,
+      "billing_note": "Free with an antenna in range of a local ABC station. A one-off antenna purchase is typically $20 to $50.",
+      "carries": ["ABC"],
+      "carries_verified": true,
       "signup_url": "",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://www.nba.com/league-pass-purchase",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "nbc",
-      "name": "NBC",
-      "kind": "ota",
-      "monthly_price_usd": null,
-      "billing_note": "Free over the air with an antenna, or included with a live TV plan.",
-      "carries": [
-        "NBC"
-      ],
-      "carries_note": "NBC national games. The feed also uses NBCSN on 30 games. That is a separate cable channel, so it is not listed here. Add it if you confirm this service carries it.",
+      "id": "antenna_nbc",
+      "name": "NBC (over the air)",
+      "monthly_price_usd": 0,
+      "billing_note": "Free with an antenna in range of a local NBC station. A one-off antenna purchase is typically $20 to $50.",
+      "carries": ["NBC"],
+      "carries_verified": true,
       "signup_url": "",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://www.nba.com/league-pass-purchase",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "espn",
-      "name": "ESPN",
-      "kind": "streaming",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [
-        "ESPN",
-        "ESPN2",
-        "ESPNU"
-      ],
-      "carries_note": "ESPN national games. The feed uses ESPN on 62 games. ESPN2 and ESPNU are listed in case they turn up later.",
-      "signup_url": "",
+      "id": "espn_unlimited",
+      "name": "ESPN Unlimited",
+      "monthly_price_usd": 31.99,
+      "billing_note": "Raised from $29.99 on September 17, 2026. Annual plan $319.99. Includes ESPN on ABC. The Disney+, Hulu and ESPN Unlimited bundle is $35.99 a month and stayed at that price through the increase.",
+      "carries": ["ESPN", "ABC"],
+      "carries_verified": true,
+      "signup_url": "https://www.espn.com/espnplus/",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "peacock",
-      "name": "Peacock",
-      "kind": "streaming",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [
-        "Peacock"
-      ],
-      "carries_note": "Peacock national games. The feed uses Peacock on 99 games.",
-      "signup_url": "",
+      "id": "peacock_premium",
+      "name": "Peacock Premium",
+      "monthly_price_usd": 12.99,
+      "billing_note": "Raised from $10.99 on August 18, 2026. Annual plan $129.99. The cheaper Select tier at $8.99 carries no live sports and does not work for NBA games. Premium Plus is $19.99.",
+      "carries": ["Peacock"],
+      "carries_verified": false,
+      "carries_check": "Whether NBC's NBA games are also streamed live on Peacock, and in which markets, is unconfirmed. Until checked, Peacock counts only for games the feed codes as Peacock.",
+      "signup_url": "https://www.peacocktv.com/plans",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://www.peacocktv.com/help/article/price-increase",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "prime-video",
+      "id": "prime_video",
       "name": "Prime Video",
-      "kind": "streaming",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [
-        "Amazon",
-        "Prime Video"
-      ],
-      "carries_note": "The feed writes Amazon, not Prime Video. Both are listed so either spelling matches if the league changes it.",
-      "signup_url": "",
+      "monthly_price_usd": 8.99,
+      "billing_note": "Standalone Prime Video, with ads. A full Amazon Prime membership at $14.99 a month or $139 a year also includes it. The Ultra add-on for ad-free and 4K is $4.99 a month on top.",
+      "carries": ["Amazon"],
+      "carries_verified": false,
+      "carries_check": "Confirm that live NBA games are included on the $8.99 standalone Prime Video tier and not limited to full Prime membership.",
+      "signup_url": "https://www.amazon.com/primevideo",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
+      "source_url": "https://www.dealnews.com/features/Amazon/How-Much-Is-Amazon-Prime/",
+      "last_verified": "2026-09-25",
       "verified": false
     },
     {
-      "id": "nba-league-pass",
+      "id": "nba_league_pass",
       "name": "NBA League Pass",
-      "kind": "league",
-      "monthly_price_usd": null,
-      "billing_note": "",
+      "monthly_price_usd": 16.99,
+      "billing_note": "League Pass Premium is $24.99 a month and adds three concurrent devices, commercial-free in-arena streams and offline viewing. Season-long billing is also sold and runs through the end of the regular season. Out-of-market games only: national and local broadcasts are blacked out live.",
       "carries": [],
-      "carries_note": "League Pass coverage is worked out from the rules block below, not from this list. Leave carries empty.",
-      "signup_url": "",
+      "carries_verified": true,
+      "carries_check": "Deliberately empty. League Pass covers games with no national broadcaster that are outside the reader's market, which the rules block handles, not the carries list.",
+      "signup_url": "https://www.nba.com/league-pass-purchase",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://www.nba.com/league-pass-purchase",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "nba-tv",
+      "id": "nba_tv",
       "name": "NBA TV",
-      "kind": "streaming",
       "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [
-        "NBA TV",
-        "NBATV"
-      ],
-      "carries_note": "NBA TV national games. The feed uses NBA TV on 60 games.",
-      "signup_url": "",
+      "billing_note": "Included at no extra cost with a League Pass subscription bought on NBA.com. Also carried inside some live TV packages. No confirmed standalone monthly price.",
+      "carries": ["NBA TV"],
+      "carries_verified": true,
+      "signup_url": "https://www.nba.com/league-pass-purchase",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
+      "source_url": "https://www.nba.com/league-pass-purchase",
+      "last_verified": "2026-09-25",
       "verified": false
     },
     {
-      "id": "youtube-tv",
+      "id": "youtube_tv",
       "name": "YouTube TV",
-      "kind": "live_tv",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [],
-      "carries_note": "Channel line-up varies by market. Add the broadcaster codes it carries once checked, then set verified.",
-      "signup_url": "",
+      "monthly_price_usd": 82.99,
+      "billing_note": "Base plan, 100+ channels, unlimited DVR, three simultaneous streams. ESPN Unlimited is unlocked in the ESPN app for subscribers.",
+      "carries": ["ESPN", "ABC", "NBC"],
+      "carries_verified": false,
+      "carries_check": "Local channel lineups vary by market and NBA TV carriage is unconfirmed. Verify before counting this toward coverage.",
+      "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "hulu-live-tv",
+      "id": "hulu_live_tv",
       "name": "Hulu + Live TV",
-      "kind": "live_tv",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [],
-      "carries_note": "Channel line-up varies by market. Add codes once checked.",
-      "signup_url": "",
+      "monthly_price_usd": 99.99,
+      "billing_note": "With ads, after a 3-day free trial. Price for new subscribers as of September 23, 2026; anyone who signed up earlier moves to it on their first bill on or after October 21, 2026. Includes Disney+ and ESPN.",
+      "carries": ["ESPN", "ABC", "NBC"],
+      "carries_verified": false,
+      "carries_check": "Local channel lineups vary by market. Verify before counting this toward coverage.",
+      "signup_url": "https://www.hulu.com/live-tv",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://www.hulu.com/live-tv",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "sling-tv",
-      "name": "Sling TV",
-      "kind": "live_tv",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [],
-      "carries_note": "Channel line-up varies by package and market. Add codes once checked.",
-      "signup_url": "",
+      "id": "sling_tv",
+      "name": "Sling TV (Orange + Blue)",
+      "monthly_price_usd": 60.99,
+      "billing_note": "Orange alone is $45.99 and carries the ESPN family. Blue alone is $45.99 and carries NBC in some markets. Local channel coverage is limited, so many subscribers pair it with an antenna.",
+      "carries": ["ESPN"],
+      "carries_verified": false,
+      "carries_check": "NBC availability depends on the market and ABC is not carried. Verify per market before counting this toward coverage.",
+      "signup_url": "https://www.sling.com/",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
       "id": "fubo",
       "name": "Fubo",
-      "kind": "live_tv",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [],
-      "carries_note": "Channel line-up varies by market. Add codes once checked.",
-      "signup_url": "",
+      "monthly_price_usd": 84.99,
+      "billing_note": "Essential plan. Regional sports fees are added in some markets and are not optional. Does not carry the Warner-owned channels.",
+      "carries": ["ESPN", "ABC"],
+      "carries_verified": false,
+      "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
+      "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
+      "last_verified": "2026-09-25",
+      "verified": true
     },
     {
-      "id": "directv-stream",
-      "name": "DirecTV Stream",
-      "kind": "live_tv",
-      "monthly_price_usd": null,
-      "billing_note": "",
-      "carries": [],
-      "carries_note": "Channel line-up varies by package and market. Add codes once checked.",
-      "signup_url": "",
+      "id": "directv_stream",
+      "name": "DirecTV",
+      "monthly_price_usd": 94.99,
+      "billing_note": "Choice plan, which is the cheapest tier carrying regional sports networks and therefore the relevant one for local NBA games. Entertainment is $89.99 without RSNs, Ultimate is $124.99, and a pared-down Sports + News plan is $55.99. Regional sports fees may apply.",
+      "carries": ["ESPN", "ABC", "NBC"],
+      "carries_verified": false,
+      "carries_check": "Which RSN a given market gets, and whether NBA TV is included, varies by plan and market. Verify before counting this toward coverage.",
+      "signup_url": "https://www.directv.com/stream/",
       "affiliate_url": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
+      "last_verified": "2026-09-25",
+      "verified": true
     }
   ],
   "rules": {
-    "_note": "League Pass blackout rules. The generator reads applies_to to work out coverage; it never hardcodes them. Paste the official League Pass help page into source_url and set verified true once the wording is checked.",
-    "league_pass_service_id": "nba-league-pass",
-    "blackouts": [
-      {
-        "id": "national-broadcast",
-        "applies_to": "national_broadcast",
-        "active": true,
-        "label": "Games shown on a national broadcast are blacked out on League Pass.",
-        "source_url": "",
-        "last_verified": "",
-        "verified": false
-      },
-      {
-        "id": "in-market-local",
-        "applies_to": "in_market_local",
-        "active": true,
-        "label": "Your local team's games are blacked out on League Pass inside its home market.",
-        "source_url": "",
-        "last_verified": "",
-        "verified": false
-      }
-    ]
-  },
-  "_broadcaster_codes_seen": {
-    "_note": "Every national code the NBA schedule feed used for 2026-27 when this was last checked, with how many regular-season games carried it. Match these strings in a service's carries list. Matching ignores case, spaces and punctuation, so 'NBA TV' and 'NBATV' are the same code.",
-    "checked": "2026-09-24",
-    "source_url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
-    "national": {
-      "Peacock": 99,
-      "NBC": 69,
-      "Amazon": 66,
-      "ESPN": 62,
-      "NBA TV": 60,
-      "NBCSN": 30,
-      "ABC": 21,
-      "Telemundo": 10
-    },
-    "local": {
-      "YES": 79,
-      "NBCSCA": 78,
-      "KUNP": 66,
-      "WPLG": 66,
-      "NBCSBA": 66,
-      "SPECSN": 65,
-      "NBCSB": 65,
-      "KATU/KUNP": 8
-    },
-    "unassigned": "303 of 1206 regular-season games carried a national broadcaster, 446 carried a local one and 541 carried neither. The rest fill in as the league publishes them, and the daily build logs the count."
+    "league_pass_blackouts": {
+      "national": "Nationally broadcast games cannot be watched live on League Pass and become available at 6am ET the next day.",
+      "local": "Games televised locally in your area cannot be watched live on League Pass and become available three days after the game.",
+      "zip_check": "The NBA publishes a zip code checker on its League Pass page for market-specific blackouts.",
+      "source_url": "https://www.nba.com/league-pass-purchase",
+      "last_verified": "2026-09-25"
+    }
   }
 }

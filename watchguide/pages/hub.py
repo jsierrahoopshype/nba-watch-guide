@@ -32,7 +32,7 @@ def faq_entries(ctx: SiteContext) -> list[dict[str, str]]:
             rules = [b.label for b in ctx.services.blackouts if b.active and b.label]
             answer = f"{item['a_intro']} {' '.join(rules)}" if rules else item.get("a_fallback", "")
         elif item.get("id") == "free":
-            free = [s.name for s in ctx.services.services if s.kind == "ota"]
+            free = [s.name for s in ctx.services.services if s.kind == "ota" or s.is_free]
             answer = f"{item['a_intro']} {', '.join(free)}." if free else item.get("a_fallback", "")
         if answer:
             entries.append({"q": item["q"], "a": answer})
