@@ -1,0 +1,310 @@
+{
+  "_note": "Hand-edited. Local TV for each team. While verified is false the team page shows 'Local details coming' for the in-market view and skips the in-market cheapest combination.",
+  "_fields": {
+    "local_broadcasters": "List of {code, name}. code matches the home/away broadcaster abbreviation in the NBA schedule feed.",
+    "streaming_apps": "List of {service_id, name, monthly_price_usd, signup_url}. service_id links to data/services.json when the app is one of the listed services; leave it empty for a standalone team app and give a price here.",
+    "in_market_note": "One plain sentence for in-market viewers."
+  },
+  "teams": [
+    {
+      "slug": "atlanta-hawks",
+      "team": "Atlanta Hawks",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "boston-celtics",
+      "team": "Boston Celtics",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "brooklyn-nets",
+      "team": "Brooklyn Nets",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "charlotte-hornets",
+      "team": "Charlotte Hornets",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "chicago-bulls",
+      "team": "Chicago Bulls",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "cleveland-cavaliers",
+      "team": "Cleveland Cavaliers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "dallas-mavericks",
+      "team": "Dallas Mavericks",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "denver-nuggets",
+      "team": "Denver Nuggets",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "detroit-pistons",
+      "team": "Detroit Pistons",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "golden-state-warriors",
+      "team": "Golden State Warriors",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "houston-rockets",
+      "team": "Houston Rockets",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "indiana-pacers",
+      "team": "Indiana Pacers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "la-clippers",
+      "team": "LA Clippers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "los-angeles-lakers",
+      "team": "Los Angeles Lakers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "memphis-grizzlies",
+      "team": "Memphis Grizzlies",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "miami-heat",
+      "team": "Miami Heat",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "milwaukee-bucks",
+      "team": "Milwaukee Bucks",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "minnesota-timberwolves",
+      "team": "Minnesota Timberwolves",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "new-orleans-pelicans",
+      "team": "New Orleans Pelicans",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "new-york-knicks",
+      "team": "New York Knicks",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "oklahoma-city-thunder",
+      "team": "Oklahoma City Thunder",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "orlando-magic",
+      "team": "Orlando Magic",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "philadelphia-76ers",
+      "team": "Philadelphia 76ers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "phoenix-suns",
+      "team": "Phoenix Suns",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "portland-trail-blazers",
+      "team": "Portland Trail Blazers",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "sacramento-kings",
+      "team": "Sacramento Kings",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "san-antonio-spurs",
+      "team": "San Antonio Spurs",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "toronto-raptors",
+      "team": "Toronto Raptors",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "utah-jazz",
+      "team": "Utah Jazz",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    },
+    {
+      "slug": "washington-wizards",
+      "team": "Washington Wizards",
+      "local_broadcasters": [],
+      "streaming_apps": [],
+      "in_market_note": "",
+      "source_url": "",
+      "last_verified": "",
+      "verified": false
+    }
+  ]
+}

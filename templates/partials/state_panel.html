@@ -1,0 +1,85 @@
+<section class="state-panel" id="panel-{{ view.state }}" role="tabpanel"
+         aria-labelledby="tab-{{ view.state }}"
+         data-state-panel="{{ view.state }}"{% if view.hidden %} hidden{% endif %}>
+
+  {%- if view.local_missing %}
+  <div class="notice">{{ text.local_missing }}</div>
+  {%- endif %}
+
+  <h2>{{ text.coverage_heading }}</h2>
+  <div class="card">
+    {%- if view.covering %}
+    <div class="rows">
+      {%- for item in view.covering %}
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">{{ item.service.name }}</div>
+          <div class="row-note">{{ text.coverage_line.format(covered=item.covered, total=item.total) }}</div>
+          <div class="bar"><span style="width: {{ item.percent|round(0, 'floor')|int }}%"></span></div>
+        </div>
+        <div class="row-side">
+          {%- if item.service.has_price %}
+          <span class="price">{{ item.service.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
+          {%- else %}
+          <span class="price-none">{{ labels.price_unconfirmed }}</span>
+          {%- endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p>{{ text.coverage_none }}</p>
+    {%- endif %}
+    {%- if view.not_covering_count %}
+    <p class="small muted">{{ text.coverage_more.format(count=view.not_covering_count) }}</p>
+    {%- endif %}
+  </div>
+
+  <h2>{{ text.cheapest_heading }}</h2>
+  {%- if view.priced_services == 0 %}
+  <div class="card"><p>{{ text.cheapest_unavailable }}</p></div>
+  {%- else %}
+    {%- if view.cheapest_full %}
+    {% with combo = view.cheapest_full, combo_label = text.cheapest_full_label %}{% include "partials/combo.html" %}{% endwith %}
+    {%- else %}
+    <div class="card"><p>{{ text.cheapest_impossible }}</p></div>
+    {%- endif %}
+    {%- if view.cheapest_ninety %}
+    {% with combo = view.cheapest_ninety, combo_label = text.cheapest_ninety_label %}{% include "partials/combo.html" %}{% endwith %}
+    {%- endif %}
+  {%- endif %}
+
+  <h2>{{ text.services_heading }}</h2>
+  <div class="card">
+    <div class="rows">
+      {%- for item in view.per_service %}
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">{% if item.service.link %}<a class="svc-link" href="{{ item.service.link }}"{% if item.service.is_affiliate %} rel="sponsored nofollow"{% endif %}>{{ item.service.name }}</a>{% else %}{{ item.service.name }}{% endif %}</div>
+          {%- if item.service.billing_note %}
+          <div class="row-note">{{ item.service.billing_note }}</div>
+          {%- endif %}
+          <div class="row-note">{% if item.service.verified and item.service.last_verified %}{{ labels.prices_checked.format(month_year=item.service.last_verified|month_year) }}{% else %}{{ labels.prices_unchecked }}{% endif %}</div>
+        </div>
+        <div class="row-side">
+          {%- if item.service.has_price %}
+          <span class="price">{{ item.service.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
+          {%- else %}
+          <span class="price-none">{{ labels.price_unconfirmed }}</span>
+          {%- endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <h2>{{ text.local_heading }}</h2>
+  <div class="card">
+    {%- if view.local_verified %}
+    <p>{{ view.local_names|join(", ") }}</p>
+    {%- if view.local_note %}<p class="small muted">{{ view.local_note }}</p>{% endif %}
+    {%- else %}
+    <p>{{ text.local_missing }}</p>
+    {%- endif %}
+  </div>
+</section>

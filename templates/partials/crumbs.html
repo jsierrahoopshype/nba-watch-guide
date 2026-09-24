@@ -1,0 +1,5 @@
+<nav class="crumbs" aria-label="Breadcrumb">
+  {%- for name, url in trail -%}
+    {%- if not loop.last %}<a href="{{ url|to_path }}">{{ name }}</a><span>/</span>{% else %}{{ name }}{% endif -%}
+  {%- endfor -%}
+</nav>

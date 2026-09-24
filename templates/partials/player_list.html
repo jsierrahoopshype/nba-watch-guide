@@ -1,0 +1,15 @@
+<div class="game-side">
+  <h4>{{ heading }}</h4>
+  {%- if players %}
+  <ul>
+    {%- for p in players %}
+    <li data-player="{{ p.player }}">
+      <span>{{ p.player }}</span>
+      <span class="badge badge-{{ p.status|lower }}" data-status-slot>{{ p.status }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="small muted">{{ empty_label }}</p>
+  {%- endif %}
+</div>

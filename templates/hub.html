@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
+{% block content %}
+<h1>{{ text.h1 }}</h1>
+<p class="lede">{{ text.intro }}</p>
+
+<p><a class="btn-link" href="{{ tonight_path }}">{{ text.tonight_link_label }}</a></p>
+
+<h2>{{ text.national_heading }}</h2>
+<div class="card">
+  <p class="small muted">{{ text.national_intro }}</p>
+  {%- if national_partners %}
+  <ul class="chip-list">
+    {%- for partner in national_partners %}
+    <li><span class="badge badge-national">{{ partner.code }}</span> <span class="small muted">{{ partner.games }} games</span></li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="small">{{ text.national_empty }}</p>
+  {%- endif %}
+</div>
+
+<h2>{{ text.teams_heading }}</h2>
+<ul class="team-grid">
+  {%- for team in teams %}
+  <li><a href="{{ team.path }}">{{ team.full_name }}</a></li>
+  {%- endfor %}
+</ul>
+
+{%- if faq %}
+<h2>{{ text.faq_heading }}</h2>
+<div class="faq">
+  {%- for item in faq %}
+  <details{% if loop.first %} open{% endif %}>
+    <summary>{{ item.q }}</summary>
+    <div class="faq-body">{{ item.a }}</div>
+  </details>
+  {%- endfor %}
+</div>
+{%- endif %}
+{% endblock %}

@@ -1,0 +1,3 @@
+{%- for channel in channels -%}
+<span class="badge badge-{{ channel.kind }}">{{ channel.name }}</span>{% if not loop.last %} {% endif %}
+{%- endfor -%}
