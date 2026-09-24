@@ -66,7 +66,11 @@ def test_shipped_live_tv_bundles_do_not_count_yet(shipped):
     carriers = carriers_for_game(game(0, national=["ESPN"]), TEAM, shipped, None, OUT_OF_MARKET)
     assert carriers == {"espn_unlimited"}
     peacock = carriers_for_game(game(1, national=["Peacock"]), TEAM, shipped, None, OUT_OF_MARKET)
-    assert peacock == set()
+    assert peacock == {"peacock_premium"}
+    nbc = carriers_for_game(game(2, national=["NBC"]), TEAM, shipped, None, OUT_OF_MARKET)
+    assert nbc == {"antenna_nbc", "peacock_premium"}        # YouTube TV etc. still unconfirmed
+    amazon = carriers_for_game(game(3, national=["Amazon"]), TEAM, shipped, None, OUT_OF_MARKET)
+    assert amazon == {"prime_video"}
 
 
 def test_unverified_services_listed_with_price_and_unconfirmed_line(built_site):
