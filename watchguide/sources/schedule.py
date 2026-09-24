@@ -12,6 +12,15 @@ watchguide.sources.http, which uses curl_cffi with a Chrome profile.
 gameDateTimeEst carries a Z suffix but holds an Eastern wall clock, so the
 Eastern tipoff is worked out from gameDateTimeUTC with zoneinfo instead. That
 keeps daylight saving correct across the season.
+
+National TV lives under broadcasters.nationalBroadcasters, not
+nationalTvBroadcasters. There is no key by that second name in the feed, which
+is why the first version of this reader found no national games at all. Checked
+against the live feed on 2026-09-24: the Christmas Day Heat at Celtics game
+lists ABC and ESPN there. nationalBroadcasters can also hold radio entries, so
+anything whose broadcasterMedia is radio is skipped; national radio has its own
+key, nationalRadioBroadcasters, which this reader ignores because the site is
+about watching games.
 """
 
 from __future__ import annotations
@@ -31,10 +40,12 @@ def fetch_raw() -> dict:
     return get(SCHEDULE_URL, expect_json=True)
 
 
-def _codes(entries: list | None) -> list[str]:
+def _codes(entries: list | None, skip_radio: bool = True) -> list[str]:
     """Broadcaster abbreviations, in feed order, without blanks or repeats."""
     out: list[str] = []
     for entry in entries or []:
+        if skip_radio and (entry.get("broadcasterMedia") or "").lower() == "radio":
+            continue
         code = (entry.get("broadcasterAbbreviation") or entry.get("broadcasterDisplay") or "").strip()
         if code and code not in out:
             out.append(code)
@@ -91,7 +102,7 @@ def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
                 status_text=(g.get("gameStatusText") or "").strip(),
                 home_tricode=(g.get("homeTeam") or {}).get("teamTricode") or "",
                 away_tricode=(g.get("awayTeam") or {}).get("teamTricode") or "",
-                national=_codes(b.get("nationalTvBroadcasters")),
+                national=_codes(b.get("nationalBroadcasters")),
                 national_ott=_codes(b.get("nationalOttBroadcasters")),
                 home_tv=_codes(b.get("homeTvBroadcasters")),
                 away_tv=_codes(b.get("awayTvBroadcasters")),
