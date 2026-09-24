@@ -23,8 +23,10 @@
 
 <h2 id="market">{{ labels.toggle_heading }}</h2>
 <div class="toggle" role="tablist" aria-label="{{ labels.toggle_heading }}">
-  <button type="button" role="tab" data-state-btn="out_of_market" aria-selected="true">{{ text.out_of_market_label }}</button>
-  <button type="button" role="tab" data-state-btn="in_market" aria-selected="false">{{ text.in_market_label }}</button>
+  <button type="button" role="tab" id="tab-out_of_market" aria-controls="panel-out_of_market"
+          data-state-btn="out_of_market" aria-selected="true">{{ text.out_of_market_label }}</button>
+  <button type="button" role="tab" id="tab-in_market" aria-controls="panel-in_market"
+          data-state-btn="in_market" aria-selected="false">{{ text.in_market_label }}</button>
 </div>
 
 {%- for view in views %}

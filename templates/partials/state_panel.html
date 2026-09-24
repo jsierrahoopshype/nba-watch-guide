@@ -1,5 +1,6 @@
-<section class="state-panel" data-state-panel="{{ view.state }}"{% if view.hidden %} hidden{% endif %}
-         aria-label="{{ view.label }}">
+<section class="state-panel" id="panel-{{ view.state }}" role="tabpanel"
+         aria-labelledby="tab-{{ view.state }}"
+         data-state-panel="{{ view.state }}"{% if view.hidden %} hidden{% endif %}>
 
   {%- if view.local_missing %}
   <div class="notice">{{ text.local_missing }}</div>
