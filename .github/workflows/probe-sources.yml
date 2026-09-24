@@ -9,21 +9,63 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Raw responses
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install curl_cffi
+      - name: cdn.nba.com with full browser headers
+        run: |
+          python - <<'PY'
+          from curl_cffi import requests
+          import json, traceback
+          urls = [
+            "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+            "https://www.nba.com/schedule",
+          ]
+          for imp in ["chrome", "chrome124", "safari17_0"]:
+            for u in urls:
+              try:
+                r = requests.get(u, impersonate=imp, timeout=60, headers={
+                  "Referer": "https://www.nba.com/",
+                  "Origin": "https://www.nba.com",
+                })
+                print(imp, u, "->", r.status_code, len(r.content), r.headers.get("content-type"))
+                if r.status_code == 200 and "json" in (r.headers.get("content-type") or ""):
+                  d = r.json()
+                  ls = d.get("leagueSchedule", {})
+                  print("   SEASONYEAR", ls.get("seasonYear"), "GAMEDATES", len(ls.get("gameDates", [])))
+              except Exception as e:
+                print(imp, u, "ERR", type(e).__name__, str(e)[:120])
+          PY
+      - name: what www.nba.com/schedule exposes
         run: |
           set +e
           UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
-          for u in \
-            https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json \
-            https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json \
-            "https://stats.nba.com/stats/scoreboardv3?GameDate=2026-10-21&LeagueID=00" \
-            https://data.nba.net/prod/v1/today.json \
-            https://official.nba.com/ \
-            https://www.nba.com/schedule ; do
-            echo "=========== $u"
-            curl -s -D /tmp/h.txt -o /tmp/b.bin --max-time 30 -H "User-Agent: $UA" -H "Referer: https://www.nba.com/" -H "Accept: application/json, text/plain, */*" "$u"
-            head -1 /tmp/h.txt; grep -iE '^(server|x-reference-error|content-type|cf-ray)' /tmp/h.txt | head -5
-            echo "--- body head:"; head -c 300 /tmp/b.bin; echo
+          curl -s --max-time 45 -H "User-Agent: $UA" https://www.nba.com/schedule -o /tmp/s.html -w "HTTP %{http_code} BYTES %{size_download}\n"
+          echo "--- buildId / next data:"
+          grep -oE '"buildId":"[^"]+"' /tmp/s.html | head -2
+          echo "--- json endpoints referenced:"
+          grep -oE 'https?://[a-z0-9.-]*nba\.com[^"\\ ]{0,120}\.json' /tmp/s.html | sort -u | head -30
+          echo "--- does it contain schedule keys?"
+          for k in gameDates leagueSchedule broadcasters nationalTvBroadcasters gameDateTimeEst homeTeam teamTricode; do
+            printf "%-26s %s\n" "$k" "$(grep -c "$k" /tmp/s.html)"
           done
-          echo "=========== egress IP"
-          curl -s --max-time 20 https://api.github.com/meta -o /dev/null -w "github_meta %{http_code}\n"
+          echo "--- sample around nationalTvBroadcasters:"
+          grep -oE '.{0,80}nationalTvBroadcasters.{0,700}' /tmp/s.html | head -1
+      - name: next data route
+        run: |
+          set +e
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0.0.0 Safari/537.36'
+          BID=$(grep -oE '"buildId":"[^"]+"' /tmp/s.html 2>/dev/null | head -1 | sed 's/.*:"//;s/"//')
+          echo "buildId=$BID"
+          for u in "https://www.nba.com/_next/data/$BID/schedule.json" "https://www.nba.com/api/schedule"; do
+            echo "== $u"; curl -s --max-time 45 -H "User-Agent: $UA" "$u" -o /tmp/n.json -w "HTTP %{http_code} BYTES %{size_download}\n"; head -c 200 /tmp/n.json; echo
+          done
+      - name: injury report hosts
+        run: |
+          set +e
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0.0.0 Safari/537.36'
+          for u in https://official.nba.com/nba-injury-report-2026-27-season/ https://official.nba.com/nba-injury-report-2025-26-season/; do
+            echo "== $u"; curl -sL --max-time 45 -H "User-Agent: $UA" "$u" -o /tmp/i.html -w "HTTP %{http_code} BYTES %{size_download}\n"
+            grep -oE 'https?://[^"'"'"' ]+\.pdf' /tmp/i.html | sort -u | head -12
+            grep -oiE 'injury[-_a-z0-9]*\.pdf' /tmp/i.html | sort -u | head -8
+          done
