@@ -6,18 +6,24 @@
 
 {%- if next_game %}
 <h2>{{ text.next_game_heading }}</h2>
+{% if next_game.is_today %}
 <p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
 <div class="notice is-hidden" data-stale-notice>{{ labels.stale_notice }}</div>
+{% endif %}
 <article class="game">
   <div class="game-head">
     <span class="game-teams">{{ next_game.away_name }} at {{ next_game.home_name }}</span>
     {% with game = next_game.game, with_date = true %}{% include "partials/game_time.html" %}{% endwith %}
   </div>
   <p class="game-channels">{% with channels = next_game.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
+  {% if next_game.is_today %}
   <div class="game-sides">
     {% with heading = next_game.away_name, players = next_game.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
     {% with heading = next_game.home_name, players = next_game.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
   </div>
+  {% else %}
+  <p class="small muted">{{ labels.availability_on_game_day }}</p>
+  {% endif %}
 </article>
 {%- endif %}
 

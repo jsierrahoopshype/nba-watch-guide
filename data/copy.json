@@ -63,7 +63,8 @@
     "misses_none": "Misses nothing.",
     "misses_prefix": "Misses",
     "no_players_listed": "Nobody listed.",
-    "players_unknown": "Details coming"
+    "players_unknown": "Details coming",
+    "availability_on_game_day": "Player availability shows here on game day."
   },
   "faq": [
     {
