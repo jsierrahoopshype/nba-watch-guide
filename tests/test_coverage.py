@@ -8,7 +8,7 @@ import pytest
 
 from watchguide.coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage,
                                  carriers_for_game, channel_names, channels_for_game)
-from watchguide.model import Game, LocalApp, LocalTV
+from watchguide.model import Game, LocalOption, LocalOTA, LocalTV
 
 TEAM = "BOS"
 OPP = "NYK"
@@ -24,13 +24,22 @@ def game(idx: int, national=None, home_tv=None) -> Game:
     )
 
 
+def local_tv(confidence="high", ota="none", price=40.0):
+    return LocalTV(slug="boston-celtics", confidence=confidence,
+                   local_broadcasters=["Test Local 1"],
+                   ota=LocalOTA(status=ota, games=None, note=""),
+                   streaming=[LocalOption(name="Test Local App", monthly_price_usd=price,
+                                          season_price_usd=None, note="")],
+                   live_tv_carriers=[], territory="Test market", notes="", sources=["x"],
+                   last_checked="2027-01-01")
+
+
+LOCAL_APP = "local-boston-celtics-0"
+
+
 @pytest.fixture
 def local_verified():
-    return LocalTV(slug="boston-celtics", team="Boston Celtics",
-                   local_broadcasters=[{"code": "TESTLOCAL1", "name": "Test Local 1"}],
-                   streaming_apps=[LocalApp(service_id="bundle", name="Big Bundle",
-                                            monthly_price_usd=40.0)],
-                   in_market_note="", source_url="x", last_verified="2027-01-01", verified=True)
+    return local_tv()
 
 
 # -- who carries what -------------------------------------------------------
@@ -51,22 +60,22 @@ def test_league_pass_is_blacked_out_in_market(priced_services, local_verified):
 
 
 def test_local_broadcast_does_not_reach_out_of_market(priced_services, local_verified):
-    g = game(0, home_tv=["TESTLOCAL1"])
-    out = carriers_for_game(g, TEAM, priced_services, local_verified, OUT_OF_MARKET)
-    assert "bundle" not in out
+    cov = build_state_coverage([game(0, home_tv=["TESTLOCAL1"])], TEAM, priced_services,
+                               local_verified, OUT_OF_MARKET)
+    assert all(not c.service.local_option for c in cov.per_service)
 
 
 def test_local_broadcast_reaches_in_market_through_its_app(priced_services, local_verified):
-    g = game(0, home_tv=["TESTLOCAL1"])
-    assert "bundle" in carriers_for_game(g, TEAM, priced_services, local_verified, IN_MARKET)
+    cov = build_state_coverage([game(0, home_tv=["TESTLOCAL1"])], TEAM, priced_services,
+                               local_verified, IN_MARKET)
+    assert {c.service.id: c.covered for c in cov.per_service}[LOCAL_APP] == 1
 
 
 def test_unverified_local_data_carries_nothing_in_market(priced_services):
-    unverified = LocalTV(slug="boston-celtics", team="Boston Celtics", local_broadcasters=[],
-                         streaming_apps=[], in_market_note="", source_url="",
-                         last_verified="", verified=False)
-    g = game(0, home_tv=["TESTLOCAL1"])
-    assert carriers_for_game(g, TEAM, priced_services, unverified, IN_MARKET) == set()
+    cov = build_state_coverage([game(0, home_tv=["TESTLOCAL1"])], TEAM, priced_services,
+                               local_tv(confidence="low"), IN_MARKET)
+    assert all(not c.service.local_option for c in cov.per_service)
+    assert len(cov.uncovered) == 1
 
 
 def test_channel_names_fall_back_to_tba(priced_services):

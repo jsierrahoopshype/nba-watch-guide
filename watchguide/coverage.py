@@ -7,7 +7,7 @@ channel, price or blackout rule is written into this file.
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from itertools import combinations
 
 from .model import Game, LocalTV, Service, ServiceData
@@ -62,24 +62,22 @@ def carriers_for_game(
             if any(_norm(c) in national for c in svc.carries):
                 carriers.add(svc.id)
 
-    # The local broadcast only reaches people inside the market.
-    if state == IN_MARKET and local and local.verified:
-        wanted = {_norm(c) for c in game.local_codes_for(tricode)}
-        if not wanted:
-            # Feed has no local code for this side. Fall back to the team's
-            # usual broadcasters from data/local_tv.json.
-            wanted = {_norm(c) for c in local.codes}
-        if wanted:
-            for svc in service_data.services:
-                if any(_norm(c) in wanted for c in svc.carries):
-                    carriers.add(svc.id)
-            for app in local.streaming_apps:
-                if app.service_id:
-                    carriers.add(app.service_id)
+    # Local options only reach a reader inside the market, and only for the
+    # team's games with no national broadcaster. They are in service_data only
+    # when with_local_options() put them there for this team.
+    if state == IN_MARKET and local and local.counts and not game.is_national:
+        for svc in service_data.services:
+            if svc.local_option:
+                carriers.add(svc.id)
 
     # League Pass, unless a blackout rule from the data file applies.
     if lp and service_data.by_id(lp) and not league_pass_blocked(game, state, service_data):
         carriers.add(lp)
+
+    # An add-on that needs another service also gives you that service's games.
+    for svc in service_data.services:
+        if svc.requires and all(r.id in carriers for r in svc.requires):
+            carriers.add(svc.id)
 
     # A service whose carries list is not checked yet counts for nothing, so it
     # stays out of the per-service counts and the cheapest-combination maths.
@@ -108,7 +106,7 @@ def channels_for_game(game: Game, tricode: str, local: LocalTV | None,
     if local_codes:
         for code in local_codes:
             add(code, "local")
-    elif not out and local and local.verified:
+    elif not out and local and local.counts:
         for name in local.names:
             add(name, "local")
     if not out:
@@ -148,6 +146,17 @@ class Combination:
     def percent(self) -> float:
         return 0.0 if not self.total else 100.0 * self.covered / self.total
 
+    @property
+    def parts(self) -> list[Service]:
+        """Services to list under the combination, with any service an add-on
+        needs spelled out after it. The prices add up to total_price."""
+        out: list[Service] = []
+        for svc in self.services:
+            for part in (svc, *svc.requires):
+                if all(part is not seen for seen in out):
+                    out.append(part)
+        return out
+
 
 @dataclass
 class StateCoverage:
@@ -158,6 +167,7 @@ class StateCoverage:
     cheapest_ninety: Combination | None
     uncovered: list[Game]            # games no listed service carries
     priced_services: int             # how many services had a confirmed price
+    service_data: ServiceData | None = None   # what the maths ran on, local options included
 
     @property
     def total(self) -> int:
@@ -171,6 +181,7 @@ def build_state_coverage(
     local: LocalTV | None,
     state: str,
 ) -> StateCoverage:
+    service_data = with_local_options(service_data, local, state)
     total = len(games)
 
     # Bitmask per service: bit i set means it carries games[i].
@@ -208,7 +219,64 @@ def build_state_coverage(
         cheapest_ninety=ninety,
         uncovered=uncovered,
         priced_services=len(priced),
+        service_data=service_data,
     )
+
+
+# --------------------------------------------------------------------------
+# In-market local options from data/local_tv.json
+# --------------------------------------------------------------------------
+
+def local_services(local: LocalTV | None, service_data: ServiceData) -> list[Service]:
+    """The team's local options as services the maths can use.
+
+    Empty unless the team's confidence lets local options count (high or
+    moderate, and not excluded from US maths). Over the air only counts at
+    status 'all'. A streaming option with a null price is still returned, so
+    it is listed and counted, but has no price and cannot enter a combination.
+    """
+    if not local or not local.counts:
+        return []
+    confidence = local.confidence if local.confidence == MODERATE else ""
+    source = local.sources[0] if local.sources else ""
+
+    def make(sid: str, name: str, price, note: str, requires=()) -> Service:
+        return Service(
+            id=sid, name=name, kind="local", monthly_price_usd=price, billing_note=note,
+            carries=[], carries_note="", signup_url="", affiliate_url="",
+            source_url=source, last_verified=local.last_checked, verified=True,
+            carries_verified=True, carries_verified_confidence=confidence,
+            local_option=True, requires=list(requires),
+        )
+
+    out: list[Service] = []
+    if local.ota.counts:
+        out.append(make(f"local-{local.slug}-ota", "Local TV over the air", 0, local.ota.note))
+    for i, opt in enumerate(local.streaming):
+        price = opt.monthly_price_usd
+        requires = []
+        if opt.requires_service:
+            required = service_data.by_id(opt.requires_service)
+            if required is None or not required.has_price:
+                price = None             # real cost unknown, so no combination
+            else:
+                requires = [required]
+        svc = make(f"local-{local.slug}-{i}", opt.name, price, opt.note, requires)
+        if requires and price is not None:
+            svc.own_price_usd = price
+            svc.monthly_price_usd = round(price + sum(r.price for r in requires), 2)
+        out.append(svc)
+    return out
+
+
+def with_local_options(service_data: ServiceData, local: LocalTV | None, state: str) -> ServiceData:
+    """service_data plus the team's local options, in-market only."""
+    if state != IN_MARKET:
+        return service_data
+    extra = local_services(local, service_data)
+    if not extra:
+        return service_data
+    return replace(service_data, services=list(service_data.services) + extra)
 
 
 def _cheapest(
@@ -300,12 +368,18 @@ def moderate_carries_in(
     for svc in moderate:
         carried = {_norm(c): c for c in svc.carries}
         channels: list[str] = []
+        used = False
         for game in games:
             if game.game_id in missed:
                 continue
-            hits = [code for code in game.national_codes if _norm(code) in carried]
+            if svc.local_option:
+                # A local option's coverage is the local games themselves.
+                hits = [] if game.is_national else ["local"]
+            else:
+                hits = [code for code in game.national_codes if _norm(code) in carried]
             if hits and svc.id in carriers_for_game(game, tricode, service_data, local, state):
-                channels += [c for c in hits if c not in channels]
-        if channels:
+                used = True
+                channels += [c for c in hits if c not in channels and c != "local"]
+        if used:
             out.append({"service": svc, "channels": channels})
     return out

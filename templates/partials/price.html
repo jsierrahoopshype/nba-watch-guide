@@ -1,7 +1,7 @@
-{%- if svc.is_free %}
+{%- if svc.has_price and svc.list_price_usd == 0 %}
 <span class="price">{{ labels.price_free }}</span>
 {%- elif svc.has_price %}
-<span class="price">{{ svc.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
+<span class="price">{{ svc.list_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
 {%- else %}
 <span class="price-none">{{ labels.price_unconfirmed }}</span>
 {%- endif %}

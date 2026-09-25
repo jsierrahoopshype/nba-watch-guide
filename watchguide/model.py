@@ -142,6 +142,13 @@ class Service:
     # should tell the reader to check; carries_confidence_note is that line.
     carries_verified_confidence: str = ""
     carries_confidence_note: str = ""
+    # In-market local options (built from data/local_tv.json, never listed in
+    # services.json). They cover the team's games with no national broadcast.
+    local_option: bool = False
+    # An add-on that needs another service: monthly_price_usd is the real cost
+    # (own price plus the required ones), own_price_usd is the add-on alone.
+    requires: list["Service"] = field(default_factory=list)
+    own_price_usd: float | None = None
 
     @property
     def has_price(self) -> bool:
@@ -151,6 +158,12 @@ class Service:
     @property
     def price(self) -> float:
         return float(self.monthly_price_usd) if self.has_price else 0.0
+
+    @property
+    def list_price_usd(self) -> float | None:
+        """Price shown next to the name: the add-on's own price when it
+        needs another service, otherwise the monthly price."""
+        return self.own_price_usd if self.requires else self.monthly_price_usd
 
     @property
     def is_free(self) -> bool:
@@ -271,59 +284,92 @@ def _league_pass_blackouts(block: dict[str, Any] | None) -> list[BlackoutRule]:
 # Local TV
 # --------------------------------------------------------------------------
 
+CONFIDENCE_COUNTS = ("high", "moderate")
+
+
 @dataclass
-class LocalApp:
-    service_id: str
+class LocalOTA:
+    status: str          # all, partial, most, none or unknown
+    games: int | None
+    note: str
+
+    @property
+    def counts(self) -> bool:
+        """Only 'all' is coverage: with 'partial' or 'most' we do not know which games."""
+        return self.status == "all"
+
+
+@dataclass
+class LocalOption:
+    """One in-market streaming option."""
     name: str
     monthly_price_usd: float | None
-    signup_url: str = ""
-    affiliate_url: str = ""
+    season_price_usd: float | None
+    note: str
+    price_verified: bool = False
+    requires_service: str = ""
+    shared_service: str = ""
+    billing_note: str = ""       # from the shared service, when there is one
 
 
 @dataclass
 class LocalTV:
     slug: str
-    team: str
-    local_broadcasters: list[dict[str, str]]
-    streaming_apps: list[LocalApp]
-    in_market_note: str
-    source_url: str
-    last_verified: str
-    verified: bool
+    confidence: str              # high, moderate, low or unknown
+    local_broadcasters: list[str]
+    ota: LocalOTA
+    streaming: list[LocalOption]
+    live_tv_carriers: list[str]
+    territory: str
+    notes: str
+    sources: list[str]
+    exclude_from_us_maths: bool = False
+    last_checked: str = ""
 
     @property
-    def codes(self) -> list[str]:
-        return [b.get("code", "") for b in self.local_broadcasters if b.get("code")]
+    def counts(self) -> bool:
+        """Whether this team's local options may enter the coverage maths."""
+        return self.confidence in CONFIDENCE_COUNTS and not self.exclude_from_us_maths
 
     @property
     def names(self) -> list[str]:
-        return [b.get("name") or b.get("code", "") for b in self.local_broadcasters]
+        return list(self.local_broadcasters)
 
 
 def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
     data_dir = data_dir or config.DATA_DIR
     raw = json.loads((data_dir / "local_tv.json").read_text(encoding="utf-8"))
+    last_checked = (raw.get("_meta") or {}).get("last_checked", "")
+    shared = raw.get("shared_services") or {}
     out: dict[str, LocalTV] = {}
-    for t in raw["teams"]:
-        apps = [
-            LocalApp(
-                service_id=a.get("service_id", ""),
-                name=a.get("name", ""),
-                monthly_price_usd=a.get("monthly_price_usd"),
-                signup_url=a.get("signup_url", ""),
-                affiliate_url=a.get("affiliate_url", ""),
-            )
-            for a in (t.get("streaming_apps") or [])
-        ]
-        out[t["slug"]] = LocalTV(
-            slug=t["slug"],
-            team=t.get("team", ""),
+    for slug, t in (raw.get("teams") or {}).items():
+        options = []
+        for o in t.get("streaming") or []:
+            base = shared.get(o.get("shared_service", ""), {})
+            options.append(LocalOption(
+                name=o.get("name") or base.get("name", ""),
+                monthly_price_usd=o.get("monthly_price_usd", base.get("monthly_price_usd")),
+                season_price_usd=o.get("season_price_usd", base.get("season_price_usd")),
+                note=o.get("note", ""),
+                price_verified=bool(o.get("price_verified", base.get("verified", False))),
+                requires_service=o.get("requires_service", ""),
+                shared_service=o.get("shared_service", ""),
+                billing_note=base.get("billing_note", ""),
+            ))
+        ota = t.get("ota") or {}
+        out[slug] = LocalTV(
+            slug=slug,
+            confidence=t.get("confidence", "unknown"),
             local_broadcasters=list(t.get("local_broadcasters") or []),
-            streaming_apps=apps,
-            in_market_note=t.get("in_market_note", ""),
-            source_url=t.get("source_url", ""),
-            last_verified=t.get("last_verified", ""),
-            verified=bool(t.get("verified")),
+            ota=LocalOTA(status=ota.get("status", "unknown"), games=ota.get("games"),
+                         note=ota.get("note", "")),
+            streaming=options,
+            live_tv_carriers=list(t.get("live_tv_carriers") or []),
+            territory=t.get("territory", ""),
+            notes=t.get("notes", ""),
+            sources=list(t.get("sources") or []),
+            exclude_from_us_maths=bool(t.get("exclude_from_us_maths")),
+            last_checked=last_checked,
         )
     return out
 
