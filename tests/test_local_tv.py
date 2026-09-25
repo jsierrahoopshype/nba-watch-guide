@@ -11,7 +11,7 @@ from datetime import date, timedelta
 import pytest
 
 from watchguide.coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage,
-                                 local_services, moderate_carries_in)
+                                 channels_for_game, local_services, moderate_carries_in)
 from watchguide.model import Game, load_local_tv, load_services
 
 MODERATE_NOTE = ("Local TV details for this team come from news reports, not an official "
@@ -239,3 +239,29 @@ def test_hub_lists_every_team_with_ota_all(built_site, local, teams):
     expected = [t.full_name for t in teams if local[t.slug].ota.status == "all"]
     assert listed == expected
     assert "Miami Heat" in listed and "Cleveland Cavaliers" not in listed
+
+
+# -- schedule fallback ------------------------------------------------------------
+
+def test_schedule_fallback_never_shows_partial_ota_stations(local):
+    # Cavaliers over the air is 'partial' (15 games on Gray and RESN), so a
+    # game with no channel in the feed shows DAZN, their primary carrier.
+    cavs = local["cleveland-cavaliers"]
+    assert cavs.ota.status == "partial"
+    channels = channels_for_game(game(0, team="CLE"), "CLE", cavs)
+    assert channels == [{"name": "DAZN", "kind": "local"}]
+    names = {c["name"] for c in channels}
+    assert not names & {"WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"}
+
+
+def test_schedule_fallback_shows_stations_when_all_games_are_over_the_air(local):
+    channels = channels_for_game(game(0, team="CHA"), "CHA", local["charlotte-hornets"])
+    assert [c["name"] for c in channels] == ["WSOC-TV 9", "TV64 (Cox Media Group)"]
+
+
+def test_schedule_fallback_on_the_cavaliers_page(built_site):
+    html = page(built_site, "cleveland-cavaliers")
+    sched = html[html.index('<table class="sched"'):html.index("</table>")]
+    assert '<span class="badge badge-local">DAZN</span>' in sched
+    for station in ("WOIO", "WUAB", "Gray stations"):
+        assert station not in sched

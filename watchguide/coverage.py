@@ -107,7 +107,7 @@ def channels_for_game(game: Game, tricode: str, local: LocalTV | None,
         for code in local_codes:
             add(code, "local")
     elif not out and local and local.counts:
-        for name in local.names:
+        for name in local.primary_carriers:
             add(name, "local")
     if not out:
         add(tba_label, "tba")

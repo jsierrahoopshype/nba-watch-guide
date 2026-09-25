@@ -335,6 +335,16 @@ class LocalTV:
     def names(self) -> list[str]:
         return list(self.local_broadcasters)
 
+    @property
+    def primary_carriers(self) -> list[str]:
+        """Where a local game with no channel in the feed is most likely on:
+        the stations when every local game is over the air, otherwise the
+        first streaming option. Stations from a 'partial' or 'most' list only
+        carry some games, so they are never offered here."""
+        if self.ota.status == "all":
+            return list(self.local_broadcasters)
+        return [self.streaming[0].name] if self.streaming else []
+
 
 def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
     data_dir = data_dir or config.DATA_DIR
