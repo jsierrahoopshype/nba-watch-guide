@@ -177,3 +177,50 @@ def test_league_pass_makes_full_out_of_market_coverage_possible(shipped):
     counts = {c.service.id: c.covered for c in inside.per_service}
     assert counts["nba_league_pass"] == 0
     assert inside.cheapest_full is None
+
+
+# -- moderate-confidence carriers --------------------------------------------
+
+LP_NOTE = ("Includes NBA TV games through League Pass. NBA TV is included when you buy "
+           "League Pass on NBA.com; check at checkout.")
+
+
+def test_moderate_carrier_flagged_only_when_its_carries_are_used(shipped):
+    from watchguide.coverage import moderate_carries_in
+    with_nba_tv = [game(0, national=["NBA TV"]), game(1), game(2, national=["ESPN"])]
+    cov = build_state_coverage(with_nba_tv, TEAM, shipped, None, OUT_OF_MARKET)
+    hits = moderate_carries_in(cov.cheapest_full, with_nba_tv, TEAM, shipped, None, OUT_OF_MARKET)
+    assert [(h["service"].id, h["channels"]) for h in hits] == [("nba_league_pass", ["NBA TV"])]
+
+    # League Pass is in this combination only for a game with no national TV,
+    # which is its rules-block coverage, not its moderate carries list.
+    without = [game(0), game(1, national=["ESPN"])]
+    cov = build_state_coverage(without, TEAM, shipped, None, OUT_OF_MARKET)
+    assert "nba_league_pass" in {s.id for s in cov.cheapest_full.services}
+    assert moderate_carries_in(cov.cheapest_full, without, TEAM, shipped, None, OUT_OF_MARKET) == []
+
+
+def test_confidence_line_is_driven_by_the_field_not_the_service(priced_services):
+    # A made-up service with no note falls back to the generic copy line.
+    from watchguide.coverage import moderate_carries_in
+    pricey = priced_services.by_id("pricey")
+    pricey.carries_verified_confidence = "moderate"
+    games = [game(0, national=["NBA TV"])]
+    priced_services.services = [s for s in priced_services.services if s.id != "bundle"]
+    cov = build_state_coverage(games, TEAM, priced_services, None, OUT_OF_MARKET)
+    hits = moderate_carries_in(cov.cheapest_full, games, TEAM, priced_services, None, OUT_OF_MARKET)
+    assert [(h["service"].id, h["channels"]) for h in hits] == [("pricey", ["NBA TV"])]
+    pricey.carries_verified_confidence = ""
+    assert moderate_carries_in(cov.cheapest_full, games, TEAM, priced_services, None, OUT_OF_MARKET) == []
+
+
+def test_league_pass_note_renders_under_the_combination_out_of_market_only(built_site):
+    html = _html(built_site)
+    out = _panel(html, "out_of_market")
+    cheapest = out[out.index("Cheapest way to watch"):out.index("Services and prices")]
+    assert "NBA League Pass" in cheapest
+    assert LP_NOTE in cheapest
+    assert cheapest.count("data-confidence-note") >= 1
+    inside = _panel(html, "in_market")
+    assert LP_NOTE not in inside
+    assert "data-confidence-note" not in inside

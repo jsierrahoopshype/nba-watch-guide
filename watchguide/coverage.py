@@ -267,3 +267,45 @@ def _cheapest(
         total=total,
         missed=missed,
     )
+
+
+# --------------------------------------------------------------------------
+# Lower-confidence carriage inside a combination
+# --------------------------------------------------------------------------
+
+MODERATE = "moderate"
+
+
+def moderate_carries_in(
+    combo: Combination | None,
+    games: list[Game],
+    tricode: str,
+    service_data: ServiceData,
+    local: LocalTV | None,
+    state: str,
+) -> list[dict]:
+    """Services in `combo` whose moderate-confidence carries list actually
+    reaches a game the combination covers, as {service, channels}.
+
+    A service only counts through its carries list here, not through a rule
+    (League Pass covering games with no national broadcast is not flagged).
+    """
+    if not combo:
+        return []
+    moderate = [s for s in combo.services if s.carries_verified_confidence == MODERATE]
+    if not moderate:
+        return []
+    missed = {g.game_id for g in combo.missed}
+    out = []
+    for svc in moderate:
+        carried = {_norm(c): c for c in svc.carries}
+        channels: list[str] = []
+        for game in games:
+            if game.game_id in missed:
+                continue
+            hits = [code for code in game.national_codes if _norm(code) in carried]
+            if hits and svc.id in carriers_for_game(game, tricode, service_data, local, state):
+                channels += [c for c in hits if c not in channels]
+        if channels:
+            out.append({"service": svc, "channels": channels})
+    return out

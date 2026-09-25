@@ -36,12 +36,12 @@
   <div class="card"><p>{{ text.cheapest_unavailable }}</p></div>
   {%- else %}
     {%- if view.cheapest_full %}
-    {% with combo = view.cheapest_full, combo_label = text.cheapest_full_label %}{% include "partials/combo.html" %}{% endwith %}
+    {% with combo = view.cheapest_full, combo_label = text.cheapest_full_label, combo_notes = view.full_notes %}{% include "partials/combo.html" %}{% endwith %}
     {%- else %}
     <div class="card"><p>{{ text.cheapest_impossible }}</p></div>
     {%- endif %}
     {%- if view.cheapest_ninety %}
-    {% with combo = view.cheapest_ninety, combo_label = text.cheapest_ninety_label %}{% include "partials/combo.html" %}{% endwith %}
+    {% with combo = view.cheapest_ninety, combo_label = text.cheapest_ninety_label, combo_notes = view.ninety_notes %}{% include "partials/combo.html" %}{% endwith %}
     {%- endif %}
   {%- endif %}
 

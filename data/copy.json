@@ -52,6 +52,7 @@
     "details_coming": "Details coming",
     "price_unconfirmed": "Price not confirmed",
     "price_free": "Free",
+    "moderate_carries_line": "Includes {channels} games through {service}; check before you buy.",
     "coverage_unconfirmed": "Which games this covers is not confirmed yet, so it is left out of the counts and the cheapest combination.",
     "prices_checked": "Prices checked {month_year}",
     "prices_unchecked": "Price not confirmed",

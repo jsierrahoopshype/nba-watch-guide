@@ -8,13 +8,25 @@ from __future__ import annotations
 
 from .. import config, seo
 from ..context import SiteContext
-from ..coverage import IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels_for_game
+from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels_for_game,
+                        moderate_carries_in)
 from ..model import Team
 from ..render import Page, date_label, et_label, format_block
 from .common import (crumb_trail, empty_players_label, game_row,
                      has_affiliate_link, updated_label)
 
 JSONLD_GAME_LIMIT = 10
+
+
+def _confidence_lines(ctx: SiteContext, combo, games: list, tricode: str, local, state: str) -> list[str]:
+    """One plain line per moderate-confidence carrier the combination leans on."""
+    template = ctx.labels().get("moderate_carries_line", "")
+    lines = []
+    for hit in moderate_carries_in(combo, games, tricode, ctx.services, local, state):
+        svc = hit["service"]
+        lines.append(svc.carries_confidence_note or template.format(
+            channels=", ".join(hit["channels"]), service=svc.name))
+    return [line for line in lines if line]
 
 
 def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dict) -> dict:
@@ -37,6 +49,8 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
         "not_covering_count": len(coverage.per_service) - len(covering),
         "cheapest_full": coverage.cheapest_full,
         "cheapest_ninety": coverage.cheapest_ninety,
+        "full_notes": _confidence_lines(ctx, coverage.cheapest_full, games, team.tricode, local, state),
+        "ninety_notes": _confidence_lines(ctx, coverage.cheapest_ninety, games, team.tricode, local, state),
         "priced_services": coverage.priced_services,
         "uncovered": coverage.uncovered,
         "local_verified": bool(local and local.verified),

@@ -85,6 +85,7 @@
       "carries": ["NBA TV"],
       "carries_verified": true,
       "carries_verified_confidence": "moderate",
+      "carries_confidence_note": "Includes NBA TV games through League Pass. NBA TV is included when you buy League Pass on NBA.com; check at checkout.",
       "carries_check": "NBA TV inclusion is from secondary sources, not the NBA's own purchase page. Verify at checkout.",
       "signup_url": "https://www.nba.com/league-pass-purchase",
       "affiliate_url": "",
