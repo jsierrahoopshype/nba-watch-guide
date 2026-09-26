@@ -46,11 +46,12 @@ def repo(tmp_path):
     return work
 
 
-def _write_raw(repo: Path, rows: int) -> None:
+def _write_raw(repo: Path, rows: int, fetched_at: str = "x", as_of: str = "") -> None:
     path = repo / FILE
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps({"row_count": rows, "fetched_at": "x",
-                                "source_id": "test", "rows": []}), encoding="utf-8")
+    body = [{"player": "Test Player", "status": "Out", "date": as_of}] if as_of else []
+    path.write_text(json.dumps({"row_count": rows, "fetched_at": fetched_at,
+                                "source_id": "test", "rows": body}), encoding="utf-8")
 
 
 def _run(repo: Path):
@@ -95,3 +96,86 @@ def test_a_missing_file_is_not_an_error(repo):
     result = _run(repo)
     assert result.returncode == 0
     assert "nothing to commit" in result.stdout
+
+
+# -- two writers racing for the branch ------------------------------------------
+
+@pytest.fixture
+def other_writer(repo, tmp_path):
+    """A second clone of the same origin: another run, or a merged PR."""
+    other = tmp_path / "other"
+    subprocess.run(["git", "clone", "-q", str(tmp_path / "remote.git"), str(other)], check=True)
+    _git(other, "config", "user.email", "o@example.test")
+    _git(other, "config", "user.name", "Other")
+    return other
+
+
+def _seed(repo: Path) -> None:
+    """Both writers start from a branch that already holds a copy."""
+    _write_raw(repo, 5400, "2026-09-25T10:00:00+00:00", "2026-09-25")
+    assert _run(repo).returncode == 0
+
+
+def _other_pushes(other: Path, rows: int, fetched_at: str, as_of: str) -> str:
+    """The other writer lands its own copy plus an unrelated change first."""
+    _git(other, "pull", "-q", "origin", "main")
+    _write_raw(other, rows, fetched_at, as_of)
+    (other / "OTHER.md").write_text("from the other writer", encoding="utf-8")
+    _git(other, "add", FILE, "OTHER.md")
+    _git(other, "commit", "-qm", "other writer")
+    _git(other, "push", "-q", "origin", "main")
+    return _git(other, "rev-parse", "HEAD")
+
+
+def test_rejected_push_puts_the_fresher_copy_on_top_without_merging(repo, other_writer):
+    # This is the failure seen in the build: both sides changed the file from
+    # the same base, so the old rebase stopped on a content conflict.
+    _seed(repo)
+    other_tip = _other_pushes(other_writer, 5410, "2026-09-26T09:00:00+00:00", "2026-09-26")
+    _write_raw(repo, 5464, "2026-09-26T22:38:35+00:00", "2026-09-26")   # fetched later
+
+    result = _run(repo)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "push rejected" in result.stdout
+    assert "pushed 5464 rows" in result.stdout
+    assert json.loads(_git(repo, "show", "origin/main:" + FILE))["row_count"] == 5464
+    # The other writer's work is kept, and ours sits directly on top of it.
+    assert _git(repo, "show", "origin/main:OTHER.md") == "from the other writer"
+    assert _git(repo, "rev-parse", "origin/main^") == other_tip
+    assert _git(repo, "log", "-1", "--format=%s", "origin/main") == "Save raw availability feed (5464 rows)"
+
+
+def test_rejected_push_leaves_a_newer_copy_alone(repo, other_writer):
+    _seed(repo)
+    other_tip = _other_pushes(other_writer, 5470, "2026-09-26T23:00:00+00:00", "2026-09-26")
+    _write_raw(repo, 5464, "2026-09-26T22:38:35+00:00", "2026-09-26")   # fetched earlier
+
+    result = _run(repo)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "newer copy" in result.stdout
+    assert _git(repo, "rev-parse", "origin/main") == other_tip
+    assert json.loads(_git(repo, "show", "origin/main:" + FILE))["row_count"] == 5470
+
+
+def test_feed_as_of_wins_over_fetch_time(repo, other_writer):
+    # A copy whose rows run a day later is newer even if fetched a bit earlier.
+    _seed(repo)
+    other_tip = _other_pushes(other_writer, 5470, "2026-09-26T08:00:00+00:00", "2026-09-27")
+    _write_raw(repo, 5464, "2026-09-26T09:00:00+00:00", "2026-09-26")
+
+    result = _run(repo)
+    assert result.returncode == 0
+    assert _git(repo, "rev-parse", "origin/main") == other_tip
+
+
+def test_the_working_tree_is_left_as_it_was(repo, other_writer):
+    # Later workflow steps publish from the checkout, so a retry must not
+    # reset it: the file keeps this run's copy and nothing else changes.
+    _seed(repo)
+    _other_pushes(other_writer, 5410, "2026-09-26T09:00:00+00:00", "2026-09-26")
+    _write_raw(repo, 5464, "2026-09-26T22:38:35+00:00", "2026-09-26")
+    (repo / "build-output.txt").write_text("untracked build output", encoding="utf-8")
+
+    assert _run(repo).returncode == 0
+    assert json.loads((repo / FILE).read_text(encoding="utf-8"))["row_count"] == 5464
+    assert (repo / "build-output.txt").read_text(encoding="utf-8") == "untracked build output"
