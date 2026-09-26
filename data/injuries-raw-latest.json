@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-09-25T15:02:27+00:00",
+ "fetched_at": "2026-09-26T14:11:55+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5460,
+ "row_count": 5464,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38095,6 +38095,36 @@
    "date": "2026-09-21",
    "prevStatus": "Available",
    "eta": "9-12 months"
+  },
+  {
+   "player": "Kon Knueppel",
+   "status": "Out",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-09-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kon Knueppel",
+   "status": "Out",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-09-25",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Grant Williams",
+   "status": "Out",
+   "injury": "Right Hamstring Injury",
+   "date": "2026-09-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Grant Williams",
+   "status": "Out",
+   "injury": "Right Hamstring Injury",
+   "date": "2026-09-25",
+   "prevStatus": "Available",
+   "eta": "4-6 weeks"
   }
  ]
 }
