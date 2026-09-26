@@ -38,9 +38,19 @@ comes from `_meta.all_prices_checked`. League Pass (`nba_league_pass`) gets its
 coverage from `rules.league_pass_blackouts`; its `carries` list holds only
 channels bundled with it (NBA TV), which share its in-market blackout. The
 build fails if that service is missing.
-A team only shows
-local TV once its `local_tv.json` entry is `verified: true`; until then the
-in-market view says "Local details coming".
+
+Local TV follows `_meta.confidence_rules` and `_meta.coverage_rules` in
+`data/local_tv.json`. Local options only cover a team's games with no national
+broadcaster, and only in the in-market view. `high` and `moderate` teams count
+(`moderate` adds a check-before-you-buy line under any combination that uses a
+local option); `low` and `unknown` never count. Over the air counts as free
+coverage only at `ota.status` `all`. A streaming option with a price covers
+every local game at that price, a null price is listed but never priced, and
+`shared_service` takes its price from `shared_services`. An option with
+`requires_service` costs its own price plus that service's, and brings that
+service's games with it. `exclude_from_us_maths` shows the team's notes instead
+of an in-market combination. Every team page has a "Watching in" section built
+from the file.
 
 `affiliate_url` is empty everywhere. The affiliate disclosure sentence only
 appears on a page once at least one service has a non-empty `affiliate_url`.

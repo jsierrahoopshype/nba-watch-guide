@@ -4,8 +4,8 @@
     <span class="combo-total">{% if combo.total_price == 0 %}{{ labels.price_free }}{% else %}{{ combo.total_price|usd }}<span class="small muted">{{ labels.per_month }}</span>{% endif %}</span>
   </div>
   <ul class="combo-parts">
-    {%- for svc in combo.services %}
-    <li><span>{{ svc.name }}</span><span class="price">{% if svc.is_free %}{{ labels.price_free }}{% else %}{{ svc.monthly_price_usd|usd }}{% endif %}</span></li>
+    {%- for svc in combo.parts %}
+    <li><span>{{ svc.name }}</span><span class="price">{% if svc.list_price_usd == 0 %}{{ labels.price_free }}{% else %}{{ svc.list_price_usd|usd }}{% endif %}</span></li>
     {%- endfor %}
   </ul>
   <p class="small muted combo-note">

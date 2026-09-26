@@ -1,0 +1,70 @@
+<section class="watching" id="watching" data-watching data-confidence="{{ watching.confidence }}">
+<h2>{{ watching.heading }}</h2>
+<div class="card">
+  {%- if watching.low_line %}
+  <p data-local-low>{{ watching.low_line }}</p>
+  {%- endif %}
+  {%- if watching.notes %}
+  <p data-local-notes>{{ watching.notes }}</p>
+  {%- endif %}
+  <div class="rows">
+    <div class="row"><div class="row-main">
+      <div class="row-title">{{ labels.local_broadcasters_label }}</div>
+      <div class="row-note">{% if watching.broadcasters %}{{ watching.broadcasters|join(", ") }}{% else %}{{ labels.local_none_listed }}{% endif %}</div>
+    </div></div>
+    {%- if watching.ota_note %}
+    <div class="row"><div class="row-main">
+      <div class="row-title">{{ labels.local_ota_label }}</div>
+      <div class="row-note" data-ota-note>{{ watching.ota_note }}</div>
+    </div></div>
+    {%- endif %}
+    {%- for opt in watching.streaming %}
+    <div class="row" data-local-option>
+      <div class="row-main">
+        <div class="row-title">{{ opt.name }}</div>
+        {%- if opt.note %}<div class="row-note">{{ opt.note }}</div>{% endif %}
+        {%- if opt.billing_note %}<div class="row-note small muted">{{ opt.billing_note }}</div>{% endif %}
+      </div>
+      <div class="row-side">
+        {%- if opt.monthly_price_usd == 0 and opt.monthly_price_usd is not none %}
+        <span class="price">{{ labels.price_free }}</span>
+        {%- elif opt.monthly_price_usd is not none %}
+        <span class="price">{{ opt.monthly_price_usd|usd }}<span class="small muted">{{ labels.per_month }}</span></span>
+        {%- endif %}
+        {%- if opt.season_price_usd %}
+        <span class="price small">{{ opt.season_price_usd|usd }}<span class="small muted">{{ labels.per_season }}</span></span>
+        {%- endif %}
+        {%- if opt.monthly_price_usd is none and not opt.season_price_usd %}
+        <span class="price-none">{{ labels.price_unconfirmed }}</span>
+        {%- endif %}
+      </div>
+    </div>
+    {%- endfor %}
+    {%- if watching.live_tv_carriers %}
+    <div class="row"><div class="row-main">
+      <div class="row-title">{{ labels.local_live_tv_label }}</div>
+      <div class="row-note">{{ watching.live_tv_carriers|join(", ") }}</div>
+    </div></div>
+    {%- endif %}
+    {%- if watching.territory %}
+    <div class="row"><div class="row-main">
+      <div class="row-title">{{ labels.local_territory_label }}</div>
+      <div class="row-note">{{ watching.territory }}</div>
+    </div></div>
+    {%- endif %}
+  </div>
+  {%- if watching.checked %}
+  <p class="small muted" data-local-checked>{{ labels.local_checked.format(month_year=watching.checked|month_year) }}</p>
+  {%- endif %}
+  {%- if watching.sources %}
+  <details class="sources small">
+    <summary>{{ labels.local_sources }}</summary>
+    <ul>
+      {%- for url in watching.sources %}
+      <li><a href="{{ url }}" rel="nofollow noopener">{{ url }}</a></li>
+      {%- endfor %}
+    </ul>
+  </details>
+  {%- endif %}
+</div>
+</section>

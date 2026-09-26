@@ -20,6 +20,11 @@
   {%- endif %}
 </div>
 
+{%- if ota_teams %}
+<p class="small" data-ota-teams>{{ text.ota_line }}
+  {% for team in ota_teams %}<a href="{{ team.path }}">{{ team.full_name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+{%- endif %}
+
 <h2>{{ text.teams_heading }}</h2>
 <ul class="team-grid">
   {%- for team in teams %}
