@@ -2,8 +2,8 @@
          aria-labelledby="tab-{{ view.state }}"
          data-state-panel="{{ view.state }}"{% if view.hidden %} hidden{% endif %}>
 
-  {%- if view.local_missing %}
-  <div class="notice">{{ text.local_missing }}</div>
+  {%- if view.local_notice %}
+  <div class="notice" data-local-notice>{{ view.local_notice }}</div>
   {%- endif %}
 
   <h2>{{ text.coverage_heading }}</h2>
@@ -32,7 +32,9 @@
   </div>
 
   <h2>{{ text.cheapest_heading }}</h2>
-  {%- if view.priced_services == 0 %}
+  {%- if view.no_maths_note %}
+  <div class="card"><p data-no-maths>{{ view.no_maths_note }}</p></div>
+  {%- elif view.priced_services == 0 %}
   <div class="card"><p>{{ text.cheapest_unavailable }}</p></div>
   {%- else %}
     {%- if view.cheapest_full %}
@@ -71,13 +73,4 @@
     </div>
   </div>
 
-  <h2>{{ text.local_heading }}</h2>
-  <div class="card">
-    {%- if view.local_verified %}
-    <p>{{ view.local_names|join(", ") }}</p>
-    {%- if view.local_note %}<p class="small muted">{{ view.local_note }}</p>{% endif %}
-    {%- else %}
-    <p>{{ text.local_missing }}</p>
-    {%- endif %}
-  </div>
 </section>

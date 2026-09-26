@@ -39,6 +39,10 @@
 {% include "partials/state_panel.html" %}
 {%- endfor %}
 
+{%- if watching %}
+{% include "partials/watching.html" %}
+{%- endif %}
+
 <hr class="rule">
 <h2>{{ text.schedule_heading }}</h2>
 {%- if schedule %}

@@ -23,6 +23,11 @@ def national_partners(ctx: SiteContext) -> list[dict]:
     return [{"code": code, "games": n} for code, n in counts.most_common()]
 
 
+def free_ota_teams(ctx: SiteContext) -> list:
+    """Teams whose local games are all free over the air, from data/local_tv.json."""
+    return [t for t in ctx.teams if (local := ctx.local(t.slug)) and local.ota.status == "all"]
+
+
 def faq_entries(ctx: SiteContext) -> list[dict[str, str]]:
     """FAQ text. Anything that states a fact is read out of the data files."""
     entries: list[dict[str, str]] = []
@@ -65,6 +70,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         text=text,
         teams=ctx.teams,
         national_partners=national_partners(ctx),
+        ota_teams=free_ota_teams(ctx),
         faq=faq,
         tonight_path=config.site_path("tonight"),
         trail=crumb_trail(ctx),

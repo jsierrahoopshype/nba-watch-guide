@@ -1,310 +1,399 @@
 {
-  "_note": "Hand-edited. Local TV for each team. While verified is false the team page shows 'Local details coming' for the in-market view and skips the in-market cheapest combination.",
-  "_fields": {
-    "local_broadcasters": "List of {code, name}. code matches the home/away broadcaster abbreviation in the NBA schedule feed.",
-    "streaming_apps": "List of {service_id, name, monthly_price_usd, signup_url}. service_id links to data/services.json when the app is one of the listed services; leave it empty for a standalone team app and give a price here.",
-    "in_market_note": "One plain sentence for in-market viewers."
+  "_meta": {
+    "purpose": "In-market local TV and streaming for each team, 2026-27. Replaces data/local_tv.json in jsierrahoopshype/nba-watch-guide.",
+    "last_checked": "2026-09-25",
+    "confidence_rules": {
+      "high": "Official 2026-27 source. Counts in coverage maths.",
+      "moderate": "Dated 2026 secondary reporting. Counts in coverage maths but must render a check-before-you-buy note.",
+      "low": "Conflicting or stale sources. Never counts in coverage maths. Page shows what is known plus 'Local details for 2026-27 not confirmed yet.'",
+      "unknown": "Not announced. Never counts. Page says so plainly."
+    },
+    "coverage_rules": {
+      "scope": "Local options only cover the team's games that have no national broadcaster, and only for a reader in the team's market.",
+      "ota_all": "ota.status 'all' means every local game is free over the air: counts as free coverage for every non-national game.",
+      "ota_partial": "ota.status 'partial' or 'most' is NOT coverage. We do not know which games. Render as a text line only.",
+      "streaming": "A streaming option with a non-null monthly_price_usd covers every non-national game at that monthly price. A null price means it is listed but cannot enter a priced combination."
+    },
+    "recheck_before_tipoff": [
+      "la-clippers (not announced)",
+      "dallas-mavericks (2026-27 not confirmed)",
+      "NBC Sports regional Peacock add-on prices (Warriors, 76ers, Kings; Celtics add-on from secondary source)",
+      "MSG and YES pricing on DAZN (Knicks, Nets)",
+      "Suns+ price (subscriptions open Oct 1)",
+      "Pelicans+ price",
+      "Bucks streaming service (TBA)",
+      "Pacers and Spurs over-the-air partner names",
+      "Houston SCHN+ (sources conflict)"
+    ]
   },
-  "teams": [
-    {
-      "slug": "atlanta-hawks",
-      "team": "Atlanta Hawks",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "boston-celtics",
-      "team": "Boston Celtics",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "brooklyn-nets",
-      "team": "Brooklyn Nets",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "charlotte-hornets",
-      "team": "Charlotte Hornets",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "chicago-bulls",
-      "team": "Chicago Bulls",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "cleveland-cavaliers",
-      "team": "Cleveland Cavaliers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "dallas-mavericks",
-      "team": "Dallas Mavericks",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "denver-nuggets",
-      "team": "Denver Nuggets",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "detroit-pistons",
-      "team": "Detroit Pistons",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "golden-state-warriors",
-      "team": "Golden State Warriors",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "houston-rockets",
-      "team": "Houston Rockets",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "indiana-pacers",
-      "team": "Indiana Pacers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "la-clippers",
-      "team": "LA Clippers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "los-angeles-lakers",
-      "team": "Los Angeles Lakers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "memphis-grizzlies",
-      "team": "Memphis Grizzlies",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "miami-heat",
-      "team": "Miami Heat",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "milwaukee-bucks",
-      "team": "Milwaukee Bucks",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "minnesota-timberwolves",
-      "team": "Minnesota Timberwolves",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "new-orleans-pelicans",
-      "team": "New Orleans Pelicans",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "new-york-knicks",
-      "team": "New York Knicks",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "oklahoma-city-thunder",
-      "team": "Oklahoma City Thunder",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "orlando-magic",
-      "team": "Orlando Magic",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "philadelphia-76ers",
-      "team": "Philadelphia 76ers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "phoenix-suns",
-      "team": "Phoenix Suns",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "portland-trail-blazers",
-      "team": "Portland Trail Blazers",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "sacramento-kings",
-      "team": "Sacramento Kings",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "san-antonio-spurs",
-      "team": "San Antonio Spurs",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "toronto-raptors",
-      "team": "Toronto Raptors",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "utah-jazz",
-      "team": "Utah Jazz",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
-    },
-    {
-      "slug": "washington-wizards",
-      "team": "Washington Wizards",
-      "local_broadcasters": [],
-      "streaming_apps": [],
-      "in_market_note": "",
-      "source_url": "",
-      "last_verified": "",
-      "verified": false
+  "shared_services": {
+    "dazn_team": {
+      "name": "DAZN (team plan)",
+      "monthly_price_usd": 19.99,
+      "season_price_usd": 119.99,
+      "ultimate_monthly_price_usd": 24.99,
+      "ultimate_season_price_usd": 139.99,
+      "billing_note": "Standard plan. Ultimate adds multiview, extra streams and a one-time team store discount. 7-day free trial. Existing DAZN subscribers add the team plan on top. In-market only; out-of-market fans use League Pass.",
+      "source_url": "https://www.sportsvideo.org/2026/09/02/san-antonio-spurs-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
+      "last_verified": "2026-09-25",
+      "verified": true
     }
-  ]
+  },
+  "teams": {
+    "atlanta-hawks": {
+      "confidence": "moderate",
+      "local_broadcasters": ["WANF (Gray)", "Peachtree Sports Network (WPCH subchannel)"],
+      "ota": {"status": "all", "games": null, "note": "Local games air free over the air on WANF and Peachtree Sports Network."},
+      "streaming": [],
+      "live_tv_carriers": ["YouTube TV", "Fubo", "DirecTV"],
+      "territory": "Hawks local market",
+      "notes": "No team streaming app announced.",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/atlanta-hawks/"]
+    },
+    "boston-celtics": {
+      "confidence": "moderate",
+      "local_broadcasters": ["NBC Sports Boston"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "NBC Sports Boston on Peacock", "monthly_price_usd": 15.00, "season_price_usd": null, "requires_service": "peacock_premium", "note": "$15 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus).", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV Stream", "Hulu + Live TV"],
+      "territory": "Celtics local market",
+      "notes": "Add-on price is from secondary reporting.",
+      "sources": ["https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/"]
+    },
+    "brooklyn-nets": {
+      "confidence": "high",
+      "local_broadcasters": ["YES Network"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "YES on DAZN", "monthly_price_usd": null, "season_price_usd": null, "note": "DAZN replaces the Gotham Sports app. Pay-TV subscribers who get YES get it on DAZN at no extra cost. Standalone price not published yet.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Nets local market",
+      "notes": "",
+      "sources": ["https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/"]
+    },
+    "charlotte-hornets": {
+      "confidence": "high",
+      "local_broadcasters": ["WSOC-TV 9", "TV64 (Cox Media Group)"],
+      "ota": {"status": "all", "games": null, "note": "Every non-national game is free over the air in the Charlotte market."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store and 20% off select tickets."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "North Carolina and South Carolina",
+      "notes": "",
+      "sources": ["https://www.sportsvideo.org/2026/09/18/charlotte-hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/"]
+    },
+    "chicago-bulls": {
+      "confidence": "moderate",
+      "local_broadcasters": ["CHSN"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "CHSN app", "monthly_price_usd": 19.99, "season_price_usd": null, "note": "Bulls only. $29.99 a month bundled with the Blackhawks and White Sox.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV", "Fubo"],
+      "territory": "Bulls local market",
+      "notes": "Not on YouTube TV or Hulu + Live TV.",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/chicago-bulls/"]
+    },
+    "cleveland-cavaliers": {
+      "confidence": "high",
+      "local_broadcasters": ["DAZN (produced by Rock Entertainment Sports Network)", "WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games are also free over the air on Gray stations and RESN."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "15 regular-season games free with a DAZN account."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Cavaliers local market",
+      "notes": "",
+      "sources": ["https://www.globenewswire.com/news-release/2026/09/15/3361838/0/en/cleveland-cavaliers-games-return-to-free-over-the-air-television-on-gray-media-stations.html"]
+    },
+    "dallas-mavericks": {
+      "confidence": "low",
+      "local_broadcasters": [],
+      "ota": {"status": "unknown", "games": null, "note": "Last season every local game was free over the air on KFAA and WFAA. 2026-27 not confirmed."},
+      "streaming": [
+        {"name": "MavsTV", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Mavericks local market",
+      "notes": "",
+      "sources": []
+    },
+    "denver-nuggets": {
+      "confidence": "moderate",
+      "local_broadcasters": ["Altitude"],
+      "ota": {"status": "unknown", "games": null, "note": "Some games aired on KTVD and KUSA in past seasons; not confirmed for 2026-27."},
+      "streaming": [
+        {"name": "Altitude+", "monthly_price_usd": 20.00, "season_price_usd": null, "note": "", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV Stream"],
+      "territory": "Nuggets local market",
+      "notes": "",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/denver-nuggets/"]
+    },
+    "detroit-pistons": {
+      "confidence": "high",
+      "local_broadcasters": ["WMYD The Spot Detroit 20 (Scripps)", "Statewide Scripps and partner stations"],
+      "ota": {"status": "all", "games": null, "note": "Local games are free over the air on Detroit 20 and partner stations across Michigan."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Michigan",
+      "notes": "",
+      "sources": ["https://www.detroitnews.com/story/sports/nba/pistons/2026/09/22/how-to-watch-the-detroit-pistons-on-their-new-streaming-home/91891542007/"]
+    },
+    "golden-state-warriors": {
+      "confidence": "low",
+      "local_broadcasters": ["NBC Sports Bay Area"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "NBC Sports Bay Area on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Warriors local market",
+      "notes": "",
+      "sources": ["https://en.wikipedia.org/wiki/List_of_current_NBA_broadcasters"]
+    },
+    "houston-rockets": {
+      "confidence": "low",
+      "local_broadcasters": ["Space City Home Network"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "SCHN+", "monthly_price_usd": null, "season_price_usd": null, "note": "Sources conflict on whether SCHN+ carries Rockets games in 2026-27.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV", "Fubo"],
+      "territory": "Rockets local market",
+      "notes": "",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/houston-rockets/"]
+    },
+    "indiana-pacers": {
+      "confidence": "high",
+      "local_broadcasters": ["DAZN"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games expected to air free over the air; partner not yet named."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Early Bird Season Pass $59.99 if bought by October 15. 22 regular-season games free with a DAZN account. Season ticket holders get a free Season Pass."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Indiana, Kentucky, Iowa, Illinois and Missouri (ZIP checker on the Pacers site)",
+      "notes": "",
+      "sources": ["https://www.nba.com/pacers/where-to-watch/dazn"]
+    },
+    "la-clippers": {
+      "confidence": "unknown",
+      "local_broadcasters": [],
+      "ota": {"status": "unknown", "games": null, "note": ""},
+      "streaming": [],
+      "live_tv_carriers": [],
+      "territory": "Clippers local market",
+      "notes": "The Clippers have not announced where local games will air in 2026-27.",
+      "sources": ["https://frontofficesports.com/article/clippers-sanctions-pair-with-already-bleak-media-outlook/"]
+    },
+    "los-angeles-lakers": {
+      "confidence": "moderate",
+      "local_broadcasters": ["Spectrum SportsNet"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "Spectrum SportsNet+", "monthly_price_usd": 20.00, "season_price_usd": null, "note": "Sold in-market through the NBA app. Season price reported inconsistently.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV"],
+      "territory": "Southern California, Hawaii and Southern Nevada",
+      "notes": "67 regular-season games on Spectrum SportsNet.",
+      "sources": ["https://corporate.charter.com/newsroom/spectrum-sportsnet-lakers-2026-27-schedule", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/los-angeles-lakers/"]
+    },
+    "memphis-grizzlies": {
+      "confidence": "high",
+      "local_broadcasters": ["DAZN"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games free on DAZN and also over the air."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Carries 78 of 80 non-national regular-season games."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Parts of Tennessee, Mississippi, Kentucky, Alabama, Missouri, Illinois and Arkansas",
+      "notes": "",
+      "sources": ["https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html"]
+    },
+    "miami-heat": {
+      "confidence": "high",
+      "local_broadcasters": ["WPLG Local 10"],
+      "ota": {"status": "all", "games": 68, "note": "Every non-national game is free over the air on Local 10."},
+      "streaming": [
+        {"name": "Local 10+ Platinum", "monthly_price_usd": 0, "season_price_usd": 0, "note": "Free stream of the Local 10 broadcasts.", "price_verified": true}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Miami-Dade, Broward and Monroe counties (Palm Beach partner pending)",
+      "notes": "",
+      "sources": ["https://www.local10.com/sports/local/2026/06/08/wplg-local-10-becomes-the-home-of-the-miami-heat/"]
+    },
+    "milwaukee-bucks": {
+      "confidence": "high",
+      "local_broadcasters": ["MY24 (WVTV-DT2)", "Statewide affiliates"],
+      "ota": {"status": "all", "games": null, "note": "Every locally available game is free over the air on MY24 and statewide affiliates."},
+      "streaming": [
+        {"name": "Bucks streaming service", "monthly_price_usd": null, "season_price_usd": null, "note": "To be announced.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["YouTube TV"],
+      "territory": "Wisconsin",
+      "notes": "",
+      "sources": ["https://urbanmilwaukee.com/pressrelease/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/"]
+    },
+    "minnesota-timberwolves": {
+      "confidence": "high",
+      "local_broadcasters": ["DAZN"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "15 games free with a DAZN account."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Minnesota, Iowa, Nebraska, North Dakota and South Dakota, plus parts of Kansas and Wisconsin",
+      "notes": "",
+      "sources": ["https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174"]
+    },
+    "new-orleans-pelicans": {
+      "confidence": "moderate",
+      "local_broadcasters": ["Gulf Coast Sports & Entertainment Network (Gray)"],
+      "ota": {"status": "all", "games": null, "note": "Free over the air in 14 Gulf Coast markets."},
+      "streaming": [
+        {"name": "Pelicans+", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Gulf Coast markets",
+      "notes": "",
+      "sources": ["https://www.wafb.com/2026/09/14/pelicans-preseason-games-air-gcsen/"]
+    },
+    "new-york-knicks": {
+      "confidence": "high",
+      "local_broadcasters": ["MSG Network"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "MSG on DAZN", "monthly_price_usd": null, "season_price_usd": null, "note": "DAZN replaces the Gotham Sports app. Pay-TV subscribers who get MSG get it on DAZN at no extra cost. Standalone price not published yet.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["Fubo", "DirecTV Stream"],
+      "territory": "Knicks local market",
+      "notes": "",
+      "sources": ["https://www.cnbc.com/2026/07/29/yes-network-msg-networks-dazn-streaming.html"]
+    },
+    "oklahoma-city-thunder": {
+      "confidence": "high",
+      "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
+      "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air."},
+      "streaming": [
+        {"name": "Thunder+ (NBA App)", "monthly_price_usd": 19.99, "season_price_usd": 108.99, "note": "Season pass $99.99 if bought by September 30. Carries all 67 non-national games.", "price_verified": true}
+      ],
+      "live_tv_carriers": ["Cox", "Spectrum", "DirecTV", "DirecTV Stream"],
+      "territory": "Oklahoma, Kansas, Arkansas, Missouri and Nebraska",
+      "notes": "",
+      "sources": ["https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts"]
+    },
+    "orlando-magic": {
+      "confidence": "high",
+      "local_broadcasters": ["WRDQ 27", "WFTV 9 (Cox)", "WMOR (Tampa)"],
+      "ota": {"status": "all", "games": null, "note": "Local games are free over the air in Orlando and Tampa."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 20% off at the team store."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Magic local market",
+      "notes": "",
+      "sources": ["https://www.nba.com/magic/news/orlando-magic-names-dazn-as-exclusive-direct-to-consumer-streaming-partner-for-2026-27"]
+    },
+    "philadelphia-76ers": {
+      "confidence": "low",
+      "local_broadcasters": ["NBC Sports Philadelphia"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "NBC Sports Philadelphia on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "76ers local market",
+      "notes": "",
+      "sources": ["https://en.wikipedia.org/wiki/List_of_current_NBA_broadcasters"]
+    },
+    "phoenix-suns": {
+      "confidence": "high",
+      "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
+      "ota": {"status": "all", "games": 74, "note": "All 74 non-national games are free over the air."},
+      "streaming": [
+        {"name": "Suns+", "monthly_price_usd": null, "season_price_usd": null, "note": "Inside the Arizona's Family Sports app. Subscriptions open October 1.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Arizona",
+      "notes": "",
+      "sources": ["https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/"]
+    },
+    "portland-trail-blazers": {
+      "confidence": "moderate",
+      "local_broadcasters": ["KUNP", "KATU (some games)"],
+      "ota": {"status": "most", "games": null, "note": "Most local games are free over the air."},
+      "streaming": [
+        {"name": "BlazerVision", "monthly_price_usd": null, "season_price_usd": 120.00, "note": "Season price only.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Blazers local market",
+      "notes": "",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/portland-trail-blazers/"]
+    },
+    "sacramento-kings": {
+      "confidence": "low",
+      "local_broadcasters": ["NBC Sports California"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "NBC Sports California on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Kings local market",
+      "notes": "",
+      "sources": ["https://en.wikipedia.org/wiki/List_of_current_NBA_broadcasters"]
+    },
+    "san-antonio-spurs": {
+      "confidence": "high",
+      "local_broadcasters": ["DAZN"],
+      "ota": {"status": "partial", "games": 22, "note": "22 games will be free over the air; partner not yet named."},
+      "streaming": [
+        {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 25% off at the team store."}
+      ],
+      "live_tv_carriers": [],
+      "territory": "Central, South and West Texas",
+      "notes": "",
+      "sources": ["https://www.axios.com/local/san-antonio/2026/09/02/spurs-name-dazn-new-streaming-games"]
+    },
+    "toronto-raptors": {
+      "confidence": "moderate",
+      "local_broadcasters": ["TSN", "Sportsnet"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [],
+      "live_tv_carriers": [],
+      "territory": "Canada",
+      "notes": "Local Raptors coverage is Canadian. US readers watch Raptors games on League Pass or national TV.",
+      "exclude_from_us_maths": true,
+      "sources": ["https://mobilesyrup.com/2026/04/18/where-to-watch-the-toronto-raptors-in-the-nba-playoffs/"]
+    },
+    "utah-jazz": {
+      "confidence": "moderate",
+      "local_broadcasters": ["KJZZ"],
+      "ota": {"status": "all", "games": 78, "note": "78 games are free over the air on KJZZ."},
+      "streaming": [
+        {"name": "Jazz+", "monthly_price_usd": 20.00, "season_price_usd": 126.00, "note": "SEG+ bundle with the Utah Mammoth is $175 a year.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["Fubo (parts of Idaho and Wyoming)"],
+      "territory": "Jazz local market",
+      "notes": "",
+      "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/utah-jazz/"]
+    },
+    "washington-wizards": {
+      "confidence": "high",
+      "local_broadcasters": ["Monumental Sports Network"],
+      "ota": {"status": "none", "games": 0, "note": ""},
+      "streaming": [
+        {"name": "Monumental+", "monthly_price_usd": 19.99, "season_price_usd": 179.99, "note": "Also sold as a subscription through DAZN.", "price_verified": false}
+      ],
+      "live_tv_carriers": ["DirecTV Stream", "Fubo"],
+      "territory": "South of Richmond, Va., to Delaware",
+      "notes": "Not on YouTube TV or Hulu + Live TV.",
+      "sources": ["https://dazngroup.com/press-room/monumental-sports-network-and-dazn-partner-to-expand-access-to-live-capitals-wizards-mystics-games-and-other-d-c-sports-content/"]
+    }
+  }
 }
