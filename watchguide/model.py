@@ -138,6 +138,10 @@ class Service:
     # still listed with its price, but it counts for no games.
     carries_verified: bool = True
     carries_check: str = ""
+    # "moderate" means the carries list is trusted for the maths but the page
+    # should tell the reader to check; carries_confidence_note is that line.
+    carries_verified_confidence: str = ""
+    carries_confidence_note: str = ""
 
     @property
     def has_price(self) -> bool:
@@ -210,6 +214,8 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             verified=bool(s.get("verified")),
             carries_verified=bool(s.get("carries_verified", True)),
             carries_check=s.get("carries_check", ""),
+            carries_verified_confidence=s.get("carries_verified_confidence", ""),
+            carries_confidence_note=s.get("carries_confidence_note", ""),
         ))
     rules = raw.get("rules") or {}
     blackouts = [

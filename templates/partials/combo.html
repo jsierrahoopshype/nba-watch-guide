@@ -13,4 +13,7 @@
       {{ combo.missed[:6]|map(attribute='date_et')|join(', ') }}{% if combo.missed|length > 6 %} and more{% endif %}.
     {%- else %}{{ labels.misses_none }}{% endif %}
   </p>
+  {%- for note in combo_notes %}
+  <p class="small muted combo-note" data-confidence-note>{{ note }}</p>
+  {%- endfor %}
 </div>

@@ -49,9 +49,16 @@ def carriers_for_game(
     carriers: set[str] = set()
     national = {_norm(c) for c in game.national_codes}
 
+    lp = service_data.league_pass_service_id
+    # Channels bundled into League Pass (NBA TV) come through the League Pass
+    # subscription, so they share its in-market blackout.
+    lp_blacked_out_here = state == IN_MARKET and bool(service_data.active_blackouts("in_market_local"))
+
     # National broadcasts reach everyone who has a service carrying that channel.
     if national:
         for svc in service_data.services:
+            if svc.id == lp and lp_blacked_out_here:
+                continue
             if any(_norm(c) in national for c in svc.carries):
                 carriers.add(svc.id)
 
@@ -71,7 +78,6 @@ def carriers_for_game(
                     carriers.add(app.service_id)
 
     # League Pass, unless a blackout rule from the data file applies.
-    lp = service_data.league_pass_service_id
     if lp and service_data.by_id(lp) and not league_pass_blocked(game, state, service_data):
         carriers.add(lp)
 
@@ -261,3 +267,45 @@ def _cheapest(
         total=total,
         missed=missed,
     )
+
+
+# --------------------------------------------------------------------------
+# Lower-confidence carriage inside a combination
+# --------------------------------------------------------------------------
+
+MODERATE = "moderate"
+
+
+def moderate_carries_in(
+    combo: Combination | None,
+    games: list[Game],
+    tricode: str,
+    service_data: ServiceData,
+    local: LocalTV | None,
+    state: str,
+) -> list[dict]:
+    """Services in `combo` whose moderate-confidence carries list actually
+    reaches a game the combination covers, as {service, channels}.
+
+    A service only counts through its carries list here, not through a rule
+    (League Pass covering games with no national broadcast is not flagged).
+    """
+    if not combo:
+        return []
+    moderate = [s for s in combo.services if s.carries_verified_confidence == MODERATE]
+    if not moderate:
+        return []
+    missed = {g.game_id for g in combo.missed}
+    out = []
+    for svc in moderate:
+        carried = {_norm(c): c for c in svc.carries}
+        channels: list[str] = []
+        for game in games:
+            if game.game_id in missed:
+                continue
+            hits = [code for code in game.national_codes if _norm(code) in carried]
+            if hits and svc.id in carriers_for_game(game, tricode, service_data, local, state):
+                channels += [c for c in hits if c not in channels]
+        if channels:
+            out.append({"service": svc, "channels": channels})
+    return out
