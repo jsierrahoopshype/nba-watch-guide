@@ -1,0 +1,23 @@
+{
+  "_note": "Scoring for tonight's ranking. Edit the numbers here; no code change is needed. A player's star power is the sum over the seasons below of (season weight x points), and awards in the same season stack. Only players on tonight's rosters who are not listed Out or Doubtful count. Awards come from data/recent_awards.json.",
+  "seasons": {
+    "2025-26": 1.0,
+    "2024-25": 0.5,
+    "2023-24": 0.25
+  },
+  "points": {
+    "all_nba_first": 5,
+    "all_nba_second": 4,
+    "all_nba_third": 3,
+    "all_star": 2
+  },
+  "stakes": {
+    "_note": "A game gets a stakes score only when both teams have played at least min_games. stakes = win_pct_points x (away win % + home win %), plus close_bonus when the two win percentages are within close_within of each other.",
+    "min_games": 5,
+    "win_pct_points": 10,
+    "close_bonus": 5,
+    "close_within": 0.1
+  },
+  "_heading_note": "The tonight page switches its heading to the stakes wording when stakes are on for more than this share of the day's games.",
+  "stakes_heading_share": 0.5
+}

@@ -47,6 +47,7 @@ def faq_entries(ctx: SiteContext) -> list[dict[str, str]]:
 def build(ctx: SiteContext, env) -> list[Page]:
     text = format_block(ctx.copy["hub"], season=ctx.season)
     faq = faq_entries(ctx)
+    ranked = ctx.tonight_ranked()
     url = config.public_url()
 
     blocks = [seo.breadcrumbs(crumb_trail(ctx))]
@@ -71,7 +72,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
         teams=ctx.teams,
         national_partners=national_partners(ctx),
         ota_teams=free_ota_teams(ctx),
-        top3=ctx.tonight_ranked()[:3],
+        top3=ranked[:3],
+        top3_text=ctx.tonight_heading(ranked),
         tonight_text=ctx.copy.get("tonight", {}),
         faq=faq,
         tonight_path=config.site_path("tonight"),

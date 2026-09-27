@@ -451,7 +451,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
 
 
 def refresh_build(out_dir: Path, today: str | None = None,
-                  repo_root: Path | None = None) -> BuildOutcome:
+                  repo_root: Path | None = None, data_dir: Path | None = None) -> BuildOutcome:
     """Availability-only refresh: the data files, the tonight page and the team
     pages whose next game is today. Everything else on disk is left alone."""
     notes: list[str] = []
@@ -473,11 +473,11 @@ def refresh_build(out_dir: Path, today: str | None = None,
 
     # Rosters come from the last full build's copy; only injuries change here,
     # which is what moves a game up or down tonight's ranking.
-    rosters, rnote = careers_source.load(out_dir, _full_names(None), allow_fetch=False)
+    rosters, rnote = careers_source.load(out_dir, _full_names(data_dir), allow_fetch=False)
     notes.append(rnote)
 
-    ctx = load_context(games, injuries, updated_at, as_of,
-                       availability_degraded=complaint, today=day, star_rosters=rosters)
+    ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
+                       data_dir=data_dir, today=day, star_rosters=rosters)
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
     # The hub carries the top-3 teaser, so it is refreshed with the tonight page.

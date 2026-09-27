@@ -67,6 +67,14 @@ def _et_times(game: dict) -> tuple[str, str, str]:
     return raw_date, "", ""
 
 
+def _count(value) -> int | None:
+    """A wins/losses value from the feed as an int, or None if it is not one."""
+    try:
+        return int(value) if value is not None and value != "" else None
+    except (TypeError, ValueError):
+        return None
+
+
 def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
     """Regular-season games only, sorted by Eastern tipoff.
 
@@ -108,6 +116,10 @@ def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
                 away_tv=_codes(b.get("awayTvBroadcasters")),
                 arena=(g.get("arenaName") or "").strip(),
                 week=int(g.get("weekNumber") or 0),
+                home_wins=_count((g.get("homeTeam") or {}).get("wins")),
+                home_losses=_count((g.get("homeTeam") or {}).get("losses")),
+                away_wins=_count((g.get("awayTeam") or {}).get("wins")),
+                away_losses=_count((g.get("awayTeam") or {}).get("losses")),
             ))
 
     if not games:
