@@ -28,6 +28,12 @@ SEASON = os.environ.get("WATCH_GUIDE_SEASON", "2026-27")
 # used when the rules block does not name one itself.
 LEAGUE_PASS_SERVICE_ID = "nba_league_pass"
 
+# National codes whose games the team's local broadcaster also carries when
+# the feed lists that team's own local code on the game. In the 2026-27 feed
+# every NBA TV game for a team with local codes also carries that team's local
+# broadcaster; other national partners are not treated this way.
+LOCAL_SIMULCAST_NATIONAL_CODES = ("NBA TV",)
+
 # Regular-season games have game ids starting 002. 001 preseason, 003 all-star,
 # 004 playoffs, 005 play-in.
 REGULAR_SEASON_PREFIX = "002"

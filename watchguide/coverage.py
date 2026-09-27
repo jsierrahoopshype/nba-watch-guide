@@ -10,6 +10,7 @@ import math
 from dataclasses import dataclass, field, replace
 from itertools import combinations
 
+from . import config
 from .model import Game, LocalTV, Service, ServiceData
 
 OUT_OF_MARKET = "out_of_market"
@@ -25,6 +26,20 @@ def _norm(code: str) -> str:
 # --------------------------------------------------------------------------
 # Which services carry one game
 # --------------------------------------------------------------------------
+
+def local_reaches(game: Game, tricode: str) -> bool:
+    """Whether the team's local options can carry this game in-market.
+
+    Games with no national broadcaster, plus games on a simulcast national
+    code (NBA TV) when the feed lists this team's own local code on the game.
+    Any other national game stays national-only.
+    """
+    if not game.is_national:
+        return True
+    simulcast = {_norm(c) for c in config.LOCAL_SIMULCAST_NATIONAL_CODES}
+    return (all(_norm(c) in simulcast for c in game.national_codes)
+            and bool(game.local_codes_for(tricode)))
+
 
 def league_pass_blocked(game: Game, state: str, service_data: ServiceData) -> list[str]:
     """Labels of the blackout rules that stop League Pass showing this game."""
@@ -63,9 +78,9 @@ def carriers_for_game(
                 carriers.add(svc.id)
 
     # Local options only reach a reader inside the market, and only for the
-    # team's games with no national broadcaster. They are in service_data only
+    # team's local games (see local_reaches). They are in service_data only
     # when with_local_options() put them there for this team.
-    if state == IN_MARKET and local and local.counts and not game.is_national:
+    if state == IN_MARKET and local and local.counts and local_reaches(game, tricode):
         for svc in service_data.services:
             if svc.local_option:
                 carriers.add(svc.id)
@@ -374,7 +389,7 @@ def moderate_carries_in(
                 continue
             if svc.local_option:
                 # A local option's coverage is the local games themselves.
-                hits = [] if game.is_national else ["local"]
+                hits = ["local"] if local_reaches(game, tricode) else []
             else:
                 hits = [code for code in game.national_codes if _norm(code) in carried]
             if hits and svc.id in carriers_for_game(game, tricode, service_data, local, state):

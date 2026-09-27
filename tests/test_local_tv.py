@@ -265,3 +265,66 @@ def test_schedule_fallback_on_the_cavaliers_page(built_site):
     assert '<span class="badge badge-local">DAZN</span>' in sched
     for station in ("WOIO", "WUAB", "Gray stations"):
         assert station not in sched
+
+
+# -- NBA TV games carried by the team's own local broadcaster -------------------
+
+def feed_game(idx, home, away, national, home_tv=(), away_tv=()) -> Game:
+    day = (date(2026, 10, 26) + timedelta(days=idx)).isoformat()
+    return Game(game_id=f"00226{idx:05d}", game_code="x", date_et=day,
+                tipoff_et=f"{day}T19:00:00-04:00", tipoff_utc=f"{day}T23:00:00+00:00",
+                status_text="7:00 pm ET", home_tricode=home, away_tricode=away,
+                national=list(national), home_tv=list(home_tv), away_tv=list(away_tv))
+
+
+# The Heat's six NBA TV games as the 2026-27 feed lists them: WPLG is on every
+# one, whether the Heat are home or away.
+HEAT_NBA_TV = [
+    feed_game(0, "MIA", "DAL", ["NBA TV"], home_tv=["WPLG"]),
+    feed_game(1, "GSW", "MIA", ["NBA TV"], home_tv=["NBCSBA"], away_tv=["WPLG"]),
+    feed_game(2, "MIA", "DET", ["NBA TV"], home_tv=["WPLG"]),
+    feed_game(3, "NYK", "MIA", ["NBA TV"], away_tv=["WPLG"]),
+    feed_game(4, "PHX", "MIA", ["NBA TV"], away_tv=["WPLG"]),
+    feed_game(5, "MIA", "BOS", ["NBA TV"], home_tv=["WPLG"], away_tv=["NBCSB"]),
+]
+
+# The Hornets' three NBA TV games: the feed has no local code on any of them.
+HORNETS_NBA_TV = [
+    feed_game(0, "CHA", "PHI", ["NBA TV"]),
+    feed_game(1, "CHA", "SAS", ["NBA TV"]),
+    feed_game(2, "CHA", "NYK", ["NBA TV"]),
+]
+
+
+def test_heat_local_options_cover_all_six_nba_tv_games(services, local):
+    cov = build_state_coverage(HEAT_NBA_TV, "MIA", services, local["miami-heat"], IN_MARKET)
+    assert local_counts(cov) == {"Local TV over the air": 6, "Local 10+ Platinum": 6}
+    assert cov.uncovered == []
+    assert cov.cheapest_full.total_price == 0
+
+
+def test_hornets_nba_tv_games_stay_uncounted_without_a_local_code(services, local):
+    cov = build_state_coverage(HORNETS_NBA_TV, "CHA", services, local["charlotte-hornets"], IN_MARKET)
+    assert local_counts(cov) == {"Local TV over the air": 0, "DAZN": 0}
+    assert counts(cov)["nba_tv"] == 3
+    assert cov.cheapest_full is None
+
+
+def test_the_other_teams_local_code_does_not_count(services, local):
+    # At Golden State the home side has NBCSBA; only the Heat's own code counts.
+    game = feed_game(0, "GSW", "MIA", ["NBA TV"], home_tv=["NBCSBA"])
+    cov = build_state_coverage([game], "MIA", services, local["miami-heat"], IN_MARKET)
+    assert local_counts(cov) == {"Local TV over the air": 0, "Local 10+ Platinum": 0}
+
+
+@pytest.mark.parametrize("code", ["ESPN", "Peacock", "NBC", "Amazon"])
+def test_other_national_games_are_not_local_even_with_a_local_code(services, local, code):
+    game = feed_game(0, "MIA", "DAL", [code], home_tv=["WPLG"])
+    cov = build_state_coverage([game], "MIA", services, local["miami-heat"], IN_MARKET)
+    assert local_counts(cov) == {"Local TV over the air": 0, "Local 10+ Platinum": 0}
+
+
+def test_nba_tv_rule_is_in_market_only(services, local):
+    cov = build_state_coverage(HEAT_NBA_TV, "MIA", services, local["miami-heat"], OUT_OF_MARKET)
+    assert local_counts(cov) == {}
+    assert counts(cov)["nba_league_pass"] == 6

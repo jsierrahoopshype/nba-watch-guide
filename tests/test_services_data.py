@@ -223,4 +223,8 @@ def test_league_pass_note_renders_under_the_combination_out_of_market_only(built
     assert cheapest.count("data-confidence-note") >= 1
     inside = _panel(html, "in_market")
     assert LP_NOTE not in inside
-    assert "data-confidence-note" not in inside
+    # In-market, the only note allowed is the local-TV one for a moderate team.
+    local_note = ("Local TV details for this team come from news reports, not an official "
+                  "team page yet; check before you buy.")
+    import re
+    assert set(re.findall(r"data-confidence-note>([^<]+)<", inside)) <= {local_note}
