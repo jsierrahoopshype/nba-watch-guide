@@ -13,6 +13,8 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from . import config
+from .ranking import STAKES, load_awards, load_weights, rank
+from .ranking import mode as ranking_mode
 from .model import (Game, LocalTV, ServiceData, Team, load_copy, load_local_tv,
                     load_services, load_teams)
 
@@ -37,6 +39,8 @@ class SiteContext:
     today: str
     generated_at: str
     star_rosters: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    star_weights: dict[str, Any] = field(default_factory=dict)
+    recent_awards: list[dict[str, str]] = field(default_factory=list)
 
     by_tricode: dict[str, Team] = field(init=False)
     by_slug: dict[str, Team] = field(init=False)
@@ -65,9 +69,17 @@ class SiteContext:
 
     def tonight_ranked(self) -> list[dict[str, Any]]:
         """Today's games, best first. See watchguide/ranking.py."""
-        from .ranking import rank
-        return rank(self.games_today(), self.star_rosters, self.injuries,
-                    self.team_name, self.copy.get("tonight", {}))
+        return rank(self.games_today(), self.star_rosters, self.injuries, self.team_name,
+                    self.copy.get("tonight", {}), self.star_weights, self.recent_awards,
+                    all_games=self.games)
+
+    def tonight_heading(self, rows: list[dict[str, Any]]) -> dict[str, str]:
+        """Heading and basis line: star power only, or stakes once most of
+        the day's games have them."""
+        text = self.copy.get("tonight", {})
+        if ranking_mode(rows, self.star_weights) == STAKES:
+            return {"heading": text["rank_heading_stakes"], "basis": text["rank_basis_stakes"]}
+        return {"heading": text["rank_heading"], "basis": text["rank_basis"]}
 
     def players_for(self, tricode: str) -> list[dict[str, str]]:
         return self.injuries.get(tricode, [])
@@ -126,4 +138,6 @@ def load_context(
         today=today or today_et(),
         generated_at=datetime.now(ET).isoformat(timespec="seconds"),
         star_rosters=star_rosters or {},
+        star_weights=load_weights(data_dir),
+        recent_awards=load_awards(data_dir),
     )

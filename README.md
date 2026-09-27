@@ -109,18 +109,29 @@ red, so a broken feed is loud but the site does not go blank. When the feed has
 no rows for the current season at all, which is the case right now, pages say
 "No injury report yet." rather than showing an empty list.
 
-**Rosters and All-Star selections**, for ranking tonight's games. The
-nba-career-map repo's `nba_players_careers_READY.json` on raw.githubusercontent.com,
-refreshed there daily from Wikipedia roster templates. That file has no
-`current_team`, so the team is the `career_history` stint running to "present"
-(544 of 598 active players on 2026-09-27). The full build fetches it and keeps a
-slim copy at `data/star-rosters.json` in the published tree; the 30-minute
-refresh reuses that copy, and a failed or implausible fetch keeps the last good
-one. The score is All-Star selections of players not listed Out or Doubtful,
-plus 5 for national TV. Team records are not used: no feed carrying them has
-been confirmed yet. Every full build's summary, and `python -m watchguide
-verify`, has a "team records probe" line saying whether the schedule feed
-carries team records or final scores, and on how many games they are filled.
+**Tonight's ranking.** Three inputs, every number in
+`data/star_power_weights.json`:
+
+- *Rosters*: the nba-career-map repo's `nba_players_careers_READY.json` on
+  raw.githubusercontent.com. That file has no `current_team`, so the team is the
+  `career_history` stint running to "present". The full build keeps a slim copy
+  at `data/star-rosters.json` in the published tree; the 30-minute refresh reuses
+  it, and a failed or implausible fetch keeps the last good one.
+- *Star power*: `data/recent_awards.json`, All-Star selections (injury
+  replacements included) and All-NBA First, Second and Third Teams for the last
+  three seasons, from Wikipedia's All-Star Game and All-NBA Team pages. Each
+  player's score is the sum over seasons of season weight x points, awards in a
+  season stacking; only players not listed Out or Doubtful count. Refresh it with
+  the `fetch-recent-awards` workflow (run by hand; Wikipedia is not reachable from
+  every sandbox) after moving the season window in the weights file.
+- *Stakes*: each team's current record from the schedule feed. A game gets a
+  stakes score once both teams have played `min_games`; before that the ranking
+  is star power only. Every full build's summary, and `python -m watchguide
+  verify`, has a "team records probe" line showing whether the feed's records are
+  filled in yet.
+
+National TV is a badge, not points. The heading reads "Most star power tonight"
+until stakes are on for most of the day's games, then "Tonight's best games".
 
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.

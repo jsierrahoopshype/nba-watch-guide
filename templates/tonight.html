@@ -8,17 +8,18 @@
 <div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice>{{ labels.stale_notice }}</div>
 
 {%- if ranked %}
-<h2>{{ text.rank_heading }}</h2>
+<h2 data-rank-heading>{{ rank_text.heading }}</h2>
 <ol class="ranked" data-ranked>
   {%- for row in ranked %}
-  <li data-rank="{{ row.rank }}" data-score="{{ row.score }}">
+  <li data-rank="{{ row.rank }}" data-score="{{ row.score }}"{% if row.stakes is not none %} data-stakes="{{ row.stakes }}"{% endif %}>
     <strong>{{ row.away_name }} at {{ row.home_name }}</strong>
-    <span class="small muted">{{ text.rank_score.format(score=row.score) }}</span>
+    {%- if row.national %} <span class="badge badge-national" title="{{ text.rank_national_badge }}">{{ row.national|join(", ") }}</span>{% endif %}
+    <span class="small muted">{{ text.rank_score.format(score=row.score_label) }}</span>
     <div class="small">{{ row.line }}</div>
   </li>
   {%- endfor %}
 </ol>
-<p class="small muted" data-rank-basis>{{ text.rank_basis }}</p>
+<p class="small muted" data-rank-basis>{{ rank_text.basis }}</p>
 {%- endif %}
 
 {%- if games %}

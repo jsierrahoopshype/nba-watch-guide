@@ -72,6 +72,12 @@ class Game:
     away_tv: list[str] = field(default_factory=list)       # away local TV codes
     arena: str = ""
     week: int = 0
+    # Each side's record as the schedule feed lists it on this game, or None
+    # when the feed has none. Used for stakes in tonight's ranking.
+    home_wins: int | None = None
+    home_losses: int | None = None
+    away_wins: int | None = None
+    away_losses: int | None = None
 
     @property
     def national_codes(self) -> list[str]:

@@ -8,13 +8,13 @@
 
 {%- if top3 %}
 <section class="card" data-top3>
-  <h2>{{ tonight_text.top3_heading }}</h2>
+  <h2>{{ top3_text.heading }}</h2>
   <ol>
     {%- for row in top3 %}
-    <li><a href="{{ tonight_path }}">{{ row.away_name }} at {{ row.home_name }}</a> <span class="small muted">{{ row.line }}</span></li>
+    <li><a href="{{ tonight_path }}">{{ row.away_name }} at {{ row.home_name }}</a>{% if row.national %} <span class="badge badge-national">{{ row.national|join(", ") }}</span>{% endif %} <span class="small muted">{{ row.line }}</span></li>
     {%- endfor %}
   </ol>
-  <p class="small muted">{{ tonight_text.rank_basis }}</p>
+  <p class="small muted">{{ top3_text.basis }}</p>
   <p class="small"><a href="{{ tonight_path }}">{{ tonight_text.top3_link }}</a></p>
 </section>
 {%- endif %}
