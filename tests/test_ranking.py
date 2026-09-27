@@ -1,9 +1,10 @@
-"""Tonight's best games: the score, the lines, the fallback and the refresh."""
+"""Most star power tonight: the score, the lines, the fallback and the refresh."""
 
 from __future__ import annotations
 
 import json
 import re
+from pathlib import Path
 
 import pytest
 
@@ -162,7 +163,8 @@ def test_hub_teaser_shows_the_top_three(ranked_site):
     site, *_ = ranked_site
     hub = (site / "index.html").read_text(encoding="utf-8")
     teaser = hub[hub.index("data-top3"):hub.index("</section>", hub.index("data-top3"))]
-    assert "Tonight&#39;s top 3" in teaser
+    assert "Most star power tonight" in teaser
+    assert "Ranked by career All-Star selections of the players in uniform tonight, plus national TV." in teaser
     assert teaser.count("<li>") == 3
     assert 'href="/how-to-watch/tonight"' in teaser
     tonight_order, _ = _order(site)
@@ -192,3 +194,16 @@ def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monke
     teaser = hub[hub.index("data-top3"):]
     assert teaser.index(second_name) < teaser.index("</ol>")
     assert re.findall(r'<a href="/how-to-watch/tonight">([^<]+)</a> <span', teaser)[0] == second_name
+
+
+def test_the_ranking_is_called_star_power_everywhere(ranked_site):
+    site, *_ = ranked_site
+    tonight = (site / "tonight" / "index.html").read_text(encoding="utf-8")
+    hub = (site / "index.html").read_text(encoding="utf-8")
+    assert "<h2>Most star power tonight</h2>" in tonight
+    basis = "Ranked by career All-Star selections of the players in uniform tonight, plus national TV."
+    # The line sits under the list, not above it.
+    assert tonight.index("</ol>", tonight.index("data-ranked")) < tonight.index(basis)
+    copy_text = (Path(__file__).resolve().parent.parent / "data" / "copy.json").read_text(encoding="utf-8")
+    for text in (tonight, hub, copy_text):
+        assert "best games" not in text.lower()

@@ -41,11 +41,9 @@ def build(ctx: SiteContext, env) -> list[Page]:
     }
 
     ranked = ctx.tonight_ranked()
-    rank_intro = text.get("rank_intro", "").format(national_points=config.RANK_NATIONAL_POINTS)
 
     html = env.get_template("tonight.html").render(
         ranked=ranked,
-        rank_intro=rank_intro,
         page=page_meta,
         copy=ctx.copy,
         labels=labels,

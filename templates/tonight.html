@@ -9,7 +9,6 @@
 
 {%- if ranked %}
 <h2>{{ text.rank_heading }}</h2>
-<p class="small muted">{{ rank_intro }}</p>
 <ol class="ranked" data-ranked>
   {%- for row in ranked %}
   <li data-rank="{{ row.rank }}" data-score="{{ row.score }}">
@@ -19,6 +18,7 @@
   </li>
   {%- endfor %}
 </ol>
+<p class="small muted" data-rank-basis>{{ text.rank_basis }}</p>
 {%- endif %}
 
 {%- if games %}

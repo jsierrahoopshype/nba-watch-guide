@@ -1,4 +1,4 @@
-"""Tonight's games, ranked by a score anyone can check.
+"""Most star power tonight: today's games, ranked by a score anyone can check.
 
 score = the All-Star selections of every rostered player not listed Out or
 Doubtful, plus a fixed number of points when the game is on national TV.

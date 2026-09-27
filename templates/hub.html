@@ -14,6 +14,7 @@
     <li><a href="{{ tonight_path }}">{{ row.away_name }} at {{ row.home_name }}</a> <span class="small muted">{{ row.line }}</span></li>
     {%- endfor %}
   </ol>
+  <p class="small muted">{{ tonight_text.rank_basis }}</p>
   <p class="small"><a href="{{ tonight_path }}">{{ tonight_text.top3_link }}</a></p>
 </section>
 {%- endif %}
