@@ -255,9 +255,9 @@ def local_services(local: LocalTV | None, service_data: ServiceData) -> list[Ser
     confidence = local.confidence if local.confidence == MODERATE else ""
     source = local.sources[0] if local.sources else ""
 
-    def make(sid: str, name: str, price, note: str, requires=()) -> Service:
+    def make(sid: str, name: str, price, note: str, requires=(), kind="local") -> Service:
         return Service(
-            id=sid, name=name, kind="local", monthly_price_usd=price, billing_note=note,
+            id=sid, name=name, kind=kind, monthly_price_usd=price, billing_note=note,
             carries=[], carries_note="", signup_url="", affiliate_url="",
             source_url=source, last_verified=local.last_checked, verified=True,
             carries_verified=True, carries_verified_confidence=confidence,
@@ -266,7 +266,8 @@ def local_services(local: LocalTV | None, service_data: ServiceData) -> list[Ser
 
     out: list[Service] = []
     if local.ota.counts:
-        out.append(make(f"local-{local.slug}-ota", "Local TV over the air", 0, local.ota.note))
+        out.append(make(f"local-{local.slug}-ota", "Local TV over the air", 0, local.ota.note,
+                        kind="ota"))
     for i, opt in enumerate(local.streaming):
         price = opt.monthly_price_usd
         requires = []

@@ -34,6 +34,10 @@
   <button type="button" role="tab" id="tab-in_market" aria-controls="panel-in_market"
           data-state-btn="in_market" aria-selected="false">{{ text.in_market_label }}</button>
 </div>
+{%- if missing %}
+<div class="missing" data-missing-root hidden></div>
+<script type="application/json" id="missing-data">{{ missing|tojson }}</script>
+{%- endif %}
 
 {%- for view in views %}
 {% include "partials/state_panel.html" %}

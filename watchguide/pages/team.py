@@ -10,6 +10,7 @@ from .. import config, seo
 from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels_for_game,
                         moderate_carries_in)
+from ..missing import payload as missing_payload
 from ..model import CONFIDENCE_COUNTS, Team
 from ..render import Page, date_label, et_label, format_block
 from .common import (crumb_trail, empty_players_label, game_row,
@@ -50,9 +51,11 @@ def _local_notice(ctx: SiteContext, local, text: dict) -> str:
     return ""
 
 
-def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dict) -> dict:
+def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dict,
+                coverage=None) -> dict:
     local = ctx.local(team.slug)
-    coverage = build_state_coverage(games, team.tricode, ctx.services, local, state)
+    if coverage is None:
+        coverage = build_state_coverage(games, team.tricode, ctx.services, local, state)
     in_market = state == IN_MARKET
     # The coverage panel only lists services that carry at least one game. The
     # rest are counted in a single line, so a page with unfilled channel lists
@@ -105,6 +108,15 @@ def _watching(ctx: SiteContext, local, text: dict) -> dict | None:
     }
 
 
+def _missing(ctx: SiteContext, schedule: list[dict], coverages: dict) -> dict:
+    """Data and wording for 'What am I missing?'. The page script builds the
+    widget from this; nothing about it is in the prerendered text."""
+    text = ctx.copy.get("missing", {})
+    games = [{"d": row["date_label"], "o": row["opponent_label"]} for row in schedule]
+    return {"data": missing_payload(games, coverages, text.get("antenna", "Antenna")),
+            "text": text}
+
+
 def build(ctx: SiteContext, env) -> list[Page]:
     raw = ctx.copy["team"]
     labels = ctx.labels()
@@ -133,8 +145,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
         if nxt:
             next_card = game_row(ctx, nxt, channels_for_game(nxt, team.tricode, local, tba))
 
-        views = [_state_view(ctx, team, remaining, state, text)
+        coverages = {state: build_state_coverage(remaining, team.tricode, ctx.services, local, state)
+                     for state in (OUT_OF_MARKET, IN_MARKET)}
+        views = [_state_view(ctx, team, remaining, state, text, coverages[state])
                  for state in (OUT_OF_MARKET, IN_MARKET)]
+        missing = _missing(ctx, schedule, coverages) if remaining else None
 
         blocks = [seo.breadcrumbs(crumb_trail(ctx, team.full_name, url))]
         for game in remaining[:JSONLD_GAME_LIMIT]:
@@ -172,6 +187,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             show_affiliate_disclosure=show_disclosure,
             prices_checked=ctx.services.prices_checked,
             watching=_watching(ctx, local, text),
+            missing=missing,
             trail=crumb_trail(ctx, team.full_name, url),
         )
         pages.append(Page(out_path=f"{team.slug}/index.html", url=url, html=html,
