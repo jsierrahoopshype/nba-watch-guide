@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -92,7 +93,23 @@ def et_label(game, with_date: bool = False) -> str:
     return f"{date_label(game.date_et)}, {clock}" if with_date else clock
 
 
+def hashed_asset_name(name: str, asset_dir: Path | None = None) -> str:
+    """'watch-guide.js' -> 'watch-guide.<10 hex of its sha256>.js'.
+
+    The Worker serves /assets/* with a day-long Cache-Control, so a changed
+    file needs a new URL or browsers keep the old one while getting new HTML.
+    Hashing the content means the URL changes exactly when the file does."""
+    path = (asset_dir or config.ASSET_DIR) / name
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()[:10]
+    stem, dot, ext = name.rpartition(".")
+    return f"{stem}.{digest}.{ext}" if dot else f"{name}.{digest}"
+
+
 def asset(rel: str) -> str:
+    """Root-relative URL of a file in assets/, content-hashed."""
+    folder, _, name = rel.rpartition("/")
+    if folder == "assets" and (config.ASSET_DIR / name).is_file():
+        rel = f"assets/{hashed_asset_name(name)}"
     return config.site_path(rel)
 
 
