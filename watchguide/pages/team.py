@@ -65,6 +65,10 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
     # rules block drives it), so at zero games it would otherwise disappear.
     lp_id = ctx.services.league_pass_service_id
     covering = [c for c in coverage.per_service if c.covered or c.service.id == lp_id]
+    # In-market, League Pass at zero games is the blackout rule at work, not a
+    # gap in its coverage, so the row says so instead of "Covers 0 of N".
+    blacked_out = {lp_id} if (in_market and ctx.services.active_blackouts("in_market_local")
+                              and any(c.service.id == lp_id and not c.covered for c in covering)) else set()
     full, ninety = coverage.cheapest_full, coverage.cheapest_ninety
     # A team whose local coverage is not for US readers gets its note, no maths.
     no_maths_note = local.notes if (in_market and local and local.exclude_from_us_maths) else ""
@@ -77,6 +81,7 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
         "label": text["in_market_label"] if in_market else text["out_of_market_label"],
         "per_service": coverage.per_service,
         "covering": covering,
+        "blacked_out_ids": blacked_out,
         "not_covering_count": len(coverage.per_service) - len(covering),
         "cheapest_full": full,
         "cheapest_ninety": ninety,

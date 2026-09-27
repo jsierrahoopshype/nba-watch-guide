@@ -228,3 +228,18 @@ def test_league_pass_note_renders_under_the_combination_out_of_market_only(built
                   "team page yet; check before you buy.")
     import re
     assert set(re.findall(r"data-confidence-note>([^<]+)<", inside)) <= {local_note}
+
+
+def test_league_pass_reads_blacked_out_in_market(built_site, teams):
+    for team in teams:
+        html = (built_site / team.slug / "index.html").read_text(encoding="utf-8")
+        inside = _coverage_block(_panel(html, "in_market"))
+        row = inside[inside.index("NBA League Pass"):]
+        row = row[:row.index('<div class="row-side">')]
+        assert "Blacked out in your market" in row, team.slug
+        assert 'class="bar"' not in row and "Covers 0 of" not in row
+        # Out of market it keeps its count and bar.
+        outside = _coverage_block(_panel(html, "out_of_market"))
+        out_row = outside[outside.index("NBA League Pass"):]
+        out_row = out_row[:out_row.index('<div class="row-side">')]
+        assert "Blacked out" not in out_row and 'class="bar"' in out_row

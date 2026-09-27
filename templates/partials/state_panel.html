@@ -14,8 +14,12 @@
       <div class="row">
         <div class="row-main">
           <div class="row-title">{{ item.service.name }}</div>
+          {%- if item.service.id in view.blacked_out_ids %}
+          <div class="row-note" data-blacked-out>{{ labels.blacked_out_market }}</div>
+          {%- else %}
           <div class="row-note">{{ text.coverage_line.format(covered=item.covered, total=item.total) }}</div>
           <div class="bar"><span style="width: {{ item.percent|round(0, 'floor')|int }}%"></span></div>
+          {%- endif %}
         </div>
         <div class="row-side">
           {% with svc = item.service %}{% include "partials/price.html" %}{% endwith %}
