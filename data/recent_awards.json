@@ -1,0 +1,724 @@
+{
+ "_note": "All-Star selections (injury replacements included) and All-NBA First, Second and Third Team selections for the seasons in data/star_power_weights.json, from Wikipedia. Built by scripts/fetch_recent_awards.py.",
+ "fetched": "2026-09-27",
+ "seasons": [
+  "2023-24",
+  "2024-25",
+  "2025-26"
+ ],
+ "sources": [
+  {
+   "season": "2023-24",
+   "award": "all_star",
+   "url": "https://en.wikipedia.org/wiki/2024_NBA_All-Star_Game",
+   "count": 26
+  },
+  {
+   "season": "2023-24",
+   "award": "all_nba_first",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2023-24",
+   "award": "all_nba_second",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2023-24",
+   "award": "all_nba_third",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2024-25",
+   "award": "all_star",
+   "url": "https://en.wikipedia.org/wiki/2025_NBA_All-Star_Game",
+   "count": 26
+  },
+  {
+   "season": "2024-25",
+   "award": "all_nba_first",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2024-25",
+   "award": "all_nba_second",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2024-25",
+   "award": "all_nba_third",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2025-26",
+   "award": "all_star",
+   "url": "https://en.wikipedia.org/wiki/2026_NBA_All-Star_Game",
+   "count": 28
+  },
+  {
+   "season": "2025-26",
+   "award": "all_nba_first",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2025-26",
+   "award": "all_nba_second",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  },
+  {
+   "season": "2025-26",
+   "award": "all_nba_third",
+   "url": "https://en.wikipedia.org/wiki/All-NBA_Team",
+   "count": 5
+  }
+ ],
+ "counts": {
+  "2023-24 all_star": 26,
+  "2023-24 all_nba_first": 5,
+  "2023-24 all_nba_second": 5,
+  "2023-24 all_nba_third": 5,
+  "2024-25 all_star": 26,
+  "2024-25 all_nba_first": 5,
+  "2024-25 all_nba_second": 5,
+  "2024-25 all_nba_third": 5,
+  "2025-26 all_star": 28,
+  "2025-26 all_nba_first": 5,
+  "2025-26 all_nba_second": 5,
+  "2025-26 all_nba_third": 5
+ },
+ "awards": [
+  {
+   "player": "Tyrese Haliburton",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Damian Lillard",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Jayson Tatum",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Joel Embiid",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Donovan Mitchell",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Trae Young",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Paolo Banchero",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Scottie Barnes",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Jaylen Brown",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Julius Randle",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Bam Adebayo",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Luka Dončić",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Kevin Durant",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "LeBron James",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Devin Booker",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Stephen Curry",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Anthony Edwards",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Paul George",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Anthony Davis",
+   "season": "2023-24",
+   "award": "all_star"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2023-24",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2023-24",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Luka Dončić",
+   "season": "2023-24",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "season": "2023-24",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Jayson Tatum",
+   "season": "2023-24",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2023-24",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Anthony Edwards",
+   "season": "2023-24",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Kevin Durant",
+   "season": "2023-24",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "season": "2023-24",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Anthony Davis",
+   "season": "2023-24",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "LeBron James",
+   "season": "2023-24",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Stephen Curry",
+   "season": "2023-24",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Domantas Sabonis",
+   "season": "2023-24",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "season": "2023-24",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Devin Booker",
+   "season": "2023-24",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Donovan Mitchell",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Jayson Tatum",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Jaylen Brown",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Cade Cunningham",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Darius Garland",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Tyler Herro",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Damian Lillard",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Evan Mobley",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Pascal Siakam",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Trae Young",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Stephen Curry",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "LeBron James",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Kevin Durant",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Anthony Edwards",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "James Harden",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Jaren Jackson Jr.",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Jalen Williams",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Anthony Davis",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Alperen Şengün",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Victor Wembanyama",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Kyrie Irving",
+   "season": "2024-25",
+   "award": "all_star"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "season": "2024-25",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2024-25",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2024-25",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Jayson Tatum",
+   "season": "2024-25",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Donovan Mitchell",
+   "season": "2024-25",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Anthony Edwards",
+   "season": "2024-25",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "LeBron James",
+   "season": "2024-25",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Stephen Curry",
+   "season": "2024-25",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Evan Mobley",
+   "season": "2024-25",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2024-25",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Cade Cunningham",
+   "season": "2024-25",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "season": "2024-25",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "season": "2024-25",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Jalen Williams",
+   "season": "2024-25",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "James Harden",
+   "season": "2024-25",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Jaylen Brown",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Cade Cunningham",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Scottie Barnes",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Jalen Duren",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Brandon Ingram",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Jalen Johnson",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Donovan Mitchell",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Norman Powell",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Pascal Siakam",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Stephen Curry",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Luka Dončić",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Victor Wembanyama",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Deni Avdija",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Devin Booker",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Kevin Durant",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Anthony Edwards",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Chet Holmgren",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "LeBron James",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Jamal Murray",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Alperen Şengün",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "De'Aaron Fox",
+   "season": "2025-26",
+   "award": "all_star"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "season": "2025-26",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Nikola Jokić",
+   "season": "2025-26",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Victor Wembanyama",
+   "season": "2025-26",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Luka Dončić",
+   "season": "2025-26",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Cade Cunningham",
+   "season": "2025-26",
+   "award": "all_nba_first"
+  },
+  {
+   "player": "Jaylen Brown",
+   "season": "2025-26",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "season": "2025-26",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Donovan Mitchell",
+   "season": "2025-26",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Kevin Durant",
+   "season": "2025-26",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Jalen Brunson",
+   "season": "2025-26",
+   "award": "all_nba_second"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "season": "2025-26",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Jamal Murray",
+   "season": "2025-26",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Jalen Johnson",
+   "season": "2025-26",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Jalen Duren",
+   "season": "2025-26",
+   "award": "all_nba_third"
+  },
+  {
+   "player": "Chet Holmgren",
+   "season": "2025-26",
+   "award": "all_nba_third"
+  }
+ ]
+}
