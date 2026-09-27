@@ -119,3 +119,25 @@ def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
 
 def fetch() -> list[Game]:
     return normalize(fetch_raw())
+
+
+def team_records_probe(raw: dict) -> str:
+    """One line on whether the schedule feed carries team records or final
+    scores. Stakes stay out of tonight's ranking until this says yes."""
+    games = [g for d in (raw.get("leagueSchedule") or {}).get("gameDates") or []
+             for g in d.get("games") or []]
+    sides = [side for g in games for side in (g.get("homeTeam") or {}, g.get("awayTeam") or {})]
+    if not sides:
+        return "team records probe (schedule feed): no games in the schedule feed"
+    has = lambda key: any(key in s for s in sides)
+    nonzero = lambda key: sum(1 for g in games
+                              if any((s or {}).get(key) not in (None, 0, "", "0")
+                                     for s in (g.get("homeTeam"), g.get("awayTeam"))))
+    parts = []
+    for label, keys in (("records", ("wins", "losses")), ("scores", ("score",))):
+        if all(has(k) for k in keys):
+            filled = max(nonzero(k) for k in keys)
+            parts.append(f"{label}: {'/'.join(keys)} present, non-zero on {filled} of {len(games)} games")
+        else:
+            parts.append(f"{label}: not in the feed")
+    return "team records probe (schedule feed): " + "; ".join(parts)

@@ -30,7 +30,7 @@ from .coverage import channel_names, channels_for_game
 from .model import Game, load_teams
 from .pages import BUILDERS
 from .pages.links_block import render as render_links_block
-from .render import Page, build_env
+from .render import Page, build_env, hashed_asset_name
 from .sources import careers as careers_source
 from .sources import injuries as injuries_source
 from .sources import schedule as schedule_source
@@ -156,12 +156,17 @@ def config_tz():
 
 
 def load_schedule(out_dir: Path, allow_cache: bool = True) -> tuple[list[Game], str]:
-    """(games, note). Falls back to the cache and reports what happened."""
+    """(games, note). Falls back to the cache and reports what happened.
+
+    On a successful fetch the note has a second line: whether the feed carries
+    team records or final scores, so it shows up in every build's summary."""
     cache_path = out_dir / SCHEDULE_CACHE
     try:
-        games = schedule_source.fetch()
+        raw = schedule_source.fetch_raw()
+        games = schedule_source.normalize(raw)
         write_schedule_cache(cache_path, games, config.SEASON)
-        return games, f"schedule: fetched {len(games)} regular-season games"
+        return games, (f"schedule: fetched {len(games)} regular-season games\n"
+                       + schedule_source.team_records_probe(raw))
     except FetchError as exc:
         if not allow_cache:
             raise BuildError(str(exc)) from exc
@@ -368,11 +373,16 @@ def write_links_block(out_dir: Path, ctx: SiteContext) -> None:
 
 
 def copy_assets(out_dir: Path) -> None:
+    """Each asset under its content-hashed name (what the pages reference)
+    and its plain name. Hashed copies from earlier builds are left in place,
+    so HTML still cached somewhere keeps finding the files it names; they
+    only accumulate when a file actually changes."""
     target = out_dir / "assets"
     target.mkdir(parents=True, exist_ok=True)
     for item in config.ASSET_DIR.iterdir():
         if item.is_file():
             shutil.copy2(item, target / item.name)
+            shutil.copy2(item, target / hashed_asset_name(item.name))
 
 
 def write_extras(out_dir: Path, noindex: bool = False) -> None:
@@ -405,7 +415,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
         complaint = ""
     else:
         games, note = load_schedule(out_dir)
-        notes.append(note)
+        notes.extend(note.splitlines())
         injuries, updated_at, as_of, inote, complaint = load_injuries(
             out_dir, repo_root=repo_root, since=season_start(games), today=today or today_et())
         notes.extend(inote.splitlines())
@@ -475,6 +485,9 @@ def refresh_build(out_dir: Path, today: str | None = None,
               if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today]
 
     write_pages(out_dir, wanted)
+    # Pages name assets by content hash, so a refresh after a code change
+    # must ship the new files too or those pages would point at nothing.
+    copy_assets(out_dir)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
     write_sitemap(out_dir, pages, noindex=ctx.noindex)

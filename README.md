@@ -118,8 +118,9 @@ slim copy at `data/star-rosters.json` in the published tree; the 30-minute
 refresh reuses that copy, and a failed or implausible fetch keeps the last good
 one. The score is All-Star selections of players not listed Out or Doubtful,
 plus 5 for national TV. Team records are not used: no feed carrying them has
-been confirmed yet, and `python -m watchguide verify` prints whether the
-schedule feed has them.
+been confirmed yet. Every full build's summary, and `python -m watchguide
+verify`, has a "team records probe" line saying whether the schedule feed
+carries team records or final scores, and on how many games they are filled.
 
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.
