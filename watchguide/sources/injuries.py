@@ -33,6 +33,8 @@ from __future__ import annotations
 import os
 import re
 import unicodedata
+from collections import Counter
+from datetime import date, timedelta
 from typing import Any
 
 from .http import FetchError, get
@@ -107,8 +109,38 @@ def fetch_raw() -> list[dict[str, Any]]:
     return data
 
 
-def latest_per_player(raw: list[dict[str, Any]], since: str = "") -> dict[str, dict[str, Any]]:
-    """The most recent row for each player, ignoring anything before `since`."""
+def latest_valid_date(build_date: str) -> str:
+    """Rows dated after this are invalid: more than one day past the build."""
+    try:
+        return (date.fromisoformat(build_date[:10]) + timedelta(days=1)).isoformat()
+    except ValueError:
+        return ""
+
+
+def future_rows(raw: list[dict[str, Any]], until: str) -> list[str]:
+    """Dates of the player rows dated after `until`, one entry per row."""
+    if not until:
+        return []
+    return sorted(
+        when for row in raw
+        if isinstance(row, dict) and (row.get("player") or "").strip()
+        and (when := (row.get("date") or "")[:10]) > until
+    )
+
+
+def future_rows_note(dates: list[str], until: str) -> str:
+    """Build-summary line for rows dropped as future-dated, or ''."""
+    if not dates:
+        return ""
+    by_date = ", ".join(f"{d} ({n})" if n > 1 else d for d, n in sorted(Counter(dates).items()))
+    return (f"injuries: dropped {len(dates)} row{'s' if len(dates) != 1 else ''} dated after "
+            f"{until} (more than a day past the build date): {by_date}")
+
+
+def latest_per_player(raw: list[dict[str, Any]], since: str = "",
+                      until: str = "") -> dict[str, dict[str, Any]]:
+    """The most recent row for each player, ignoring anything before `since`
+    and anything dated after `until`, which cannot be a real status yet."""
     latest: dict[str, dict[str, Any]] = {}
     for row in raw:
         if not isinstance(row, dict):
@@ -118,6 +150,8 @@ def latest_per_player(raw: list[dict[str, Any]], since: str = "") -> dict[str, d
             continue
         when = (row.get("date") or "")[:10]
         if since and when < since:
+            continue
+        if until and when > until:
             continue
         key = normalize_name(name)
         if not key:
@@ -129,18 +163,19 @@ def latest_per_player(raw: list[dict[str, Any]], since: str = "") -> dict[str, d
 
 
 def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str],
-              since: str = "") -> dict[str, Any]:
+              since: str = "", until: str = "") -> dict[str, Any]:
     """Current status per player, grouped by team tricode.
 
     `since` is normally the first game date of the season, so last season's
-    entries never carry over.
+    entries never carry over. `until` is the day after the build date: rows
+    dated later are invalid and count for neither statuses nor as_of.
     """
     by_team: dict[str, list[dict[str, str]]] = {}
     unmatched: list[str] = []
     skipped_status = 0
     as_of = ""
 
-    for key, row in latest_per_player(raw, since).items():
+    for key, row in latest_per_player(raw, since, until).items():
         name = (row.get("player") or "").strip()
         status = normalize_status(row.get("status") or "")
         if status is None:
@@ -167,6 +202,8 @@ def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str],
         "as_of": as_of,
         "unmatched": sorted(set(unmatched)),
         "skipped_status": skipped_status,
+        "dropped_future": future_rows(raw, until),
+        "until": until,
     }
 
 

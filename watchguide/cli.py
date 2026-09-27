@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -29,6 +30,15 @@ DEGRADED_EXIT = 3
 def _report(outcome) -> int:
     for line in outcome.notes:
         print(line)
+    # The same lines go into the job's summary page on GitHub Actions.
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as fh:
+            fh.write("### Watch guide build\n\n")
+            for line in outcome.notes:
+                fh.write(f"- {line}\n")
+            if outcome.degraded:
+                fh.write(f"- WARNING {outcome.degraded}\n")
     if outcome.degraded:
         print(f"::warning::{outcome.degraded}")
         print(outcome.degraded, file=sys.stderr)

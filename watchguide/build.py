@@ -191,13 +191,23 @@ def read_injuries_file(path: Path) -> tuple[dict[str, list[dict[str, str]]], str
 
 
 def load_injuries(out_dir: Path, repo_root: Path | None = None, since: str = "",
-                  allow_cache: bool = True) -> tuple[dict, str, str, str, str]:
+                  allow_cache: bool = True, today: str = "") -> tuple[dict, str, str, str, str]:
     """(by_team, updated_at, as_of, note, complaint).
 
     complaint is empty on a healthy run. When it is set, the last good data has
     been kept and the caller must make the job go red, so a broken feed is never
     published quietly.
+
+    `today` is the build date. Rows dated more than a day after it are invalid:
+    they are left out of statuses and as_of, and the note gets a second line
+    saying how many were dropped and their dates.
     """
+    until = injuries_source.latest_valid_date(today) if today else ""
+
+    def with_dropped(note: str, result: dict) -> str:
+        extra = injuries_source.future_rows_note(result.get("dropped_future") or [], until)
+        return f"{note}\n{extra}" if extra else note
+
     path = out_dir / INJURIES_FILE
     raw_path = (repo_root or config.REPO_ROOT) / RAW_FILE
     previous = read_raw(raw_path)
@@ -208,9 +218,10 @@ def load_injuries(out_dir: Path, repo_root: Path | None = None, since: str = "",
         if previous is not None and previous.rows:
             try:
                 result = injuries_source.normalize(
-                    previous.rows, injuries_source.fetch_player_teams(), since=since)
+                    previous.rows, injuries_source.fetch_player_teams(), since=since, until=until)
                 return (result["by_team"], previous.fetched_at, result["as_of"],
-                        f"injuries: kept the last good raw copy ({previous.count} rows)", reason)
+                        with_dropped(f"injuries: kept the last good raw copy ({previous.count} rows)",
+                                     result), reason)
             except FetchError:
                 pass
         cached, updated, as_of = read_injuries_file(path)
@@ -228,7 +239,8 @@ def load_injuries(out_dir: Path, repo_root: Path | None = None, since: str = "",
         return fall_back(complaint)
 
     try:
-        result = injuries_source.normalize(rows, injuries_source.fetch_player_teams(), since=since)
+        result = injuries_source.normalize(rows, injuries_source.fetch_player_teams(),
+                                           since=since, until=until)
     except FetchError as exc:
         if not allow_cache:
             raise BuildError(str(exc)) from exc
@@ -246,7 +258,7 @@ def load_injuries(out_dir: Path, repo_root: Path | None = None, since: str = "",
         note += f"; {len(result['unmatched'])} names had no current team"
     if not players:
         note += "; no player has an entry for this season yet"
-    return result["by_team"], updated, result["as_of"], note, ""
+    return result["by_team"], updated, result["as_of"], with_dropped(note, result), ""
 
 
 # --------------------------------------------------------------------------
@@ -389,8 +401,8 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
         games, note = load_schedule(out_dir)
         notes.append(note)
         injuries, updated_at, as_of, inote, complaint = load_injuries(
-            out_dir, repo_root=repo_root, since=season_start(games))
-        notes.append(inote)
+            out_dir, repo_root=repo_root, since=season_start(games), today=today or today_et())
+        notes.extend(inote.splitlines())
 
     if complaint:
         notes.append(f"WARNING {complaint}")
@@ -435,8 +447,8 @@ def refresh_build(out_dir: Path, today: str | None = None,
         return BuildOutcome(notes=["no games today, nothing to refresh"])
 
     injuries, updated_at, as_of, inote, complaint = load_injuries(
-        out_dir, repo_root=repo_root, since=season_start(games))
-    notes.append(inote)
+        out_dir, repo_root=repo_root, since=season_start(games), today=day)
+    notes.extend(inote.splitlines())
     if complaint:
         notes.append(f"WARNING {complaint}")
 

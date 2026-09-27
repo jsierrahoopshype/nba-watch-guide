@@ -47,19 +47,22 @@ COMMIT=HEAD
 
 # Exit 0 when the copy in $2 is newer than the one in $1: the feed's own as-of
 # (newest row date) first, then when it was fetched, since row dates only go
-# down to the day.
+# down to the day. Rows dated more than a day after the copy was fetched are
+# invalid and do not count toward its as-of, the same rule the build applies.
 newer_than() {
   python - "$1" "$2" <<'PY'
 import json, sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def key(path):
     data = json.load(open(path))
-    as_of = max(((r.get("date") or "")[:10] for r in data.get("rows") or []), default="")
     try:
-        fetched = datetime.fromisoformat(data.get("fetched_at", "")).timestamp()
+        stamp = datetime.fromisoformat(data.get("fetched_at", ""))
+        fetched, until = stamp.timestamp(), (stamp.date() + timedelta(days=1)).isoformat()
     except ValueError:
-        fetched = 0.0
+        fetched, until = 0.0, ""
+    dates = ((r.get("date") or "")[:10] for r in data.get("rows") or [])
+    as_of = max((d for d in dates if not until or d <= until), default="")
     return (as_of, fetched)
 
 sys.exit(0 if key(sys.argv[2]) > key(sys.argv[1]) else 1)

@@ -179,3 +179,22 @@ def test_the_working_tree_is_left_as_it_was(repo, other_writer):
     assert _run(repo).returncode == 0
     assert json.loads((repo / FILE).read_text(encoding="utf-8"))["row_count"] == 5464
     assert (repo / "build-output.txt").read_text(encoding="utf-8") == "untracked build output"
+
+
+def test_a_future_dated_row_does_not_make_an_old_copy_look_newer(repo, other_writer):
+    # The other writer's copy was fetched earlier but carries a row dated
+    # months ahead. That row is invalid, so the fresher fetch still wins.
+    _seed(repo)
+    path = other_writer / FILE
+    _other_pushes(other_writer, 5410, "2026-09-26T09:00:00+00:00", "2026-09-26")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["rows"].append({"player": "Future Row", "status": "Out", "date": "2026-12-13"})
+    path.write_text(json.dumps(data), encoding="utf-8")
+    _git(other_writer, "commit", "-qam", "other writer, future row")
+    _git(other_writer, "push", "-q", "origin", "main")
+
+    _write_raw(repo, 5464, "2026-09-26T22:38:35+00:00", "2026-09-26")
+    result = _run(repo)
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "pushed 5464 rows" in result.stdout
+    assert json.loads(_git(repo, "show", "origin/main:" + FILE))["row_count"] == 5464
