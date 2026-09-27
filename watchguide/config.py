@@ -34,6 +34,11 @@ LEAGUE_PASS_SERVICE_ID = "nba_league_pass"
 # broadcaster; other national partners are not treated this way.
 LOCAL_SIMULCAST_NATIONAL_CODES = ("NBA TV",)
 
+# Tonight's ranking: players listed with these statuses do not count toward
+# star power, and a national TV broadcast adds this many points.
+RANK_UNAVAILABLE_STATUSES = ("Out", "Doubtful")
+RANK_NATIONAL_POINTS = 5
+
 # Regular-season games have game ids starting 002. 001 preseason, 003 all-star,
 # 004 playoffs, 005 play-in.
 REGULAR_SEASON_PREFIX = "002"

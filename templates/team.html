@@ -34,6 +34,10 @@
   <button type="button" role="tab" id="tab-in_market" aria-controls="panel-in_market"
           data-state-btn="in_market" aria-selected="false">{{ text.in_market_label }}</button>
 </div>
+{%- if missing %}
+<div class="missing" data-missing-root hidden></div>
+<script type="application/json" id="missing-data">{{ missing|tojson }}</script>
+{%- endif %}
 
 {%- for view in views %}
 {% include "partials/state_panel.html" %}
@@ -57,7 +61,15 @@
       <td class="when" data-label="Date">{{ row.date_label }}</td>
       <td class="opp" data-label="Opponent">{{ row.opponent_label }}</td>
       <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
-      <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</td>
+      <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}
+        <details class="why"><summary>{{ copy.why.summary }}</summary>
+          {%- for state, lines in row.why %}
+          <div class="why-body" data-state-panel="{{ state }}"{% if state == "in_market" %} hidden{% endif %}>
+            {%- for line in lines %}<p>{{ line }}</p>{% endfor %}
+          </div>
+          {%- endfor %}
+        </details>
+      </td>
     </tr>
     {%- endfor %}
   </tbody>

@@ -6,6 +6,19 @@
 
 <p><a class="btn-link" href="{{ tonight_path }}">{{ text.tonight_link_label }}</a></p>
 
+{%- if top3 %}
+<section class="card" data-top3>
+  <h2>{{ tonight_text.top3_heading }}</h2>
+  <ol>
+    {%- for row in top3 %}
+    <li><a href="{{ tonight_path }}">{{ row.away_name }} at {{ row.home_name }}</a> <span class="small muted">{{ row.line }}</span></li>
+    {%- endfor %}
+  </ol>
+  <p class="small muted">{{ tonight_text.rank_basis }}</p>
+  <p class="small"><a href="{{ tonight_path }}">{{ tonight_text.top3_link }}</a></p>
+</section>
+{%- endif %}
+
 <h2>{{ text.national_heading }}</h2>
 <div class="card">
   <p class="small muted">{{ text.national_intro }}</p>

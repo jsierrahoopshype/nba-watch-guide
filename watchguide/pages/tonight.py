@@ -40,7 +40,10 @@ def build(ctx: SiteContext, env) -> list[Page]:
         "jsonld": seo.jsonld(blocks),
     }
 
+    ranked = ctx.tonight_ranked()
+
     html = env.get_template("tonight.html").render(
+        ranked=ranked,
         page=page_meta,
         copy=ctx.copy,
         labels=labels,

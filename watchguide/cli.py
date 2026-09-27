@@ -84,6 +84,18 @@ def cmd_verify(args) -> int:
         ok = False
         print(f"schedule FAILED: {exc}")
     try:
+        # Stakes (team records) are left out of tonight's ranking until a
+        # feed is confirmed to carry them. This line is that check.
+        raw = schedule_source.fetch_raw()
+        sample = next((g for d in (raw.get("leagueSchedule") or {}).get("gameDates") or []
+                       for g in d.get("games") or []), {})
+        home = sample.get("homeTeam") or {}
+        found = [k for k in ("wins", "losses", "score") if k in home]
+        print(f"team records in schedule feed: {', '.join(found) if found else 'none'} "
+              f"(homeTeam keys: {', '.join(sorted(home)) or 'none'})")
+    except Exception as exc:
+        print(f"team records check FAILED: {exc}")
+    try:
         result = injuries_source.fetch()
         total = sum(len(v) for v in result["by_team"].values())
         print(f"injuries OK: {total} players across {len(result['by_team'])} teams")

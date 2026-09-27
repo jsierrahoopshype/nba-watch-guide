@@ -41,13 +41,47 @@
     "coverage_none": "No service on this list carries a {team} game yet. Channels for these games are still listed as TBA in the league schedule.",
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
+  "why": {
+    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed.",
+    "summary": "Why can't I watch this game?",
+    "carried": "Watch it on {services}.",
+    "none": "None of the services on this page carries this game yet.",
+    "blackout": "{service}: {rule}"
+  },
+  "missing": {
+    "_note": "Wording for 'What am I missing?' on the team pages. The page script fills {placeholders}. None of it is in the prerendered HTML.",
+    "heading": "What am I missing?",
+    "intro": "Tick what you already pay for. Nothing leaves your browser.",
+    "antenna": "Antenna",
+    "can_watch": "You can already watch {covered} of {total} remaining games.",
+    "all_covered": "You can already watch every remaining game.",
+    "miss_list": "Games you would miss ({count})",
+    "best_single": "Best single add-on: {name}, {price}, adds {added} of the games you miss.",
+    "best_single_none": "No single service on this list adds a game you are missing.",
+    "full_set": "Cheapest way to see every game: add {names}, {price}.",
+    "best_possible": "No combination reaches every game. The most you can see is {covered} of {total}: add {names}, {price}.",
+    "nothing_more": "No priced service on this list adds any of the games you miss.",
+    "free": "free",
+    "per_month": "a month"
+  },
   "tonight": {
     "title": "NBA Games Tonight: TV Channels & Start Times",
     "description": "Every NBA game today in ET order, the channel each one is on and which players are out, doubtful or questionable.",
     "h1": "NBA games today",
     "intro": "Every game on today's schedule in Eastern Time order, with the channel and the players listed as out, doubtful or questionable.",
     "no_games": "No NBA games scheduled today.",
-    "injuries_heading": "Player availability"
+    "injuries_heading": "Player availability",
+    "rank_heading": "Most star power tonight",
+    "rank_basis": "Ranked by career All-Star selections of the players in uniform tonight, plus national TV.",
+    "rank_score": "Score {score}",
+    "rank_stars": "{stars} All-Star selections in uniform",
+    "rank_no_stars": "no past All-Stars available",
+    "rank_all_playing": "no All-Star listed out or doubtful",
+    "rank_absent": "{names} listed out or doubtful",
+    "rank_more": " and {count} more",
+    "rank_national": "national TV on {channels}",
+    "top3_heading": "Most star power tonight",
+    "top3_link": "All of tonight's games by star power"
   },
   "labels": {
     "tba": "TBA",

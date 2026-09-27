@@ -30,13 +30,16 @@ Set INJURY_FEED_URL to point this at a different feed with the same shape.
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import unicodedata
+from functools import lru_cache
 from collections import Counter
 from datetime import date, timedelta
 from typing import Any
 
+from .. import config
 from .http import FetchError, get
 
 DEFAULT_FEED_URL = "https://aderoa.github.io/Injuries/injuries.json"
@@ -56,13 +59,33 @@ def feed_url() -> str:
     return os.environ.get("INJURY_FEED_URL") or DEFAULT_FEED_URL
 
 
-def normalize_name(name: str) -> str:
-    """Fold case, accents, punctuation and a trailing Jr/III so names line up."""
+def _fold(name: str) -> list[str]:
     text = unicodedata.normalize("NFKD", name or "")
     text = "".join(ch for ch in text if not unicodedata.combining(ch))
-    text = re.sub(r"[^a-zA-Z ]", " ", text).lower()
-    parts = [p for p in text.split() if p and p not in _SUFFIXES]
-    return " ".join(parts)
+    return re.sub(r"[^a-zA-Z ]", " ", text).lower().split()
+
+
+@lru_cache(maxsize=1)
+def _aliases() -> dict[str, str]:
+    """data/player_aliases.json, folded on both sides."""
+    try:
+        raw = json.loads((config.DATA_DIR / "player_aliases.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return {" ".join(_fold(k)): " ".join(_fold(v)) for k, v in (raw.get("aliases") or {}).items()}
+
+
+def normalize_name(name: str) -> str:
+    """Fold case, accents and punctuation, drop a trailing Jr/Sr/II-V, and
+    apply data/player_aliases.json, so names line up across feeds.
+
+    A suffix is only dropped as the last word: "V. J. Edgecombe" keeps its
+    "v". Earlier this dropped a suffix-like word anywhere in the name."""
+    parts = _fold(name)
+    while len(parts) > 1 and parts[-1] in _SUFFIXES:
+        parts.pop()
+    key = " ".join(parts)
+    return _aliases().get(key, key)
 
 
 def normalize_status(raw: str) -> str | None:

@@ -109,6 +109,18 @@ red, so a broken feed is loud but the site does not go blank. When the feed has
 no rows for the current season at all, which is the case right now, pages say
 "No injury report yet." rather than showing an empty list.
 
+**Rosters and All-Star selections**, for ranking tonight's games. The
+nba-career-map repo's `nba_players_careers_READY.json` on raw.githubusercontent.com,
+refreshed there daily from Wikipedia roster templates. That file has no
+`current_team`, so the team is the `career_history` stint running to "present"
+(544 of 598 active players on 2026-09-27). The full build fetches it and keeps a
+slim copy at `data/star-rosters.json` in the published tree; the 30-minute
+refresh reuses that copy, and a failed or implausible fetch keeps the last good
+one. The score is All-Star selections of players not listed Out or Doubtful,
+plus 5 for national TV. Team records are not used: no feed carrying them has
+been confirmed yet, and `python -m watchguide verify` prints whether the
+schedule feed has them.
+
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.
 

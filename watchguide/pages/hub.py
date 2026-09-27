@@ -71,6 +71,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
         teams=ctx.teams,
         national_partners=national_partners(ctx),
         ota_teams=free_ota_teams(ctx),
+        top3=ctx.tonight_ranked()[:3],
+        tonight_text=ctx.copy.get("tonight", {}),
         faq=faq,
         tonight_path=config.site_path("tonight"),
         trail=crumb_trail(ctx),
