@@ -11,6 +11,7 @@ from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels_for_game,
                         moderate_carries_in)
 from ..missing import payload as missing_payload
+from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
 from ..render import Page, date_label, et_label, format_block
 from .common import (crumb_trail, empty_players_label, game_row,
@@ -147,6 +148,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
 
         coverages = {state: build_state_coverage(remaining, team.tricode, ctx.services, local, state)
                      for state in (OUT_OF_MARKET, IN_MARKET)}
+        why_text = ctx.copy.get("why", {})
+        for row, game in zip(schedule, remaining):
+            row["why"] = [(state, explain_game(game, team.tricode, coverages[state].service_data,
+                                               local, state, why_text))
+                          for state in (OUT_OF_MARKET, IN_MARKET)]
         views = [_state_view(ctx, team, remaining, state, text, coverages[state])
                  for state in (OUT_OF_MARKET, IN_MARKET)]
         missing = _missing(ctx, schedule, coverages) if remaining else None

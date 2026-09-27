@@ -41,6 +41,14 @@
     "coverage_none": "No service on this list carries a {team} game yet. Channels for these games are still listed as TBA in the league schedule.",
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
+  "why": {
+    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json.",
+    "summary": "Why can't I watch this game?",
+    "carried": "Watch it on {services}.",
+    "none": "None of the services on this page carries this game yet.",
+    "blackout": "{service}: {rule}",
+    "not_carried": "Not on {services}."
+  },
   "missing": {
     "_note": "Wording for 'What am I missing?' on the team pages. The page script fills {placeholders}. None of it is in the prerendered HTML.",
     "heading": "What am I missing?",
