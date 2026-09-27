@@ -1,0 +1,6 @@
+{
+  "_note": "Names that different feeds spell differently. Left: a spelling seen in a feed. Right: the spelling it should match. Matching ignores case, accents and punctuation, so only real name differences belong here.",
+  "aliases": {
+    "Herb Jones": "Herbert Jones"
+  }
+}

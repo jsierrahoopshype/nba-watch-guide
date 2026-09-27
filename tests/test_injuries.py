@@ -70,3 +70,29 @@ def test_name_matching_folds_accents_and_suffixes():
     assert normalize_name("Nikola Jokić") == "nikola jokic"
     assert normalize_name("Gary Payton II") == "gary payton"
     assert normalize_name("Jaren Jackson Jr.") == "jaren jackson"
+
+
+# -- name folding -------------------------------------------------------------------
+
+def test_a_suffix_is_only_dropped_as_the_last_word():
+    assert normalize_name("V. J. Edgecombe") == "v j edgecombe"
+    assert normalize_name("Gary Trent Jr.") == "gary trent"
+    assert normalize_name("Kelly Oubre Jr.") == "kelly oubre"
+    assert normalize_name("Nene") == "nene"
+    assert normalize_name("Jaren Jackson Jr") == "jaren jackson"
+    assert normalize_name("Robert Williams III") == "robert williams"
+
+
+def test_aliases_from_the_data_file():
+    from watchguide.sources.careers import match_key
+    assert normalize_name("Herb Jones") == normalize_name("Herbert Jones") == "herbert jones"
+    assert match_key("Herb Jones") == match_key("Herbert Jones")
+
+
+def test_the_alias_file_is_valid():
+    import json
+    from pathlib import Path
+    data = json.loads((Path(__file__).resolve().parent.parent / "data" / "player_aliases.json")
+                      .read_text(encoding="utf-8"))
+    assert data["aliases"] and all(isinstance(k, str) and isinstance(v, str)
+                                   for k, v in data["aliases"].items())

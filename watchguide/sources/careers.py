@@ -19,12 +19,12 @@ from __future__ import annotations
 import json
 import os
 import re
-import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from .http import FetchError, get
+from .injuries import normalize_name
 
 DEFAULT_URL = ("https://raw.githubusercontent.com/jsierrahoopshype/nba-career-map/"
                "main/nba_players_careers_READY.json")
@@ -39,21 +39,11 @@ def feed_url() -> str:
     return os.environ.get("CAREER_MAP_URL") or DEFAULT_URL
 
 
-_SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
-
-
 def match_key(name: str) -> str:
-    """Folded name for matching across sources: case, accents and punctuation
-    go, a trailing Jr/Sr/II-V goes, and runs of single-letter initials are
-    joined, so 'V. J. Edgecombe' and 'VJ Edgecombe' meet as 'vj edgecombe'.
-
-    injuries.normalize_name drops a "v" anywhere, which turns 'V. J.' into
-    'j', so this only strips suffixes at the end of the name."""
-    text = unicodedata.normalize("NFKD", name or "")
-    text = "".join(ch for ch in text if not unicodedata.combining(ch))
-    parts = re.sub(r"[^a-zA-Z ]", " ", text).lower().split()
-    while len(parts) > 2 and parts[-1] in _SUFFIXES:
-        parts.pop()
+    """injuries.normalize_name (which also applies data/player_aliases.json),
+    with runs of single-letter initials joined, so 'V. J. Edgecombe' and
+    'VJ Edgecombe' meet as 'vj edgecombe'."""
+    parts = normalize_name(name).split()
     out: list[str] = []
     run = ""
     for part in parts:
