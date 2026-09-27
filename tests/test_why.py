@@ -41,7 +41,7 @@ def test_national_game_names_the_carrier_and_the_national_rule(heat):
     out = lines(heat, game(national=["ESPN"]), OUT_OF_MARKET)
     assert out[0] == "Watch it on ESPN Unlimited."
     assert out[1] == f"NBA League Pass: {RULES['national']}"
-    assert out[2].startswith("Not on ") and "ESPN Unlimited" not in out[2]
+    assert len(out) == 2
 
 
 def test_national_game_in_market_gives_one_reason_not_both(heat):
@@ -105,3 +105,12 @@ def test_no_rule_text_in_the_code():
         text = path.read_text(encoding="utf-8")
         for phrase in ("6am", "three days", "blacked out", "Nationally broadcast"):
             assert phrase not in text, (path.name, phrase)
+
+
+def test_no_not_carried_lists(built_site, teams):
+    for team in teams:
+        html = (built_site / team.slug / "index.html").read_text(encoding="utf-8")
+        body = html[html.index("<tbody>"):html.index("</tbody>")]
+        assert "Not on " not in body
+        for block in re.findall(r'class="why-body"[^>]*>(.*?)</div>', body, re.S):
+            assert 1 <= block.count("<p>") <= 2

@@ -19,7 +19,8 @@ def _names(names: list[str]) -> str:
 
 def explain(game: Game, tricode: str, service_data: ServiceData, local: LocalTV | None,
             state: str, text: dict[str, str]) -> list[str]:
-    """Plain sentences for one game in one market state.
+    """Plain sentences for one game in one market state: who carries it, and
+    League Pass's blackout reason when it does not. At most two lines.
 
     Only services whose carries list is verified are named, the same set the
     coverage maths uses. service_data should be the one build_state_coverage
@@ -37,7 +38,6 @@ def explain(game: Game, tricode: str, service_data: ServiceData, local: LocalTV 
 
     lp_id = service_data.league_pass_service_id
     lp = service_data.by_id(lp_id) if lp_id else None
-    blackout_names: list[str] = []
     if lp is not None and lp.carries_verified and lp.id not in carriers:
         # One reason per game: league_pass_blocked lists the national rule
         # first, so a national game is explained as national and only a
@@ -45,10 +45,4 @@ def explain(game: Game, tricode: str, service_data: ServiceData, local: LocalTV 
         rules = league_pass_blocked(game, state, service_data)
         if rules:
             lines.append(text["blackout"].format(service=lp.name, rule=rules[0]))
-            blackout_names.append(lp.name)
-
-    others = [s.name for s in listed
-              if s.id not in carriers and s.name not in blackout_names]
-    if others:
-        lines.append(text["not_carried"].format(services=_names(others)))
     return lines
