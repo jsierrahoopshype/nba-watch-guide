@@ -71,7 +71,18 @@
     "h1": "NBA games today",
     "intro": "Every game on today's schedule in Eastern Time order, with the channel and the players listed as out, doubtful or questionable.",
     "no_games": "No NBA games scheduled today.",
-    "injuries_heading": "Player availability"
+    "injuries_heading": "Player availability",
+    "rank_heading": "Tonight's best games",
+    "rank_intro": "Ranked by a simple score: each All-Star selection of a player not listed out or doubtful counts one point, and national TV adds {national_points}. Team records are not part of it.",
+    "rank_score": "Score {score}",
+    "rank_stars": "{stars} All-Star selections in uniform",
+    "rank_no_stars": "no past All-Stars available",
+    "rank_all_playing": "no All-Star listed out or doubtful",
+    "rank_absent": "{names} listed out or doubtful",
+    "rank_more": " and {count} more",
+    "rank_national": "national TV on {channels}",
+    "top3_heading": "Tonight's top 3",
+    "top3_link": "All of tonight's games, ranked"
   },
   "labels": {
     "tba": "TBA",

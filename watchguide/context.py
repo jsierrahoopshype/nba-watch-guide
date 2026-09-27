@@ -36,6 +36,7 @@ class SiteContext:
     availability_degraded: str                  # why the feed was not trusted, or ""
     today: str
     generated_at: str
+    star_rosters: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
 
     by_tricode: dict[str, Team] = field(init=False)
     by_slug: dict[str, Team] = field(init=False)
@@ -61,6 +62,12 @@ class SiteContext:
 
     def local(self, slug: str) -> LocalTV | None:
         return self.local_tv.get(slug)
+
+    def tonight_ranked(self) -> list[dict[str, Any]]:
+        """Today's games, best first. See watchguide/ranking.py."""
+        from .ranking import rank
+        return rank(self.games_today(), self.star_rosters, self.injuries,
+                    self.team_name, self.copy.get("tonight", {}))
 
     def players_for(self, tricode: str) -> list[dict[str, str]]:
         return self.injuries.get(tricode, [])
@@ -104,6 +111,7 @@ def load_context(
     availability_degraded: str = "",
     data_dir: Path | None = None,
     today: str | None = None,
+    star_rosters: dict[str, list[dict[str, Any]]] | None = None,
 ) -> SiteContext:
     return SiteContext(
         teams=load_teams(data_dir),
@@ -117,4 +125,5 @@ def load_context(
         availability_degraded=availability_degraded,
         today=today or today_et(),
         generated_at=datetime.now(ET).isoformat(timespec="seconds"),
+        star_rosters=star_rosters or {},
     )

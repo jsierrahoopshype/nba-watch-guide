@@ -7,6 +7,20 @@
 <p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
 <div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice>{{ labels.stale_notice }}</div>
 
+{%- if ranked %}
+<h2>{{ text.rank_heading }}</h2>
+<p class="small muted">{{ rank_intro }}</p>
+<ol class="ranked" data-ranked>
+  {%- for row in ranked %}
+  <li data-rank="{{ row.rank }}" data-score="{{ row.score }}">
+    <strong>{{ row.away_name }} at {{ row.home_name }}</strong>
+    <span class="small muted">{{ text.rank_score.format(score=row.score) }}</span>
+    <div class="small">{{ row.line }}</div>
+  </li>
+  {%- endfor %}
+</ol>
+{%- endif %}
+
 {%- if games %}
 {%- for row in games %}
 <article class="game">

@@ -27,10 +27,11 @@ from typing import Any
 from . import config, seo
 from .context import SiteContext, load_context, today_et
 from .coverage import channel_names, channels_for_game
-from .model import Game
+from .model import Game, load_teams
 from .pages import BUILDERS
 from .pages.links_block import render as render_links_block
 from .render import Page, build_env
+from .sources import careers as careers_source
 from .sources import injuries as injuries_source
 from .sources import schedule as schedule_source
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
@@ -319,6 +320,11 @@ def tonight_payload(ctx: SiteContext) -> dict[str, Any]:
 # Rendering and writing
 # --------------------------------------------------------------------------
 
+def _full_names(data_dir: Path | None) -> dict[str, str]:
+    """Official full team name to tricode, from data/teams.json."""
+    return {t.full_name: t.tricode for t in load_teams(data_dir)}
+
+
 def render_pages(ctx: SiteContext, env=None) -> list[Page]:
     env = env or build_env()
     # Every page type picks this up, including ones added later, so a new
@@ -407,8 +413,11 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     if complaint:
         notes.append(f"WARNING {complaint}")
 
+    rosters, rnote = careers_source.load(out_dir, _full_names(data_dir), allow_fetch=not offline)
+    notes.append(rnote)
+
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
-                       data_dir=data_dir, today=today)
+                       data_dir=data_dir, today=today, star_rosters=rosters)
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
 
@@ -452,12 +461,18 @@ def refresh_build(out_dir: Path, today: str | None = None,
     if complaint:
         notes.append(f"WARNING {complaint}")
 
+    # Rosters come from the last full build's copy; only injuries change here,
+    # which is what moves a game up or down tonight's ranking.
+    rosters, rnote = careers_source.load(out_dir, _full_names(None), allow_fetch=False)
+    notes.append(rnote)
+
     ctx = load_context(games, injuries, updated_at, as_of,
-                       availability_degraded=complaint, today=day)
+                       availability_degraded=complaint, today=day, star_rosters=rosters)
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
+    # The hub carries the top-3 teaser, so it is refreshed with the tonight page.
     wanted = [p for p in pages
-              if p.out_path == "tonight/index.html" or p.meta.get("slug") in slugs_today]
+              if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today]
 
     write_pages(out_dir, wanted)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
