@@ -156,12 +156,17 @@ def config_tz():
 
 
 def load_schedule(out_dir: Path, allow_cache: bool = True) -> tuple[list[Game], str]:
-    """(games, note). Falls back to the cache and reports what happened."""
+    """(games, note). Falls back to the cache and reports what happened.
+
+    On a successful fetch the note has a second line: whether the feed carries
+    team records or final scores, so it shows up in every build's summary."""
     cache_path = out_dir / SCHEDULE_CACHE
     try:
-        games = schedule_source.fetch()
+        raw = schedule_source.fetch_raw()
+        games = schedule_source.normalize(raw)
         write_schedule_cache(cache_path, games, config.SEASON)
-        return games, f"schedule: fetched {len(games)} regular-season games"
+        return games, (f"schedule: fetched {len(games)} regular-season games\n"
+                       + schedule_source.team_records_probe(raw))
     except FetchError as exc:
         if not allow_cache:
             raise BuildError(str(exc)) from exc
@@ -410,7 +415,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
         complaint = ""
     else:
         games, note = load_schedule(out_dir)
-        notes.append(note)
+        notes.extend(note.splitlines())
         injuries, updated_at, as_of, inote, complaint = load_injuries(
             out_dir, repo_root=repo_root, since=season_start(games), today=today or today_et())
         notes.extend(inote.splitlines())
