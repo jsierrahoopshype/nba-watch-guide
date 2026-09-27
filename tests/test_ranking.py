@@ -83,8 +83,8 @@ def test_out_and_doubtful_do_not_count_questionable_does():
                 {"player": "Star C", "status": "Questionable"}]
     got = team_star_power(roster, injuries, power)
     assert got["score"] == 2
-    assert got["absent"] == ["Star A", "Star B"]
-    assert (got["all_nba"], got["all_nba_total"], got["all_star"], got["all_star_total"]) == (0, 1, 1, 2)
+    assert got["best"] == "Star C"          # the best player in uniform
+    assert got["out"] == ["Star A"]         # listed Out; Doubtful gets no note
 
 
 def test_award_names_match_through_aliases():
@@ -146,7 +146,7 @@ def test_before_the_threshold_the_ranking_is_star_power_only(fixture_games):
     rows = rank(early, rosters, {}, lambda t: t, TEXT, W, awards)
     assert [r["stakes"] for r in rows] == [None, None]
     assert rows[0]["game"].game_id == local.game_id and rows[0]["score"] == 5
-    assert rows[0]["line"] == "The one recent All-NBA player in uniform."
+    assert rows[0]["line"] == "Star A"      # only one side has an award winner in uniform
 
 
 def test_with_stakes_the_line_names_both_records(fixture_games):
@@ -157,7 +157,7 @@ def test_with_stakes_the_line_names_both_records(fixture_games):
     game = replace(local, home_wins=8, home_losses=3, away_wins=9, away_losses=2)
     row = rank([game], rosters, {}, lambda t: t, TEXT, W, awards)[0]
     assert row["stakes"] is not None
-    assert row["line"] == "Two teams at 9-2 and 8-3, both recent All-NBA players in uniform."
+    assert row["line"] == "9-2 vs. 8-3: Star B vs. Star A"      # away first
     assert row["score"] == pytest.approx(8 + row["stakes"], abs=0.01)
 
 
@@ -284,7 +284,7 @@ def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monke
     order, html = _order(site)
     assert order[0] == _name(second)
     assert order.index(_name(first)) > 0
-    assert "Star One listed out or doubtful" in html
+    assert "No recent All-NBA or All-Star players in uniform (Star One out)" in html
 
 
 def test_the_page_switches_heading_once_stakes_are_on(tmp_path_factory, fixture_games, ranked_site):
@@ -301,6 +301,72 @@ def test_the_page_switches_heading_once_stakes_are_on(tmp_path_factory, fixture_
     assert "<h2 data-rank-heading>Tonight&#39;s best games</h2>" in html
     assert ("Ranked by team records and All-NBA and All-Star selections over the last three seasons, "
             "counting only players in uniform tonight.") in html
-    assert "Two teams at 7-3 and 6-4" in html
+    assert "7-3 vs. 6-4: " in html
     hub = (site / "index.html").read_text(encoding="utf-8")
     assert "<h2>Tonight&#39;s best games</h2>" in hub
+
+
+
+# -- the line ------------------------------------------------------------------------------
+
+def _pair(fixture_games):
+    return sorted((g for g in fixture_games if g.date_et == TODAY), key=lambda g: g.game_id)[0]
+
+
+def _line_for(fixture_games, away_players, home_players, awards, injuries=(), records=None):
+    g = _pair(fixture_games)
+    if records:
+        g = replace(g, away_wins=records[0][0], away_losses=records[0][1],
+                    home_wins=records[1][0], home_losses=records[1][1])
+    rosters = {g.away_tricode: [{"player": p, "all_star": 0} for p in away_players],
+               g.home_tricode: [{"player": p, "all_star": 0} for p in home_players]}
+    inj = {}
+    for name, status in injuries:
+        side = g.away_tricode if name in away_players else g.home_tricode
+        inj.setdefault(side, []).append({"player": name, "status": status})
+    return rank([g], rosters, inj, lambda t: t, TEXT, W, awards)[0]["line"]
+
+
+def test_names_the_best_player_in_uniform_on_each_side(fixture_games):
+    awards = [award("Shai Gilgeous-Alexander", "2025-26", "all_nba_first"),
+              award("Jalen Williams", "2025-26", "all_star"),
+              award("Nikola Jokić", "2025-26", "all_nba_first")]
+    line = _line_for(fixture_games, ["Jalen Williams", "Shai Gilgeous-Alexander"], ["Nikola Jokić"], awards)
+    assert line == "Shai Gilgeous-Alexander vs. Nikola Jokić"
+
+
+def test_records_lead_when_stakes_are_on(fixture_games):
+    awards = [award("Shai Gilgeous-Alexander", "2025-26", "all_nba_first"),
+              award("Nikola Jokić", "2025-26", "all_nba_first")]
+    line = _line_for(fixture_games, ["Shai Gilgeous-Alexander"], ["Nikola Jokić"], awards,
+                     records=[(9, 1), (8, 2)])
+    assert line == "9-1 vs. 8-2: Shai Gilgeous-Alexander vs. Nikola Jokić"
+
+
+def test_a_top_three_player_out_is_noted_a_fourth_is_not(fixture_games):
+    stars = ["P One", "P Two", "P Three", "P Four"]
+    awards = [award(p, "2025-26", "all_nba_first") for p in stars[:1]]
+    awards += [award(p, "2025-26", "all_nba_second") for p in stars[1:2]]
+    awards += [award(p, "2025-26", "all_nba_third") for p in stars[2:3]]
+    awards += [award("P Four", "2025-26", "all_star")]
+    line = _line_for(fixture_games, stars, [], awards, injuries=[("P One", "Out"), ("P Four", "Out")])
+    assert line == "P Two (P One out)"
+    doubtful = _line_for(fixture_games, stars, [], awards, injuries=[("P One", "Doubtful")])
+    assert doubtful == "P Two"
+
+
+def test_long_lines_fall_back_to_surnames_and_stay_under_80(fixture_games):
+    away = ["Giannis Antetokounmpo", "Karl-Anthony Towns"]
+    home = ["Shai Gilgeous-Alexander", "Alexander-Walker Nickeil-Longname"]
+    awards = [award(p, "2025-26", "all_nba_first") for p in away + home]
+    line = _line_for(fixture_games, away, home, awards,
+                     injuries=[("Karl-Anthony Towns", "Out"), ("Alexander-Walker Nickeil-Longname", "Out")],
+                     records=[(10, 2), (11, 1)])
+    assert len(line) <= 80, line
+    assert line.startswith("10-2 vs. 11-1: Antetokounmpo vs. Gilgeous-Alexander")
+
+
+def test_nobody_in_uniform(fixture_games):
+    line = _line_for(fixture_games, ["Star A"], [], [award("Star A", "2025-26", "all_star")],
+                     injuries=[("Star A", "Out")])
+    assert line == "No recent All-NBA or All-Star players in uniform (Star A out)"

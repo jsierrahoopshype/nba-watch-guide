@@ -30,6 +30,8 @@ from .sources.careers import match_key
 AWARD_KINDS = ("all_nba_first", "all_nba_second", "all_nba_third", "all_star")
 ALL_NBA = ("all_nba_first", "all_nba_second", "all_nba_third")
 STARS, STAKES = "stars", "stakes"      # the two heading modes
+TOP_FOR_OUT_NOTE = 3                   # a roster's top three by star power get "(Name out)"
+LINE_LIMIT = 80                        # characters a game's line aims to stay under
 
 
 # --------------------------------------------------------------------------
@@ -84,23 +86,20 @@ def player_star_power(awards: list[dict[str, str]], weights: dict[str, Any]
 
 def team_star_power(roster: list[dict[str, Any]], injuries: list[dict[str, str]],
                     power: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """Star power of the players in uniform, and who is missing."""
-    unavailable = {match_key(p.get("player", "")) for p in injuries
-                   if p.get("status") in config.RANK_UNAVAILABLE_STATUSES}
-    result = {"score": 0.0, "all_nba": 0, "all_nba_total": 0,
-              "all_star": 0, "all_star_total": 0, "absent": []}
-    for player in roster:
-        key = match_key(player["player"])
-        rec = power.get(key)
-        if rec is None:
+    """Star power of the players in uniform, the best of them by star power,
+    and which of the roster's top three by star power are listed Out."""
+    status = {match_key(p.get("player", "")): p.get("status") for p in injuries}
+    ranked = sorted(((power[k], k) for k in {match_key(p["player"]) for p in roster} if k in power),
+                    key=lambda item: (-item[0]["score"], item[0]["name"]))
+    result = {"score": 0.0, "best": None, "out": []}
+    for i, (rec, key) in enumerate(ranked):
+        if status.get(key) in config.RANK_UNAVAILABLE_STATUSES:
+            if i < TOP_FOR_OUT_NOTE and status.get(key) == "Out":
+                result["out"].append(rec["name"])
             continue
-        kind = "all_nba" if rec["all_nba"] else "all_star"
-        result[f"{kind}_total"] += 1
-        if key in unavailable:
-            result["absent"].append(player["player"])
-            continue
-        result[kind] += 1
         result["score"] += rec["score"]
+        if result["best"] is None:
+            result["best"] = rec["name"]
     return result
 
 
@@ -140,35 +139,41 @@ def stakes_score(away: tuple[int, int] | None, home: tuple[int, int] | None,
 # The line and the ranking
 # --------------------------------------------------------------------------
 
-def _names(names: list[str]) -> str:
-    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+def _surname(name: str) -> str:
+    parts = name.split()
+    return " ".join(parts[1:]) if len(parts) > 1 else name
 
 
-def _stars_phrase(text: dict[str, str], kind: str, available: int, total: int) -> str:
-    if available == total:
-        key = {1: "one", 2: "both"}.get(total, "all")
-        return text[f"rank_{kind}_{key}"].format(count=total)
-    return text[f"rank_{kind}_some"].format(count=available, total=total)
+def _line(text: dict[str, str], sides: list[dict[str, Any]],
+          records: list[tuple[int, int]] | None) -> str:
+    """'9-1 vs. 8-2: Shai Gilgeous-Alexander vs. Nikola Jokić (Luka Dončić out)'.
 
+    Away first, as in the game title. Surnames, then fewer out names, keep it
+    under LINE_LIMIT characters where they can."""
+    best = [s["best"] for s in sides if s["best"]]
+    outs = [name for s in sides for name in s["out"]]
+    prefix = text["rank_records"].format(a=f"{records[0][0]}-{records[0][1]}",
+                                         b=f"{records[1][0]}-{records[1][1]}") if records else ""
 
-def _line(text: dict[str, str], stars: dict[str, Any], records: list[tuple[int, int]] | None) -> str:
-    parts: list[str] = []
-    if records:
-        a, b = sorted(records, key=lambda r: (-r[0] / max(1, sum(r)), -r[0]))
-        parts.append(text["rank_records"].format(a=f"{a[0]}-{a[1]}", b=f"{b[0]}-{b[1]}"))
-    if stars["all_nba_total"]:
-        parts.append(_stars_phrase(text, "all_nba", stars["all_nba"], stars["all_nba_total"]))
-    elif stars["all_star_total"]:
-        parts.append(_stars_phrase(text, "all_star", stars["all_star"], stars["all_star_total"]))
-    else:
-        parts.append(text["rank_no_stars"])
-    if stars["absent"]:
-        shown = stars["absent"][:2]
-        more = len(stars["absent"]) - len(shown)
-        names = _names(shown) + (text["rank_more"].format(count=more) if more else "")
-        parts.append(text["rank_absent"].format(names=names))
-    line = ", ".join(parts)
-    return line[:1].upper() + line[1:] + "."
+    def build(names: list[str], out: list[str]) -> str:
+        if len(names) == 2:
+            core = text["rank_matchup"].format(a=names[0], b=names[1])
+        elif names:
+            core = names[0]
+        else:
+            core = text["rank_no_stars"]
+        line = prefix + core
+        if out:
+            line += " " + text["rank_out"].format(names=", ".join(out))
+        return line[:1].upper() + line[1:]
+
+    candidates = [(best, outs), ([_surname(n) for n in best], outs)]
+    candidates += [([_surname(n) for n in best], outs[:k]) for k in range(len(outs) - 1, -1, -1)]
+    for names, out in candidates:
+        line = build(names, out)
+        if len(line) <= LINE_LIMIT:
+            return line
+    return build(*candidates[-1])
 
 
 def rank(games: list[Game], rosters: dict[str, list[dict[str, Any]]],
@@ -185,21 +190,20 @@ def rank(games: list[Game], rosters: dict[str, list[dict[str, Any]]],
     for game in games:
         sides = [team_star_power(rosters.get(t, []), injuries.get(t, []), power)
                  for t in (game.away_tricode, game.home_tricode)]
-        stars = {k: (sum(s[k] for s in sides) if k != "absent" else sides[0][k] + sides[1][k])
-                 for k in sides[0]}
+        star_score = sides[0]["score"] + sides[1]["score"]
         away, home = records.get(game.away_tricode), records.get(game.home_tricode)
         stakes = stakes_score(away, home, weights)
-        score = stars["score"] + (stakes or 0.0)
+        score = star_score + (stakes or 0.0)
         rows.append({
             "game": game,
             "away_name": team_name(game.away_tricode),
             "home_name": team_name(game.home_tricode),
-            "star_power": round(stars["score"], 2),
+            "star_power": round(star_score, 2),
             "stakes": None if stakes is None else round(stakes, 2),
             "score": round(score, 2),
             "score_label": f"{score:.1f}",
             "national": list(game.national_codes),
-            "line": _line(text, stars, [away, home] if stakes is not None else None),
+            "line": _line(text, sides, [away, home] if stakes is not None else None),
         })
     rows.sort(key=lambda r: (-r["score"], r["game"].tipoff_utc or "~", r["game"].game_id))
     for i, row in enumerate(rows, 1):
