@@ -36,6 +36,7 @@ from .pages import BUILDERS
 from .pages.links_block import render as render_links_block
 from .render import Page, build_env, hashed_asset_name
 from .sources import careers as careers_source
+from .sources import headshots as headshots_source
 from .sources import injuries as injuries_source
 from .sources import schedule as schedule_source
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
@@ -354,6 +355,15 @@ def unplaced_overrides(ctx: SiteContext) -> list[str]:
             for name in c.player_overrides if match_key(name) not in placed]
 
 
+def load_faces(out_dir: Path, ctx: SiteContext, allow_fetch: bool = True) -> list[str]:
+    """Headshots for the players the hub's game cards name, into
+    assets/faces/ in the published tree. Sets ctx.faces; never raises."""
+    names = [n for row in ctx.showcase()["rows"] for n in row.get("stars", []) if n]
+    index, inote = headshots_source.load_index(out_dir, allow_fetch=allow_fetch)
+    ctx.faces, fnote = headshots_source.ensure_faces(out_dir, names, index, allow_fetch=allow_fetch)
+    return [inote, fnote]
+
+
 def check_pages(pages: list[Page], data_dir: Path | None = None) -> list[str]:
     """The manifest for this data, after checking the rendered pages match it."""
     expected = expected_pages(data_dir)
@@ -410,15 +420,18 @@ def write_links_block(out_dir: Path, ctx: SiteContext) -> None:
 
 def copy_assets(out_dir: Path) -> None:
     """Each asset under its content-hashed name (what the pages reference)
-    and its plain name. Hashed copies from earlier builds are left in place,
-    so HTML still cached somewhere keeps finding the files it names; they
-    only accumulate when a file actually changes."""
+    and its plain name, subfolders included (logos, flags, fonts). Hashed
+    copies from earlier builds are left in place, so HTML still cached
+    somewhere keeps finding the files it names; they only accumulate when a
+    file actually changes."""
     target = out_dir / "assets"
-    target.mkdir(parents=True, exist_ok=True)
-    for item in config.ASSET_DIR.iterdir():
-        if item.is_file():
-            shutil.copy2(item, target / item.name)
-            shutil.copy2(item, target / hashed_asset_name(item.name))
+    for item in sorted(config.ASSET_DIR.rglob("*")):
+        if not item.is_file():
+            continue
+        rel = item.relative_to(config.ASSET_DIR).as_posix()
+        for name in (rel, hashed_asset_name(rel)):
+            (target / name).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(item, target / name)
 
 
 def write_extras(out_dir: Path, noindex: bool = False) -> None:
@@ -467,6 +480,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
                        nationalities=careers_source.read_nationalities(out_dir))
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
+    notes.extend(load_faces(out_dir, ctx, allow_fetch=not offline))
 
     pages = render_pages(ctx)
     expected = check_pages(pages, data_dir)
@@ -516,6 +530,9 @@ def refresh_build(out_dir: Path, today: str | None = None,
 
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
                        data_dir=data_dir, today=day, star_rosters=rosters)
+    # An injury can change who a game's line names, so the hub may need a
+    # face the last full build did not fetch.
+    notes.extend(load_faces(out_dir, ctx, allow_fetch=True))
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
     # The hub carries the top-3 teaser, so it is refreshed with the tonight page.

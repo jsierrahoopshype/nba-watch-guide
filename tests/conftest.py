@@ -45,6 +45,18 @@ def _game(index: int, home: str, away: str, day: date) -> Game:
     )
 
 
+@pytest.fixture(autouse=True)
+def no_headshot_downloads(monkeypatch):
+    """Builds in tests never reach the headshot repo; a test that wants faces
+    patches watchguide.sources.headshots.get itself."""
+    from watchguide.sources import headshots
+    from watchguide.sources.http import FetchError
+
+    def refuse(*a, **k):
+        raise FetchError("network disabled in tests")
+    monkeypatch.setattr(headshots, "get", refuse)
+
+
 def expected_page_count(data_dir=None) -> int:
     """How many pages a build of these data files must produce, from the
     same manifest publish.sh checks against. Never a hard-coded number."""

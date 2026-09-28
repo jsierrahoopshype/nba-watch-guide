@@ -94,7 +94,8 @@ def et_label(game, with_date: bool = False) -> str:
 
 
 def hashed_asset_name(name: str, asset_dir: Path | None = None) -> str:
-    """'watch-guide.js' -> 'watch-guide.<10 hex of its sha256>.js'.
+    """'watch-guide.js' -> 'watch-guide.<10 hex of its sha256>.js', and
+    'logos/bos.svg' -> 'logos/bos.<hash>.svg' for files in a subfolder.
 
     The Worker serves /assets/* with a day-long Cache-Control, so a changed
     file needs a new URL or browsers keep the old one while getting new HTML.
@@ -106,10 +107,13 @@ def hashed_asset_name(name: str, asset_dir: Path | None = None) -> str:
 
 
 def asset(rel: str) -> str:
-    """Root-relative URL of a file in assets/, content-hashed."""
-    folder, _, name = rel.rpartition("/")
-    if folder == "assets" and (config.ASSET_DIR / name).is_file():
-        rel = f"assets/{hashed_asset_name(name)}"
+    """Root-relative URL of a file under assets/, content-hashed. Anything
+    that is not a file in the repo's assets/ (a headshot written by the
+    build, say) keeps its plain name."""
+    if rel.startswith("assets/"):
+        name = rel[len("assets/"):]
+        if (config.ASSET_DIR / name).is_file():
+            rel = f"assets/{hashed_asset_name(name)}"
     return config.site_path(rel)
 
 
@@ -128,5 +132,6 @@ def build_env(template_dir: Path | None = None) -> Environment:
     env.filters["date_label"] = date_label
     env.filters["et_label"] = et_label
     env.globals["asset"] = asset
+    env.globals["site_path"] = config.site_path
     env.globals["site_base"] = config.SITE_BASE
     return env

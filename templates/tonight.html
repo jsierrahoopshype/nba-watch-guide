@@ -2,8 +2,10 @@
 {% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
 {% block content %}
 <div data-tonight hidden></div>
-<h1>{{ text.h1 }}</h1>
-<p class="lede">{{ text.intro }}</p>
+<div class="phead">
+  <h1>{{ text.h1 }}</h1>
+  <p class="lede">{{ text.intro }}</p>
+</div>
 <p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
 <div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice>{{ labels.stale_notice }}</div>
 
