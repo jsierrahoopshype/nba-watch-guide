@@ -23,7 +23,7 @@ def _pages(site):
 
 def test_every_page_carries_the_noindex_tag(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 32
+    assert len(pages) == 37
     for page in pages:
         found = ROBOTS.findall(page.read_text(encoding="utf-8"))
         assert found == ["noindex,follow"], f"{page} robots tag is {found}"
@@ -50,7 +50,7 @@ def test_no_robots_tag_when_indexing_is_allowed(built_site_indexed):
 
 def test_sitemap_lists_every_page_when_indexing_is_allowed(built_site_indexed):
     xml = (built_site_indexed / "sitemap.xml").read_text(encoding="utf-8")
-    assert len(LOC.findall(xml)) == 32
+    assert len(LOC.findall(xml)) == 37
 
 
 def test_robots_txt_advertises_the_sitemap_when_indexing_is_allowed(built_site_indexed):

@@ -2,7 +2,8 @@
 
 Not a page of its own: it is a fragment written to data/how-to-watch-links.html
 so the guide has an internal crawl path from a page search engines already
-visit. Absolute URLs, class names only, nothing else.
+visit. Absolute URLs, class names only, nothing else. It links the hub, every
+team, the tonight page and every country page in data/countries.json.
 """
 
 from __future__ import annotations
@@ -32,6 +33,17 @@ def render(ctx: SiteContext) -> str:
         '  </ul>',
         f'  <p class="hm-watch-links__tonight">'
         f'<a href="{config.public_url("tonight")}">NBA games today and where to watch them</a></p>',
-        '</nav>',
     ]
+    countries = ctx.countries.countries
+    if countries:
+        places = ctx.copy.get("country", {}).get("places", {})
+        lines.append('  <ul class="hm-watch-links__countries">')
+        for country in countries:
+            place = escape(places.get(country.slug, country.name))
+            lines.append(
+                f'    <li class="hm-watch-links__item">'
+                f'<a href="{country.url}">How to watch the NBA in {place}</a></li>'
+            )
+        lines.append('  </ul>')
+    lines.append('</nav>')
     return "\n".join(lines) + "\n"

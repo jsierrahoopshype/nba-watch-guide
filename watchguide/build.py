@@ -4,6 +4,7 @@ Output layout, which the Worker maps onto /how-to-watch:
 
     index.html
     <team-slug>/index.html
+    <country-slug>/index.html      (from data/countries.json)
     tonight/index.html
     assets/
     data/injuries.json, data/tonight.json, data/schedule.json
@@ -26,6 +27,7 @@ from typing import Any
 
 from . import config, seo
 from .context import SiteContext, load_context, today_et
+from .countries import country_players
 from .coverage import channel_names, channels_for_game
 from .model import Game, load_teams
 from .pages import BUILDERS
@@ -35,6 +37,7 @@ from .sources import careers as careers_source
 from .sources import injuries as injuries_source
 from .sources import schedule as schedule_source
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
+from .sources.careers import match_key
 from .sources.http import FetchError
 
 SCHEDULE_CACHE = "data/schedule.json"
@@ -330,6 +333,25 @@ def _full_names(data_dir: Path | None) -> dict[str, str]:
     return {t.full_name: t.tricode for t in load_teams(data_dir)}
 
 
+def country_summary(ctx: SiteContext) -> str:
+    """Players matched per country, for the build log."""
+    counts = [f"{c.slug} {len(country_players(c, ctx.star_rosters, ctx.nationalities))}"
+              for c in ctx.countries.countries]
+    line = "countries: players " + (", ".join(counts) or "none")
+    missing = unplaced_overrides(ctx)
+    if missing:
+        line += "; overrides not on an NBA roster: " + ", ".join(missing)
+    return line
+
+
+def unplaced_overrides(ctx: SiteContext) -> list[str]:
+    """Override names that match nobody on the current rosters, so a typo or a
+    released player shows up in the build log instead of vanishing quietly."""
+    placed = {match_key(p.get("player", "")) for players in ctx.star_rosters.values() for p in players}
+    return [f"{c.slug}: {name}" for c in ctx.countries.countries
+            for name in c.player_overrides if match_key(name) not in placed]
+
+
 def render_pages(ctx: SiteContext, env=None) -> list[Page]:
     env = env or build_env()
     # Every page type picks this up, including ones added later, so a new
@@ -362,7 +384,8 @@ def write_sitemap(out_dir: Path, pages: list[Page], noindex: bool = False) -> No
 
 
 def write_links_block(out_dir: Path, ctx: SiteContext) -> None:
-    """A bare HTML block of links to the hub and all 30 team pages.
+    """A bare HTML block of links to the hub, all 30 team pages, tonight and
+    the country pages.
 
     Meant to be pasted into the Worker on a page that is already crawled, so
     the guide has an internal path in. Absolute URLs, class names only, no
@@ -427,13 +450,17 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     notes.append(rnote)
 
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
-                       data_dir=data_dir, today=today, star_rosters=rosters)
+                       data_dir=data_dir, today=today, star_rosters=rosters,
+                       nationalities=careers_source.read_nationalities(out_dir))
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
 
     pages = render_pages(ctx)
-    if len(pages) != 32:
-        raise BuildError(f"expected 32 pages (hub, tonight, 30 teams), built {len(pages)}")
+    expected = 32 + len(ctx.countries.countries)
+    if len(pages) != expected:
+        raise BuildError(f"expected {expected} pages (hub, tonight, 30 teams, "
+                         f"{len(ctx.countries.countries)} countries), built {len(pages)}")
+    notes.append(country_summary(ctx))
 
     report = broadcast_report(games, ctx.today)
     notes.append(broadcast_summary(report))

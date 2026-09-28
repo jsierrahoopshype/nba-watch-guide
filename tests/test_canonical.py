@@ -16,7 +16,7 @@ def _pages(built_site):
 
 def test_one_canonical_per_page(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 32
+    assert len(pages) == 37
     for page in pages:
         html = page.read_text(encoding="utf-8")
         found = CANONICAL.findall(html)

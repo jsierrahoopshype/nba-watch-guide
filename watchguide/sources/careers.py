@@ -5,7 +5,8 @@ team roster templates:
   https://raw.githubusercontent.com/jsierrahoopshype/nba-career-map/main/nba_players_careers_READY.json
 Checked on 2026-09-27: a list of 5,173 players, 598 with status "nba_active".
 Each record has player, status, all_star_count (null for none) and
-career_history. This file has no current_team field: the current team is the
+career_history, plus nationality ("France", "American / Italian", or null),
+which the country pages read. This file has no current_team field: the current team is the
 career_history entry whose years run to "present" and whose team is one of the
 30 in data/teams.json (544 of the 598 active players have one).
 
@@ -70,8 +71,10 @@ def current_team(record: dict[str, Any], full_names: dict[str, str]) -> str:
 
 
 def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> dict[str, Any]:
-    """{tricode: [{player, all_star}]} plus counts of what was and was not placed."""
+    """{tricode: [{player, all_star}]} plus counts of what was and was not placed,
+    and {player: nationality} for the placed players whose record has one."""
     teams: dict[str, list[dict[str, Any]]] = {}
+    nationalities: dict[str, str] = {}
     active = placed = 0
     for rec in records:
         if not isinstance(rec, dict) or rec.get("status") != "nba_active":
@@ -81,13 +84,16 @@ def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> d
         if not tricode:
             continue
         placed += 1
+        name = rec.get("display_name") or rec.get("player") or ""
         teams.setdefault(tricode, []).append({
-            "player": rec.get("display_name") or rec.get("player") or "",
+            "player": name,
             "all_star": int(rec.get("all_star_count") or 0),
         })
+        if name and isinstance(rec.get("nationality"), str) and rec["nationality"].strip():
+            nationalities[name] = rec["nationality"].strip()
     for players in teams.values():
         players.sort(key=lambda p: (-p["all_star"], p["player"]))
-    return {"teams": teams, "active": active, "placed": placed}
+    return {"teams": teams, "active": active, "placed": placed, "nationalities": nationalities}
 
 
 def read_cache(out_dir: Path) -> dict[str, Any] | None:
@@ -96,6 +102,14 @@ def read_cache(out_dir: Path) -> dict[str, Any] | None:
     except (OSError, ValueError):
         return None
     return data if isinstance(data.get("teams"), dict) else None
+
+
+def read_nationalities(out_dir: Path) -> dict[str, str]:
+    """{player: nationality} from the slim copy the last load() wrote. Empty
+    when there is no copy, or it predates nationalities being kept."""
+    cached = read_cache(out_dir)
+    found = (cached or {}).get("nationalities")
+    return found if isinstance(found, dict) else {}
 
 
 def load(out_dir: Path, full_names: dict[str, str], allow_fetch: bool = True

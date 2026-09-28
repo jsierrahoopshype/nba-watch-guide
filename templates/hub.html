@@ -45,6 +45,18 @@
   {%- endfor %}
 </ul>
 
+{%- if countries %}
+<section data-countries>
+<h2>{{ text.countries_heading }}</h2>
+<p class="small muted">{{ text.countries_intro }}</p>
+<ul class="team-grid">
+  {%- for c in countries %}
+  <li><a href="{{ c.path }}">{{ c.name }}</a></li>
+  {%- endfor %}
+</ul>
+</section>
+{%- endif %}
+
 {%- if faq %}
 <h2>{{ text.faq_heading }}</h2>
 <div class="faq">
