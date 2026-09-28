@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "purpose": "Per-country NBA viewing data for the European How to Watch pages. New file: data/countries.json in jsierrahoopshype/nba-watch-guide.",
+    "last_checked": "2026-09-26",
+    "language": "Pages are in English.",
+    "confidence_rules": {
+      "high": "Official 2026-27 source.",
+      "moderate": "Dated 2026 secondary reporting. Render with a short check-before-you-buy note.",
+      "low": "Conflicting or stale. Render as 'not confirmed'."
+    },
+    "league_pass_note": "League Pass has no blackouts outside the US and Canada: every game is available live. 2026-27 prices are not published yet in any of these countries; price fields stay null until they are.",
+    "league_pass_source_url": "https://support.watch.nba.com/hc/en-us/articles/115002481154-League-Pass-Blackouts",
+    "league_pass_price_note": "Each country's league_pass block holds its League Pass prices in the local currency: monthly_price and season_price, null until published. A filled price renders on the next build with no code change; set price_verified true and source_url once checked, or the page adds a check-before-you-buy line.",
+    "player_overrides_note": "player_overrides lists active players the career map has no nationality for (or a different one), by name as the career map spells it. Each one is listed on that country's page with their current team.",
+    "recheck_before_tipoff": [
+      "League Pass 2026-27 prices in GBP and EUR for all five countries",
+      "Prime Video's 20 remaining European-primetime games (announced 'in the coming weeks' as of 13 Aug 2026)",
+      "Prime Video game count and commentary language in France and Germany",
+      "Sky UK games per week, channel name and whether Sky UK has the 2027 Finals",
+      "Sky Italia game count (sources say 180 or 300+)",
+      "Prime membership prices in the UK, France, Italy and Germany",
+      "Tip times of the Paris and Manchester games"
+    ]
+  },
+  "prime_video_europe": {
+    "name": "Prime Video",
+    "summary": "Included with an Amazon Prime membership in all five countries. 67 regular-season games announced for 2026-27 plus 20 more European-primetime games to be announced, all NBA Cup knockout games, the full Play-In, selected early playoff games and the Eastern Conference Finals exclusively.",
+    "confidence": "high",
+    "source_url": "https://www.svgeurope.org/blog/headlines/prime-video-unveils-2026-27-nba-schedule-including-paris-and-manchester-games/"
+  },
+  "europe_games": [
+    {"date": "2027-01-14", "matchup": "San Antonio Spurs vs. New Orleans Pelicans", "city": "Paris", "arena": "Accor Arena", "broadcaster": "Prime Video", "tip_note": "Reported for about 8pm CET; not officially confirmed"},
+    {"date": "2027-01-17", "matchup": "San Antonio Spurs vs. New Orleans Pelicans", "city": "Manchester", "arena": "Co-op Live", "broadcaster": "Prime Video", "tip_note": "Reported for about 3:30pm GMT; not officially confirmed"}
+  ],
+  "europe_games_source_url": "https://www.nba.com/news/spurs-pelicans-nba-paris-nba-manchester-2027",
+  "countries": {
+    "uk": {
+      "name": "United Kingdom",
+      "slug": "uk",
+      "timezone": "Europe/London",
+      "currency": "GBP",
+      "nationality_aliases": ["United Kingdom", "England", "Great Britain", "Scotland", "Wales", "Northern Ireland", "British"],
+      "confidence": "moderate",
+      "partner": {
+        "name": "Sky Sports",
+        "carries": "Over 100 live regular-season games a season, under an 11-year deal that began in 2025-26.",
+        "commentary": "English",
+        "options": [
+          {"name": "NOW Sports Membership", "price": 34.99, "period": "month", "note": "Flexible, cancel anytime.", "price_verified": true, "source_url": "https://www.nowtv.com/"},
+          {"name": "NOW Sports Day Membership", "price": 14.99, "period": "day", "note": "One day of Sky Sports.", "price_verified": true, "source_url": "https://www.nowtv.com/"},
+          {"name": "Sky TV with Sky Sports", "price": 35.00, "period": "month", "note": "Sky Essential TV £15 plus Sky Sports £20, on contract.", "price_verified": false, "source_url": "https://www.goal.com/en-gb/news/best-sky-sports-subscriptions/bltc970c90dc3e48b1c"}
+        ],
+        "source_url": "https://www.advanced-television.com/2025/10/03/sky-sports-nets-nba-rights-deal-to-2036/"
+      },
+      "prime_video": {"commentary": "English", "membership_price": null, "price_verified": false},
+      "free_to_air": "None found for 2026-27.",
+      "notes": "Sky's coverage also includes Ireland. Irish prices are in euros and were not researched.",
+      "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
+      "player_overrides": []
+    },
+    "spain": {
+      "name": "Spain",
+      "slug": "spain",
+      "timezone": "Europe/Madrid",
+      "currency": "EUR",
+      "nationality_aliases": ["Spain", "Spanish"],
+      "confidence": "moderate",
+      "partner": {
+        "name": "DAZN",
+        "carries": "About 180 regular-season games plus Christmas Day, MLK Day, the All-Star Game, a selection of playoff games, one Conference Final and the 2027 NBA Finals.",
+        "commentary": "Spanish",
+        "options": [
+          {"name": "DAZN Plan Baloncesto", "price": 9.99, "period": "month", "note": "Reported at 5.99 a month on the annual plan paid monthly (secondary source, Sept 2026).", "price_verified": true, "source_url": "https://www.gigantes.com/nba/dazn-nba-espana-retransmisiones-confirmado/"},
+          {"name": "DAZN Plan Made in USA", "price": 4.99, "period": "month", "note": "NBA, NFL and NASCAR.", "price_verified": true, "source_url": "https://www.gigantes.com/nba/dazn-nba-espana-retransmisiones-confirmado/"}
+        ],
+        "source_url": "https://www.gigantes.com/nba/dazn-nba-espana-retransmisiones-confirmado/"
+      },
+      "prime_video": {"commentary": "Spanish", "membership_price": 4.99, "membership_period": "month", "note": "Or 49.90 a year.", "price_verified": false, "source_url": "https://www.gigantes.com/nba/donde-ver-nba-espana-tv-streaming-prime-video-dazn/"},
+      "free_to_air": "None found for 2026-27.",
+      "notes": "Movistar Plus+ and Orange customers can get DAZN's basketball channels through their operator; how many NBA games reach them is not confirmed.",
+      "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
+      "player_overrides": []
+    },
+    "france": {
+      "name": "France",
+      "slug": "france",
+      "timezone": "Europe/Paris",
+      "currency": "EUR",
+      "nationality_aliases": ["France", "French"],
+      "confidence": "moderate",
+      "partner": {
+        "name": "beIN SPORTS",
+        "carries": "Up to nine regular-season games a week, Christmas Day, MLK Day, All-Star Weekend, a selection of playoff games, a Conference Final and the NBA Finals in alternate years, plus next-day replays at noon.",
+        "commentary": "French",
+        "options": [
+          {"name": "beIN SPORTS", "price": 15.00, "period": "month", "note": "No commitment. Also sold through Orange, SFR, Bouygues, Free and Canal+.", "price_verified": true, "source_url": "https://sabonner.beinsports.com/faq"}
+        ],
+        "source_url": "https://www.sportcal.com/media/bein-renews-long-running-nba-broadcast-agreement-in-france/"
+      },
+      "prime_video": {"commentary": "French (confirmed for 2025-26; 2026-27 not yet confirmed), with a US commentary option", "membership_price": null, "price_verified": false},
+      "free_to_air": "None found for 2026-27.",
+      "notes": "The Paris game on January 14 is live and exclusive on Prime Video.",
+      "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
+      "player_overrides": []
+    },
+    "germany": {
+      "name": "Germany",
+      "slug": "germany",
+      "timezone": "Europe/Berlin",
+      "currency": "EUR",
+      "nationality_aliases": ["Germany", "German"],
+      "confidence": "moderate",
+      "partner": {
+        "name": "Sky Deutschland / WOW",
+        "carries": "Up to six regular-season games a week on average, all five Christmas Day games, selected MLK Day games, All-Star Weekend, selected first- and second-round playoff games, and all Conference Finals and NBA Finals games live or as replays.",
+        "commentary": "US original broadcast, with German commentary on selected games",
+        "options": [
+          {"name": "Sky Sport package", "price": 24.99, "period": "month", "note": "On a 12-month contract.", "price_verified": false, "source_url": "https://www.sky-deals.de/nba/"},
+          {"name": "WOW Live-Sport", "price": 29.99, "period": "month", "note": "Streaming, for 12 months, then 44.99.", "price_verified": false, "source_url": "https://www.sky-deals.de/nba/"}
+        ],
+        "source_url": "https://sport.sky.de/nba/artikel/nba-live-uebertragung-auf-sky-sport/13380329/34334"
+      },
+      "prime_video": {"commentary": "German commentary not confirmed for 2026-27", "membership_price": null, "price_verified": false},
+      "free_to_air": "None found for 2026-27.",
+      "notes": "",
+      "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
+      "player_overrides": []
+    },
+    "italy": {
+      "name": "Italy",
+      "slug": "italy",
+      "timezone": "Europe/Rome",
+      "currency": "EUR",
+      "nationality_aliases": ["Italy", "Italian"],
+      "confidence": "moderate",
+      "partner": {
+        "name": "Sky Italia / NOW",
+        "carries": "A wide selection of regular-season games on Sky Sport Basket (channel 205), Christmas Day, MLK Day, the All-Star Game, several playoff games, one Conference Finals series live and the 2027 NBA Finals live and exclusive.",
+        "commentary": "Italian",
+        "options": [
+          {"name": "NOW Pass Sport", "price": 29.99, "period": "month", "note": "Rolling monthly.", "price_verified": true, "source_url": "https://www.nowtv.it/sport/basket/nba"}
+        ],
+        "source_url": "https://www.adcgroup.it/adv-express/news/industry/media/sky-acquisisce-nuovi-diritti-nba-in-italia-accordo-pluriennale-per-la-trasmissione-delle-partite-top-del-basket-usa.html"
+      },
+      "prime_video": {"commentary": "Italian and English on every game", "membership_price": null, "price_verified": false, "source_url": "https://www.sporteconomy.it/diritti-tv-prime-video-svela-il-calendario-nba-2026-27/"},
+      "free_to_air": "Not guaranteed; Sky has occasionally shown games free on Cielo in past seasons.",
+      "notes": "Sky's game count is reported as both 180 and over 300 a season; not confirmed.",
+      "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
+      "player_overrides": []
+    }
+  }
+}

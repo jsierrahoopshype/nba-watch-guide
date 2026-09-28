@@ -1,7 +1,8 @@
 # NBA how-to-watch guide
 
 Generates the HoopsMatic guide at **https://hoopsmatic.com/how-to-watch**: a hub
-page, one page per team, and a page for tonight's games. Python plus Jinja2, no
+page, one page per team, a page for tonight's games, and one page each for
+the UK, Spain, France, Germany and Italy. Python plus Jinja2, no
 front-end framework.
 
 `main` holds the generator. The built site is force-pushed as a single fresh
@@ -20,6 +21,8 @@ expected.
 | Page titles, descriptions, headings, FAQ wording | `data/copy.json` |
 | Team names and slugs | `data/teams.json` |
 | Whether search engines may index the site | `data/copy.json`, the top-level `noindex` flag |
+| Country pages: TV partners, prices, League Pass prices, player overrides, the games in Europe | `data/countries.json` |
+| Country page titles, descriptions and wording | `data/copy.json`, the `country` block |
 
 `noindex` ships as `true`. While it is on, every page carries
 `<meta name="robots" content="noindex,follow">`, `sitemap.xml` is still written
@@ -54,6 +57,29 @@ from the file.
 
 `affiliate_url` is empty everywhere. The affiliate disclosure sentence only
 appears on a page once at least one service has a non-empty `affiliate_url`.
+
+### Country pages
+
+`data/countries.json` drives `/how-to-watch/<slug>` for each country in it. Each
+page is prerendered with every time in the country's own zone, worked out at
+build time, so the page script leaves it alone. The daily build writes these
+pages; the 30-minute refresh does not.
+
+- Prices render in the country's currency. `price_verified: false` adds "Check
+  the current price before you buy."; a `null` price reads "Price not
+  confirmed". A `moderate` country gets one check-before-you-buy line and a
+  `low` one shows every price as not confirmed.
+- League Pass prices sit in each country's `league_pass` block
+  (`monthly_price`, `season_price`). While both are `null` the page says the
+  prices are not published yet; fill one in and the next build shows it.
+- "Players from" lists active players whose career-map `nationality` has a
+  part (split on `/`) matching the country's `nationality_aliases`, so
+  "American / Italian" counts for Italy. `player_overrides` adds players by
+  name when the career map has no nationality for them. A country with no
+  players gets no block.
+- "Games at a watchable hour" is the next 14 days of games tipping off from
+  12:00 to 23:59 local time.
+- The Paris and Manchester games show until their date has passed.
 
 ## Running it
 

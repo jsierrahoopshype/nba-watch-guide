@@ -13,6 +13,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from . import config
+from .countries import CountryData, load_countries
 from .ranking import STAKES, load_awards, load_weights, rank
 from .ranking import mode as ranking_mode
 from .model import (Game, LocalTV, ServiceData, Team, load_copy, load_local_tv,
@@ -41,6 +42,8 @@ class SiteContext:
     star_rosters: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
     star_weights: dict[str, Any] = field(default_factory=dict)
     recent_awards: list[dict[str, str]] = field(default_factory=list)
+    countries: CountryData = field(default_factory=CountryData)
+    nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
 
     by_tricode: dict[str, Team] = field(init=False)
     by_slug: dict[str, Team] = field(init=False)
@@ -124,6 +127,7 @@ def load_context(
     data_dir: Path | None = None,
     today: str | None = None,
     star_rosters: dict[str, list[dict[str, Any]]] | None = None,
+    nationalities: dict[str, str] | None = None,
 ) -> SiteContext:
     return SiteContext(
         teams=load_teams(data_dir),
@@ -140,4 +144,6 @@ def load_context(
         star_rosters=star_rosters or {},
         star_weights=load_weights(data_dir),
         recent_awards=load_awards(data_dir),
+        countries=load_countries(data_dir),
+        nationalities=nationalities or {},
     )

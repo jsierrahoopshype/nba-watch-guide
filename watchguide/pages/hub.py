@@ -77,6 +77,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         tonight_text=ctx.copy.get("tonight", {}),
         faq=faq,
         tonight_path=config.site_path("tonight"),
+        countries=ctx.countries.countries,
         trail=crumb_trail(ctx),
     )
     return [Page(out_path="index.html", url=url, html=html, lastmod=ctx.today)]

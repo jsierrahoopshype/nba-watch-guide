@@ -20,7 +20,7 @@ def _pages(site: Path):
 
 def test_every_asset_url_is_hashed_and_the_file_exists(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 32
+    assert len(pages) == 37
     seen = set()
     for page in pages:
         urls = ASSET_URL.findall(page.read_text(encoding="utf-8"))

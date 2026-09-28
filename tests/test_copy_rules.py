@@ -40,7 +40,9 @@ def test_copy_file_follows_the_rules():
             assert banned not in words, f"{path} uses '{banned}'"
 
 
-@pytest.mark.parametrize("page", ["index.html", "tonight/index.html", "boston-celtics/index.html"])
+@pytest.mark.parametrize("page", ["index.html", "tonight/index.html", "boston-celtics/index.html",
+                                  "uk/index.html", "spain/index.html", "france/index.html",
+                                  "germany/index.html", "italy/index.html"])
 def test_rendered_pages_follow_the_rules(built_site, page):
     text = html.unescape(TAGS.sub(" ", (built_site / page).read_text(encoding="utf-8")))
     for dash in DASHES:

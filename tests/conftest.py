@@ -72,7 +72,8 @@ def _copy_data(tmp_path_factory, label: str):
     data_dir = tmp_path_factory.mktemp(label)
     src = Path(__file__).resolve().parent.parent / "data"
     for name in ("teams.json", "services.json", "local_tv.json", "copy.json",
-                 "star_power_weights.json", "player_aliases.json", "recent_awards.json"):
+                 "star_power_weights.json", "player_aliases.json", "recent_awards.json",
+                 "countries.json"):
         if (src / name).exists():
             (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
     return data_dir

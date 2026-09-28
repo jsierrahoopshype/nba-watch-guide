@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
+{% block content %}
+<h1>{{ h1 }}</h1>
+
+<section id="where-to-watch" data-country-answer>
+<h2>{{ text.answer_heading }}</h2>
+<p class="lede">{{ answer_line }}</p>
+{%- if confidence_note %}
+<p class="small" data-confidence-note>{{ confidence_note }}</p>
+{%- endif %}
+<div class="card">
+  <h3>{{ partner.name }}</h3>
+  <p><strong>{{ text.carries_label }}:</strong> {{ partner.carries }}</p>
+  <p><strong>{{ text.commentary_label }}:</strong> {{ partner.commentary }}</p>
+  <div class="rows">
+    {%- for opt in partner.options %}
+    <div class="row" data-country-option>
+      <div class="row-main">
+        <div class="row-title">{{ opt.name }}</div>
+        {%- if opt.note %}<div class="row-note">{{ opt.note }}</div>{% endif %}
+        {%- if opt.check %}<div class="row-note small muted" data-check-price>{{ opt.check }}</div>{% endif %}
+      </div>
+      <div class="row-side">
+        {%- if opt.amount %}<span class="price">{{ opt.amount }}</span>{% else %}<span class="price-none">{{ opt.none }}</span>{% endif %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</div>
+<div class="card">
+  <h3>{{ prime.name }}</h3>
+  <p>{{ prime.summary }}</p>
+  <p><strong>{{ text.commentary_label }}:</strong> {{ prime.commentary }}</p>
+  <div class="rows">
+    <div class="row" data-country-option>
+      <div class="row-main">
+        <div class="row-title">{{ prime.membership.name }}</div>
+        {%- if prime.membership.note %}<div class="row-note">{{ prime.membership.note }}</div>{% endif %}
+        {%- if prime.membership.check %}<div class="row-note small muted" data-check-price>{{ prime.membership.check }}</div>{% endif %}
+      </div>
+      <div class="row-side">
+        {%- if prime.membership.amount %}<span class="price">{{ prime.membership.amount }}</span>{% else %}<span class="price-none">{{ prime.membership.none }}</span>{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{%- if country.free_to_air %}
+<p class="small"><strong>{{ text.free_to_air_label }}:</strong> {{ country.free_to_air }}</p>
+{%- endif %}
+{%- if country.notes %}
+<p class="small" data-country-notes>{{ country.notes }}</p>
+{%- endif %}
+</section>
+
+<section id="league-pass" data-league-pass>
+<h2>{{ text.league_pass_heading }}</h2>
+<div class="card">
+  <p>{{ league_pass.line }}</p>
+  {%- if league_pass.prices %}
+  <p data-league-pass-price>{% for p in league_pass.prices %}<span class="price">{{ p }}</span>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+  {%- if league_pass.check %}<p class="small muted" data-check-price>{{ league_pass.check }}</p>{% endif %}
+  {%- else %}
+  <p class="price-none" data-league-pass-unpublished>{{ league_pass.unpublished }}</p>
+  {%- endif %}
+  {%- if league_pass.rules_url %}
+  <p class="small"><a href="{{ league_pass.rules_url }}" rel="nofollow noopener">{{ league_pass.rules_label }}</a></p>
+  {%- endif %}
+</div>
+</section>
+
+{%- if players %}
+<section id="players" data-country-players>
+<h2>{{ text.players_heading }}</h2>
+<div class="card">
+  <ul>
+    {%- for p in players %}
+    <li><strong>{{ p.player }}</strong>, {{ p.team }}. <span class="small muted">{{ text.players_next }}: {{ p.next }}</span></li>
+    {%- endfor %}
+  </ul>
+</div>
+</section>
+{%- endif %}
+
+<section id="watchable" data-watchable>
+<h2>{{ text.watchable_heading }}</h2>
+<p class="small muted">{{ text.watchable_intro }}</p>
+<p class="small">{{ text.watchable_note }}</p>
+{%- if watchable %}
+<table class="sched">
+  <thead>
+    <tr><th scope="col">Date</th><th scope="col">Game</th><th scope="col">{{ text.watchable_time_col }}</th></tr>
+  </thead>
+  <tbody>
+    {%- for row in watchable %}
+    <tr>
+      <td class="when" data-label="Date">{{ row.date }}</td>
+      <td class="opp" data-label="Game">{{ row.matchup }}</td>
+      <td class="when" data-label="{{ text.watchable_time_col }}">{{ row.time }}</td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+</table>
+{%- else %}
+<div class="card"><p>{{ text.watchable_empty }}</p></div>
+{%- endif %}
+</section>
+
+{%- if europe %}
+<section id="europe" data-europe-games>
+<h2>{{ text.europe_heading }}</h2>
+<div class="card">
+  <ul>
+    {%- for g in europe %}
+    <li><strong>{{ g.date }}</strong>: {{ g.matchup }}, {{ g.place }}. {{ g.on }} <span class="small muted">{{ g.tip_note }}</span></li>
+    {%- endfor %}
+  </ul>
+</div>
+</section>
+{%- endif %}
+
+{%- if checked %}
+<p class="small muted" data-country-checked>{{ text.checked.format(month_year=checked|month_year) }}</p>
+{%- endif %}
+{%- if sources %}
+<details class="sources small">
+  <summary>{{ text.sources }}</summary>
+  <ul>
+    {%- for url in sources %}
+    <li><a href="{{ url }}" rel="nofollow noopener">{{ url }}</a></li>
+    {%- endfor %}
+  </ul>
+</details>
+{%- endif %}
+
+<hr class="rule">
+<h2>{{ text.other_heading }}</h2>
+<ul class="team-grid" data-other-countries>
+  {%- for c in others %}
+  <li><a href="{{ c.path }}">{{ c.name }}</a></li>
+  {%- endfor %}
+  <li><a href="{{ hub_path }}">{{ text.hub_link }}</a></li>
+</ul>
+{% endblock %}

@@ -14,7 +14,9 @@
     "national_empty": "National broadcasters will show here once the {season} schedule is loaded.",
     "tonight_link_label": "See tonight's games and channels",
     "ota_line": "Free over the air this season:",
-    "faq_heading": "Questions people ask"
+    "faq_heading": "Questions people ask",
+    "countries_heading": "Watching from outside the US?",
+    "countries_intro": "Where to watch in these countries, with local prices and local tip-off times."
   },
   "team": {
     "title": "How to Watch {team} Games {season}: TV & Streaming",
@@ -142,5 +144,58 @@
       "q": "How current are these prices?",
       "a": "Each service carries the date its price was last checked. Anything without a confirmed price shows as not confirmed instead of a number."
     }
-  ]
+  ],
+  "country": {
+    "_note": "Wording for the country pages at /how-to-watch/<slug>. {place} is the country as it reads in a sentence (places below), {country} its name in data/countries.json, {partner} its TV partner, {season} the season label. titles and descriptions are per country so each page has its own. Titles are cut to 60 characters, descriptions to 155.",
+    "places": {
+      "uk": "the UK",
+      "spain": "Spain",
+      "france": "France",
+      "germany": "Germany",
+      "italy": "Italy"
+    },
+    "titles": {
+      "uk": "How to Watch the NBA in the UK in {season}",
+      "spain": "How to Watch the NBA in Spain in {season}",
+      "france": "How to Watch the NBA in France in {season}",
+      "germany": "How to Watch the NBA in Germany in {season}",
+      "italy": "How to Watch the NBA in Italy in {season}"
+    },
+    "descriptions": {
+      "uk": "Watch the NBA in the UK in {season} on Sky Sports, NOW and Prime Video, or every game on League Pass. Prices in pounds and UK tip-off times.",
+      "spain": "Watch the NBA in Spain in {season} on DAZN and Prime Video, or every game on League Pass. Prices in euros and tip-off times in Spain.",
+      "france": "Watch the NBA in France in {season} on beIN SPORTS and Prime Video, or every game on League Pass. Prices in euros and tip-off times in France.",
+      "germany": "Watch the NBA in Germany in {season} on Sky, WOW and Prime Video, or every game on League Pass. Prices in euros and tip-off times in Germany.",
+      "italy": "Watch the NBA in Italy in {season} on Sky Sport, NOW and Prime Video, or every game on League Pass. Prices in euros and tip-off times in Italy."
+    },
+    "h1": "How to watch the NBA in {place} in {season}",
+    "answer_heading": "Where to watch",
+    "answer_line": "In {place}, NBA games are on {partner} and Prime Video, and every game is live on NBA League Pass.",
+    "carries_label": "What it shows",
+    "commentary_label": "Commentary",
+    "prime_membership": "Amazon Prime membership",
+    "free_to_air_label": "Free to air",
+    "moderate_note": "These details come from 2026 news reports rather than an official {season} source; check before you buy.",
+    "low_note": "Details for {place} in {season} are not confirmed yet.",
+    "check_price": "Check the current price before you buy.",
+    "league_pass_heading": "NBA League Pass",
+    "league_pass_line": "Every game live, no blackouts in {place}.",
+    "league_pass_unpublished": "{season} prices not published yet",
+    "league_pass_rules_link": "League Pass blackout rules",
+    "players_heading": "Players from {place}",
+    "players_next": "Next game",
+    "players_no_game": "No game scheduled",
+    "watchable_heading": "Games at a watchable hour",
+    "watchable_intro": "Games in the next 14 days that tip off between 12:00 and 23:59 local time in {place}.",
+    "watchable_note": "Every game is on League Pass. {partner} and Prime Video carry a selection.",
+    "watchable_empty": "No games in the next 14 days tip off between 12:00 and 23:59 local time.",
+    "watchable_time_col": "Tip-off",
+    "europe_heading": "NBA games in Europe",
+    "europe_on": "On {broadcaster}.",
+    "checked": "Checked {month_year}",
+    "sources": "Sources",
+    "other_heading": "Watching from somewhere else?",
+    "hub_link": "Every NBA team, channel by channel (US)",
+    "tba": "time TBA"
+  }
 }
