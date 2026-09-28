@@ -45,6 +45,13 @@ def _game(index: int, home: str, away: str, day: date) -> Game:
     )
 
 
+def expected_page_count(data_dir=None) -> int:
+    """How many pages a build of these data files must produce, from the
+    same manifest publish.sh checks against. Never a hard-coded number."""
+    from watchguide.manifest import expected_pages
+    return len(expected_pages(data_dir))
+
+
 @pytest.fixture(scope="session")
 def teams():
     return load_teams()
