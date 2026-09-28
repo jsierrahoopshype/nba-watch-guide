@@ -307,7 +307,7 @@ def test_players_block_has_team_and_local_next_game(site):
     assert body == ("data-country-players> Players from Spain Hugo González, Boston Celtics. "
                     "Next game: Tue Oct 20, 21:00 CEST, at Detroit Pistons")
     italy = text_of(section(page(site, "italy"), "data-country-players"))
-    assert italy.index("Paolo Banchero") < italy.index("Simone Fontecchio")   # more All-Star picks first
+    assert italy.index("Paolo Banchero") < italy.index("Simone Fontecchio")   # same game, so by name
     assert "Paolo Banchero, Orlando Magic. Next game: Sat Oct 24, 21:00 CEST, at Miami Heat" in italy
 
 
@@ -407,3 +407,33 @@ def test_price_text():
     assert price_text(34.99, "GBP", "month") == "£34.99 a month"
     assert price_text(15.00, "EUR", "month") == "€15 a month"
     assert price_text(None, "EUR", "month") == ""
+
+
+def test_players_sorted_by_next_game_then_name(tmp_path_factory):
+    """Soonest game first whatever the All-Star count, teammates by name,
+    a game with no time after the timed ones, no game at all last."""
+    rosters = {
+        "SAS": [{"player": "Victor Wembanyama", "all_star": 5}],           # Mon Oct 26
+        "BKN": [{"player": "Zed Early", "all_star": 0}],                    # Sat Oct 31 12:00
+        "MIL": [{"player": "Bob Later", "all_star": 0}],                    # Sat Oct 31 23:59
+        "BOS": [{"player": "Yann Soonest", "all_star": 0},                  # Tue Oct 20
+                {"player": "Adam Soonest", "all_star": 0}],
+        "LAC": [{"player": "Tim Untimed", "all_star": 0}],                  # Tue Oct 27, no time
+        "PHX": [{"player": "Al Idle", "all_star": 0}],                      # no game
+    }
+    nationalities = {name: "France" for players in rosters.values() for name in
+                     (p["player"] for p in players)}
+    out = tmp_path_factory.mktemp("country-site-sort")
+    (out / "data").mkdir()
+    (out / "data" / "schedule.json").write_text(json.dumps({
+        "season": "2026-27", "updated_at": TODAY, "count": len(FORTNIGHT),
+        "games": [asdict(g) for g in FORTNIGHT]}), encoding="utf-8")
+    (out / careers.CACHE).write_text(json.dumps({
+        "fetched_at": "t", "teams": rosters, "nationalities": nationalities}), encoding="utf-8")
+    full_build(out, today=TODAY, offline=True)
+    block = section(page(out, "france"), "data-country-players")
+    names = re.findall(r"<strong>([^<]+)</strong>", block)
+    assert names == ["Adam Soonest", "Yann Soonest", "Victor Wembanyama", "Tim Untimed",
+                     "Zed Early", "Bob Later", "Al Idle"]
+    assert "Tim Untimed, LA Clippers. Next game: Tue Oct 27, time TBA" in text_of(block)
+    assert "Al Idle, Phoenix Suns. Next game: No game scheduled" in text_of(block)

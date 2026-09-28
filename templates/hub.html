@@ -4,20 +4,37 @@
 <h1>{{ text.h1 }}</h1>
 <p class="lede">{{ text.intro }}</p>
 
-<p><a class="btn-link" href="{{ tonight_path }}">{{ text.tonight_link_label }}</a></p>
-
-{%- if top3 %}
-<section class="card" data-top3>
-  <h2>{{ top3_text.heading }}</h2>
-  <ol>
-    {%- for row in top3 %}
-    <li><a href="{{ tonight_path }}">{{ row.away_name }} at {{ row.home_name }}</a>{% if row.national %} <span class="badge badge-national">{{ row.national|join(", ") }}</span>{% endif %} <span class="small muted">{{ row.line }}</span></li>
-    {%- endfor %}
-  </ol>
-  <p class="small muted">{{ top3_text.basis }}</p>
-  <p class="small"><a href="{{ tonight_path }}">{{ tonight_text.top3_link }}</a></p>
-</section>
+<section class="hub-games" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
+{%- if showcase.rows %}
+<h2 data-rank-heading>{{ showcase.heading }}</h2>
+<ol class="hg-list">
+  {%- for row in showcase.rows %}
+  <li class="hg-row" data-game="{{ row.game.game_id }}">
+    <div class="hg-top">
+      {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
+      <span class="hg-teams">{% if row.away %}<a href="{{ row.away.path }}">{{ row.away_name }}</a>{% else %}{{ row.away_name }}{% endif %} at {% if row.home %}<a href="{{ row.home.path }}">{{ row.home_name }}</a>{% else %}{{ row.home_name }}{% endif %}</span>
+    </div>
+    <div class="hg-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</div>
+    <div class="hg-line small">{{ row.line }}</div>
+    {%- if row.out %}
+    <details class="hg-out small">
+      <summary>{{ tonight_text.out_summary.format(count=row.out_count) }}</summary>
+      <ul>
+        {%- for side in row.out %}
+        <li>{{ side.team }}: {{ side.players|join(", ") }}</li>
+        {%- endfor %}
+      </ul>
+    </details>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ol>
+<p class="small muted" data-rank-basis>{{ showcase.basis }}</p>
+{%- else %}
+<div class="card"><p>{{ tonight_text.next_no_games }}</p></div>
 {%- endif %}
+<p class="small"><a href="{{ tonight_path }}" data-tonight-link>{{ text.tonight_page_link }}</a></p>
+</section>
 
 <h2>{{ text.national_heading }}</h2>
 <div class="card">

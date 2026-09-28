@@ -15,7 +15,10 @@ def build(ctx: SiteContext, env) -> list[Page]:
     text = ctx.copy["tonight"]
     labels = ctx.labels()
     url = config.public_url(SLUG)
-    games = ctx.games_today()
+    # On an off day the page leads with the next day that has games.
+    show = ctx.showcase()
+    games = [r["game"] for r in show["rows"]]
+    games.sort(key=lambda g: (g.tipoff_utc or "~", g.game_id))
 
     rows = []
     for game in games:
@@ -40,8 +43,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
         "jsonld": seo.jsonld(blocks),
     }
 
-    ranked = ctx.tonight_ranked()
-    rank_text = ctx.tonight_heading(ranked)
+    ranked = show["rows"]
+    rank_text = {"heading": show["heading"], "basis": show["basis"]}
 
     html = env.get_template("tonight.html").render(
         ranked=ranked,
@@ -51,6 +54,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         labels=labels,
         text=text,
         games=rows,
+        is_today=show["is_today"],
         updated_label=updated_label(ctx),
         stale=ctx.availability_is_stale(),
         empty_players_label=empty_players_label(ctx),

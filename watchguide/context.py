@@ -22,6 +22,12 @@ from .model import (Game, LocalTV, ServiceData, Team, load_copy, load_local_tv,
 ET = ZoneInfo(config.EASTERN)
 
 
+def long_date(value: str) -> str:
+    """'2026-10-20' becomes 'Tuesday, October 20'."""
+    parsed = date.fromisoformat(value)
+    return f"{parsed:%A, %B} {parsed.day}"
+
+
 def today_et() -> str:
     return datetime.now(ET).date().isoformat()
 
@@ -83,6 +89,40 @@ class SiteContext:
         if ranking_mode(rows, self.star_weights) == STAKES:
             return {"heading": text["rank_heading_stakes"], "basis": text["rank_basis_stakes"]}
         return {"heading": text["rank_heading"], "basis": text["rank_basis"]}
+
+    def showcase_day(self) -> str:
+        """Today when there are games today, otherwise the next date that has
+        games, or "" once the schedule has run out."""
+        if self.games_today():
+            return self.today
+        return min((g.date_et for g in self.games if g.date_et > self.today), default="")
+
+    def showcase(self) -> dict[str, Any]:
+        """The games the hub and the tonight page lead with, ranked, plus the
+        heading and basis line to put around them.
+
+        On a game day that is today's ranking with its usual heading. On an
+        off day it is the next day with games, headed "Next games: <day>".
+        The availability report is written for today's games, so the next
+        day is ranked without it and nobody is marked Out."""
+        day = self.showcase_day()
+        if not day:
+            return {"day": "", "is_today": False, "rows": [], "heading": "", "basis": ""}
+        if day == self.today:
+            rows = self.tonight_ranked()
+            return {"day": day, "is_today": True, "rows": rows, **self.tonight_heading(rows)}
+        text = self.copy.get("tonight", {})
+        games = [g for g in self.games if g.date_et == day]
+        rows = rank(games, self.star_rosters, {}, self.team_name, text, self.star_weights,
+                    self.recent_awards, all_games=self.games)
+        stakes = ranking_mode(rows, self.star_weights) == STAKES
+        heading = text["next_heading"].format(day=long_date(day))
+        return {"day": day, "is_today": False, "rows": rows, "heading": heading,
+                "basis": text["next_basis_stakes" if stakes else "next_basis"]}
+
+    def out_players(self, tricode: str) -> list[str]:
+        """Names listed Out for a team in today's report."""
+        return [p["player"] for p in self.players_for(tricode) if p.get("status") == "Out"]
 
     def players_for(self, tricode: str) -> list[dict[str, str]]:
         return self.injuries.get(tricode, [])

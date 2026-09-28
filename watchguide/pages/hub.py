@@ -6,6 +6,7 @@ from collections import Counter
 
 from .. import config, seo
 from ..context import SiteContext
+from ..coverage import channels_for_game
 from ..render import Page, format_block
 from .common import crumb_trail
 
@@ -28,6 +29,34 @@ def free_ota_teams(ctx: SiteContext) -> list:
     return [t for t in ctx.teams if (local := ctx.local(t.slug)) and local.ota.status == "all"]
 
 
+def showcase_rows(ctx: SiteContext) -> dict:
+    """Today's games in ranking order (or the next day's, on an off day),
+    one compact row each: tip time, both teams, channels, the ranking line
+    and, on a game day, the players listed Out for a collapsed detail."""
+    show = ctx.showcase()
+    tba = ctx.labels().get("tba", "TBA")
+    rows = []
+    for r in show["rows"]:
+        game = r["game"]
+        home, away = ctx.by_tricode.get(game.home_tricode), ctx.by_tricode.get(game.away_tricode)
+        out = []
+        if show["is_today"]:
+            out = [{"team": ctx.team_name(t), "players": ctx.out_players(t)}
+                   for t in (game.away_tricode, game.home_tricode)]
+            out = [side for side in out if side["players"]]
+        rows.append({
+            "game": game,
+            "away": away, "home": home,
+            "away_name": r["away_name"], "home_name": r["home_name"],
+            "channels": channels_for_game(game, game.home_tricode,
+                                          ctx.local(home.slug) if home else None, tba),
+            "line": r["line_core"],
+            "out": out,
+            "out_count": sum(len(side["players"]) for side in out),
+        })
+    return {**show, "rows": rows}
+
+
 def faq_entries(ctx: SiteContext) -> list[dict[str, str]]:
     """FAQ text. Anything that states a fact is read out of the data files."""
     entries: list[dict[str, str]] = []
@@ -47,7 +76,6 @@ def faq_entries(ctx: SiteContext) -> list[dict[str, str]]:
 def build(ctx: SiteContext, env) -> list[Page]:
     text = format_block(ctx.copy["hub"], season=ctx.season)
     faq = faq_entries(ctx)
-    ranked = ctx.tonight_ranked()
     url = config.public_url()
 
     blocks = [seo.breadcrumbs(crumb_trail(ctx))]
@@ -72,8 +100,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         teams=ctx.teams,
         national_partners=national_partners(ctx),
         ota_teams=free_ota_teams(ctx),
-        top3=ranked[:3],
-        top3_text=ctx.tonight_heading(ranked),
+        showcase=showcase_rows(ctx),
         tonight_text=ctx.copy.get("tonight", {}),
         faq=faq,
         tonight_path=config.site_path("tonight"),

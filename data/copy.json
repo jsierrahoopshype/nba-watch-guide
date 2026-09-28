@@ -12,11 +12,11 @@
     "national_heading": "National TV and streaming partners",
     "national_intro": "These are the broadcasters listed on national games in the league schedule feed for {season}.",
     "national_empty": "National broadcasters will show here once the {season} schedule is loaded.",
-    "tonight_link_label": "See tonight's games and channels",
     "ota_line": "Free over the air this season:",
     "faq_heading": "Questions people ask",
     "countries_heading": "Watching from outside the US?",
-    "countries_intro": "Where to watch in these countries, with local prices and local tip-off times."
+    "countries_intro": "Where to watch in these countries, with local prices and local tip-off times.",
+    "tonight_page_link": "Tonight's page"
   },
   "team": {
     "title": "How to Watch {team} Games {season}: TV & Streaming",
@@ -77,13 +77,17 @@
     "rank_basis": "Ranked by All-NBA and All-Star selections over the last three seasons, recent seasons weighted more, counting only players in uniform tonight.",
     "rank_score": "Score {score}",
     "rank_no_stars": "no recent All-NBA or All-Star players in uniform",
-    "top3_link": "All of tonight's games, ranked",
     "rank_heading_stakes": "Tonight's best games",
     "rank_basis_stakes": "Ranked by team records and All-NBA and All-Star selections over the last three seasons, counting only players in uniform tonight.",
     "rank_records": "{a} vs. {b}: ",
     "rank_national_badge": "National TV",
     "rank_matchup": "{a} vs. {b}",
-    "rank_out": "({names} out)"
+    "rank_out": "({names} out)",
+    "next_heading": "Next games: {day}",
+    "next_basis": "Ranked by All-NBA and All-Star selections over the last three seasons, recent seasons weighted more. Player availability shows here on game day.",
+    "next_basis_stakes": "Ranked by team records and All-NBA and All-Star selections over the last three seasons. Player availability shows here on game day.",
+    "out_summary": "Out ({count})",
+    "next_no_games": "No more games on the schedule."
   },
   "labels": {
     "tba": "TBA",
