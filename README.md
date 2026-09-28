@@ -183,6 +183,12 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - Both market states are in the HTML of every team page, so a crawler reads both.
 - A failed fetch keeps the last published data and makes the job go red rather
   than publishing an empty page.
+- Every build and refresh writes `data/expected-pages.txt`: the hub, tonight,
+  one page per team in `data/teams.json` and one per country in
+  `data/countries.json`. `scripts/publish.sh` refuses to publish unless the
+  tree's `index.html` files are exactly those paths, and lists any missing or
+  unexpected ones. Adding a team or a country needs no change to a script or
+  a test. `PUBLISH_CHECK_ONLY=1 ./scripts/publish.sh site` runs the check alone.
 - `data/how-to-watch-links.html` is written on every build: a plain block of
   absolute links to the hub, the tonight page, all 30 teams and every country
   page, for pasting into

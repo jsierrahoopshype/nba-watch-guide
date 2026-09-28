@@ -65,7 +65,8 @@ jobs:
         run: |
           test -f site/sitemap.xml
           test -f site/data/how-to-watch-links.html
-          echo "pages: $(find site -name index.html | wc -l)"
+          echo "pages: $(find site -name index.html | wc -l) found, $(grep -c . site/data/expected-pages.txt) expected"
+          PUBLISH_CHECK_ONLY=1 ./scripts/publish.sh site
           echo "sitemap urls: $(grep -c '<loc>' site/sitemap.xml || true)"
           ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
 

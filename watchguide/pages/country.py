@@ -151,8 +151,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
         fields = _fields(ctx, country)
         low = country.confidence == LOW
         url = country.url
-        title = seo.title(text["titles"][country.slug], season=ctx.season)
-        desc = seo.description(text["descriptions"][country.slug], season=ctx.season)
+        # A country with no title or description of its own in copy.json gets
+        # the shared template, so adding one to countries.json is enough.
+        title = seo.title(safe_format(text.get("titles", {}).get(country.slug) or text["title"], **fields))
+        desc = seo.description(safe_format(text.get("descriptions", {}).get(country.slug)
+                                           or text["description"], **fields))
         h1 = safe_format(text["h1"], **fields)
         trail = crumb_trail(ctx, country.name, url)
 

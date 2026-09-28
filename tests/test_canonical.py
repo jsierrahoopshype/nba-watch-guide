@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 
 from watchguide import config
+from conftest import expected_page_count
 
 CANONICAL = re.compile(r'<link rel="canonical" href="([^"]+)"')
 OG_URL = re.compile(r'<meta property="og:url" content="([^"]+)"')
@@ -16,7 +17,7 @@ def _pages(built_site):
 
 def test_one_canonical_per_page(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 37
+    assert len(pages) == expected_page_count()
     for page in pages:
         html = page.read_text(encoding="utf-8")
         found = CANONICAL.findall(html)

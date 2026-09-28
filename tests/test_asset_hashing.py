@@ -9,6 +9,7 @@ from pathlib import Path
 
 from watchguide import config
 from watchguide.render import asset, hashed_asset_name
+from conftest import expected_page_count
 
 ASSET_URL = re.compile(r'(?:href|src)="(/how-to-watch/assets/[^"]+)"')
 HASHED = re.compile(r"^/how-to-watch/assets/(?P<stem>[\w-]+)\.(?P<hash>[0-9a-f]{10})\.(?P<ext>css|js)$")
@@ -20,7 +21,7 @@ def _pages(site: Path):
 
 def test_every_asset_url_is_hashed_and_the_file_exists(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 37
+    assert len(pages) == expected_page_count()
     seen = set()
     for page in pages:
         urls = ASSET_URL.findall(page.read_text(encoding="utf-8"))

@@ -7,6 +7,7 @@ Output layout, which the Worker maps onto /how-to-watch:
     <country-slug>/index.html      (from data/countries.json)
     tonight/index.html
     assets/
+    data/expected-pages.txt   (every index.html above; see watchguide/manifest.py)
     data/injuries.json, data/tonight.json, data/schedule.json
     sitemap.xml
 
@@ -29,6 +30,7 @@ from . import config, seo
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
+from .manifest import expected_pages, mismatch, write_manifest
 from .model import Game, load_teams
 from .pages import BUILDERS
 from .pages.links_block import render as render_links_block
@@ -352,6 +354,17 @@ def unplaced_overrides(ctx: SiteContext) -> list[str]:
             for name in c.player_overrides if match_key(name) not in placed]
 
 
+def check_pages(pages: list[Page], data_dir: Path | None = None) -> list[str]:
+    """The manifest for this data, after checking the rendered pages match it."""
+    expected = expected_pages(data_dir)
+    missing, unexpected = mismatch(expected, [p.out_path for p in pages])
+    if missing or unexpected or len(pages) != len(expected):
+        raise BuildError(f"expected {len(expected)} pages, built {len(pages)}; "
+                         f"missing: {', '.join(missing) or 'none'}; "
+                         f"unexpected: {', '.join(unexpected) or 'none'}")
+    return expected
+
+
 def render_pages(ctx: SiteContext, env=None) -> list[Page]:
     env = env or build_env()
     # Every page type picks this up, including ones added later, so a new
@@ -456,16 +469,14 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
         raise BuildError("expected 30 teams in data/teams.json")
 
     pages = render_pages(ctx)
-    expected = 32 + len(ctx.countries.countries)
-    if len(pages) != expected:
-        raise BuildError(f"expected {expected} pages (hub, tonight, 30 teams, "
-                         f"{len(ctx.countries.countries)} countries), built {len(pages)}")
+    expected = check_pages(pages, data_dir)
     notes.append(country_summary(ctx))
 
     report = broadcast_report(games, ctx.today)
     notes.append(broadcast_summary(report))
 
     write_pages(out_dir, pages)
+    write_manifest(out_dir, expected)
     write_json(out_dir, BROADCAST_REPORT, report)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
@@ -512,6 +523,9 @@ def refresh_build(out_dir: Path, today: str | None = None,
               if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today]
 
     write_pages(out_dir, wanted)
+    # The refresh leaves most pages alone, but the tree it hands to publish.sh
+    # still has to match the data, so the manifest is rewritten here too.
+    write_manifest(out_dir, check_pages(pages, data_dir))
     # Pages name assets by content hash, so a refresh after a code change
     # must ship the new files too or those pages would point at nothing.
     copy_assets(out_dir)

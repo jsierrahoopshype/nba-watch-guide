@@ -146,7 +146,7 @@
     }
   ],
   "country": {
-    "_note": "Wording for the country pages at /how-to-watch/<slug>. {place} is the country as it reads in a sentence (places below), {country} its name in data/countries.json, {partner} its TV partner, {season} the season label. titles and descriptions are per country so each page has its own. Titles are cut to 60 characters, descriptions to 155.",
+    "_note": "Wording for the country pages at /how-to-watch/<slug>. {place} is the country as it reads in a sentence (places below), {country} its name in data/countries.json, {partner} its TV partner, {season} the season label. titles and descriptions are per country so each page has its own; a country missing from them uses title and description. Titles are cut to 60 characters, descriptions to 155.",
     "places": {
       "uk": "the UK",
       "spain": "Spain",
@@ -154,6 +154,8 @@
       "germany": "Germany",
       "italy": "Italy"
     },
+    "title": "How to Watch the NBA in {place} in {season}",
+    "description": "Watch the NBA in {place} in {season} on {partner} and Prime Video, or every game on League Pass, with local prices and tip-off times.",
     "titles": {
       "uk": "How to Watch the NBA in the UK in {season}",
       "spain": "How to Watch the NBA in Spain in {season}",

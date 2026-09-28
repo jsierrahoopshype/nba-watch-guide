@@ -9,6 +9,7 @@ from __future__ import annotations
 import re
 
 from watchguide import config
+from conftest import expected_page_count
 
 ROBOTS = re.compile(r'<meta name="robots" content="([^"]*)"')
 CANONICAL = re.compile(r'<link rel="canonical" href="([^"]+)"')
@@ -23,7 +24,7 @@ def _pages(site):
 
 def test_every_page_carries_the_noindex_tag(built_site):
     pages = _pages(built_site)
-    assert len(pages) == 37
+    assert len(pages) == expected_page_count()
     for page in pages:
         found = ROBOTS.findall(page.read_text(encoding="utf-8"))
         assert found == ["noindex,follow"], f"{page} robots tag is {found}"
@@ -50,7 +51,7 @@ def test_no_robots_tag_when_indexing_is_allowed(built_site_indexed):
 
 def test_sitemap_lists_every_page_when_indexing_is_allowed(built_site_indexed):
     xml = (built_site_indexed / "sitemap.xml").read_text(encoding="utf-8")
-    assert len(LOC.findall(xml)) == 37
+    assert len(LOC.findall(xml)) == expected_page_count()
 
 
 def test_robots_txt_advertises_the_sitemap_when_indexing_is_allowed(built_site_indexed):

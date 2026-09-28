@@ -5,17 +5,18 @@ from __future__ import annotations
 import re
 
 from watchguide import config
+from conftest import expected_page_count
 
 LOC = re.compile(r"<loc>([^<]+)</loc>")
 LASTMOD = re.compile(r"<lastmod>([^<]+)</lastmod>")
 
 
-def test_sitemap_lists_exactly_37_urls(built_site_indexed):
+def test_sitemap_lists_one_url_per_expected_page(built_site_indexed):
     xml = (built_site_indexed / "sitemap.xml").read_text(encoding="utf-8")
     urls = LOC.findall(xml)
-    assert len(urls) == 37
-    assert len(set(urls)) == 37
-    assert len(LASTMOD.findall(xml)) == 37
+    assert len(urls) == expected_page_count()
+    assert len(set(urls)) == expected_page_count()
+    assert len(LASTMOD.findall(xml)) == expected_page_count()
 
 
 def test_sitemap_urls_are_public_and_clean(built_site_indexed):
