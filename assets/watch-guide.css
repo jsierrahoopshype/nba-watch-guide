@@ -284,6 +284,7 @@ a:hover { color: var(--accent); }
 .hg-top .game-when { flex: 0 0 auto; min-width: 5.5em; }
 .hg-teams { font-weight: 600; min-width: 0; }
 .hg-teams a { color: inherit; }
+.badge-top { background: transparent; color: var(--brand-ink); box-shadow: inset 0 0 0 1px var(--brand); flex: 0 0 auto; }
 .hg-channels { margin-top: 4px; }
 .hg-line { margin-top: 2px; color: var(--text-2); }
 .hg-out { margin-top: 4px; }

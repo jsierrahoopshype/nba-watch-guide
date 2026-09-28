@@ -29,10 +29,15 @@ def free_ota_teams(ctx: SiteContext) -> list:
     return [t for t in ctx.teams if (local := ctx.local(t.slug)) and local.ota.status == "all"]
 
 
+TOP_PICKS = 3     # the highest-ranked games get the "Top pick" badge on the hub
+
+
 def showcase_rows(ctx: SiteContext) -> dict:
-    """Today's games in ranking order (or the next day's, on an off day),
-    one compact row each: tip time, both teams, channels, the ranking line
-    and, on a game day, the players listed Out for a collapsed detail."""
+    """Today's games (or the next day's, on an off day) in tip-off order,
+    earliest first, one compact row each: tip time, both teams, channels,
+    the ranking line and, on a game day, the players listed Out for a
+    collapsed detail. The TOP_PICKS highest-ranked games carry a badge; the
+    tonight page keeps the full ranking order."""
     show = ctx.showcase()
     tba = ctx.labels().get("tba", "TBA")
     rows = []
@@ -53,7 +58,9 @@ def showcase_rows(ctx: SiteContext) -> dict:
             "line": r["line_core"],
             "out": out,
             "out_count": sum(len(side["players"]) for side in out),
+            "top_pick": r["rank"] <= TOP_PICKS,
         })
+    rows.sort(key=lambda row: (row["game"].tipoff_utc or "~", row["game"].game_id))
     return {**show, "rows": rows}
 
 

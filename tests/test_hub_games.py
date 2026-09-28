@@ -4,12 +4,14 @@ tonight page, and what one mobile row carries."""
 from __future__ import annotations
 
 import html
+import json
 import re
-from datetime import date, timedelta
+from dataclasses import asdict, replace
+from datetime import date, datetime, timedelta, timezone
 
 import pytest
 
-from conftest import TODAY, _build
+from conftest import TODAY, _build, _copy_data
 from watchguide.model import load_teams
 
 TEAMS = {t.tricode: t for t in load_teams()}
@@ -149,3 +151,81 @@ def test_after_the_last_game_day_both_pages_say_so(tmp_path_factory, fixture_gam
     assert "No more games on the schedule." in hub_block(site)
     tonight = (site / "tonight" / "index.html").read_text(encoding="utf-8")
     assert "No NBA games scheduled today. No more games on the schedule." in tonight
+
+
+# -- tip-off order with Top pick badges --------------------------------------------------
+
+STARS = ("Star Alpha", "Star Bravo", "Star Charlie")     # letters: names are matched without digits
+
+
+@pytest.fixture(scope="module")
+def staggered_site(tmp_path_factory, fixture_games):
+    """Today's games tip off an hour apart, and the stars play in the last
+    three, so ranking order is the reverse of tip-off order for them."""
+    today = sorted((g for g in fixture_games if g.date_et == TODAY), key=lambda g: g.game_id)
+    base = datetime.fromisoformat(today[0].tipoff_utc).astimezone(timezone.utc) - timedelta(hours=len(today))
+    staggered = {g.game_id: replace(g, tipoff_utc=(base + timedelta(hours=i)).isoformat())
+                 for i, g in enumerate(today)}
+    games = [staggered.get(g.game_id, g) for g in fixture_games]
+    last_three = today[-3:]                            # latest tips; the last has the biggest star
+    data_dir = _copy_data(tmp_path_factory, "data-staggered")
+    awards = [{"player": STARS[i], "season": "2025-26", "award": "all_nba_first"}
+              for i in range(3) for _ in range(i + 1)]
+    (data_dir / "recent_awards.json").write_text(json.dumps({"awards": awards}), encoding="utf-8")
+    site = tmp_path_factory.mktemp("hub-staggered")
+    (site / "data").mkdir()
+    (site / "data" / "star-rosters.json").write_text(json.dumps({"fetched_at": "t", "teams": {
+        g.home_tricode: [{"player": STARS[i], "all_star": 0}] for i, g in enumerate(last_three)}}),
+        encoding="utf-8")
+    (site / "data" / "schedule.json").write_text(json.dumps({
+        "season": "2026-27", "updated_at": TODAY, "count": len(games),
+        "games": [asdict(g) for g in games]}), encoding="utf-8")
+    from watchguide.build import full_build
+    full_build(site, today=TODAY, offline=True, data_dir=data_dir)
+    return site, [staggered[g.game_id] for g in today], last_three
+
+
+def test_hub_runs_by_tip_time_earliest_first(staggered_site):
+    site, today, _ = staggered_site
+    block = hub_block(site)
+    assert [r.split('"')[1] for r in rows(block)] == [g.game_id for g in today]
+    times = re.findall(r'data-utc="([^"]+)"', block)
+    assert times == sorted(times)
+
+
+def test_top_three_ranked_games_carry_the_badge(staggered_site):
+    site, _, last_three = staggered_site
+    block = hub_block(site)
+    picked = [r.split('"')[1] for r in rows(block) if "data-top-pick" in r]
+    assert picked == [g.game_id for g in last_three]          # listed in tip order, not rank order
+    assert block.count(">Top pick</span>") == 3
+    # The badge sits in the row's top line, next to the teams.
+    top = next(r for r in rows(block) if "data-top-pick" in r).split('<div class="hg-channels">')[0]
+    assert '<span class="badge badge-top" data-top-pick>Top pick</span>' in top
+
+
+def test_tonight_page_keeps_ranking_order(staggered_site):
+    site, _, last_three = staggered_site
+    page = (site / "tonight" / "index.html").read_text(encoding="utf-8")
+    ranked = page[page.index("data-ranked"):page.index("</ol>", page.index("data-ranked"))]
+    names = re.findall(r"<strong>([^<]+)</strong>", ranked)
+    expected = [f"{TEAMS[g.away_tricode].full_name} at {TEAMS[g.home_tricode].full_name}"
+                for g in reversed(last_three)]
+    assert names[:3] == expected
+    assert "Top pick" not in page
+
+
+def test_heading_lines_and_basis_unchanged(staggered_site):
+    site, _, last_three = staggered_site
+    block = hub_block(site)
+    assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
+    assert "counting only players in uniform tonight" in block
+    star_row = next(r for r in rows(block) if r.startswith(f'data-game="{last_three[-1].game_id}"'))
+    assert '<div class="hg-line small">Star Charlie</div>' in star_row
+
+
+def test_off_day_list_is_also_in_tip_order_with_badges(off_day_site, fixture_games):
+    block = hub_block(off_day_site)
+    times = re.findall(r'data-utc="([^"]+)"', block)
+    assert times == sorted(times)
+    assert block.count(">Top pick</span>") == 3

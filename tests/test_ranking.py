@@ -271,16 +271,28 @@ def _hub_order(site):
     return [re.sub(r"<[^>]+>", "", t) for t in re.findall(r'<span class="hg-teams">(.*?)</span>', block)], block
 
 
-def test_hub_list_follows_the_ranking(ranked_site):
+def _by_tip(fixture_games):
+    today = [g for g in fixture_games if g.date_et == TODAY]
+    return [_name(g) for g in sorted(today, key=lambda g: (g.tipoff_utc, g.game_id))]
+
+
+def _top_picks(block):
+    return [re.sub(r"<[^>]+>", "", m) for m in
+            re.findall(r'<span class="hg-teams">(.*?)</span> <span class="badge badge-top" data-top-pick>', block)]
+
+
+def test_hub_list_runs_by_tip_time_with_the_ranking_as_badges(ranked_site, fixture_games):
     site, first, second, _ = ranked_site
     order, block = _hub_order(site)
     tonight, _ = _order(site)
-    assert order == tonight
-    assert order[:2] == [_name(first), _name(second)]
+    assert order == _by_tip(fixture_games)           # tip-off order, not ranking order
+    assert tonight[:2] == [_name(first), _name(second)]
+    assert sorted(_top_picks(block)) == sorted(tonight[:3])
+    assert block.count("Top pick") == 3
     assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
 
 
-def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monkeypatch):
+def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, fixture_games, tmp_path, monkeypatch):
     site, first, second, data_dir = ranked_site
     from watchguide.build import refresh_build
     from watchguide.sources import injuries as injuries_source
@@ -295,7 +307,8 @@ def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monke
     # The hub is rewritten by the same refresh: new order, the line without
     # the out note, and Star One in the game's collapsed Out detail.
     hub_order, block = _hub_order(site)
-    assert hub_order == order
+    assert hub_order == _by_tip(fixture_games)
+    assert sorted(_top_picks(block)) == sorted(order[:3])
     row = next(r for r in block.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{first.game_id}"'))
     assert '<div class="hg-line small">No recent All-NBA or All-Star players in uniform</div>' in row
     assert "<summary>Out (1)</summary>" in row and "Star One" in row
