@@ -30,13 +30,17 @@
     {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
   </div>
   <p class="game-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
+  {%- if is_today %}
   <div class="game-sides">
     {% with heading = row.away_name, players = row.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
     {% with heading = row.home_name, players = row.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
   </div>
+  {%- else %}
+  <p class="small muted">{{ labels.availability_on_game_day }}</p>
+  {%- endif %}
 </article>
 {%- endfor %}
 {%- else %}
-<div class="card"><p>{{ text.no_games }}</p></div>
+<div class="card"><p>{{ text.no_games }} {{ text.next_no_games }}</p></div>
 {%- endif %}
 {% endblock %}

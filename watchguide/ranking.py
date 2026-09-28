@@ -204,6 +204,10 @@ def rank(games: list[Game], rosters: dict[str, list[dict[str, Any]]],
             "score_label": f"{score:.1f}",
             "national": list(game.national_codes),
             "line": _line(text, sides, [away, home] if stakes is not None else None),
+            # The same line without "(Name out)": the hub lists Out players in
+            # a collapsed detail under the row instead.
+            "line_core": _line(text, [{**s, "out": []} for s in sides],
+                               [away, home] if stakes is not None else None),
         })
     rows.sort(key=lambda r: (-r["score"], r["game"].tipoff_utc or "~", r["game"].game_id))
     for i, row in enumerate(rows, 1):

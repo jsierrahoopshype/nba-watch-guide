@@ -85,10 +85,15 @@ def league_pass(ctx: SiteContext, country: Country, text: dict, fields: dict) ->
 
 
 def players_block(ctx: SiteContext, country: Country, text: dict) -> list[dict]:
-    """Each player with his team and next game, in the country's zone."""
+    """Each player with his team and next game, in the country's zone,
+    soonest game first. Ties (teammates, or two sides of one game) go by
+    name, and players with no game scheduled come last."""
     rows = []
     for p in country_players(country, ctx.star_rosters, ctx.nationalities):
         nxt = ctx.next_game(p["tricode"])
+        # A game with no tip-off time yet sorts after the timed games of its day.
+        sort_key = (1, "", p["player"]) if nxt is None else \
+            (0, nxt.tipoff_utc or f"{nxt.date_et}T99", p["player"])
         if nxt is None:
             next_label = text["players_no_game"]
         else:
@@ -98,7 +103,8 @@ def players_block(ctx: SiteContext, country: Country, text: dict) -> list[dict]:
             when = when_label(local) if local else f"{date_label(nxt.date_et)}, {text['tba']}"
             next_label = f"{when}, {where}{opponent}"
         rows.append({"player": p["player"], "team": ctx.team_name(p["tricode"]),
-                     "next": next_label})
+                     "next": next_label, "sort": sort_key})
+    rows.sort(key=lambda r: r["sort"])
     return rows
 
 

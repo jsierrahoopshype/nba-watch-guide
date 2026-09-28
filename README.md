@@ -160,6 +160,16 @@ no rows for the current season at all, which is the case right now, pages say
 National TV is a badge, not points. The heading reads "Most star power tonight"
 until stakes are on for most of the day's games, then "Tonight's best games".
 
+The hub lists every game of the day in tip-off order, earliest first, with a
+"Top pick" badge on the three highest-ranked, one compact row each: tip
+time (ET, shown in the reader's zone by the page script), both teams linked to
+their pages, channel badges and the ranking line, with players listed Out in a
+collapsed detail under the row. The 30-minute refresh rewrites the hub with the
+tonight page, so an injury that changes a line or the order shows on both. On a
+day with no games, the hub and the tonight page show the next day with games
+instead, headed "Next games: <weekday, date>", ranked without availability
+(the league's report only covers today's games).
+
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.
 

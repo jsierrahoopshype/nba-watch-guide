@@ -275,6 +275,28 @@ a:hover { color: var(--accent); }
 .game-side ul { margin: 0; padding: 0; list-style: none; }
 .game-side li { display: flex; gap: 8px; justify-content: space-between; padding: 4px 0; font-size: 0.9rem; }
 
+/* ---------- hub: today's games, one compact row each ---------- */
+
+.hg-list { list-style: none; margin: 0 0 8px; padding: 0; border: 1px solid var(--border-soft); border-radius: var(--radius); background: var(--surface); }
+.hg-row { padding: 10px 14px; border-top: 1px solid var(--border-soft); }
+.hg-row:first-child { border-top: 0; }
+.hg-top { display: flex; gap: 10px; align-items: baseline; }
+.hg-top .game-when { flex: 0 0 auto; min-width: 5.5em; }
+.hg-teams { font-weight: 600; min-width: 0; }
+.hg-teams a { color: inherit; }
+.badge-top { background: transparent; color: var(--brand-ink); box-shadow: inset 0 0 0 1px var(--brand); flex: 0 0 auto; }
+.hg-channels { margin-top: 4px; }
+.hg-line { margin-top: 2px; color: var(--text-2); }
+.hg-out { margin-top: 4px; }
+.hg-out summary { cursor: pointer; color: var(--text-muted); min-height: 28px; display: flex; align-items: center; }
+.hg-out ul { margin: 2px 0 0; padding-left: 18px; }
+
+@media (min-width: 700px) {
+  .hg-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; }
+  .hg-channels { grid-column: 2; grid-row: 1; margin-top: 0; text-align: right; }
+  .hg-line, .hg-out { grid-column: 1 / -1; }
+}
+
 /* ---------- faq ---------- */
 
 .faq details {

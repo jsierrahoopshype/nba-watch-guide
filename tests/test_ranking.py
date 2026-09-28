@@ -265,15 +265,34 @@ def test_tonight_page_ranks_by_star_power(ranked_site, fixture_games):
     assert "badge badge-national" in html[html.index("data-ranked"):]
 
 
-def test_hub_teaser_follows_the_ranking(ranked_site):
-    site, first, *_ = ranked_site
+def _hub_order(site):
     hub = (site / "index.html").read_text(encoding="utf-8")
-    teaser = hub[hub.index("data-top3"):hub.index("</section>", hub.index("data-top3"))]
-    assert "<h2>Most star power tonight</h2>" in teaser and teaser.count("<li>") == 3
-    assert re.findall(r'<a href="/how-to-watch/tonight">([^<]+)</a>', teaser)[0] == _name(first)
+    block = hub[hub.index("data-hub-games"):hub.index("</section>", hub.index("data-hub-games"))]
+    return [re.sub(r"<[^>]+>", "", t) for t in re.findall(r'<span class="hg-teams">(.*?)</span>', block)], block
 
 
-def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monkeypatch):
+def _by_tip(fixture_games):
+    today = [g for g in fixture_games if g.date_et == TODAY]
+    return [_name(g) for g in sorted(today, key=lambda g: (g.tipoff_utc, g.game_id))]
+
+
+def _top_picks(block):
+    return [re.sub(r"<[^>]+>", "", m) for m in
+            re.findall(r'<span class="hg-teams">(.*?)</span> <span class="badge badge-top" data-top-pick>', block)]
+
+
+def test_hub_list_runs_by_tip_time_with_the_ranking_as_badges(ranked_site, fixture_games):
+    site, first, second, _ = ranked_site
+    order, block = _hub_order(site)
+    tonight, _ = _order(site)
+    assert order == _by_tip(fixture_games)           # tip-off order, not ranking order
+    assert tonight[:2] == [_name(first), _name(second)]
+    assert sorted(_top_picks(block)) == sorted(tonight[:3])
+    assert block.count("Top pick") == 3
+    assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
+
+
+def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, fixture_games, tmp_path, monkeypatch):
     site, first, second, data_dir = ranked_site
     from watchguide.build import refresh_build
     from watchguide.sources import injuries as injuries_source
@@ -285,6 +304,14 @@ def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, tmp_path, monke
     assert order[0] == _name(second)
     assert order.index(_name(first)) > 0
     assert "No recent All-NBA or All-Star players in uniform (Star One out)" in html
+    # The hub is rewritten by the same refresh: new order, the line without
+    # the out note, and Star One in the game's collapsed Out detail.
+    hub_order, block = _hub_order(site)
+    assert hub_order == _by_tip(fixture_games)
+    assert sorted(_top_picks(block)) == sorted(order[:3])
+    row = next(r for r in block.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{first.game_id}"'))
+    assert '<div class="hg-line small">No recent All-NBA or All-Star players in uniform</div>' in row
+    assert "<summary>Out (1)</summary>" in row and "Star One" in row
 
 
 def test_the_page_switches_heading_once_stakes_are_on(tmp_path_factory, fixture_games, ranked_site):
@@ -303,7 +330,7 @@ def test_the_page_switches_heading_once_stakes_are_on(tmp_path_factory, fixture_
             "counting only players in uniform tonight.") in html
     assert "7-3 vs. 6-4: " in html
     hub = (site / "index.html").read_text(encoding="utf-8")
-    assert "<h2>Tonight&#39;s best games</h2>" in hub
+    assert "<h2 data-rank-heading>Tonight&#39;s best games</h2>" in hub
 
 
 
