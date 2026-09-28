@@ -75,8 +75,9 @@ pages; the 30-minute refresh does not.
 - "Players from" lists active players whose career-map `nationality` has a
   part (split on `/`) matching the country's `nationality_aliases`, so
   "American / Italian" counts for Italy. `player_overrides` adds players by
-  name when the career map has no nationality for them. A country with no
-  players gets no block.
+  name when the career map has no nationality for them. An override that
+  matches nobody on a current roster is named in the build log. A country
+  with no players gets no block.
 - "Games at a watchable hour" is the next 14 days of games tipping off from
   12:00 to 23:59 local time.
 - The Paris and Manchester games show until their date has passed.
@@ -183,7 +184,8 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - A failed fetch keeps the last published data and makes the job go red rather
   than publishing an empty page.
 - `data/how-to-watch-links.html` is written on every build: a plain block of
-  absolute links to the hub, the tonight page and all 30 teams, for pasting into
+  absolute links to the hub, the tonight page, all 30 teams and every country
+  page, for pasting into
   the Worker so the guide has an internal crawl path.
 
 ## Automation

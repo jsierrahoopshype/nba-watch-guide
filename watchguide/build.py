@@ -37,6 +37,7 @@ from .sources import careers as careers_source
 from .sources import injuries as injuries_source
 from .sources import schedule as schedule_source
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
+from .sources.careers import match_key
 from .sources.http import FetchError
 
 SCHEDULE_CACHE = "data/schedule.json"
@@ -336,7 +337,19 @@ def country_summary(ctx: SiteContext) -> str:
     """Players matched per country, for the build log."""
     counts = [f"{c.slug} {len(country_players(c, ctx.star_rosters, ctx.nationalities))}"
               for c in ctx.countries.countries]
-    return "countries: players " + (", ".join(counts) or "none")
+    line = "countries: players " + (", ".join(counts) or "none")
+    missing = unplaced_overrides(ctx)
+    if missing:
+        line += "; overrides not on an NBA roster: " + ", ".join(missing)
+    return line
+
+
+def unplaced_overrides(ctx: SiteContext) -> list[str]:
+    """Override names that match nobody on the current rosters, so a typo or a
+    released player shows up in the build log instead of vanishing quietly."""
+    placed = {match_key(p.get("player", "")) for players in ctx.star_rosters.values() for p in players}
+    return [f"{c.slug}: {name}" for c in ctx.countries.countries
+            for name in c.player_overrides if match_key(name) not in placed]
 
 
 def render_pages(ctx: SiteContext, env=None) -> list[Page]:
@@ -371,7 +384,8 @@ def write_sitemap(out_dir: Path, pages: list[Page], noindex: bool = False) -> No
 
 
 def write_links_block(out_dir: Path, ctx: SiteContext) -> None:
-    """A bare HTML block of links to the hub and all 30 team pages.
+    """A bare HTML block of links to the hub, all 30 team pages, tonight and
+    the country pages.
 
     Meant to be pasted into the Worker on a page that is already crawled, so
     the guide has an internal path in. Absolute URLs, class names only, no

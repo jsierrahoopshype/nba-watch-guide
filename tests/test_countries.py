@@ -112,8 +112,10 @@ def section(markup: str, attr: str) -> str:
 def test_data_file_has_the_five_countries():
     data = load_countries()
     assert [c.slug for c in data.countries] == list(SLUGS)
+    overrides = {c.slug: c.player_overrides for c in data.countries}
+    assert overrides == {"uk": [], "spain": ["Santi Aldama", "Aday Mara", "Sergio de Larrea"],
+                         "france": [], "germany": ["Hannes Steinbach"], "italy": []}
     for c in data.countries:
-        assert c.player_overrides == []
         assert c.league_pass["monthly_price"] is None and c.league_pass["season_price"] is None
         ZoneInfo(c.timezone)
 
@@ -266,6 +268,38 @@ def test_overrides_add_players_without_a_nationality():
     found = country_players(spain, ROSTERS, NATIONALITIES)
     assert {(p["player"], p["tricode"]) for p in found} == {("Hugo González", "BOS"),
                                                             ("Unlisted Player", "MIL")}
+
+
+def test_file_overrides_are_listed_with_team_and_next_game(tmp_path_factory):
+    """The shipped overrides, placed on the teams the career map has them on."""
+    rosters = {**ROSTERS, "DAL": [{"player": "Santi Aldama", "all_star": 0},
+                                  {"player": "Sergio de Larrea", "all_star": 0}],
+               "OKC": [{"player": "Aday Mara", "all_star": 0}],
+               "CHA": [{"player": "Hannes Steinbach", "all_star": 0}]}
+    out = tmp_path_factory.mktemp("country-site-overrides")
+    (out / "data").mkdir()
+    (out / "data" / "schedule.json").write_text(json.dumps({
+        "season": "2026-27", "updated_at": TODAY, "count": len(FORTNIGHT),
+        "games": [asdict(g) for g in FORTNIGHT]}), encoding="utf-8")
+    (out / careers.CACHE).write_text(json.dumps({
+        "fetched_at": "t", "teams": rosters, "nationalities": NATIONALITIES}), encoding="utf-8")
+    notes = full_build(out, today=TODAY, offline=True).notes
+    assert "overrides not on an NBA roster" not in " ".join(notes)
+    spain = text_of(section(page(out, "spain"), "data-country-players"))
+    for line in ("Aday Mara, Oklahoma City Thunder. Next game: No game scheduled",
+                 "Santi Aldama, Dallas Mavericks. Next game: Mon Oct 26, 10:59 CET, at San Antonio Spurs",
+                 "Sergio de Larrea, Dallas Mavericks. Next game: Mon Oct 26, 10:59 CET, at San Antonio Spurs",
+                 "Hugo González, Boston Celtics."):
+        assert line in spain
+    germany = text_of(section(page(out, "germany"), "data-country-players"))
+    assert "Hannes Steinbach, Charlotte Hornets. Next game: Sat Oct 31, 12:00 CET, vs Brooklyn Nets" in germany
+
+
+def test_an_override_nobody_matches_is_logged(tmp_path_factory):
+    out = _site(tmp_path_factory, "country-site-unplaced")     # rosters without the override players
+    notes = full_build(out, today=TODAY, offline=True).notes
+    assert any("overrides not on an NBA roster: spain: Santi Aldama, spain: Aday Mara, "
+               "spain: Sergio de Larrea, germany: Hannes Steinbach" in n for n in notes)
 
 
 def test_players_block_has_team_and_local_next_game(site):

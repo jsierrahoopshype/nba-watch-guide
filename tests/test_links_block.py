@@ -19,13 +19,21 @@ def test_the_block_is_generated(built_site):
     assert (built_site / BLOCK).exists()
 
 
-def test_it_links_the_hub_tonight_and_all_thirty_teams(built_site):
+def test_it_links_the_hub_tonight_all_thirty_teams_and_five_countries(built_site):
     links = HREF.findall(_block(built_site))
-    assert len(links) == 32
+    assert len(links) == 37
     assert config.public_url() in links
     assert config.public_url("tonight") in links
     for team in load_teams():
         assert team.url in links
+    for slug in ("uk", "spain", "france", "germany", "italy"):
+        assert f"https://hoopsmatic.com/how-to-watch/{slug}" in links
+
+
+def test_country_links_read_as_sentences(built_site):
+    html = _block(built_site)
+    assert '<a href="https://hoopsmatic.com/how-to-watch/uk">How to watch the NBA in the UK</a>' in html
+    assert '<a href="https://hoopsmatic.com/how-to-watch/spain">How to watch the NBA in Spain</a>' in html
 
 
 def test_every_url_is_absolute_and_public(built_site):

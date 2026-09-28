@@ -79,7 +79,7 @@
       "free_to_air": "None found for 2026-27.",
       "notes": "Movistar Plus+ and Orange customers can get DAZN's basketball channels through their operator; how many NBA games reach them is not confirmed.",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
-      "player_overrides": []
+      "player_overrides": ["Santi Aldama", "Aday Mara", "Sergio de Larrea"]
     },
     "france": {
       "name": "France",
@@ -124,7 +124,7 @@
       "free_to_air": "None found for 2026-27.",
       "notes": "",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
-      "player_overrides": []
+      "player_overrides": ["Hannes Steinbach"]
     },
     "italy": {
       "name": "Italy",
