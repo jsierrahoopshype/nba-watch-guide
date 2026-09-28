@@ -1,4 +1,4 @@
-"""The redesign: stat cards, team and country cards, the partners footnote,
+"""The redesign: team and country cards, the partners footnote,
 logos, flags, headshots, and the rule that no image comes from elsewhere."""
 
 from __future__ import annotations
@@ -7,7 +7,6 @@ import html
 import json
 import re
 from dataclasses import asdict, replace
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -15,7 +14,7 @@ import pytest
 from conftest import TODAY, _build, _copy_data
 from watchguide import config
 from watchguide.context import load_context
-from watchguide.pages.hub import country_cards, national_partners, stat_cards, team_summary
+from watchguide.pages.hub import country_cards, national_partners, team_summary
 from watchguide.sources import headshots
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,57 +28,6 @@ def text(markup: str) -> str:
 
 def ctx_for(games, today=TODAY, data_dir=None):
     return load_context(games, today=today, data_dir=data_dir)
-
-
-def card(cards, cid):
-    return next(c for c in cards if c["id"] == cid)
-
-
-# -- stat cards ------------------------------------------------------------------------
-
-def test_countdown_before_opening_night(fixture_games):
-    opener = min(g.date_et for g in fixture_games)
-    ctx = ctx_for(fixture_games, today="2027-01-01")
-    first = card(stat_cards(ctx), "opener")
-    days = (date.fromisoformat(opener) - date(2027, 1, 1)).days
-    assert first["label"] == "Opening night" and first["num"] == f"{days} days"
-
-
-def test_game_day_switches_to_tonight(fixture_games):
-    ctx = ctx_for(fixture_games)
-    first = stat_cards(ctx)[0]
-    n = sum(1 for g in fixture_games if g.date_et == TODAY)
-    assert (first["id"], first["label"], first["num"]) == ("tonight", "Tonight", f"{n} games")
-    assert first["sub"] == "First tip 7:00 pm ET"
-
-
-def test_in_season_off_day_shows_the_next_games(fixture_games):
-    games = [g for g in fixture_games if g.date_et != TODAY]
-    first = stat_cards(ctx_for(games))[0]
-    assert first["id"] == "next" and first["num"] == "Sat Jan 16"
-
-
-def test_counts_come_from_the_data(fixture_games, tmp_path_factory):
-    ctx = ctx_for(fixture_games)
-    cards = stat_cards(ctx)
-    assert card(cards, "national")["num"] == str(sum(1 for g in fixture_games if g.national_codes))
-    local = json.loads((ROOT / "data" / "local_tv.json").read_text(encoding="utf-8"))["teams"]
-    assert card(cards, "ota")["num"] == str(sum(1 for t in local.values() if t.get("ota", {}).get("status") == "all"))
-    assert card(cards, "countries")["num"] == "5"
-    # One more country in the data file, one more on the card, no other change.
-    data_dir = _copy_data(tmp_path_factory, "data-six-countries")
-    raw = json.loads((data_dir / "countries.json").read_text(encoding="utf-8"))
-    raw["countries"]["portugal"] = {**raw["countries"]["spain"], "name": "Portugal", "slug": "portugal", "flag": "pt"}
-    (data_dir / "countries.json").write_text(json.dumps(raw), encoding="utf-8")
-    assert card(stat_cards(ctx_for(fixture_games, data_dir=data_dir)), "countries")["num"] == "6"
-
-
-def test_stat_strip_is_prerendered_on_the_hub(built_site):
-    hub = (built_site / "index.html").read_text(encoding="utf-8")
-    strip = hub[hub.index("data-stats"):hub.index("data-hub-games")]
-    assert strip.count('class="lbl"') == 4
-    assert "Tonight" in strip and "National TV games" in strip
-    assert hub.index("data-stats") < hub.index("data-hub-games") < hub.index('id="teams"')
 
 
 # -- team cards ------------------------------------------------------------------------

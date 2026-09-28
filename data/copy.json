@@ -23,26 +23,6 @@
       "Telemundo"
     ],
     "national_footnote": "NBCSN simulcasts Peacock's Monday games; Telemundo carries NBC games in Spanish.",
-    "stats": {
-      "_note": "The dashboard strip on the hub. Every number is computed on each build. {n} is a count, {time} a tip-off time, {total} the number of regular-season games.",
-      "opener_label": "Opening night",
-      "days_one": "{n} day",
-      "days_many": "{n} days",
-      "tonight_label": "Tonight",
-      "games_one": "{n} game",
-      "games_many": "{n} games",
-      "first_tip": "First tip {time}",
-      "next_label": "Next games",
-      "season_label": "Season",
-      "season_over": "Over",
-      "national_label": "National TV games",
-      "national_sub": "of {total} this season",
-      "national_none": "not published yet",
-      "ota_label": "Teams free over the air",
-      "ota_sub": "every local game on an antenna",
-      "countries_label": "Countries covered",
-      "countries_sub": "local prices and tip-off times"
-    },
     "team_summary": {
       "_note": "One line per team card on the hub, from data/local_tv.json. {station} is a local broadcaster, {name} a streaming option, {price} its monthly price.",
       "free_ota": "Free over the air on {station}",

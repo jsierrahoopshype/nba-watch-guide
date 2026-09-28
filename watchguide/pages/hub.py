@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 from collections import Counter
-from datetime import date
 
 from .. import config, seo
 from ..context import SiteContext
 from ..coverage import channels_for_game
-from ..render import Page, date_label, et_label, format_block, usd
+from ..render import Page, format_block, usd
 from ..sources.careers import match_key
 from .common import crumb_trail
 
@@ -35,53 +34,6 @@ def national_footnote(ctx: SiteContext) -> str:
     codes = set(hub.get("national_footnote_codes", []))
     in_feed = any(code in codes for g in ctx.games for code in g.national_codes)
     return hub.get("national_footnote", "") if in_feed else ""
-
-
-def _plural(n: int, one: str, many: str) -> str:
-    return (one if n == 1 else many).format(n=f"{n:,}")
-
-
-def stat_cards(ctx: SiteContext) -> list[dict]:
-    """The dashboard strip. Every number is worked out from the data files
-    and the schedule on each build."""
-    text = ctx.copy["hub"]["stats"]
-    cards = []
-
-    opener = min((g.date_et for g in ctx.games), default="")
-    today_games = ctx.games_today()
-    if today_games:
-        first = min((g for g in today_games if g.tipoff_et), key=lambda g: g.tipoff_utc, default=None)
-        cards.append({"label": text["tonight_label"],
-                      "num": _plural(len(today_games), text["games_one"], text["games_many"]),
-                      "sub": text["first_tip"].format(time=et_label(first)) if first else "",
-                      "href": config.site_path("tonight"), "id": "tonight"})
-    elif opener and ctx.today < opener:
-        days = (date.fromisoformat(opener) - date.fromisoformat(ctx.today)).days
-        cards.append({"label": text["opener_label"],
-                      "num": _plural(days, text["days_one"], text["days_many"]),
-                      "sub": date_label(opener), "href": "", "id": "opener"})
-    elif (nxt := ctx.showcase_day()):
-        count = sum(1 for g in ctx.games if g.date_et == nxt)
-        cards.append({"label": text["next_label"], "num": date_label(nxt), "text": True,
-                      "sub": _plural(count, text["games_one"], text["games_many"]),
-                      "href": config.site_path("tonight"), "id": "next"})
-    else:
-        cards.append({"label": text["season_label"], "num": text["season_over"], "text": True,
-                      "sub": "", "href": "", "id": "season"})
-
-    national = sum(1 for g in ctx.games if g.national_codes)
-    cards.append({"label": text["national_label"], "num": f"{national:,}",
-                  "sub": text["national_sub"].format(total=f"{len(ctx.games):,}") if national
-                  else text["national_none"], "href": "#national", "id": "national"})
-    ota = len(free_ota_teams(ctx))
-    cards.append({"label": text["ota_label"], "num": str(ota), "sub": text["ota_sub"],
-                  "href": "#teams", "id": "ota"})
-    countries = len(ctx.countries.countries)
-    cards.append({"label": text["countries_label"], "num": str(countries), "sub": text["countries_sub"],
-                  "href": "#countries", "id": "countries"})
-    for card in cards:
-        card.setdefault("text", False)       # True: the value is words, not a number
-    return cards
 
 
 def team_summary(ctx: SiteContext, team) -> dict[str, str]:
@@ -221,7 +173,6 @@ def build(ctx: SiteContext, env) -> list[Page]:
         national_partners=national_partners(ctx),
         ota_teams=free_ota_teams(ctx),
         showcase=showcase_rows(ctx),
-        stats=stat_cards(ctx),
         team_cards=team_cards(ctx),
         country_cards=country_cards(ctx),
         national_footnote=national_footnote(ctx),
