@@ -20,7 +20,7 @@ TAGS = re.compile(r"<[^>]+>")
 
 def hub_block(site) -> str:
     hub = (site / "index.html").read_text(encoding="utf-8")
-    start = hub.index("<section class=\"hub-games\"")
+    start = hub.index("data-hub-games")
     return hub[start:hub.index("</section>", start)]
 
 
@@ -63,7 +63,7 @@ def test_hub_lists_every_game_today_above_the_team_grid(game_day_site, fixture_g
     today = [g for g in fixture_games if g.date_et == TODAY]
     assert len(rows(block)) == len(today)
     assert {r.split('"')[1] for r in rows(block)} == {g.game_id for g in today}
-    assert hub.index("data-hub-games") < hub.index('class="team-grid"')
+    assert hub.index("data-hub-games") < hub.index('id="teams"')
     assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
     assert "data-rank-basis" in block and "counting only players in uniform tonight" in block
     assert "data-next-day" not in block
@@ -93,8 +93,13 @@ def test_row_carries_time_teams_channels_and_line(game_day_site):
     # Tip time in ET in the HTML, with the hook the page script uses to show local time.
     assert f'data-utc="{first.tipoff_utc}"' in row and "<span data-local-slot>7:00 pm ET</span>" in row
     away, home = TEAMS[first.away_tricode], TEAMS[first.home_tricode]
-    assert (f'<span class="hg-teams"><a href="/how-to-watch/{away.slug}">{away.full_name}</a> at '
-            f'<a href="/how-to-watch/{home.slug}">{home.full_name}</a></span>') in row
+    # Away first, then home, each with its logo and a link to its page.
+    names = re.findall(r'<span class="hg-name"><a href="([^"]+)">([^<]+)</a></span>', row)
+    assert names == [(f"/how-to-watch/{away.slug}", away.full_name), (f"/how-to-watch/{home.slug}", home.full_name)]
+    for team in (away, home):
+        assert re.search(rf'<img class="logo" src="/how-to-watch/assets/logos/{team.tricode.lower()}\.[0-9a-f]{{10}}\.svg" '
+                         r'width="28" height="28" loading="lazy" decoding="async" alt="">', row), team.tricode
+    assert '<span class="hg-at">at</span>' in row
     assert 'class="hg-channels"><span class="badge badge-' in row
     assert '<div class="hg-line small">' in row
 
@@ -199,7 +204,7 @@ def test_top_three_ranked_games_carry_the_badge(staggered_site):
     picked = [r.split('"')[1] for r in rows(block) if "data-top-pick" in r]
     assert picked == [g.game_id for g in last_three]          # listed in tip order, not rank order
     assert block.count(">Top pick</span>") == 3
-    # The badge sits in the row's top line, next to the teams.
+    # The badge sits in the card's top line, next to the tip time.
     top = next(r for r in rows(block) if "data-top-pick" in r).split('<div class="hg-channels">')[0]
     assert '<span class="badge badge-top" data-top-pick>Top pick</span>' in top
 

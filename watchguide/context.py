@@ -50,6 +50,7 @@ class SiteContext:
     recent_awards: list[dict[str, str]] = field(default_factory=list)
     countries: CountryData = field(default_factory=CountryData)
     nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
+    faces: dict[str, str] = field(default_factory=dict)           # match_key to assets/faces/<file>.webp
 
     by_tricode: dict[str, Team] = field(init=False)
     by_slug: dict[str, Team] = field(init=False)

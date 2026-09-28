@@ -208,6 +208,9 @@ def rank(games: list[Game], rosters: dict[str, list[dict[str, Any]]],
             # a collapsed detail under the row instead.
             "line_core": _line(text, [{**s, "out": []} for s in sides],
                                [away, home] if stakes is not None else None),
+            # Full names of the away and home players the line names (None
+            # for a side with nobody in uniform), for the hub's headshots.
+            "stars": [sides[0]["best"], sides[1]["best"]],
         })
     rows.sort(key=lambda r: (-r["score"], r["game"].tipoff_utc or "~", r["game"].game_id))
     for i, row in enumerate(rows, 1):

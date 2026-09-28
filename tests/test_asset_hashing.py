@@ -12,7 +12,14 @@ from watchguide.render import asset, hashed_asset_name
 from conftest import expected_page_count
 
 ASSET_URL = re.compile(r'(?:href|src)="(/how-to-watch/assets/[^"]+)"')
-HASHED = re.compile(r"^/how-to-watch/assets/(?P<stem>[\w-]+)\.(?P<hash>[0-9a-f]{10})\.(?P<ext>css|js)$")
+HASHED = re.compile(r"^/how-to-watch/assets/(?P<stem>[\w/-]+)\.(?P<hash>[0-9a-f]{10})\.(?P<ext>css|js|svg|woff2)$")
+# Headshots are written by the build from the headshot repo, not kept in
+# assets/, so they keep their plain (player-id) names.
+BUILD_WRITTEN = "/how-to-watch/assets/faces/"
+# The stylesheet's @font-face rules name the fonts by plain path (the CSS
+# itself is hashed), so the preload has to use that same plain URL or the
+# browser downloads the font twice.
+PLAIN_BY_DESIGN = ("/how-to-watch/assets/fonts/",)
 
 
 def _pages(site: Path):
@@ -27,6 +34,9 @@ def test_every_asset_url_is_hashed_and_the_file_exists(built_site):
         urls = ASSET_URL.findall(page.read_text(encoding="utf-8"))
         assert {u.rsplit(".", 1)[-1] for u in urls} >= {"css", "js"}, page
         for url in urls:
+            if url.startswith(BUILD_WRITTEN) or url.startswith(PLAIN_BY_DESIGN):
+                assert (built_site / url[len("/how-to-watch/"):]).is_file(), url
+                continue
             m = HASHED.match(url)
             assert m, f"{page}: {url} has no content hash"
             served = built_site / url[len("/how-to-watch/"):]

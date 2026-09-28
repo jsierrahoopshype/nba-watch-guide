@@ -1,19 +1,41 @@
 {% extends "base.html" %}
 {% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
 {% block content %}
-<h1>{{ text.h1 }}</h1>
-<p class="lede">{{ text.intro }}</p>
+<div class="phead">
+  <h1>{{ text.h1 }}</h1>
+  <p class="lede">{{ text.intro }}</p>
+</div>
 
-<section class="hub-games" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
+<div class="stat-cards" data-stats>
+  {%- for card in stats %}
+  {% if card.href %}<a class="stat-card link" href="{{ card.href }}" data-stat="{{ card.id }}">{% else %}<div class="stat-card" data-stat="{{ card.id }}">{% endif %}
+    <div class="lbl">{{ card.label }}</div>
+    <div class="num{% if card.text %} txt{% endif %}">{{ card.num }}</div>
+    {%- if card.sub %}<div class="sub">{{ card.sub }}</div>{% endif %}
+  {% if card.href %}</a>{% else %}</div>{% endif %}
+  {%- endfor %}
+</div>
+
+<section class="hub-games block" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
 {%- if showcase.rows %}
-<h2 data-rank-heading>{{ showcase.heading }}</h2>
+<div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2><span class="sub">{{ text.games_heading_sub }}</span></div>
 <ol class="hg-list">
   {%- for row in showcase.rows %}
   <li class="hg-row" data-game="{{ row.game.game_id }}">
     <div class="hg-top">
       {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
-      <span class="hg-teams">{% if row.away %}<a href="{{ row.away.path }}">{{ row.away_name }}</a>{% else %}{{ row.away_name }}{% endif %} at {% if row.home %}<a href="{{ row.home.path }}">{{ row.home_name }}</a>{% else %}{{ row.home_name }}{% endif %}</span>
       {%- if row.top_pick %} <span class="badge badge-top" data-top-pick>{{ text.top_pick }}</span>{% endif %}
+    </div>
+    <div class="hg-teams">
+      {%- for side in [(row.away, row.away_name, row.faces[0]), (row.home, row.home_name, row.faces[1])] %}
+      {%- set team, name, face = side %}
+      <div class="hg-team">
+        {%- if team %}<img class="logo" src="{{ asset('assets/logos/' ~ team.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt="">{% endif %}
+        <span class="hg-name">{% if team %}<a href="{{ team.path }}">{{ name }}</a>{% else %}{{ name }}{% endif %}</span>
+        {%- if face %}<img class="av" src="{{ asset(face.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="{{ face.name if face.is_face else '' }}"{% if face.is_face %} title="{{ face.name }}"{% endif %}>{% endif %}
+      </div>
+      {%- if loop.first %}<span class="hg-at">at</span>{% endif %}
+      {%- endfor %}
     </div>
     <div class="hg-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</div>
     <div class="hg-line small">{{ row.line }}</div>
@@ -34,12 +56,13 @@
 {%- else %}
 <div class="card"><p>{{ tonight_text.next_no_games }}</p></div>
 {%- endif %}
-<p class="small"><a href="{{ tonight_path }}" data-tonight-link>{{ text.tonight_page_link }}</a></p>
+<p class="small more-links"><a href="{{ tonight_path }}" data-tonight-link>{{ text.tonight_page_link }}</a></p>
 </section>
 
-<h2>{{ text.national_heading }}</h2>
-<div class="card">
-  <p class="small muted">{{ text.national_intro }}</p>
+<section class="block" id="national">
+<div class="block-head"><h2>{{ text.national_heading }}</h2></div>
+<div class="section">
+  <p class="hint">{{ text.national_intro }}</p>
   {%- if national_partners %}
   <ul class="chip-list">
     {%- for partner in national_partners %}
@@ -49,34 +72,53 @@
   {%- else %}
   <p class="small">{{ text.national_empty }}</p>
   {%- endif %}
+  {%- if national_footnote %}
+  <p class="footnote small muted" data-national-footnote>{{ national_footnote }}</p>
+  {%- endif %}
 </div>
-
 {%- if ota_teams %}
 <p class="small" data-ota-teams>{{ text.ota_line }}
   {% for team in ota_teams %}<a href="{{ team.path }}">{{ team.full_name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
 {%- endif %}
+</section>
 
-<h2>{{ text.teams_heading }}</h2>
-<ul class="team-grid">
-  {%- for team in teams %}
-  <li><a href="{{ team.path }}">{{ team.full_name }}</a></li>
+<section class="block" id="teams">
+<div class="block-head"><h2>{{ text.teams_heading }}</h2></div>
+<ul class="team-grid tcards">
+  {%- for card in team_cards %}
+  <li><a class="tcard" href="{{ card.team.path }}" data-summary="{{ card.summary.kind }}">
+    <img class="logo" src="{{ asset('assets/logos/' ~ card.team.tricode|lower ~ '.svg') }}" width="36" height="36" loading="lazy" decoding="async" alt="">
+    <span class="tc-t">
+      <span class="tc-n">{{ card.team.full_name }}</span>
+      <span class="tc-s">{{ card.summary.text }}</span>
+      {%- if card.summary.note %}<span class="tc-note">{{ card.summary.note }}</span>{% endif %}
+    </span>
+  </a></li>
   {%- endfor %}
 </ul>
+</section>
 
-{%- if countries %}
-<section data-countries>
-<h2>{{ text.countries_heading }}</h2>
-<p class="small muted">{{ text.countries_intro }}</p>
-<ul class="team-grid">
-  {%- for c in countries %}
-  <li><a href="{{ c.path }}">{{ c.name }}</a></li>
+{%- if country_cards %}
+<section class="block" id="countries" data-countries>
+<div class="block-head"><h2>{{ text.countries_heading }}</h2></div>
+<p class="hint">{{ text.countries_intro }}</p>
+<ul class="team-grid ccards">
+  {%- for card in country_cards %}
+  <li><a class="tcard" href="{{ card.country.path }}">
+    {%- if card.flag %}<img class="flag" src="{{ asset(card.flag) }}" width="24" height="18" loading="lazy" decoding="async" alt="">{% endif %}
+    <span class="tc-t">
+      <span class="tc-n">{{ card.country.name }}</span>
+      {%- if card.partner %}<span class="tc-s">{{ card.partner }}</span>{% endif %}
+    </span>
+  </a></li>
   {%- endfor %}
 </ul>
 </section>
 {%- endif %}
 
 {%- if faq %}
-<h2>{{ text.faq_heading }}</h2>
+<section class="block" id="faq">
+<div class="block-head"><h2>{{ text.faq_heading }}</h2></div>
 <div class="faq">
   {%- for item in faq %}
   <details{% if loop.first %} open{% endif %}>
@@ -85,5 +127,6 @@
   </details>
   {%- endfor %}
 </div>
+</section>
 {%- endif %}
 {% endblock %}

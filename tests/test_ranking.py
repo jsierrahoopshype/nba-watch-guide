@@ -268,7 +268,8 @@ def test_tonight_page_ranks_by_star_power(ranked_site, fixture_games):
 def _hub_order(site):
     hub = (site / "index.html").read_text(encoding="utf-8")
     block = hub[hub.index("data-hub-games"):hub.index("</section>", hub.index("data-hub-games"))]
-    return [re.sub(r"<[^>]+>", "", t) for t in re.findall(r'<span class="hg-teams">(.*?)</span>', block)], block
+    return [" at ".join(re.sub(r"<[^>]+>", "", n) for n in re.findall(r'<span class="hg-name">(.*?)</span>', row))
+            for row in block.split('<li class="hg-row" ')[1:]], block
 
 
 def _by_tip(fixture_games):
@@ -277,8 +278,8 @@ def _by_tip(fixture_games):
 
 
 def _top_picks(block):
-    return [re.sub(r"<[^>]+>", "", m) for m in
-            re.findall(r'<span class="hg-teams">(.*?)</span> <span class="badge badge-top" data-top-pick>', block)]
+    return [" at ".join(re.sub(r"<[^>]+>", "", n) for n in re.findall(r'<span class="hg-name">(.*?)</span>', row))
+            for row in block.split('<li class="hg-row" ')[1:] if "data-top-pick" in row]
 
 
 def test_hub_list_runs_by_tip_time_with_the_ranking_as_badges(ranked_site, fixture_games):

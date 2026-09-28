@@ -11,6 +11,7 @@
     "league_pass_note": "League Pass has no blackouts outside the US and Canada: every game is available live. 2026-27 prices are not published yet in any of these countries; price fields stay null until they are.",
     "league_pass_source_url": "https://support.watch.nba.com/hc/en-us/articles/115002481154-League-Pass-Blackouts",
     "league_pass_price_note": "Each country's league_pass block holds its League Pass prices in the local currency: monthly_price and season_price, null until published. A filled price renders on the next build with no code change; set price_verified true and source_url once checked, or the page adds a check-before-you-buy line.",
+    "flag_note": "flag names the SVG in assets/flags/ (ISO 3166 code, lower case) shown on the hub's country cards. A country with no flag file is shown without one.",
     "player_overrides_note": "player_overrides lists active players the career map has no nationality for (or a different one), by name as the career map spells it. Each one is listed on that country's page with their current team.",
     "recheck_before_tipoff": [
       "League Pass 2026-27 prices in GBP and EUR for all five countries",
@@ -37,6 +38,7 @@
     "uk": {
       "name": "United Kingdom",
       "slug": "uk",
+      "flag": "gb",
       "timezone": "Europe/London",
       "currency": "GBP",
       "nationality_aliases": ["United Kingdom", "England", "Great Britain", "Scotland", "Wales", "Northern Ireland", "British"],
@@ -61,6 +63,7 @@
     "spain": {
       "name": "Spain",
       "slug": "spain",
+      "flag": "es",
       "timezone": "Europe/Madrid",
       "currency": "EUR",
       "nationality_aliases": ["Spain", "Spanish"],
@@ -84,6 +87,7 @@
     "france": {
       "name": "France",
       "slug": "france",
+      "flag": "fr",
       "timezone": "Europe/Paris",
       "currency": "EUR",
       "nationality_aliases": ["France", "French"],
@@ -106,6 +110,7 @@
     "germany": {
       "name": "Germany",
       "slug": "germany",
+      "flag": "de",
       "timezone": "Europe/Berlin",
       "currency": "EUR",
       "nationality_aliases": ["Germany", "German"],
@@ -129,6 +134,7 @@
     "italy": {
       "name": "Italy",
       "slug": "italy",
+      "flag": "it",
       "timezone": "Europe/Rome",
       "currency": "EUR",
       "nationality_aliases": ["Italy", "Italian"],

@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
 {% block content %}
-<h1>{{ h1 }}</h1>
+<div class="phead">
+  <div class="name-row">
+    {%- if flag %}<img class="flag flag-lg" src="{{ asset(flag) }}" width="40" height="30" decoding="async" alt="">{% endif %}
+    <h1>{{ h1 }}</h1>
+  </div>
+</div>
 
 <section id="where-to-watch" data-country-answer>
 <h2>{{ text.answer_heading }}</h2>

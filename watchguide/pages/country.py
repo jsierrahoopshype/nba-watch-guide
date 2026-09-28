@@ -203,6 +203,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
             sources=sources(ctx, country),
             others=[c for c in countries if c.slug != country.slug],
             hub_path=config.site_path(),
+            flag=(f"assets/flags/{country.flag}.svg"
+                  if country.flag and (config.ASSET_DIR / "flags" / f"{country.flag}.svg").is_file() else ""),
             trail=trail,
         )
         pages.append(Page(out_path=f"{country.slug}/index.html", url=url, html=html,

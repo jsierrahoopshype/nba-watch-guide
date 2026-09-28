@@ -43,6 +43,7 @@ class Country:
     notes: str
     league_pass: dict[str, Any]
     player_overrides: list[str]
+    flag: str = ""                 # file name in assets/flags/, without .svg
 
     @property
     def zone(self) -> ZoneInfo:
@@ -90,6 +91,7 @@ def load_countries(data_dir: Path | None = None) -> CountryData:
             notes=c.get("notes", ""),
             league_pass=c.get("league_pass") or {},
             player_overrides=list(c.get("player_overrides") or []),
+            flag=c.get("flag", ""),
         ))
     return CountryData(
         countries=countries,

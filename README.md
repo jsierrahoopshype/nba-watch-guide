@@ -160,6 +160,13 @@ no rows for the current season at all, which is the case right now, pages say
 National TV is a badge, not points. The heading reads "Most star power tonight"
 until stakes are on for most of the day's games, then "Tonight's best games".
 
+The hub opens with a strip of stat cards (days to opening night, or tonight's
+game count; national TV games; teams free over the air; countries covered), all
+computed on each build. Each team card carries a one-line local summary from
+`data/local_tv.json` under the team pages' confidence rules. NBCSN and Telemundo
+are explained in a footnote under the partners box rather than listed as
+partners (`hub.national_footnote_codes` in `data/copy.json`).
+
 The hub lists every game of the day in tip-off order, earliest first, with a
 "Top pick" badge on the three highest-ranked, one compact row each: tip
 time (ET, shown in the reader's zone by the page script), both teams linked to
@@ -169,6 +176,21 @@ tonight page, so an injury that changes a line or the order shows on both. On a
 day with no games, the hub and the tonight page show the next day with games
 instead, headed "Next games: <weekday, date>", ranked without availability
 (the league's report only covers today's games).
+
+**Logos, flags, headshots and fonts.** Nothing on a page loads from another
+domain. Team logos (`assets/logos/<tricode>.svg`) and the player silhouette
+come from jsierrahoopshype/nba-headshots; the country flags
+(`assets/flags/`, flag-icons, MIT) and the self-hosted DM Sans and JetBrains
+Mono fonts (`assets/fonts/`, SIL OFL) from jsierrahoopshype/nba-born-died,
+whose design language the pages follow. All are in the repo and published
+under `/how-to-watch/assets/` with content-hashed names (the fonts keep plain
+names because the stylesheet names them). Player headshots for the hub's game
+cards are fetched at build time: `players/metadata/players_all.json` gives each
+player's file name, the 160px WebP comes from `players/headshots/face2-160/`,
+and it is saved to `assets/faces/` in the published tree, which the restore
+step brings back, so each face is downloaded once. A player with no headshot,
+or a failed download, gets the silhouette. `HEADSHOTS_BASE` points the fetch at
+another copy of that repo.
 
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is
 guessed. See the table above.
