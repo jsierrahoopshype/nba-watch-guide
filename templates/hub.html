@@ -6,16 +6,6 @@
   <p class="lede">{{ text.intro }}</p>
 </div>
 
-<div class="stat-cards" data-stats>
-  {%- for card in stats %}
-  {% if card.href %}<a class="stat-card link" href="{{ card.href }}" data-stat="{{ card.id }}">{% else %}<div class="stat-card" data-stat="{{ card.id }}">{% endif %}
-    <div class="lbl">{{ card.label }}</div>
-    <div class="num{% if card.text %} txt{% endif %}">{{ card.num }}</div>
-    {%- if card.sub %}<div class="sub">{{ card.sub }}</div>{% endif %}
-  {% if card.href %}</a>{% else %}</div>{% endif %}
-  {%- endfor %}
-</div>
-
 <section class="hub-games block" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
 {%- if showcase.rows %}
 <div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2><span class="sub">{{ text.games_heading_sub }}</span></div>

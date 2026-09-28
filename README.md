@@ -160,9 +160,8 @@ no rows for the current season at all, which is the case right now, pages say
 National TV is a badge, not points. The heading reads "Most star power tonight"
 until stakes are on for most of the day's games, then "Tonight's best games".
 
-The hub opens with a strip of stat cards (days to opening night, or tonight's
-game count; national TV games; teams free over the air; countries covered), all
-computed on each build. Each team card carries a one-line local summary from
+The hub goes straight from its title and intro to the day's games. Each team
+card carries a one-line local summary from
 `data/local_tv.json` under the team pages' confidence rules. NBCSN and Telemundo
 are explained in a footnote under the partners box rather than listed as
 partners (`hub.national_footnote_codes` in `data/copy.json`).

@@ -1,7 +1,7 @@
 /* HoopsMatic how-to-watch guide.
    Design language follows NBA Born & Died (jsierrahoopshype/nba-born-died,
    assets/style.css): same tokens, 12px cards with a 1px border, small
-   uppercase labels, JetBrains Mono for numbers and meta lines, stat cards,
+   uppercase labels, JetBrains Mono for numbers and meta lines,
    round headshots and 4:3 SVG flags. Change a value here and every page
    follows.
    No site nav lives in this file. The Worker injects the shared HoopsMatic nav,
@@ -292,7 +292,7 @@ a:hover { color: var(--accent); }
 .game-side ul { margin: 0; padding: 0; list-style: none; }
 .game-side li { display: flex; gap: 8px; justify-content: space-between; padding: 4px 0; font-size: 0.9rem; }
 
-/* ---------- page head, stat cards, blocks (from NBA Born & Died) ---------- */
+/* ---------- page head, blocks (from NBA Born & Died) ---------- */
 
 .phead { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 16px; }
 .name-row { display: flex; align-items: center; gap: 12px; }
@@ -306,13 +306,6 @@ a:hover { color: var(--accent); }
 .more-links { font-family: var(--mono); font-weight: 600; margin: 10px 0 0; }
 .more-links a { display: inline-flex; align-items: center; min-height: var(--tap); }
 
-.stat-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 8px; }
-.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; min-width: 0; color: var(--text); text-decoration: none; display: block; min-height: var(--tap); }
-a.stat-card:hover { border-color: var(--accent); color: var(--text); }
-.stat-card .lbl { font-size: 0.66rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 4px; }
-.stat-card .num { font-family: var(--mono); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
-.stat-card .num.txt { font-family: var(--sans); font-size: 1.05rem; letter-spacing: -0.01em; }
-.stat-card .sub { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
 
 /* images: fixed boxes so nothing jumps while they load */
 .logo { flex: none; width: 28px; height: 28px; object-fit: contain; }
@@ -353,9 +346,6 @@ a.stat-card:hover { border-color: var(--accent); color: var(--text); }
 
 @media (min-width: 700px) {
   h1 { font-size: 1.6rem; }
-  .stat-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-  .stat-card { padding: 14px 16px; }
-  .stat-card .num { font-size: 1.5rem; }
   .hg-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .logo-lg { width: 56px; height: 56px; }
 }
