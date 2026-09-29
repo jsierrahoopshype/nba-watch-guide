@@ -25,25 +25,6 @@ def updated_label(ctx: SiteContext) -> str:
     return f"{labels.get('updated_prefix', 'Updated')} {ctx.injuries_updated_at[:16].replace('T', ' ')} ET"
 
 
-def game_row(ctx: SiteContext, game, channels: list[dict[str, str]]) -> dict:
-    """Shape a game for the game card partial.
-
-    Availability is only shown for a game being played today. The league's
-    report is written for that day's games, so carrying a status onto a game
-    three days out would put a stale label next to a player's name.
-    """
-    today = game.date_et == ctx.today
-    return {
-        "game": game,
-        "is_today": today,
-        "home_name": ctx.team_name(game.home_tricode),
-        "away_name": ctx.team_name(game.away_tricode),
-        "home_players": ctx.players_for(game.home_tricode) if today else [],
-        "away_players": ctx.players_for(game.away_tricode) if today else [],
-        "channels": channels,
-    }
-
-
 def has_affiliate_link(ctx: SiteContext) -> bool:
     return any(s.affiliate_url for s in ctx.services.services)
 

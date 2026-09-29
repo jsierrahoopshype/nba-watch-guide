@@ -434,12 +434,16 @@ def update_lastmod(out_dir: Path, pages: list[Page], today: str,
     prev = lastmod.read_state(out_dir)
     listed = [p for p in pages if p.in_sitemap]
     rehash = {p.url: p.html for p in (written if written is not None else listed) if p.in_sitemap}
-    rehash.update({p.url: p.html for p in listed if p.url not in rehash and p.url not in prev})
+    # A placeholder (a page the refresh did not render) has no content to
+    # hash: it keeps its stored entry, or gets one on the next full build.
+    rehash.update({p.url: p.html for p in listed if p.url not in rehash and p.url not in prev
+                   and not p.meta.get("placeholder")})
     state = {p.url: prev[p.url] for p in listed if p.url in prev}
     state.update(lastmod.update(prev, rehash, today))
     lastmod.write_state(out_dir, state)
     for p in listed:
-        p.lastmod = state[p.url][1]
+        if p.url in state:
+            p.lastmod = state[p.url][1]
     return state
 
 
@@ -581,18 +585,22 @@ def refresh_build(out_dir: Path, today: str | None = None,
 
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
                        data_dir=data_dir, today=day, star_rosters=rosters, now=now)
+    # Only today's pair pages change with the report, so only they are rendered.
+    ctx.render_pairs = {game_pair_slug(g, ctx.by_tricode) for g in ctx.games_today()}
     notes.extend(injury_guard_notes(ctx))
     # An injury can change who a game's line names, so the hub may need a
     # face the last full build did not fetch.
     notes.extend(load_faces(out_dir, ctx, allow_fetch=True))
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
-    pairs_today = {game_pair_slug(g, ctx.by_tricode) for g in ctx.games_today()}
+    pairs_today = ctx.render_pairs
     # The hub carries the top-3 teaser, so it is refreshed with the tonight page.
     wanted = [p for p in pages
               if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today
               or p.meta.get("pair") in pairs_today]
 
+    if any(p.meta.get("placeholder") for p in wanted):
+        raise BuildError("refresh would write a pair page it did not render")
     write_pages(out_dir, wanted)
     # The refresh leaves most pages alone, but the tree it hands to publish.sh
     # still has to match the data, so the manifest is rewritten here too.

@@ -54,6 +54,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
     pages: list[Page] = []
 
     for slug, games in meetings(ctx.games, ctx.teams).items():
+        if ctx.render_pairs is not None and slug not in ctx.render_pairs:
+            # Not rendered on this run: a placeholder that is never written.
+            pages.append(Page(out_path=f"{slug}/index.html", url=pair_url(slug), html="",
+                              lastmod=ctx.today, meta={"pair": slug, "placeholder": True}))
+            continue
         a, b = by_name(*game_teams(games[0], ctx.by_tricode))
         fields = {"a": a.short_name, "b": b.short_name, "full_a": a.full_name,
                   "full_b": b.full_name, "season": ctx.season}

@@ -51,6 +51,10 @@ class SiteContext:
     countries: CountryData = field(default_factory=CountryData)
     nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
     faces: dict[str, str] = field(default_factory=dict)           # match_key to assets/faces/<file>.webp
+    # Pair pages to render in full; None means all. The 30-minute refresh
+    # sets it to today's pairs, and the rest come back as placeholders
+    # (see pages/pair.py) so the manifest, sitemap and lastmod still see them.
+    render_pairs: set[str] | None = None
 
     by_tricode: dict[str, Team] = field(init=False)
     by_slug: dict[str, Team] = field(init=False)

@@ -134,10 +134,10 @@ def test_pair_page_has_next_meeting_then_every_meeting(built_site, fixture_games
 
 
 def test_game_block_parts_are_in_the_layout_order(built_site):
-    """Pair pages and tonight's cards: where to watch, when, who's out, then
+    """Pair pages, tonight's cards and the team pages' next game: where to watch, when, who's out, then
     Also worth knowing, and nothing between the head and where to watch."""
-    pages = [read(built_site, "tonight")] + [p.read_text(encoding="utf-8")
-                                             for p in sorted(built_site.glob("*-vs-*/index.html"))[:20]]
+    pages = [read(built_site, "tonight")] + [read(built_site, t.slug) for t in TEAMS] + \
+        [p.read_text(encoding="utf-8") for p in sorted(built_site.glob("*-vs-*/index.html"))[:20]]
     seen = 0
     for page in pages:
         for block in blocks(page):
@@ -194,7 +194,7 @@ def test_layout_order_on_a_phone_in_a_real_browser(built_site, tmp_path):
             except Exception:
                 browser = p.chromium.launch(executable_path="/opt/pw-browsers/chromium")
             page = browser.new_page(viewport={"width": 375, "height": 800})
-            for path in ("tonight", slug):
+            for path in ("tonight", slug, TEAMS[0].slug):
                 page.goto(f"http://127.0.0.1:{server.server_port}/how-to-watch/{path}")
                 tops = page.eval_on_selector_all("[data-game-block]", """els => els.map(el =>
                     ['watch', 'when', 'out', 'worth'].map(k => {
@@ -382,22 +382,84 @@ def test_not_game_day_keeps_the_game_day_line(built_site, fixture_games):
     assert "Player availability shows here on game day." in block.split('data-part="out"')[1]
 
 
-def test_refresh_rewrites_todays_pair_pages(built_site, tmp_path, fixture_games, monkeypatch):
+def test_refresh_renders_and_writes_only_todays_pair_pages_with_the_latest_report(
+        built_site, tmp_path, fixture_games, monkeypatch):
     import shutil
-    from watchguide.build import refresh_build
+    from watchguide import build as build_module, lastmod
     from watchguide.sources import injuries as injuries_source
+    game = next(g for g in fixture_games if g.date_et == TODAY)
     monkeypatch.setattr(injuries_source, "fetch_raw", lambda: [
-        {"player": "Some One", "status": "Out", "injury": "", "date": TODAY}])
-    monkeypatch.setattr(injuries_source, "fetch_player_teams", lambda: {})
+        {"player": "Fresh Injury", "status": "Out", "injury": "Knee", "date": TODAY}])
+    monkeypatch.setattr(injuries_source, "fetch_player_teams", lambda: {"fresh injury": game.home_tricode})
+    rendered = []
+    real_render = build_module.render_pages
+
+    def spy(ctx, env=None):
+        pages = real_render(ctx, env)
+        rendered.extend(p.meta["pair"] for p in pages if p.meta.get("pair") and not p.meta.get("placeholder"))
+        return pages
+    monkeypatch.setattr(build_module, "render_pages", spy)
+
     site = tmp_path / "site"
     shutil.copytree(built_site, site)
+    before = lastmod.read_state(site)
+    stamps = {p: p.stat().st_mtime_ns for p in site.glob("*-vs-*/index.html")}
+    build_module.refresh_build(site, today=TODAY, repo_root=tmp_path)
+
+    today_pairs = {canonical_slug(g) for g in fixture_games if g.date_et == TODAY}
+    assert set(rendered) == today_pairs and len(rendered) == len(today_pairs)
+    changed = {p.parent.name for p, t in stamps.items() if p.stat().st_mtime_ns != t}
+    assert changed == today_pairs
+    page = read(site, canonical_slug(game))
+    out_part = blocks(page)[0].split('data-part="out"')[1]
+    assert 'data-player="Fresh Injury"' in out_part and ">Out</span>" in out_part
+    # Every pair page is still in the manifest and keeps its lastmod entry.
+    after = lastmod.read_state(site)
+    pair_urls = {u for u in before if "-vs-" in u}
+    assert pair_urls and pair_urls <= set(after)
+    assert (site / "data" / "expected-pages.txt").read_text(encoding="utf-8").split() == \
+        expected_pages(games=fixture_games)
+
+
+def test_injury_ranking_and_out_parts_do_not_move_lastmod(fixture_games):
+    """The same pair page with a different report, a different ranking line and
+    the safety net on hashes the same, so the sitemap date stays put."""
+    from watchguide import lastmod
+    from watchguide.pages import pair as pair_page
+    from watchguide.render import build_env
     game = next(g for g in fixture_games if g.date_et == TODAY)
-    target = site / canonical_slug(game) / "index.html"
-    target.write_text("stale", encoding="utf-8")
-    later = next(g for g in fixture_games if g.date_et > TODAY and
-                 all(x.date_et != TODAY for x in fixture_games if canonical_slug(x) == canonical_slug(g)))
-    untouched = site / canonical_slug(later) / "index.html"
-    untouched.write_text("keep", encoding="utf-8")
-    refresh_build(site, today=TODAY, repo_root=tmp_path)
-    assert "data-game-block" in target.read_text(encoding="utf-8")
-    assert untouched.read_text(encoding="utf-8") == "keep"
+    slug = canonical_slug(game)
+    env = build_env()
+    env.globals["noindex"] = True
+
+    def page(**kw):
+        ctx = _ctx(fixture_games, **kw)
+        ctx.render_pairs = {slug}
+        return next(p.html for p in pair_page.build(ctx, env) if p.meta["pair"] == slug)
+
+    quiet = page(now=f"{TODAY}T10:00:00-05:00")
+    hurt = page(injuries={game.home_tricode: [{"player": "Star Guy", "status": "Out", "injury": "", "date": TODAY}]},
+                injuries_as_of=TODAY, now=f"{TODAY}T10:00:00-05:00")
+    missing = page(injuries_as_of="2027-01-14", now=f"{TODAY}T18:00:00-05:00")
+    star = json.loads((config.DATA_DIR / "recent_awards.json").read_text(encoding="utf-8"))["awards"][0]["player"]
+    ranked = page(now=f"{TODAY}T10:00:00-05:00", star_rosters={game.home_tricode: [{"player": star}]})
+    assert len({quiet, hurt, missing, ranked}) == 4 and star in ranked
+    assert "Injury report not available yet" in missing and "Star Guy" in hurt
+    assert lastmod.content_hash(quiet) == lastmod.content_hash(hurt) == lastmod.content_hash(missing) \
+        == lastmod.content_hash(ranked)
+    stripped = lastmod.normalise(hurt)
+    for marker in ('data-part="out"', "data-rank-line", "data-player", "data-updated", "data-stale-notice"):
+        assert marker not in stripped, marker
+    assert 'data-part="watch"' in stripped and 'data-part="when"' in stripped
+
+
+def test_team_next_game_card_is_the_shared_game_block(built_site, fixture_games):
+    for team in TEAMS:
+        page = read(built_site, team.slug)
+        nxt = min((g for g in fixture_games if g.involves(team.tricode) and g.date_et >= TODAY),
+                  key=lambda g: (g.date_et, g.tipoff_utc))
+        section = page[page.index("<h2>Next game</h2>"):page.index('id="market"')]
+        assert section.count("data-game-block") == 1 and f'id="game-{nxt.game_id}"' in section
+        head_to_watch = section[section.index("data-game-block"):section.index('data-part="watch"')]
+        assert "data-updated" not in head_to_watch and "data-stale-notice" not in head_to_watch
+        assert f'href="/how-to-watch/{canonical_slug(nxt)}#game-{nxt.game_id}" data-pair-link' in section

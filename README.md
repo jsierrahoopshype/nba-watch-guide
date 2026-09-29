@@ -175,8 +175,8 @@ card carries a one-line local summary from
 are explained in a footnote under the partners box rather than listed as
 partners (`hub.national_footnote_codes` in `data/copy.json`).
 
-**Layout rule for every game view** (pair pages, the tonight page, hub game
-cards): where to watch comes first and nothing may push it down. The order is
+**Layout rule for every game view** (pair pages, the tonight page, the team
+pages' next game, hub game cards): where to watch comes first and nothing may push it down. The order is
 (1) channels, the out-of-market and in-market answer for both fan bases and
 "Why can't I watch this game?", (2) date and tip time, (3) who's out with the
 ranking line, (4) "Also worth knowing", last. The full-size version is one
@@ -208,7 +208,11 @@ alphabetically ("76ers vs. Knicks"), trying each of `pair.titles` in
 meeting in full (the game block above) and then every meeting this season
 with its channels; each game has one `#game-<id>` anchor, which the hub and
 tonight cards and the team pages' schedule rows link to. The pages are in the
-sitemap and the manifest, and the refresh rewrites the ones for today's games.
+sitemap and the manifest. The 30-minute refresh renders and writes only the
+pair pages of today's games, with the latest report; the others stay as
+published and keep their sitemap dates. Who's out, the ranking line, the
+"Updated" stamp and the out-of-date notice are `data-volatile`, so a new
+report never moves a pair page's `<lastmod>`.
 
 "Also worth knowing" comes from `watchguide/worth.py`: a list of item
 functions, each returning lines. Today it has rest ("Knicks on the second
