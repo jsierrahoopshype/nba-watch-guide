@@ -15,7 +15,7 @@ from markupsafe import Markup
 
 from . import config
 
-TITLE_MAX = 60
+TITLE_MAX = 60           # the whole <title>, " | HoopsMatic" included
 DESCRIPTION_MAX = 155
 
 
@@ -30,8 +30,28 @@ def _cut(text: str, limit: int) -> str:
     return clipped.rstrip(" ,.:;-")
 
 
+BRAND_SUFFIX = " | HoopsMatic"
+
+
+def branded(text: str) -> str:
+    """'<title part> | HoopsMatic', within TITLE_MAX characters.
+
+    The suffix is never dropped. When the whole thing would be too long the
+    title part is shortened instead: first by dropping a trailing ': subtitle'
+    (so 'How to Watch Timberwolves Games 2026-27: TV & Streaming' becomes
+    'How to Watch Timberwolves Games 2026-27'), and only if that is still too
+    long by cutting whole words."""
+    budget = TITLE_MAX - len(BRAND_SUFFIX)
+    text = " ".join((text or "").split())
+    while len(text) > budget and ": " in text:
+        text = text.rsplit(": ", 1)[0]
+    if len(text) > budget:
+        text = _cut(text, budget).rstrip(" &|")
+    return text + BRAND_SUFFIX
+
+
 def title(template: str, **fields: str) -> str:
-    return _cut(template.format(**fields), TITLE_MAX)
+    return branded(template.format(**fields))
 
 
 def description(template: str, **fields: str) -> str:

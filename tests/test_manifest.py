@@ -71,7 +71,7 @@ def test_a_new_country_raises_the_count_with_no_other_change(tmp_path_factory, f
     full_build(out, today=TODAY, offline=True, data_dir=data_dir)
     assert read_manifest(out) == after
     page = (out / "portugal" / "index.html").read_text(encoding="utf-8")
-    assert "<title>How to Watch the NBA in Portugal in 2026-27</title>" in page
+    assert "<title>How to Watch the NBA in Portugal in 2026-27 | HoopsMatic</title>" in page
     assert publish_check(out).returncode == 0
 
 
