@@ -37,7 +37,7 @@
     "game_link_label": "channels and player availability"
   },
   "team": {
-    "title": "How to Watch {team} Games {season}: TV & Streaming",
+    "title": "How to Watch the {team}: TV & Streaming",
     "description": "Every {full_team} game in {season}, the channel it is on, what each service costs and the cheapest combination to watch them all.",
     "h1": "How to watch the {full_team} in {season}",
     "intro": "Every remaining {full_team} regular-season game, the channel it is on and what it costs to watch. Switch between outside the market and inside it below.",

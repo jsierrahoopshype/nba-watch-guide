@@ -44,3 +44,16 @@ def test_hoopshype_never_appears_in_the_generated_site(built_site):
         if path.is_file() and b"hoopshype" in path.read_bytes().lower():
             offenders.append(str(path.relative_to(built_site)))
     assert offenders == [], f"HoopsHype found in: {offenders}"
+
+
+def test_team_titles_name_the_team_without_the_season(built_site, teams):
+    """'How to Watch the <nickname>: TV & Streaming | HoopsMatic' for all 30,
+    whole (never shortened), with the season kept in the H1 and description."""
+    for team in teams:
+        markup = (built_site / team.slug / "index.html").read_text(encoding="utf-8")
+        expected = f"How to Watch the {team.short_name}: TV & Streaming | HoopsMatic"
+        assert html.unescape(TITLE.findall(markup)[0]) == expected
+        assert html.unescape(OG_TITLE.findall(markup)[0]) == expected
+        assert len(expected) <= seo.TITLE_MAX, expected
+        assert "2026-27" in re.search(r"<h1>([^<]*)</h1>", markup).group(1)
+        assert "2026-27" in re.search(r'<meta name="description" content="([^"]*)"', markup).group(1)
