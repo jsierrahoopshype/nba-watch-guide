@@ -8,8 +8,7 @@ from .. import config, seo, worth
 from ..context import SiteContext
 from ..pairs import pair_path
 from ..render import Page, format_block, usd
-from ..sources.careers import match_key
-from .common import all_channels, crumb_trail, fan_answers
+from .common import accent_style, crumb_trail, face, players_to_watch, watch_view
 
 
 def national_partners(ctx: SiteContext) -> list[dict]:
@@ -80,14 +79,6 @@ def country_cards(ctx: SiteContext) -> list[dict]:
     return cards
 
 
-def _face(ctx: SiteContext, name: str | None) -> dict | None:
-    """The headshot (or silhouette) for a player the ranking line names."""
-    if not name:
-        return None
-    rel = ctx.faces.get(match_key(name))
-    return {"name": name, "src": rel or "assets/silhouette.svg", "is_face": bool(rel)}
-
-
 def free_ota_teams(ctx: SiteContext) -> list:
     """Teams whose local games are all free over the air, from data/local_tv.json."""
     return [t for t in ctx.teams if (local := ctx.local(t.slug)) and local.ota.status == "all"]
@@ -112,15 +103,18 @@ def showcase_rows(ctx: SiteContext) -> dict:
             out = [{"team": ctx.team_name(t), "players": ctx.out_players(t)}
                    for t in (game.away_tricode, game.home_tricode)]
             out = [side for side in out if side["players"]]
-        fans, why = fan_answers(ctx, game)
+        watch = watch_view(ctx, game)
         rows.append({
             "game": game,
             "away": away, "home": home,
             "away_name": r["away_name"], "home_name": r["home_name"],
-            # Both fan bases' channels, as on the pair page and tonight's cards.
-            "channels": all_channels(ctx, game),
-            "fans": fans,
-            "why": why,
+            "away_accent": ctx.team_accent(game.away_tricode),
+            "home_accent": ctx.team_accent(game.home_tricode),
+            "accent_style": accent_style(ctx, game),
+            # Both fan bases' channels with the way to get each, the fan-base
+            # answer (one line when it is the same everywhere) and "Why ...?"
+            # only when someone is blocked: the game block's watch part.
+            "watch": watch,
             "pair_path": pair_path(game, ctx.by_tricode),
             "worth": worth.lines(ctx, game),
             # Only the safety net's message: on a normal day the Out list is
@@ -131,7 +125,7 @@ def showcase_rows(ctx: SiteContext) -> dict:
             "out": out,
             "out_count": sum(len(side["players"]) for side in out),
             "top_pick": r["rank"] <= TOP_PICKS,
-            "faces": [_face(ctx, n) for n in r.get("stars", [None, None])],
+            "players": players_to_watch(ctx, game, r.get("stars")),
         })
     rows.sort(key=lambda row: (row["game"].tipoff_utc or "~", row["game"].game_id))
     return {**show, "rows": rows}

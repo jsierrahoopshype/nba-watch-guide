@@ -35,7 +35,7 @@ from .coverage import channel_names, channels_for_game
 from .manifest import expected_pages, mismatch, write_manifest
 from .model import Game, load_teams
 from .pages import BUILDERS
-from .pairs import game_pair_slug
+from .pairs import game_pair_slug, meetings
 from .pages.links_block import render as render_links_block
 from .render import Page, build_env, hashed_asset_name
 from .sources import careers as careers_source
@@ -376,10 +376,36 @@ def unplaced_overrides(ctx: SiteContext) -> list[str]:
             for name in c.player_overrides if match_key(name) not in placed]
 
 
+def face_names(ctx: SiteContext) -> list[str]:
+    """Every player a game's "Players to watch" can show on this run: the
+    hub and tonight games, each team's next game and each pair's next
+    meeting. In first-seen order, each once."""
+    games = [row["game"] for row in ctx.showcase()["rows"]]
+    for team in ctx.teams:
+        nxt = ctx.next_game(team.tricode)
+        if nxt:
+            games.append(nxt)
+    for group in meetings(ctx.games, ctx.teams).values():
+        nxt = next((g for g in group if g.date_et >= ctx.today), None)
+        if nxt:
+            games.append(nxt)
+    names: list[str] = []
+    seen: set[str] = set()
+    for game in games:
+        if game.game_id in seen:
+            continue
+        seen.add(game.game_id)
+        row = ctx.ranking_row(game)
+        for name in (row or {}).get("stars", []):
+            if name and name not in names:
+                names.append(name)
+    return names
+
+
 def load_faces(out_dir: Path, ctx: SiteContext, allow_fetch: bool = True) -> list[str]:
-    """Headshots for the players the hub's game cards name, into
+    """Headshots for the players the game cards name (see face_names), into
     assets/faces/ in the published tree. Sets ctx.faces; never raises."""
-    names = [n for row in ctx.showcase()["rows"] for n in row.get("stars", []) if n]
+    names = face_names(ctx)
     index, inote = headshots_source.load_index(out_dir, allow_fetch=allow_fetch)
     ctx.faces, fnote = headshots_source.ensure_faces(out_dir, names, index, allow_fetch=allow_fetch)
     return [inote, fnote]

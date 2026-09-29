@@ -145,7 +145,7 @@ def test_tonight_page_shows_the_next_game_day_on_an_off_day(off_day_site, fixtur
     label = f"{date.fromisoformat(nxt):%A, %B} {date.fromisoformat(nxt).day}"
     assert f"<h2 data-rank-heading>Next games: {label}</h2>" in page
     assert "No NBA games scheduled today." not in page
-    assert page.count('<article class="game gb" id="game-') == sum(1 for g in fixture_games if g.date_et == nxt)
+    assert page.count('data-game-block>') == sum(1 for g in fixture_games if g.date_et == nxt)
     assert "Player availability shows here on game day." in page
     assert "data-player" not in page
     assert '<link rel="canonical" href="https://hoopsmatic.com/how-to-watch/tonight">' in page

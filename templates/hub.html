@@ -11,39 +11,52 @@
 <div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2><span class="sub">{{ text.games_heading_sub }}</span></div>
 <ol class="hg-list">
   {%- for row in showcase.rows %}
-  <li class="hg-row" data-game="{{ row.game.game_id }}">
-    {#- The layout rule: where to watch first (channels, then the fan-base
-        answer and "Why can't I watch" in one collapsed detail), then the tip
-        time, then the ranking line and who's out, then "Also worth knowing".
+  <li class="hg-row" data-game="{{ row.game.game_id }}"{% if row.accent_style %} style="{{ row.accent_style }}"{% endif %}>
+    {#- The layout rule: where to watch first (channel chips with the way to
+        get each, the fan-base answer, the cable line and "Why ...?" only
+        when someone is blocked), then the tip time, then players to watch
+        with the ranking line, then who's out, then "Also worth knowing".
         The team names are the card's title. The card's one primary link,
         stretched over the whole card by CSS, goes to the game on its pair
         page; team links and the details sit above it, so they stay tappable. #}
     <div class="hg-teams">
-      {%- for side in [(row.away, row.away_name, row.faces[0]), (row.home, row.home_name, row.faces[1])] %}
-      {%- set team, name, face = side %}
-      <div class="hg-team">
+      {%- for side in [(row.away, row.away_name, row.away_accent), (row.home, row.home_name, row.home_accent)] %}
+      {%- set team, name, accent = side %}
+      <div class="hg-team"{% if accent %} style="--tc:{{ accent }}"{% endif %}>
         {%- if team %}
         <a class="hg-team-link" href="{{ team.path }}"><img class="logo" src="{{ asset('assets/logos/' ~ team.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt=""><span class="hg-name">{{ name }}</span></a>
         {%- else %}
         <span class="hg-name">{{ name }}</span>
         {%- endif %}
-        {%- if face %}<img class="av" src="{{ asset(face.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="{{ face.name if face.is_face else '' }}"{% if face.is_face %} title="{{ face.name }}"{% endif %} data-volatile>{% endif %}
       </div>
       {%- if loop.first %}<span class="hg-at">at</span>{% endif %}
       {%- endfor %}
     </div>
+    {%- set watch = row.watch %}
     <div class="hg-watch" data-part="watch">
-      <div class="hg-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</div>
-      <details class="hg-why small">
-        <summary>{{ copy.why.summary }}</summary>
-        {%- for fan in row.fans %}
+      <div class="hg-channels">{% with channels = watch.chips %}{% include "partials/channels.html" %}{% endwith %}</div>
+      {%- if watch.everyone %}
+      <p class="hg-everyone small" data-everyone><strong>{{ game_text.everyone }}:</strong> {{ watch.everyone }}</p>
+      {%- else %}
+      <details class="hg-where small">
+        <summary>{{ game_text.where_summary }}</summary>
+        {%- for fan in watch.fans %}
         <p class="hg-fan"><strong>{{ fan.label }}</strong></p>
         {%- for st in fan.states %}
         <p class="gb-answer" data-state="{{ st.state }}"><span class="gb-state">{{ st.label }}:</span> {{ st.answer }}</p>
         {%- endfor %}
         {%- endfor %}
-        {%- for line in row.why %}<p class="why-line">{{ line }}</p>{% endfor %}
       </details>
+      {%- endif %}
+      {%- if watch.cable %}
+      <p class="hg-cable small" data-cable>{{ watch.cable }}</p>
+      {%- endif %}
+      {%- if watch.why %}
+      <details class="hg-why small" data-why="{{ watch.why.kinds|join(' ') }}">
+        <summary>{{ watch.why.summary }}</summary>
+        {%- for line in watch.why.lines %}<p class="why-line">{{ line }}</p>{% endfor %}
+      </details>
+      {%- endif %}
     </div>
     <div class="hg-top" data-part="when">
       <a class="card-link" href="{{ row.pair_path or (tonight_path ~ '#game-' ~ row.game.game_id) }}">
@@ -51,7 +64,17 @@
         <span class="sr-only">: {{ row.away_name }} at {{ row.home_name }}, {{ text.game_link_label }}</span></a>
       {%- if row.top_pick %} <span class="badge badge-top" data-top-pick data-volatile>{{ text.top_pick }}</span>{% endif %}
     </div>
-    <div class="hg-line small" data-volatile>{{ row.line }}</div>
+    <div class="hg-players" data-part="players" data-volatile>
+      <p class="hg-label">{{ game_text.players_heading }}</p>
+      {%- if row.players %}
+      <ul class="hg-faces">
+        {%- for p in row.players %}
+        <li><img class="av" src="{{ asset(p.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="" data-volatile><span class="hg-pname">{{ p.name }}</span><span class="hg-pteam">{{ p.team }}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      <div class="hg-line small" data-volatile>{{ row.line }}</div>
+    </div>
     {%- if row.out %}
     <details class="hg-out small" data-volatile>
       <summary>{{ tonight_text.out_summary.format(count=row.out_count) }}</summary>

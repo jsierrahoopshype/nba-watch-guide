@@ -13,7 +13,7 @@ from .. import seo
 from ..context import SiteContext, long_date
 from ..pairs import by_name, game_teams, meetings, pair_url
 from ..render import Page, date_label, et_label, safe_format
-from .common import all_channels, crumb_trail, game_view, updated_label
+from .common import all_channels, chips, crumb_trail, game_view, updated_label
 
 JSONLD_GAME_LIMIT = 10
 
@@ -47,6 +47,19 @@ def pair_description(ctx: SiteContext, text: dict, a: str, b: str, nxt, channels
                 seo.description(candidates[-1]))
 
 
+def final_label(ctx: SiteContext, game) -> dict | None:
+    """A played game's score once the feed has it (gameStatus 3), away
+    first as in the matchup; None before then."""
+    if not game.is_final:
+        return None
+    sides = []
+    for tricode, score in ((game.away_tricode, game.away_score), (game.home_tricode, game.home_score)):
+        team = ctx.by_tricode.get(tricode)
+        sides.append({"name": team.short_name if team else tricode, "score": score,
+                      "won": game.winner == tricode})
+    return {"label": ctx.copy["game"]["final"], "sides": sides}
+
+
 def build(ctx: SiteContext, env) -> list[Page]:
     text = ctx.copy["pair"]
     game_text = ctx.copy["game"]
@@ -69,10 +82,12 @@ def build(ctx: SiteContext, env) -> list[Page]:
         rows = [{
             "game": g,
             "is_next": nxt is not None and g.game_id == nxt.game_id,
+            "is_past": g.date_et < ctx.today,
             "date_label": date_label(g.date_et),
             "matchup": f"{ctx.team_name(g.away_tricode)} at {ctx.team_name(g.home_tricode)}",
             "time_label": et_label(g),
-            "channels": all_channels(ctx, g),
+            "final": final_label(ctx, g),
+            "channels": chips(ctx, all_channels(ctx, g)),
         } for g in games]
 
         title = pair_title(text, a.short_name, b.short_name)

@@ -15,7 +15,7 @@ from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
 from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
-from .common import (crumb_trail, empty_players_label, game_view,
+from .common import (chips, crumb_trail, empty_players_label, game_view,
                      has_affiliate_link, updated_label)
 
 JSONLD_GAME_LIMIT = 10
@@ -144,7 +144,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "opponent_label": ("vs " if g.is_home_for(team.tricode) else "at ")
                               + ctx.team_name(g.opponent_of(team.tricode)),
             "time_label": et_label(g),
-            "channels": channels_for_game(g, team.tricode, local, tba),
+            # Chips: a long local name shows short, the full one in title.
+            "channels": chips(ctx, channels_for_game(g, team.tricode, local, tba)),
             "pair_path": pair_path(g, ctx.by_tricode),
         } for g in remaining]
 

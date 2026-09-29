@@ -12,12 +12,12 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from . import config
+from . import colors, config
 from .countries import CountryData, load_countries
 from .ranking import STAKES, load_awards, load_weights, rank
 from .ranking import mode as ranking_mode
 from .model import (Game, LocalTV, ServiceData, Team, load_copy, load_local_tv,
-                    load_services, load_teams)
+                    load_services, load_team_colors, load_teams)
 
 ET = ZoneInfo(config.EASTERN)
 
@@ -51,6 +51,7 @@ class SiteContext:
     countries: CountryData = field(default_factory=CountryData)
     nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
     faces: dict[str, str] = field(default_factory=dict)           # match_key to assets/faces/<file>.webp
+    team_colors: dict[str, str] = field(default_factory=dict)     # tricode to '#RRGGBB', data/team_colors.json
     # Pair pages to render in full; None means all. The 30-minute refresh
     # sets it to today's pairs, and the rest come back as placeholders
     # (see pages/pair.py) so the manifest, sitemap and lastmod still see them.
@@ -129,11 +130,33 @@ class SiteContext:
         """The ranking line for one game, the same one tonight's list shows:
         named players, records once stakes are on. Availability only counts
         on game day, as everywhere else."""
+        row = self.ranking_row(game)
+        return row["line"] if row else ""
+
+    def ranking_row(self, game: Game) -> dict[str, Any] | None:
+        """rank() for one game: its line and the two players it names
+        (row["stars"], away then home, None for a side with nobody)."""
         injuries = self.injuries if game.date_et == self.today else {}
         rows = rank([game], self.star_rosters, injuries, self.team_name,
                     self.copy.get("tonight", {}), self.star_weights, self.recent_awards,
                     all_games=self.games)
-        return rows[0]["line"] if rows else ""
+        return rows[0] if rows else None
+
+    # -- display helpers ----------------------------------------------------
+
+    def short_channel(self, name: str) -> str:
+        """A channel chip's name: the short name data/local_tv.json gives
+        any team for it, otherwise the name itself."""
+        for local in self.local_tv.values():
+            if name in local.short_names:
+                return local.short_names[name]
+        return name
+
+    def team_accent(self, tricode: str) -> str:
+        """The team's color as a ring or edge color, darkened if needed to
+        keep 3:1 against the card (see watchguide/colors.py), or ""."""
+        value = self.team_colors.get(tricode)
+        return colors.accent(value) if value else ""
 
     def injury_report_missing(self) -> bool:
         """The safety net for a game day whose report has not arrived.
@@ -224,4 +247,5 @@ def load_context(
         recent_awards=load_awards(data_dir),
         countries=load_countries(data_dir),
         nationalities=nationalities or {},
+        team_colors=load_team_colors(data_dir),
     )
