@@ -228,6 +228,10 @@ availability feed somewhere else. Both are optional and neither is a secret.
   tree's `index.html` files are exactly those paths, and lists any missing or
   unexpected ones. Adding a team or a country needs no change to a script or
   a test. `PUBLISH_CHECK_ONLY=1 ./scripts/publish.sh site` runs the check alone.
+- Old content-hashed CSS and JS copies are kept for 7 days so cached HTML still
+  finds them, then deleted on publish. `data/asset-first-seen.json` in the
+  published tree records when each copy first appeared; any copy a page still
+  names, or that is the current build's, is never deleted.
 - `data/how-to-watch-links.html` is written on every build: a plain block of
   absolute links to the hub, the tonight page, all 30 teams and every country
   page, for pasting into

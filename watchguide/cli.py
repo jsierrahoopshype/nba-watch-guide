@@ -4,6 +4,7 @@
     python -m watchguide refresh --out site
     python -m watchguide games-today --out site
     python -m watchguide verify
+    python -m watchguide prune-assets --out site
 """
 
 from __future__ import annotations
@@ -101,6 +102,19 @@ def cmd_verify(args) -> int:
     return 0 if ok else 1
 
 
+def cmd_prune_assets(args) -> int:
+    """Delete hashed CSS/JS copies first seen more than --keep-days ago that
+    no page names. scripts/publish.sh runs this before it pushes."""
+    from datetime import date
+    from .prune import prune
+    deleted = prune(_out(args), today=date.fromisoformat(args.today) if args.today else None,
+                    keep_days=args.keep_days)
+    print(f"prune: deleted {len(deleted)} old hashed asset copies")
+    for rel in deleted:
+        print(f"  {rel}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="watchguide")
     parser.add_argument("--out", default=str(config.DEFAULT_OUT_DIR),
@@ -116,6 +130,9 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("refresh", help="refresh availability and the pages it touches").set_defaults(func=cmd_refresh)
     sub.add_parser("games-today", help="exit 0 if there are games today").set_defaults(func=cmd_games_today)
     sub.add_parser("verify", help="check the live feeds").set_defaults(func=cmd_verify)
+    prune = sub.add_parser("prune-assets", help="delete old hashed CSS/JS copies from the tree")
+    prune.add_argument("--keep-days", type=int, default=7)
+    prune.set_defaults(func=cmd_prune_assets)
 
     args = parser.parse_args(argv)
     try:
