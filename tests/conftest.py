@@ -118,20 +118,36 @@ def _build(tmp_path_factory, fixture_games, label: str, data_dir=None, injuries=
     return out
 
 
+def data_with_noindex(tmp_path_factory, label: str, noindex: bool):
+    """A copy of data/ with the noindex switch forced to `noindex`. Any test
+    that cares whether noindex is on builds from one of these, never from the
+    shipped data/copy.json, whose value flips when the section launches."""
+    data_dir = _copy_data(tmp_path_factory, label)
+    copy = json.loads((data_dir / "copy.json").read_text(encoding="utf-8"))
+    copy["noindex"] = noindex
+    (data_dir / "copy.json").write_text(json.dumps(copy), encoding="utf-8")
+    return data_dir
+
+
 @pytest.fixture(scope="session")
 def built_site(tmp_path_factory, fixture_games):
     """The whole site, rendered offline from the fixture schedule, with the
-    shipped data files (so noindex is on)."""
+    shipped data files. Tests on this one must not depend on the noindex
+    state: use built_site_noindex or built_site_indexed for that."""
     return _build(tmp_path_factory, fixture_games, "site")
 
 
 @pytest.fixture(scope="session")
+def built_site_noindex(tmp_path_factory, fixture_games):
+    """The same site with noindex forced on."""
+    data_dir = data_with_noindex(tmp_path_factory, "data-noindex", True)
+    return _build(tmp_path_factory, fixture_games, "site-noindex", data_dir=data_dir)
+
+
+@pytest.fixture(scope="session")
 def built_site_indexed(tmp_path_factory, fixture_games):
-    """The same site with noindex turned off in data/copy.json."""
-    data_dir = _copy_data(tmp_path_factory, "data-indexed")
-    copy = json.loads((data_dir / "copy.json").read_text(encoding="utf-8"))
-    copy["noindex"] = False
-    (data_dir / "copy.json").write_text(json.dumps(copy), encoding="utf-8")
+    """The same site with noindex forced off."""
+    data_dir = data_with_noindex(tmp_path_factory, "data-indexed", False)
     return _build(tmp_path_factory, fixture_games, "site-indexed", data_dir=data_dir)
 
 

@@ -13,7 +13,7 @@ TITLE = re.compile(r"<title>([^<]*)</title>")
 OG_TITLE = re.compile(r'<meta property="og:title" content="([^"]*)">')
 
 
-@pytest.mark.parametrize("fixture", ["built_site", "built_site_indexed"])
+@pytest.mark.parametrize("fixture", ["built_site_noindex", "built_site_indexed"])
 def test_every_title_and_og_title_ends_with_the_brand(fixture, request):
     site = request.getfixturevalue(fixture)
     pages = sorted(site.rglob("index.html"))

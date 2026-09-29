@@ -158,8 +158,8 @@ def test_each_country_links_the_hub_and_the_other_four(site):
             assert (f'href="/how-to-watch/{other}"' in others) == (other != slug)
 
 
-def test_sitemap_lists_countries_only_when_indexed(site, built_site_indexed):
-    assert "<loc>" not in (site / "sitemap.xml").read_text(encoding="utf-8")
+def test_sitemap_lists_countries_only_when_indexed(built_site_noindex, built_site_indexed):
+    assert "<loc>" not in (built_site_noindex / "sitemap.xml").read_text(encoding="utf-8")
     xml = (built_site_indexed / "sitemap.xml").read_text(encoding="utf-8")
     for slug in SLUGS:
         assert f"<loc>https://hoopsmatic.com/how-to-watch/{slug}</loc>" in xml

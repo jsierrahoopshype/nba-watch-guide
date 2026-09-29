@@ -118,9 +118,9 @@ def test_a_content_change_moves_only_that_page(tmp_path_factory, fixture_games):
     assert moved == {f"https://hoopsmatic.com/how-to-watch/{s}" for s in ("uk", "spain", "france", "germany", "italy")}
 
 
-def test_state_is_kept_while_noindex_is_on(built_site):
-    assert "<loc>" not in (built_site / "sitemap.xml").read_text(encoding="utf-8")
-    assert len(lastmod.read_state(built_site)) == expected_page_count()
+def test_state_is_kept_while_noindex_is_on(built_site_noindex):
+    assert "<loc>" not in (built_site_noindex / "sitemap.xml").read_text(encoding="utf-8")
+    assert len(lastmod.read_state(built_site_noindex)) == expected_page_count()
 
 
 def test_sitemap_uses_the_stored_dates(built_site_indexed):
