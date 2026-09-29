@@ -25,7 +25,8 @@ expected.
 | Country pages: TV partners, prices, League Pass prices, player overrides, the games in Europe | `data/countries.json` |
 | Country page titles, descriptions and wording | `data/copy.json`, the `country` block |
 
-`noindex` ships as `true`. While it is on, every page carries
+`noindex` ships as `false`: the section has launched and every page is open to
+search engines. Set it to `true` to hide the section again. While it is on, every page carries
 `<meta name="robots" content="noindex,follow">`, `sitemap.xml` is still written
 but lists no URLs, and `robots.txt` does not point at it. Each sitemap
 `<lastmod>` is the date the page's content last changed, not the build date:
@@ -36,8 +37,7 @@ out-of-date notice, the availability lists and badges, the injury-driven
 ranking on the hub and tonight page) and the content hashes in asset names.
 The file is kept up to date while `noindex` is on, so the dates are right the
 day the sitemap starts listing pages. Canonicals do not
-change either way. Set it to `false` when the Worker is live and you want the
-guide in search results.
+change either way.
 
 A service only shows a price once it has `monthly_price_usd`, a `source_url`, a
 `last_verified` date and `verified: true`. Anything else renders as "Price not
