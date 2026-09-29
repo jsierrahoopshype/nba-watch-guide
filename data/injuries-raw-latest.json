@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-09-28T17:59:59+00:00",
+ "fetched_at": "2026-09-29T10:13:34+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5464,
+ "row_count": 5474,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38125,6 +38125,81 @@
    "date": "2026-09-25",
    "prevStatus": "Available",
    "eta": "4-6 weeks"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-09-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "Partial torn Achilles",
+   "date": "2026-09-28",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "Partial Torn Achilles",
+   "date": "2026-09-28",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "Partial Torn Achilles",
+   "date": "2026-09-28",
+   "prevStatus": "Out",
+   "eta": "1 month"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "Partial Torn Achilles",
+   "date": "2026-09-28",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Yanic Konan Niederhauser",
+   "status": "Out",
+   "injury": "Right Foot Lisfranc Injury",
+   "date": "2026-09-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Yanic Konan Niederhauser",
+   "status": "Out",
+   "injury": "Right Foot Lisfranc Injury",
+   "date": "2026-09-28",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Out",
+   "injury": "Partial Torn Achilles",
+   "date": "2026-09-28",
+   "prevStatus": "Out",
+   "eta": "5-7 weeks"
+  },
+  {
+   "player": "Yanic Konan Niederhauser",
+   "status": "Out",
+   "injury": "Right Foot Lisfranc Injury",
+   "date": "2026-09-28",
+   "prevStatus": "Out",
+   "eta": "5-7 weeks"
+  },
+  {
+   "player": "Nick Richards",
+   "status": "Available",
+   "injury": "Right Elbow Sprain",
+   "date": "2026-09-28",
+   "prevStatus": "Out"
   }
  ]
 }
