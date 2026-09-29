@@ -94,11 +94,12 @@ def test_row_carries_time_teams_channels_and_line(game_day_site):
     assert f'data-utc="{first.tipoff_utc}"' in row and "<span data-local-slot>7:00 pm ET</span>" in row
     away, home = TEAMS[first.away_tricode], TEAMS[first.home_tricode]
     # Away first, then home, each with its logo and a link to its page.
-    names = re.findall(r'<span class="hg-name"><a href="([^"]+)">([^<]+)</a></span>', row)
-    assert names == [(f"/how-to-watch/{away.slug}", away.full_name), (f"/how-to-watch/{home.slug}", home.full_name)]
-    for team in (away, home):
-        assert re.search(rf'<img class="logo" src="/how-to-watch/assets/logos/{team.tricode.lower()}\.[0-9a-f]{{10}}\.svg" '
-                         r'width="28" height="28" loading="lazy" decoding="async" alt="">', row), team.tricode
+    links = re.findall(r'<a class="hg-team-link" href="([^"]+)"><img class="logo" src="([^"]+)"[^>]*>'
+                       r'<span class="hg-name">([^<]+)</span></a>', row)
+    assert [(href, name) for href, _, name in links] == [
+        (f"/how-to-watch/{away.slug}", away.full_name), (f"/how-to-watch/{home.slug}", home.full_name)]
+    for (_, src, _), team in zip(links, (away, home)):
+        assert re.fullmatch(rf"/how-to-watch/assets/logos/{team.tricode.lower()}\.[0-9a-f]{{10}}\.svg", src), team.tricode
     assert '<span class="hg-at">at</span>' in row
     assert 'class="hg-channels"><span class="badge badge-' in row
     assert '<div class="hg-line small">' in row
@@ -144,7 +145,7 @@ def test_tonight_page_shows_the_next_game_day_on_an_off_day(off_day_site, fixtur
     label = f"{date.fromisoformat(nxt):%A, %B} {date.fromisoformat(nxt).day}"
     assert f"<h2 data-rank-heading>Next games: {label}</h2>" in page
     assert "No NBA games scheduled today." not in page
-    assert page.count('<article class="game">') == sum(1 for g in fixture_games if g.date_et == nxt)
+    assert page.count('<article class="game" id="game-') == sum(1 for g in fixture_games if g.date_et == nxt)
     assert "Player availability shows here on game day." in page
     assert "data-player" not in page
     assert '<link rel="canonical" href="https://hoopsmatic.com/how-to-watch/tonight">' in page

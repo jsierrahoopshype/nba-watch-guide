@@ -33,7 +33,8 @@
       "missing": "Local TV not announced yet",
       "check": "Check before you buy"
     },
-    "games_heading_sub": "Tip times in your time zone"
+    "games_heading_sub": "Tip times in your time zone",
+    "game_link_label": "channels and player availability"
   },
   "team": {
     "title": "How to Watch {team} Games {season}: TV & Streaming",

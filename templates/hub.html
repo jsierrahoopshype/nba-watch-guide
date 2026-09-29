@@ -12,16 +12,23 @@
 <ol class="hg-list">
   {%- for row in showcase.rows %}
   <li class="hg-row" data-game="{{ row.game.game_id }}">
+    {#- The card's one primary link, stretched over the whole card by CSS.
+        Team links and the Out list sit above it, so they stay tappable. #}
     <div class="hg-top">
-      {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
+      <a class="card-link" href="{{ tonight_path }}#game-{{ row.game.game_id }}">
+        {%- with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith -%}
+        <span class="sr-only">: {{ row.away_name }} at {{ row.home_name }}, {{ text.game_link_label }}</span></a>
       {%- if row.top_pick %} <span class="badge badge-top" data-top-pick>{{ text.top_pick }}</span>{% endif %}
     </div>
     <div class="hg-teams">
       {%- for side in [(row.away, row.away_name, row.faces[0]), (row.home, row.home_name, row.faces[1])] %}
       {%- set team, name, face = side %}
       <div class="hg-team">
-        {%- if team %}<img class="logo" src="{{ asset('assets/logos/' ~ team.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt="">{% endif %}
-        <span class="hg-name">{% if team %}<a href="{{ team.path }}">{{ name }}</a>{% else %}{{ name }}{% endif %}</span>
+        {%- if team %}
+        <a class="hg-team-link" href="{{ team.path }}"><img class="logo" src="{{ asset('assets/logos/' ~ team.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt=""><span class="hg-name">{{ name }}</span></a>
+        {%- else %}
+        <span class="hg-name">{{ name }}</span>
+        {%- endif %}
         {%- if face %}<img class="av" src="{{ asset(face.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="{{ face.name if face.is_face else '' }}"{% if face.is_face %} title="{{ face.name }}"{% endif %}>{% endif %}
       </div>
       {%- if loop.first %}<span class="hg-at">at</span>{% endif %}

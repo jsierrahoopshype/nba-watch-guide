@@ -26,7 +26,7 @@
 
 {%- if games %}
 {%- for row in games %}
-<article class="game">
+<article class="game" id="game-{{ row.game.game_id }}">
   <div class="game-head">
     <span class="game-teams">{{ row.away_name }} at {{ row.home_name }}</span>
     {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
