@@ -26,7 +26,15 @@ expected.
 
 `noindex` ships as `true`. While it is on, every page carries
 `<meta name="robots" content="noindex,follow">`, `sitemap.xml` is still written
-but lists no URLs, and `robots.txt` does not point at it. Canonicals do not
+but lists no URLs, and `robots.txt` does not point at it. Each sitemap
+`<lastmod>` is the date the page's content last changed, not the build date:
+`data/sitemap_lastmod.json` in the published tree keeps a content hash and a
+date per URL, and a date moves only when the hash does. The hash leaves out
+anything marked `data-volatile` in the templates (the "Updated" stamp, the
+out-of-date notice, the availability lists and badges, the injury-driven
+ranking on the hub and tonight page) and the content hashes in asset names.
+The file is kept up to date while `noindex` is on, so the dates are right the
+day the sitemap starts listing pages. Canonicals do not
 change either way. Set it to `false` when the Worker is live and you want the
 guide in search results.
 

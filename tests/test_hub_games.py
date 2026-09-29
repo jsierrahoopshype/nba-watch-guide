@@ -102,13 +102,13 @@ def test_row_carries_time_teams_channels_and_line(game_day_site):
         assert re.fullmatch(rf"/how-to-watch/assets/logos/{team.tricode.lower()}\.[0-9a-f]{{10}}\.svg", src), team.tricode
     assert '<span class="hg-at">at</span>' in row
     assert 'class="hg-channels"><span class="badge badge-' in row
-    assert '<div class="hg-line small">' in row
+    assert '<div class="hg-line small" data-volatile>' in row
 
 
 def test_out_players_sit_in_a_collapsed_detail_not_the_row(game_day_site):
     site, first = game_day_site
     row = next(r for r in rows(hub_block(site)) if r.startswith(f'data-game="{first.game_id}"'))
-    main, _, detail = row.partition('<details class="hg-out small">')
+    main, _, detail = row.partition('<details class="hg-out small" data-volatile>')
     assert "Home Starter" not in main
     assert "<details" in row and " open" not in detail.split(">")[0]
     assert "<summary>Out (1)</summary>" in detail
@@ -207,7 +207,7 @@ def test_top_three_ranked_games_carry_the_badge(staggered_site):
     assert block.count(">Top pick</span>") == 3
     # The badge sits in the card's top line, next to the tip time.
     top = next(r for r in rows(block) if "data-top-pick" in r).split('<div class="hg-channels">')[0]
-    assert '<span class="badge badge-top" data-top-pick>Top pick</span>' in top
+    assert '<span class="badge badge-top" data-top-pick data-volatile>Top pick</span>' in top
 
 
 def test_tonight_page_keeps_ranking_order(staggered_site):
@@ -227,7 +227,7 @@ def test_heading_lines_and_basis_unchanged(staggered_site):
     assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
     assert "counting only players in uniform tonight" in block
     star_row = next(r for r in rows(block) if r.startswith(f'data-game="{last_three[-1].game_id}"'))
-    assert '<div class="hg-line small">Star Charlie</div>' in star_row
+    assert '<div class="hg-line small" data-volatile>Star Charlie</div>' in star_row
 
 
 def test_off_day_list_is_also_in_tip_order_with_badges(off_day_site, fixture_games):

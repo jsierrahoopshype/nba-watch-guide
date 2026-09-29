@@ -6,12 +6,12 @@
   <h1>{{ text.h1 }}</h1>
   <p class="lede">{{ text.intro }}</p>
 </div>
-<p class="updated"><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
-<div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice>{{ labels.stale_notice }}</div>
+<p class="updated" data-volatile><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+<div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice data-volatile>{{ labels.stale_notice }}</div>
 
 {%- if ranked %}
 <h2 data-rank-heading>{{ rank_text.heading }}</h2>
-<ol class="ranked" data-ranked>
+<ol class="ranked" data-ranked data-volatile>
   {%- for row in ranked %}
   <li data-rank="{{ row.rank }}" data-score="{{ row.score }}"{% if row.stakes is not none %} data-stakes="{{ row.stakes }}"{% endif %}>
     <strong>{{ row.away_name }} at {{ row.home_name }}</strong>
@@ -33,7 +33,7 @@
   </div>
   <p class="game-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
   {%- if is_today %}
-  <div class="game-sides">
+  <div class="game-sides" data-volatile>
     {% with heading = row.away_name, players = row.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
     {% with heading = row.home_name, players = row.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
   </div>

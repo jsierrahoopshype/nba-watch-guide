@@ -311,7 +311,7 @@ def test_an_injury_on_the_refresh_moves_a_game_down(ranked_site, fixture_games, 
     assert hub_order == _by_tip(fixture_games)
     assert sorted(_top_picks(block)) == sorted(order[:3])
     row = next(r for r in block.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{first.game_id}"'))
-    assert '<div class="hg-line small">No recent All-NBA or All-Star players in uniform</div>' in row
+    assert '<div class="hg-line small" data-volatile>No recent All-NBA or All-Star players in uniform</div>' in row
     assert "<summary>Out (1)</summary>" in row and "Star One" in row
 
 
