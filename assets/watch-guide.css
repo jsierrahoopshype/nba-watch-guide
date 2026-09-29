@@ -292,6 +292,28 @@ a:hover { color: var(--accent); }
 .game-side ul { margin: 0; padding: 0; list-style: none; }
 .game-side li { display: flex; gap: 8px; justify-content: space-between; padding: 4px 0; font-size: 0.9rem; }
 
+/* ---------- game block (pair pages, tonight): one column, fixed order ----------
+   Where to watch, then date and tip, then who's out, then Also worth knowing.
+   Plain block flow at every width: nothing here may reorder those parts. */
+.game-list { list-style: none; margin: 0; padding: 0; }
+.gb-head { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; justify-content: space-between; }
+.gb-head a { color: inherit; }
+.gb-head h3 { margin: 0; }
+.pair-link { display: block; margin-top: 4px; font-family: var(--sans); font-size: 0.85rem; }
+.gb-fans { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 8px; }
+.gb-fan h4, .gb-out h4, .gb-worth h4 { margin: 0 0 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+.gb-answer { margin: 2px 0; font-size: 0.9rem; }
+.gb-state { font-weight: 600; }
+.gb-watch .why { margin-top: 8px; }
+.gb-when { margin: 12px 0 0; font-family: var(--mono); font-size: 0.85rem; color: var(--text-2); }
+.gb-when > span + span { margin-left: 6px; }
+.gb-out { margin-top: 12px; }
+.gb-out .game-sides { margin-top: 4px; }
+.game-side h5 { margin: 0 0 6px; font-size: 0.82rem; color: var(--text-2); }
+.gb-line { margin: 8px 0 0; color: var(--text-2); }
+.gb-worth { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-soft); }
+.gb-worth ul { margin: 0; padding-left: 18px; }
+
 /* ---------- page head, blocks (from NBA Born & Died) ---------- */
 
 .phead { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 16px; }
@@ -325,7 +347,7 @@ a:hover { color: var(--accent); }
 .card-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); z-index: 1; }
 .card-link:focus-visible { outline: none; }
 .card-link:focus-visible::after { outline: 3px solid var(--accent); outline-offset: 2px; }
-.hg-team-link, .hg-out { position: relative; z-index: 2; }
+.hg-team-link, .hg-out, .hg-why { position: relative; z-index: 2; }
 .hg-team-link { display: inline-flex; align-items: center; gap: 10px; min-height: var(--tap); min-width: 0; flex: 1 1 auto; color: var(--text); text-decoration: none; border-radius: var(--radius-sm); }
 .hg-team-link:hover .hg-name { color: var(--accent-ink); text-decoration: underline; }
 .hg-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 24px; }
@@ -339,6 +361,12 @@ a:hover { color: var(--accent); }
 .hg-out { margin-top: 4px; }
 .hg-out summary { cursor: pointer; color: var(--text-muted); min-height: var(--tap); display: flex; align-items: center; }
 .hg-out ul { margin: 0; padding-left: 18px; }
+.hg-watch { margin-bottom: 6px; }
+.hg-why summary { cursor: pointer; color: var(--text-muted); min-height: var(--tap); display: flex; align-items: center; }
+.hg-why p { margin: 4px 0; }
+.hg-top { margin-top: 2px; }
+.hg-worth { list-style: none; margin: 6px 0 0; padding: 6px 0 0; border-top: 1px solid var(--border-soft); color: var(--text-2); }
+.hg-worth li { padding: 1px 0; }
 .badge-top { background: transparent; color: var(--brand-ink); box-shadow: inset 0 0 0 1px var(--brand); flex: 0 0 auto; }
 
 /* ---------- hub: team and country cards ---------- */
@@ -423,6 +451,7 @@ hr.rule { border: 0; border-top: 1px solid var(--border-soft); margin: 28px 0; }
 @media (min-width: 560px) {
   .team-grid { grid-template-columns: 1fr 1fr; }
   .game-sides { grid-template-columns: 1fr 1fr; }
+  .gb-fans { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 860px) {
   h1 { font-size: 2rem; }

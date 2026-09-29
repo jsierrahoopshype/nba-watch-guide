@@ -48,6 +48,12 @@ STALE_WINDOW_START_HOUR = 12  # 12:00 ET
 STALE_WINDOW_END_HOUR = 1     # 01:00 ET next day
 
 
+# From this hour ET until midnight on a game day, a day with no injury
+# listing for any team playing and no report dated today reads "Injury report
+# not available yet" (see SiteContext.injury_report_missing).
+INJURY_GUARD_START_HOUR = 15
+
+
 def public_url(path: str = "") -> str:
     """Absolute public URL. No trailing slash, ever."""
     path = path.strip("/")

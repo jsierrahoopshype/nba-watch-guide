@@ -98,6 +98,8 @@ def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
             if (g.get("postponedStatus") or "").upper() in {"P", "POSTPONED"}:
                 continue
             b = g.get("broadcasters") or {}
+            status = _count(g.get("gameStatus")) or 0
+            home, away = g.get("homeTeam") or {}, g.get("awayTeam") or {}
             date_et, tip_et, tip_utc = _et_times(g)
             if not date_et:
                 continue
@@ -120,6 +122,11 @@ def normalize(raw: dict, season: str = config.SEASON) -> list[Game]:
                 home_losses=_count((g.get("homeTeam") or {}).get("losses")),
                 away_wins=_count((g.get("awayTeam") or {}).get("wins")),
                 away_losses=_count((g.get("awayTeam") or {}).get("losses")),
+                # The feed lists a score of 0 on games not played yet, so a
+                # score only counts once the game is final.
+                game_status=status,
+                home_score=_count(home.get("score")) if status == 3 else None,
+                away_score=_count(away.get("score")) if status == 3 else None,
             ))
 
     if not games:

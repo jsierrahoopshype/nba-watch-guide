@@ -1,10 +1,12 @@
 """The list of pages a build must produce, worked out from the data files.
 
 hub + tonight + one page per team in data/teams.json + one page per country
-in data/countries.json. Every build writes it to data/expected-pages.txt in
+in data/countries.json + one page per pair of teams that meets in the
+schedule (watchguide/pairs.py). Every build writes it to data/expected-pages.txt in
 the published tree, one path per line, and scripts/publish.sh refuses to
 publish a tree whose index.html files are not exactly these paths. Adding a
-team or a country to the data changes the list with no code change.
+team or a country to the data, or a schedule with new pairings, changes the
+list with no code change.
 """
 
 from __future__ import annotations
@@ -12,17 +14,21 @@ from __future__ import annotations
 from pathlib import Path
 
 from .countries import load_countries
-from .model import load_teams
+from .model import Game, load_teams
+from .pairs import pair_slugs
 
 MANIFEST_FILE = "data/expected-pages.txt"
 FIXED_PAGES = ("index.html", "tonight/index.html")
 
 
-def expected_pages(data_dir: Path | None = None) -> list[str]:
-    """Paths relative to the publish root, sorted."""
+def expected_pages(data_dir: Path | None = None, games: list[Game] | None = None) -> list[str]:
+    """Paths relative to the publish root, sorted. Pair pages come from
+    `games`, the season's schedule; without it only the data-file pages count."""
+    teams = load_teams(data_dir)
     pages = list(FIXED_PAGES)
-    pages += [f"{t.slug}/index.html" for t in load_teams(data_dir)]
+    pages += [f"{t.slug}/index.html" for t in teams]
     pages += [f"{c.slug}/index.html" for c in load_countries(data_dir).countries]
+    pages += [f"{slug}/index.html" for slug in pair_slugs(games or [], teams)]
     if len(set(pages)) != len(pages):
         dupes = sorted({p for p in pages if pages.count(p) > 1})
         raise ValueError(f"two pages would share a path: {', '.join(dupes)}")

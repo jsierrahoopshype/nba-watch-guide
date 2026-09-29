@@ -36,6 +36,11 @@
 
   /* ---------------- local kick-off times ---------------- */
 
+  function readerIsEastern() {
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone === 'America/New_York'; }
+    catch (e) { return false; }
+  }
+
   function initLocalTimes() {
     var nodes = $$('[data-utc]');
     if (!nodes.length) return;
@@ -50,6 +55,9 @@
         .formatToParts(when).filter(function (p) { return p.type === 'timeZoneName'; })[0].value; } catch (e) { /* ignore */ }
       var slot = node.querySelector('[data-local-slot]');
       if (slot) slot.textContent = local + (zone ? ' ' + zone : '');
+      // A second, reader's-zone time next to the ET one: only worth showing
+      // when the reader is not on Eastern time already.
+      if (node.hasAttribute('data-local-extra')) node.hidden = readerIsEastern();
     });
   }
 

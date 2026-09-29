@@ -4,9 +4,8 @@ from __future__ import annotations
 
 from .. import config, seo
 from ..context import SiteContext
-from ..coverage import channels_for_game
 from ..render import Page
-from .common import crumb_trail, empty_players_label, game_row, updated_label
+from .common import crumb_trail, game_view, updated_label
 
 SLUG = "tonight"
 
@@ -15,22 +14,17 @@ def build(ctx: SiteContext, env) -> list[Page]:
     text = ctx.copy["tonight"]
     labels = ctx.labels()
     url = config.public_url(SLUG)
-    # On an off day the page leads with the next day that has games.
+    # On an off day the page leads with the next day that has games. One list
+    # of game cards, in ranking order; each card carries its ranking line.
     show = ctx.showcase()
-    games = [r["game"] for r in show["rows"]]
-    games.sort(key=lambda g: (g.tipoff_utc or "~", g.game_id))
-
-    rows = []
-    for game in games:
-        channels = channels_for_game(game, game.home_tricode,
-                                     ctx.local(ctx.by_tricode[game.home_tricode].slug)
-                                     if game.home_tricode in ctx.by_tricode else None,
-                                     labels.get("tba", "TBA"))
-        rows.append(game_row(ctx, game, channels))
+    cards = [{"rank": r["rank"], "stakes": r["stakes"], "national": r["national"],
+              "view": game_view(ctx, r["game"], line=r["line"])} for r in show["rows"]]
 
     blocks = [seo.breadcrumbs(crumb_trail(ctx, text["h1"], url))]
-    for row in rows:
-        event = seo.sports_event(row["game"], row["home_name"], row["away_name"], row["channels"], url)
+    for card in cards:
+        view = card["view"]
+        event = seo.sports_event(view["game"], view["home_name"], view["away_name"],
+                                 view["channels"], url)
         if event:
             blocks.append(event)
 
@@ -43,21 +37,18 @@ def build(ctx: SiteContext, env) -> list[Page]:
         "jsonld": seo.jsonld(blocks),
     }
 
-    ranked = show["rows"]
-    rank_text = {"heading": show["heading"], "basis": show["basis"]}
-
     html = env.get_template("tonight.html").render(
-        ranked=ranked,
-        rank_text=rank_text,
+        cards=cards,
+        rank_text={"heading": show["heading"], "basis": show["basis"]},
         page=page_meta,
         copy=ctx.copy,
         labels=labels,
         text=text,
-        games=rows,
+        game_text=ctx.copy.get("game", {}),
+        show_pair_link=True,
         is_today=show["is_today"],
         updated_label=updated_label(ctx),
         stale=ctx.availability_is_stale(),
-        empty_players_label=empty_players_label(ctx),
         trail=crumb_trail(ctx, text["h1"], url),
     )
     return [Page(out_path=f"{SLUG}/index.html", url=url, html=html, lastmod=ctx.today)]

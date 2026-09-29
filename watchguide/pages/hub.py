@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from collections import Counter
 
-from .. import config, seo
+from .. import config, seo, worth
 from ..context import SiteContext
-from ..coverage import channels_for_game
+from ..pairs import pair_path
 from ..render import Page, format_block, usd
 from ..sources.careers import match_key
-from .common import crumb_trail
+from .common import all_channels, crumb_trail, fan_answers
 
 
 def national_partners(ctx: SiteContext) -> list[dict]:
@@ -103,7 +103,6 @@ def showcase_rows(ctx: SiteContext) -> dict:
     collapsed detail. The TOP_PICKS highest-ranked games carry a badge; the
     tonight page keeps the full ranking order."""
     show = ctx.showcase()
-    tba = ctx.labels().get("tba", "TBA")
     rows = []
     for r in show["rows"]:
         game = r["game"]
@@ -113,12 +112,21 @@ def showcase_rows(ctx: SiteContext) -> dict:
             out = [{"team": ctx.team_name(t), "players": ctx.out_players(t)}
                    for t in (game.away_tricode, game.home_tricode)]
             out = [side for side in out if side["players"]]
+        fans, why = fan_answers(ctx, game)
         rows.append({
             "game": game,
             "away": away, "home": home,
             "away_name": r["away_name"], "home_name": r["home_name"],
-            "channels": channels_for_game(game, game.home_tricode,
-                                          ctx.local(home.slug) if home else None, tba),
+            # Both fan bases' channels, as on the pair page and tonight's cards.
+            "channels": all_channels(ctx, game),
+            "fans": fans,
+            "why": why,
+            "pair_path": pair_path(game, ctx.by_tricode),
+            "worth": worth.lines(ctx, game),
+            # Only the safety net's message: on a normal day the Out list is
+            # the collapsed detail, and a day with nobody out shows nothing.
+            "out_message": (ctx.copy["game"]["injury_report_missing"]
+                            if show["is_today"] and ctx.injury_report_missing() else ""),
             "line": r["line_core"],
             "out": out,
             "out_count": sum(len(side["players"]) for side in out),
@@ -177,6 +185,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         country_cards=country_cards(ctx),
         national_footnote=national_footnote(ctx),
         tonight_text=ctx.copy.get("tonight", {}),
+        game_text=ctx.copy.get("game", {}),
         faq=faq,
         tonight_path=config.site_path("tonight"),
         countries=ctx.countries.countries,

@@ -22,7 +22,8 @@ def test_the_block_is_generated(built_site):
 
 def test_it_links_the_hub_tonight_all_thirty_teams_and_five_countries(built_site):
     links = HREF.findall(_block(built_site))
-    assert len(links) == expected_page_count()
+    # Pair pages are reached from team pages and game cards, not this block.
+    assert len(links) == expected_page_count(games=[])
     assert config.public_url() in links
     assert config.public_url("tonight") in links
     for team in load_teams():

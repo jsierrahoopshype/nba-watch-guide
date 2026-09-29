@@ -86,14 +86,13 @@
   },
   "tonight": {
     "title": "NBA Games Tonight: TV Channels & Start Times",
-    "description": "Every NBA game today in ET order, the channel each one is on and which players are out, doubtful or questionable.",
+    "description": "Every NBA game today, best first: the channel each one is on, where to watch it in and out of market and which players are out.",
     "h1": "NBA games today",
-    "intro": "Every game on today's schedule in Eastern Time order, with the channel and the players listed as out, doubtful or questionable.",
+    "intro": "Every game on today's schedule, best first, with where to watch it in and out of market and the players listed as out, doubtful or questionable.",
     "no_games": "No NBA games scheduled today.",
     "injuries_heading": "Player availability",
     "rank_heading": "Most star power tonight",
     "rank_basis": "Ranked by All-NBA and All-Star selections over the last three seasons, recent seasons weighted more, counting only players in uniform tonight.",
-    "rank_score": "Score {score}",
     "rank_no_stars": "no recent All-NBA or All-Star players in uniform",
     "rank_heading_stakes": "Tonight's best games",
     "rank_basis_stakes": "Ranked by team records and All-NBA and All-Star selections over the last three seasons, counting only players in uniform tonight.",
@@ -221,5 +220,40 @@
     "other_heading": "Watching from somewhere else?",
     "hub_link": "Every NBA team, channel by channel (US)",
     "tba": "time TBA"
+  },
+  "game": {
+    "_note": "The game block on pair pages and the tonight page, and the hub cards' collapsed answer. {team} is a team's short name. The layout order (where to watch, date and tip time, who's out, Also worth knowing) is fixed in templates/partials/game_block.html.",
+    "fans": "{team} fans",
+    "outside": "Outside the {team} market",
+    "inside": "In the {team} market",
+    "why_nothing": "No blackout rule on this page stops either fan base watching it on the services listed.",
+    "tip_label": "Tip-off",
+    "your_time": "your time",
+    "out_heading": "Who's out",
+    "injury_report_missing": "Injury report not available yet",
+    "worth_heading": "Also worth knowing",
+    "back_to_back": "{team} on the second night of a back-to-back",
+    "series_lead": "{team} lead the season series {w}-{l}",
+    "series_tied": "Season series tied {w}-{l}",
+    "pair_link": "Every {a} vs. {b} game",
+    "where_summary": "Where can I watch? In market and out of market"
+  },
+  "pair": {
+    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",
+    "titles": [
+      "{a} vs. {b}: How to Watch, TV & Streaming",
+      "{a} vs. {b}: How to Watch on TV",
+      "{a} vs. {b}: How to Watch"
+    ],
+    "description": "{a} vs. {b} next on {date} on {channel}. Every {season} meeting with TV channels, streaming and who's out.",
+    "description_done": "Every {season} {a} vs. {b} game with TV channels and streaming. The two teams have no meetings left this season.",
+    "h1": "{full_a} vs. {full_b}: how to watch",
+    "breadcrumb": "{a} vs. {b}",
+    "next_heading": "Next game",
+    "no_next": "No more meetings this season.",
+    "meetings_heading": "Every {season} meeting",
+    "meetings_caption": "{count} games",
+    "channel_tba": "a channel still to be announced",
+    "description_short": "{a} vs. {b} next on {date} on {channel}. TV and streaming for every {season} meeting."
   }
 }

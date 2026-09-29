@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block crumbs %}{% include "partials/crumbs.html" %}{% endblock %}
+{% block content %}
+<div class="phead">
+  <h1>{{ text.h1 }}</h1>
+</div>
+
+<section class="block" id="next">
+<h2>{{ text.next_heading }}</h2>
+{%- if view %}
+{% include "partials/game_block.html" %}
+{#- Freshness goes under the block, so it never pushes where to watch down. #}
+{%- if view.out.is_today %}
+<div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice data-volatile>{{ labels.stale_notice }}</div>
+<p class="updated" data-volatile><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+{%- endif %}
+{%- else %}
+<div class="card"><p>{{ text.no_next }}</p></div>
+{%- endif %}
+</section>
+
+<section class="block" id="meetings">
+<h2>{{ text.meetings_heading }}</h2>
+<table class="sched">
+  <caption>{{ text.meetings_caption.format(count=rows|length) }}</caption>
+  <thead>
+    <tr><th scope="col">Date</th><th scope="col">Game</th><th scope="col">Tip-off (ET)</th><th scope="col">Channel</th></tr>
+  </thead>
+  <tbody>
+    {%- for row in rows %}
+    {#- The next meeting's anchor is its full block above, so each game has
+        exactly one #game-<id> on the page. #}
+    <tr{% if not row.is_next %} id="game-{{ row.game.game_id }}"{% else %} data-next{% endif %}>
+      <td class="when" data-label="Date">{{ row.date_label }}</td>
+      <td class="opp" data-label="Game">{% if row.is_next %}<a href="#game-{{ row.game.game_id }}">{{ row.matchup }}</a>{% else %}{{ row.matchup }}{% endif %}</td>
+      <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
+      <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+</table>
+</section>
+{% endblock %}

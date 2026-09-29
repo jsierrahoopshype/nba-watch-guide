@@ -57,11 +57,12 @@ def no_headshot_downloads(monkeypatch):
     monkeypatch.setattr(headshots, "get", refuse)
 
 
-def expected_page_count(data_dir=None) -> int:
-    """How many pages a build of these data files must produce, from the
-    same manifest publish.sh checks against. Never a hard-coded number."""
+def expected_page_count(data_dir=None, games=None) -> int:
+    """How many pages a build of these data files and the fixture schedule
+    (or `games`) must produce, from the same manifest publish.sh checks
+    against. Never a hard-coded number."""
     from watchguide.manifest import expected_pages
-    return len(expected_pages(data_dir))
+    return len(expected_pages(data_dir, fixture_schedule() if games is None else games))
 
 
 @pytest.fixture(scope="session")
@@ -71,7 +72,12 @@ def teams():
 
 @pytest.fixture(scope="session")
 def fixture_games(teams):
+    return fixture_schedule()
+
+
+def fixture_schedule() -> list[Game]:
     """Every team plays, some games today, some later, some already gone."""
+    teams = load_teams()
     tricodes = [t.tricode for t in teams]
     start = date.fromisoformat(TODAY)
     games: list[Game] = []

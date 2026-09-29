@@ -13,8 +13,9 @@ from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels
 from ..missing import payload as missing_payload
 from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
+from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
-from .common import (crumb_trail, empty_players_label, game_row,
+from .common import (crumb_trail, empty_players_label, game_view,
                      has_affiliate_link, updated_label)
 
 JSONLD_GAME_LIMIT = 10
@@ -144,12 +145,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
                               + ctx.team_name(g.opponent_of(team.tricode)),
             "time_label": et_label(g),
             "channels": channels_for_game(g, team.tricode, local, tba),
+            "pair_path": pair_path(g, ctx.by_tricode),
         } for g in remaining]
 
         nxt = remaining[0] if remaining else None
-        next_card = None
-        if nxt:
-            next_card = game_row(ctx, nxt, channels_for_game(nxt, team.tricode, local, tba))
+        next_card = game_view(ctx, nxt) if nxt else None
 
         coverages = {state: build_state_coverage(remaining, team.tricode, ctx.services, local, state)
                      for state in (OUT_OF_MARKET, IN_MARKET)}
@@ -192,6 +192,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
             views=views,
             schedule=schedule,
             next_game=next_card,
+            game_text=ctx.copy.get("game", {}),
+            show_pair_link=True,
             updated_label=updated_label(ctx),
             stale=ctx.availability_is_stale(),
             empty_players_label=empty_players_label(ctx),

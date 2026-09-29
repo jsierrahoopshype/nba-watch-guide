@@ -1,8 +1,9 @@
 # NBA how-to-watch guide
 
 Generates the HoopsMatic guide at **https://hoopsmatic.com/how-to-watch**: a hub
-page, one page per team, a page for tonight's games, and one page each for
-the UK, Spain, France, Germany and Italy. Python plus Jinja2, no
+page, one page per team, a page for tonight's games, one page per pair of
+teams that meets this season, and one page each for the UK, Spain, France,
+Germany and Italy. Python plus Jinja2, no
 front-end framework.
 
 `main` holds the generator. The built site is force-pushed as a single fresh
@@ -174,15 +175,57 @@ card carries a one-line local summary from
 are explained in a footnote under the partners box rather than listed as
 partners (`hub.national_footnote_codes` in `data/copy.json`).
 
+**Layout rule for every game view** (pair pages, the tonight page, the team
+pages' next game, hub game cards): where to watch comes first and nothing may push it down. The order is
+(1) channels, the out-of-market and in-market answer for both fan bases and
+"Why can't I watch this game?", (2) date and tip time, (3) who's out with the
+ranking line, (4) "Also worth knowing", last. The full-size version is one
+partial, `templates/partials/game_block.html`; no CSS may reorder its parts,
+and `tests/test_pairs.py` checks the order in the HTML and in a 375px-wide
+browser (that test needs the `playwright` package and skips without it).
+
 The hub lists every game of the day in tip-off order, earliest first, with a
-"Top pick" badge on the three highest-ranked, one compact row each: tip
-time (ET, shown in the reader's zone by the page script), both teams linked to
-their pages, channel badges and the ranking line, with players listed Out in a
-collapsed detail under the row. The 30-minute refresh rewrites the hub with the
+"Top pick" badge on the three highest-ranked, one compact card each: both
+teams linked to their pages, then the channels with the fan-base answer and
+"Why can't I watch" in one collapsed detail, then the tip time (ET, shown in
+the reader's zone by the page script) and the ranking line, with players
+listed Out in a collapsed detail, then any "Also worth knowing" lines. The
+card itself links to the game on its pair page. The tonight page is one list
+of full game cards in ranking order, each linking its pair page; no page shows
+the numeric score. The 30-minute refresh rewrites the hub with the
 tonight page, so an injury that changes a line or the order shows on both. On a
 day with no games, the hub and the tonight page show the next day with games
 instead, headed "Next games: <weekday, date>", ranked without availability
 (the league's report only covers today's games).
+
+**Team-vs-team pages.** `/how-to-watch/<slug-a>-vs-<slug-b>` for every pair
+of teams in the schedule, the two slugs from `data/teams.json` in alphabetical
+order (`new-york-knicks-vs-philadelphia-76ers`). The reversed order has no
+page and nothing links to it, since the Worker cannot redirect it; every link
+goes through `watchguide/pairs.py`. Titles name the teams by short name, also
+alphabetically ("76ers vs. Knicks"), trying each of `pair.titles` in
+`data/copy.json` until one fits 60 characters. Each page shows the next
+meeting in full (the game block above) and then every meeting this season
+with its channels; each game has one `#game-<id>` anchor, which the hub and
+tonight cards and the team pages' schedule rows link to. The pages are in the
+sitemap and the manifest. The 30-minute refresh renders and writes only the
+pair pages of today's games, with the latest report; the others stay as
+published and keep their sitemap dates. Who's out, the ranking line, the
+"Updated" stamp and the out-of-date notice are `data-volatile`, so a new
+report never moves a pair page's `<lastmod>`.
+
+"Also worth knowing" comes from `watchguide/worth.py`: a list of item
+functions, each returning lines. Today it has rest ("Knicks on the second
+night of a back-to-back", only when the team played the day before) and the
+season series, which appears once the schedule feed has final scores for an
+earlier meeting (the feed's `score` counts only on `gameStatus` 3). Add an
+item by writing one function and listing it in `ITEMS`.
+
+**Injury safety net.** From 3 pm ET to midnight on a game day, if none of the
+day's teams has a single listing and the availability feed's newest date is
+not today, today's games say "Injury report not available yet" instead of
+listing nobody, and the build summary gets a `WARNING injury report not
+available yet` line. The warning does not fail the job.
 
 **Logos, flags, headshots and fonts.** Nothing on a page loads from another
 domain. Team logos (`assets/logos/<tricode>.svg`) and the player silhouette
@@ -223,8 +266,9 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - A failed fetch keeps the last published data and makes the job go red rather
   than publishing an empty page.
 - Every build and refresh writes `data/expected-pages.txt`: the hub, tonight,
-  one page per team in `data/teams.json` and one per country in
-  `data/countries.json`. `scripts/publish.sh` refuses to publish unless the
+  one page per team in `data/teams.json`, one per country in
+  `data/countries.json` and one per pair of teams in the schedule.
+  `scripts/publish.sh` refuses to publish unless the
   tree's `index.html` files are exactly those paths, and lists any missing or
   unexpected ones. Adding a team or a country needs no change to a script or
   a test. `PUBLISH_CHECK_ONLY=1 ./scripts/publish.sh site` runs the check alone.

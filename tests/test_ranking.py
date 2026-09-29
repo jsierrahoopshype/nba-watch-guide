@@ -247,7 +247,8 @@ def ranked_site(tmp_path_factory, fixture_games):
 def _order(site):
     html = (site / "tonight" / "index.html").read_text(encoding="utf-8")
     block = html[html.index("data-ranked"):html.index("</ol>", html.index("data-ranked"))]
-    return re.findall(r"<strong>([^<]+)</strong>", block), html
+    names = re.findall(r'<h3 class="game-teams">(.*?)</h3>', block, re.S)
+    return [" ".join(re.sub(r"<[^>]+>", "", n).split()) for n in names], html
 
 
 def _name(g):
@@ -263,6 +264,9 @@ def test_tonight_page_ranks_by_star_power(ranked_site, fixture_games):
     assert ("Ranked by All-NBA and All-Star selections over the last three seasons, recent seasons "
             "weighted more, counting only players in uniform tonight.") in html
     assert "badge badge-national" in html[html.index("data-ranked"):]
+    # One list of game cards, and no numeric score anywhere.
+    assert html.count("data-ranked") == 1 and html.count("data-game-block") == len(order)
+    assert "data-score" not in html and "Score " not in html
 
 
 def _hub_order(site):

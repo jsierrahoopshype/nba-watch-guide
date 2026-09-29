@@ -4,6 +4,7 @@ Output layout, which the Worker maps onto /how-to-watch:
 
     index.html
     <team-slug>/index.html
+    <team-a>-vs-<team-b>/index.html (one per pair that meets; see watchguide/pairs.py)
     <country-slug>/index.html      (from data/countries.json)
     tonight/index.html
     assets/
@@ -34,6 +35,7 @@ from .coverage import channel_names, channels_for_game
 from .manifest import expected_pages, mismatch, write_manifest
 from .model import Game, load_teams
 from .pages import BUILDERS
+from .pairs import game_pair_slug
 from .pages.links_block import render as render_links_block
 from .render import Page, build_env, hashed_asset_name
 from .sources import careers as careers_source
@@ -348,6 +350,24 @@ def country_summary(ctx: SiteContext) -> str:
     return line
 
 
+def pair_summary(pages: list[Page]) -> str:
+    """How many team-vs-team pages this build wrote, and the longest title."""
+    titles = [p.meta["title"] for p in pages if p.meta.get("pair")]
+    if not titles:
+        return "pairs: no team-vs-team pages (no schedule)"
+    longest = max(titles, key=len)
+    return f"pairs: {len(titles)} team-vs-team pages; longest title {len(longest)} characters: {longest}"
+
+
+def injury_guard_notes(ctx: SiteContext) -> list[str]:
+    """The build-summary warning for a game day whose injury report is missing."""
+    if not ctx.injury_report_missing():
+        return []
+    teams = len({g.home_tricode for g in ctx.games_today()} | {g.away_tricode for g in ctx.games_today()})
+    return [f"WARNING injury report not available yet: no listing for any of today's {teams} teams "
+            f"and the feed's latest date is {ctx.injuries_as_of or 'unknown'}, not {ctx.today}"]
+
+
 def unplaced_overrides(ctx: SiteContext) -> list[str]:
     """Override names that match nobody on the current rosters, so a typo or a
     released player shows up in the build log instead of vanishing quietly."""
@@ -365,9 +385,11 @@ def load_faces(out_dir: Path, ctx: SiteContext, allow_fetch: bool = True) -> lis
     return [inote, fnote]
 
 
-def check_pages(pages: list[Page], data_dir: Path | None = None) -> list[str]:
-    """The manifest for this data, after checking the rendered pages match it."""
-    expected = expected_pages(data_dir)
+def check_pages(pages: list[Page], data_dir: Path | None = None,
+                games: list[Game] | None = None) -> list[str]:
+    """The manifest for this data and schedule, after checking the rendered
+    pages match it."""
+    expected = expected_pages(data_dir, games)
     missing, unexpected = mismatch(expected, [p.out_path for p in pages])
     if missing or unexpected or len(pages) != len(expected):
         raise BuildError(f"expected {len(expected)} pages, built {len(pages)}; "
@@ -412,12 +434,16 @@ def update_lastmod(out_dir: Path, pages: list[Page], today: str,
     prev = lastmod.read_state(out_dir)
     listed = [p for p in pages if p.in_sitemap]
     rehash = {p.url: p.html for p in (written if written is not None else listed) if p.in_sitemap}
-    rehash.update({p.url: p.html for p in listed if p.url not in rehash and p.url not in prev})
+    # A placeholder (a page the refresh did not render) has no content to
+    # hash: it keeps its stored entry, or gets one on the next full build.
+    rehash.update({p.url: p.html for p in listed if p.url not in rehash and p.url not in prev
+                   and not p.meta.get("placeholder")})
     state = {p.url: prev[p.url] for p in listed if p.url in prev}
     state.update(lastmod.update(prev, rehash, today))
     lastmod.write_state(out_dir, state)
     for p in listed:
-        p.lastmod = state[p.url][1]
+        if p.url in state:
+            p.lastmod = state[p.url][1]
     return state
 
 
@@ -471,7 +497,8 @@ def write_extras(out_dir: Path, noindex: bool = False) -> None:
 # --------------------------------------------------------------------------
 
 def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
-               data_dir: Path | None = None, repo_root: Path | None = None) -> BuildOutcome:
+               data_dir: Path | None = None, repo_root: Path | None = None,
+               now: str | None = None) -> BuildOutcome:
     """Rebuild everything. Raises BuildError when nothing should be published."""
     notes: list[str] = []
     complaint = ""
@@ -500,14 +527,16 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
 
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
                        data_dir=data_dir, today=today, star_rosters=rosters,
-                       nationalities=careers_source.read_nationalities(out_dir))
+                       nationalities=careers_source.read_nationalities(out_dir), now=now)
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
     notes.extend(load_faces(out_dir, ctx, allow_fetch=not offline))
 
     pages = render_pages(ctx)
-    expected = check_pages(pages, data_dir)
+    expected = check_pages(pages, data_dir, ctx.games)
     notes.append(country_summary(ctx))
+    notes.append(pair_summary(pages))
+    notes.extend(injury_guard_notes(ctx))
 
     report = broadcast_report(games, ctx.today)
     notes.append(broadcast_summary(report))
@@ -527,9 +556,11 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
 
 
 def refresh_build(out_dir: Path, today: str | None = None,
-                  repo_root: Path | None = None, data_dir: Path | None = None) -> BuildOutcome:
-    """Availability-only refresh: the data files, the tonight page and the team
-    pages whose next game is today. Everything else on disk is left alone."""
+                  repo_root: Path | None = None, data_dir: Path | None = None,
+                  now: str | None = None) -> BuildOutcome:
+    """Availability-only refresh: the data files, the hub, the tonight page,
+    the team pages whose next game is today and the pair pages of today's
+    games. Everything else on disk is left alone."""
     notes: list[str] = []
     games = read_schedule_cache(out_dir / SCHEDULE_CACHE)
     if not games:
@@ -553,20 +584,27 @@ def refresh_build(out_dir: Path, today: str | None = None,
     notes.append(rnote)
 
     ctx = load_context(games, injuries, updated_at, as_of, availability_degraded=complaint,
-                       data_dir=data_dir, today=day, star_rosters=rosters)
+                       data_dir=data_dir, today=day, star_rosters=rosters, now=now)
+    # Only today's pair pages change with the report, so only they are rendered.
+    ctx.render_pairs = {game_pair_slug(g, ctx.by_tricode) for g in ctx.games_today()}
+    notes.extend(injury_guard_notes(ctx))
     # An injury can change who a game's line names, so the hub may need a
     # face the last full build did not fetch.
     notes.extend(load_faces(out_dir, ctx, allow_fetch=True))
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
+    pairs_today = ctx.render_pairs
     # The hub carries the top-3 teaser, so it is refreshed with the tonight page.
     wanted = [p for p in pages
-              if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today]
+              if p.out_path in ("tonight/index.html", "index.html") or p.meta.get("slug") in slugs_today
+              or p.meta.get("pair") in pairs_today]
 
+    if any(p.meta.get("placeholder") for p in wanted):
+        raise BuildError("refresh would write a pair page it did not render")
     write_pages(out_dir, wanted)
     # The refresh leaves most pages alone, but the tree it hands to publish.sh
     # still has to match the data, so the manifest is rewritten here too.
-    write_manifest(out_dir, check_pages(pages, data_dir))
+    write_manifest(out_dir, check_pages(pages, data_dir, ctx.games))
     # Pages name assets by content hash, so a refresh after a code change
     # must ship the new files too or those pages would point at nothing.
     copy_assets(out_dir)

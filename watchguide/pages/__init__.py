@@ -4,6 +4,6 @@ Adding a page type means writing a module here and listing it in BUILDERS.
 Nothing else in the generator needs to change.
 """
 
-from . import country, hub, team, tonight
+from . import country, hub, pair, team, tonight
 
-BUILDERS = (hub.build, team.build, tonight.build, country.build)
+BUILDERS = (hub.build, team.build, tonight.build, country.build, pair.build)

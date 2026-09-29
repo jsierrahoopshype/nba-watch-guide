@@ -11,25 +11,13 @@
 
 {%- if next_game %}
 <h2>{{ text.next_game_heading }}</h2>
-{% if next_game.is_today %}
-<p class="updated" data-volatile><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+{#- The shared game block, same layout rule as pair pages and tonight's
+    cards; freshness goes under it so it never pushes where to watch down. #}
+{% with view = next_game %}{% include "partials/game_block.html" %}{% endwith %}
+{%- if next_game.out.is_today %}
 <div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice data-volatile>{{ labels.stale_notice }}</div>
-{% endif %}
-<article class="game">
-  <div class="game-head">
-    <span class="game-teams">{{ next_game.away_name }} at {{ next_game.home_name }}</span>
-    {% with game = next_game.game, with_date = true %}{% include "partials/game_time.html" %}{% endwith %}
-  </div>
-  <p class="game-channels">{% with channels = next_game.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
-  {% if next_game.is_today %}
-  <div class="game-sides" data-volatile>
-    {% with heading = next_game.away_name, players = next_game.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
-    {% with heading = next_game.home_name, players = next_game.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
-  </div>
-  {% else %}
-  <p class="small muted">{{ labels.availability_on_game_day }}</p>
-  {% endif %}
-</article>
+<p class="updated" data-volatile><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
+{%- endif %}
 {%- endif %}
 
 <h2 id="market">{{ labels.toggle_heading }}</h2>
@@ -64,7 +52,7 @@
     {%- for row in schedule %}
     <tr>
       <td class="when" data-label="Date">{{ row.date_label }}</td>
-      <td class="opp" data-label="Opponent">{{ row.opponent_label }}</td>
+      <td class="opp" data-label="Opponent">{% if row.pair_path %}<a href="{{ row.pair_path }}" data-pair-link>{{ row.opponent_label }}</a>{% else %}{{ row.opponent_label }}{% endif %}</td>
       <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
       <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}
         <details class="why"><summary>{{ copy.why.summary }}</summary>
