@@ -64,7 +64,7 @@
     {%- for row in schedule %}
     <tr>
       <td class="when" data-label="Date">{{ row.date_label }}</td>
-      <td class="opp" data-label="Opponent">{{ row.opponent_label }}</td>
+      <td class="opp" data-label="Opponent">{% if row.pair_path %}<a href="{{ row.pair_path }}" data-pair-link>{{ row.opponent_label }}</a>{% else %}{{ row.opponent_label }}{% endif %}</td>
       <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
       <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}
         <details class="why"><summary>{{ copy.why.summary }}</summary>

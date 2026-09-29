@@ -1,6 +1,6 @@
 """Every card on the hub is one full tap target: game cards through a
-stretched link to their game on the tonight page (team links inside stay
-their own), team and country cards as a single link."""
+stretched link to their game on its pair page (team links and the collapsed
+details inside stay their own), team and country cards as a single link."""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ import pytest
 
 from conftest import TODAY, _build
 from watchguide import config
+from watchguide.model import load_teams
 
 
 class Cards(HTMLParser):
@@ -68,16 +69,23 @@ def off_day_site(tmp_path_factory, fixture_games):
 
 
 @pytest.mark.parametrize("which", ["game_day", "off_day"])
-def test_every_game_card_has_one_primary_link_to_an_anchor_that_exists(which, built_site, off_day_site):
+def test_every_game_card_has_one_primary_link_to_an_anchor_that_exists(which, built_site, off_day_site,
+                                                                      fixture_games):
     site = built_site if which == "game_day" else off_day_site
     games = [c for c in cards_of(site / "index.html") if c["kind"] == "game"]
     assert games
-    tonight_ids = ids_on(site / "tonight" / "index.html")
+    by_tricode = {t.tricode: t for t in load_teams()}
+    games_by_id = {g.game_id: g for g in fixture_games}
     for card in games:
         primary = [l for l in card["links"] if "card-link" in l["classes"]]
         assert len(primary) == 1, card
-        assert primary[0]["href"] == f"/how-to-watch/tonight#game-{card['id']}"
-        assert f"game-{card['id']}" in tonight_ids, f"no #game-{card['id']} on the tonight page"
+        # The game on its pair page, in the one canonical order.
+        away, home = (by_tricode[t] for t in (games_by_id[card["id"]].away_tricode,
+                                              games_by_id[card["id"]].home_tricode))
+        first, second = sorted([away.slug, home.slug])
+        assert primary[0]["href"] == f"/how-to-watch/{first}-vs-{second}#game-{card['id']}"
+        path, _, anchor = primary[0]["href"].partition("#")
+        assert anchor in ids_on(site / path[len("/how-to-watch/"):] / "index.html"), card
 
 
 def test_game_card_team_links_stay_separate_and_work(built_site, teams):
@@ -111,7 +119,7 @@ def test_styles_stretch_the_link_keep_team_links_on_top_and_show_focus():
     css = (config.ASSET_DIR / "watch-guide.css").read_text(encoding="utf-8")
     assert re.search(r"\.hg-row \{ position: relative;", css)
     assert re.search(r'\.card-link::after \{ content: ""; position: absolute; inset: 0;[^}]*z-index: 1;', css)
-    assert re.search(r"\.hg-team-link, \.hg-out \{ position: relative; z-index: 2; \}", css)
+    assert re.search(r"\.hg-team-link, \.hg-out, \.hg-why \{ position: relative; z-index: 2; \}", css)
     assert ".card-link:focus-visible::after { outline: 3px solid" in css
     assert "a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid" in css
     assert re.search(r"\.hg-team-link \{[^}]*min-height: var\(--tap\)", css)

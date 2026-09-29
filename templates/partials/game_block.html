@@ -1,0 +1,94 @@
+{#- One game, full size: the pair page's next meeting and every card on the
+    tonight page. The order is the layout rule and must not change:
+      1. where to watch: channels, the out-of-market and in-market answer for
+         both fan bases, "Why can't I watch this game?"
+      2. date and tip time (ET, plus the reader's own time from the script)
+      3. who's out, with the ranking line
+      4. "Also worth knowing", last
+    Nothing sits between the head and where to watch, and no CSS reorders
+    these parts (tests/test_pairs.py checks both).
+    Expects: view (pages.common.game_view), game_text (copy.json "game"),
+    copy, labels, show_pair_link. -#}
+<article class="game gb" id="game-{{ view.game.game_id }}" data-game-block>
+  <div class="gb-head">
+    <h3 class="game-teams">
+      {%- if view.away %}<a href="{{ view.away.path }}">{{ view.away_name }}</a>{% else %}{{ view.away_name }}{% endif %} at
+      {% if view.home %}<a href="{{ view.home.path }}">{{ view.home_name }}</a>{% else %}{{ view.home_name }}{% endif -%}
+    </h3>
+  </div>
+
+  <div class="gb-watch" data-part="watch">
+    <p class="game-channels">{% with channels = view.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
+    <div class="gb-fans">
+      {%- for fan in view.fans %}
+      <div class="gb-fan">
+        <h4>{{ fan.label }}</h4>
+        {%- for st in fan.states %}
+        <p class="gb-answer" data-state="{{ st.state }}"><span class="gb-state">{{ st.label }}:</span> {{ st.answer }}</p>
+        {%- endfor %}
+      </div>
+      {%- endfor %}
+    </div>
+    <details class="why"><summary>{{ copy.why.summary }}</summary>
+      <div class="why-body">
+        {%- for line in view.why %}<p>{{ line }}</p>{% endfor %}
+      </div>
+    </details>
+  </div>
+
+  <p class="gb-when" data-part="when">
+    <span class="gb-date">{{ view.game.date_et|date_label }}</span>
+    {%- if view.game.tipoff_utc %}
+    <span class="gb-et">{{ view.game|et_label }}</span>
+    <span class="gb-local" data-utc="{{ view.game.tipoff_utc }}" data-local-extra hidden>(<span data-local-slot></span> {{ game_text.your_time }})</span>
+    {%- else %}
+    <span class="gb-et">{{ view.game.status_text or labels.tba }}</span>
+    {%- endif %}
+    {#- The pair page link rides on this line, not in the head, so it never
+        pushes where to watch down. #}
+    {%- if show_pair_link and view.pair_path %}
+    <a class="pair-link" href="{{ view.pair_path }}" data-pair-link>{{ view.pair_label }}</a>
+    {%- endif %}
+  </p>
+
+  <div class="gb-out" data-part="out" data-volatile>
+    <h4>{{ game_text.out_heading }}</h4>
+    {%- if view.out.message %}
+    <p class="small muted" data-out-message>{{ view.out.message }}</p>
+    {%- else %}
+    <div class="game-sides">
+      {%- for side in view.out.sides %}
+      <div class="game-side">
+        <h5>{{ side.name }}</h5>
+        {%- if side.players %}
+        <ul>
+          {%- for p in side.players %}
+          <li data-player="{{ p.player }}">
+            <span>{{ p.player }}</span>
+            <span class="badge badge-{{ p.status|lower }}" data-status-slot>{{ p.status }}</span>
+          </li>
+          {%- endfor %}
+        </ul>
+        {%- else %}
+        <p class="small muted">{{ side.empty }}</p>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {%- if view.line %}
+    <p class="gb-line small" data-rank-line>{{ view.line }}</p>
+    {%- endif %}
+  </div>
+
+  {%- if view.worth %}
+  <div class="gb-worth small" data-part="worth">
+    <h4>{{ game_text.worth_heading }}</h4>
+    <ul>
+      {%- for line in view.worth %}
+      <li>{{ line }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+</article>

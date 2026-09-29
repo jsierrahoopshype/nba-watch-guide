@@ -9,39 +9,18 @@
 <p class="updated" data-volatile><span data-updated data-updated-prefix="{{ labels.updated_prefix }}">{{ updated_label }}</span></p>
 <div class="notice{% if not stale %} is-hidden{% endif %}" data-stale-notice data-volatile>{{ labels.stale_notice }}</div>
 
-{%- if ranked %}
+{%- if cards %}
 <h2 data-rank-heading>{{ rank_text.heading }}</h2>
-<ol class="ranked" data-ranked data-volatile>
-  {%- for row in ranked %}
-  <li data-rank="{{ row.rank }}" data-score="{{ row.score }}"{% if row.stakes is not none %} data-stakes="{{ row.stakes }}"{% endif %}>
-    <strong>{{ row.away_name }} at {{ row.home_name }}</strong>
-    {%- if row.national %} <span class="badge badge-national" title="{{ text.rank_national_badge }}">{{ row.national|join(", ") }}</span>{% endif %}
-    <span class="small muted">{{ text.rank_score.format(score=row.score_label) }}</span>
-    <div class="small">{{ row.line }}</div>
+{#- One list: the game cards themselves, best first. Each card's ranking line
+    sits in its "Who's out" part (see partials/game_block.html). #}
+<ol class="ranked game-list" data-ranked>
+  {%- for card in cards %}
+  <li data-rank="{{ card.rank }}"{% if card.stakes is not none %} data-stakes{% endif %}>
+    {%- with view = card.view %}{% include "partials/game_block.html" %}{% endwith %}
   </li>
   {%- endfor %}
 </ol>
 <p class="small muted" data-rank-basis>{{ rank_text.basis }}</p>
-{%- endif %}
-
-{%- if games %}
-{%- for row in games %}
-<article class="game" id="game-{{ row.game.game_id }}">
-  <div class="game-head">
-    <span class="game-teams">{{ row.away_name }} at {{ row.home_name }}</span>
-    {% with game = row.game, with_date = false %}{% include "partials/game_time.html" %}{% endwith %}
-  </div>
-  <p class="game-channels">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</p>
-  {%- if is_today %}
-  <div class="game-sides" data-volatile>
-    {% with heading = row.away_name, players = row.away_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
-    {% with heading = row.home_name, players = row.home_players, empty_label = empty_players_label %}{% include "partials/player_list.html" %}{% endwith %}
-  </div>
-  {%- else %}
-  <p class="small muted">{{ labels.availability_on_game_day }}</p>
-  {%- endif %}
-</article>
-{%- endfor %}
 {%- else %}
 <div class="card"><p>{{ text.no_games }} {{ text.next_no_games }}</p></div>
 {%- endif %}

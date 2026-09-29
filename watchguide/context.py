@@ -121,6 +121,37 @@ class SiteContext:
         return {"day": day, "is_today": False, "rows": rows, "heading": heading,
                 "basis": text["next_basis_stakes" if stakes else "next_basis"]}
 
+    def ranking_line(self, game: Game) -> str:
+        """The ranking line for one game, the same one tonight's list shows:
+        named players, records once stakes are on. Availability only counts
+        on game day, as everywhere else."""
+        injuries = self.injuries if game.date_et == self.today else {}
+        rows = rank([game], self.star_rosters, injuries, self.team_name,
+                    self.copy.get("tonight", {}), self.star_weights, self.recent_awards,
+                    all_games=self.games)
+        return rows[0]["line"] if rows else ""
+
+    def injury_report_missing(self) -> bool:
+        """The safety net for a game day whose report has not arrived.
+
+        True from INJURY_GUARD_START_HOUR ET to midnight on a day with games
+        when none of the day's teams has a single listing and the feed's
+        newest date is not today. Pages then say the report is not available
+        yet instead of implying nobody is hurt, and the build summary warns."""
+        today = self.games_today()
+        if not today:
+            return False
+        try:
+            hour = datetime.fromisoformat(self.generated_at).astimezone(ET).hour
+        except ValueError:
+            return False
+        if hour < config.INJURY_GUARD_START_HOUR:
+            return False
+        playing = {g.home_tricode for g in today} | {g.away_tricode for g in today}
+        if any(self.players_for(t) for t in playing):
+            return False
+        return (self.injuries_as_of or "")[:10] != self.today
+
     def out_players(self, tricode: str) -> list[str]:
         """Names listed Out for a team in today's report."""
         return [p["player"] for p in self.players_for(tricode) if p.get("status") == "Out"]
@@ -169,6 +200,7 @@ def load_context(
     today: str | None = None,
     star_rosters: dict[str, list[dict[str, Any]]] | None = None,
     nationalities: dict[str, str] | None = None,
+    now: str | None = None,
 ) -> SiteContext:
     return SiteContext(
         teams=load_teams(data_dir),
@@ -181,7 +213,8 @@ def load_context(
         injuries_as_of=injuries_as_of,
         availability_degraded=availability_degraded,
         today=today or today_et(),
-        generated_at=datetime.now(ET).isoformat(timespec="seconds"),
+        # `now` is for tests: an ISO timestamp standing in for the clock.
+        generated_at=now or datetime.now(ET).isoformat(timespec="seconds"),
         star_rosters=star_rosters or {},
         star_weights=load_weights(data_dir),
         recent_awards=load_awards(data_dir),

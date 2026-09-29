@@ -13,6 +13,7 @@ from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels
 from ..missing import payload as missing_payload
 from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
+from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
 from .common import (crumb_trail, empty_players_label, game_row,
                      has_affiliate_link, updated_label)
@@ -144,6 +145,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
                               + ctx.team_name(g.opponent_of(team.tricode)),
             "time_label": et_label(g),
             "channels": channels_for_game(g, team.tricode, local, tba),
+            "pair_path": pair_path(g, ctx.by_tricode),
         } for g in remaining]
 
         nxt = remaining[0] if remaining else None

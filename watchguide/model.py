@@ -78,6 +78,22 @@ class Game:
     home_losses: int | None = None
     away_wins: int | None = None
     away_losses: int | None = None
+    # The feed's gameStatus (1 scheduled, 2 live, 3 final) and, only once a
+    # game is final, each side's score. None until the feed has one.
+    game_status: int = 0
+    home_score: int | None = None
+    away_score: int | None = None
+
+    @property
+    def is_final(self) -> bool:
+        return self.game_status == 3 and self.home_score is not None and self.away_score is not None
+
+    @property
+    def winner(self) -> str:
+        """Tricode of the winning side of a final game, or ""."""
+        if not self.is_final or self.home_score == self.away_score:
+            return ""
+        return self.home_tricode if self.home_score > self.away_score else self.away_tricode
 
     @property
     def national_codes(self) -> list[str]:

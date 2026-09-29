@@ -145,7 +145,7 @@ def test_tonight_page_shows_the_next_game_day_on_an_off_day(off_day_site, fixtur
     label = f"{date.fromisoformat(nxt):%A, %B} {date.fromisoformat(nxt).day}"
     assert f"<h2 data-rank-heading>Next games: {label}</h2>" in page
     assert "No NBA games scheduled today." not in page
-    assert page.count('<article class="game" id="game-') == sum(1 for g in fixture_games if g.date_et == nxt)
+    assert page.count('<article class="game gb" id="game-') == sum(1 for g in fixture_games if g.date_et == nxt)
     assert "Player availability shows here on game day." in page
     assert "data-player" not in page
     assert '<link rel="canonical" href="https://hoopsmatic.com/how-to-watch/tonight">' in page
@@ -205,8 +205,9 @@ def test_top_three_ranked_games_carry_the_badge(staggered_site):
     picked = [r.split('"')[1] for r in rows(block) if "data-top-pick" in r]
     assert picked == [g.game_id for g in last_three]          # listed in tip order, not rank order
     assert block.count(">Top pick</span>") == 3
-    # The badge sits in the card's top line, next to the tip time.
-    top = next(r for r in rows(block) if "data-top-pick" in r).split('<div class="hg-channels">')[0]
+    # The badge sits in the tip-time line, after where to watch.
+    row = next(r for r in rows(block) if "data-top-pick" in r)
+    top = row[row.index('<div class="hg-top"'):row.index('<div class="hg-line')]
     assert '<span class="badge badge-top" data-top-pick data-volatile>Top pick</span>' in top
 
 
@@ -214,7 +215,7 @@ def test_tonight_page_keeps_ranking_order(staggered_site):
     site, _, last_three = staggered_site
     page = (site / "tonight" / "index.html").read_text(encoding="utf-8")
     ranked = page[page.index("data-ranked"):page.index("</ol>", page.index("data-ranked"))]
-    names = re.findall(r"<strong>([^<]+)</strong>", ranked)
+    names = [text(n) for n in re.findall(r'<h3 class="game-teams">(.*?)</h3>', ranked, re.S)]
     expected = [f"{TEAMS[g.away_tricode].full_name} at {TEAMS[g.home_tricode].full_name}"
                 for g in reversed(last_three)]
     assert names[:3] == expected

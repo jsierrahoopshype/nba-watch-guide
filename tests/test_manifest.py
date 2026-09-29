@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from conftest import TODAY, _copy_data
+from conftest import TODAY, _copy_data, fixture_schedule
 from watchguide.build import BuildError, check_pages, full_build
 from watchguide.manifest import MANIFEST_FILE, expected_pages, read_manifest
 from watchguide.model import load_teams
@@ -40,7 +40,7 @@ def _with_extra_country(data_dir: Path) -> None:
 # -- the manifest ----------------------------------------------------------------------
 
 def test_manifest_comes_from_the_data():
-    pages = expected_pages()
+    pages = expected_pages()                     # no schedule: no pair pages
     teams = load_teams()
     assert len(pages) == 2 + len(teams) + 5
     assert "index.html" in pages and "tonight/index.html" in pages
@@ -49,7 +49,7 @@ def test_manifest_comes_from_the_data():
 
 
 def test_build_writes_the_manifest(built_site):
-    assert read_manifest(built_site) == expected_pages()
+    assert read_manifest(built_site) == expected_pages(games=fixture_schedule())
     found = sorted(str(p.relative_to(built_site)) for p in built_site.rglob("index.html"))
     assert found == read_manifest(built_site)
 
@@ -57,9 +57,9 @@ def test_build_writes_the_manifest(built_site):
 def test_a_new_country_raises_the_count_with_no_other_change(tmp_path_factory, fixture_games):
     """Only countries.json changes: no copy.json entry, no code, no test number."""
     data_dir = _copy_data(tmp_path_factory, "data-extra-country")
-    before = expected_pages(data_dir)
+    before = expected_pages(data_dir, fixture_games)
     _with_extra_country(data_dir)
-    after = expected_pages(data_dir)
+    after = expected_pages(data_dir, fixture_games)
     assert len(after) == len(before) + 1
     assert set(after) - set(before) == {"portugal/index.html"}
 
@@ -97,14 +97,14 @@ def site_copy(built_site, tmp_path):
 def test_publish_check_passes_on_a_full_build(site_copy):
     result = publish_check(site_copy)
     assert result.returncode == 0, result.stderr
-    assert f"{len(expected_pages())} pages match" in result.stdout
+    assert f"{len(expected_pages(games=fixture_schedule()))} pages match" in result.stdout
 
 
 def test_publish_refuses_a_missing_page_and_names_it(site_copy):
     (site_copy / "spain" / "index.html").unlink()
     result = publish_check(site_copy)
     assert result.returncode == 1
-    n = len(expected_pages())
+    n = len(expected_pages(games=fixture_schedule()))
     assert f"expected {n} pages, found {n - 1}, refusing to publish" in result.stderr
     assert "missing pages:\n  spain/index.html" in result.stderr
 
@@ -149,5 +149,5 @@ def test_refresh_writes_the_manifest_into_a_restored_tree(site_copy):
     from watchguide.build import refresh_build
     (site_copy / MANIFEST_FILE).unlink()
     refresh_build(site_copy, today=TODAY)
-    assert read_manifest(site_copy) == expected_pages()
+    assert read_manifest(site_copy) == expected_pages(games=fixture_schedule())
     assert publish_check(site_copy).returncode == 0
