@@ -133,8 +133,8 @@ def test_titles_canonicals_and_descriptions(site):
         desc = re.search(r'<meta name="description" content="([^"]+)"', markup).group(1)
         descriptions.add(desc)
     assert len(descriptions) == 5
-    assert "<title>How to Watch the NBA in the UK in 2026-27</title>" in page(site, "uk")
-    assert "<title>How to Watch the NBA in Spain in 2026-27</title>" in page(site, "spain")
+    assert "<title>How to Watch the NBA in the UK in 2026-27 | HoopsMatic</title>" in page(site, "uk")
+    assert "<title>How to Watch the NBA in Spain in 2026-27 | HoopsMatic</title>" in page(site, "spain")
     for slug, service in (("uk", "Sky Sports"), ("spain", "DAZN"), ("france", "beIN SPORTS"),
                           ("germany", "WOW"), ("italy", "Sky Sport")):
         desc = html.unescape(re.search(r'name="description" content="([^"]+)"', page(site, slug)).group(1))

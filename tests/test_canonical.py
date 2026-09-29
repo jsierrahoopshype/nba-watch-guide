@@ -43,8 +43,10 @@ def test_titles_and_descriptions_within_limits(built_site):
     desc = __import__("re").compile(r'<meta name="description" content="([^"]*)"')
     for page in _pages(built_site):
         html = page.read_text(encoding="utf-8")
-        assert len(title.findall(html)[0]) <= 60
-        assert len(desc.findall(html)[0]) <= 155
+        # Measured as displayed: "&amp;" in the markup is one character on screen.
+        unescape = __import__("html").unescape
+        assert len(unescape(title.findall(html)[0])) <= 60
+        assert len(unescape(desc.findall(html)[0])) <= 155
 
 
 def test_jsonld_parses_and_is_not_html_escaped(built_site):

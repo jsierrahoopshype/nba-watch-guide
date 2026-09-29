@@ -26,7 +26,15 @@ expected.
 
 `noindex` ships as `true`. While it is on, every page carries
 `<meta name="robots" content="noindex,follow">`, `sitemap.xml` is still written
-but lists no URLs, and `robots.txt` does not point at it. Canonicals do not
+but lists no URLs, and `robots.txt` does not point at it. Each sitemap
+`<lastmod>` is the date the page's content last changed, not the build date:
+`data/sitemap_lastmod.json` in the published tree keeps a content hash and a
+date per URL, and a date moves only when the hash does. The hash leaves out
+anything marked `data-volatile` in the templates (the "Updated" stamp, the
+out-of-date notice, the availability lists and badges, the injury-driven
+ranking on the hub and tonight page) and the content hashes in asset names.
+The file is kept up to date while `noindex` is on, so the dates are right the
+day the sitemap starts listing pages. Canonicals do not
 change either way. Set it to `false` when the Worker is live and you want the
 guide in search results.
 
@@ -220,6 +228,10 @@ availability feed somewhere else. Both are optional and neither is a secret.
   tree's `index.html` files are exactly those paths, and lists any missing or
   unexpected ones. Adding a team or a country needs no change to a script or
   a test. `PUBLISH_CHECK_ONLY=1 ./scripts/publish.sh site` runs the check alone.
+- Old content-hashed CSS and JS copies are kept for 7 days so cached HTML still
+  finds them, then deleted on publish. `data/asset-first-seen.json` in the
+  published tree records when each copy first appeared; any copy a page still
+  names, or that is the current build's, is never deleted.
 - `data/how-to-watch-links.html` is written on every build: a plain block of
   absolute links to the hub, the tonight page, all 30 teams and every country
   page, for pasting into

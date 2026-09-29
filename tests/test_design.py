@@ -216,7 +216,7 @@ def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch)
     hub = (site / "index.html").read_text(encoding="utf-8")
     row = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[0].game_id}"'))
     assert ('<img class="av" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="40" height="40" '
-            'loading="lazy" decoding="async" alt="Star Alpha" title="Star Alpha">') in row
+            'loading="lazy" decoding="async" alt="Star Alpha" title="Star Alpha" data-volatile>') in row
     other = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[1].game_id}"'))
     assert "Star Bravo" not in re.findall(r'<img class="av"[^>]*>', other)[0]     # no face on disk: silhouette
     assert "silhouette" in other

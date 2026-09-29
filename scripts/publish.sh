@@ -53,6 +53,12 @@ if [ "${PUBLISH_CHECK_ONLY:-}" = "1" ]; then
   exit 0
 fi
 
+# Hashed CSS/JS copies first seen more than 7 days ago that no page names are
+# deleted before the push; the current ones never are (watchguide/prune.py).
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHONPATH="$REPO_ROOT${PYTHONPATH:+:$PYTHONPATH}" "${PYTHON:-python3}" -m watchguide --out "$SITE_DIR" \
+  prune-assets --keep-days "${PUBLISH_KEEP_DAYS:-7}"
+
 WORK="$(mktemp -d)"
 cp -a "$SITE_DIR/." "$WORK/"
 cd "$WORK"
@@ -63,5 +69,7 @@ git config user.name "${GIT_AUTHOR_NAME:-github-actions[bot]}"
 git config user.email "${GIT_AUTHOR_EMAIL:-41898282+github-actions[bot]@users.noreply.github.com}"
 git add -A
 git commit -q -m "Publish watch guide $(date -u +'%Y-%m-%d %H:%M UTC')"
-git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$BRANCH"
+# PUBLISH_REMOTE lets a test push to a local repository instead.
+REMOTE="${PUBLISH_REMOTE:-https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git}"
+git push -q --force "$REMOTE" "$BRANCH"
 echo "publish: pushed $PAGES pages to $BRANCH"

@@ -10,6 +10,7 @@ Output layout, which the Worker maps onto /how-to-watch:
     data/expected-pages.txt   (every index.html above; see watchguide/manifest.py)
     data/injuries.json, data/tonight.json, data/schedule.json
     sitemap.xml
+    data/sitemap_lastmod.json (URL -> [content hash, lastmod]; see watchguide/lastmod.py)
 
 data/schedule.json is the normalized schedule. The workflows restore it from
 the last publish before a run, so a failed fetch falls back to the last good
@@ -26,7 +27,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from . import config, seo
+from . import config, lastmod, seo
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
@@ -399,9 +400,31 @@ def write_json(out_dir: Path, rel: str, payload: dict) -> None:
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
+def update_lastmod(out_dir: Path, pages: list[Page], today: str,
+                   written: list[Page] | None = None) -> dict[str, list[str]]:
+    """Refresh data/sitemap_lastmod.json and set each page's lastmod from it.
+
+    `written` is the pages this run writes (all of them on a full build).
+    Only those are rehashed; any other page keeps its stored entry, since
+    the file on disk has not changed. A page with no entry yet is hashed as
+    rendered. On a full build, entries for pages that no longer exist are
+    dropped. The state is kept whether or not noindex is on."""
+    prev = lastmod.read_state(out_dir)
+    listed = [p for p in pages if p.in_sitemap]
+    rehash = {p.url: p.html for p in (written if written is not None else listed) if p.in_sitemap}
+    rehash.update({p.url: p.html for p in listed if p.url not in rehash and p.url not in prev})
+    state = {p.url: prev[p.url] for p in listed if p.url in prev}
+    state.update(lastmod.update(prev, rehash, today))
+    lastmod.write_state(out_dir, state)
+    for p in listed:
+        p.lastmod = state[p.url][1]
+    return state
+
+
 def write_sitemap(out_dir: Path, pages: list[Page], noindex: bool = False) -> None:
     """The file is always written. While noindex is on it lists nothing, so a
-    stale sitemap cannot keep pointing crawlers at pages we asked them to skip."""
+    stale sitemap cannot keep pointing crawlers at pages we asked them to skip.
+    Each entry's lastmod comes from update_lastmod(), run before this."""
     entries = [] if noindex else [(p.url, p.lastmod) for p in pages if p.in_sitemap]
     (out_dir / SITEMAP_FILE).write_text(seo.sitemap(entries), encoding="utf-8")
 
@@ -494,6 +517,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     write_json(out_dir, BROADCAST_REPORT, report)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
+    update_lastmod(out_dir, pages, ctx.today)
     write_sitemap(out_dir, pages, noindex=ctx.noindex)
     copy_assets(out_dir)
     write_extras(out_dir, noindex=ctx.noindex)
@@ -548,6 +572,7 @@ def refresh_build(out_dir: Path, today: str | None = None,
     copy_assets(out_dir)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
+    update_lastmod(out_dir, pages, day, written=wanted)
     write_sitemap(out_dir, pages, noindex=ctx.noindex)
     notes.append(f"refreshed {len(wanted)} pages for {len(playing)} teams playing on {day}")
     return BuildOutcome(notes=notes, degraded=complaint)
