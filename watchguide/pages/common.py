@@ -11,7 +11,7 @@ from ..coverage import (IN_MARKET, OUT_OF_MARKET, carriers_for_game, channels_fo
 from ..pairs import by_name, game_teams, pair_path
 from ..render import usd
 from ..sources.careers import match_key
-from ..why import explain
+from ..why import answer_parts, explain
 
 
 def crumb_trail(ctx: SiteContext, leaf_name: str = "", leaf_url: str = "") -> list[tuple[str, str]]:
@@ -122,36 +122,6 @@ def _names(names: list[str]) -> str:
     return ", ".join(names[:-1]) + " and " + names[-1]
 
 
-def cable_line(ctx: SiteContext, game) -> str:
-    """For a game on a cable channel (config.CABLE_NATIONAL_CODES): it is
-    also on cable and on live TV services carrying that channel. A live TV
-    package is named only when its lineup in data/services.json marks that
-    specific channel carried at high or moderate confidence
-    (LineupPackage.carried_confidence); the service-level carries list does
-    not count here. Naming a moderate one adds the check-before-you-buy
-    line."""
-    cable = {_norm(c) for c in config.CABLE_NATIONAL_CODES}
-    codes = [c for c in game.national_codes if _norm(c) in cable]
-    if not codes:
-        return ""
-    named: dict[str, str] = {}
-    for svc in ctx.services.services:
-        if svc.kind != "live_tv":
-            continue
-        for pkg in svc.lineup:
-            levels = [pkg.carried_confidence(code) for code in codes]
-            best = "high" if "high" in levels else ("moderate" if "moderate" in levels else "")
-            if best and pkg.label not in named:
-                named[pkg.label] = best
-    text = ctx.copy.get("game", {})
-    if not named:
-        return text["cable"].format(channels=_names(codes))
-    line = text["cable_named"].format(channels=_names(codes), services=_names(list(named)))
-    if "moderate" in named.values():
-        line += " " + text["cable_check"]
-    return line
-
-
 def fan_answers(ctx: SiteContext, game) -> tuple[list[dict], list[str]]:
     """(fans, why): for the away and then the home fan base, the out-of-market
     and in-market answer, plus the reasons a fan base cannot watch it where
@@ -186,7 +156,8 @@ def _fans_and_reasons(ctx: SiteContext, game) -> tuple[list[dict], list[dict]]:
             sd = with_local_options(ctx.services, local, state)
             lines = explain(game, tricode, sd, local, state, why_text)
             states.append({"state": state, "label": label.format(team=team.short_name),
-                           "answer": lines[0] if lines else ""})
+                           "answer": lines[0] if lines else "",
+                           "moderate": answer_parts(game, tricode, sd, local, state)["moderate"]})
             for line in lines[1:]:
                 add("league_pass", line)
         # Regional: in its own market a fan base with counted local options
@@ -208,10 +179,17 @@ def _fans_and_reasons(ctx: SiteContext, game) -> tuple[list[dict], list[dict]]:
 
 def watch_view(ctx: SiteContext, game) -> dict:
     """Where to watch one game: the priced chips, the four fan-base answers
-    (or one line for everyone when all four are the same), the cable line,
-    and "Why ...?" only when some fan base is actually blocked."""
+    (or one line for everyone when all four are the same) with standalone
+    options first and live TV services grouped by service, one
+    check-before-you-buy line when a live TV answer rests on a moderate
+    lineup entry, and "Why ...?" only when some fan base is actually
+    blocked."""
     fans, reasons = _fans_and_reasons(ctx, game)
     answers = {st["answer"] for fan in fans for st in fan["states"]}
+    # One check-before-you-buy line under the answers when any of them names
+    # a live TV service on a moderate-confidence lineup entry.
+    check = ctx.copy.get("game", {})["live_tv_check"] if any(
+        st["moderate"] for fan in fans for st in fan["states"]) else ""
     everyone = answers.pop() if len(answers) == 1 and fans else ""
     why = None
     if reasons:
@@ -224,7 +202,7 @@ def watch_view(ctx: SiteContext, game) -> dict:
         "chips": chips(ctx, all_channels(ctx, game), priced=True),
         "fans": fans,
         "everyone": everyone,
-        "cable": cable_line(ctx, game),
+        "check": check,
         "why": why,
     }
 

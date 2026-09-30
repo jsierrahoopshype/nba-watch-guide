@@ -62,7 +62,7 @@
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
   "why": {
-    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed. The game block's expandable only appears when a fan base is blocked from something it might expect: summary_league_pass for League Pass blackouts, summary_local when a team's local TV does not carry a national game (the regional line, {team} a short name, {channels} its local channels), summary_both when both apply.",
+    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed. The game block's expandable only appears when a fan base is blocked from something it might expect: summary_league_pass for League Pass blackouts, summary_local when a team's local TV does not carry a national game (the regional line, {team} a short name, {channels} its local channels), summary_both when both apply. carried_live and live_only list the standalone options first and then the live TV services, one name per service ({live}, joined with 'or') unless its plans differ for that game. zip_locals follows an answer that names a live TV service only through a ZIP-dependent local ABC or NBC, and also marks the team pages' figures that rely on one. Every list in an answer is of alternatives and joins with 'or'. league_pass_nba_tv names League Pass on an NBA TV game (and the NBA TV channel is then not listed); nba_tv_channel names the NBA TV channel when it is the only standalone option (the live TV services follow it).",
     "summary": "Why can't I watch this game?",
     "carried": "Watch it on {services}.",
     "none": "None of the services on this page carries this game yet.",
@@ -70,7 +70,12 @@
     "summary_league_pass": "Why isn't this on League Pass?",
     "summary_local": "Why isn't this on local TV?",
     "summary_both": "Why isn't this on League Pass or local TV?",
-    "regional": "{team} local TV ({channels}) does not show games on national TV."
+    "regional": "{team} local TV ({channels}) does not show games on national TV.",
+    "carried_live": "Watch it on {services}, or on live TV with {live}.",
+    "live_only": "Watch it on live TV with {live}.",
+    "zip_locals": "Local ABC and NBC availability varies by ZIP code.",
+    "league_pass_nba_tv": "{service} (includes NBA TV)",
+    "nba_tv_channel": "NBA TV through cable"
   },
   "missing": {
     "_note": "Wording for 'What am I missing?' on the team pages. The page script fills {placeholders}. None of it is in the prerendered HTML.",
@@ -226,7 +231,7 @@
     "tba": "time TBA"
   },
   "game": {
-    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. cable and cable_named follow the answer on games on a cable channel (config.CABLE_NATIONAL_CODES); {channels} is those channels, {services} the live TV packages whose lineup marks that channel carried; cable_check follows when any of them is moderate confidence. countdown_* label the date chip; tonight is used from 5 pm ET.",
+    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. live_tv_check follows the answers once when they name a live TV service on a moderate-confidence lineup entry. countdown_* label the date chip; tonight is used from 5 pm ET.",
     "fans": "{team} fans",
     "outside": "Outside the {team} market",
     "inside": "In the {team} market",
@@ -243,8 +248,6 @@
     "where_summary": "Where can I watch? In market and out of market",
     "watch_heading": "Where to watch",
     "everyone": "Everyone in the US",
-    "cable": "Also on cable and on live TV services that carry {channels}.",
-    "cable_named": "Also on cable and on live TV services that carry {channels}, including {services}.",
     "chip_free_ota": "free over the air",
     "chip_local": "{team} market",
     "players_heading": "Players to watch",
@@ -254,7 +257,7 @@
     "countdown_days": "In {n} days",
     "final": "Final",
     "next_label": "Next",
-    "cable_check": "Based on 2026 channel guides. Check your plan's lineup before you buy."
+    "live_tv_check": "Based on 2026 channel guides. Check your plan's lineup before you buy."
   },
   "pair": {
     "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",

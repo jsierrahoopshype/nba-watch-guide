@@ -204,7 +204,7 @@ def sourced_confidence(entry: LineupChannel, domains: list[str]) -> str:
 @dataclass
 class LineupPackage:
     """A live TV package (YouTube TV Base Plan, Sling Orange...) and its
-    per-channel carries list. label is the name the cable line uses."""
+    per-channel carries list. label names the package in the data and tests."""
     name: str
     label: str
     channels: list[LineupChannel] = field(default_factory=list)
@@ -277,10 +277,17 @@ class Service:
     # (own price plus the required ones), own_price_usd is the add-on alone.
     requires: list["Service"] = field(default_factory=list)
     own_price_usd: float | None = None
-    # Live TV services only: each package's per-channel carries list from its
-    # official lineup page. Read by the game block's cable line; the coverage
-    # maths still goes by carries and carries_verified above.
+    # Live TV services only: each package's per-channel carries list (see
+    # apply_lineup). It replaces carries and carries_verified above for the
+    # coverage maths and so for the answers too.
     lineup: list[LineupPackage] = field(default_factory=list)
+    # Filled by apply_lineup: counted channels whose best entry is moderate
+    # confidence, and local ABC/NBC counted only through "depends on ZIP".
+    moderate_codes: list[str] = field(default_factory=list)
+    zip_codes: list[str] = field(default_factory=list)
+    # Live TV only: the service a plan belongs to ("Fubo" for Fubo Pro and
+    # Elite), so an answer can name the service once.
+    family: str = ""
 
     @property
     def has_price(self) -> bool:
@@ -339,6 +346,45 @@ class ServiceData:
         return [b for b in self.blackouts if b.active and b.applies_to == applies_to]
 
 
+# National channels a live TV lineup can count toward the coverage maths, and
+# the local broadcast networks whose "depends on ZIP" entries count as carried
+# for their national games. Regional networks never count.
+LINEUP_COUNTED = ("ESPN", "ESPN2", "ABC", "NBC", "NBA TV")
+LINEUP_ZIP_COUNTED = ("ABC", "NBC")
+
+
+def apply_lineup(svc: Service) -> None:
+    """For a live TV service, set carries and carries_verified from its
+    lineup instead of the service-level fields: a channel counts when a
+    package has it carried at high or moderate confidence, or, for ABC and
+    NBC, "depends on ZIP" at either confidence. unchecked and not_carried
+    never count. The service covers the union of its packages (Sling Orange
+    and Blue are one Orange + Blue service)."""
+    best: dict[str, tuple[str, str]] = {}          # code -> (how, confidence)
+    rank = {("carried", "high"): 4, ("carried", "moderate"): 3, ("zip", "high"): 2, ("zip", "moderate"): 1}
+    for pkg in svc.lineup:
+        for code in LINEUP_COUNTED:
+            entry = pkg.entry(code)
+            if entry is None:
+                continue
+            confidence = sourced_confidence(entry, pkg.official_domains)
+            if not confidence:
+                continue
+            if entry.status == "carried":
+                how = "carried"
+            elif entry.status == "zip_dependent" and code in LINEUP_ZIP_COUNTED:
+                how = "zip"
+            else:
+                continue
+            if rank[(how, confidence)] > rank.get(best.get(code, ("", "")), 0):
+                best[code] = (how, confidence)
+    svc.carries = [c for c in LINEUP_COUNTED if c in best]
+    svc.carries_verified = bool(svc.carries)
+    svc.moderate_codes = [c for c in svc.carries if best[c][1] == "moderate"]
+    svc.zip_codes = [c for c in svc.carries if best[c][0] == "zip"]
+    svc.carries_verified_confidence = "moderate" if svc.moderate_codes else ""
+
+
 def load_services(data_dir: Path | None = None) -> ServiceData:
     data_dir = data_dir or config.DATA_DIR
     raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
@@ -362,7 +408,10 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             carries_verified_confidence=s.get("carries_verified_confidence", ""),
             carries_confidence_note=s.get("carries_confidence_note", ""),
             lineup=load_lineup(s.get("lineup")),
+            family=s.get("family", ""),
         ))
+        if services[-1].kind == "live_tv":
+            apply_lineup(services[-1])
     rules = raw.get("rules") or {}
     blackouts = [
         BlackoutRule(

@@ -13,7 +13,7 @@
   {%- for row in showcase.rows %}
   <li class="hg-row" data-game="{{ row.game.game_id }}"{% if row.accent_style %} style="{{ row.accent_style }}"{% endif %}>
     {#- The layout rule: where to watch first (channel chips with the way to
-        get each, the fan-base answer, the cable line and "Why ...?" only
+        get each, the fan-base answer, the live TV check line and "Why ...?" only
         when someone is blocked), then the tip time, then players to watch
         with the ranking line, then who's out, then "Also worth knowing".
         The team names are the card's title. The card's one primary link,
@@ -48,8 +48,8 @@
         {%- endfor %}
       </details>
       {%- endif %}
-      {%- if watch.cable %}
-      <p class="hg-cable small" data-cable>{{ watch.cable }}</p>
+      {%- if watch.check %}
+      <p class="hg-check small muted" data-live-tv-check>{{ watch.check }}</p>
       {%- endif %}
       {%- if watch.why %}
       <details class="hg-why small" data-why="{{ watch.why.kinds|join(' ') }}">

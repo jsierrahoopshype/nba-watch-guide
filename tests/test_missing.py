@@ -74,7 +74,8 @@ def test_matrix_matches_the_coverage_engine(fixture_games):
     data = payload([{"d": g.date_et, "o": g.game_id} for g in games], covs, "Antenna")
     ids = [o["id"] for o in data["options"]]
     assert ANTENNA in ids and "local-miami-heat-0" in ids
-    assert "antenna_abc" not in ids and "youtube_tv" not in ids      # grouped / unverified
+    assert "antenna_abc" not in ids                                   # grouped under Antenna
+    assert {"youtube_tv", "hulu_live_tv", "sling_tv", "fubo", "fubo_elite", "directv_stream"} <= set(ids)
     for state in STATES:
         everything = answer(data, state, set(ids))
         assert everything["covered"] == len(games) - len(covs[state].uncovered)

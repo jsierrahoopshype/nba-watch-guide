@@ -266,7 +266,7 @@ def local_services(local: LocalTV | None, service_data: ServiceData) -> list[Ser
 
     out: list[Service] = []
     if local.ota.counts:
-        out.append(make(f"local-{local.slug}-ota", "Local TV over the air", 0, local.ota.note,
+        out.append(make(f"local-{local.slug}-ota", "Local TV (free over the air)", 0, local.ota.note,
                         kind="ota"))
     for i, opt in enumerate(local.streaming):
         price = opt.monthly_price_usd
@@ -382,7 +382,9 @@ def moderate_carries_in(
     missed = {g.game_id for g in combo.missed}
     out = []
     for svc in moderate:
-        carried = {_norm(c): c for c in svc.carries}
+        # A live TV service is moderate only for some channels (apply_lineup);
+        # other services are moderate for their whole carries list.
+        carried = {_norm(c): c for c in (svc.moderate_codes or svc.carries)}
         channels: list[str] = []
         used = False
         for game in games:
@@ -399,3 +401,37 @@ def moderate_carries_in(
         if used:
             out.append({"service": svc, "channels": channels})
     return out
+
+
+# --------------------------------------------------------------------------
+# Local ABC and NBC through a live TV package ("depends on ZIP")
+# --------------------------------------------------------------------------
+
+def via_zip(svc: Service, game: Game) -> bool:
+    """True when this service reaches the game only through a local ABC or
+    NBC that its lineup marks as depending on the ZIP code."""
+    if not svc.zip_codes:
+        return False
+    codes = {_norm(c) for c in game.national_codes}
+    zip_hit = codes & {_norm(c) for c in svc.zip_codes}
+    firm = codes & {_norm(c) for c in svc.carries if c not in svc.zip_codes}
+    return bool(zip_hit) and not firm
+
+
+def relies_on_zip(services: list[Service], games: list[Game], tricode: str,
+                  service_data: ServiceData, local: LocalTV | None, state: str,
+                  skip: set[str] | None = None) -> bool:
+    """Whether some game these services cover is reached only through a
+    ZIP-dependent local ABC or NBC: every one of `services` that carries it
+    does so via_zip. Games whose id is in `skip` (a combination's misses)
+    do not count."""
+    ids = {s.id for s in services}
+    if not any(s.zip_codes for s in services):
+        return False
+    for game in games:
+        if skip and game.game_id in skip:
+            continue
+        carriers = carriers_for_game(game, tricode, service_data, local, state) & ids
+        if carriers and all(via_zip(service_data.by_id(sid), game) for sid in carriers):
+            return True
+    return False
