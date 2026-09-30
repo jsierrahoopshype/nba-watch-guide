@@ -19,6 +19,7 @@ expected.
 | Subscription prices, billing notes, which channels a service carries, League Pass blackout rules | `data/services.json` |
 | Local TV per team, in-market notes | `data/local_tv.json` |
 | Short names for long local channel names on channel chips | `data/local_tv.json`, each team's `short_names` |
+| Antenna channel numbers for over-the-air stations | `data/local_tv.json`, each team's `antenna_channels` |
 | Live TV channel lineups (per package, per channel, with sources and check date; also what each live TV service counts for) | `data/services.json`, each live TV service's `lineup` |
 | Team colors (logo rings, card edges) | `data/team_colors.json` |
 | Affiliate links | `data/services.json`, the `affiliate_url` on each service |
@@ -242,6 +243,20 @@ against the white card (the Spurs' silver) is darkened for that
 (`watchguide/colors.py`). A local channel with an entry in its team's
 `short_names` shows the short name on chips, with the full name in the
 `title` attribute; titles, descriptions and JSON-LD keep the full name.
+
+Over-the-air stations can carry their antenna (virtual) channel in their
+team's `antenna_channels` in `data/local_tv.json`: `{station, names, virtual,
+status, reason, sources, checked}`. A chip then reads "WMOR · antenna ch.
+32.1 · Magic market", the team page's local broadcasters row adds it too, and
+each block that shows one gets "Cable and satellite channel numbers vary by
+provider; check your guide." once. A number shows only when `status` is
+"confirmed", `virtual` looks like "32.1", `checked` is set and `sources` hold
+two URLs on different sites (FCC data or RabbitEars.info plus the station's
+own site, or two independent 2026 sources). Anything else stays unset with
+its `reason`. Cable and satellite numbers are never stored; streaming apps
+and regional networks get no entry; `not_applicable` marks a name that
+covers several stations. Titles, descriptions and JSON-LD never include the
+number.
 
 The hub lists every game of the day in tip-off order, earliest first, with a
 "Top pick" badge on the three highest-ranked, one compact card each: both

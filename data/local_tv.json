@@ -8,6 +8,7 @@
       "low": "Conflicting or stale sources. Never counts in coverage maths. Page shows what is known plus 'Local details for 2026-27 not confirmed yet.'",
       "unknown": "Not announced. Never counts. Page says so plainly."
     },
+    "antenna_channels": "Optional per team: over-the-air stations with their virtual (antenna) channel, e.g. \"32.1\". names are the channel names the station appears under (the schedule feed's codes and local_broadcasters), matched exactly. Shown on chips and the team page only when status is \"confirmed\", virtual looks like \"32.1\", checked is set and sources hold two URLs on different sites: FCC data or RabbitEars.info plus the station's own site, or two independent 2026 sources if those are blocked. Sources that disagree, or only one, leave it unset. Never a cable or satellite number; streaming apps and regional networks get no entry. not_applicable marks a name that covers several stations.",
     "short_names": "Optional per team: {full name: short name} for a local broadcaster or streaming option whose name is too long for a channel chip. Chips show the short name with the full name in the title attribute; every other place keeps the full name.",
     "coverage_rules": {
       "scope": "Local options only cover the team's games that have no national broadcaster, and only for a reader in the team's market.",
@@ -44,6 +45,10 @@
     "atlanta-hawks": {
       "confidence": "moderate",
       "local_broadcasters": ["WANF (Gray)", "Peachtree Sports Network (WPCH subchannel)"],
+      "antenna_channels": [
+        {"station": "WANF", "names": ["WANF (Gray)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "WPCH-TV (Peachtree Sports Network subchannel)", "names": ["Peachtree Sports Network (WPCH subchannel)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "short_names": {"WANF (Gray)": "WANF", "Peachtree Sports Network (WPCH subchannel)": "Peachtree Sports"},
       "ota": {"status": "all", "games": null, "note": "Local games air free over the air on WANF and Peachtree Sports Network."},
       "streaming": [],
@@ -80,6 +85,10 @@
     "charlotte-hornets": {
       "confidence": "high",
       "local_broadcasters": ["WSOC-TV 9", "TV64 (Cox Media Group)"],
+      "antenna_channels": [
+        {"station": "WSOC-TV", "names": ["WSOC-TV 9"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "WAXN-TV (TV64)", "names": ["TV64 (Cox Media Group)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "short_names": {"TV64 (Cox Media Group)": "TV64"},
       "ota": {"status": "all", "games": null, "note": "Every non-national game is free over the air in the Charlotte market."},
       "streaming": [
@@ -105,6 +114,11 @@
     "cleveland-cavaliers": {
       "confidence": "high",
       "local_broadcasters": ["DAZN (produced by Rock Entertainment Sports Network)", "WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"],
+      "antenna_channels": [
+        {"station": "WOIO", "names": ["WOIO"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "WUAB", "names": ["WUAB"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "Gray stations in Cincinnati, Lima and Parkersburg", "names": ["Gray stations in Cincinnati, Lima and Parkersburg (15 games)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"DAZN (produced by Rock Entertainment Sports Network)": "DAZN", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)": "Gray stations (15 games)"},
       "ota": {"status": "partial", "games": 15, "note": "15 games are also free over the air on Gray stations and RESN."},
       "streaming": [
@@ -142,6 +156,10 @@
     "detroit-pistons": {
       "confidence": "high",
       "local_broadcasters": ["WMYD The Spot Detroit 20 (Scripps)", "Statewide Scripps and partner stations"],
+      "antenna_channels": [
+        {"station": "WMYD", "names": ["WMYD The Spot Detroit 20 (Scripps)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "Statewide Scripps and partner stations", "names": ["Statewide Scripps and partner stations"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"WMYD The Spot Detroit 20 (Scripps)": "Scripps Detroit 20", "Statewide Scripps and partner stations": "Scripps statewide"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air on Detroit 20 and partner stations across Michigan."},
       "streaming": [
@@ -226,6 +244,9 @@
     "miami-heat": {
       "confidence": "high",
       "local_broadcasters": ["WPLG Local 10"],
+      "antenna_channels": [
+        {"station": "WPLG", "names": ["WPLG Local 10", "WPLG"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "ota": {"status": "all", "games": 68, "note": "Every non-national game is free over the air on Local 10."},
       "streaming": [
         {"name": "Local 10+ Platinum", "monthly_price_usd": 0, "season_price_usd": 0, "note": "Free stream of the Local 10 broadcasts.", "price_verified": true}
@@ -238,6 +259,10 @@
     "milwaukee-bucks": {
       "confidence": "high",
       "local_broadcasters": ["MY24 (WVTV-DT2)", "Statewide affiliates"],
+      "antenna_channels": [
+        {"station": "WVTV-DT2 (MY24)", "names": ["MY24 (WVTV-DT2)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "Statewide affiliates", "names": ["Statewide affiliates"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"MY24 (WVTV-DT2)": "MY24"},
       "ota": {"status": "all", "games": null, "note": "Every locally available game is free over the air on MY24 and statewide affiliates."},
       "streaming": [
@@ -263,6 +288,9 @@
     "new-orleans-pelicans": {
       "confidence": "moderate",
       "local_broadcasters": ["Gulf Coast Sports & Entertainment Network (Gray)"],
+      "antenna_channels": [
+        {"station": "Gulf Coast Sports & Entertainment Network (Gray)", "names": ["Gulf Coast Sports & Entertainment Network (Gray)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"Gulf Coast Sports & Entertainment Network (Gray)": "Gulf Coast Sports"},
       "ota": {"status": "all", "games": null, "note": "Free over the air in 14 Gulf Coast markets."},
       "streaming": [
@@ -288,6 +316,11 @@
     "oklahoma-city-thunder": {
       "confidence": "high",
       "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
+      "antenna_channels": [
+        {"station": "KSBI", "names": ["KSBI (Oklahoma City)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "KQCW-DT", "names": ["KQCW (Tulsa)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "KOTV-DT (News On 6)", "names": ["News On 6 (4 games)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "short_names": {"KSBI (Oklahoma City)": "KSBI", "KQCW (Tulsa)": "KQCW", "News On 6 (4 games)": "News On 6", "Thunder+ (NBA App)": "Thunder+"},
       "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air."},
       "streaming": [
@@ -301,6 +334,11 @@
     "orlando-magic": {
       "confidence": "high",
       "local_broadcasters": ["WRDQ 27", "WFTV 9 (Cox)", "WMOR (Tampa)"],
+      "antenna_channels": [
+        {"station": "WRDQ", "names": ["WRDQ 27"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "WFTV", "names": ["WFTV 9 (Cox)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "WMOR-TV", "names": ["WMOR (Tampa)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "short_names": {"WFTV 9 (Cox)": "WFTV 9", "WMOR (Tampa)": "WMOR"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air in Orlando and Tampa."},
       "streaming": [
@@ -327,6 +365,10 @@
     "phoenix-suns": {
       "confidence": "high",
       "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
+      "antenna_channels": [
+        {"station": "KTVK (Arizona's Family)", "names": ["Arizona's Family (3TV/KTVK)"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)", "names": ["Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"Arizona's Family (3TV/KTVK)": "Arizona's Family", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)": "Arizona's Family Sports"},
       "ota": {"status": "all", "games": 74, "note": "All 74 non-national games are free over the air."},
       "streaming": [
@@ -340,6 +382,10 @@
     "portland-trail-blazers": {
       "confidence": "moderate",
       "local_broadcasters": ["KUNP", "KATU (some games)"],
+      "antenna_channels": [
+        {"station": "KUNP", "names": ["KUNP"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""},
+        {"station": "KATU", "names": ["KATU (some games)", "KATU"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "short_names": {"KATU (some games)": "KATU"},
       "ota": {"status": "most", "games": null, "note": "Most local games are free over the air."},
       "streaming": [
@@ -389,6 +435,9 @@
     "utah-jazz": {
       "confidence": "moderate",
       "local_broadcasters": ["KJZZ"],
+      "antenna_channels": [
+        {"station": "KJZZ-TV", "names": ["KJZZ"], "virtual": null, "status": "unset", "reason": "Not confirmed: FCC, RabbitEars.info, the station's site and 2026 news pages could not be read from the build environment (network policy), so no two sources were checked.", "sources": [], "checked": ""}
+      ],
       "ota": {"status": "all", "games": 78, "note": "78 games are free over the air on KJZZ."},
       "streaming": [
         {"name": "Jazz+", "monthly_price_usd": 20.00, "season_price_usd": 126.00, "note": "SEG+ bundle with the Utah Mammoth is $175 a year.", "price_verified": false}

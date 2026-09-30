@@ -13,7 +13,7 @@ from .. import seo
 from ..context import SiteContext, long_date
 from ..pairs import by_name, game_teams, meetings, pair_url
 from ..render import Page, date_label, et_label, safe_format
-from .common import all_channels, chips, crumb_trail, game_view, updated_label
+from .common import all_channels, cable_note, chips, crumb_trail, game_view, updated_label
 
 JSONLD_GAME_LIMIT = 10
 
@@ -118,6 +118,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             game_text=game_text,
             view=view,
             rows=rows,
+            meetings_cable_note=cable_note(ctx, *[row["channels"] for row in rows]),
             show_pair_link=False,
             updated_label=updated_label(ctx),
             stale=ctx.availability_is_stale(),

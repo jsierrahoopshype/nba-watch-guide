@@ -11,6 +11,9 @@
     <div class="row"><div class="row-main">
       <div class="row-title">{{ labels.local_broadcasters_label }}</div>
       <div class="row-note">{% if watching.broadcasters %}{{ watching.broadcasters|join(", ") }}{% else %}{{ labels.local_none_listed }}{% endif %}</div>
+      {% if watching.cable_note %}
+      <div class="row-note small muted" data-cable-numbers>{{ watching.cable_note }}</div>
+      {% endif %}
     </div></div>
     {%- if watching.ota_note %}
     <div class="row"><div class="row-main">

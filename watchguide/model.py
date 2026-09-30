@@ -7,6 +7,7 @@ pages, calendar feeds) read the same objects rather than the raw feed.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field, asdict
 from datetime import date, datetime
 from pathlib import Path
@@ -494,6 +495,38 @@ class LocalOption:
     billing_note: str = ""       # from the shared service, when there is one
 
 
+VIRTUAL_CHANNEL = re.compile(r"^\d{1,2}\.\d{1,2}$")     # "32.1", "24.2"
+
+
+@dataclass
+class AntennaChannel:
+    """An over-the-air station's virtual channel (data/local_tv.json
+    "antenna_channels"). `names` are the channel names it appears under (the
+    schedule feed's codes and the file's broadcaster names), matched exactly.
+    Shown only when confirmed: status "confirmed", a virtual channel like
+    "32.1", a check date and two sources on different sites. Anything else is
+    kept for the record and never shown."""
+    station: str
+    names: list[str]
+    virtual: str = ""
+    status: str = "unset"          # confirmed, unset or not_applicable
+    reason: str = ""
+    sources: list[dict[str, str]] = field(default_factory=list)
+    checked: str = ""
+
+    @property
+    def confirmed(self) -> bool:
+        hosts = {_host(s.get("url", "")) for s in self.sources if s.get("url")}
+        return (self.status == "confirmed" and bool(VIRTUAL_CHANNEL.match(self.virtual or ""))
+                and bool(self.checked) and len(hosts - {""}) >= 2)
+
+
+def _host(url: str) -> str:
+    """The site a source URL is on, without "www.", for the two-sites rule."""
+    m = re.match(r"^https?://([^/]+)", url or "")
+    return m.group(1).lower().removeprefix("www.") if m else ""
+
+
 @dataclass
 class LocalTV:
     slug: str
@@ -509,6 +542,14 @@ class LocalTV:
     last_checked: str = ""
     # {full name: short name} for channel chips; see short_name().
     short_names: dict[str, str] = field(default_factory=dict)
+    antenna_channels: list[AntennaChannel] = field(default_factory=list)
+
+    def antenna_channel(self, name: str) -> str:
+        """The confirmed virtual channel for a channel name, or ""."""
+        for entry in self.antenna_channels:
+            if name in entry.names and entry.confirmed:
+                return entry.virtual
+        return ""
 
     def short_name(self, name: str) -> str:
         """The name a channel chip shows: the short one when the file has
@@ -570,6 +611,12 @@ def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
             exclude_from_us_maths=bool(t.get("exclude_from_us_maths")),
             last_checked=last_checked,
             short_names={str(k): str(v) for k, v in (t.get("short_names") or {}).items() if k and v},
+            antenna_channels=[AntennaChannel(
+                station=a.get("station", ""), names=[str(n) for n in a.get("names") or [] if n],
+                virtual=str(a.get("virtual") or ""), status=a.get("status", "unset"),
+                reason=a.get("reason", ""),
+                sources=[x for x in a.get("sources") or [] if isinstance(x, dict)],
+                checked=a.get("checked", "")) for a in t.get("antenna_channels") or []],
         )
     return out
 

@@ -67,6 +67,9 @@
     {%- endfor %}
   </tbody>
 </table>
+{%- if schedule_cable_note %}
+<p class="small muted" data-cable-numbers>{{ schedule_cable_note }}</p>
+{%- endif %}
 {%- else %}
 <div class="card"><p>{{ text.no_games }}</p></div>
 {%- endif %}

@@ -112,8 +112,19 @@ def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False
         # title carries a shortened local name in full; a national chip
         # relabelled with its service needs none.
         title = name if channel["kind"] == "local" and label != name else ""
-        out.append({**channel, "label": label, "title": title, "how": how})
+        # An over-the-air station's confirmed antenna channel; never a cable
+        # or satellite number, and none for streaming apps or regional networks.
+        virtual = ctx.antenna_channel(name) if channel["kind"] == "local" else ""
+        antenna = text["chip_antenna"].format(channel=virtual) if virtual else ""
+        out.append({**channel, "label": label, "title": title, "how": how, "antenna": antenna})
     return out
+
+
+def cable_note(ctx: SiteContext, *chip_lists: list[dict]) -> str:
+    """The once-per-block line under chips that show an antenna channel:
+    the same stations sit on other numbers on cable and satellite."""
+    shown = any(c.get("antenna") for chips_ in chip_lists for c in chips_)
+    return ctx.copy.get("game", {})["cable_numbers"] if shown else ""
 
 
 def _names(names: list[str]) -> str:
@@ -208,8 +219,10 @@ def watch_view(ctx: SiteContext, game) -> dict:
         else:
             key = "summary_league_pass"
         why = {"summary": why_text[key], "lines": [r["line"] for r in reasons], "kinds": sorted(kinds)}
+    game_chips = chips(ctx, all_channels(ctx, game), priced=True)
     return {
-        "chips": chips(ctx, all_channels(ctx, game), priced=True),
+        "chips": game_chips,
+        "cable_note": cable_note(ctx, game_chips),
         "fans": fans,
         "everyone": everyone,
         "check": check,

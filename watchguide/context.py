@@ -158,6 +158,16 @@ class SiteContext:
                 return local.short_names[name]
         return name
 
+    def antenna_channel(self, name: str) -> str:
+        """A local channel's confirmed antenna (virtual) channel, "32.1", from
+        whichever team's data/local_tv.json entry names it; "" otherwise.
+        Never a cable or satellite number."""
+        for local in self.local_tv.values():
+            found = local.antenna_channel(name)
+            if found:
+                return found
+        return ""
+
     def team_accent(self, tricode: str) -> str:
         """The team's color as a ring or edge color, darkened if needed to
         keep 3:1 against the card (see watchguide/colors.py), or ""."""
