@@ -3,6 +3,14 @@ name: build-watch-guide-daily
 on:
   schedule:
     - cron: '0 10 * * *'
+  # Every merge to main rebuilds and publishes, then checks the live site.
+  # Doc-only changes don't. The bots' own commits (raw availability copy,
+  # recent awards) are pushed with GITHUB_TOKEN, which never starts a run.
+  push:
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - CLAUDE.md
   workflow_dispatch:
     inputs:
       publish:
@@ -79,6 +87,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: ./scripts/publish.sh site gh-pages
+
+      # Waits (up to 10 minutes, for caching) until hoopsmatic.com serves
+      # this run's data/build.json, then checks the hub, miami-heat, tonight
+      # and spain for HTTP 200, the built title and no noindex. Runs whenever
+      # this run published, including when the availability feed was not
+      # trusted; the result goes to the job summary. The 30-minute refresh
+      # has no live check.
+      - name: Live check
+        if: inputs.publish != false
+        run: python scripts/live_check.py --site site --sha "$GITHUB_SHA"
 
       - name: Fail if the availability feed was not trusted
         if: steps.build.outputs.exit_code == '3'

@@ -278,9 +278,10 @@ def test_why_is_worded_for_the_block(fixture_games):
     why = watch_view(ctx, a_game(fixture_games, "MIA", "DAL", ["ESPN"]))["why"]
     assert why["summary"] == "Why isn't this on League Pass or local TV?"
     assert "Heat local TV (WPLG Local 10) does not show games on national TV." in why["lines"]
-    # A local game: League Pass is blacked out in the home markets.
+    # A local game: League Pass is blacked out in the home markets, and
+    # that in-market blackout is the only thing in the way.
     why = watch_view(ctx, a_game(fixture_games, "MIA", "DAL", []))["why"]
-    assert why["summary"] == "Why isn't this on League Pass?"
+    assert why["summary"] == "Why is League Pass blacked out here?" and why["kinds"] == ["league_pass"]
 
 
 def test_no_why_when_nothing_blocks_anyone(fixture_games, tmp_path_factory):
@@ -301,7 +302,7 @@ def test_why_markup_is_conditional_and_tappable(built_site, fixture_games, tmp_p
             summary = re.search(r'<details class="why gb-why" data-why="[\w ]+"><summary>([^<]+)</summary>', watch)
             assert summary and htmllib.unescape(summary.group(1)) in {
                 "Why isn't this on League Pass?", "Why isn't this on local TV?",
-                "Why isn't this on League Pass or local TV?"}
+                "Why isn't this on League Pass or local TV?", "Why is League Pass blacked out here?"}
     assert "Why can&#39;t I watch this game?" not in "".join(blocks(page))
     css = (config.ASSET_DIR / "watch-guide.css").read_text(encoding="utf-8")
     assert re.search(r"\.gb-why > summary::after[^{]*\{[^}]*border-right: 2px solid", css)      # the chevron

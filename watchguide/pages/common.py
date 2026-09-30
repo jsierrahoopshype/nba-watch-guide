@@ -6,8 +6,8 @@ from datetime import date
 
 from .. import config, worth
 from ..context import SiteContext
-from ..coverage import (IN_MARKET, OUT_OF_MARKET, carriers_for_game, channels_for_game, local_reaches,
-                        with_local_options)
+from ..coverage import (IN_MARKET, OUT_OF_MARKET, carriers_for_game, channels_for_game, league_pass_blocked,
+                        local_reaches, with_local_options)
 from ..pairs import by_name, game_teams, pair_path
 from ..render import usd
 from ..sources.careers import match_key
@@ -142,9 +142,9 @@ def _fans_and_reasons(ctx: SiteContext, game) -> tuple[list[dict], list[dict]]:
     fans: list[dict] = []
     reasons: list[dict] = []
 
-    def add(kind: str, line: str) -> None:
+    def add(kind: str, line: str, in_market: bool = False) -> None:
         if line and line not in {r["line"] for r in reasons}:
-            reasons.append({"kind": kind, "line": line})
+            reasons.append({"kind": kind, "line": line, "in_market": in_market})
 
     for tricode in (game.away_tricode, game.home_tricode):
         team = ctx.by_tricode.get(tricode)
@@ -158,8 +158,12 @@ def _fans_and_reasons(ctx: SiteContext, game) -> tuple[list[dict], list[dict]]:
             states.append({"state": state, "label": label.format(team=team.short_name),
                            "answer": lines[0] if lines else "",
                            "moderate": answer_parts(game, tricode, sd, local, state)["moderate"]})
+            # A League Pass reason is an in-market blackout when the rule it
+            # gives (the first that applies, as in why.explain) is one.
+            rules = league_pass_blocked(game, state, sd)
+            in_market = bool(rules) and rules[0] in {r.label for r in sd.active_blackouts("in_market_local")}
             for line in lines[1:]:
-                add("league_pass", line)
+                add("league_pass", line, in_market)
         # Regional: in its own market a fan base with counted local options
         # still cannot see a national game on them. Skipped when a local
         # option carries it anyway (an add-on bundled with the national
@@ -195,8 +199,14 @@ def watch_view(ctx: SiteContext, game) -> dict:
     if reasons:
         why_text = ctx.copy.get("why", {})
         kinds = {r["kind"] for r in reasons}
-        key = "summary_both" if len(kinds) > 1 else \
-            ("summary_local" if kinds == {"local"} else "summary_league_pass")
+        if len(kinds) > 1:
+            key = "summary_both"
+        elif kinds == {"local"}:
+            key = "summary_local"
+        elif all(r["in_market"] for r in reasons):
+            key = "summary_blackout"          # only the in-market League Pass blackout is in the way
+        else:
+            key = "summary_league_pass"
         why = {"summary": why_text[key], "lines": [r["line"] for r in reasons], "kinds": sorted(kinds)}
     return {
         "chips": chips(ctx, all_channels(ctx, game), priced=True),
