@@ -186,7 +186,10 @@ with "Tonight", "Tomorrow" or "In 21 days") the order is
 from `data/services.json` ("ESPN Unlimited · $31.99/mo", "NBC · free over the
 air"), the out-of-market and in-market answer for both fan bases, collapsed to
 one "Everyone in the US" line when all four match. Each answer lists the
-standalone options first, then the live TV services grouped by service ("or on
+standalone options first, as alternatives joined with "or" ("NBA League Pass
+(includes NBA TV)" on NBA TV games, "NBA TV through cable or live TV" when the
+NBA TV channel is the only standalone option), then the live TV services
+grouped by service ("or on
 live TV with YouTube TV, Hulu + Live TV, Sling, Fubo or DirecTV"), naming a
 specific plan only when the plans of one service differ for that game (Fubo
 Elite on NBA TV games); `family` in `data/services.json` groups the plans.

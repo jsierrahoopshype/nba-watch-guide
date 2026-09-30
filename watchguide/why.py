@@ -34,6 +34,34 @@ def live_tv_names(carrying: list[Service], service_data: ServiceData) -> list[st
     return names
 
 
+def _is_nba_tv_channel(svc: Service, lp_id: str) -> bool:
+    """The NBA TV channel entry itself (not League Pass, which bundles it)."""
+    return svc.id != lp_id and [c.lower() for c in svc.carries] == ["nba tv"]
+
+
+def _standalone_names(game: Game, services: list[Service], service_data: ServiceData,
+                      text: dict[str, str]) -> list[str]:
+    """Standalone options as the answer names them. On an NBA TV game League
+    Pass reads "NBA League Pass (includes NBA TV)" and the NBA TV channel is
+    not listed beside it; when the NBA TV channel is the only standalone
+    option it reads "NBA TV through cable or live TV", since it is a cable
+    channel rather than an app of its own."""
+    lp_id = service_data.league_pass_service_id
+    on_nba_tv = any(c.lower() == "nba tv" for c in game.national_codes)
+    lp_covers = on_nba_tv and any(s.id == lp_id for s in services)
+    names: list[str] = []
+    for svc in services:
+        if svc.id == lp_id and lp_covers:
+            names.append(text["league_pass_nba_tv"].format(service=svc.name))
+        elif _is_nba_tv_channel(svc, lp_id):
+            if lp_covers:
+                continue
+            names.append(text["nba_tv_channel"] if len(services) == 1 else svc.name)
+        else:
+            names.append(svc.name)
+    return names
+
+
 def answer_parts(game: Game, tricode: str, service_data: ServiceData, local: LocalTV | None,
                  state: str) -> dict:
     """Who carries one game in one market state, split the way the answer
@@ -47,6 +75,7 @@ def answer_parts(game: Game, tricode: str, service_data: ServiceData, local: Loc
     codes = {c.lower() for c in game.national_codes}
     return {
         "carriers": carriers,
+        "standalone_services": [s for s in carrying if s.kind != "live_tv"],
         "standalone": [s.name for s in carrying if s.kind != "live_tv"],
         "live": live_tv_names(live, service_data),
         "zip": any(via_zip(s, game) for s in live),
@@ -65,16 +94,18 @@ def explain(game: Game, tricode: str, service_data: ServiceData, local: LocalTV 
     """
     parts = answer_parts(game, tricode, service_data, local, state)
     carriers = parts["carriers"]
-    standalone, live = parts["standalone"], _names(parts["live"], "or")
+    standalone = _standalone_names(game, parts["standalone_services"], service_data, text)
+    live = _names(parts["live"], "or")
 
     lines: list[str] = []
     # Standalone options first, then live TV grouped by service.
+    # Every list is of alternatives, so it joins with "or".
     if standalone and live:
-        answer = text["carried_live"].format(services=_names(standalone), live=live)
+        answer = text["carried_live"].format(services=_names(standalone, "or"), live=live)
     elif live:
         answer = text["live_only"].format(live=live)
     elif standalone:
-        answer = text["carried"].format(services=_names(standalone))
+        answer = text["carried"].format(services=_names(standalone, "or"))
     else:
         answer = text["none"]
     if parts["zip"]:

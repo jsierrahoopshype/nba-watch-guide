@@ -53,7 +53,7 @@ def test_national_game_in_market_gives_one_reason_not_both(heat):
 
 def test_local_game_in_market_is_on_local_tv_and_blacked_out_on_league_pass(heat):
     inside = lines(heat, game(home_tv=["WPLG"]), IN_MARKET)
-    assert inside[0] == "Watch it on Local TV over the air and Local 10+ Platinum."
+    assert inside[0] == "Watch it on Local TV over the air or Local 10+ Platinum."
     assert inside[1] == f"NBA League Pass: {RULES['local']}"
 
 

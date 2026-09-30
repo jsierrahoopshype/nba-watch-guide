@@ -62,7 +62,7 @@
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
   "why": {
-    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed. The game block's expandable only appears when a fan base is blocked from something it might expect: summary_league_pass for League Pass blackouts, summary_local when a team's local TV does not carry a national game (the regional line, {team} a short name, {channels} its local channels), summary_both when both apply. carried_live and live_only list the standalone options first and then the live TV services, one name per service ({live}, joined with 'or') unless its plans differ for that game. zip_locals follows an answer that names a live TV service only through a ZIP-dependent local ABC or NBC, and also marks the team pages' figures that rely on one.",
+    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed. The game block's expandable only appears when a fan base is blocked from something it might expect: summary_league_pass for League Pass blackouts, summary_local when a team's local TV does not carry a national game (the regional line, {team} a short name, {channels} its local channels), summary_both when both apply. carried_live and live_only list the standalone options first and then the live TV services, one name per service ({live}, joined with 'or') unless its plans differ for that game. zip_locals follows an answer that names a live TV service only through a ZIP-dependent local ABC or NBC, and also marks the team pages' figures that rely on one. Every list in an answer is of alternatives and joins with 'or'. league_pass_nba_tv names League Pass on an NBA TV game (and the NBA TV channel is then not listed); nba_tv_channel names the NBA TV channel when it is the only standalone option.",
     "summary": "Why can't I watch this game?",
     "carried": "Watch it on {services}.",
     "none": "None of the services on this page carries this game yet.",
@@ -73,7 +73,9 @@
     "regional": "{team} local TV ({channels}) does not show games on national TV.",
     "carried_live": "Watch it on {services}, or on live TV with {live}.",
     "live_only": "Watch it on live TV with {live}.",
-    "zip_locals": "Local ABC and NBC availability varies by ZIP code."
+    "zip_locals": "Local ABC and NBC availability varies by ZIP code.",
+    "league_pass_nba_tv": "{service} (includes NBA TV)",
+    "nba_tv_channel": "NBA TV through cable or live TV"
   },
   "missing": {
     "_note": "Wording for 'What am I missing?' on the team pages. The page script fills {placeholders}. None of it is in the prerendered HTML.",
