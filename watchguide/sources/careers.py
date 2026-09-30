@@ -88,16 +88,30 @@ def stint_end(years: str) -> int | None:
     return year + 100 if year < int(start) else year          # "1999-00" is 2000
 
 
+def stint_seasons(years: str) -> int:
+    """How many seasons a stint covers: "2013–2026" is 13 (2013-14 through
+    2025-26), "2016–17" and "2025" are 1; 0 when unreadable or open."""
+    end = stint_end(years)
+    m = re.match(r"\s*(\d{4})", str(years or ""))
+    if end is None or not m:
+        return 0
+    return max(1, end - int(m.group(1)))
+
+
 def past_teams(record: dict[str, Any], full_names: dict[str, str], current: str) -> list[dict[str, Any]]:
-    """[{team: tricode, end: year}] for the player's earlier NBA stints, the
-    latest stint per team, leaving out the team he plays for now."""
-    latest: dict[str, int] = {}
+    """[{team: tricode, end: year, seasons: n}] for the player's earlier NBA
+    stints, the latest stint per team, leaving out the team he plays for now."""
+    latest: dict[str, tuple[int, int]] = {}
     for stint in record.get("career_history") or []:
         tricode = full_names.get(stint.get("team", ""))
-        end = stint_end(stint.get("years", ""))
+        years = stint.get("years", "")
+        end = stint_end(years)
         if tricode and tricode != current and end is not None:
-            latest[tricode] = max(end, latest.get(tricode, 0))
-    return [{"team": t, "end": e} for t, e in sorted(latest.items(), key=lambda kv: (-kv[1], kv[0]))]
+            seen = latest.get(tricode)
+            if seen is None or end > seen[0]:
+                latest[tricode] = (end, stint_seasons(years))
+    return [{"team": t, "end": e, "seasons": n}
+            for t, (e, n) in sorted(latest.items(), key=lambda kv: (-kv[1][0], kv[0]))]
 
 
 def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> dict[str, Any]:

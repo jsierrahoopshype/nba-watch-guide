@@ -22,6 +22,7 @@ from datetime import date, timedelta
 from typing import Any, Callable
 
 from .model import Game
+from .ranking import player_star_power
 from .sources import referees as referees_source
 from .sources.careers import match_key
 
@@ -103,46 +104,42 @@ def _names(names: list[str]) -> str:
     return ", ".join(names[:-1]) + " and " + names[-1]
 
 
-def _met_before(games: list[Game], game: Game) -> bool:
-    """Whether the two teams already met earlier in this schedule."""
-    pair = {game.away_tricode, game.home_tricode}
-    key = (game.date_et, game.tipoff_utc or "")
-    return any({g.away_tricode, g.home_tricode} == pair and g.game_id != game.game_id
-               and (g.date_et, g.tipoff_utc or "") < key for g in games)
-
-
 REVENGE_LIMIT = 2
+LONG_STINT = 5          # seasons with the old team for a non-star to count
 
 
 def revenge_lines(ctx, game: Game) -> list[str]:
     """"Revenge game: Paul George faces the 76ers", for players on either
-    roster who used to play for the opponent (career map stints). At most
-    REVENGE_LIMIT, first meetings since leaving first, then the most recent
-    departures. "for the first time since leaving" when he left in the
-    calendar year this season starts (so not in an earlier season) and the
-    two teams have not met yet this season. Players listed Out on game day
-    do not count."""
-    text = _text(ctx)
-    if "revenge" not in text:
+    roster with an earlier stint with the opponent (career map), when he is
+    either in the recent-awards pool (All-Star or All-NBA in the seasons
+    data/star_power_weights.json counts, the last three) or left that team in
+    the offseason before this season after LONG_STINT or more seasons there.
+    At most REVENGE_LIMIT, most recent departures first, then star power.
+    Players listed Out on game day do not count."""
+    template = _text(ctx).get("revenge", "")
+    if not template:
         return []
     season_start = int(str(getattr(ctx, "season", "") or "0")[:4] or 0)
+    pool = player_star_power(ctx.recent_awards, ctx.star_weights) if ctx.star_weights else {}
     game_day = game.date_et == ctx.today
-    met = _met_before(ctx.games, game)
     found = []
     for side, opponent in ((game.away_tricode, game.home_tricode), (game.home_tricode, game.away_tricode)):
         out = {match_key(n) for n in ctx.out_players(side)} if game_day else set()
         for player in ctx.star_rosters.get(side, []):
             name = player.get("player", "")
-            if not name or match_key(name) in out:
+            key = match_key(name)
+            if not name or key in out:
                 continue
             for stint in player.get("past") or []:
                 if stint.get("team") != opponent:
                     continue
-                first = bool(season_start) and stint.get("end", 0) >= season_start and not met
-                found.append((first, stint.get("end", 0), player.get("all_star", 0), name, opponent))
-    found.sort(key=lambda f: (not f[0], -f[1], -f[2], f[3]))
-    return [text["revenge_first" if first else "revenge"].format(player=name, team=_short(ctx, opp))
-            for first, _, _, name, opp in found[:REVENGE_LIMIT]]
+                long_stint_just_ended = (bool(season_start) and stint.get("end") == season_start
+                                         and stint.get("seasons", 0) >= LONG_STINT)
+                if key in pool or long_stint_just_ended:
+                    power = pool[key]["score"] if key in pool else 0.0
+                    found.append((stint.get("end", 0), power, name, opponent))
+    found.sort(key=lambda f: (-f[0], -f[1], f[2]))
+    return [template.format(player=name, team=_short(ctx, opp)) for _, _, name, opp in found[:REVENGE_LIMIT]]
 
 
 def referee_lines(ctx, game: Game) -> list[Line]:

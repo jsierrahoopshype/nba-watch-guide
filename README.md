@@ -286,10 +286,12 @@ kept:
 2. Revenge games: "Revenge game: Paul George faces the 76ers", for players on
    either roster with an earlier stint with the opponent in the career map
    (the same file as the rosters; its slim copy keeps each player's `past`
-   teams and the year each stint ended). At most two, first meetings since
-   leaving first ("for the first time since leaving": he left in the calendar
-   year the season starts and the teams have not met yet this season), then
-   the most recent departures. Players listed Out on game day don't count.
+   teams, the year each stint ended and how many seasons it lasted). Only
+   players in the recent-awards pool (All-Star or All-NBA in the last three
+   seasons, `data/recent_awards.json`) and players who left that team in the
+   offseason before this season after five or more seasons there. At most
+   two, most recent departures first. Players listed Out on game day don't
+   count.
 3. Referees, game day only: "Referees: A, B and C" from
    jsierrahoopshype/nbareferees' `data/tonights-crews.json`, used only when
    its `date` is the game's Eastern date. Each name links to

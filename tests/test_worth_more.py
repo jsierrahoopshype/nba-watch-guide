@@ -137,53 +137,70 @@ def rosters(home_players=(), away_players=()):
     return {HOME: list(home_players), AWAY: list(away_players)}
 
 
-def former(name, team, end, all_star=0):
-    return {"player": name, "all_star": all_star, "past": [{"team": team, "end": end}]}
+def former(name, team, end, seasons=1, all_star=0):
+    return {"player": name, "all_star": all_star, "past": [{"team": team, "end": end, "seasons": seasons}]}
 
 
-ONLY_TODAY = [GAME]                                          # no earlier meeting of the pair
+def awarded(ctx, *names, season="2025-26", award="all_star"):
+    """Put these players in the recent-awards pool."""
+    ctx.recent_awards = ctx.recent_awards + [{"player": n, "season": season, "award": award} for n in names]
+    return ctx
 
 
-def test_revenge_line_for_a_player_facing_his_old_team():
-    ctx = ctx_for(games=GAMES, rosters=rosters([former("Paul George", AWAY, 2019)]), stars=False)
+def test_revenge_line_for_a_star_facing_his_old_team():
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2019)]), stars=False), "Paul George")
     assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Paul George faces the Celtics"]
 
 
-def test_first_meeting_since_leaving():
-    ctx = ctx_for(games=ONLY_TODAY, rosters=rosters([former("Paul George", AWAY, 2026)]), stars=False)
-    assert worth.revenge_lines(ctx, GAME) == [
-        "Revenge game: Paul George faces the Celtics for the first time since leaving"]
+def test_all_nba_counts_like_all_star():
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2019)]), stars=False), "Paul George",
+                  season="2023-24", award="all_nba_third")
+    assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Paul George faces the Celtics"]
 
 
-def test_not_first_once_the_teams_have_met_or_he_left_earlier():
-    met = ctx_for(games=GAMES, rosters=rosters([former("Paul George", AWAY, 2026)]), stars=False)
-    assert "first time" not in worth.revenge_lines(met, GAME)[0]         # met on day -2
-    earlier = ctx_for(games=ONLY_TODAY, rosters=rosters([former("Paul George", AWAY, 2024)]), stars=False)
-    assert "first time" not in worth.revenge_lines(earlier, GAME)[0]
-
-
-def test_no_revenge_line_without_a_stint_with_the_opponent():
-    ctx = ctx_for(rosters=rosters([former("Paul George", "LAL", 2020), {"player": "No Past"}]), stars=False)
+def test_no_line_for_a_player_outside_the_pool_on_a_short_or_old_stint():
+    players = [former("Role Player", AWAY, 2019, seasons=9),        # long stint, left years ago
+               former("Short Stay", AWAY, 2026, seasons=4),         # left this offseason, four seasons
+               former("Old Star", AWAY, 2026, seasons=2)]           # his All-Star season is too old
+    ctx = awarded(ctx_for(rosters=rosters(players), stars=False), "Old Star", season="2021-22")
     assert worth.revenge_lines(ctx, GAME) == []
 
 
-def test_at_most_two_first_meetings_then_most_recent_departure():
-    players = [former("Old Move", AWAY, 2019, all_star=9), former("New Move", AWAY, 2026),
-               former("Mid Move", AWAY, 2023)]
-    ctx = ctx_for(games=ONLY_TODAY, rosters=rosters(players, [former("Away Guy", HOME, 2021)]), stars=False)
-    assert worth.revenge_lines(ctx, GAME) == [
-        "Revenge game: New Move faces the Celtics for the first time since leaving",
-        "Revenge game: Mid Move faces the Celtics"]
+def test_line_for_a_long_stint_that_ended_this_offseason():
+    ctx = ctx_for(rosters=rosters([former("Long Timer", AWAY, 2026, seasons=5)]), stars=False)
+    assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Long Timer faces the Celtics"]
+
+
+def test_the_line_never_says_first_time():
+    ctx = ctx_for(games=[GAME], rosters=rosters([former("Long Timer", AWAY, 2026, seasons=7)]), stars=False)
+    [line] = worth.revenge_lines(ctx, GAME)
+    assert line == "Revenge game: Long Timer faces the Celtics" and "first time" not in line
+    assert "revenge_first" not in ctx.copy["game"]
+
+
+def test_no_revenge_line_without_a_stint_with_the_opponent():
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", "LAL", 2020), {"player": "No Past"}]),
+                          stars=False), "Paul George", "No Past")
+    assert worth.revenge_lines(ctx, GAME) == []
+
+
+def test_at_most_two_most_recent_departure_first():
+    players = [former("Old Star", AWAY, 2019, all_star=9), former("Long Timer", AWAY, 2026, seasons=8),
+               former("Mid Star", AWAY, 2023)]
+    ctx = awarded(ctx_for(rosters=rosters(players, [former("Away Star", HOME, 2021)]), stars=False),
+                  "Old Star", "Mid Star", "Away Star")
+    assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Long Timer faces the Celtics",
+                                              "Revenge game: Mid Star faces the Celtics"]
 
 
 def test_players_listed_out_do_not_count():
-    players = [former("Paul George", AWAY, 2026), former("Other Guy", AWAY, 2020)]
+    players = [former("Paul George", AWAY, 2026, seasons=6), former("Other Star", AWAY, 2020)]
     injuries = {HOME: [{"player": "Paul George", "status": "Out", "injury": "Knee", "date": TODAY}]}
-    ctx = ctx_for(games=ONLY_TODAY, rosters=rosters(players), injuries=injuries, stars=False)
-    assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Other Guy faces the Celtics"]
+    ctx = awarded(ctx_for(rosters=rosters(players), injuries=injuries, stars=False), "Other Star")
+    assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Other Star faces the Celtics"]
     injuries[HOME][0]["status"] = "Questionable"                         # only Out removes him
-    ctx = ctx_for(games=ONLY_TODAY, rosters=rosters(players), injuries=injuries, stars=False)
-    assert worth.revenge_lines(ctx, GAME)[0].startswith("Revenge game: Paul George")
+    ctx = awarded(ctx_for(rosters=rosters(players), injuries=injuries, stars=False), "Other Star")
+    assert worth.revenge_lines(ctx, GAME)[0] == "Revenge game: Paul George faces the Celtics"
 
 
 # -- career head-to-head -------------------------------------------------------------------
@@ -241,7 +258,8 @@ def full_house(n_revenge=2, back_to_back=True):
     if back_to_back:
         games.append(replace(GAME, game_id="0022699002", home_tricode="MIA", date_et=day(-1),
                              tipoff_utc=f"{day(-1)}T00:00:00+00:00"))
-    home = [{"player": "Bea Beta", "all_star": 4}] + [former(f"Mover {i}", AWAY, 2020 + i) for i in range(n_revenge)]
+    home = [{"player": "Bea Beta", "all_star": 4}] + [former(f"Mover {i}", AWAY, 2026, seasons=6)
+                                                      for i in range(n_revenge)]
     return ctx_for(games=games, rosters={AWAY: [{"player": "Anna Alpha", "all_star": 5}], HOME: home},
                    crews=crews_for(GAME), referee_slugs={"ann-ref"}, matchups=found_matchups())
 
@@ -304,7 +322,8 @@ def worth_site(tmp_path_factory):
         TOMORROW.home_tricode: [{"player": "Bea Beta", "all_star": 9}]}}), encoding="utf-8")
     awards_dir = _copy_data(tmp_path_factory, "data-worth-awards")
     (awards_dir / "recent_awards.json").write_text(json.dumps({"awards": [
-        {"player": n, "season": "2025-26", "award": "all_nba_first"} for n in ("Anna Alpha", "Bea Beta")]}),
+        {"player": n, "season": "2025-26", "award": "all_nba_first"} for n in ("Anna Alpha", "Bea Beta")] +
+        [{"player": "Paul George", "season": "2024-25", "award": "all_star"}]}),
         encoding="utf-8")
     full_build(out, today=TODAY, offline=True, data_dir=awards_dir, now=f"{TODAY}T12:00:00-05:00")
     return out
@@ -431,4 +450,12 @@ def test_past_teams_latest_stint_per_team_newest_first():
         {"years": "2012–2014", "team": "Boston Celtics"}, {"years": "2014–2019", "team": "Miami Heat"},
         {"years": "2019–2021", "team": "Boston Celtics"}, {"years": "2021–present", "team": "Atlanta Hawks"},
         {"years": "2011", "team": "Some G League Team"}]}
-    assert careers.past_teams(record, full, "ATL") == [{"team": "BOS", "end": 2021}, {"team": "MIA", "end": 2019}]
+    assert careers.past_teams(record, full, "ATL") == [{"team": "BOS", "end": 2021, "seasons": 2},
+                                                       {"team": "MIA", "end": 2019, "seasons": 5}]
+
+
+@pytest.mark.parametrize("years, seasons", [
+    ("2013–2026", 13), ("2019-2026", 7), ("2016–17", 1), ("2025–2026", 1), ("2025", 1), ("2026–present", 0),
+    ("", 0)])
+def test_stint_seasons(years, seasons):
+    assert careers.stint_seasons(years) == seasons
