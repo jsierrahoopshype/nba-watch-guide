@@ -70,6 +70,36 @@ def current_team(record: dict[str, Any], full_names: dict[str, str]) -> str:
     return ""
 
 
+def stint_end(years: str) -> int | None:
+    """The last calendar year of a stint: "2010–2017" and "2016–17" give 2017,
+    "2025" gives 2025; "present" and anything unreadable give None."""
+    text = str(years or "").strip()
+    if re.search(r"present", text, re.I):
+        return None
+    m = re.fullmatch(r"(\d{4})(?:\s*[–-]\s*(\d{2}|\d{4}))?", text)
+    if not m:
+        return None
+    start, end = m.group(1), m.group(2)
+    if not end:
+        return int(start)
+    if len(end) == 4:
+        return int(end)
+    year = int(start[:2] + end)
+    return year + 100 if year < int(start) else year          # "1999-00" is 2000
+
+
+def past_teams(record: dict[str, Any], full_names: dict[str, str], current: str) -> list[dict[str, Any]]:
+    """[{team: tricode, end: year}] for the player's earlier NBA stints, the
+    latest stint per team, leaving out the team he plays for now."""
+    latest: dict[str, int] = {}
+    for stint in record.get("career_history") or []:
+        tricode = full_names.get(stint.get("team", ""))
+        end = stint_end(stint.get("years", ""))
+        if tricode and tricode != current and end is not None:
+            latest[tricode] = max(end, latest.get(tricode, 0))
+    return [{"team": t, "end": e} for t, e in sorted(latest.items(), key=lambda kv: (-kv[1], kv[0]))]
+
+
 def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> dict[str, Any]:
     """{tricode: [{player, all_star}]} plus counts of what was and was not placed,
     and {player: nationality} for the placed players whose record has one."""
@@ -88,6 +118,8 @@ def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> d
         teams.setdefault(tricode, []).append({
             "player": name,
             "all_star": int(rec.get("all_star_count") or 0),
+            # Earlier NBA teams, for the revenge-game line (worth.py).
+            "past": past_teams(rec, full_names, tricode),
         })
         if name and isinstance(rec.get("nationality"), str) and rec["nationality"].strip():
             nationalities[name] = rec["nationality"].strip()
