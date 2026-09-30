@@ -19,6 +19,7 @@ expected.
 | Subscription prices, billing notes, which channels a service carries, League Pass blackout rules | `data/services.json` |
 | Local TV per team, in-market notes | `data/local_tv.json` |
 | Short names for long local channel names on channel chips | `data/local_tv.json`, each team's `short_names` |
+| Live TV channel lineups (per package, per channel, with source page and check date) | `data/services.json`, each live TV service's `lineup` |
 | Team colors (logo rings, card edges) | `data/team_colors.json` |
 | Affiliate links | `data/services.json`, the `affiliate_url` on each service |
 | Page titles, descriptions, headings, FAQ wording | `data/copy.json` |
@@ -185,8 +186,9 @@ with "Tonight", "Tomorrow" or "In 21 days") the order is
 from `data/services.json` ("ESPN Unlimited · $31.99/mo", "NBC · free over the
 air"), the out-of-market and in-market answer for both fan bases, collapsed to
 one "Everyone in the US" line when all four match, a cable line on games on a
-cable channel (`config.CABLE_NATIONAL_CODES`) that names only live TV services
-(`kind: live_tv`) whose carries list is verified, and "Why ...?" only when a
+cable channel (`config.CABLE_NATIONAL_CODES`) that names a live TV package
+only when its `lineup` has that specific channel verified from the service's
+official lineup page (see below), and "Why ...?" only when a
 fan base is actually blocked (a League Pass blackout, or a team's local TV not
 carrying a national game in its own market), worded for the case;
 (2) tip time, the reader's own time big and ET small beside it, one format
@@ -199,6 +201,19 @@ browser (that test needs the `playwright` package and skips without it).
 Players to watch never sits inside who's out
 (`tests/test_game_block_redesign.py`). The date chip's countdown is
 `data-volatile` and the page script recounts it from the reader's clock.
+
+**Live TV lineups.** Each live TV service in `data/services.json` (kind
+`live_tv`) has a `lineup` with one entry per package (Sling Orange and Sling
+Blue apart) and, in each, one entry per channel in
+`_meta.lineup_channels`: ESPN, ESPN2, ABC, NBC, NBA TV and every regional
+network in `data/local_tv.json`. `status` is `carried`, `not_carried`,
+`zip_dependent` (the page says it varies by ZIP code or market; recorded,
+never guessed) or `unchecked`. `carries_verified: true` needs status
+`carried`, a `source_url` on one of the service's `official_domains` and a
+`checked` date; anything short of that is ignored.
+`tests/test_live_tv_lineups.py` enforces it. The lineups only feed the cable
+line: the service-level `carries` and `carries_verified` still drive the
+coverage maths.
 
 Team colors come from `data/team_colors.json` and only draw the logo rings
 and the two-tone strip on a card's top edge, never text; a color under 3:1

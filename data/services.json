@@ -7,6 +7,9 @@
       "NBCSN": "30 games in the NBA schedule feed. Deliberately not mapped to any service: the original NBC Sports Network shut down in 2021 and what this code refers to in 2026-27 is unconfirmed. These games render TBA until verified.",
       "Telemundo": "10 games. Spanish-language coverage. Deliberately not counted as coverage for an English-language reader; show it as a separate note on those games."
     },
+    "lineup_note": "Live TV services only. lineup.packages lists each package (Sling Orange and Sling Blue separately) with a per-channel carries list read from the service's own channel lineup page: status is carried, not_carried, zip_dependent (the page says it depends on ZIP code or market; record that, never a guess) or unchecked. carries_verified is true only for a channel found carried on an official page, with that page as source_url (on one of official_domains) and the date it was read as checked. The game block's cable line names a package only for a channel verified this way. The service-level carries and carries_verified above still drive the coverage maths and are not changed by this block.",
+    "lineup_channels": {"national": ["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], "regional": ["NBC Sports Boston", "YES Network", "CHSN", "Altitude", "NBC Sports Bay Area", "Space City Home Network", "Spectrum SportsNet", "MSG Network", "NBC Sports Philadelphia", "NBC Sports California", "Monumental Sports Network", "Peachtree Sports Network", "Gulf Coast Sports & Entertainment Network", "Arizona's Family Sports", "TSN", "Sportsnet"]},
+    "lineup_regional_note": "regional is every regional sports network named in data/local_tv.json local_broadcasters, owner notes dropped. Over-the-air stations (WPLG, KJZZ and the rest) and DAZN are not channels a live TV package lists nationally, so they are left out; a local ABC or NBC affiliate is checked as ABC or NBC.",
     "kind_note": "kind is ota for an antenna, live_tv for a live TV package that carries cable channels (named on national cable games once its carries list is verified), and streaming when left out.",
     "carries_note": "carries lists the broadcaster codes as they appear in cdn.nba.com scheduleLeagueV2.json: ABC, ESPN, NBC, Peacock, Amazon, NBA TV. Entries with carries_verified false must not be trusted for coverage maths until checked."
   },
@@ -119,6 +122,38 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market and NBA TV carriage is unconfirmed. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["tv.youtube.com", "support.google.com"],
+        "packages": [
+          {
+            "name": "Base Plan",
+            "label": "YouTube TV",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
@@ -134,6 +169,38 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["tv.youtube.com", "support.google.com"],
+        "packages": [
+          {
+            "name": "Sports Plan",
+            "label": "YouTube TV Sports Plan",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
       "source_url": "https://tv.youtube.com/learn/nbaplayoffs/",
@@ -149,6 +216,38 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["hulu.com"],
+        "packages": [
+          {
+            "name": "Hulu + Live TV",
+            "label": "Hulu + Live TV",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.hulu.com/live-tv",
       "affiliate_url": "",
       "source_url": "https://www.hulu.com/live-tv",
@@ -164,6 +263,65 @@
       "carries": ["ESPN"],
       "carries_verified": false,
       "carries_check": "NBC availability depends on the market and ABC is not carried. Verify per market before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["sling.com"],
+        "packages": [
+          {
+            "name": "Sling Orange",
+            "label": "Sling Orange",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          },
+          {
+            "name": "Sling Blue",
+            "label": "Sling Blue",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.sling.com/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
@@ -179,6 +337,38 @@
       "carries": ["ESPN", "ABC"],
       "carries_verified": false,
       "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["fubo.tv"],
+        "packages": [
+          {
+            "name": "Essential",
+            "label": "Fubo",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
@@ -194,6 +384,38 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Which RSN a given market gets, and whether NBA TV is included, varies by plan and market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["directv.com"],
+        "packages": [
+          {
+            "name": "Choice",
+            "label": "DirecTV",
+            "channels": [
+              {"channel": "ESPN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ESPN2", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "ABC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBA TV", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "YES Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "CHSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Altitude", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "MSG Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "TSN", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""},
+              {"channel": "Sportsnet", "status": "unchecked", "carries_verified": false, "source_url": "", "checked": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.directv.com/stream/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",

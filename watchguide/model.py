@@ -142,6 +142,79 @@ class Game:
 # Services
 # --------------------------------------------------------------------------
 
+LINEUP_STATUSES = ("carried", "not_carried", "zip_dependent", "unchecked")
+
+
+def _norm_code(code: str) -> str:
+    return "".join(ch for ch in (code or "").lower() if ch.isalnum())
+
+
+@dataclass
+class LineupChannel:
+    """One channel in one live TV package, as its official lineup page shows
+    it. status is carried, not_carried, zip_dependent (the page says it
+    varies by ZIP code or market) or unchecked."""
+    channel: str
+    status: str = "unchecked"
+    carries_verified: bool = False
+    source_url: str = ""
+    checked: str = ""
+    note: str = ""
+
+
+@dataclass
+class LineupPackage:
+    """A live TV package (YouTube TV Base Plan, Sling Orange...) and its
+    per-channel carries list. label is the name the cable line uses."""
+    name: str
+    label: str
+    channels: list[LineupChannel] = field(default_factory=list)
+    official_domains: list[str] = field(default_factory=list)
+
+    def entry(self, code: str) -> LineupChannel | None:
+        return next((c for c in self.channels if _norm_code(c.channel) == _norm_code(code)), None)
+
+    def verified_for(self, code: str) -> bool:
+        """True only when this channel was found carried on the service's own
+        lineup page: status carried, carries_verified true, a check date and
+        a source URL on one of the service's official domains."""
+        entry = self.entry(code)
+        return bool(entry and entry.carries_verified and entry.status == "carried"
+                    and entry.checked and official_url(entry.source_url, self.official_domains))
+
+
+def official_url(url: str, domains: list[str]) -> bool:
+    """Whether url is https on one of `domains` or a subdomain of one."""
+    from urllib.parse import urlparse
+    parsed = urlparse(url or "")
+    host = (parsed.hostname or "").lower()
+    return parsed.scheme == "https" and any(host == d or host.endswith("." + d) for d in domains)
+
+
+def load_lineup(raw: dict[str, Any] | None) -> list[LineupPackage]:
+    """services.json lineup block to packages. Anything malformed reads as
+    unchecked rather than failing the build."""
+    if not isinstance(raw, dict):
+        return []
+    domains = [str(d).lower() for d in raw.get("official_domains") or []]
+    packages = []
+    for pkg in raw.get("packages") or []:
+        channels = []
+        for ch in pkg.get("channels") or []:
+            status = ch.get("status", "unchecked")
+            channels.append(LineupChannel(
+                channel=str(ch.get("channel", "")),
+                status=status if status in LINEUP_STATUSES else "unchecked",
+                carries_verified=ch.get("carries_verified") is True,
+                source_url=str(ch.get("source_url") or ""),
+                checked=str(ch.get("checked") or ""),
+                note=str(ch.get("note") or ""),
+            ))
+        packages.append(LineupPackage(name=str(pkg.get("name", "")), label=str(pkg.get("label") or pkg.get("name", "")),
+                                      channels=channels, official_domains=domains))
+    return packages
+
+
 @dataclass
 class Service:
     id: str
@@ -171,6 +244,10 @@ class Service:
     # (own price plus the required ones), own_price_usd is the add-on alone.
     requires: list["Service"] = field(default_factory=list)
     own_price_usd: float | None = None
+    # Live TV services only: each package's per-channel carries list from its
+    # official lineup page. Read by the game block's cable line; the coverage
+    # maths still goes by carries and carries_verified above.
+    lineup: list[LineupPackage] = field(default_factory=list)
 
     @property
     def has_price(self) -> bool:
@@ -251,6 +328,7 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             carries_check=s.get("carries_check", ""),
             carries_verified_confidence=s.get("carries_verified_confidence", ""),
             carries_confidence_note=s.get("carries_confidence_note", ""),
+            lineup=load_lineup(s.get("lineup")),
         ))
     rules = raw.get("rules") or {}
     blackouts = [

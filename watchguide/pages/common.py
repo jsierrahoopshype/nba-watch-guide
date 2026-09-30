@@ -124,15 +124,22 @@ def _names(names: list[str]) -> str:
 
 def cable_line(ctx: SiteContext, game) -> str:
     """For a game on a cable channel (config.CABLE_NATIONAL_CODES): it is
-    also on cable and on live TV services carrying that channel, naming only
-    the live TV services whose carries list data/services.json confirms."""
+    also on cable and on live TV services carrying that channel. A live TV
+    package is named only when its lineup in data/services.json has that
+    specific channel verified from the service's official lineup page
+    (LineupPackage.verified_for); the service-level carries list does not
+    count here."""
     cable = {_norm(c) for c in config.CABLE_NATIONAL_CODES}
     codes = [c for c in game.national_codes if _norm(c) in cable]
     if not codes:
         return ""
-    wanted = {_norm(c) for c in codes}
-    named = [s.name for s in ctx.services.services
-             if s.kind == "live_tv" and s.carries_verified and wanted & {_norm(c) for c in s.carries}]
+    named: list[str] = []
+    for svc in ctx.services.services:
+        if svc.kind != "live_tv":
+            continue
+        for pkg in svc.lineup:
+            if pkg.label not in named and any(pkg.verified_for(code) for code in codes):
+                named.append(pkg.label)
     text = ctx.copy.get("game", {})
     if named:
         return text["cable_named"].format(channels=_names(codes), services=_names(named))

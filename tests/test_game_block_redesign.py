@@ -106,31 +106,68 @@ def test_collapsed_and_stacked_answers_on_the_page(built_site, fixture_games):
 
 # -- 2. national cable games: cable and live TV line ---------------------------------------
 
-def _verified_live_tv(tmp_path_factory, ids):
-    data_dir = _copy_data(tmp_path_factory, "data-live-tv")
+def _lineups(tmp_path_factory, marks, label="data-live-tv"):
+    """A data copy where `marks` maps (package label, channel) to a lineup
+    entry override, e.g. {("YouTube TV", "ESPN"): {"status": "carried", ...}}."""
+    data_dir = _copy_data(tmp_path_factory, label)
     raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
     for svc in raw["services"]:
-        if svc["id"] in ids:
-            svc["carries_verified"] = True
+        for pkg in (svc.get("lineup") or {}).get("packages", []):
+            for ch in pkg["channels"]:
+                ch.update(marks.get((pkg["label"], ch["channel"]), {}))
     (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
     return data_dir
 
 
-def test_cable_line_names_only_verified_live_tv_services(fixture_games, tmp_path_factory):
+def _found(url, checked="2026-09-30"):
+    return {"status": "carried", "carries_verified": True, "source_url": url, "checked": checked}
+
+
+def test_cable_line_names_only_packages_verified_for_that_channel(fixture_games, tmp_path_factory):
     espn = a_game(fixture_games, "MIA", "MIN", ["ESPN"])
+    nba_tv = a_game(fixture_games, "MIA", "MIN", ["NBA TV"])
     shipped = ctx_for(fixture_games)
-    # No live TV service in the shipped file has a verified carries list yet.
+    # Nothing in the shipped file is verified yet, so no service is named.
     assert cable_line(shipped, espn) == "Also on cable and on live TV services that carry ESPN."
-    ctx = ctx_for(fixture_games, data_dir=_verified_live_tv(tmp_path_factory, {"youtube_tv", "hulu_live_tv"}))
+    ctx = ctx_for(fixture_games, data_dir=_lineups(tmp_path_factory, {
+        ("YouTube TV", "ESPN"): _found("https://tv.youtube.com/welcome/"),
+        ("Hulu + Live TV", "ESPN"): _found("https://www.hulu.com/live-tv"),
+        ("Sling Orange", "ESPN"): _found("https://www.sling.com/channels"),
+        ("YouTube TV", "NBA TV"): _found("https://tv.youtube.com/welcome/"),
+        # Not verified, each for its own reason: none of these may be named.
+        ("Sling Blue", "ESPN"): {"status": "not_carried", "carries_verified": False,
+                                 "source_url": "https://www.sling.com/channels", "checked": "2026-09-30"},
+        ("Fubo", "ESPN"): {"status": "zip_dependent", "carries_verified": False,
+                           "source_url": "https://www.fubo.tv/welcome/channels", "checked": "2026-09-30"},
+        ("DirecTV", "ESPN"): _found("https://cordcuttersnews.com/some-review"),       # not an official page
+        ("YouTube TV Sports Plan", "ESPN"): _found("https://tv.youtube.com/welcome/", checked=""),  # no date
+        ("Hulu + Live TV", "NBA TV"): {"status": "carried", "carries_verified": False,
+                                       "source_url": "https://www.hulu.com/live-tv", "checked": "2026-09-30"},
+    }))
     assert cable_line(ctx, espn) == ("Also on cable and on live TV services that carry ESPN, "
-                                     "including YouTube TV and Hulu + Live TV.")
-    # An ABC/ESPN simulcast counts through ESPN; NBA TV is cable but neither
-    # of those services lists it; broadcast and streaming games get no line.
-    assert "carry ESPN, including YouTube TV" in cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
-    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["NBA TV"])) == \
-        "Also on cable and on live TV services that carry NBA TV."
+                                     "including YouTube TV, Hulu + Live TV and Sling Orange.")
+    # Verified for ESPN is not verified for NBA TV: each channel on its own.
+    assert cable_line(ctx, nba_tv) == ("Also on cable and on live TV services that carry NBA TV, "
+                                       "including YouTube TV.")
+    # An ABC/ESPN simulcast counts through ESPN; broadcast and streaming games get no line.
+    assert "carry ESPN, including YouTube TV, Hulu + Live TV and Sling Orange." in \
+        cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
     for codes in (["NBC", "Peacock"], ["ABC"], ["Amazon"], []):
         assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", codes)) == "", codes
+
+
+def test_the_service_level_flag_alone_names_nobody(fixture_games, tmp_path_factory):
+    """carries_verified on the service drives the coverage maths; the cable
+    line only listens to the per-channel lineup."""
+    data_dir = _copy_data(tmp_path_factory, "data-service-flag")
+    raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
+    for svc in raw["services"]:
+        if svc.get("kind") == "live_tv":
+            svc["carries_verified"] = True
+    (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
+    ctx = ctx_for(fixture_games, data_dir=data_dir)
+    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == \
+        "Also on cable and on live TV services that carry ESPN."
 
 
 def test_cable_line_is_in_the_watch_part(built_site, fixture_games):
