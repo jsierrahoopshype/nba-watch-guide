@@ -386,12 +386,14 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - `build-watch-guide-daily.yml` runs at 10:00 UTC, on manual dispatch and on
   every push to main (except changes to README.md or CLAUDE.md only), and
   rebuilds everything. After publishing, its "Live check" step
-  (`scripts/live_check.py`) fetches the hub, miami-heat, tonight and spain on
-  hoopsmatic.com with a cache-buster until each returns 200, the title this
-  run built, no noindex and this run's `<meta name="build">` commit, for up to
-  10 minutes, and fails the run otherwise. The result is in the job summary.
-- Every page carries `<meta name="build" content="<short sha>">`; the sitemap
-  lastmod hash ignores it.
+  (`scripts/live_check.py`, browser-like requests through curl_cffi) polls
+  hoopsmatic.com's `data/build.json` with a cache-buster until it names this
+  run's commit, then checks the hub, miami-heat, tonight and spain for HTTP
+  200, the title this run built and no noindex, all within 10 minutes, and
+  fails the run otherwise. The result is in the job summary.
+- Every build writes `data/build.json` (`{"build": "<short sha>", "mode":
+  "build" | "refresh", "generated_at"}`). The commit is never written into the
+  pages, so an unchanged page stays byte-identical between builds.
 - `refresh-watch-guide-injuries.yml` runs every 30 minutes from 16:00 to 04:30
   UTC. It reads the published schedule first and stops within seconds when there
   are no games on the Eastern date.

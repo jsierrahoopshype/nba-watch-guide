@@ -39,9 +39,6 @@ VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "met
 HASHED_ASSET = re.compile(r"(/assets/[\w/.-]+?)\.[0-9a-f]{10}\.(css|js|svg|woff2)\b")
 
 
-BUILD_META = re.compile(r'<meta name="build" content="[^"]*">')
-
-
 class _Stripper(HTMLParser):
     """Re-emits the document with every data-volatile subtree left out."""
 
@@ -98,8 +95,6 @@ def normalise(html: str) -> str:
     parser.feed(html)
     parser.close()
     text = HASHED_ASSET.sub(r"\1.\2", "".join(parser.out))
-    # The build marker names the commit, which moves on every build.
-    text = BUILD_META.sub("", text)
     # Whitespace left where a volatile element was dropped is not a change.
     return re.sub(r"\s+", " ", text)
 

@@ -53,6 +53,10 @@ BROADCAST_REPORT = "data/broadcast-coverage.json"
 LINKS_FILE = "data/how-to-watch-links.html"
 INJURIES_FILE = "data/injuries.json"
 TONIGHT_FILE = "data/tonight.json"
+# The commit the published tree was built from. Kept out of the pages so an
+# unchanged page stays byte-identical between builds; the live check after
+# publish polls it (scripts/live_check.py).
+BUILD_FILE = "data/build.json"
 SITEMAP_FILE = "sitemap.xml"
 
 
@@ -471,6 +475,11 @@ def write_pages(out_dir: Path, pages: list[Page]) -> None:
         target.write_text(page.html, encoding="utf-8")
 
 
+def build_payload(ctx: SiteContext, mode: str) -> dict:
+    """data/build.json: the short commit, the run type and when it ran."""
+    return {"build": config.build_id(), "mode": mode, "generated_at": ctx.generated_at}
+
+
 def write_json(out_dir: Path, rel: str, payload: dict) -> None:
     target = out_dir / rel
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -602,6 +611,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     write_json(out_dir, BROADCAST_REPORT, report)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
+    write_json(out_dir, BUILD_FILE, build_payload(ctx, "build"))
     update_lastmod(out_dir, pages, ctx.today)
     write_sitemap(out_dir, pages, noindex=ctx.noindex)
     copy_assets(out_dir)
@@ -670,6 +680,7 @@ def refresh_build(out_dir: Path, today: str | None = None,
     copy_assets(out_dir)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
+    write_json(out_dir, BUILD_FILE, build_payload(ctx, "refresh"))
     update_lastmod(out_dir, pages, day, written=wanted)
     write_sitemap(out_dir, pages, noindex=ctx.noindex)
     notes.append(f"refreshed {len(wanted)} pages for {len(playing)} teams playing on {day}")

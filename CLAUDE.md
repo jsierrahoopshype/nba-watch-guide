@@ -18,8 +18,7 @@ reporting any PR.
   or og:url unless the task says so. Confirm it in every report (compare
   every page against a build of main).
 - **Sitemap lastmod.** It moves only on real content changes. Anything that
-  changes during a game day is `data-volatile`, and the build marker is left
-  out of the hash (`watchguide/lastmod.py`).
+  changes during a game day is `data-volatile` (`watchguide/lastmod.py`).
 - **No third-party requests.** No new request from the reader's browser to
   any other domain; everything is fetched at build time and prerendered.
   No HoopsHype branding.
@@ -46,10 +45,16 @@ When they do:
    doc-only changes to README.md or CLAUDE.md don't). Find that run: list the
    workflow's runs filtered to event `push` on `main` and take the one whose
    head SHA is the merge commit.
-3. Wait for it to finish, then report its conclusion and the live check: the
-   "Live check" step's output (also in the job summary) lists each page's
-   HTTP status, title, noindex and build marker. A failed live check means
-   hoopsmatic.com did not serve this commit's pages within 10 minutes.
+3. If that run is cancelled, or never starts (none shows up within a few
+   minutes of the merge), trigger `build-watch-guide-daily` manually
+   (workflow_dispatch on main, publish on) and follow that run instead. Say
+   in the report that the merge build was cancelled or missing and which run
+   you started.
+4. Wait for the run to finish, then report its conclusion and the live
+   check: the "Live check" step's output (also in the job summary) says
+   whether `data/build.json` served this commit and lists each page's HTTP
+   status, title and noindex. A failed live check means hoopsmatic.com did
+   not serve this commit within 10 minutes.
 
 ## How the loop works
 
@@ -57,12 +62,17 @@ When they do:
   on every push to main except README.md and CLAUDE.md changes. The bots'
   own commits (raw availability copy, recent awards) are pushed with
   GITHUB_TOKEN, which never starts a run.
-- Every page carries `<meta name="build" content="<short sha>">` from
+- Every build writes `data/build.json` with the short commit from
   `config.build_id()` (WATCH_GUIDE_BUILD, else GITHUB_SHA, else git HEAD).
-- After publishing, `scripts/live_check.py` fetches the hub, miami-heat,
-  tonight and spain pages with a cache-buster until each returns 200, the
-  title this run built, no noindex and this run's build marker, for up to
-  10 minutes, and fails the run otherwise.
+  The commit is never written into the pages, so unchanged pages stay
+  byte-identical between builds.
+- After publishing, `scripts/live_check.py` (browser-like requests, the same
+  curl_cffi profile the build uses for cdn.nba.com) polls
+  `https://hoopsmatic.com/how-to-watch/data/build.json` with a cache-buster
+  until it names this run's commit, then checks the hub, miami-heat, tonight
+  and spain for HTTP 200, the title this run built and no noindex, all within
+  10 minutes, and fails the run otherwise. The 30-minute refresh has no live
+  check.
 
 ## Working here
 

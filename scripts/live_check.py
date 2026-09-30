@@ -1,10 +1,14 @@
-"""After a publish, check that hoopsmatic.com serves this run's pages.
+"""After a publish, check that hoopsmatic.com serves this run's build.
 
-For each page in PAGES it fetches the live URL with a cache-buster and checks:
-HTTP 200, the same <title> as the page this run built, no noindex (robots
-meta or X-Robots-Tag), and a <meta name="build"> equal to this run's short
-commit. It retries every INTERVAL seconds until every page passes in the same
-round or TIMEOUT runs out, and writes the last round to the job summary.
+First it polls data/build.json (BUILD_FILE, written by every build) with a
+cache-buster until its "build" is this run's short commit. Then it fetches
+each page in PAGES with a cache-buster and checks: HTTP 200, the same <title>
+as the page this run built, and no noindex (robots meta or X-Robots-Tag).
+Both steps retry every INTERVAL seconds within one TIMEOUT, and the result is
+written to the job summary.
+
+Requests go through curl_cffi with the same browser impersonation profile the
+build uses for cdn.nba.com (watchguide.sources.http.IMPERSONATE).
 
     python scripts/live_check.py --site site --sha "$GITHUB_SHA"
 
@@ -15,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import os
 import re
 import sys
@@ -22,33 +27,31 @@ import time
 from pathlib import Path
 from typing import Callable
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 BASE = "https://hoopsmatic.com/how-to-watch"
+BUILD_FILE = "data/build.json"
 PAGES = ["", "miami-heat", "tonight", "spain"]      # hub, a team, tonight, a country
 TIMEOUT = 600
 INTERVAL = 20
-USER_AGENT = "Mozilla/5.0 (compatible; watch-guide-live-check; +https://github.com/jsierrahoopshype/nba-watch-guide)"
 
 TITLE = re.compile(r"<title>(.*?)</title>", re.S | re.I)
-BUILD = re.compile(r'<meta name="build" content="([^"]*)"')
 ROBOTS = re.compile(r'<meta name="robots" content="([^"]*)"', re.I)
 
 Fetch = Callable[[str], "tuple[int, dict[str, str], str]"]
 
 
 def fetch(url: str) -> tuple[int, dict[str, str], str]:
-    """(status, lower-cased headers, body). Never raises: a network error is status 0."""
-    import urllib.error
-    import urllib.request
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Cache-Control": "no-cache",
-                                               "Pragma": "no-cache"})
+    """(status, lower-cased headers, body) from a browser-like request. Never
+    raises: a network error is status 0 with the reason in headers["error"]."""
+    from curl_cffi import requests
+    from watchguide.sources.http import IMPERSONATE
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return resp.status, {k.lower(): v for k, v in resp.headers.items()}, \
-                resp.read().decode("utf-8", "replace")
-    except urllib.error.HTTPError as exc:
-        return exc.code, {k.lower(): v for k, v in exc.headers.items()}, ""
+        resp = requests.get(url, impersonate=IMPERSONATE, timeout=30,
+                            headers={"Cache-Control": "no-cache", "Pragma": "no-cache"})
     except Exception as exc:                      # DNS, TLS, timeout
         return 0, {"error": f"{type(exc).__name__}: {exc}"}, ""
+    return resp.status_code, {k.lower(): v for k, v in resp.headers.items()}, resp.text
 
 
 def page_url(base: str, page: str) -> str:
@@ -63,61 +66,90 @@ def expected_title(site: Path, page: str) -> str:
     return html.unescape(found.group(1).strip())
 
 
-def check_page(body: str, status: int, headers: dict[str, str], title: str, sha: str) -> dict:
+def served_build(status: int, body: str) -> str:
+    """The "build" in a data/build.json response, or "" when there is none."""
+    if status != 200:
+        return ""
+    try:
+        return str(json.loads(body).get("build") or "")
+    except (ValueError, AttributeError):
+        return ""
+
+
+def check_page(body: str, status: int, headers: dict[str, str], title: str) -> dict:
     seen_title = TITLE.search(body)
     seen_title = html.unescape(seen_title.group(1).strip()) if seen_title else ""
     robots = " ".join(ROBOTS.findall(body)) + " " + headers.get("x-robots-tag", "")
-    build = BUILD.search(body)
     result = {
         "status": status,
         "title": seen_title,
         "title_ok": seen_title == title,
         "robots_noindex": "noindex" in robots.lower(),
-        "build": build.group(1) if build else "",
         "error": headers.get("error", ""),
     }
-    result["build_ok"] = result["build"] == sha
-    result["ok"] = status == 200 and result["title_ok"] and not result["robots_noindex"] and result["build_ok"]
+    result["ok"] = status == 200 and result["title_ok"] and not result["robots_noindex"]
     return result
 
 
 def run(site: Path, sha: str, base: str = BASE, pages: list[str] | None = None, timeout: float = TIMEOUT,
         interval: float = INTERVAL, get: Fetch | None = None, sleep=None, clock=None) -> tuple[bool, dict]:
-    """(all matched, {page: last result}). `get`, `sleep` and `clock` are for tests."""
+    """(all matched, report). `get`, `sleep` and `clock` are for tests."""
     get, sleep, clock = get or fetch, sleep or time.sleep, clock or time.monotonic
     pages = PAGES if pages is None else pages
     sha = sha[:7]
     titles = {p: expected_title(site, p) for p in pages}
     start = clock()
-    attempt = 0
-    results: dict[str, dict] = {}
+    report = {"sha": sha, "build_url": f"{base.rstrip('/')}/{BUILD_FILE}", "build_seen": "",
+              "build_status": 0, "build_attempts": 0, "page_attempts": 0, "pages": {}, "elapsed": 0.0}
+
+    def out_of_time() -> bool:
+        report["elapsed"] = clock() - start
+        return report["elapsed"] + interval > timeout
+
+    # 1. Wait for this run's build.json to be served.
     while True:
-        attempt += 1
+        report["build_attempts"] += 1
+        status, _, body = get(f"{report['build_url']}?v={sha}-{report['build_attempts']}")
+        report["build_status"], report["build_seen"] = status, served_build(status, body)
+        if report["build_seen"] == sha:
+            break
+        if out_of_time():
+            return False, report
+        sleep(interval)
+
+    # 2. The pages: 200, the title this run built, no noindex.
+    while True:
+        report["page_attempts"] += 1
         for page in pages:
-            url = f"{page_url(base, page)}?v={sha}-{attempt}"
-            status, headers, body = get(url)
-            results[page] = check_page(body, status, headers, titles[page], sha)
-            results[page].update(url=page_url(base, page), expected_title=titles[page])
-        elapsed = clock() - start
-        if all(r["ok"] for r in results.values()):
-            return True, {"attempts": attempt, "elapsed": elapsed, "pages": results, "sha": sha}
-        if elapsed + interval > timeout:
-            return False, {"attempts": attempt, "elapsed": elapsed, "pages": results, "sha": sha}
+            status, headers, body = get(f"{page_url(base, page)}?v={sha}-{report['page_attempts']}")
+            report["pages"][page] = check_page(body, status, headers, titles[page])
+            report["pages"][page].update(url=page_url(base, page), expected_title=titles[page])
+        if all(r["ok"] for r in report["pages"].values()):
+            report["elapsed"] = clock() - start
+            return True, report
+        if out_of_time():
+            return False, report
         sleep(interval)
 
 
 def summary(ok: bool, report: dict) -> str:
-    head = (f"### Live check: {'passed' if ok else 'FAILED'}\n\n"
-            f"Build `{report['sha']}`, {report['attempts']} attempt(s) over {report['elapsed']:.0f}s.\n\n"
-            "| Page | HTTP | Title | noindex | Build | Result |\n|---|---|---|---|---|---|\n")
-    rows = []
-    for r in report["pages"].values():
-        title = "matches" if r["title_ok"] else f"expected “{r['expected_title']}”, got “{r['title'] or 'none'}”"
-        build = r["build"] or "none"
-        status = str(r["status"] or r["error"] or "no response")
-        rows.append(f"| {r['url']} | {status} | {title} | {'yes' if r['robots_noindex'] else 'no'} | {build} | "
-                    f"{'ok' if r['ok'] else 'fail'} |")
-    return head + "\n".join(rows) + "\n"
+    build_ok = report["build_seen"] == report["sha"]
+    lines = [f"### Live check: {'passed' if ok else 'FAILED'}", "",
+             f"Build `{report['sha']}`, {report['elapsed']:.0f}s.", "",
+             f"- `{report['build_url']}`: {'serves' if build_ok else 'never served'} this build "
+             f"(last seen: `{report['build_seen'] or 'none'}`, HTTP {report['build_status'] or 'no response'}, "
+             f"{report['build_attempts']} attempt(s))"]
+    if report["pages"]:
+        lines += ["", f"Pages, {report['page_attempts']} attempt(s):", "",
+                  "| Page | HTTP | Title | noindex | Result |", "|---|---|---|---|---|"]
+        for r in report["pages"].values():
+            title = "matches" if r["title_ok"] else f"expected “{r['expected_title']}”, got “{r['title'] or 'none'}”"
+            status = str(r["status"] or r["error"] or "no response")
+            lines.append(f"| {r['url']} | {status} | {title} | {'yes' if r['robots_noindex'] else 'no'} | "
+                         f"{'ok' if r['ok'] else 'fail'} |")
+    else:
+        lines += ["", "Pages not checked: the build was never served."]
+    return "\n".join(lines) + "\n"
 
 
 def main(argv: list[str] | None = None) -> int:

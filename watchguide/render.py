@@ -144,5 +144,4 @@ def build_env(template_dir: Path | None = None) -> Environment:
     env.globals["asset"] = asset
     env.globals["site_path"] = config.site_path
     env.globals["site_base"] = config.SITE_BASE
-    env.globals["build_id"] = config.build_id()
     return env

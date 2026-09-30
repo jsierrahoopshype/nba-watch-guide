@@ -13,9 +13,6 @@
 <meta property="og:title" content="{{ page.og_title }}">
 <meta property="og:description" content="{{ page.og_description }}">
 <meta name="twitter:card" content="summary">
-{#- The commit this page was built from; the live check after publish reads
-    it. Left out of the sitemap lastmod hash (lastmod.BUILD_META). #}
-<meta name="build" content="{{ build_id }}">
 {#- Fonts are self-hosted under assets/fonts (see its LICENSE.txt), so no page
     asks another domain for anything. The stylesheet names them by plain path. #}
 <link rel="preload" href="{{ site_path('assets/fonts/dm-sans-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>

@@ -56,8 +56,8 @@ INJURY_GUARD_START_HOUR = 15
 
 
 def build_id() -> str:
-    """The short commit this build ran from, for the <meta name="build">
-    marker the live check compares: WATCH_GUIDE_BUILD, else the Actions
+    """The short commit this build ran from, written to data/build.json for
+    the live check to compare: WATCH_GUIDE_BUILD, else the Actions
     GITHUB_SHA, else the checkout's HEAD; "local" when none is known."""
     sha = os.environ.get("WATCH_GUIDE_BUILD") or os.environ.get("GITHUB_SHA") or ""
     if not sha:
