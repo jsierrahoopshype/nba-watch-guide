@@ -204,7 +204,7 @@ def sourced_confidence(entry: LineupChannel, domains: list[str]) -> str:
 @dataclass
 class LineupPackage:
     """A live TV package (YouTube TV Base Plan, Sling Orange...) and its
-    per-channel carries list. label is the name the cable line uses."""
+    per-channel carries list. label names the package in the data and tests."""
     name: str
     label: str
     channels: list[LineupChannel] = field(default_factory=list)
@@ -279,12 +279,15 @@ class Service:
     own_price_usd: float | None = None
     # Live TV services only: each package's per-channel carries list (see
     # apply_lineup). It replaces carries and carries_verified above for the
-    # coverage maths, and the game block's cable line reads it directly.
+    # coverage maths and so for the answers too.
     lineup: list[LineupPackage] = field(default_factory=list)
     # Filled by apply_lineup: counted channels whose best entry is moderate
     # confidence, and local ABC/NBC counted only through "depends on ZIP".
     moderate_codes: list[str] = field(default_factory=list)
     zip_codes: list[str] = field(default_factory=list)
+    # Live TV only: the service a plan belongs to ("Fubo" for Fubo Pro and
+    # Elite), so an answer can name the service once.
+    family: str = ""
 
     @property
     def has_price(self) -> bool:
@@ -405,6 +408,7 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             carries_verified_confidence=s.get("carries_verified_confidence", ""),
             carries_confidence_note=s.get("carries_confidence_note", ""),
             lineup=load_lineup(s.get("lineup")),
+            family=s.get("family", ""),
         ))
         if services[-1].kind == "live_tv":
             apply_lineup(services[-1])

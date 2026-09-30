@@ -39,8 +39,8 @@ def lines(heat, g, state):
 
 def test_national_game_names_the_carrier_and_the_national_rule(heat):
     out = lines(heat, game(national=["ESPN"]), OUT_OF_MARKET)
-    assert out[0] == ("Watch it on ESPN Unlimited, YouTube TV, YouTube TV Sports Plan, Hulu + Live TV, "
-                      "Sling TV (Orange + Blue), Fubo Pro, Fubo Elite and DirecTV.")
+    assert out[0] == ("Watch it on ESPN Unlimited, or on live TV with YouTube TV, Hulu + Live TV, Sling, Fubo "
+                      "or DirecTV.")
     assert out[1] == f"NBA League Pass: {RULES['national']}"
     assert len(out) == 2
 

@@ -11,7 +11,7 @@
     "lineup_method": "2026-09-30 check: the services' own lineup pages and the third-party pages were not reachable from the build environment, so every entry was read from web search results restricted to one site at a time, which keeps each claim tied to one source. No entry is high confidence; an 'official' source here is the service's page as the search index shows it and backs a moderate entry alongside a 2026 third-party source, never on its own.",
     "lineup_channels": {"national": ["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], "regional": ["NBC Sports Boston", "YES Network", "CHSN", "Altitude", "NBC Sports Bay Area", "Space City Home Network", "Spectrum SportsNet", "MSG Network", "NBC Sports Philadelphia", "NBC Sports California", "Monumental Sports Network", "Peachtree Sports Network", "Gulf Coast Sports & Entertainment Network", "Arizona's Family Sports"]},
     "lineup_regional_note": "regional is every US regional sports network named in data/local_tv.json local_broadcasters, owner notes dropped. Over-the-air stations (WPLG, KJZZ and the rest), DAZN and the Raptors' Canadian networks (TSN, Sportsnet) are left out; a local ABC or NBC affiliate is checked as ABC or NBC.",
-    "kind_note": "kind is ota for an antenna, live_tv for a live TV package (its coverage comes from its lineup block, not a carries list), and streaming when left out.",
+    "kind_note": "kind is ota for an antenna, live_tv for a live TV package (its coverage comes from its lineup block, not a carries list), and streaming when left out. family groups live TV plans of one service (YouTube TV and its Sports Plan, Fubo Pro and Elite) so the answers name the service once, and a specific plan only when the plans differ for that game.",
     "carries_note": "carries lists the broadcaster codes as they appear in cdn.nba.com scheduleLeagueV2.json: ABC, ESPN, NBC, Peacock, Amazon, NBA TV. Entries with carries_verified false must not be trusted for coverage maths until checked."
   },
   "services": [
@@ -117,6 +117,7 @@
     {
       "id": "youtube_tv",
       "kind": "live_tv",
+      "family": "YouTube TV",
       "name": "YouTube TV",
       "monthly_price_usd": 82.99,
       "billing_note": "Base plan, 100+ channels, unlimited DVR, three simultaneous streams. ESPN Unlimited is unlocked in the ESPN app for subscribers.",
@@ -159,6 +160,7 @@
     {
       "id": "youtube_tv_sports_plan",
       "kind": "live_tv",
+      "family": "YouTube TV",
       "name": "YouTube TV Sports Plan",
       "monthly_price_usd": 64.99,
       "billing_note": "New users pay $44.99 a month for the first 6 months if they sign up by September 30, 2026. Includes local channels and sports networks; lineup varies by market.",
@@ -201,6 +203,7 @@
     {
       "id": "hulu_live_tv",
       "kind": "live_tv",
+      "family": "Hulu + Live TV",
       "name": "Hulu + Live TV",
       "monthly_price_usd": 99.99,
       "billing_note": "With ads, after a 3-day free trial. Price for new subscribers as of September 23, 2026; anyone who signed up earlier moves to it on their first bill on or after October 21, 2026. Includes Disney+ and ESPN.",
@@ -243,6 +246,7 @@
     {
       "id": "sling_tv",
       "kind": "live_tv",
+      "family": "Sling",
       "name": "Sling TV (Orange + Blue)",
       "monthly_price_usd": 60.99,
       "billing_note": "Orange alone is $45.99 and carries the ESPN family. Blue alone is $45.99 and carries NBC in some markets. Local channel coverage is limited, so many subscribers pair it with an antenna.",
@@ -310,6 +314,7 @@
     {
       "id": "fubo",
       "kind": "live_tv",
+      "family": "Fubo",
       "name": "Fubo Pro",
       "monthly_price_usd": 88.99,
       "billing_note": "Pro plan. $88.99 a month since the July 2026 increase that followed NBC's return. A regional sports fee is added in markets with regional sports networks and is not optional. Does not carry the Warner-owned channels.",
@@ -354,6 +359,7 @@
     {
       "id": "fubo_elite",
       "kind": "live_tv",
+      "family": "Fubo",
       "name": "Fubo Elite",
       "monthly_price_usd": null,
       "billing_note": "Elite plan: everything in Pro plus about 70 more channels, NBA TV among them. Price not confirmed: after the July 2026 increase 2026 sources give $98.99, $99, $89.99 and $88.99. A regional sports fee is added in markets with regional sports networks. Does not carry the Warner-owned channels.",
@@ -398,6 +404,7 @@
     {
       "id": "directv_stream",
       "kind": "live_tv",
+      "family": "DirecTV",
       "name": "DirecTV",
       "monthly_price_usd": 94.99,
       "billing_note": "Choice plan, which is the cheapest tier carrying regional sports networks and therefore the relevant one for local NBA games. Entertainment is $89.99 without RSNs, Ultimate is $124.99, and a pared-down Sports + News plan is $55.99. Regional sports fees may apply.",

@@ -185,10 +185,15 @@ with "Tonight", "Tomorrow" or "In 21 days") the order is
 (1) where to watch: channel chips with the cheapest way to get each channel
 from `data/services.json` ("ESPN Unlimited · $31.99/mo", "NBC · free over the
 air"), the out-of-market and in-market answer for both fan bases, collapsed to
-one "Everyone in the US" line when all four match, a cable line on games on a
-cable channel (`config.CABLE_NATIONAL_CODES`) that names a live TV package
-only when its `lineup` has that specific channel verified from the service's
-official lineup page (see below), and "Why ...?" only when a
+one "Everyone in the US" line when all four match. Each answer lists the
+standalone options first, then the live TV services grouped by service ("or on
+live TV with YouTube TV, Hulu + Live TV, Sling, Fubo or DirecTV"), naming a
+specific plan only when the plans of one service differ for that game (Fubo
+Elite on NBA TV games); `family` in `data/services.json` groups the plans.
+An answer that names a live TV service only through a ZIP-dependent local ABC
+or NBC ends "Local ABC and NBC availability varies by ZIP code.", and one
+check-before-you-buy line follows the answers when a live TV service is named
+on a moderate lineup entry (see below). Then "Why ...?" only when a
 fan base is actually blocked (a League Pass blackout, or a team's local TV not
 carrying a national game in its own market), worded for the case;
 (2) tip time, the reader's own time big and ET small beside it, one format
@@ -214,9 +219,7 @@ different sites, each published in 2026 (or the service's own page), say the
 same about that channel in that plan; `sources` lists each URL with its
 publication date and `checked` is the day they were read. One source, older
 sources or disagreeing sources leave it `unchecked`, with a `note` saying why.
-The game block's cable line names a package for a channel `carried` at high or
-moderate confidence, and adds a check-before-you-buy line when any named one is
-moderate. `_meta.lineup_method` records how the last check was done.
+`_meta.lineup_method` records how the last check was done.
 `tests/test_live_tv_lineups.py` enforces every rule. For live TV services the lineup is also the coverage: a service covers a
 national game when one of the game's channels is `carried` at high or moderate
 confidence in one of its packages (Sling's Orange and Blue together make the

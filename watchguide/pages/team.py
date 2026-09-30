@@ -41,7 +41,7 @@ def _confidence_lines(ctx: SiteContext, combo, games: list, tricode: str, local,
             lines.append(line)
     if combo and relies_on_zip(combo.services, games, tricode, service_data, local, state,
                                skip={g.game_id for g in combo.missed}):
-        lines.append(labels["zip_locals_note"])
+        lines.append(ctx.copy["why"]["zip_locals"])
     return lines
 
 

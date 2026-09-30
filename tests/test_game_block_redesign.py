@@ -20,7 +20,7 @@ from conftest import TODAY, _build, _copy_data
 from watchguide import colors, config
 from watchguide.context import load_context
 from watchguide.model import load_local_tv, load_team_colors, load_teams
-from watchguide.pages.common import cable_line, chips, countdown, watch_view
+from watchguide.pages.common import chips, countdown, watch_view
 from watchguide.pairs import game_pair_slug
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -104,7 +104,7 @@ def test_collapsed_and_stacked_answers_on_the_page(built_site, fixture_games):
     assert checked[True] and checked[False]
 
 
-# -- 2. national cable games: cable and live TV line ---------------------------------------
+# -- 2. live TV in the answers: standalone first, grouped by service -----------------------
 
 def _lineups(tmp_path_factory, marks, label="data-live-tv"):
     """A data copy where every lineup entry starts unchecked and `marks` maps
@@ -133,68 +133,96 @@ def _high(url, checked="2026-09-30"):
 
 
 TWO = (_src("https://thestreamable.com/x"), _src("https://www.antennaland.com/y"))
+CHECK = "Based on 2026 channel guides. Check your plan's lineup before you buy."
+ZIP = "Local ABC and NBC availability varies by ZIP code."
 
 
-def test_cable_line_names_packages_carried_at_high_or_moderate(fixture_games, tmp_path_factory):
-    espn = a_game(fixture_games, "MIA", "MIN", ["ESPN"])
-    nba_tv = a_game(fixture_games, "MIA", "MIN", ["NBA TV"])
+def _answer(ctx, game):
+    watch = watch_view(ctx, game)
+    return watch["everyone"] or watch["fans"][0]["states"][0]["answer"], watch["check"]
+
+
+def test_answers_list_standalone_first_then_live_tv_by_service(fixture_games):
+    ctx = ctx_for(fixture_games)
+    answer, check = _answer(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"]))
+    assert answer == ("Watch it on ESPN Unlimited, or on live TV with YouTube TV, Hulu + Live TV, Sling, Fubo "
+                      "or DirecTV.")
+    assert check == CHECK
+    # NBA TV: Fubo Pro does not count there, so the plan that does is named;
+    # both YouTube TV plans carry it, so YouTube TV is named once.
+    answer, _ = _answer(ctx, a_game(fixture_games, "LAC", "DAL", ["NBA TV"]))
+    assert answer.endswith(", or on live TV with YouTube TV, Fubo Elite or DirecTV.")
+    assert "Fubo Pro" not in answer and "YouTube TV Sports Plan" not in answer
+
+
+def test_a_plan_is_named_only_when_the_plans_differ(fixture_games, tmp_path_factory):
     ctx = ctx_for(fixture_games, data_dir=_lineups(tmp_path_factory, {
-        ("YouTube TV", "ESPN"): _high("https://tv.youtube.com/welcome/"),
+        ("YouTube TV Sports Plan", "ESPN"): _moderate(*TWO),       # the Sports Plan only
+        ("Fubo Pro", "ESPN"): _moderate(*TWO),
+        ("Fubo Elite", "ESPN"): _moderate(*TWO),                   # both Fubo plans
+    }))
+    answer, _ = _answer(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"]))
+    assert answer == "Watch it on ESPN Unlimited, or on live TV with YouTube TV Sports Plan or Fubo."
+
+
+def test_live_tv_only_answer_and_no_check_line_at_high_confidence(fixture_games, tmp_path_factory):
+    """A game only live TV carries reads "Watch it on live TV with ..."; a
+    high-confidence entry needs no check line."""
+    ctx = ctx_for(fixture_games, data_dir=_lineups(tmp_path_factory, {
+        ("YouTube TV", "ESPN2"): _high("https://tv.youtube.com/welcome/"),
+    }, label="data-live-tv-high"))
+    answer, check = _answer(ctx, a_game(fixture_games, "LAC", "DAL", ["ESPN2"]))
+    assert answer == "Watch it on live TV with YouTube TV."
+    assert check == ""
+
+
+def test_unchecked_below_the_rule_and_not_carried_are_never_named(fixture_games, tmp_path_factory):
+    ctx = ctx_for(fixture_games, data_dir=_lineups(tmp_path_factory, {
         ("Hulu + Live TV", "ESPN"): _moderate(*TWO),
-        ("YouTube TV", "NBA TV"): _high("https://tv.youtube.com/welcome/"),
-        # Each of these falls short of the rule, so none may be named:
-        ("Sling Orange", "ESPN"): _moderate(TWO[0]),                                   # one source
+        ("Sling Orange", "ESPN"): _moderate(TWO[0]),                                  # one source
         ("Sling Blue", "ESPN"): _moderate(_src("https://thestreamable.com/a"),
                                           _src("https://thestreamable.com/b")),       # same site twice
         ("Fubo Pro", "ESPN"): _moderate(_src("https://thestreamable.com/x", "2025"), TWO[1]),  # a 2025 source
-        ("DirecTV", "ESPN"): _high("https://cordcuttersnews.com/review"),              # "official" off-domain
-        ("YouTube TV Sports Plan", "ESPN"): _moderate(*TWO, checked=""),               # no check date
-        ("YouTube TV Sports Plan", "NBA TV"): _moderate(*TWO, status="zip_dependent"),  # not "carried"
-        ("Hulu + Live TV", "NBA TV"): _moderate(*TWO, status="not_carried"),
-    }))
-    # Hulu is moderate, so the check-your-plan line follows.
-    assert cable_line(ctx, espn) == ("Also on cable and on live TV services that carry ESPN, including YouTube TV "
-                                     "and Hulu + Live TV. Based on 2026 channel guides. Check your plan's lineup before "
-                                     "you buy.")
-    # Only high confidence named: no check line. Carried for ESPN is not carried for NBA TV.
-    assert cable_line(ctx, nba_tv) == "Also on cable and on live TV services that carry NBA TV, including YouTube TV."
-    assert "including YouTube TV and Hulu + Live TV." in cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
-    for codes in (["NBC", "Peacock"], ["ABC"], ["Amazon"], []):
-        assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", codes)) == "", codes
+        ("DirecTV", "ESPN"): _high("https://cordcuttersnews.com/review"),             # "official" off-domain
+        ("YouTube TV Sports Plan", "ESPN"): _moderate(*TWO, checked=""),              # no check date
+        ("YouTube TV", "ESPN"): _moderate(*TWO, status="not_carried"),
+    }, label="data-live-tv-rules"))
+    answer, _ = _answer(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"]))
+    assert answer == "Watch it on ESPN Unlimited, or on live TV with Hulu + Live TV."
 
 
-def test_cable_line_with_the_shipped_lineups(fixture_games):
+def test_zip_line_only_when_live_tv_is_named_through_local_abc_or_nbc(fixture_games):
     ctx = ctx_for(fixture_games)
-    check = " Based on 2026 channel guides. Check your plan's lineup before you buy."
-    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == (
-        "Also on cable and on live TV services that carry ESPN, including YouTube TV, YouTube TV Sports Plan, "
-        "Hulu + Live TV, Sling Orange, Fubo Pro, Fubo Elite and DirecTV." + check)
-    # NBA TV on Fubo Pro is disputed between sources, so only Elite is named.
-    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["NBA TV"])) == (
-        "Also on cable and on live TV services that carry NBA TV, including YouTube TV, YouTube TV Sports Plan, "
-        "Fubo Elite and DirecTV." + check)
+    for codes in (["ABC"], ["NBC", "Peacock"]):
+        answer, _ = _answer(ctx, a_game(fixture_games, "LAC", "DAL", codes))
+        assert answer.endswith(" " + ZIP), codes
+    for codes in (["ESPN"], ["ABC", "ESPN"], ["NBA TV"], ["Amazon"]):
+        answer, _ = _answer(ctx, a_game(fixture_games, "LAC", "DAL", codes))
+        assert ZIP not in answer, codes
 
 
 def test_the_service_level_flag_alone_names_nobody(fixture_games, tmp_path_factory):
-    """carries_verified on the service drives the coverage maths; the cable
-    line only listens to the per-channel lineup."""
+    """Live TV coverage comes from the lineup; a service-level flag put back
+    into services.json is ignored."""
     data_dir = _lineups(tmp_path_factory, {}, label="data-service-flag")      # every lineup entry unchecked
     raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
     for svc in raw["services"]:
         if svc.get("kind") == "live_tv":
-            svc["carries_verified"] = True
+            svc["carries"], svc["carries_verified"] = ["ESPN"], True
     (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
-    ctx = ctx_for(fixture_games, data_dir=data_dir)
-    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == \
-        "Also on cable and on live TV services that carry ESPN."
+    answer, check = _answer(ctx_for(fixture_games, data_dir=data_dir), a_game(fixture_games, "MIA", "MIN", ["ESPN"]))
+    assert answer == "Watch it on ESPN Unlimited." and check == ""
 
 
-def test_cable_line_is_in_the_watch_part(built_site, fixture_games):
+def test_no_cable_line_and_one_check_line_per_block(built_site, fixture_games):
     page = read(built_site, "tonight")
     espn = next(g for g in fixture_games if g.date_et == TODAY and "ESPN" in g.national_codes)
-    assert "Also on cable and on live TV services that carry ESPN, including" in part(block_for(page, espn.game_id), "watch")
-    nbc = next(g for g in fixture_games if g.date_et == TODAY and "NBC" in g.national_codes)
-    assert "data-cable" not in block_for(page, nbc.game_id)
+    watch = part(block_for(page, espn.game_id), "watch")
+    assert "data-cable" not in page and "Also on cable" not in page
+    assert htmllib.unescape(watch).count(CHECK) == 1 and watch.count("data-live-tv-check") == 1
+    assert "or on live TV with" in watch
+    hub = (built_site / "index.html").read_text(encoding="utf-8")
+    assert "data-cable" not in hub
 
 
 # -- 3. "Why ...?" only when someone is blocked, worded for the case -----------------------

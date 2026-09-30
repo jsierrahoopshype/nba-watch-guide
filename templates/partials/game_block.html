@@ -3,7 +3,9 @@
     and must not change:
       1. where to watch: channel chips with the way to get each one, the
          out-of-market and in-market answer for both fan bases (one line
-         when all four are the same), the cable line, and "Why ...?" only
+         when all four are the same; standalone options first, then live TV
+         grouped by service), one check-before-you-buy line when a live TV
+         answer rests on a moderate lineup entry, and "Why ...?" only
          when a fan base is actually blocked
       2. tip time: the reader's own time big (ET in the HTML, swapped by
          the page script), ET small beside it
@@ -48,8 +50,8 @@
       {%- endfor %}
     </div>
     {%- endif %}
-    {%- if watch.cable %}
-    <p class="gb-cable" data-cable>{{ watch.cable }}</p>
+    {%- if watch.check %}
+    <p class="gb-check small muted" data-live-tv-check>{{ watch.check }}</p>
     {%- endif %}
     {%- if watch.why %}
     <details class="why gb-why" data-why="{{ watch.why.kinds|join(' ') }}"><summary>{{ watch.why.summary }}</summary>

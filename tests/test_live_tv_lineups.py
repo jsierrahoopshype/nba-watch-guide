@@ -9,7 +9,6 @@ import re
 from datetime import date
 from pathlib import Path
 
-from watchguide import config
 from watchguide.model import (LINEUP_CONFIDENCE, LINEUP_STATUSES, LineupChannel, LineupSource, load_local_tv,
                               load_services, official_url, sourced_confidence)
 
@@ -40,9 +39,9 @@ def test_canadian_networks_are_not_in_the_list():
     assert "TSN" not in WANTED and "Sportsnet" not in WANTED
 
 
-def test_the_national_list_covers_the_cable_codes():
-    assert set(config.CABLE_NATIONAL_CODES) <= set(CHANNELS["national"])
-    assert CHANNELS["national"] == ["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"]
+def test_the_national_list_is_what_the_maths_counts():
+    from watchguide.model import LINEUP_COUNTED
+    assert CHANNELS["national"] == ["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"] == list(LINEUP_COUNTED)
 
 
 def test_regional_channels_are_the_networks_in_local_tv():

@@ -363,7 +363,7 @@ a:hover { color: var(--accent); }
 .gb-fan { padding: 10px 12px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); }
 .gb-answer { margin: 2px 0; font-size: 0.9rem; }
 .gb-state { font-weight: 600; }
-.gb-cable { margin: 8px 0 0; font-size: 0.85rem; color: var(--text-2); }
+.gb-check { margin: 8px 0 0; }
 .gb-why { margin-top: 10px; }
 .gb-why .why-body { padding: 10px 12px 2px; font-size: 0.88rem; color: var(--text-2); }
 
@@ -459,7 +459,7 @@ a:hover { color: var(--accent); }
 .hg-row { background: linear-gradient(90deg, var(--away, var(--border-soft)) 0 50%, var(--home, var(--border-soft)) 50% 100%) top / 100% 3px no-repeat, var(--surface); }
 .hg-team .logo { border-radius: 50%; padding: 3px; background: var(--surface); box-shadow: 0 0 0 2px var(--tc, var(--border-soft)); }
 .hg-everyone { margin: 6px 0 0; }
-.hg-cable { margin: 6px 0 0; color: var(--text-2); }
+.hg-check { margin: 6px 0 0; }
 .hg-where, .hg-why { position: relative; z-index: 2; margin-top: 6px; }
 .hg-where > summary, .hg-why > summary { min-height: var(--tap); padding: 6px 10px; font-size: 0.82rem; }
 .hg-where p, .hg-why p { margin: 4px 0; }
