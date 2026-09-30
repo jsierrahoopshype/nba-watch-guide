@@ -288,7 +288,9 @@ kept:
    (the same file as the rosters; its slim copy keeps each player's `past`
    teams, the year each stint ended and how many seasons it lasted). Only
    players in the recent-awards pool (All-Star or All-NBA in the last three
-   seasons, `data/recent_awards.json`) and players who left that team in the
+   seasons, `data/recent_awards.json`) against a team they left in the year
+   this season starts or the year before (2026 or 2025 for 2026-27, the
+   career map's stint end year), and players who left that team in the
    offseason before this season after five or more seasons there. At most
    two, most recent departures first. Players listed Out on game day don't
    count.

@@ -106,14 +106,17 @@ def _names(names: list[str]) -> str:
 
 REVENGE_LIMIT = 2
 LONG_STINT = 5          # seasons with the old team for a non-star to count
+STAR_LEFT_WITHIN = 1    # a star counts against a team he left this year or the year before
 
 
 def revenge_lines(ctx, game: Game) -> list[str]:
     """"Revenge game: Paul George faces the 76ers", for players on either
     roster with an earlier stint with the opponent (career map), when he is
     either in the recent-awards pool (All-Star or All-NBA in the seasons
-    data/star_power_weights.json counts, the last three) or left that team in
-    the offseason before this season after LONG_STINT or more seasons there.
+    data/star_power_weights.json counts, the last three) and left that team
+    in the calendar year this season starts or the one before (2026 or 2025
+    for 2026-27, the career map's stint end year), or left it in the
+    offseason before this season after LONG_STINT or more seasons there.
     At most REVENGE_LIMIT, most recent departures first, then star power.
     Players listed Out on game day do not count."""
     template = _text(ctx).get("revenge", "")
@@ -133,9 +136,11 @@ def revenge_lines(ctx, game: Game) -> list[str]:
             for stint in player.get("past") or []:
                 if stint.get("team") != opponent:
                     continue
-                long_stint_just_ended = (bool(season_start) and stint.get("end") == season_start
+                end = stint.get("end", 0)
+                recent_star = key in pool and bool(season_start) and end >= season_start - STAR_LEFT_WITHIN
+                long_stint_just_ended = (bool(season_start) and end == season_start
                                          and stint.get("seasons", 0) >= LONG_STINT)
-                if key in pool or long_stint_just_ended:
+                if recent_star or long_stint_just_ended:
                     power = pool[key]["score"] if key in pool else 0.0
                     found.append((stint.get("end", 0), power, name, opponent))
     found.sort(key=lambda f: (-f[0], -f[1], f[2]))

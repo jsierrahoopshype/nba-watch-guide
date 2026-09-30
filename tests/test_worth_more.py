@@ -148,12 +148,19 @@ def awarded(ctx, *names, season="2025-26", award="all_star"):
 
 
 def test_revenge_line_for_a_star_facing_his_old_team():
-    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2019)]), stars=False), "Paul George")
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2025)]), stars=False), "Paul George")
     assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Paul George faces the Celtics"]
 
 
+@pytest.mark.parametrize("end, shows", [(2026, True), (2025, True), (2024, False), (2019, False)])
+def test_a_star_counts_only_against_a_team_he_left_this_year_or_last(end, shows):
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, end, seasons=6)]), stars=False),
+                  "Paul George")
+    assert worth.revenge_lines(ctx, GAME) == (["Revenge game: Paul George faces the Celtics"] if shows else [])
+
+
 def test_all_nba_counts_like_all_star():
-    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2019)]), stars=False), "Paul George",
+    ctx = awarded(ctx_for(rosters=rosters([former("Paul George", AWAY, 2026)]), stars=False), "Paul George",
                   season="2023-24", award="all_nba_third")
     assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Paul George faces the Celtics"]
 
@@ -184,17 +191,18 @@ def test_no_revenge_line_without_a_stint_with_the_opponent():
     assert worth.revenge_lines(ctx, GAME) == []
 
 
-def test_at_most_two_most_recent_departure_first():
+def test_at_most_two_most_recent_departure_first_then_star_power():
     players = [former("Old Star", AWAY, 2019, all_star=9), former("Long Timer", AWAY, 2026, seasons=8),
-               former("Mid Star", AWAY, 2023)]
-    ctx = awarded(ctx_for(rosters=rosters(players, [former("Away Star", HOME, 2021)]), stars=False),
-                  "Old Star", "Mid Star", "Away Star")
+               former("Mid Star", AWAY, 2025)]
+    ctx = awarded(ctx_for(rosters=rosters(players, [former("Away Star", HOME, 2025)]), stars=False),
+                  "Old Star", "Away Star")
+    ctx = awarded(ctx, "Mid Star", award="all_nba_first")              # both left in 2025; he is the bigger star
     assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Long Timer faces the Celtics",
                                               "Revenge game: Mid Star faces the Celtics"]
 
 
 def test_players_listed_out_do_not_count():
-    players = [former("Paul George", AWAY, 2026, seasons=6), former("Other Star", AWAY, 2020)]
+    players = [former("Paul George", AWAY, 2026, seasons=6), former("Other Star", AWAY, 2025)]
     injuries = {HOME: [{"player": "Paul George", "status": "Out", "injury": "Knee", "date": TODAY}]}
     ctx = awarded(ctx_for(rosters=rosters(players), injuries=injuries, stars=False), "Other Star")
     assert worth.revenge_lines(ctx, GAME) == ["Revenge game: Other Star faces the Celtics"]
@@ -317,7 +325,7 @@ def worth_site(tmp_path_factory):
         {"fetched_at": "2000-01-01T00:00:00+00:00", "data": matchup_data()}), encoding="utf-8")
     (data / "star-rosters.json").write_text(json.dumps({"teams": {
         AWAY: [{"player": "Anna Alpha", "all_star": 9}],
-        HOME: [{"player": "Bea Beta", "all_star": 9}, former("Paul George", AWAY, 2019)],
+        HOME: [{"player": "Bea Beta", "all_star": 9}, former("Paul George", AWAY, 2025)],
         TOMORROW.away_tricode: [{"player": "Anna Alpha", "all_star": 9}],
         TOMORROW.home_tricode: [{"player": "Bea Beta", "all_star": 9}]}}), encoding="utf-8")
     awards_dir = _copy_data(tmp_path_factory, "data-worth-awards")
