@@ -106,37 +106,93 @@ def test_collapsed_and_stacked_answers_on_the_page(built_site, fixture_games):
 
 # -- 2. national cable games: cable and live TV line ---------------------------------------
 
-def _verified_live_tv(tmp_path_factory, ids):
-    data_dir = _copy_data(tmp_path_factory, "data-live-tv")
+def _lineups(tmp_path_factory, marks, label="data-live-tv"):
+    """A data copy where every lineup entry starts unchecked and `marks` maps
+    (package label, channel) to the entry to put there."""
+    data_dir = _copy_data(tmp_path_factory, label)
     raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
     for svc in raw["services"]:
-        if svc["id"] in ids:
-            svc["carries_verified"] = True
+        for pkg in (svc.get("lineup") or {}).get("packages", []):
+            for ch in pkg["channels"]:
+                ch.update({"status": "unchecked", "confidence": "", "sources": [], "checked": ""})
+                ch.update(marks.get((pkg["label"], ch["channel"]), {}))
     (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
     return data_dir
 
 
-def test_cable_line_names_only_verified_live_tv_services(fixture_games, tmp_path_factory):
+def _src(url, published="2026"):
+    return {"url": url, "published": published}
+
+
+def _moderate(*sources, status="carried", checked="2026-09-30"):
+    return {"status": status, "confidence": "moderate", "sources": list(sources), "checked": checked}
+
+
+def _high(url, checked="2026-09-30"):
+    return {"status": "carried", "confidence": "high", "sources": [_src(url, "official")], "checked": checked}
+
+
+TWO = (_src("https://thestreamable.com/x"), _src("https://www.antennaland.com/y"))
+
+
+def test_cable_line_names_packages_carried_at_high_or_moderate(fixture_games, tmp_path_factory):
     espn = a_game(fixture_games, "MIA", "MIN", ["ESPN"])
-    shipped = ctx_for(fixture_games)
-    # No live TV service in the shipped file has a verified carries list yet.
-    assert cable_line(shipped, espn) == "Also on cable and on live TV services that carry ESPN."
-    ctx = ctx_for(fixture_games, data_dir=_verified_live_tv(tmp_path_factory, {"youtube_tv", "hulu_live_tv"}))
-    assert cable_line(ctx, espn) == ("Also on cable and on live TV services that carry ESPN, "
-                                     "including YouTube TV and Hulu + Live TV.")
-    # An ABC/ESPN simulcast counts through ESPN; NBA TV is cable but neither
-    # of those services lists it; broadcast and streaming games get no line.
-    assert "carry ESPN, including YouTube TV" in cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
-    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["NBA TV"])) == \
-        "Also on cable and on live TV services that carry NBA TV."
+    nba_tv = a_game(fixture_games, "MIA", "MIN", ["NBA TV"])
+    ctx = ctx_for(fixture_games, data_dir=_lineups(tmp_path_factory, {
+        ("YouTube TV", "ESPN"): _high("https://tv.youtube.com/welcome/"),
+        ("Hulu + Live TV", "ESPN"): _moderate(*TWO),
+        ("YouTube TV", "NBA TV"): _high("https://tv.youtube.com/welcome/"),
+        # Each of these falls short of the rule, so none may be named:
+        ("Sling Orange", "ESPN"): _moderate(TWO[0]),                                   # one source
+        ("Sling Blue", "ESPN"): _moderate(_src("https://thestreamable.com/a"),
+                                          _src("https://thestreamable.com/b")),       # same site twice
+        ("Fubo Pro", "ESPN"): _moderate(_src("https://thestreamable.com/x", "2025"), TWO[1]),  # a 2025 source
+        ("DirecTV", "ESPN"): _high("https://cordcuttersnews.com/review"),              # "official" off-domain
+        ("YouTube TV Sports Plan", "ESPN"): _moderate(*TWO, checked=""),               # no check date
+        ("YouTube TV Sports Plan", "NBA TV"): _moderate(*TWO, status="zip_dependent"),  # not "carried"
+        ("Hulu + Live TV", "NBA TV"): _moderate(*TWO, status="not_carried"),
+    }))
+    # Hulu is moderate, so the check-your-plan line follows.
+    assert cable_line(ctx, espn) == ("Also on cable and on live TV services that carry ESPN, including YouTube TV "
+                                     "and Hulu + Live TV. Based on 2026 channel guides. Check your plan's lineup before "
+                                     "you buy.")
+    # Only high confidence named: no check line. Carried for ESPN is not carried for NBA TV.
+    assert cable_line(ctx, nba_tv) == "Also on cable and on live TV services that carry NBA TV, including YouTube TV."
+    assert "including YouTube TV and Hulu + Live TV." in cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
     for codes in (["NBC", "Peacock"], ["ABC"], ["Amazon"], []):
         assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", codes)) == "", codes
+
+
+def test_cable_line_with_the_shipped_lineups(fixture_games):
+    ctx = ctx_for(fixture_games)
+    check = " Based on 2026 channel guides. Check your plan's lineup before you buy."
+    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == (
+        "Also on cable and on live TV services that carry ESPN, including YouTube TV, YouTube TV Sports Plan, "
+        "Hulu + Live TV, Sling Orange, Fubo Pro, Fubo Elite and DirecTV." + check)
+    # NBA TV on Fubo Pro is disputed between sources, so only Elite is named.
+    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["NBA TV"])) == (
+        "Also on cable and on live TV services that carry NBA TV, including YouTube TV, YouTube TV Sports Plan, "
+        "Fubo Elite and DirecTV." + check)
+
+
+def test_the_service_level_flag_alone_names_nobody(fixture_games, tmp_path_factory):
+    """carries_verified on the service drives the coverage maths; the cable
+    line only listens to the per-channel lineup."""
+    data_dir = _lineups(tmp_path_factory, {}, label="data-service-flag")      # every lineup entry unchecked
+    raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
+    for svc in raw["services"]:
+        if svc.get("kind") == "live_tv":
+            svc["carries_verified"] = True
+    (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
+    ctx = ctx_for(fixture_games, data_dir=data_dir)
+    assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == \
+        "Also on cable and on live TV services that carry ESPN."
 
 
 def test_cable_line_is_in_the_watch_part(built_site, fixture_games):
     page = read(built_site, "tonight")
     espn = next(g for g in fixture_games if g.date_et == TODAY and "ESPN" in g.national_codes)
-    assert "Also on cable and on live TV services that carry ESPN." in part(block_for(page, espn.game_id), "watch")
+    assert "Also on cable and on live TV services that carry ESPN, including" in part(block_for(page, espn.game_id), "watch")
     nbc = next(g for g in fixture_games if g.date_et == TODAY and "NBC" in g.national_codes)
     assert "data-cable" not in block_for(page, nbc.game_id)
 

@@ -35,9 +35,10 @@ LEAGUE_PASS_SERVICE_ID = "nba_league_pass"
 LOCAL_SIMULCAST_NATIONAL_CODES = ("NBA TV",)
 
 # National codes that are cable channels. A game on one of them (an ABC/ESPN
-# simulcast included) says it is also on cable and on the live TV services
-# (kind "live_tv" in data/services.json) whose carries list is verified.
-CABLE_NATIONAL_CODES = ("ESPN", "NBA TV")
+# simulcast included) says it is also on cable and on the live TV packages
+# (kind "live_tv" in data/services.json) whose lineup has that channel
+# verified. ESPN2 is not in the 2026-27 feed yet; it is here for the day it is.
+CABLE_NATIONAL_CODES = ("ESPN", "ESPN2", "NBA TV")
 
 # Tonight's ranking: players listed with these statuses do not count toward
 # star power. Every scoring number is in data/star_power_weights.json.

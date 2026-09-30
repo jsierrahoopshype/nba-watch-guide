@@ -142,6 +142,112 @@ class Game:
 # Services
 # --------------------------------------------------------------------------
 
+LINEUP_STATUSES = ("carried", "not_carried", "zip_dependent", "unchecked")
+LINEUP_CONFIDENCE = ("high", "moderate")
+LINEUP_YEAR = "2026"          # third-party sources must be published this year
+
+
+def _norm_code(code: str) -> str:
+    return "".join(ch for ch in (code or "").lower() if ch.isalnum())
+
+
+@dataclass
+class LineupSource:
+    url: str
+    published: str = ""       # YYYY, YYYY-MM or YYYY-MM-DD, or "official" for the service's own page
+
+
+@dataclass
+class LineupChannel:
+    """One channel in one live TV package. status is carried, not_carried,
+    zip_dependent (sources say it depends on the ZIP code or market) or
+    unchecked; confidence is high or moderate once sourced."""
+    channel: str
+    status: str = "unchecked"
+    confidence: str = ""
+    sources: list[LineupSource] = field(default_factory=list)
+    checked: str = ""
+    note: str = ""
+
+
+def _site(url: str) -> str:
+    """The site a URL is on, without www., for telling sources apart."""
+    from urllib.parse import urlparse
+    host = (urlparse(url or "").hostname or "").lower()
+    return host[4:] if host.startswith("www.") else host
+
+
+def official_url(url: str, domains: list[str]) -> bool:
+    """Whether url is https on one of `domains` or a subdomain of one."""
+    from urllib.parse import urlparse
+    parsed = urlparse(url or "")
+    host = (parsed.hostname or "").lower()
+    return parsed.scheme == "https" and any(host == d or host.endswith("." + d) for d in domains)
+
+
+def sourced_confidence(entry: LineupChannel, domains: list[str]) -> str:
+    """The confidence an entry has earned, or "" when it falls short:
+    high needs a source on the service's own domains; moderate needs two or
+    more sources on different sites, each either the service's own page or a
+    third-party page published in LINEUP_YEAR. Both need a check date."""
+    if entry.status == "unchecked" or entry.confidence not in LINEUP_CONFIDENCE or not entry.checked:
+        return ""
+    official = [s for s in entry.sources if official_url(s.url, domains) and s.published == "official"]
+    dated = [s for s in entry.sources if s.url.startswith("https://") and not official_url(s.url, domains)
+             and s.published.startswith(LINEUP_YEAR)]
+    if entry.confidence == "high":
+        return "high" if official else ""
+    sites = {_site(s.url) for s in official + dated}
+    return "moderate" if len(sites) >= 2 else ""
+
+
+@dataclass
+class LineupPackage:
+    """A live TV package (YouTube TV Base Plan, Sling Orange...) and its
+    per-channel carries list. label is the name the cable line uses."""
+    name: str
+    label: str
+    channels: list[LineupChannel] = field(default_factory=list)
+    official_domains: list[str] = field(default_factory=list)
+
+    def entry(self, code: str) -> LineupChannel | None:
+        return next((c for c in self.channels if _norm_code(c.channel) == _norm_code(code)), None)
+
+    def carried_confidence(self, code: str) -> str:
+        """high or moderate when this channel is carried and the entry's
+        sources back that confidence (sourced_confidence), else ""."""
+        entry = self.entry(code)
+        if not entry or entry.status != "carried":
+            return ""
+        return sourced_confidence(entry, self.official_domains)
+
+
+def load_lineup(raw: dict[str, Any] | None) -> list[LineupPackage]:
+    """services.json lineup block to packages. Anything malformed reads as
+    unchecked rather than failing the build."""
+    if not isinstance(raw, dict):
+        return []
+    domains = [str(d).lower() for d in raw.get("official_domains") or []]
+    packages = []
+    for pkg in raw.get("packages") or []:
+        channels = []
+        for ch in pkg.get("channels") or []:
+            status = ch.get("status", "unchecked")
+            confidence = ch.get("confidence", "")
+            channels.append(LineupChannel(
+                channel=str(ch.get("channel", "")),
+                status=status if status in LINEUP_STATUSES else "unchecked",
+                confidence=confidence if confidence in LINEUP_CONFIDENCE else "",
+                sources=[LineupSource(url=str(src.get("url") or ""), published=str(src.get("published") or ""))
+                         for src in ch.get("sources") or [] if isinstance(src, dict)],
+                checked=str(ch.get("checked") or ""),
+                note=str(ch.get("note") or ""),
+            ))
+        packages.append(LineupPackage(name=str(pkg.get("name", "")), label=str(pkg.get("label") or pkg.get("name", "")),
+                                      channels=channels, official_domains=domains))
+    return packages
+
+
 @dataclass
 class Service:
     id: str
@@ -171,6 +277,10 @@ class Service:
     # (own price plus the required ones), own_price_usd is the add-on alone.
     requires: list["Service"] = field(default_factory=list)
     own_price_usd: float | None = None
+    # Live TV services only: each package's per-channel carries list from its
+    # official lineup page. Read by the game block's cable line; the coverage
+    # maths still goes by carries and carries_verified above.
+    lineup: list[LineupPackage] = field(default_factory=list)
 
     @property
     def has_price(self) -> bool:
@@ -251,6 +361,7 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             carries_check=s.get("carries_check", ""),
             carries_verified_confidence=s.get("carries_verified_confidence", ""),
             carries_confidence_note=s.get("carries_confidence_note", ""),
+            lineup=load_lineup(s.get("lineup")),
         ))
     rules = raw.get("rules") or {}
     blackouts = [

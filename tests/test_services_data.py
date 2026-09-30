@@ -83,7 +83,13 @@ def test_unverified_services_listed_with_price_and_unconfirmed_line(built_site):
         assert "Which games this covers is not confirmed yet" in panel
         for svc in unverified:
             assert svc.name in panel
-            assert f"${svc.monthly_price_usd:,.2f}" in panel
+            # A price when it is confirmed, the not-confirmed label when it is not (Fubo Elite).
+            row = panel[panel.index(f">{svc.name}</a></div>"):]
+            row = row[:row.index('<div class="row">')] if '<div class="row">' in row else row
+            if svc.has_price:
+                assert f"${svc.monthly_price_usd:,.2f}" in row
+            else:
+                assert "Price not confirmed" in row
             assert svc.name not in _coverage_block(panel)
 
 

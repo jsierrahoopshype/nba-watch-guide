@@ -7,6 +7,10 @@
       "NBCSN": "30 games in the NBA schedule feed. Deliberately not mapped to any service: the original NBC Sports Network shut down in 2021 and what this code refers to in 2026-27 is unconfirmed. These games render TBA until verified.",
       "Telemundo": "10 games. Spanish-language coverage. Deliberately not counted as coverage for an English-language reader; show it as a separate note on those games."
     },
+    "lineup_note": "Live TV services only. lineup.packages lists each package (Sling Orange and Sling Blue separately) with one entry per channel in lineup_channels. status is carried, not_carried, zip_dependent (sources say it depends on the ZIP code or market; recorded, never guessed) or unchecked. confidence is high when the entry comes from the service's own lineup page (a source on one of official_domains, published 'official'), or moderate when at least two independent sources (different sites) published in 2026 say the same about that channel in that specific plan; one source, older sources or disagreeing sources leave it unchecked. checked is the date the sources were read. The game block's cable line names a package for a channel marked carried at high or moderate confidence, and a moderate one adds a check-before-you-buy line. The service-level carries and carries_verified above still drive the coverage maths and are not changed by this block.",
+    "lineup_method": "2026-09-30 check: the services' own lineup pages and the third-party pages were not reachable from the build environment, so every entry was read from web search results restricted to one site at a time, which keeps each claim tied to one source. No entry is high confidence; an 'official' source here is the service's page as the search index shows it and backs a moderate entry alongside a 2026 third-party source, never on its own.",
+    "lineup_channels": {"national": ["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], "regional": ["NBC Sports Boston", "YES Network", "CHSN", "Altitude", "NBC Sports Bay Area", "Space City Home Network", "Spectrum SportsNet", "MSG Network", "NBC Sports Philadelphia", "NBC Sports California", "Monumental Sports Network", "Peachtree Sports Network", "Gulf Coast Sports & Entertainment Network", "Arizona's Family Sports"]},
+    "lineup_regional_note": "regional is every US regional sports network named in data/local_tv.json local_broadcasters, owner notes dropped. Over-the-air stations (WPLG, KJZZ and the rest), DAZN and the Raptors' Canadian networks (TSN, Sportsnet) are left out; a local ABC or NBC affiliate is checked as ABC or NBC.",
     "kind_note": "kind is ota for an antenna, live_tv for a live TV package that carries cable channels (named on national cable games once its carries list is verified), and streaming when left out.",
     "carries_note": "carries lists the broadcaster codes as they appear in cdn.nba.com scheduleLeagueV2.json: ABC, ESPN, NBC, Peacock, Amazon, NBA TV. Entries with carries_verified false must not be trusted for coverage maths until checked."
   },
@@ -119,6 +123,36 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market and NBA TV carriage is unconfirmed. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["tv.youtube.com", "support.google.com"],
+        "packages": [
+          {
+            "name": "Base Plan",
+            "label": "YouTube TV",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/youtube-tv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/how-to-watch-espn/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/youtube-tv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/how-to-watch-espn2/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://tv.youtube.com/welcome/", "published": "official"}, {"url": "https://www.antennaland.com/how-to-watch-espn/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://tv.youtube.com/welcome/", "published": "official"}, {"url": "https://www.antennaland.com/how-to-watch-espn/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBA TV", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/youtube-tv/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/everything-to-know-about-youtube-tv-in-2026-plans-pricing-channels-dvr-add-ons-more/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: Monumental's own support page says YouTube TV and Hulu + Live TV dropped it on October 1, 2025, but thestreamable.com's 2026 channel page still lists it on YouTube TV."},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
@@ -134,6 +168,36 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["tv.youtube.com", "support.google.com"],
+        "packages": [
+          {
+            "name": "Sports Plan",
+            "label": "YouTube TV Sports Plan",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.antennaland.com/youtube-tv-sports-plan-vs-espn-fox-one/", "published": "2026"}, {"url": "https://www.cabletv.com/youtube-tv/channels/sports-plan", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.antennaland.com/youtube-tv-sports-plan-vs-espn-fox-one/", "published": "2026"}, {"url": "https://www.cabletv.com/youtube-tv/channels/sports-plan", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.antennaland.com/youtube-tv-sports-plan-vs-espn-fox-one/", "published": "2026"}, {"url": "https://tv.youtube.com/welcome/", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.antennaland.com/youtube-tv-sports-plan-vs-espn-fox-one/", "published": "2026"}, {"url": "https://tv.youtube.com/welcome/", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBA TV", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.sportspro.com/news/broadcast-ott/youtube-tv-sports-plan-package-subscription-cost-price-nfl-rights-february-2026/", "published": "2026-02"}, {"url": "https://www.sportico.com/business/media/2026/youtube-tv-sports-streaming-service-discount-fubo-directv-1234884474/", "published": "2026"}, {"url": "https://www.antennaland.com/youtube-tv-sports-plan-vs-espn-fox-one/", "published": "2026"}], "checked": "2026-09-30", "note": "cabletv.com's Sports Plan page hedges that NBA TV may sit in the Sports + News plan instead; SportsPro, Sportico, Antenna Land and YouTube TV's own Sports Plan page list it in the Sports Plan."},
+              {"channel": "NBC Sports Boston", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.inquirer.com/entertainment/media/youtube-tv-sports-package-price-nbc-sports-philadelphia-20260210.html", "published": "2026-02-10"}, {"url": "https://www.sportico.com/business/media/2026/youtube-tv-sports-streaming-service-discount-fubo-directv-1234884474/", "published": "2026"}], "checked": "2026-09-30", "note": "In the Celtics market only."},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.inquirer.com/entertainment/media/youtube-tv-sports-package-price-nbc-sports-philadelphia-20260210.html", "published": "2026-02-10"}, {"url": "https://www.sportico.com/business/media/2026/youtube-tv-sports-streaming-service-discount-fubo-directv-1234884474/", "published": "2026"}], "checked": "2026-09-30", "note": "In the Warriors market only."},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.inquirer.com/entertainment/media/youtube-tv-sports-package-price-nbc-sports-philadelphia-20260210.html", "published": "2026-02-10"}, {"url": "https://www.sportico.com/business/media/2026/youtube-tv-sports-streaming-service-discount-fubo-directv-1234884474/", "published": "2026"}], "checked": "2026-09-30", "note": "In the 76ers market only."},
+              {"channel": "NBC Sports California", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.inquirer.com/entertainment/media/youtube-tv-sports-package-price-nbc-sports-philadelphia-20260210.html", "published": "2026-02-10"}, {"url": "https://www.sportico.com/business/media/2026/youtube-tv-sports-streaming-service-discount-fubo-directv-1234884474/", "published": "2026"}], "checked": "2026-09-30", "note": "In the Kings market only."},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: Monumental's own support page says YouTube TV and Hulu + Live TV dropped it on October 1, 2025, but thestreamable.com's 2026 channel page still lists it on YouTube TV."},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
       "source_url": "https://tv.youtube.com/learn/nbaplayoffs/",
@@ -149,6 +213,36 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Local channel lineups vary by market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["hulu.com"],
+        "packages": [
+          {
+            "name": "Hulu + Live TV",
+            "label": "Hulu + Live TV",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/hulu/live-tv", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/hulu-live-tv/channels", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/hulu-live-tv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/how-to-watch-espn2/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/hulu/live-tv", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/hulu-live-tv/channels", "published": "2026"}, {"url": "https://help.hulu.com/article/hulu-live-tv-availability", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/hulu/live-tv", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/hulu-live-tv/channels", "published": "2026"}, {"url": "https://help.hulu.com/article/hulu-live-tv-availability", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBA TV", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/hulu/live-tv", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/hulu-live-tv/channels", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: Monumental's own support page says YouTube TV and Hulu + Live TV dropped it on October 1, 2025, but thestreamable.com's 2026 channel page still lists it on YouTube TV."},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.hulu.com/live-tv",
       "affiliate_url": "",
       "source_url": "https://www.hulu.com/live-tv",
@@ -164,6 +258,61 @@
       "carries": ["ESPN"],
       "carries_verified": false,
       "carries_check": "NBC availability depends on the market and ABC is not carried. Verify per market before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["sling.com"],
+        "packages": [
+          {
+            "name": "Sling Orange",
+            "label": "Sling Orange",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/sling-tv/channels", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/sling-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/sling-tv/channels", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/sling-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/sling-tv/channel-lineup", "published": "2026"}, {"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}], "checked": "2026-09-30", "note": "Sling's local channels come with Sling Blue only."},
+              {"channel": "NBC", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/sling-tv/channel-lineup", "published": "2026"}, {"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}], "checked": "2026-09-30", "note": "Sling's local channels come with Sling Blue only."},
+              {"channel": "NBA TV", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/sling-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": "Only in the Sports Extra add-on, not in Sling Orange itself."},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          },
+          {
+            "name": "Sling Blue",
+            "label": "Sling Blue",
+            "channels": [
+              {"channel": "ESPN", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/sling-tv/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}], "checked": "2026-09-30", "note": "ESPN and ESPN2 are Sling Orange channels."},
+              {"channel": "ESPN2", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/sling-tv/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}], "checked": "2026-09-30", "note": "ESPN and ESPN2 are Sling Orange channels."},
+              {"channel": "ABC", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: cabletv.com and thestreamable.com say local ABC in select markets, Cord Cutters News (2026) and sling.com say Sling carries only local FOX and NBC."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/sling-tv/channel-lineup", "published": "2026"}, {"url": "https://cordcuttersnews.com/sling-tv-pricing-packages-channels/", "published": "2026"}, {"url": "https://www.sling.com/service/sling-orange-and-blue", "published": "official"}], "checked": "2026-09-30", "note": "Local NBC in select markets only."},
+              {"channel": "NBA TV", "status": "not_carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/sling-tv/channels", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/sling-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": "Only in the Sports Extra add-on, not in Sling Blue itself."},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.sling.com/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
@@ -173,17 +322,96 @@
     {
       "id": "fubo",
       "kind": "live_tv",
-      "name": "Fubo",
-      "monthly_price_usd": 84.99,
-      "billing_note": "Essential plan. Regional sports fees are added in some markets and are not optional. Does not carry the Warner-owned channels.",
+      "name": "Fubo Pro",
+      "monthly_price_usd": 88.99,
+      "billing_note": "Pro plan. $88.99 a month since the July 2026 increase that followed NBC's return. A regional sports fee is added in markets with regional sports networks and is not optional. Does not carry the Warner-owned channels.",
       "carries": ["ESPN", "ABC"],
       "carries_verified": false,
       "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["fubo.tv"],
+        "packages": [
+          {
+            "name": "Pro",
+            "label": "Fubo Pro",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/fubotv/channel-lineup/pro", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://cordcuttersnews.com/nbc-is-back-on-fubo-in-all-markets/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code. NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
+              {"channel": "NBA TV", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: cabletv.com and reviews.org (2026) put NBA TV in the Sports Plus add-on or Elite, not Pro; thestreamable.com, antennaland.com and Cord Cutters News say every Fubo plan has it."},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
-      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
-      "last_verified": "2026-09-25",
+      "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
+      "price_sources": [{"url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}],
+      "price_note": "Two 2026 sources give $88.99 (Cord Cutters News on the July increase, thestreamable.com's channel guide). cabletv.com's pages disagree with each other ($79.99, $85 and the pre-increase $73.99).",
+      "last_verified": "2026-09-30",
       "verified": true
+    },
+    {
+      "id": "fubo_elite",
+      "kind": "live_tv",
+      "name": "Fubo Elite",
+      "monthly_price_usd": null,
+      "billing_note": "Elite plan: everything in Pro plus about 70 more channels, NBA TV among them. Price not confirmed: after the July 2026 increase 2026 sources give $98.99, $99, $89.99 and $88.99. A regional sports fee is added in markets with regional sports networks. Does not carry the Warner-owned channels.",
+      "carries": ["ESPN", "ABC"],
+      "carries_verified": false,
+      "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["fubo.tv"],
+        "packages": [
+          {
+            "name": "Elite",
+            "label": "Fubo Elite",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://cordcuttersnews.com/nbc-is-back-on-fubo-in-all-markets/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code. NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
+              {"channel": "NBA TV", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/fubotv/channel-lineup/elite", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
+      "signup_url": "https://www.fubo.tv/",
+      "affiliate_url": "",
+      "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
+      "price_sources": [],
+      "price_note": "Not confirmed: Cord Cutters News says $98.99 and thestreamable.com $99 in one article but $84.99 in its channel guide; cabletv.com says $89.99; Fubo's own plans page as indexed says $88.99.",
+      "last_verified": "2026-09-30",
+      "verified": false
     },
     {
       "id": "directv_stream",
@@ -194,6 +422,36 @@
       "carries": ["ESPN", "ABC", "NBC"],
       "carries_verified": false,
       "carries_check": "Which RSN a given market gets, and whether NBA TV is included, varies by plan and market. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["directv.com"],
+        "packages": [
+          {
+            "name": "Choice",
+            "label": "DirecTV",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/directv-stream/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/everything-you-need-to-know-about-directv-in-2026-pricing-plans-features-more/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/directv-stream/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/everything-you-need-to-know-about-directv-in-2026-pricing-plans-features-more/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/directv-stream/channels", "published": "2026"}, {"url": "https://www.directv.com/channel-lineup/", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/directv-stream/channels", "published": "2026"}, {"url": "https://www.directv.com/channel-lineup/", "published": "official"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBA TV", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/directv-stream/channels", "published": "2026"}, {"url": "https://cordcuttersnews.com/everything-you-need-to-know-about-directv-in-2026-pricing-plans-features-more/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/channels/monumental-sports-network", "published": "2026"}, {"url": "https://www.tvguide.com/news/how-to-watch-monumental-sports-network/", "published": "2026"}], "checked": "2026-09-30", "note": "In the Wizards market only, with CHOICE or above."},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
       "signup_url": "https://www.directv.com/stream/",
       "affiliate_url": "",
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
