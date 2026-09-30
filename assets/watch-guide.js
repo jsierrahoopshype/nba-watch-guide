@@ -111,9 +111,10 @@
       var slot = node.querySelector('[data-local-slot]');
       if (clockSlot) {
         // The big number: the weekday, when it differs, goes in its own
-        // smaller slot in front.
+        // smaller slot in front, followed by a real space so the text reads
+        // "Thu 2:00 am" when copied, read aloud or shown without the CSS.
         clockSlot.textContent = time;
-        if (daySlot) daySlot.textContent = otherDay ? weekday(when) : '';
+        if (daySlot) daySlot.textContent = otherDay ? weekday(when) + ' ' : '';
         if (zoneSlot) zoneSlot.textContent = zone;
       } else if (slot) {
         slot.textContent = prefix + time + (zone ? ' ' + zone : '');

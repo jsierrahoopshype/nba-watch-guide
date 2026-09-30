@@ -376,7 +376,7 @@ a:hover { color: var(--accent); }
 .gb-tip-et.is-shown { visibility: visible; }
 /* One line whatever the script writes into it, so nothing below moves. */
 .gb-tip-main { flex: 1 0 100%; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.gb-wday:not(:empty) { margin-right: 6px; font-size: 1rem; font-weight: 600; color: var(--text-2); }
+.gb-wday:not(:empty) { font-size: 1rem; font-weight: 600; color: var(--text-2); }
 .gb-clock { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
 .gb-zone { font-size: 0.95rem; font-weight: 600; color: var(--text-2); }
 .pair-link { display: inline-flex; align-items: center; min-height: var(--tap); font-family: var(--sans); font-size: 0.88rem; font-weight: 600; }

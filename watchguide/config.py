@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import subprocess
 from pathlib import Path
 
 # Rule: every canonical, og:url, JSON-LD url and sitemap entry uses this base.
@@ -52,6 +53,20 @@ STALE_WINDOW_END_HOUR = 1     # 01:00 ET next day
 # listing for any team playing and no report dated today reads "Injury report
 # not available yet" (see SiteContext.injury_report_missing).
 INJURY_GUARD_START_HOUR = 15
+
+
+def build_id() -> str:
+    """The short commit this build ran from, for the <meta name="build">
+    marker the live check compares: WATCH_GUIDE_BUILD, else the Actions
+    GITHUB_SHA, else the checkout's HEAD; "local" when none is known."""
+    sha = os.environ.get("WATCH_GUIDE_BUILD") or os.environ.get("GITHUB_SHA") or ""
+    if not sha:
+        try:
+            sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True,
+                                 text=True, timeout=5).stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            sha = ""
+    return sha[:7] or "local"
 
 
 def public_url(path: str = "") -> str:
