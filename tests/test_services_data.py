@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import replace
 from datetime import date, timedelta
 
 import pytest
 
+from conftest import _build, _copy_data
 from watchguide.coverage import IN_MARKET, OUT_OF_MARKET, build_state_coverage, carriers_for_game
 from watchguide.model import Game, load_services
 
@@ -61,22 +63,35 @@ def test_unverified_carries_count_for_nothing(priced_services):
     assert cov.cheapest_full.total_price == 109.0
 
 
-def test_shipped_live_tv_bundles_do_not_count_yet(shipped):
-    # ESPN is claimed by five live TV services with carries_verified false.
+LIVE_TV_ESPN = {"youtube_tv", "youtube_tv_sports_plan", "hulu_live_tv", "sling_tv", "fubo", "fubo_elite",
+                "directv_stream"}
+
+
+def test_shipped_live_tv_bundles_count_through_their_lineups(shipped):
     carriers = carriers_for_game(game(0, national=["ESPN"]), TEAM, shipped, None, OUT_OF_MARKET)
-    assert carriers == {"espn_unlimited"}
+    assert carriers == {"espn_unlimited"} | LIVE_TV_ESPN
     peacock = carriers_for_game(game(1, national=["Peacock"]), TEAM, shipped, None, OUT_OF_MARKET)
-    assert peacock == {"peacock_premium"}
+    assert peacock == {"peacock_premium"}                     # no lineup lists Peacock
     nbc = carriers_for_game(game(2, national=["NBC"]), TEAM, shipped, None, OUT_OF_MARKET)
-    assert nbc == {"antenna_nbc", "peacock_premium"}        # YouTube TV etc. still unconfirmed
+    assert nbc == {"antenna_nbc", "peacock_premium"} | LIVE_TV_ESPN   # local NBC, depends on ZIP
     amazon = carriers_for_game(game(3, national=["Amazon"]), TEAM, shipped, None, OUT_OF_MARKET)
     assert amazon == {"prime_video"}
 
 
-def test_unverified_services_listed_with_price_and_unconfirmed_line(built_site):
-    html = _html(built_site)
-    unverified = [s for s in load_services().services if not s.carries_verified]
-    assert unverified
+def test_unverified_services_listed_with_price_and_unconfirmed_line(tmp_path_factory, fixture_games):
+    """A live TV service whose lineup counts nothing is still listed with its
+    price (or "Price not confirmed") and the unconfirmed line."""
+    data_dir = _copy_data(tmp_path_factory, "data-unverified-live-tv")
+    raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
+    for svc in raw["services"]:
+        if svc["id"] in ("hulu_live_tv", "fubo_elite"):
+            for pkg in svc["lineup"]["packages"]:
+                for ch in pkg["channels"]:
+                    ch.update({"status": "unchecked", "confidence": "", "sources": [], "checked": ""})
+    (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
+    html = _html(_build(tmp_path_factory, fixture_games, "site-unverified-live-tv", data_dir=data_dir))
+    unverified = [s for s in load_services(data_dir).services if not s.carries_verified]
+    assert {s.id for s in unverified} == {"hulu_live_tv", "fubo_elite"}
     for state in ("out_of_market", "in_market"):
         panel = _panel(html, state)
         assert panel.count("data-coverage-unconfirmed") == len(unverified)
@@ -105,7 +120,9 @@ def test_zero_price_is_free_coverage_and_null_stays_out(shipped):
     # bundles NBA TV) is blacked out, so only the unpriced NBA TV carries it.
     games = [game(i, national=["ABC" if i % 2 else "NBC"]) for i in range(9)]
     games.append(game(9, national=["NBA TV"]))
-    cov = build_state_coverage(games, TEAM, shipped, None, IN_MARKET)
+    # Without the live TV packages, which would cover the NBA TV game at a price.
+    no_live = replace(shipped, services=[s for s in shipped.services if s.kind != "live_tv"])
+    cov = build_state_coverage(games, TEAM, no_live, None, IN_MARKET)
     counts = {c.service.id: c.covered for c in cov.per_service}
     assert counts["nba_tv"] == 1                  # coverage still counted
     assert cov.cheapest_full is None              # but it has no price to add up
@@ -169,10 +186,11 @@ def test_nba_tv_through_league_pass_only_counts_out_of_market(shipped):
     # League Pass includes NBA TV, but it is blacked out in-market, so an
     # in-market reader gains nothing from it. NBA TV itself has no price.
     nba_tv_game = game(0, national=["NBA TV"])
+    live_nba_tv = {"youtube_tv", "youtube_tv_sports_plan", "fubo_elite", "directv_stream"}
     out = carriers_for_game(nba_tv_game, TEAM, shipped, None, OUT_OF_MARKET)
-    assert out == {"nba_league_pass", "nba_tv"}
+    assert out == {"nba_league_pass", "nba_tv"} | live_nba_tv
     inside = carriers_for_game(nba_tv_game, TEAM, shipped, None, IN_MARKET)
-    assert inside == {"nba_tv"}
+    assert inside == {"nba_tv"} | live_nba_tv                  # League Pass blacked out, live TV is not
 
 
 def test_league_pass_makes_full_out_of_market_coverage_possible(shipped):
@@ -229,11 +247,14 @@ def test_league_pass_note_renders_under_the_combination_out_of_market_only(built
     assert cheapest.count("data-confidence-note") >= 1
     inside = _panel(html, "in_market")
     assert LP_NOTE not in inside
-    # In-market, the only note allowed is the local-TV one for a moderate team.
+    # In-market, the notes allowed are the local-TV one for a moderate team
+    # and the live TV packages' own lines.
     local_note = ("Local TV details for this team come from news reports, not an official "
                   "team page yet; check before you buy.")
     import re
-    assert set(re.findall(r"data-confidence-note>([^<]+)<", inside)) <= {local_note}
+    for note in set(re.findall(r"data-confidence-note>([^<]+)<", inside)):
+        assert (note == local_note or note == "Local ABC and NBC availability varies by ZIP code."
+                or (note.startswith("Includes ") and note.endswith("; check before you buy."))), note
 
 
 def test_league_pass_reads_blacked_out_in_market(built_site, teams):

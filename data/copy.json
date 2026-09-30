@@ -144,7 +144,8 @@
     "no_players_listed": "Nobody listed.",
     "players_unknown": "Details coming",
     "availability_on_game_day": "Player availability shows here on game day.",
-    "no_injury_report": "No injury report yet."
+    "no_injury_report": "No injury report yet.",
+    "zip_locals_note": "Local ABC and NBC availability varies by ZIP code."
   },
   "faq": [
     {

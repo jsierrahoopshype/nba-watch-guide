@@ -19,7 +19,7 @@ expected.
 | Subscription prices, billing notes, which channels a service carries, League Pass blackout rules | `data/services.json` |
 | Local TV per team, in-market notes | `data/local_tv.json` |
 | Short names for long local channel names on channel chips | `data/local_tv.json`, each team's `short_names` |
-| Live TV channel lineups (per package, per channel, with source page and check date) | `data/services.json`, each live TV service's `lineup` |
+| Live TV channel lineups (per package, per channel, with sources and check date; also what each live TV service counts for) | `data/services.json`, each live TV service's `lineup` |
 | Team colors (logo rings, card edges) | `data/team_colors.json` |
 | Affiliate links | `data/services.json`, the `affiliate_url` on each service |
 | Page titles, descriptions, headings, FAQ wording | `data/copy.json` |
@@ -217,9 +217,18 @@ sources or disagreeing sources leave it `unchecked`, with a `note` saying why.
 The game block's cable line names a package for a channel `carried` at high or
 moderate confidence, and adds a check-before-you-buy line when any named one is
 moderate. `_meta.lineup_method` records how the last check was done.
-`tests/test_live_tv_lineups.py` enforces every rule. The lineups only feed the
-cable line: the service-level `carries` and `carries_verified` still drive the
-coverage maths.
+`tests/test_live_tv_lineups.py` enforces every rule. For live TV services the lineup is also the coverage: a service covers a
+national game when one of the game's channels is `carried` at high or moderate
+confidence in one of its packages (Sling's Orange and Blue together make the
+one Orange + Blue service), and local ABC and NBC marked `zip_dependent` count
+for national ABC and NBC games. Live TV entries have no service-level `carries`
+or `carries_verified`; `model.apply_lineup` derives them. Regional networks,
+`unchecked` and `not_carried` never count. The per-service counts, the
+cheapest combinations, "What am I missing?" and the in-market and
+out-of-market answers all follow. A count or combination that leans on a
+moderate entry gets the check-before-you-buy line, and one that reaches a game
+only through a ZIP-dependent local ABC or NBC adds "Local ABC and NBC
+availability varies by ZIP code." (`tests/test_live_tv_coverage.py`).
 
 Team colors come from `data/team_colors.json` and only draw the logo rings
 and the two-tone strip on a card's top edge, never text; a color under 3:1

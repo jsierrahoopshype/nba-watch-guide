@@ -19,6 +19,9 @@
           {%- else %}
           <div class="row-note">{{ text.coverage_line.format(covered=item.covered, total=item.total) }}</div>
           <div class="bar"><span style="width: {{ item.percent|round(0, 'floor')|int }}%"></span></div>
+          {%- for note in view.row_notes.get(item.service.id, []) %}
+          <div class="row-note" data-confidence-note>{{ note }}</div>
+          {%- endfor %}
           {%- endif %}
         </div>
         <div class="row-side">

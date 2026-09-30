@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from .. import config, seo
 from ..context import SiteContext
-from ..coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage, channels_for_game,
-                        moderate_carries_in)
+from ..coverage import (IN_MARKET, OUT_OF_MARKET, Combination, build_state_coverage, channels_for_game,
+                        moderate_carries_in, relies_on_zip)
 from ..missing import payload as missing_payload
 from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
@@ -23,7 +23,9 @@ JSONLD_GAME_LIMIT = 10
 
 def _confidence_lines(ctx: SiteContext, combo, games: list, tricode: str, local, state: str,
                       service_data) -> list[str]:
-    """One plain line per moderate-confidence carrier the combination leans on."""
+    """One plain line per moderate-confidence carrier the combination leans on,
+    then the ZIP line when some game it covers is reached only through a live
+    TV package's local ABC or NBC."""
     labels = ctx.labels()
     template = labels.get("moderate_carries_line", "")
     lines: list[str] = []
@@ -37,7 +39,28 @@ def _confidence_lines(ctx: SiteContext, combo, games: list, tricode: str, local,
             line = template.format(channels=", ".join(hit["channels"]), service=svc.name)
         if line and line not in lines:
             lines.append(line)
+    if combo and relies_on_zip(combo.services, games, tricode, service_data, local, state,
+                               skip={g.game_id for g in combo.missed}):
+        lines.append(labels["zip_locals_note"])
     return lines
+
+
+def _row_notes(ctx: SiteContext, coverage, games: list, tricode: str, local, state: str,
+               service_data) -> dict[str, list[str]]:
+    """The same lines for each service's own "Covers X of N" figure: the
+    service on its own is a one-service combination missing what it does
+    not cover."""
+    notes: dict[str, list[str]] = {}
+    for item in coverage.per_service:
+        if not item.covered:
+            continue
+        missed = [g for i, g in enumerate(games) if not (item.mask >> i) & 1]
+        alone = Combination(services=[item.service], total_price=item.service.price,
+                            covered=item.covered, total=item.total, missed=missed)
+        lines = _confidence_lines(ctx, alone, games, tricode, local, state, service_data)
+        if lines:
+            notes[item.service.id] = lines
+    return notes
 
 
 def _local_notice(ctx: SiteContext, local, text: dict) -> str:
@@ -86,6 +109,7 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
         "not_covering_count": len(coverage.per_service) - len(covering),
         "cheapest_full": full,
         "cheapest_ninety": ninety,
+        "row_notes": _row_notes(ctx, coverage, games, team.tricode, local, state, sd),
         "full_notes": _confidence_lines(ctx, full, games, team.tricode, local, state, sd),
         "ninety_notes": _confidence_lines(ctx, ninety, games, team.tricode, local, state, sd),
         "priced_services": coverage.priced_services,

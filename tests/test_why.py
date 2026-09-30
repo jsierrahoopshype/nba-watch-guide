@@ -39,7 +39,8 @@ def lines(heat, g, state):
 
 def test_national_game_names_the_carrier_and_the_national_rule(heat):
     out = lines(heat, game(national=["ESPN"]), OUT_OF_MARKET)
-    assert out[0] == "Watch it on ESPN Unlimited."
+    assert out[0] == ("Watch it on ESPN Unlimited, YouTube TV, YouTube TV Sports Plan, Hulu + Live TV, "
+                      "Sling TV (Orange + Blue), Fubo Pro, Fubo Elite and DirecTV.")
     assert out[1] == f"NBA League Pass: {RULES['national']}"
     assert len(out) == 2
 
@@ -67,9 +68,21 @@ def test_a_game_nobody_carries(heat):
     assert out[0] == TEXT["none"]
 
 
-def test_unconfirmed_services_are_never_named(heat):
+def test_unconfirmed_services_are_never_named(tmp_path_factory):
+    """A live TV package whose lineup has the channel unchecked or not
+    carried is never named, even though the service exists."""
+    data_dir = _copy_data(tmp_path_factory, "data-why-unchecked")
+    raw = json.loads((data_dir / "services.json").read_text(encoding="utf-8"))
+    for svc in raw["services"]:
+        for pkg in (svc.get("lineup") or {}).get("packages", []):
+            for ch in pkg["channels"]:
+                if ch["channel"] == "ESPN":
+                    ch.update({"status": "not_carried" if svc["id"] == "hulu_live_tv" else "unchecked"})
+    (data_dir / "services.json").write_text(json.dumps(raw), encoding="utf-8")
+    services, local = load_services(data_dir), load_local_tv(data_dir)["miami-heat"]
     for state in (OUT_OF_MARKET, IN_MARKET):
-        text = " ".join(lines(heat, game(national=["ESPN"]), state))
+        text = " ".join(explain(game(national=["ESPN"]), "MIA", with_local_options(services, local, state),
+                                local, state, TEXT))
         for name in ("YouTube TV", "Hulu + Live TV", "Sling TV", "Fubo", "DirecTV"):
             assert name not in text
 

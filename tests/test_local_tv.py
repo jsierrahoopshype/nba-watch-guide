@@ -307,7 +307,9 @@ def test_hornets_nba_tv_games_stay_uncounted_without_a_local_code(services, loca
     cov = build_state_coverage(HORNETS_NBA_TV, "CHA", services, local["charlotte-hornets"], IN_MARKET)
     assert local_counts(cov) == {"Local TV over the air": 0, "DAZN": 0}
     assert counts(cov)["nba_tv"] == 3
-    assert cov.cheapest_full is None
+    # A live TV package with NBA TV can now cover them, never a local option.
+    assert cov.cheapest_full is not None
+    assert not any(s.local_option for s in cov.cheapest_full.services)
 
 
 def test_the_other_teams_local_code_does_not_count(services, local):

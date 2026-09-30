@@ -113,18 +113,21 @@ def test_official_url_matching():
     assert not official_url("", domains)
 
 
-def test_lineups_do_not_touch_the_coverage_flags():
-    """The service-level carries lists that drive the coverage maths are
-    what they were before the lineups were added."""
-    live = {s["id"]: (s["carries"], s["carries_verified"]) for s in RAW["services"] if s.get("kind") == "live_tv"}
-    assert live == {
-        "youtube_tv": (["ESPN", "ABC", "NBC"], False),
-        "youtube_tv_sports_plan": (["ESPN", "ABC", "NBC"], False),
-        "hulu_live_tv": (["ESPN", "ABC", "NBC"], False),
-        "sling_tv": (["ESPN"], False),
-        "fubo": (["ESPN", "ABC"], False),
-        "fubo_elite": (["ESPN", "ABC"], False),
-        "directv_stream": (["ESPN", "ABC", "NBC"], False),
+def test_live_tv_coverage_comes_from_the_lineup_not_service_flags():
+    """Live TV entries carry no service-level carries list or flag; what they
+    count for is derived from their lineups (model.apply_lineup)."""
+    for svc in RAW["services"]:
+        if svc.get("kind") == "live_tv":
+            assert not {"carries", "carries_verified", "carries_check"} & set(svc), svc["id"]
+    derived = {s.id: (s.carries, s.zip_codes) for s in load_services().services if s.kind == "live_tv"}
+    assert derived == {
+        "youtube_tv": (["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], ["ABC", "NBC"]),
+        "youtube_tv_sports_plan": (["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], ["ABC", "NBC"]),
+        "hulu_live_tv": (["ESPN", "ESPN2", "ABC", "NBC"], ["ABC", "NBC"]),
+        "sling_tv": (["ESPN", "ESPN2", "NBC"], ["NBC"]),          # Orange's ESPN plus Blue's local NBC
+        "fubo": (["ESPN", "ESPN2", "ABC", "NBC"], ["ABC", "NBC"]),
+        "fubo_elite": (["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], ["ABC", "NBC"]),
+        "directv_stream": (["ESPN", "ESPN2", "ABC", "NBC", "NBA TV"], ["ABC", "NBC"]),
     }
 
 
