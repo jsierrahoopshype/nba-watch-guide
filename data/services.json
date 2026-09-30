@@ -322,9 +322,9 @@
     {
       "id": "fubo",
       "kind": "live_tv",
-      "name": "Fubo",
-      "monthly_price_usd": 84.99,
-      "billing_note": "Essential plan. Regional sports fees are added in some markets and are not optional. Does not carry the Warner-owned channels.",
+      "name": "Fubo Pro",
+      "monthly_price_usd": 88.99,
+      "billing_note": "Pro plan. $88.99 a month since the July 2026 increase that followed NBC's return. A regional sports fee is added in markets with regional sports networks and is not optional. Does not carry the Warner-owned channels.",
       "carries": ["ESPN", "ABC"],
       "carries_verified": false,
       "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
@@ -332,14 +332,14 @@
         "official_domains": ["fubo.tv"],
         "packages": [
           {
-            "name": "Essential",
-            "label": "Fubo",
+            "name": "Pro",
+            "label": "Fubo Pro",
             "channels": [
-              {"channel": "ESPN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Not recorded: 2026 sources name Fubo's plans Pro, Elite and Sports + News, and no two 2026 sources describe an 'Essential' plan's channels. For reference, cabletv.com and antennaland.com (2026) put ESPN and ESPN2 in Pro and NBA TV in Elite or the Sports Plus add-on; NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
-              {"channel": "ESPN2", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Not recorded: 2026 sources name Fubo's plans Pro, Elite and Sports + News, and no two 2026 sources describe an 'Essential' plan's channels. For reference, cabletv.com and antennaland.com (2026) put ESPN and ESPN2 in Pro and NBA TV in Elite or the Sports Plus add-on; NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
-              {"channel": "ABC", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Not recorded: 2026 sources name Fubo's plans Pro, Elite and Sports + News, and no two 2026 sources describe an 'Essential' plan's channels. For reference, cabletv.com and antennaland.com (2026) put ESPN and ESPN2 in Pro and NBA TV in Elite or the Sports Plus add-on; NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
-              {"channel": "NBC", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Not recorded: 2026 sources name Fubo's plans Pro, Elite and Sports + News, and no two 2026 sources describe an 'Essential' plan's channels. For reference, cabletv.com and antennaland.com (2026) put ESPN and ESPN2 in Pro and NBA TV in Elite or the Sports Plus add-on; NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
-              {"channel": "NBA TV", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Not recorded: 2026 sources name Fubo's plans Pro, Elite and Sports + News, and no two 2026 sources describe an 'Essential' plan's channels. For reference, cabletv.com and antennaland.com (2026) put ESPN and ESPN2 in Pro and NBA TV in Elite or the Sports Plus add-on; NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/fubotv/channel-lineup/pro", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://cordcuttersnews.com/nbc-is-back-on-fubo-in-all-markets/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code. NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
+              {"channel": "NBA TV", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": "Sources disagree: cabletv.com and reviews.org (2026) put NBA TV in the Sports Plus add-on or Elite, not Pro; thestreamable.com, antennaland.com and Cord Cutters News say every Fubo plan has it."},
               {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
               {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
               {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
@@ -360,9 +360,58 @@
       },
       "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
-      "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
-      "last_verified": "2026-09-25",
+      "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
+      "price_sources": [{"url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}],
+      "price_note": "Two 2026 sources give $88.99 (Cord Cutters News on the July increase, thestreamable.com's channel guide). cabletv.com's pages disagree with each other ($79.99, $85 and the pre-increase $73.99).",
+      "last_verified": "2026-09-30",
       "verified": true
+    },
+    {
+      "id": "fubo_elite",
+      "kind": "live_tv",
+      "name": "Fubo Elite",
+      "monthly_price_usd": null,
+      "billing_note": "Elite plan: everything in Pro plus about 70 more channels, NBA TV among them. Price not confirmed: after the July 2026 increase 2026 sources give $98.99, $99, $89.99 and $88.99. A regional sports fee is added in markets with regional sports networks. Does not carry the Warner-owned channels.",
+      "carries": ["ESPN", "ABC"],
+      "carries_verified": false,
+      "carries_check": "Lineups vary by market and Fubo has had carriage disputes affecting NBC. Verify before counting this toward coverage.",
+      "lineup": {
+        "official_domains": ["fubo.tv"],
+        "packages": [
+          {
+            "name": "Elite",
+            "label": "Fubo Elite",
+            "channels": [
+              {"channel": "ESPN", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ESPN2", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}, {"url": "https://www.antennaland.com/fubo-price-drops-nbc-channels-removed/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "ABC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code."},
+              {"channel": "NBC", "status": "zip_dependent", "confidence": "moderate", "sources": [{"url": "https://support.fubo.tv/hc/en-us/articles/115005151127-What-Local-Channels-does-Fubo-Carry", "published": "official"}, {"url": "https://cordcuttersnews.com/nbc-is-back-on-fubo-in-all-markets/", "published": "2026"}], "checked": "2026-09-30", "note": "Local affiliate; which station, if any, depends on the ZIP code. NBC returned to Fubo after the June 10, 2026 NBCUniversal deal."},
+              {"channel": "NBA TV", "status": "carried", "confidence": "moderate", "sources": [{"url": "https://www.cabletv.com/fubotv/channel-lineup/elite", "published": "2026"}, {"url": "https://www.reviews.org/tv-service/fubo-tv-review/", "published": "2026"}], "checked": "2026-09-30", "note": ""},
+              {"channel": "NBC Sports Boston", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "YES Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "CHSN", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Altitude", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Bay Area", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Space City Home Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Spectrum SportsNet", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "MSG Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports Philadelphia", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "NBC Sports California", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Monumental Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Peachtree Sports Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Gulf Coast Sports & Entertainment Network", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""},
+              {"channel": "Arizona's Family Sports", "status": "unchecked", "confidence": "", "sources": [], "checked": "", "note": ""}
+            ]
+          }
+        ]
+      },
+      "signup_url": "https://www.fubo.tv/",
+      "affiliate_url": "",
+      "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
+      "price_sources": [],
+      "price_note": "Not confirmed: Cord Cutters News says $98.99 and thestreamable.com $99 in one article but $84.99 in its channel guide; cabletv.com says $89.99; Fubo's own plans page as indexed says $88.99.",
+      "last_verified": "2026-09-30",
+      "verified": false
     },
     {
       "id": "directv_stream",

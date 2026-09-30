@@ -146,7 +146,7 @@ def test_cable_line_names_packages_carried_at_high_or_moderate(fixture_games, tm
         ("Sling Orange", "ESPN"): _moderate(TWO[0]),                                   # one source
         ("Sling Blue", "ESPN"): _moderate(_src("https://thestreamable.com/a"),
                                           _src("https://thestreamable.com/b")),       # same site twice
-        ("Fubo", "ESPN"): _moderate(_src("https://thestreamable.com/x", "2025"), TWO[1]),  # a 2025 source
+        ("Fubo Pro", "ESPN"): _moderate(_src("https://thestreamable.com/x", "2025"), TWO[1]),  # a 2025 source
         ("DirecTV", "ESPN"): _high("https://cordcuttersnews.com/review"),              # "official" off-domain
         ("YouTube TV Sports Plan", "ESPN"): _moderate(*TWO, checked=""),               # no check date
         ("YouTube TV Sports Plan", "NBA TV"): _moderate(*TWO, status="zip_dependent"),  # not "carried"
@@ -154,8 +154,8 @@ def test_cable_line_names_packages_carried_at_high_or_moderate(fixture_games, tm
     }))
     # Hulu is moderate, so the check-your-plan line follows.
     assert cable_line(ctx, espn) == ("Also on cable and on live TV services that carry ESPN, including YouTube TV "
-                                     "and Hulu + Live TV. Those channel lists come from 2026 news reports, not the "
-                                     "services' own pages; check your plan before you buy.")
+                                     "and Hulu + Live TV. Based on 2026 channel guides. Check your plan's lineup before "
+                                     "you buy.")
     # Only high confidence named: no check line. Carried for ESPN is not carried for NBA TV.
     assert cable_line(ctx, nba_tv) == "Also on cable and on live TV services that carry NBA TV, including YouTube TV."
     assert "including YouTube TV and Hulu + Live TV." in cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ABC", "ESPN"]))
@@ -165,13 +165,14 @@ def test_cable_line_names_packages_carried_at_high_or_moderate(fixture_games, tm
 
 def test_cable_line_with_the_shipped_lineups(fixture_games):
     ctx = ctx_for(fixture_games)
-    check = " Those channel lists come from 2026 news reports, not the services' own pages; check your plan before you buy."
+    check = " Based on 2026 channel guides. Check your plan's lineup before you buy."
     assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["ESPN"])) == (
         "Also on cable and on live TV services that carry ESPN, including YouTube TV, YouTube TV Sports Plan, "
-        "Hulu + Live TV, Sling Orange and DirecTV." + check)
+        "Hulu + Live TV, Sling Orange, Fubo Pro, Fubo Elite and DirecTV." + check)
+    # NBA TV on Fubo Pro is disputed between sources, so only Elite is named.
     assert cable_line(ctx, a_game(fixture_games, "MIA", "MIN", ["NBA TV"])) == (
-        "Also on cable and on live TV services that carry NBA TV, including YouTube TV, YouTube TV Sports Plan "
-        "and DirecTV." + check)
+        "Also on cable and on live TV services that carry NBA TV, including YouTube TV, YouTube TV Sports Plan, "
+        "Fubo Elite and DirecTV." + check)
 
 
 def test_the_service_level_flag_alone_names_nobody(fixture_games, tmp_path_factory):

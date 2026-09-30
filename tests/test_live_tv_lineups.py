@@ -25,7 +25,7 @@ def test_every_live_tv_service_has_a_lineup_and_nothing_else_does():
         assert bool(svc.get("lineup")) == (svc.get("kind") == "live_tv"), svc["id"]
     labels = [p.label for s in load_services().services for p in s.lineup]
     assert labels == ["YouTube TV", "YouTube TV Sports Plan", "Hulu + Live TV", "Sling Orange", "Sling Blue",
-                      "Fubo", "DirecTV"]
+                      "Fubo Pro", "Fubo Elite", "DirecTV"]
 
 
 def test_every_package_lists_every_channel_once():
@@ -123,5 +123,20 @@ def test_lineups_do_not_touch_the_coverage_flags():
         "hulu_live_tv": (["ESPN", "ABC", "NBC"], False),
         "sling_tv": (["ESPN"], False),
         "fubo": (["ESPN", "ABC"], False),
+        "fubo_elite": (["ESPN", "ABC"], False),
         "directv_stream": (["ESPN", "ABC", "NBC"], False),
     }
+
+
+def test_fubo_is_pro_and_elite_with_prices_sourced_or_unconfirmed():
+    """Pro's price has two agreeing 2026 sources; Elite's does not, so it is
+    listed without a price rather than a guess."""
+    services = {s.id: s for s in load_services().services}
+    raw = {s["id"]: s for s in RAW["services"]}
+    pro, elite = services["fubo"], services["fubo_elite"]
+    assert (pro.name, pro.monthly_price_usd, pro.has_price) == ("Fubo Pro", 88.99, True)
+    assert len({re.sub(r"^www\.", "", s["url"].split("/")[2]) for s in raw["fubo"]["price_sources"]}) >= 2
+    assert all(s["published"].startswith("2026") for s in raw["fubo"]["price_sources"])
+    assert (elite.name, elite.monthly_price_usd, elite.has_price) == ("Fubo Elite", None, False)
+    assert "not confirmed" in raw["fubo_elite"]["price_note"].lower()
+    assert "Essential" not in json.dumps(raw["fubo"]) and "Essential" not in json.dumps(raw["fubo_elite"])

@@ -254,7 +254,7 @@
     "countdown_days": "In {n} days",
     "final": "Final",
     "next_label": "Next",
-    "cable_check": "Those channel lists come from 2026 news reports, not the services' own pages; check your plan before you buy."
+    "cable_check": "Based on 2026 channel guides. Check your plan's lineup before you buy."
   },
   "pair": {
     "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",
