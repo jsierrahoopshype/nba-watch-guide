@@ -41,6 +41,8 @@ from .render import Page, build_env, hashed_asset_name
 from .sources import careers as careers_source
 from .sources import headshots as headshots_source
 from .sources import injuries as injuries_source
+from .sources import matchups as matchups_source
+from .sources import referees as referees_source
 from .sources import schedule as schedule_source
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
 from .sources.careers import match_key
@@ -376,10 +378,10 @@ def unplaced_overrides(ctx: SiteContext) -> list[str]:
             for name in c.player_overrides if match_key(name) not in placed]
 
 
-def face_names(ctx: SiteContext) -> list[str]:
-    """Every player a game's "Players to watch" can show on this run: the
-    hub and tonight games, each team's next game and each pair's next
-    meeting. In first-seen order, each once."""
+def card_games(ctx: SiteContext) -> list[Game]:
+    """Every game shown as a full card on this run: the hub and tonight
+    games, each team's next game and each pair's next meeting. In
+    first-seen order, each once."""
     games = [row["game"] for row in ctx.showcase()["rows"]]
     for team in ctx.teams:
         nxt = ctx.next_game(team.tricode)
@@ -389,12 +391,20 @@ def face_names(ctx: SiteContext) -> list[str]:
         nxt = next((g for g in group if g.date_et >= ctx.today), None)
         if nxt:
             games.append(nxt)
-    names: list[str] = []
     seen: set[str] = set()
+    unique = []
     for game in games:
-        if game.game_id in seen:
-            continue
-        seen.add(game.game_id)
+        if game.game_id not in seen:
+            seen.add(game.game_id)
+            unique.append(game)
+    return unique
+
+
+def face_names(ctx: SiteContext) -> list[str]:
+    """Every player a game's "Players to watch" can show on this run (see
+    card_games). In first-seen order, each once."""
+    names: list[str] = []
+    for game in card_games(ctx):
         row = ctx.ranking_row(game)
         for name in (row or {}).get("stars", []):
             if name and name not in names:
@@ -409,6 +419,25 @@ def load_faces(out_dir: Path, ctx: SiteContext, allow_fetch: bool = True) -> lis
     index, inote = headshots_source.load_index(out_dir, allow_fetch=allow_fetch)
     ctx.faces, fnote = headshots_source.ensure_faces(out_dir, names, index, allow_fetch=allow_fetch)
     return [inote, fnote]
+
+
+def star_pairs(ctx: SiteContext) -> list[tuple[str, str]]:
+    """The two "Players to watch" of every card game, for the career
+    head-to-head line."""
+    pairs = []
+    for game in card_games(ctx):
+        stars = [s for s in (ctx.ranking_row(game) or {}).get("stars", []) if s]
+        if len(stars) == 2 and tuple(stars) not in pairs:
+            pairs.append((stars[0], stars[1]))
+    return pairs
+
+
+def load_worth(out_dir: Path, ctx: SiteContext, allow_fetch: bool = True) -> list[str]:
+    """Referee crews and career matchups for "Also worth knowing". Read here,
+    server side, and kept in the published tree; never raises."""
+    ctx.crews, ctx.referee_slugs, rnote = referees_source.load(out_dir, allow_fetch=allow_fetch)
+    ctx.matchups, mnote = matchups_source.load(out_dir, star_pairs(ctx), allow_fetch=allow_fetch)
+    return [rnote, mnote]
 
 
 def check_pages(pages: list[Page], data_dir: Path | None = None,
@@ -557,6 +586,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     if len(ctx.teams) != 30:
         raise BuildError("expected 30 teams in data/teams.json")
     notes.extend(load_faces(out_dir, ctx, allow_fetch=not offline))
+    notes.extend(load_worth(out_dir, ctx, allow_fetch=not offline))
 
     pages = render_pages(ctx)
     expected = check_pages(pages, data_dir, ctx.games)
@@ -617,6 +647,10 @@ def refresh_build(out_dir: Path, today: str | None = None,
     # An injury can change who a game's line names, so the hub may need a
     # face the last full build did not fetch.
     notes.extend(load_faces(out_dir, ctx, allow_fetch=True))
+    # Tonight's referee crews usually arrive after the morning build, so the
+    # refresh always reads the file; matchup pages come from the same fetch
+    # (pair files already on disk are not downloaded again).
+    notes.extend(load_worth(out_dir, ctx, allow_fetch=True))
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
     pairs_today = ctx.render_pairs

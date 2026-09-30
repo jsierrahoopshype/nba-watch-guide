@@ -277,11 +277,48 @@ published and keep their sitemap dates. Who's out, the ranking line, the
 report never moves a pair page's `<lastmod>`.
 
 "Also worth knowing" comes from `watchguide/worth.py`: a list of item
-functions, each returning lines. Today it has rest ("Knicks on the second
-night of a back-to-back", only when the team played the day before) and the
-season series, which appears once the schedule feed has final scores for an
-earlier meeting (the feed's `score` counts only on `gameStatus` 3). Add an
-item by writing one function and listing it in `ITEMS`.
+functions, each returning lines, in priority order. The block stays last and
+shows at most four lines; when more apply, the first ones in this order are
+kept:
+
+1. Rest: "Knicks on the second night of a back-to-back", only when the team
+   played the day before.
+2. Revenge games: "Revenge game: Paul George faces the 76ers", for players on
+   either roster with an earlier stint with the opponent in the career map
+   (the same file as the rosters; its slim copy keeps each player's `past`
+   teams, the year each stint ended and how many seasons it lasted). Only
+   players in the recent-awards pool (All-Star or All-NBA in the last three
+   seasons, `data/recent_awards.json`) against a team they left in the year
+   this season starts or the year before (2026 or 2025 for 2026-27, the
+   career map's stint end year), and players who left that team in the
+   offseason before this season after five or more seasons there. At most
+   two, most recent departures first. Players listed Out on game day don't
+   count.
+3. Referees, game day only: "Referees: A, B and C" from
+   jsierrahoopshype/nbareferees' `data/tonights-crews.json`, used only when
+   its `date` is the game's Eastern date. Each name links to
+   `https://hoopsmatic.com/referees/referee/<slug>/index.html` when that slug
+   is in the site's `data/referees.json` (the list its pages are built from);
+   any other name is plain text. Names only, no figures.
+4. Career head-to-head for the two players in "Players to watch", from
+   jsierrahoopshype/nba-matchups: "Surname vs. Surname: N possessions
+   guarding each other through 2025-26", linked to
+   `https://hoopsmatic.com/matchups/m/<slug-a>-vs-<slug-b>.html` (slugs in
+   alphabetical order). Only when that page is in the matchups sitemap and
+   the two guarded each other for at least 300 possessions in total
+   (`MIN_POSSESSIONS` in `watchguide/sources/matchups.py`).
+5. Season series, once the schedule feed has final scores for an earlier
+   meeting (the feed's `score` counts only on `gameStatus` 3).
+
+Referee crews and matchup data are read server side, in the daily build and
+in the 30-minute refresh (crews usually arrive after the morning build), and
+cached in the published tree (`data/tonights-crews.json`,
+`data/referee-pages.json`, `data/matchups/`); a failed fetch keeps the last
+copy and never fails the build. `REFEREE_CREWS_URL`, `REFEREES_URL` and
+`MATCHUPS_BASE` override the sources. On game day every line is
+`data-volatile` (crews arrive and the injury report can change which lines
+apply, which moves the cap); any other day the block is stable content. Add
+an item by writing one function and listing it in `ITEMS`.
 
 **Injury safety net.** From 3 pm ET to midnight on a game day, if none of the
 day's teams has a single listing and the availability feed's newest date is

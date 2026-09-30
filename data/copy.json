@@ -231,7 +231,7 @@
     "tba": "time TBA"
   },
   "game": {
-    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. live_tv_check follows the answers once when they name a live TV service on a moderate-confidence lineup entry. countdown_* label the date chip; tonight is used from 5 pm ET.",
+    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. live_tv_check follows the answers once when they name a live TV service on a moderate-confidence lineup entry. countdown_* label the date chip; tonight is used from 5 pm ET. Also worth knowing shows at most four lines, in this priority: back_to_back, revenge ({player} a full name, {team} a short name), referees ({names} the crew, each linked to its referee page), head_to_head ({pair} the two players' surnames, linked to the matchup page), then the season series.",
     "fans": "{team} fans",
     "outside": "Outside the {team} market",
     "inside": "In the {team} market",
@@ -257,7 +257,10 @@
     "countdown_days": "In {n} days",
     "final": "Final",
     "next_label": "Next",
-    "live_tv_check": "Based on 2026 channel guides. Check your plan's lineup before you buy."
+    "live_tv_check": "Based on 2026 channel guides. Check your plan's lineup before you buy.",
+    "revenge": "Revenge game: {player} faces the {team}",
+    "referees": "Referees: {names}",
+    "head_to_head": "{pair}: {possessions} possessions guarding each other through {season}"
   },
   "pair": {
     "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",

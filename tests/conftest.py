@@ -55,6 +55,10 @@ def no_headshot_downloads(monkeypatch):
     def refuse(*a, **k):
         raise FetchError("network disabled in tests")
     monkeypatch.setattr(headshots, "get", refuse)
+    # Nor the referee and matchup files; tests of those lines pass data in.
+    from watchguide.sources import matchups, referees
+    monkeypatch.setattr(referees, "get", refuse)
+    monkeypatch.setattr(matchups, "get", refuse)
 
 
 def expected_page_count(data_dir=None, games=None) -> int:

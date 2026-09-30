@@ -193,7 +193,7 @@ def test_rosters_come_from_the_present_stint():
         {"player": "C Three", "status": "retired", "career_history": [{"years": "2000–present", "team": "Miami Heat"}]},
     ]
     built = rosters_from(records, FULL)
-    assert built["teams"] == {"MIA": [{"player": "A One", "all_star": 3}]}
+    assert built["teams"] == {"MIA": [{"player": "A One", "all_star": 3, "past": [{"team": "BOS", "end": 2020, "seasons": 5}]}]}
     assert (built["active"], built["placed"]) == (2, 1)
 
 

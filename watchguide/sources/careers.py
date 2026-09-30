@@ -70,6 +70,50 @@ def current_team(record: dict[str, Any], full_names: dict[str, str]) -> str:
     return ""
 
 
+def stint_end(years: str) -> int | None:
+    """The last calendar year of a stint: "2010–2017" and "2016–17" give 2017,
+    "2025" gives 2025; "present" and anything unreadable give None."""
+    text = str(years or "").strip()
+    if re.search(r"present", text, re.I):
+        return None
+    m = re.fullmatch(r"(\d{4})(?:\s*[–-]\s*(\d{2}|\d{4}))?", text)
+    if not m:
+        return None
+    start, end = m.group(1), m.group(2)
+    if not end:
+        return int(start)
+    if len(end) == 4:
+        return int(end)
+    year = int(start[:2] + end)
+    return year + 100 if year < int(start) else year          # "1999-00" is 2000
+
+
+def stint_seasons(years: str) -> int:
+    """How many seasons a stint covers: "2013–2026" is 13 (2013-14 through
+    2025-26), "2016–17" and "2025" are 1; 0 when unreadable or open."""
+    end = stint_end(years)
+    m = re.match(r"\s*(\d{4})", str(years or ""))
+    if end is None or not m:
+        return 0
+    return max(1, end - int(m.group(1)))
+
+
+def past_teams(record: dict[str, Any], full_names: dict[str, str], current: str) -> list[dict[str, Any]]:
+    """[{team: tricode, end: year, seasons: n}] for the player's earlier NBA
+    stints, the latest stint per team, leaving out the team he plays for now."""
+    latest: dict[str, tuple[int, int]] = {}
+    for stint in record.get("career_history") or []:
+        tricode = full_names.get(stint.get("team", ""))
+        years = stint.get("years", "")
+        end = stint_end(years)
+        if tricode and tricode != current and end is not None:
+            seen = latest.get(tricode)
+            if seen is None or end > seen[0]:
+                latest[tricode] = (end, stint_seasons(years))
+    return [{"team": t, "end": e, "seasons": n}
+            for t, (e, n) in sorted(latest.items(), key=lambda kv: (-kv[1][0], kv[0]))]
+
+
 def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> dict[str, Any]:
     """{tricode: [{player, all_star}]} plus counts of what was and was not placed,
     and {player: nationality} for the placed players whose record has one."""
@@ -88,6 +132,8 @@ def rosters_from(records: list[dict[str, Any]], full_names: dict[str, str]) -> d
         teams.setdefault(tricode, []).append({
             "player": name,
             "all_star": int(rec.get("all_star_count") or 0),
+            # Earlier NBA teams, for the revenge-game line (worth.py).
+            "past": past_teams(rec, full_names, tricode),
         })
         if name and isinstance(rec.get("nationality"), str) and rec["nationality"].strip():
             nationalities[name] = rec["nationality"].strip()

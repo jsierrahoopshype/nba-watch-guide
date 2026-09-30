@@ -478,6 +478,7 @@ a:hover { color: var(--accent); }
 .hg-top { margin-top: 2px; }
 .hg-worth { list-style: none; margin: 6px 0 0; padding: 6px 0 0; border-top: 1px solid var(--border-soft); color: var(--text-2); }
 .hg-worth li { padding: 1px 0; }
+.hg-worth a { position: relative; z-index: 2; }   /* above the card's stretched link */
 .badge-top { background: transparent; color: var(--brand-ink); box-shadow: inset 0 0 0 1px var(--brand); flex: 0 0 auto; }
 
 /* ---------- hub: team and country cards ---------- */

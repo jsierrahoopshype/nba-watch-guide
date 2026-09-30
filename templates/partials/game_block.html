@@ -11,7 +11,8 @@
          the page script), ET small beside it
       3. players to watch, with the ranking line
       4. who's out
-      5. "Also worth knowing", last
+      5. "Also worth knowing", last: at most four short lines (worth.py),
+         each marked data-volatile only when it can change during the day
     The head above them is the matchup: both logos, both names linking to
     the team pages and the date chip. Nothing sits between the head and
     where to watch, and no CSS reorders these parts (tests/test_pairs.py
@@ -125,7 +126,7 @@
     <h4>{{ game_text.worth_heading }}</h4>
     <ul>
       {%- for line in view.worth %}
-      <li>{{ line }}</li>
+      <li{% if line.volatile %} data-volatile{% endif %}>{% for text, href in line.parts %}{% if href %}<a href="{{ href }}">{{ text }}</a>{% else %}{{ text }}{% endif %}{% endfor %}</li>
       {%- endfor %}
     </ul>
   </div>

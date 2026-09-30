@@ -90,7 +90,7 @@
     {%- if row.worth %}
     <ul class="hg-worth small" data-part="worth" aria-label="{{ game_text.worth_heading }}">
       {%- for line in row.worth %}
-      <li>{{ line }}</li>
+      <li{% if line.volatile %} data-volatile{% endif %}>{% for text, href in line.parts %}{% if href %}<a href="{{ href }}">{{ text }}</a>{% else %}{{ text }}{% endif %}{% endfor %}</li>
       {%- endfor %}
     </ul>
     {%- endif %}

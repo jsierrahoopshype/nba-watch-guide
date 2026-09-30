@@ -52,6 +52,12 @@ class SiteContext:
     nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
     faces: dict[str, str] = field(default_factory=dict)           # match_key to assets/faces/<file>.webp
     team_colors: dict[str, str] = field(default_factory=dict)     # tricode to '#RRGGBB', data/team_colors.json
+    # "Also worth knowing" sources, set by the build (see build.load_worth):
+    # tonight's referee crews, the referee slugs that have a page, and the
+    # career matchup pages (sources/matchups.Matchups).
+    crews: dict[str, Any] = field(default_factory=dict)
+    referee_slugs: set[str] = field(default_factory=set)
+    matchups: Any = None
     # Pair pages to render in full; None means all. The 30-minute refresh
     # sets it to today's pairs, and the rest come back as placeholders
     # (see pages/pair.py) so the manifest, sitemap and lastmod still see them.
