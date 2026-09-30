@@ -226,7 +226,7 @@
     "tba": "time TBA"
   },
   "game": {
-    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. cable and cable_named follow the answer on games on a cable channel (config.CABLE_NATIONAL_CODES); {channels} is those channels, {services} the live TV services whose carries list is verified. countdown_* label the date chip; tonight is used from 5 pm ET.",
+    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. cable and cable_named follow the answer on games on a cable channel (config.CABLE_NATIONAL_CODES); {channels} is those channels, {services} the live TV packages whose lineup marks that channel carried; cable_check follows when any of them is moderate confidence. countdown_* label the date chip; tonight is used from 5 pm ET.",
     "fans": "{team} fans",
     "outside": "Outside the {team} market",
     "inside": "In the {team} market",
@@ -253,7 +253,8 @@
     "countdown_tomorrow": "Tomorrow",
     "countdown_days": "In {n} days",
     "final": "Final",
-    "next_label": "Next"
+    "next_label": "Next",
+    "cable_check": "Those channel lists come from 2026 news reports, not the services' own pages; check your plan before you buy."
   },
   "pair": {
     "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",

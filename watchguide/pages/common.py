@@ -125,25 +125,31 @@ def _names(names: list[str]) -> str:
 def cable_line(ctx: SiteContext, game) -> str:
     """For a game on a cable channel (config.CABLE_NATIONAL_CODES): it is
     also on cable and on live TV services carrying that channel. A live TV
-    package is named only when its lineup in data/services.json has that
-    specific channel verified from the service's official lineup page
-    (LineupPackage.verified_for); the service-level carries list does not
-    count here."""
+    package is named only when its lineup in data/services.json marks that
+    specific channel carried at high or moderate confidence
+    (LineupPackage.carried_confidence); the service-level carries list does
+    not count here. Naming a moderate one adds the check-before-you-buy
+    line."""
     cable = {_norm(c) for c in config.CABLE_NATIONAL_CODES}
     codes = [c for c in game.national_codes if _norm(c) in cable]
     if not codes:
         return ""
-    named: list[str] = []
+    named: dict[str, str] = {}
     for svc in ctx.services.services:
         if svc.kind != "live_tv":
             continue
         for pkg in svc.lineup:
-            if pkg.label not in named and any(pkg.verified_for(code) for code in codes):
-                named.append(pkg.label)
+            levels = [pkg.carried_confidence(code) for code in codes]
+            best = "high" if "high" in levels else ("moderate" if "moderate" in levels else "")
+            if best and pkg.label not in named:
+                named[pkg.label] = best
     text = ctx.copy.get("game", {})
-    if named:
-        return text["cable_named"].format(channels=_names(codes), services=_names(named))
-    return text["cable"].format(channels=_names(codes))
+    if not named:
+        return text["cable"].format(channels=_names(codes))
+    line = text["cable_named"].format(channels=_names(codes), services=_names(list(named)))
+    if "moderate" in named.values():
+        line += " " + text["cable_check"]
+    return line
 
 
 def fan_answers(ctx: SiteContext, game) -> tuple[list[dict], list[str]]:

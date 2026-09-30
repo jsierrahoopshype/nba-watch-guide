@@ -205,14 +205,20 @@ Players to watch never sits inside who's out
 **Live TV lineups.** Each live TV service in `data/services.json` (kind
 `live_tv`) has a `lineup` with one entry per package (Sling Orange and Sling
 Blue apart) and, in each, one entry per channel in
-`_meta.lineup_channels`: ESPN, ESPN2, ABC, NBC, NBA TV and every regional
+`_meta.lineup_channels`: ESPN, ESPN2, ABC, NBC, NBA TV and every US regional
 network in `data/local_tv.json`. `status` is `carried`, `not_carried`,
-`zip_dependent` (the page says it varies by ZIP code or market; recorded,
-never guessed) or `unchecked`. `carries_verified: true` needs status
-`carried`, a `source_url` on one of the service's `official_domains` and a
-`checked` date; anything short of that is ignored.
-`tests/test_live_tv_lineups.py` enforces it. The lineups only feed the cable
-line: the service-level `carries` and `carries_verified` still drive the
+`zip_dependent` (sources say it depends on the ZIP code or market; recorded,
+never guessed) or `unchecked`. `confidence` is `high` when the entry comes
+from the service's own lineup page, `moderate` when at least two sources on
+different sites, each published in 2026 (or the service's own page), say the
+same about that channel in that plan; `sources` lists each URL with its
+publication date and `checked` is the day they were read. One source, older
+sources or disagreeing sources leave it `unchecked`, with a `note` saying why.
+The game block's cable line names a package for a channel `carried` at high or
+moderate confidence, and adds a check-before-you-buy line when any named one is
+moderate. `_meta.lineup_method` records how the last check was done.
+`tests/test_live_tv_lineups.py` enforces every rule. The lineups only feed the
+cable line: the service-level `carries` and `carries_verified` still drive the
 coverage maths.
 
 Team colors come from `data/team_colors.json` and only draw the logo rings
