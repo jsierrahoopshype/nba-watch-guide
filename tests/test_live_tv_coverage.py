@@ -187,3 +187,13 @@ def test_team_page_embeds_live_tv_options(built_site):
     ids = {o["id"] for o in data["options"]}
     assert {"youtube_tv", "youtube_tv_sports_plan", "hulu_live_tv", "sling_tv", "fubo", "fubo_elite",
             "directv_stream"} <= ids
+
+
+# -- over-the-air entries are named as free ----------------------------------------------------
+
+def test_every_over_the_air_entry_says_free_over_the_air(shipped):
+    from watchguide.coverage import local_services
+    ota = [s for s in shipped.services if s.kind == "ota"]
+    assert [s.name for s in ota] == ["ABC (free over the air)", "NBC (free over the air)"]
+    heat = local_services(load_local_tv()["miami-heat"], shipped)
+    assert [s.name for s in heat if s.kind == "ota"] == ["Local TV (free over the air)"]

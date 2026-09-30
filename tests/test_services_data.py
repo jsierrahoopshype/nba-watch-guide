@@ -135,7 +135,7 @@ def test_zero_price_is_free_coverage_and_null_stays_out(shipped):
 def test_zero_price_renders_as_free_not_unconfirmed(built_site):
     panel = _panel(_html(built_site), "out_of_market")
     services = panel[panel.index("Services and prices"):]
-    for name in ("ABC (over the air)", "NBC (over the air)"):
+    for name in ("ABC (free over the air)", "NBC (free over the air)"):
         row = services[services.index(name):]
         row = row[:row.index('<div class="row">') if '<div class="row">' in row else len(row)]
         assert '<span class="price">Free</span>' in row

@@ -18,7 +18,7 @@
     {
       "id": "antenna_abc",
       "kind": "ota",
-      "name": "ABC (over the air)",
+      "name": "ABC (free over the air)",
       "monthly_price_usd": 0,
       "billing_note": "Free with an antenna in range of a local ABC station. A one-off antenna purchase is typically $20 to $50.",
       "carries": ["ABC"],
@@ -32,7 +32,7 @@
     {
       "id": "antenna_nbc",
       "kind": "ota",
-      "name": "NBC (over the air)",
+      "name": "NBC (free over the air)",
       "monthly_price_usd": 0,
       "billing_note": "Free with an antenna in range of a local NBC station. A one-off antenna purchase is typically $20 to $50.",
       "carries": ["NBC"],

@@ -187,7 +187,7 @@ from `data/services.json` ("ESPN Unlimited · $31.99/mo", "NBC · free over the
 air"), the out-of-market and in-market answer for both fan bases, collapsed to
 one "Everyone in the US" line when all four match. Each answer lists the
 standalone options first, as alternatives joined with "or" ("NBA League Pass
-(includes NBA TV)" on NBA TV games, "NBA TV through cable or live TV" when the
+(includes NBA TV)" on NBA TV games, "NBA TV through cable" when the
 NBA TV channel is the only standalone option), then the live TV services
 grouped by service ("or on
 live TV with YouTube TV, Hulu + Live TV, Sling, Fubo or DirecTV"), naming a

@@ -204,7 +204,7 @@ def test_zip_line_only_when_live_tv_is_named_through_local_abc_or_nbc(fixture_ga
 def test_alternatives_join_with_or_never_and(fixture_games):
     ctx = ctx_for(fixture_games)
     answer, _ = _answer(ctx, a_game(fixture_games, "MIA", "NYK", ["ABC"]))
-    assert answer.startswith("Watch it on ABC (over the air) or ESPN Unlimited, or on live TV with ")
+    assert answer.startswith("Watch it on ABC (free over the air) or ESPN Unlimited, or on live TV with ")
     for game in fixture_games:
         for fan in watch_view(ctx, game)["fans"]:
             for st in fan["states"]:
@@ -218,7 +218,7 @@ def test_league_pass_includes_nba_tv_and_nba_tv_is_a_channel(fixture_games):
     assert by_state["out_of_market"] == ("Watch it on NBA League Pass (includes NBA TV), or on live TV with "
                                          "YouTube TV, Fubo Elite or DirecTV.")
     # In-market League Pass is blacked out and NBA TV is the only standalone option.
-    assert by_state["in_market"] == ("Watch it on NBA TV through cable or live TV, or on live TV with "
+    assert by_state["in_market"] == ("Watch it on NBA TV through cable, or on live TV with "
                                      "YouTube TV, Fubo Elite or DirecTV.")
 
 
@@ -229,7 +229,7 @@ def test_nba_tv_keeps_its_plain_name_beside_other_standalone_options(fixture_gam
     game = replace(a_game(fixture_games, "MIA", "PHI", ["NBA TV"]), home_tv=["WPLG"])
     heat = next(f for f in watch_view(ctx, game)["fans"] if f["team"].tricode == "MIA")
     inside = next(st["answer"] for st in heat["states"] if st["state"] == "in_market")
-    assert inside.startswith("Watch it on NBA TV, Local TV over the air or Local 10+ Platinum, or on live TV with ")
+    assert inside.startswith("Watch it on NBA TV, Local TV (free over the air) or Local 10+ Platinum, or on live TV with ")
     assert "through cable" not in inside
 
 

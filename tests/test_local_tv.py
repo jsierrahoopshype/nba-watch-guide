@@ -61,7 +61,7 @@ def test_local_options_cover_only_non_national_games_in_market(services, local):
     games = [game(0, national=["ESPN"]), game(1), game(2)]
     heat = local["miami-heat"]
     inside = build_state_coverage(games, "MIA", services, heat, IN_MARKET)
-    assert local_counts(inside) == {"Local TV over the air": 2, "Local 10+ Platinum": 2}
+    assert local_counts(inside) == {"Local TV (free over the air)": 2, "Local 10+ Platinum": 2}
     outside = build_state_coverage(games, "MIA", services, heat, OUT_OF_MARKET)
     assert local_counts(outside) == {}
 
@@ -78,9 +78,9 @@ def test_moderate_confidence_counts_and_flags_the_combination(services, local):
     assert jazz.confidence == "moderate"
     games = [game(0), game(1)]
     cov = build_state_coverage(games, "UTA", services, jazz, IN_MARKET)
-    assert [s.name for s in cov.cheapest_full.services] == ["Local TV over the air"]
+    assert [s.name for s in cov.cheapest_full.services] == ["Local TV (free over the air)"]
     hits = moderate_carries_in(cov.cheapest_full, games, "UTA", cov.service_data, jazz, IN_MARKET)
-    assert [h["service"].name for h in hits] == ["Local TV over the air"]
+    assert [h["service"].name for h in hits] == ["Local TV (free over the air)"]
 
 
 @pytest.mark.parametrize("slug", ["golden-state-warriors", "dallas-mavericks", "la-clippers"])
@@ -298,14 +298,14 @@ HORNETS_NBA_TV = [
 
 def test_heat_local_options_cover_all_six_nba_tv_games(services, local):
     cov = build_state_coverage(HEAT_NBA_TV, "MIA", services, local["miami-heat"], IN_MARKET)
-    assert local_counts(cov) == {"Local TV over the air": 6, "Local 10+ Platinum": 6}
+    assert local_counts(cov) == {"Local TV (free over the air)": 6, "Local 10+ Platinum": 6}
     assert cov.uncovered == []
     assert cov.cheapest_full.total_price == 0
 
 
 def test_hornets_nba_tv_games_stay_uncounted_without_a_local_code(services, local):
     cov = build_state_coverage(HORNETS_NBA_TV, "CHA", services, local["charlotte-hornets"], IN_MARKET)
-    assert local_counts(cov) == {"Local TV over the air": 0, "DAZN": 0}
+    assert local_counts(cov) == {"Local TV (free over the air)": 0, "DAZN": 0}
     assert counts(cov)["nba_tv"] == 3
     # A live TV package with NBA TV can now cover them, never a local option.
     assert cov.cheapest_full is not None
@@ -316,14 +316,14 @@ def test_the_other_teams_local_code_does_not_count(services, local):
     # At Golden State the home side has NBCSBA; only the Heat's own code counts.
     game = feed_game(0, "GSW", "MIA", ["NBA TV"], home_tv=["NBCSBA"])
     cov = build_state_coverage([game], "MIA", services, local["miami-heat"], IN_MARKET)
-    assert local_counts(cov) == {"Local TV over the air": 0, "Local 10+ Platinum": 0}
+    assert local_counts(cov) == {"Local TV (free over the air)": 0, "Local 10+ Platinum": 0}
 
 
 @pytest.mark.parametrize("code", ["ESPN", "Peacock", "NBC", "Amazon"])
 def test_other_national_games_are_not_local_even_with_a_local_code(services, local, code):
     game = feed_game(0, "MIA", "DAL", [code], home_tv=["WPLG"])
     cov = build_state_coverage([game], "MIA", services, local["miami-heat"], IN_MARKET)
-    assert local_counts(cov) == {"Local TV over the air": 0, "Local 10+ Platinum": 0}
+    assert local_counts(cov) == {"Local TV (free over the air)": 0, "Local 10+ Platinum": 0}
 
 
 def test_nba_tv_rule_is_in_market_only(services, local):
