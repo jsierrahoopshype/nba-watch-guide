@@ -95,7 +95,7 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
                 failed += 1
         if target.is_file():
             found[key] = rel
-    note = f"headshots: {len(found)} faces on the hub, {fetched} downloaded"
+    note = f"headshots: {len(found)} faces on the game cards, {fetched} downloaded"
     if failed:
         note += f", {failed} failed (silhouette shown)"
     return found, note

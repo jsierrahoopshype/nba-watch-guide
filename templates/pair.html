@@ -21,20 +21,29 @@
 
 <section class="block" id="meetings">
 <h2>{{ text.meetings_heading }}</h2>
-<table class="sched">
+{#- One markup for both layouts: compact cards on phones (date and tip time,
+    then the matchup, then the channel chips), a table from tablet width up.
+    The next meeting is highlighted; a played game shows its final score once
+    the feed has it. Each game has exactly one #game-<id> on the page: the
+    next meeting's is its full block above. #}
+<table class="sched meetings">
   <caption>{{ text.meetings_caption.format(count=rows|length) }}</caption>
+  <colgroup><col class="mt-c-date"><col class="mt-c-game"><col class="mt-c-time"><col class="mt-c-ch"></colgroup>
   <thead>
-    <tr><th scope="col">Date</th><th scope="col">Game</th><th scope="col">Tip-off (ET)</th><th scope="col">Channel</th></tr>
+    <tr><th scope="col">Date</th><th scope="col">Game</th><th scope="col">Tip-off</th><th scope="col">Channel</th></tr>
   </thead>
   <tbody>
     {%- for row in rows %}
-    {#- The next meeting's anchor is its full block above, so each game has
-        exactly one #game-<id> on the page. #}
-    <tr{% if not row.is_next %} id="game-{{ row.game.game_id }}"{% else %} data-next{% endif %}>
-      <td class="when" data-label="Date">{{ row.date_label }}</td>
-      <td class="opp" data-label="Game">{% if row.is_next %}<a href="#game-{{ row.game.game_id }}">{{ row.matchup }}</a>{% else %}{{ row.matchup }}{% endif %}</td>
-      <td class="when" data-label="Tip-off (ET)">{{ row.time_label }}</td>
-      <td data-label="Channel">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</td>
+    <tr class="mt{% if row.is_next %} is-next{% endif %}{% if row.is_past %} is-past{% endif %}"{% if not row.is_next %} id="game-{{ row.game.game_id }}"{% else %} data-next{% endif %}>
+      <td class="mt-date">{{ row.date_label }}{% if row.is_next %} <span class="badge badge-next">{{ game_text.next_label }}</span>{% endif %}</td>
+      <td class="mt-game">{% if row.is_next %}<a href="#game-{{ row.game.game_id }}">{{ row.matchup }}</a>{% else %}{{ row.matchup }}{% endif %}</td>
+      <td class="mt-time">
+        {%- if row.final %}<span class="mt-final" data-final>{{ row.final.label }} ·
+          {% for side in row.final.sides %}{% if side.won %}<strong>{{ side.name }} {{ side.score }}</strong>{% else %}{{ side.name }} {{ side.score }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+        {%- elif row.game.tipoff_utc and not row.is_past %}<span class="game-when" data-utc="{{ row.game.tipoff_utc }}" data-date-et="{{ row.game.date_et }}"><span data-local-slot>{{ row.time_label }}</span></span>
+        {%- else %}<span class="game-when">{{ row.time_label }}</span>{% endif -%}
+      </td>
+      <td class="mt-ch">{% with channels = row.channels %}{% include "partials/channels.html" %}{% endwith %}</td>
     </tr>
     {%- endfor %}
   </tbody>

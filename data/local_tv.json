@@ -8,6 +8,7 @@
       "low": "Conflicting or stale sources. Never counts in coverage maths. Page shows what is known plus 'Local details for 2026-27 not confirmed yet.'",
       "unknown": "Not announced. Never counts. Page says so plainly."
     },
+    "short_names": "Optional per team: {full name: short name} for a local broadcaster or streaming option whose name is too long for a channel chip. Chips show the short name with the full name in the title attribute; every other place keeps the full name.",
     "coverage_rules": {
       "scope": "Local options only cover the team's games that have no national broadcaster, and only for a reader in the team's market.",
       "ota_all": "ota.status 'all' means every local game is free over the air: counts as free coverage for every non-national game.",
@@ -43,6 +44,7 @@
     "atlanta-hawks": {
       "confidence": "moderate",
       "local_broadcasters": ["WANF (Gray)", "Peachtree Sports Network (WPCH subchannel)"],
+      "short_names": {"WANF (Gray)": "WANF", "Peachtree Sports Network (WPCH subchannel)": "Peachtree Sports"},
       "ota": {"status": "all", "games": null, "note": "Local games air free over the air on WANF and Peachtree Sports Network."},
       "streaming": [],
       "live_tv_carriers": ["YouTube TV", "Fubo", "DirecTV"],
@@ -53,6 +55,7 @@
     "boston-celtics": {
       "confidence": "moderate",
       "local_broadcasters": ["NBC Sports Boston"],
+      "short_names": {"NBC Sports Boston on Peacock": "NBCS Boston on Peacock"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
         {"name": "NBC Sports Boston on Peacock", "monthly_price_usd": 15.00, "season_price_usd": null, "requires_service": "peacock_premium", "note": "$15 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus).", "price_verified": false}
@@ -77,6 +80,7 @@
     "charlotte-hornets": {
       "confidence": "high",
       "local_broadcasters": ["WSOC-TV 9", "TV64 (Cox Media Group)"],
+      "short_names": {"TV64 (Cox Media Group)": "TV64"},
       "ota": {"status": "all", "games": null, "note": "Every non-national game is free over the air in the Charlotte market."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store and 20% off select tickets."}
@@ -101,6 +105,7 @@
     "cleveland-cavaliers": {
       "confidence": "high",
       "local_broadcasters": ["DAZN (produced by Rock Entertainment Sports Network)", "WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"],
+      "short_names": {"DAZN (produced by Rock Entertainment Sports Network)": "DAZN", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)": "Gray stations (15 games)"},
       "ota": {"status": "partial", "games": 15, "note": "15 games are also free over the air on Gray stations and RESN."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "15 regular-season games free with a DAZN account."}
@@ -137,6 +142,7 @@
     "detroit-pistons": {
       "confidence": "high",
       "local_broadcasters": ["WMYD The Spot Detroit 20 (Scripps)", "Statewide Scripps and partner stations"],
+      "short_names": {"WMYD The Spot Detroit 20 (Scripps)": "Scripps Detroit 20", "Statewide Scripps and partner stations": "Scripps statewide"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air on Detroit 20 and partner stations across Michigan."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store."}
@@ -149,6 +155,7 @@
     "golden-state-warriors": {
       "confidence": "low",
       "local_broadcasters": ["NBC Sports Bay Area"],
+      "short_names": {"NBC Sports Bay Area on Peacock": "NBCS Bay Area on Peacock"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
         {"name": "NBC Sports Bay Area on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
@@ -231,6 +238,7 @@
     "milwaukee-bucks": {
       "confidence": "high",
       "local_broadcasters": ["MY24 (WVTV-DT2)", "Statewide affiliates"],
+      "short_names": {"MY24 (WVTV-DT2)": "MY24"},
       "ota": {"status": "all", "games": null, "note": "Every locally available game is free over the air on MY24 and statewide affiliates."},
       "streaming": [
         {"name": "Bucks streaming service", "monthly_price_usd": null, "season_price_usd": null, "note": "To be announced.", "price_verified": false}
@@ -255,6 +263,7 @@
     "new-orleans-pelicans": {
       "confidence": "moderate",
       "local_broadcasters": ["Gulf Coast Sports & Entertainment Network (Gray)"],
+      "short_names": {"Gulf Coast Sports & Entertainment Network (Gray)": "Gulf Coast Sports"},
       "ota": {"status": "all", "games": null, "note": "Free over the air in 14 Gulf Coast markets."},
       "streaming": [
         {"name": "Pelicans+", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
@@ -279,6 +288,7 @@
     "oklahoma-city-thunder": {
       "confidence": "high",
       "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
+      "short_names": {"KSBI (Oklahoma City)": "KSBI", "KQCW (Tulsa)": "KQCW", "News On 6 (4 games)": "News On 6", "Thunder+ (NBA App)": "Thunder+"},
       "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air."},
       "streaming": [
         {"name": "Thunder+ (NBA App)", "monthly_price_usd": 19.99, "season_price_usd": 108.99, "note": "Season pass $99.99 if bought by September 30. Carries all 67 non-national games.", "price_verified": true}
@@ -291,6 +301,7 @@
     "orlando-magic": {
       "confidence": "high",
       "local_broadcasters": ["WRDQ 27", "WFTV 9 (Cox)", "WMOR (Tampa)"],
+      "short_names": {"WFTV 9 (Cox)": "WFTV 9", "WMOR (Tampa)": "WMOR"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air in Orlando and Tampa."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 20% off at the team store."}
@@ -303,6 +314,7 @@
     "philadelphia-76ers": {
       "confidence": "low",
       "local_broadcasters": ["NBC Sports Philadelphia"],
+      "short_names": {"NBC Sports Philadelphia on Peacock": "NBCS Philly on Peacock"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
         {"name": "NBC Sports Philadelphia on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
@@ -315,6 +327,7 @@
     "phoenix-suns": {
       "confidence": "high",
       "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
+      "short_names": {"Arizona's Family (3TV/KTVK)": "Arizona's Family", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)": "Arizona's Family Sports"},
       "ota": {"status": "all", "games": 74, "note": "All 74 non-national games are free over the air."},
       "streaming": [
         {"name": "Suns+", "monthly_price_usd": null, "season_price_usd": null, "note": "Inside the Arizona's Family Sports app. Subscriptions open October 1.", "price_verified": false}
@@ -327,6 +340,7 @@
     "portland-trail-blazers": {
       "confidence": "moderate",
       "local_broadcasters": ["KUNP", "KATU (some games)"],
+      "short_names": {"KATU (some games)": "KATU"},
       "ota": {"status": "most", "games": null, "note": "Most local games are free over the air."},
       "streaming": [
         {"name": "BlazerVision", "monthly_price_usd": null, "season_price_usd": 120.00, "note": "Season price only.", "price_verified": false}
@@ -339,6 +353,7 @@
     "sacramento-kings": {
       "confidence": "low",
       "local_broadcasters": ["NBC Sports California"],
+      "short_names": {"NBC Sports California on Peacock": "NBCS California on Peacock"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
         {"name": "NBC Sports California on Peacock", "monthly_price_usd": null, "season_price_usd": null, "note": "In-market Peacock add-on; 2026-27 price not confirmed.", "price_verified": false}
@@ -386,6 +401,7 @@
     "washington-wizards": {
       "confidence": "high",
       "local_broadcasters": ["Monumental Sports Network"],
+      "short_names": {"Monumental Sports Network": "Monumental Sports"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
         {"name": "Monumental+", "monthly_price_usd": 19.99, "season_price_usd": 179.99, "note": "Also sold as a subscription through DAZN.", "price_verified": false}

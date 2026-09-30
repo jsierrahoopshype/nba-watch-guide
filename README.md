@@ -18,6 +18,8 @@ expected.
 | --- | --- |
 | Subscription prices, billing notes, which channels a service carries, League Pass blackout rules | `data/services.json` |
 | Local TV per team, in-market notes | `data/local_tv.json` |
+| Short names for long local channel names on channel chips | `data/local_tv.json`, each team's `short_names` |
+| Team colors (logo rings, card edges) | `data/team_colors.json` |
 | Affiliate links | `data/services.json`, the `affiliate_url` on each service |
 | Page titles, descriptions, headings, FAQ wording | `data/copy.json` |
 | Team names and slugs | `data/teams.json` |
@@ -176,19 +178,41 @@ are explained in a footnote under the partners box rather than listed as
 partners (`hub.national_footnote_codes` in `data/copy.json`).
 
 **Layout rule for every game view** (pair pages, the tonight page, the team
-pages' next game, hub game cards): where to watch comes first and nothing may push it down. The order is
-(1) channels, the out-of-market and in-market answer for both fan bases and
-"Why can't I watch this game?", (2) date and tip time, (3) who's out with the
-ranking line, (4) "Also worth knowing", last. The full-size version is one
+pages' next game, hub game cards): where to watch comes first and nothing may push it down. Under the
+matchup head (both logos, both names linking to the team pages, a date chip
+with "Tonight", "Tomorrow" or "In 21 days") the order is
+(1) where to watch: channel chips with the cheapest way to get each channel
+from `data/services.json` ("ESPN Unlimited · $31.99/mo", "NBC · free over the
+air"), the out-of-market and in-market answer for both fan bases, collapsed to
+one "Everyone in the US" line when all four match, a cable line on games on a
+cable channel (`config.CABLE_NATIONAL_CODES`) that names only live TV services
+(`kind: live_tv`) whose carries list is verified, and "Why ...?" only when a
+fan base is actually blocked (a League Pass blackout, or a team's local TV not
+carrying a national game in its own market), worded for the case;
+(2) tip time, the reader's own time big and ET small beside it, one format
+everywhere ("9:00 pm EDT"); (3) players to watch, the two players the ranking
+line names with headshot and team; (4) who's out, as chips; (5) "Also worth
+knowing", last. The full-size version is one
 partial, `templates/partials/game_block.html`; no CSS may reorder its parts,
 and `tests/test_pairs.py` checks the order in the HTML and in a 375px-wide
 browser (that test needs the `playwright` package and skips without it).
+Players to watch never sits inside who's out
+(`tests/test_game_block_redesign.py`). The date chip's countdown is
+`data-volatile` and the page script recounts it from the reader's clock.
+
+Team colors come from `data/team_colors.json` and only draw the logo rings
+and the two-tone strip on a card's top edge, never text; a color under 3:1
+against the white card (the Spurs' silver) is darkened for that
+(`watchguide/colors.py`). A local channel with an entry in its team's
+`short_names` shows the short name on chips, with the full name in the
+`title` attribute; titles, descriptions and JSON-LD keep the full name.
 
 The hub lists every game of the day in tip-off order, earliest first, with a
 "Top pick" badge on the three highest-ranked, one compact card each: both
-teams linked to their pages, then the channels with the fan-base answer and
-"Why can't I watch" in one collapsed detail, then the tip time (ET, shown in
-the reader's zone by the page script) and the ranking line, with players
+teams linked to their pages, then the same where-to-watch part as the game
+block (the fan-base answers in a collapsed detail unless they collapse to one
+line), then the tip time (ET, shown in the reader's zone by the page script),
+then players to watch with the ranking line, with players
 listed Out in a collapsed detail, then any "Also worth knowing" lines. The
 card itself links to the game on its pair page. The tonight page is one list
 of full game cards in ranking order, each linking its pair page; no page shows
@@ -206,7 +230,9 @@ goes through `watchguide/pairs.py`. Titles name the teams by short name, also
 alphabetically ("76ers vs. Knicks"), trying each of `pair.titles` in
 `data/copy.json` until one fits 60 characters. Each page shows the next
 meeting in full (the game block above) and then every meeting this season
-with its channels; each game has one `#game-<id>` anchor, which the hub and
+with its channels (compact cards on phones, the next meeting highlighted and
+played games showing the final score once the feed has it; a table from
+700px); each game has one `#game-<id>` anchor, which the hub and
 tonight cards and the team pages' schedule rows link to. The pages are in the
 sitemap and the manifest. The 30-minute refresh renders and writes only the
 pair pages of today's games, with the latest report; the others stay as
@@ -234,8 +260,9 @@ come from jsierrahoopshype/nba-headshots; the country flags
 Mono fonts (`assets/fonts/`, SIL OFL) from jsierrahoopshype/nba-born-died,
 whose design language the pages follow. All are in the repo and published
 under `/how-to-watch/assets/` with content-hashed names (the fonts keep plain
-names because the stylesheet names them). Player headshots for the hub's game
-cards are fetched at build time: `players/metadata/players_all.json` gives each
+names because the stylesheet names them). Player headshots for the game cards'
+"Players to watch" (hub, tonight, each team's next game, each pair's next
+meeting) are fetched at build time: `players/metadata/players_all.json` gives each
 player's file name, the 160px WebP comes from `players/headshots/face2-160/`,
 and it is saved to `assets/faces/` in the published tree, which the restore
 step brings back, so each face is downloaded once. A player with no headshot,

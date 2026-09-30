@@ -93,6 +93,15 @@ def et_label(game, with_date: bool = False) -> str:
     return f"{date_label(game.date_et)}, {clock}" if with_date else clock
 
 
+def et_clock(game) -> str:
+    """'7:00 pm': the Eastern tip-off clock alone, for the big number the
+    page script swaps for the reader's own time. Same format as et_label."""
+    if not game.tipoff_et:
+        return game.status_text or "TBA"
+    parsed = datetime.fromisoformat(game.tipoff_et)
+    return f"{parsed.hour % 12 or 12}:{parsed.minute:02d} {'am' if parsed.hour < 12 else 'pm'}"
+
+
 def hashed_asset_name(name: str, asset_dir: Path | None = None) -> str:
     """'watch-guide.js' -> 'watch-guide.<10 hex of its sha256>.js', and
     'logos/bos.svg' -> 'logos/bos.<hash>.svg' for files in a subfolder.
@@ -131,6 +140,7 @@ def build_env(template_dir: Path | None = None) -> Environment:
     env.filters["to_path"] = to_path
     env.filters["date_label"] = date_label
     env.filters["et_label"] = et_label
+    env.filters["et_clock"] = et_clock
     env.globals["asset"] = asset
     env.globals["site_path"] = config.site_path
     env.globals["site_base"] = config.SITE_BASE

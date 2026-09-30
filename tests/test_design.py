@@ -14,7 +14,9 @@ import pytest
 from conftest import TODAY, _build, _copy_data
 from watchguide import config
 from watchguide.context import load_context
+from watchguide.model import load_teams
 from watchguide.pages.hub import country_cards, national_partners, team_summary
+from watchguide.pairs import game_pair_slug
 from watchguide.sources import headshots
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,6 +26,10 @@ IMG = re.compile(r"<img\b[^>]*>")
 
 def text(markup: str) -> str:
     return " ".join(html.unescape(TAGS.sub(" ", markup)).split())
+
+
+def pairs_slug(game) -> str:
+    return game_pair_slug(game, {t.tricode: t for t in load_teams()})
 
 
 def ctx_for(games, today=TODAY, data_dir=None):
@@ -215,8 +221,14 @@ def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch)
     full_build(site, today=TODAY, offline=True, data_dir=data_dir)
     hub = (site / "index.html").read_text(encoding="utf-8")
     row = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[0].game_id}"'))
-    assert ('<img class="av" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="40" height="40" '
-            'loading="lazy" decoding="async" alt="Star Alpha" title="Star Alpha" data-volatile>') in row
+    # The face sits in "Players to watch" with the name printed under it, so
+    # the image itself is decorative.
+    players = row[row.index('class="hg-players"'):]
+    assert ('<li><img class="av" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="40" height="40" '
+            'loading="lazy" decoding="async" alt="" data-volatile><span class="hg-pname">Star Alpha</span>') in players
     other = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[1].game_id}"'))
-    assert "Star Bravo" not in re.findall(r'<img class="av"[^>]*>', other)[0]     # no face on disk: silhouette
-    assert "silhouette" in other
+    assert re.search(r'<img class="av" src="/how-to-watch/assets/silhouette\.[0-9a-f]{10}\.svg"[^>]*>'
+                     r'<span class="hg-pname">Star Bravo</span>', other)             # no face on disk: silhouette
+    # The pair page's game block uses the same face, 56px.
+    pair = (site / pairs_slug(today[0]) / "index.html").read_text(encoding="utf-8")
+    assert '<img class="av pw-face" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="56" height="56"' in pair

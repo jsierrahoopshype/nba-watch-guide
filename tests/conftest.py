@@ -98,7 +98,7 @@ def _copy_data(tmp_path_factory, label: str):
     src = Path(__file__).resolve().parent.parent / "data"
     for name in ("teams.json", "services.json", "local_tv.json", "copy.json",
                  "star_power_weights.json", "player_aliases.json", "recent_awards.json",
-                 "countries.json"):
+                 "countries.json", "team_colors.json"):
         if (src / name).exists():
             (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
     return data_dir
@@ -114,7 +114,9 @@ def _build(tmp_path_factory, fixture_games, label: str, data_dir=None, injuries=
     }), encoding="utf-8")
     if injuries is not None:
         (out / "data" / "injuries.json").write_text(json.dumps(injuries), encoding="utf-8")
-    full_build(out, today=TODAY, offline=True, data_dir=data_dir)
+    # Noon ET on TODAY: before the 3 pm injury safety net, whatever the real
+    # clock says, so the output does not depend on when the suite runs.
+    full_build(out, today=TODAY, offline=True, data_dir=data_dir, now=f"{TODAY}T12:00:00-05:00")
     return out
 
 

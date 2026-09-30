@@ -28,7 +28,7 @@ from watchguide.sources import schedule as schedule_source
 TEAMS = load_teams()
 BY_TRICODE = {t.tricode: t for t in TEAMS}
 TAGS = re.compile(r"<[^>]+>")
-PARTS = ("watch", "when", "out", "worth")
+PARTS = ("watch", "when", "players", "out", "worth")
 
 
 def read(site, rel: str) -> str:
@@ -125,12 +125,14 @@ def test_pair_page_has_next_meeting_then_every_meeting(built_site, fixture_games
     ids = re.findall(r'\bid="(game-[^"]+)"', page)
     assert sorted(ids) == sorted(f"game-{g.game_id}" for g in games)       # each game exactly once
     block = blocks(page)[0]
+    collapsed = "data-everyone" in block
     for team in (BY_TRICODE[nxt.away_tricode], BY_TRICODE[nxt.home_tricode]):
         assert f'href="{team.path}"' in block
-        assert f"{team.short_name} fans" in block
-        assert f"Outside the {team.short_name} market:" in block and f"In the {team.short_name} market:" in block
-    assert "Why can&#39;t I watch this game?" in block
-    assert f'data-utc="{nxt.tipoff_utc}"' in block and " pm ET" in block and "your time" in block
+        # Four fan-base answers, or one line for everyone when they match.
+        assert collapsed or (f"{team.short_name} fans" in block and f"Outside the {team.short_name} market:" in block
+                             and f"In the {team.short_name} market:" in block)
+    assert not collapsed or "Everyone in the US:" in block
+    assert f'data-utc="{nxt.tipoff_utc}"' in block and " pm ET" in block and "Tip-off" in block
 
 
 def test_game_block_parts_are_in_the_layout_order(built_site):
@@ -142,7 +144,7 @@ def test_game_block_parts_are_in_the_layout_order(built_site):
     for page in pages:
         for block in blocks(page):
             found = [p for p in re.findall(r'data-part="(\w+)"', block)]
-            assert found == [p for p in PARTS if p in found] and found[:3] == list(PARTS[:3]), found
+            assert found == [p for p in PARTS if p in found] and found[:4] == list(PARTS[:4]), found
             head = block.index('class="gb-head"')
             between = block[block.index("</div>", head) + len("</div>"):block.index('<div class="gb-watch"')]
             assert between.strip() == "", between
@@ -197,7 +199,7 @@ def test_layout_order_on_a_phone_in_a_real_browser(built_site, tmp_path):
             for path in ("tonight", slug, TEAMS[0].slug):
                 page.goto(f"http://127.0.0.1:{server.server_port}/how-to-watch/{path}")
                 tops = page.eval_on_selector_all("[data-game-block]", """els => els.map(el =>
-                    ['watch', 'when', 'out', 'worth'].map(k => {
+                    ['watch', 'when', 'players', 'out', 'worth'].map(k => {
                       const n = el.querySelector('[data-part="' + k + '"]');
                       if (!n) return null;
                       const r = n.getBoundingClientRect();

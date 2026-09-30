@@ -62,11 +62,15 @@
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
   "why": {
-    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed.",
+    "_note": "Per-game explanation under each schedule row. {services} is a list of service names, {service} one name, {rule} a League Pass blackout rule from data/services.json. Services that do not carry a game are not listed. The game block's expandable only appears when a fan base is blocked from something it might expect: summary_league_pass for League Pass blackouts, summary_local when a team's local TV does not carry a national game (the regional line, {team} a short name, {channels} its local channels), summary_both when both apply.",
     "summary": "Why can't I watch this game?",
     "carried": "Watch it on {services}.",
     "none": "None of the services on this page carries this game yet.",
-    "blackout": "{service}: {rule}"
+    "blackout": "{service}: {rule}",
+    "summary_league_pass": "Why isn't this on League Pass?",
+    "summary_local": "Why isn't this on local TV?",
+    "summary_both": "Why isn't this on League Pass or local TV?",
+    "regional": "{team} local TV ({channels}) does not show games on national TV."
   },
   "missing": {
     "_note": "Wording for 'What am I missing?' on the team pages. The page script fills {placeholders}. None of it is in the prerendered HTML.",
@@ -222,7 +226,7 @@
     "tba": "time TBA"
   },
   "game": {
-    "_note": "The game block on pair pages and the tonight page, and the hub cards' collapsed answer. {team} is a team's short name. The layout order (where to watch, date and tip time, who's out, Also worth knowing) is fixed in templates/partials/game_block.html.",
+    "_note": "The game block on pair pages, the tonight page and the team pages' next game, and the hub cards. {team} is a team's short name. The layout order (where to watch, tip time, players to watch, who's out, Also worth knowing) is fixed in templates/partials/game_block.html. everyone replaces the four fan-base answers when they are identical. cable and cable_named follow the answer on games on a cable channel (config.CABLE_NATIONAL_CODES); {channels} is those channels, {services} the live TV services whose carries list is verified. countdown_* label the date chip; tonight is used from 5 pm ET.",
     "fans": "{team} fans",
     "outside": "Outside the {team} market",
     "inside": "In the {team} market",
@@ -236,7 +240,20 @@
     "series_lead": "{team} lead the season series {w}-{l}",
     "series_tied": "Season series tied {w}-{l}",
     "pair_link": "Every {a} vs. {b} game",
-    "where_summary": "Where can I watch? In market and out of market"
+    "where_summary": "Where can I watch? In market and out of market",
+    "watch_heading": "Where to watch",
+    "everyone": "Everyone in the US",
+    "cable": "Also on cable and on live TV services that carry {channels}.",
+    "cable_named": "Also on cable and on live TV services that carry {channels}, including {services}.",
+    "chip_free_ota": "free over the air",
+    "chip_local": "{team} market",
+    "players_heading": "Players to watch",
+    "countdown_today": "Today",
+    "countdown_tonight": "Tonight",
+    "countdown_tomorrow": "Tomorrow",
+    "countdown_days": "In {n} days",
+    "final": "Final",
+    "next_label": "Next"
   },
   "pair": {
     "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",

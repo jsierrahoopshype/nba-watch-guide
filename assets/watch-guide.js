@@ -34,30 +34,119 @@
     if (saved && $('[data-state-panel="' + saved + '"]')) setMarket(saved);
   }
 
-  /* ---------------- local kick-off times ---------------- */
+  /* ---------------- local tip-off times ----------------
+     One format everywhere: "9:00 pm" plus a zone abbreviation, the same
+     shape as the "7:00 pm ET" in the HTML. A time on another calendar day
+     than the game's Eastern date gets the local weekday in front. */
+
+  var EASTERN = 'America/New_York';
 
   function readerIsEastern() {
-    try { return Intl.DateTimeFormat().resolvedOptions().timeZone === 'America/New_York'; }
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone === EASTERN; }
     catch (e) { return false; }
   }
 
+  function part(parts, type) {
+    for (var i = 0; i < parts.length; i++) if (parts[i].type === type) return parts[i].value;
+    return '';
+  }
+
+  // Intl formatters are slow to build, so each one is made once and reused.
+  var FORMATS = {};
+  function fmt(locale, opts, key) {
+    if (!FORMATS[key]) FORMATS[key] = new Intl.DateTimeFormat(locale, opts);
+    return FORMATS[key];
+  }
+
+  function clock(when) {
+    var parts = fmt('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }, 'clock').formatToParts(when);
+    return part(parts, 'hour') + ':' + part(parts, 'minute') + ' ' + part(parts, 'dayPeriod').toLowerCase();
+  }
+
+  // "EDT", "PDT", "CEST", "BST", "IST", "AEDT": the first locale that has a
+  // real abbreviation for the reader's zone, else the GMT offset.
+  function zoneName(when) {
+    if (readerIsEastern()) return 'ET';
+    var locales = ['en-US', 'en-GB', 'en-AU', 'en-IN'], fallback = '';
+    for (var i = 0; i < locales.length; i++) {
+      var name = '';
+      try {
+        name = part(fmt(locales[i], { timeZoneName: 'short' }, 'zone-' + locales[i]).formatToParts(when), 'timeZoneName');
+      } catch (e) { /* ignore */ }
+      if (!fallback) fallback = name;
+      if (name && name.indexOf('GMT') !== 0 && name.indexOf('UTC') !== 0) return name;
+    }
+    return fallback;
+  }
+
+  function dayKey(when, zone) {
+    var opts = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    if (zone) opts.timeZone = zone;
+    var parts = fmt('en-US', opts, 'day-' + (zone || 'local')).formatToParts(when);
+    return part(parts, 'year') + '-' + part(parts, 'month') + '-' + part(parts, 'day');
+  }
+
+  function weekday(when) {
+    return fmt('en-US', { weekday: 'short' }, 'weekday').format(when);
+  }
+
+  function dateLabel(when) {
+    var parts = fmt('en-US', { weekday: 'short', month: 'short', day: 'numeric' }, 'date').formatToParts(when);
+    return part(parts, 'weekday') + ' ' + part(parts, 'month') + ' ' + part(parts, 'day');
+  }
+
   function initLocalTimes() {
-    var nodes = $$('[data-utc]');
-    if (!nodes.length) return;
-    nodes.forEach(function (node) {
+    $$('[data-utc]').forEach(function (node) {
       var when = new Date(node.getAttribute('data-utc'));
       if (isNaN(when.getTime())) return;
-      var opts = { hour: 'numeric', minute: '2-digit' };
-      if (node.hasAttribute('data-with-date')) { opts.weekday = 'short'; opts.month = 'short'; opts.day = 'numeric'; }
-      var local = when.toLocaleString([], opts);
-      var zone = '';
-      try { zone = new Intl.DateTimeFormat([], { timeZoneName: 'short' })
-        .formatToParts(when).filter(function (p) { return p.type === 'timeZoneName'; })[0].value; } catch (e) { /* ignore */ }
+      var time, zone;
+      try { time = clock(when); zone = zoneName(when); } catch (e) { return; }
+      var otherDay = dayKey(when) !== dayKey(when, EASTERN);
+      var prefix = '';
+      if (node.hasAttribute('data-with-date')) prefix = dateLabel(when) + ', ';
+      else if (otherDay) prefix = weekday(when) + ' ';
+      var clockSlot = node.querySelector('[data-local-clock]');
+      var zoneSlot = node.querySelector('[data-local-zone]');
+      var daySlot = node.querySelector('[data-local-day]');
       var slot = node.querySelector('[data-local-slot]');
-      if (slot) slot.textContent = local + (zone ? ' ' + zone : '');
-      // A second, reader's-zone time next to the ET one: only worth showing
-      // when the reader is not on Eastern time already.
-      if (node.hasAttribute('data-local-extra')) node.hidden = readerIsEastern();
+      if (clockSlot) {
+        // The big number: the weekday, when it differs, goes in its own
+        // smaller slot in front.
+        clockSlot.textContent = time;
+        if (daySlot) daySlot.textContent = otherDay ? weekday(when) : '';
+        if (zoneSlot) zoneSlot.textContent = zone;
+      } else if (slot) {
+        slot.textContent = prefix + time + (zone ? ' ' + zone : '');
+      }
+      // The small ET time beside the big one: only worth showing when the
+      // reader is not on Eastern time already. It always holds its space.
+      var et = node.querySelector('[data-et-extra]');
+      if (et && !readerIsEastern()) et.classList.add('is-shown');
+    });
+  }
+
+  /* ---------------- date chip countdown ----------------
+     The build writes "Tonight", "Tomorrow" or "In 21 days" for its own day;
+     this redoes the count from today's Eastern date, so a page cached from
+     yesterday does not say Tonight a day late. */
+
+  function initCountdowns() {
+    var nodes = $$('[data-countdown]');
+    if (!nodes.length) return;
+    var today;
+    try { today = dayKey(new Date(), EASTERN); } catch (e) { return; }
+    var t = Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1, +today.slice(8, 10));
+    nodes.forEach(function (node) {
+      var d = node.getAttribute('data-date') || '';
+      var g = Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10));
+      if (isNaN(g)) return;
+      var days = Math.round((g - t) / 86400000);
+      var label;
+      if (days < 0) { node.hidden = true; return; }
+      if (days === 0) label = node.getAttribute(node.hasAttribute('data-evening') ? 'data-l-tonight' : 'data-l-today');
+      else if (days === 1) label = node.getAttribute('data-l-tomorrow');
+      else label = (node.getAttribute('data-l-days') || '').replace('{n}', String(days));
+      if (label && node.textContent !== label) node.textContent = label;
     });
   }
 
@@ -392,6 +481,7 @@
   function init() {
     initToggle();
     initLocalTimes();
+    initCountdowns();
     initMissing();
     if ($('[data-player]') || $('[data-updated]')) refresh();
   }

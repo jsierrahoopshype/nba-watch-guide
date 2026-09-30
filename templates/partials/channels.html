@@ -1,3 +1,9 @@
+{#- Channel chips. A chip from pages.common.chips carries a label (a long
+    local name shortened, the full one in title) and, when priced, how to
+    get it; a plain channel dict just prints its name. -#}
 {%- for channel in channels -%}
-<span class="badge badge-{{ channel.kind }}">{{ channel.name }}</span>{% if not loop.last %} {% endif %}
+<span class="badge badge-{{ channel.kind }}{% if channel.get('how') %} chip{% endif %}"{% if channel.get('title') %} title="{{ channel.title }}"{% endif %}>
+{%- if channel.get('how') %}<span class="chip-name">{{ channel.label }}</span><span class="chip-how">· {{ channel.how }}</span>
+{%- else %}{{ channel.get('label') or channel.name }}{% endif -%}
+</span>{% if not loop.last %} {% endif %}
 {%- endfor -%}

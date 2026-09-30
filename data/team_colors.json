@@ -1,0 +1,100 @@
+{
+  "_meta": {
+    "purpose": "Each team's primary color, used only as a subtle accent: the ring around a team logo and the edge of a game card. Never used as a text color.",
+    "format": "teams.<tricode>.primary is a #RRGGBB hex. The build keeps the accent at 3:1 or more against the white card (WCAG non-text contrast) by darkening a light color such as the Spurs' silver; the value here stays the team's own.",
+    "source": "Team brand colors as the NBA and the teams publish them, checked against the logos in assets/logos.",
+    "last_checked": "2026-09-29"
+  },
+  "teams": {
+    "ATL": {
+      "primary": "#C8102E"
+    },
+    "BKN": {
+      "primary": "#000000"
+    },
+    "BOS": {
+      "primary": "#007A33"
+    },
+    "CHA": {
+      "primary": "#1D1160"
+    },
+    "CHI": {
+      "primary": "#CE1141"
+    },
+    "CLE": {
+      "primary": "#860038"
+    },
+    "DAL": {
+      "primary": "#0064B1"
+    },
+    "DEN": {
+      "primary": "#0D2240"
+    },
+    "DET": {
+      "primary": "#C8102E"
+    },
+    "GSW": {
+      "primary": "#1D428A"
+    },
+    "HOU": {
+      "primary": "#CE1141"
+    },
+    "IND": {
+      "primary": "#002D62"
+    },
+    "LAC": {
+      "primary": "#C8102E"
+    },
+    "LAL": {
+      "primary": "#552583"
+    },
+    "MEM": {
+      "primary": "#5D76A9"
+    },
+    "MIA": {
+      "primary": "#98002E"
+    },
+    "MIL": {
+      "primary": "#00471B"
+    },
+    "MIN": {
+      "primary": "#0C2340"
+    },
+    "NOP": {
+      "primary": "#0C2340"
+    },
+    "NYK": {
+      "primary": "#006BB6"
+    },
+    "OKC": {
+      "primary": "#007AC1"
+    },
+    "ORL": {
+      "primary": "#0077C0"
+    },
+    "PHI": {
+      "primary": "#006BB6"
+    },
+    "PHX": {
+      "primary": "#1D1160"
+    },
+    "POR": {
+      "primary": "#E03A3E"
+    },
+    "SAC": {
+      "primary": "#5A2D81"
+    },
+    "SAS": {
+      "primary": "#C4CED4"
+    },
+    "TOR": {
+      "primary": "#CE1141"
+    },
+    "UTA": {
+      "primary": "#4E008E"
+    },
+    "WAS": {
+      "primary": "#002B5C"
+    }
+  }
+}

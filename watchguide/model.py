@@ -347,6 +347,13 @@ class LocalTV:
     sources: list[str]
     exclude_from_us_maths: bool = False
     last_checked: str = ""
+    # {full name: short name} for channel chips; see short_name().
+    short_names: dict[str, str] = field(default_factory=dict)
+
+    def short_name(self, name: str) -> str:
+        """The name a channel chip shows: the short one when the file has
+        one, otherwise the full name."""
+        return self.short_names.get(name, name)
 
     @property
     def counts(self) -> bool:
@@ -402,7 +409,32 @@ def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
             sources=list(t.get("sources") or []),
             exclude_from_us_maths=bool(t.get("exclude_from_us_maths")),
             last_checked=last_checked,
+            short_names={str(k): str(v) for k, v in (t.get("short_names") or {}).items() if k and v},
         )
+    return out
+
+
+# --------------------------------------------------------------------------
+# Team colors
+# --------------------------------------------------------------------------
+
+def load_team_colors(data_dir: Path | None = None) -> dict[str, str]:
+    """{tricode: '#RRGGBB'} from data/team_colors.json. A missing file or a
+    malformed value just means no accent for that team."""
+    data_dir = data_dir or config.DATA_DIR
+    try:
+        raw = json.loads((data_dir / "team_colors.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out: dict[str, str] = {}
+    for tricode, entry in (raw.get("teams") or {}).items():
+        value = (entry or {}).get("primary", "") if isinstance(entry, dict) else ""
+        if isinstance(value, str) and len(value) == 7 and value.startswith("#"):
+            try:
+                int(value[1:], 16)
+            except ValueError:
+                continue
+            out[tricode] = value.upper()
     return out
 
 
