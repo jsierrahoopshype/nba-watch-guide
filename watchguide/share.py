@@ -1,9 +1,10 @@
-"""Share images (og:image): one 1200x630 PNG per page, drawn at build time.
+"""Share images (og:image): one 1200x630 JPEG per page, drawn at build time.
 
 The look follows the HoopsMatic share cards (the Player Comparison card):
 dark indigo background with purple and pink glows, rounded panels, Poppins.
 Each card is a small SVG (the self-hosted team logos and flags embedded)
-rendered to PNG by resvg. Nothing is fetched: logos and flags come from
+rendered by resvg, then saved as JPEG by Pillow (the gradients make PNGs
+about twice the size). Nothing is fetched: logos and flags come from
 assets/, the fonts from watchguide/share_fonts (Poppins, SIL OFL, see
 scripts/make_share_fonts.py).
 
@@ -35,6 +36,7 @@ WEIGHTS = {500: "Medium", 600: "SemiBold", 700: "Bold", 800: "ExtraBold"}
 FONTS = [FONT_DIR / f"Poppins-{style}.ttf" for style in WEIGHTS.values()]
 # Bump when the layout changes, so every card is drawn again.
 LAYOUT_VERSION = "2"
+JPEG_QUALITY = 88
 
 # The HoopsMatic share-card palette (nba-trade-card).
 BG_TOP = "#0d0a22"
@@ -60,7 +62,7 @@ class Card:
 
     @property
     def path(self) -> str:
-        return f"{SHARE_DIR}/{self.name}.png"
+        return f"{SHARE_DIR}/{self.name}.jpg"
 
     @property
     def url(self) -> str:
@@ -323,7 +325,8 @@ def svg(card: Card) -> str:
 def _renderer_key() -> str:
     from importlib.metadata import version
     digest = hashlib.sha256()
-    digest.update(f"resvg-py {version('resvg-py')} layout {LAYOUT_VERSION}".encode())
+    digest.update(f"resvg-py {version('resvg-py')} pillow {version('pillow')} "
+                  f"layout {LAYOUT_VERSION} jpeg {JPEG_QUALITY}".encode())
     for font in FONTS:
         digest.update(font.read_bytes())
     return digest.hexdigest()
@@ -336,9 +339,17 @@ def input_hash(markup: str) -> str:
 @lru_cache(maxsize=2048)
 def _render(markup: str) -> bytes:
     # Cached per process: test builds draw the same cards many times.
+    import io
+
     import resvg_py
-    return bytes(resvg_py.svg_to_bytes(svg_string=markup, skip_system_fonts=True,
-                                       font_files=[str(f) for f in FONTS]))
+    from PIL import Image
+    png = bytes(resvg_py.svg_to_bytes(svg_string=markup, skip_system_fonts=True,
+                                      font_files=[str(f) for f in FONTS]))
+    out = io.BytesIO()
+    # The card is fully opaque, so dropping alpha loses nothing.
+    Image.open(io.BytesIO(png)).convert("RGB").save(out, "JPEG", quality=JPEG_QUALITY,
+                                                     optimize=True, progressive=True)
+    return out.getvalue()
 
 
 def render(card: Card) -> bytes:

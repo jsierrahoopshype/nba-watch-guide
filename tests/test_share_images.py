@@ -1,4 +1,4 @@
-"""Share images: every page names its own 1200x630 PNG on hoopsmatic.com,
+"""Share images: every page names its own 1200x630 JPEG on hoopsmatic.com,
 the file is in the build, the Event markup reuses it, and a card is drawn
 again only when what it shows changes."""
 
@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import json
 import re
-import struct
 from itertools import permutations
 
 import pytest
@@ -22,9 +21,13 @@ CARD = re.compile(r'<meta name="twitter:card" content="([^"]*)">')
 BLOCK = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
 
 
-def _png_size(data: bytes) -> tuple[int, int]:
-    assert data[:8] == b"\x89PNG\r\n\x1a\n" and data[12:16] == b"IHDR"
-    return struct.unpack(">II", data[16:24])
+def _jpeg_size(data: bytes) -> tuple[int, int]:
+    from io import BytesIO
+
+    from PIL import Image
+    image = Image.open(BytesIO(data))
+    assert image.format == "JPEG" and image.mode == "RGB"
+    return image.size
 
 
 def test_every_page_has_a_share_image(built_site):
@@ -35,13 +38,13 @@ def test_every_page_has_a_share_image(built_site):
         found = {k: rx.findall(html) for k, rx in OG.items()}
         assert all(len(v) == 1 for v in found.values()), (page, found)
         url = found[""][0]
-        assert url.startswith(config.SITE_BASE + "/share/") and url.endswith(".png"), url
+        assert url.startswith(config.SITE_BASE + "/share/") and url.endswith(".jpg"), url
         assert (found[":width"][0], found[":height"][0]) == ("1200", "630"), page
         assert found[":alt"][0].strip(), page
         assert CARD.findall(html) == ["summary_large_image"], page
         image = built_site / url[len(config.SITE_BASE) + 1:]
         assert image.is_file(), image
-        assert _png_size(image.read_bytes()) == (1200, 630), image
+        assert _jpeg_size(image.read_bytes()) == (1200, 630), image
 
 
 def test_events_carry_the_pages_og_image(built_site):
@@ -140,6 +143,18 @@ def test_a_card_is_drawn_again_only_when_its_inputs_change(tmp_path):
     assert note.endswith("1 removed") and not (tmp_path / b.path).exists()
     state = json.loads((tmp_path / share.STATE_FILE).read_text(encoding="utf-8"))
     assert set(state) == {changed.path}
+
+
+def test_a_full_build_removes_the_old_png_cards(tmp_path):
+    """The PNGs published before the switch to JPEG go on the next full build."""
+    old = tmp_path / "share" / "hub.png"
+    old.parent.mkdir(parents=True)
+    old.write_bytes(b"old")
+    (tmp_path / "data").mkdir()
+    (tmp_path / share.STATE_FILE).write_text(json.dumps({"share/hub.png": "x"}), encoding="utf-8")
+    card = share.Card("hub", "How to watch the NBA", "2026-27 season", "TV and streaming for all 30 teams")
+    assert share.write_images(tmp_path, [card], full=True).endswith("1 drawn, 0 unchanged, 1 removed")
+    assert not old.exists() and (tmp_path / "share" / "hub.jpg").is_file()
 
 
 def test_cards_use_only_local_files():
