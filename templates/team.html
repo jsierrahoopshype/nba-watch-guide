@@ -7,6 +7,12 @@
     <h1>{{ text.h1 }}</h1>
   </div>
   <p class="lede">{{ text.intro }}</p>
+  {%- set mt = my_team_text %}
+  {#- Saves this team on this device only (localStorage hm-watch-team).
+      Both labels sit in the button, so it never changes size. #}
+  <p class="myt-make-row"><button type="button" class="myt-make" data-my-team-btn="{{ team.slug }}" aria-pressed="false">
+    <span class="myt-l-make">{{ mt.make }}</span><span class="myt-l-mine" aria-hidden="true">{{ mt.mine }}</span></button>
+    <span class="small muted">{{ mt.button_hint }}</span></p>
 </div>
 
 {%- if next_game %}

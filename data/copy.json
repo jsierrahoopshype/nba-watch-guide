@@ -282,5 +282,19 @@
     "meetings_caption": "{count} games",
     "channel_tba": "a channel still to be announced",
     "description_short": "{a} vs. {b} next on {date} on {channel}. TV and streaming for every {season} meeting."
+  },
+  "my_team": {
+    "_note": "\"My team\": a team the reader saves on this device (localStorage hm-watch-team). Nothing is sent anywhere.",
+    "picker_label": "Your team",
+    "picker_prompt": "Pick your team",
+    "picker_hint": "Saved on this device only.",
+    "clear_label": "Clear",
+    "card_heading": "Your team's next game",
+    "at": "at",
+    "team_link": "All {team} games",
+    "no_game": "No game left on the {season} schedule.",
+    "make": "Make this my team",
+    "mine": "My team ✓",
+    "button_hint": "Saved on this device only. The hub shows this team's next game first."
   }
 }
