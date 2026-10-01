@@ -161,10 +161,11 @@ def test_prerendered_html_only_gains_the_inert_data(built_site, tmp_path_factory
 
 def test_one_site_wide_storage_key_and_nothing_sent():
     js = JS.read_text(encoding="utf-8")
-    keys = set(re.findall(r"var (?:STORE|OWNED)_KEY = '([^']+)'", js))
-    assert keys == {"hm-watch-market", "hm-watch-owned"}
+    # The market toggle, the owned-services list and "My team" (the saved team).
+    keys = set(re.findall(r"var (?:STORE|OWNED|TEAM)_KEY = '([^']+)'", js))
+    assert keys == {"hm-watch-market", "hm-watch-owned", "hm-watch-team"}
     assert re.findall(r"localStorage\.(?:get|set)Item\((\w+)", js) and \
-        set(re.findall(r"localStorage\.(?:get|set)Item\((\w+)", js)) == {"STORE_KEY", "OWNED_KEY"}
+        set(re.findall(r"localStorage\.(?:get|set)Item\((\w+)", js)) == {"STORE_KEY", "OWNED_KEY", "TEAM_KEY"}
     section = js[js.index("what am I missing?"):js.index("function init()")]
     for call in ("fetch(", "XMLHttpRequest", "sendBeacon", "sessionStorage", "document.cookie"):
         assert call not in section

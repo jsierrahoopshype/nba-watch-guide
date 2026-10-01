@@ -95,8 +95,8 @@
     return part(parts, 'weekday') + ' ' + part(parts, 'month') + ' ' + part(parts, 'day');
   }
 
-  function initLocalTimes() {
-    $$('[data-utc]').forEach(function (node) {
+  function initLocalTimes(root) {
+    $$('[data-utc]', root).forEach(function (node) {
       var when = new Date(node.getAttribute('data-utc'));
       if (isNaN(when.getTime())) return;
       var time, zone;
@@ -123,6 +123,73 @@
       // reader is not on Eastern time already. It always holds its space.
       var et = node.querySelector('[data-et-extra]');
       if (et && !readerIsEastern()) et.classList.add('is-shown');
+    });
+  }
+
+  /* ---------------- my team ----------------
+     The reader's team, kept on this device only (localStorage
+     hm-watch-team; nothing is sent anywhere). On the hub my-team.js has
+     already put the saved team's card in place before first paint; this
+     wires the picker and Clear, and the team pages' "Make this my team". */
+
+  var TEAM_KEY = 'hm-watch-team';
+
+  function readTeam() {
+    try { return localStorage.getItem(TEAM_KEY) || ''; } catch (e) { return ''; }
+  }
+
+  function writeTeam(slug) {
+    try {
+      if (slug) localStorage.setItem(TEAM_KEY, slug); else localStorage.removeItem(TEAM_KEY);
+    } catch (e) { /* private mode */ }
+  }
+
+  function showHubTeam(slug) {
+    var root = $('[data-my-team-root]'), slot = $('[data-my-team-slot]'), tpl = $('#my-team-cards');
+    if (!root || !slot || !tpl || !tpl.content) return;
+    while (slot.firstChild) slot.removeChild(slot.firstChild);
+    var card = /^[a-z0-9-]{2,40}$/.test(slug) ? tpl.content.querySelector('[data-team="' + slug + '"]') : null;
+    if (card) {
+      slot.appendChild(card.cloneNode(true));
+      root.setAttribute('data-saved', slug);
+      initLocalTimes(slot);
+    } else {
+      root.removeAttribute('data-saved');
+    }
+    var select = $('[data-my-team-select]');
+    if (select) select.value = card ? slug : '';
+  }
+
+  function initMyTeam() {
+    var select = $('[data-my-team-select]');
+    if (select) {
+      select.addEventListener('change', function () {
+        writeTeam(select.value);
+        showHubTeam(select.value);
+      });
+      var clear = $('[data-my-team-clear]');
+      if (clear) clear.addEventListener('click', function () {
+        writeTeam('');
+        showHubTeam('');
+        select.focus();
+      });
+    }
+    $$('[data-my-team-btn]').forEach(function (btn) {
+      var slug = btn.getAttribute('data-my-team-btn');
+      var make = btn.querySelector('.myt-l-make'), mine = btn.querySelector('.myt-l-mine');
+      function sync() {
+        var on = readTeam() === slug;
+        btn.setAttribute('aria-pressed', String(on));
+        // Both labels stay in the button (it never resizes); only the one
+        // shown is read out.
+        if (make) make.setAttribute('aria-hidden', String(on));
+        if (mine) mine.setAttribute('aria-hidden', String(!on));
+      }
+      btn.addEventListener('click', function () {
+        writeTeam(readTeam() === slug ? '' : slug);
+        sync();
+      });
+      sync();
     });
   }
 
@@ -484,6 +551,7 @@
     initLocalTimes();
     initCountdowns();
     initMissing();
+    initMyTeam();
     if ($('[data-player]') || $('[data-updated]')) refresh();
   }
 
