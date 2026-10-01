@@ -1,7 +1,8 @@
 """Antenna (virtual) channel numbers for over-the-air stations: stored with
-two sources and a check date in data/local_tv.json, shown on chips and the
-team page only when confirmed, never a cable or satellite number, and one
-"channel numbers vary" line per block that shows one."""
+their sources and a check date in data/local_tv.json, shown on chips and the
+team page only when confirmed (FCC data agreeing with Wikipedia), never a
+cable or satellite number, and one "channel numbers vary" line per block that
+shows one."""
 
 from __future__ import annotations
 
@@ -17,8 +18,11 @@ from watchguide.pages.common import chips, watch_view
 
 CABLE = "Cable and satellite channel numbers vary by provider; check your guide."
 BY_TRICODE = {t.tricode: t for t in load_teams()}
-TWO_SOURCES = [{"url": "https://www.rabbitears.info/market.php?request=station_search&callsign=WPLG"},
-               {"url": "https://www.local10.com/about-us/"}]
+FCC = {"url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=53113"}
+WIKI = {"url": "https://en.wikipedia.org/w/index.php?title=WPLG&oldid=1374127990"}
+RABBITEARS = {"url": "https://www.rabbitears.info/market.php?request=station_search&callsign=53113"}
+STATION = {"url": "https://www.local10.com/about-us/"}
+TWO_SOURCES = [WIKI, FCC]
 
 
 def entry(**kw):
@@ -40,6 +44,17 @@ def test_confirmed_needs_status_number_date_and_two_sites():
     assert not entry(sources=[{"url": "https://www.local10.com/a"}, {"url": "https://local10.com/b"}]).confirmed
 
 
+def test_confirmed_means_fcc_agrees_with_wikipedia():
+    assert entry(sources=[FCC, WIKI, RABBITEARS]).confirmed    # RabbitEars as supporting is fine
+    assert not entry(sources=[FCC]).confirmed
+    assert not entry(sources=[FCC, STATION]).confirmed         # FCC needs Wikipedia
+    assert not entry(sources=[WIKI, STATION]).confirmed        # Wikipedia needs FCC
+    assert not entry(sources=[RABBITEARS, STATION]).confirmed
+    # RabbitEars stands in for FCC (when FCC can't be read), never with Wikipedia alone.
+    assert not entry(sources=[WIKI, RABBITEARS]).confirmed
+    assert entry(sources=[WIKI, RABBITEARS, STATION]).confirmed
+
+
 def test_shipped_file_never_shows_an_unconfirmed_number():
     for slug, local in load_local_tv().items():
         for a in local.antenna_channels:
@@ -49,7 +64,7 @@ def test_shipped_file_never_shows_an_unconfirmed_number():
             if a.status != "confirmed":
                 assert a.reason and not local.antenna_channel(a.names[0]), (slug, a.station)
             else:
-                assert a.confirmed, f"{slug} {a.station} is marked confirmed but fails the two-source rule"
+                assert a.confirmed, f"{slug} {a.station} is marked confirmed but fails the sources rule"
 
 
 def test_no_entry_for_streaming_apps_or_regional_networks():
@@ -125,10 +140,11 @@ def test_team_page_row_and_schedule_note(antenna_site):
 
 
 def test_no_cable_or_satellite_numbers_anywhere(antenna_site):
+    stored = {a.virtual for local in load_local_tv().values() for a in local.antenna_channels if a.confirmed}
     for p in antenna_site.rglob("index.html"):
         text = p.read_text(encoding="utf-8")
         for m in re.finditer(r"antenna ch\. ([\d.]+)", text):
-            assert m.group(1) == "10.1", (p, m.group(0))
+            assert m.group(1) in stored | {"10.1"}, (p, m.group(0))
         assert not re.search(r"(?i)\b(cable|satellite|dish|directv) ch(annel)?\.? ?\d", text), p
 
 
@@ -144,7 +160,19 @@ def test_seo_fields_do_not_move(antenna_site, built_site):
     assert fields(antenna_site) == fields(built_site)
 
 
-def test_nothing_shows_without_a_confirmed_number(built_site):
-    for p in built_site.rglob("index.html"):
+@pytest.fixture(scope="module")
+def unset_site(tmp_path_factory, fixture_games):
+    """The site with every antenna entry unset."""
+    data_dir = _copy_data(tmp_path_factory, "data-antenna-unset")
+    raw = json.loads((data_dir / "local_tv.json").read_text(encoding="utf-8"))
+    for t in raw["teams"].values():
+        for a in t.get("antenna_channels") or []:
+            a["status"] = "unset"
+    (data_dir / "local_tv.json").write_text(json.dumps(raw), encoding="utf-8")
+    return _build(tmp_path_factory, fixture_games, "site-antenna-unset", data_dir=data_dir)
+
+
+def test_nothing_shows_without_a_confirmed_number(unset_site):
+    for p in unset_site.rglob("index.html"):
         text = p.read_text(encoding="utf-8")
         assert "data-antenna" not in text and "data-cable-numbers" not in text and CABLE not in text, p

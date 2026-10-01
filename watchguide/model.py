@@ -504,8 +504,10 @@ class AntennaChannel:
     "antenna_channels"). `names` are the channel names it appears under (the
     schedule feed's codes and the file's broadcaster names), matched exactly.
     Shown only when confirmed: status "confirmed", a virtual channel like
-    "32.1", a check date and two sources on different sites. Anything else is
-    kept for the record and never shown."""
+    "32.1", a check date and FCC data agreeing with Wikipedia. RabbitEars.info
+    may stand in for FCC only when FCC can't be read, and never with Wikipedia
+    alone (Wikipedia's channel tables cite RabbitEars), so it needs one more
+    site. Anything else is kept for the record and never shown."""
     station: str
     names: list[str]
     virtual: str = ""
@@ -516,13 +518,18 @@ class AntennaChannel:
 
     @property
     def confirmed(self) -> bool:
-        hosts = {_host(s.get("url", "")) for s in self.sources if s.get("url")}
+        hosts = {_host(s.get("url", "")) for s in self.sources if s.get("url")} - {""}
+        wiki = any(h == "wikipedia.org" or h.endswith(".wikipedia.org") for h in hosts)
+        fcc = any(h == "fcc.gov" or h.endswith(".fcc.gov") for h in hosts)
+        others = {h for h in hosts if not (h.endswith("wikipedia.org") or h.endswith("fcc.gov"))
+                  and h != "rabbitears.info"}
+        standin = "rabbitears.info" in hosts and bool(others)
         return (self.status == "confirmed" and bool(VIRTUAL_CHANNEL.match(self.virtual or ""))
-                and bool(self.checked) and len(hosts - {""}) >= 2)
+                and bool(self.checked) and wiki and (fcc or standin))
 
 
 def _host(url: str) -> str:
-    """The site a source URL is on, without "www.", for the two-sites rule."""
+    """The site a source URL is on, without "www.", for the sources rule."""
     m = re.match(r"^https?://([^/]+)", url or "")
     return m.group(1).lower().removeprefix("www.") if m else ""
 

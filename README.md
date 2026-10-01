@@ -249,13 +249,18 @@ team's `antenna_channels` in `data/local_tv.json`: `{station, names, virtual,
 status, reason, sources, checked}`. A chip then reads "WMOR · antenna ch.
 32.1 · Magic market", the team page's local broadcasters row adds it too, and
 each block that shows one gets "Cable and satellite channel numbers vary by
-provider; check your guide." once. A number shows only when `status` is
-"confirmed", `virtual` looks like "32.1", `checked` is set and `sources` hold
-two URLs on different sites (FCC data or RabbitEars.info plus the station's
-own site, or two independent 2026 sources). Anything else stays unset with
-its `reason`. Cable and satellite numbers are never stored; streaming apps
-and regional networks get no entry; `not_applicable` marks a name that
-covers several stations. Titles, descriptions and JSON-LD never include the
+provider; check your guide." once. A number counts as confirmed when FCC
+data agrees with Wikipedia: `status` is "confirmed", `virtual` looks like
+"32.1", `checked` is set and `sources` hold an FCC URL (the LMS facility page)
+and a Wikipedia URL (a permanent revision). FCC records only the major number
+("Virtual Channel: 32"), so it confirms the station's main programming, not a
+subchannel. RabbitEars.info may stand in for FCC only when FCC can't be read,
+and never paired with Wikipedia alone (Wikipedia's channel tables cite
+RabbitEars), so it needs a third site; otherwise it is recorded as supporting
+and not counted. Anything else stays unset with its `reason`. Cable and
+satellite numbers are never stored; streaming apps and regional networks get
+no entry; `not_applicable` marks a name that covers several stations, or one
+with no single number. Titles, descriptions and JSON-LD never include the
 number.
 
 The hub lists every game of the day in tip-off order, earliest first, with a
