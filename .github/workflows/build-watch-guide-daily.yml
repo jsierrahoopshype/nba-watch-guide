@@ -82,7 +82,7 @@ jobs:
         run: ./scripts/commit-raw-injuries.sh
 
       - name: Publish to gh-pages
-        if: inputs.publish != false
+        if: github.event_name != 'workflow_dispatch' || inputs.publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -95,7 +95,7 @@ jobs:
       # trusted; the result goes to the job summary. The 30-minute refresh
       # has no live check.
       - name: Live check
-        if: inputs.publish != false
+        if: github.event_name != 'workflow_dispatch' || inputs.publish
         run: python scripts/live_check.py --site site --sha "$GITHUB_SHA"
 
       - name: Fail if the availability feed was not trusted
