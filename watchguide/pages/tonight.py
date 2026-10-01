@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .. import config, seo
+from .. import config, seo, share
 from ..context import SiteContext
 from ..render import Page
 from .common import crumb_trail, game_view, updated_label
@@ -20,11 +20,12 @@ def build(ctx: SiteContext, env) -> list[Page]:
     cards = [{"rank": r["rank"], "stakes": r["stakes"], "national": r["national"],
               "view": game_view(ctx, r["game"], line=r["line"])} for r in show["rows"]]
 
+    share_card = share.tonight_card(ctx)
     blocks = [seo.breadcrumbs(crumb_trail(ctx, text["h1"], url))]
     for card in cards:
         view = card["view"]
         event = seo.sports_event(view["game"], view["home_name"], view["away_name"], url,
-                                 ctx.arenas.get(view["game"].arena))
+                                 ctx.arenas.get(view["game"].arena), share_card.url)
         if event:
             blocks.append(event)
 
@@ -35,6 +36,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         "og_title": seo.title(text["title"]),
         "og_description": seo.description(text["description"]),
         "jsonld": seo.jsonld(blocks),
+        **share.meta(share_card),
     }
 
     html = env.get_template("tonight.html").render(
@@ -51,4 +53,5 @@ def build(ctx: SiteContext, env) -> list[Page]:
         stale=ctx.availability_is_stale(),
         trail=crumb_trail(ctx, text["h1"], url),
     )
-    return [Page(out_path=f"{SLUG}/index.html", url=url, html=html, lastmod=ctx.today)]
+    return [Page(out_path=f"{SLUG}/index.html", url=url, html=html, lastmod=ctx.today,
+                 meta={"share": share_card})]
