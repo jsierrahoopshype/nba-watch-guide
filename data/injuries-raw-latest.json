@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-01T16:59:47+00:00",
+ "fetched_at": "2026-10-01T19:23:54+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5474,
+ "row_count": 5477,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38200,6 +38200,28 @@
    "injury": "Right Elbow Sprain",
    "date": "2026-09-28",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Tristan Vukcevic",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-01",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tristan Vukcevic",
+   "status": "Out",
+   "injury": "Left Hip Impingement",
+   "date": "2026-10-01",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tristan Vukcevic",
+   "status": "Out",
+   "injury": "Left Hip Impingement",
+   "date": "2026-10-01",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
   }
  ]
 }
