@@ -16,7 +16,7 @@ from . import colors, config
 from .countries import CountryData, load_countries
 from .ranking import STAKES, load_awards, load_weights, rank
 from .ranking import mode as ranking_mode
-from .model import (Game, LocalTV, ServiceData, Team, load_copy, load_local_tv,
+from .model import (Game, LocalTV, ServiceData, Team, load_arenas, load_copy, load_local_tv,
                     load_services, load_team_colors, load_teams)
 
 ET = ZoneInfo(config.EASTERN)
@@ -52,6 +52,7 @@ class SiteContext:
     nationalities: dict[str, str] = field(default_factory=dict)   # player to career-map nationality
     faces: dict[str, str] = field(default_factory=dict)           # match_key to assets/faces/<file>.webp
     team_colors: dict[str, str] = field(default_factory=dict)     # tricode to '#RRGGBB', data/team_colors.json
+    arenas: dict[str, dict[str, str]] = field(default_factory=dict)  # feed arena name to address, data/arenas.json
     # "Also worth knowing" sources, set by the build (see build.load_worth):
     # tonight's referee crews, the referee slugs that have a page, and the
     # career matchup pages (sources/matchups.Matchups).
@@ -264,4 +265,5 @@ def load_context(
         countries=load_countries(data_dir),
         nationalities=nationalities or {},
         team_colors=load_team_colors(data_dir),
+        arenas=load_arenas(data_dir),
     )

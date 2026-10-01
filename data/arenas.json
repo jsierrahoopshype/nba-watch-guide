@@ -1,0 +1,595 @@
+{
+  "_meta": {
+    "purpose": "Street address of every arena in the 2026-27 schedule feed, for the location of the SportsEvent JSON-LD. Keys are the arena names exactly as the feed spells them (arenaName).",
+    "rules": "Only entries with verified true are used. A game at an arena that is missing here or not verified gets no Event: a wrong address is worse than none.",
+    "method": "Search limited to the official domain (direct fetch blocked in the build sandbox), plus a dated independent listing.",
+    "last_checked": "2026-10-01",
+    "kind": "home: the team's regular arena. alternate: a second home arena (Spurs in Austin). neutral: an international or neutral-site game; home is the designated home team."
+  },
+  "arenas": {
+    "TD Garden": {
+      "home": "BOS",
+      "kind": "home",
+      "address": {
+        "streetAddress": "100 Legends Way",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "postalCode": "02114",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.tdgarden.com/plan-your-visit/directions-parking/directions",
+        "https://www.yelp.com/biz/td-garden-boston-4"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Barclays Center": {
+      "home": "BKN",
+      "kind": "home",
+      "address": {
+        "streetAddress": "620 Atlantic Avenue",
+        "addressLocality": "Brooklyn",
+        "addressRegion": "NY",
+        "postalCode": "11217",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.barclayscenter.com/center-info/about-us",
+        "https://www.livenation.com/venue/KovZ917AtP3/barclays-center-events"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Madison Square Garden": {
+      "home": "NYK",
+      "kind": "home",
+      "address": {
+        "streetAddress": "4 Pennsylvania Plaza",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10001",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.msg.com/madison-square-garden/directions",
+        "https://www.yelp.com/biz/madison-square-garden-new-york"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Xfinity Mobile Arena": {
+      "home": "PHI",
+      "kind": "home",
+      "address": {
+        "streetAddress": "3601 S. Broad St.",
+        "addressLocality": "Philadelphia",
+        "addressRegion": "PA",
+        "postalCode": "19148",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.xfinitymobilearena.com/plan-your-visit/directions",
+        "https://www.yelp.com/biz/wells-fargo-center-philadelphia"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Scotiabank Arena": {
+      "home": "TOR",
+      "kind": "home",
+      "address": {
+        "streetAddress": "40 Bay Street",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "postalCode": "M5J 2X2",
+        "addressCountry": "CA"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.scotiabankarena.com/venue-information/contact-us",
+        "https://www.ticketmaster.ca/scotiabank-arena-tickets-toronto/venue/131157"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Postal code M5J 2X2 as Ticketmaster.ca, AXS and Live Nation list it; a search of the official site returned M5J 2L2. The site owner chose M5J 2X2 on 2026-10-01."
+    },
+    "United Center": {
+      "home": "CHI",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1901 W. Madison St.",
+        "addressLocality": "Chicago",
+        "addressRegion": "IL",
+        "postalCode": "60612",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.unitedcenter.com/venue/directions-parking/",
+        "https://www.livenation.com/venue/KovZpa2M7e/united-center-events"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Rocket Arena": {
+      "home": "CLE",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1 Center Court",
+        "addressLocality": "Cleveland",
+        "addressRegion": "OH",
+        "postalCode": "44115",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.rocketarena.com/directions-parking",
+        "https://www.yelp.com/biz/rocket-arena-cleveland"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Little Caesars Arena": {
+      "home": "DET",
+      "kind": "home",
+      "address": {
+        "streetAddress": "2645 Woodward Avenue",
+        "addressLocality": "Detroit",
+        "addressRegion": "MI",
+        "postalCode": "48201",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.313presents.com/venue/little-caesars-arena",
+        "https://www.livenation.com/venue/KovZ917A25V/little-caesars-arena-events"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Official site is 313presents.com (the operator)."
+    },
+    "Gainbridge Fieldhouse": {
+      "home": "IND",
+      "kind": "home",
+      "address": {
+        "streetAddress": "125 South Pennsylvania St.",
+        "addressLocality": "Indianapolis",
+        "addressRegion": "IN",
+        "postalCode": "46204",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.gainbridgefieldhouse.com/plan-your-visit/directions-parking",
+        "https://www.livenation.com/venue/KovZpZA6keIA/gainbridge-fieldhouse-events"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Fiserv Forum": {
+      "home": "MIL",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1111 Vel R. Phillips Ave",
+        "addressLocality": "Milwaukee",
+        "addressRegion": "WI",
+        "postalCode": "53203",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.fiservforum.com/connect/contact-us",
+        "https://www.livenation.com/venue/KovZ917A_fV/fiserv-forum-events"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "State Farm Arena": {
+      "home": "ATL",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1 State Farm Drive",
+        "addressLocality": "Atlanta",
+        "addressRegion": "GA",
+        "postalCode": "30303",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.statefarmarena.com/contact-information",
+        "https://www.ticketmaster.com/state-farm-arena-tickets-atlanta/venue/114689"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Spectrum Center": {
+      "home": "CHA",
+      "kind": "home",
+      "address": {
+        "streetAddress": "333 East Trade Street",
+        "addressLocality": "Charlotte",
+        "addressRegion": "NC",
+        "postalCode": "28202",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.spectrumcentercharlotte.com/plan-your-visit/directions-parking",
+        "https://www.livenation.com/venue/KovZpZA6AEIA/spectrum-center-events"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Kaseya Center": {
+      "home": "MIA",
+      "kind": "home",
+      "address": {
+        "streetAddress": "601 Biscayne Boulevard",
+        "addressLocality": "Miami",
+        "addressRegion": "FL",
+        "postalCode": "33132",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.kaseyacenter.com/plan-your-visit/directions-parking",
+        "https://www.yelp.com/biz/kaseya-center-miami-2"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Kia Center": {
+      "home": "ORL",
+      "kind": "home",
+      "address": {
+        "streetAddress": "400 West Church Street",
+        "addressLocality": "Orlando",
+        "addressRegion": "FL",
+        "postalCode": "32801",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.kiacenter.com/directions-and-parking",
+        "https://www.yelp.com/biz/kia-center-orlando"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Office suite (Suite 200) left out: it is the venue address that matters."
+    },
+    "Capital One Arena": {
+      "home": "WAS",
+      "kind": "home",
+      "address": {
+        "streetAddress": "601 F Street, N.W.",
+        "addressLocality": "Washington",
+        "addressRegion": "DC",
+        "postalCode": "20004",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.capitalonearena.com/directions-parking",
+        "https://www.yelp.com/biz/capital-one-arena-washington"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Ball Arena": {
+      "home": "DEN",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1000 Chopper Circle",
+        "addressLocality": "Denver",
+        "addressRegion": "CO",
+        "postalCode": "80204",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.ballarena.com/plan-your-visit/parking-directions",
+        "https://www.yelp.com/biz/ball-arena-denver"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Target Center": {
+      "home": "MIN",
+      "kind": "home",
+      "address": {
+        "streetAddress": "600 1st Avenue North",
+        "addressLocality": "Minneapolis",
+        "addressRegion": "MN",
+        "postalCode": "55403-1416",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.targetcenter.com/plan-your-visit-1/getting_here",
+        "https://www.yelp.com/biz/target-center-minneapolis"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Paycom Center": {
+      "home": "OKC",
+      "kind": "home",
+      "address": {
+        "streetAddress": "100 W Reno Ave.",
+        "addressLocality": "Oklahoma City",
+        "addressRegion": "OK",
+        "postalCode": "73102",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.paycomcenter.com/plan-your-visit/directions-visitor-info",
+        "https://m.yelp.com/biz/paycom-center-oklahoma-city"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Moda Center": {
+      "home": "POR",
+      "kind": "home",
+      "address": {
+        "streetAddress": "One Center Court",
+        "addressLocality": "Portland",
+        "addressRegion": "OR",
+        "postalCode": "97227",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.rosequarter.com/plan-your-visit/directions-transportation",
+        "https://www.yelp.com/biz/moda-center-portland-2"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Official site is rosequarter.com (the operator)."
+    },
+    "Delta Center": {
+      "home": "UTA",
+      "kind": "home",
+      "address": {
+        "streetAddress": "301 W. South Temple",
+        "addressLocality": "Salt Lake City",
+        "addressRegion": "UT",
+        "postalCode": "84101",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.deltacenter.com/contact/",
+        "https://www.yelp.com/biz/delta-center-salt-lake-city"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Chase Center": {
+      "home": "GSW",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1 Warriors Way",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "postalCode": "94158",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://chasecenter.com/plan-your-visit/transportation/",
+        "https://www.yelp.com/biz/chase-center-san-francisco-2"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Intuit Dome": {
+      "home": "LAC",
+      "kind": "home",
+      "address": {
+        "streetAddress": "3930 W Century Blvd",
+        "addressLocality": "Inglewood",
+        "addressRegion": "CA",
+        "postalCode": "90303",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.intuitdome.com/plan-your-visit/how-to-get-here",
+        "https://us.trip.com/travel-guide/attraction/inglewood/intuit-dome-146532332/"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Crypto.com Arena": {
+      "home": "LAL",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1111 S. Figueroa Street",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "postalCode": "90015",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.cryptoarena.com/plan-your-visit/getting-here/directions",
+        "https://www.findglocal.com/US/Los-Angeles/21466446456/Crypto.com-Arena"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Mortgage Matchup Center": {
+      "home": "PHX",
+      "kind": "home",
+      "address": {
+        "streetAddress": "201 E. Jefferson St.",
+        "addressLocality": "Phoenix",
+        "addressRegion": "AZ",
+        "postalCode": "85004",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://mortgagematchupcenter.com/get-in-touch/contact-us/",
+        "https://www.yelp.com/biz/mortgage-matchup-center-phoenix"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Golden 1 Center": {
+      "home": "SAC",
+      "kind": "home",
+      "address": {
+        "streetAddress": "500 David J Stern Walk",
+        "addressLocality": "Sacramento",
+        "addressRegion": "CA",
+        "postalCode": "95814",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.golden1center.com/visit/directions-and-parking/",
+        "https://www.yelp.com/biz/golden-1-center-sacramento"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "American Airlines Center": {
+      "home": "DAL",
+      "kind": "home",
+      "address": {
+        "streetAddress": "2500 Victory Ave.",
+        "addressLocality": "Dallas",
+        "addressRegion": "TX",
+        "postalCode": "75219",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.americanairlinescenter.com/plan-your-visit/directions",
+        "https://www.yelp.com/biz/american-airlines-center-dallas"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Toyota Center": {
+      "home": "HOU",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1510 Polk Street",
+        "addressLocality": "Houston",
+        "addressRegion": "TX",
+        "postalCode": "77002",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.toyotacenter.com/connect-with-us/contact-us",
+        "https://www.yelp.com/biz/toyota-center-houston"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "FedExForum": {
+      "home": "MEM",
+      "kind": "home",
+      "address": {
+        "streetAddress": "191 Beale Street",
+        "addressLocality": "Memphis",
+        "addressRegion": "TN",
+        "postalCode": "38103",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://fedexforum.com/contact-us",
+        "https://www.ticketmaster.com/fedexforum-tickets-memphis/venue/222094"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Smoothie King Center": {
+      "home": "NOP",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1501 Dave Dixon Drive",
+        "addressLocality": "New Orleans",
+        "addressRegion": "LA",
+        "postalCode": "70113",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.smoothiekingcenter.com/contact-us/location-and-phone-directory",
+        "https://www.yelp.com/biz/smoothie-king-center-new-orleans-4"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Frost Bank Center": {
+      "home": "SAS",
+      "kind": "home",
+      "address": {
+        "streetAddress": "1 Frost Bank Center Drive",
+        "addressLocality": "San Antonio",
+        "addressRegion": "TX",
+        "postalCode": "78219",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.frostbankcenter.com/plan-your-visit/directions",
+        "https://www.yelp.com/biz/frost-bank-center-san-antonio"
+      ],
+      "last_checked": "2026-10-01"
+    },
+    "Moody Center": {
+      "home": "SAS",
+      "kind": "alternate",
+      "address": {
+        "streetAddress": "2001 Robert Dedman Drive",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78712",
+        "addressCountry": "US"
+      },
+      "verified": true,
+      "sources": [
+        "https://moodycenteratx.com/contact/",
+        "https://www.yelp.com/biz/moody-center-austin-3"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Spurs home games in Austin (3 in the 2026-27 feed)."
+    },
+    "Arena CDMX": {
+      "home": "IND",
+      "kind": "neutral",
+      "address": {
+        "streetAddress": "Av. de las Granjas 800, Santa Barbara, Azcapotzalco",
+        "addressLocality": "Ciudad de México",
+        "addressRegion": "CDMX",
+        "postalCode": "02230",
+        "addressCountry": "MX"
+      },
+      "verified": true,
+      "sources": [
+        "https://web.arenacdmx.com/",
+        "https://www.goliiive.com/venue/arena-ciudad-de-mexico"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Neutral site: NBA Mexico City Game (Nuggets at Pacers, 2026-11-07). Sources give one line; split by us."
+    },
+    "Accor Arena": {
+      "home": "SAS",
+      "kind": "neutral",
+      "address": {
+        "streetAddress": "8 boulevard de Bercy",
+        "addressLocality": "Paris",
+        "postalCode": "75012",
+        "addressCountry": "FR"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.accorarena.com/en/plan-your-visit/getting-to-the-accor-arena",
+        "https://www.sortiraparis.com/en/lieux/56004-accor-arena"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Neutral site: NBA Paris Game (Pelicans at Spurs, 2027-01-14). No source named the region, so it is left out."
+    },
+    "Co-op Live": {
+      "home": "NOP",
+      "kind": "neutral",
+      "address": {
+        "streetAddress": "1 Sports City Way, Etihad Campus",
+        "addressLocality": "Manchester",
+        "postalCode": "M11 3DU",
+        "addressCountry": "GB"
+      },
+      "verified": true,
+      "sources": [
+        "https://www.cooplive.com/getting-here-lkzg",
+        "https://www.skiddle.com/whats-on/Manchester/Co-Op-Live-1-Sports-City-Way,-Etihad-Campus,-M11-3DU/"
+      ],
+      "last_checked": "2026-10-01",
+      "note": "Neutral site: Spurs at Pelicans, 2027-01-17. No source named the region, so it is left out."
+    }
+  }
+}

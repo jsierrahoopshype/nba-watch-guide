@@ -98,7 +98,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         blocks = [seo.breadcrumbs(trail)]
         for g in [g for g in games if g.date_et >= ctx.today][:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(g, ctx.team_name(g.home_tricode), ctx.team_name(g.away_tricode),
-                                     all_channels(ctx, g), url)
+                                     url, ctx.arenas.get(g.arena))
             if event:
                 blocks.append(event)
 

@@ -23,8 +23,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
     blocks = [seo.breadcrumbs(crumb_trail(ctx, text["h1"], url))]
     for card in cards:
         view = card["view"]
-        event = seo.sports_event(view["game"], view["home_name"], view["away_name"],
-                                 view["channels"], url)
+        event = seo.sports_event(view["game"], view["home_name"], view["away_name"], url,
+                                 ctx.arenas.get(view["game"].arena))
         if event:
             blocks.append(event)
 
