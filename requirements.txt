@@ -1,6 +1,8 @@
 Jinja2>=3.1
 curl_cffi>=0.7
-# Share images (watchguide/share.py): resvg draws the cards, fonttools
-# measures the text. resvg-py is pinned so unchanged cards keep their bytes.
+# Share images (watchguide/share.py): resvg draws the cards, Pillow saves
+# them as JPEG, fonttools measures the text. resvg-py and Pillow are pinned
+# so unchanged cards keep their bytes.
 resvg-py==0.5.0
+Pillow==12.3.0
 fonttools>=4.40
