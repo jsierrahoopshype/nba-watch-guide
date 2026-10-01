@@ -55,6 +55,12 @@ When they do:
    whether `data/build.json` served this commit and lists each page's HTTP
    status, title and noindex. A failed live check means hoopsmatic.com did
    not serve this commit within 10 minutes.
+5. A green run is not proof of publishing. Read the job's steps and confirm
+   in the report that "Publish to gh-pages" and "Live check" each ran and
+   succeeded (conclusion `success`, not `skipped`). If either was skipped,
+   the merge is not live: say so, then handle it as in step 3.
+   `tests/test_publish_runs.py` fails if a publish or live-check condition
+   would skip on push or schedule runs.
 
 ## How the loop works
 

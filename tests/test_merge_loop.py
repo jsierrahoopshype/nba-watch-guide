@@ -40,7 +40,11 @@ def test_live_check_runs_after_publish_and_before_the_final_failure():
     assert steps.index("Live check") == steps.index("Publish to gh-pages") + 1
     assert steps[-1] == "Fail if the availability feed was not trusted"
     step = WORKFLOW[WORKFLOW.index("- name: Live check"):]
-    assert "if: inputs.publish != false" in step[:400]
+    publish = WORKFLOW[WORKFLOW.index("- name: Publish to gh-pages"):]
+    condition = re.search(r"\n\s+if: (.+)", publish[:400]).group(1)
+    # Same condition as publish; tests/test_publish_runs.py checks it runs on
+    # push, schedule and a default dispatch.
+    assert f"if: {condition}" in step[:400]
     assert 'python scripts/live_check.py --site site --sha "$GITHUB_SHA"' in step[:400]
 
 
