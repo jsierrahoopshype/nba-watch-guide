@@ -574,3 +574,37 @@ hr.rule { border: 0; border-top: 1px solid var(--border-soft); margin: 28px 0; }
 /* Every disclosure summary (sources, "Why can't I watch", Out lists) is a
    44px tap target. */
 details > summary { min-height: var(--tap); display: flex; align-items: center; cursor: pointer; }
+
+/* ---------- my team (hub picker and card, team page button) ----------
+   The team is kept on this device only. The picker row is the same height
+   with or without a saved team (Clear keeps its space), and the card is put
+   in place by my-team.js before first paint, so nothing shifts. */
+.my-team { margin: 16px 0 0; }
+.myt-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.myt-pick-label { font-weight: 600; font-size: 0.9rem; }
+.myt-pick select { min-height: var(--tap); padding: 0 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font: inherit; font-size: 0.9rem; max-width: 100%; }
+.myt-clear { min-height: var(--tap); padding: 0 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font: inherit; font-size: 0.85rem; cursor: pointer; visibility: hidden; }
+.my-team[data-saved] .myt-clear { visibility: visible; }
+.myt-hint { flex-basis: 100%; }
+.myt-slot:empty { display: none; }
+.myt-slot { margin-top: 12px; }
+.myt-card { background: linear-gradient(var(--tc, var(--accent)), var(--tc, var(--accent))) top / 100% 3px no-repeat, var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+.myt-head { margin: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-2); }
+.myt-teams { margin: 6px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-weight: 600; }
+.myt-teams .logo { flex: none; }
+.myt-at { color: var(--text-2); font-weight: 400; }
+.myt-channels { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.myt-when { margin: 8px 0 0; font-size: 0.9rem; }
+.myt-link { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; font-size: 0.9rem; }
+.myt-make-row { margin: 10px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+/* Both labels share one cell, so the button is as wide as the longer one
+   whichever is showing. */
+.myt-make { display: inline-grid; min-height: var(--tap); padding: 0 14px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: inherit; font-size: 0.9rem;
+  font-weight: 600; cursor: pointer; align-items: center; }
+.myt-make > span { grid-row: 1; grid-column: 1; }
+.myt-make[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-dim); color: var(--accent-ink); }
+.myt-make[aria-pressed="true"] .myt-l-make, .myt-make[aria-pressed="false"] .myt-l-mine { visibility: hidden; }

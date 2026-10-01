@@ -8,7 +8,8 @@ from .. import config, seo, share, worth
 from ..context import SiteContext
 from ..pairs import pair_path
 from ..render import Page, format_block, usd
-from .common import accent_style, crumb_trail, face, players_to_watch, watch_view
+from ..coverage import channels_for_game
+from .common import accent_style, chips, crumb_trail, face, players_to_watch, watch_view
 
 
 def national_partners(ctx: SiteContext) -> list[dict]:
@@ -66,6 +67,26 @@ def team_summary(ctx: SiteContext, team) -> dict[str, str]:
 
 def team_cards(ctx: SiteContext) -> list[dict]:
     return [{"team": t, "summary": team_summary(ctx, t)} for t in ctx.teams]
+
+
+def my_team_cards(ctx: SiteContext) -> list[dict]:
+    """One compact next-game card per team for "My team": the page script
+    shows the reader's saved team's card first. Every card is in the HTML
+    (inside a <template>), so the page is the same for everyone and nothing
+    is fetched. Channels are the team's own fan view, as on its page."""
+    tba = ctx.labels().get("tba", "TBA")
+    no_game = ctx.copy.get("my_team", {}).get("no_game", "").format(season=ctx.season)
+    cards = []
+    for team in sorted(ctx.teams, key=lambda t: t.full_name):
+        game = ctx.next_game(team.tricode)
+        card = {"team": team, "game": game, "accent": ctx.team_accent(team.tricode), "no_game": no_game}
+        if game:
+            card["away"] = ctx.by_tricode.get(game.away_tricode)
+            card["home"] = ctx.by_tricode.get(game.home_tricode)
+            card["channels"] = chips(ctx, channels_for_game(game, team.tricode, ctx.local(team.slug), tba))
+            card["pair_path"] = pair_path(game, ctx.by_tricode)
+        cards.append(card)
+    return cards
 
 
 def country_cards(ctx: SiteContext) -> list[dict]:
@@ -178,6 +199,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
         ota_teams=free_ota_teams(ctx),
         showcase=showcase_rows(ctx),
         team_cards=team_cards(ctx),
+        my_team=my_team_cards(ctx),
+        my_team_text=ctx.copy.get("my_team", {}),
         country_cards=country_cards(ctx),
         national_footnote=national_footnote(ctx),
         tonight_text=ctx.copy.get("tonight", {}),

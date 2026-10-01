@@ -240,6 +240,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             watching=_watching(ctx, local, text),
             missing=missing,
             trail=crumb_trail(ctx, team.full_name, url),
+            my_team_text=ctx.copy.get("my_team", {}),
         )
         pages.append(Page(out_path=f"{team.slug}/index.html", url=url, html=html,
                           lastmod=ctx.today, meta={"slug": team.slug, "share": card,

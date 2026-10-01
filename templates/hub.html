@@ -6,6 +6,50 @@
   <p class="lede">{{ text.intro }}</p>
 </div>
 
+{%- set mt = my_team_text %}
+{#- "My team": the picker and the slot are the same HTML for everyone. A
+    saved team (localStorage hm-watch-team, set on this device only) gets
+    its card copied from the template below into the slot by my-team.js,
+    which runs right here while the page is parsed, so nothing below moves
+    once it is painted. The template is inert: not shown, not fetched. #}
+<section class="my-team" data-my-team-root aria-label="{{ mt.picker_label }}">
+  <div class="myt-pick">
+    <label class="myt-pick-label" for="my-team-select">{{ mt.picker_label }}</label>
+    <select id="my-team-select" data-my-team-select>
+      <option value="">{{ mt.picker_prompt }}</option>
+      {%- for card in my_team %}
+      <option value="{{ card.team.slug }}">{{ card.team.full_name }}</option>
+      {%- endfor %}
+    </select>
+    <button type="button" class="myt-clear" data-my-team-clear>{{ mt['clear_label'] }}</button>
+    <span class="myt-hint small muted">{{ mt.picker_hint }}</span>
+  </div>
+  <div class="myt-slot" data-my-team-slot></div>
+</section>
+<template id="my-team-cards" data-volatile>
+  {%- for card in my_team %}
+  <article class="myt-card" data-team="{{ card.team.slug }}"{% if card.accent %} style="--tc:{{ card.accent }}"{% endif %}>
+    <p class="myt-head">{{ mt.card_heading }}</p>
+    {%- if card.game %}
+    <p class="myt-teams">
+      {%- for side in [card.away, card.home] %}
+      {%- if side %}<img class="logo" src="{{ asset('assets/logos/' ~ side.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt=""><span class="myt-name">{{ side.short_name }}</span>{% endif %}
+      {%- if loop.first %} <span class="myt-at">{{ mt.at }}</span> {% endif %}
+      {%- endfor %}
+    </p>
+    {#- Where to watch first, then the tip time (the game view order). #}
+    <div class="myt-channels" data-part="watch">{% with channels = card.channels %}{% include "partials/channels.html" %}{% endwith %}</div>
+    <p class="myt-when" data-part="when">{% with game = card.game, with_date = true %}{% include "partials/game_time.html" %}{% endwith %}</p>
+    {%- else %}
+    <p class="myt-teams"><img class="logo" src="{{ asset('assets/logos/' ~ card.team.tricode|lower ~ '.svg') }}" width="28" height="28" loading="lazy" decoding="async" alt=""><span class="myt-name">{{ card.team.short_name }}</span></p>
+    <p class="myt-when small muted">{{ card.no_game }}</p>
+    {%- endif %}
+    <a class="myt-link" href="{{ card.team.path }}">{{ mt.team_link.format(team=card.team.short_name) }}</a>
+  </article>
+  {%- endfor %}
+</template>
+<script src="{{ asset('assets/my-team.js') }}"></script>
+
 <section class="hub-games block" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
 {%- if showcase.rows %}
 <div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2><span class="sub">{{ text.games_heading_sub }}</span></div>
