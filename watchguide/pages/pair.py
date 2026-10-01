@@ -95,9 +95,10 @@ def build(ctx: SiteContext, env) -> list[Page]:
                                 view["channels"] if view else [])
         leaf = safe_format(text["breadcrumb"], **fields)
         trail = crumb_trail(ctx, leaf, url)
-        shown = nxt or games[-1]
-        card = share.pair_card(ctx, slug, ctx.by_tricode[shown.away_tricode],
-                               ctx.by_tricode[shown.home_tricode])
+        card = share.pair_card(
+            ctx, slug, a, b,
+            share.game_line(date_label(nxt.date_et), et_label(nxt),
+                            [c["label"] for c in chips(ctx, all_channels(ctx, nxt))]) if nxt else "")
         blocks = [seo.breadcrumbs(trail)]
         for g in [g for g in games if g.date_et >= ctx.today][:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(g, ctx.team_name(g.home_tricode), ctx.team_name(g.away_tricode),

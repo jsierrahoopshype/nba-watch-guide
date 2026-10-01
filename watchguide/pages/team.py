@@ -196,7 +196,11 @@ def build(ctx: SiteContext, env) -> list[Page]:
                  for state in (OUT_OF_MARKET, IN_MARKET)]
         missing = _missing(ctx, schedule, coverages) if remaining else None
 
-        card = share.team_card(ctx, team)
+        card = share.team_card(
+            ctx, team, nxt, ctx.by_tricode[nxt.opponent_of(team.tricode)].short_name if nxt else "",
+            share.game_line(date_label(nxt.date_et), et_label(nxt),
+                            [c["label"] for c in chips(ctx, channels_for_game(nxt, team.tricode, local, tba))])
+            if nxt else "")
         blocks = [seo.breadcrumbs(crumb_trail(ctx, team.full_name, url))]
         for game in remaining[:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(

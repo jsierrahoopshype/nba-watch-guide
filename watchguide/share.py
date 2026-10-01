@@ -1,15 +1,18 @@
 """Share images (og:image): one 1200x630 PNG per page, drawn at build time.
 
-Each card is a small SVG (the self-hosted team logos and flags embedded,
-DM Sans text) rendered to PNG by resvg. Nothing is fetched: the logos and
-flags come from assets/, the fonts from watchguide/share_fonts (static
-instances of the self-hosted DM Sans, see scripts/make_share_fonts.py).
+The look follows the HoopsMatic share cards (the Player Comparison card):
+dark indigo background with purple and pink glows, rounded panels, Poppins.
+Each card is a small SVG (the self-hosted team logos and flags embedded)
+rendered to PNG by resvg. Nothing is fetched: logos and flags come from
+assets/, the fonts from watchguide/share_fonts (Poppins, SIL OFL, see
+scripts/make_share_fonts.py).
 
 An image is drawn again only when its inputs change. data/share_images.json
 in the published tree maps each image to a hash of the SVG it was drawn
 from, the fonts and the renderer version; the restore step brings the last
 published images and that file back before each run, so an unchanged card
-is skipped and its bytes on gh-pages stay the same.
+is skipped and its bytes on gh-pages stay the same. Team and pair cards
+name the next game, so they are drawn again after each game.
 """
 
 from __future__ import annotations
@@ -28,25 +31,31 @@ WIDTH, HEIGHT = 1200, 630
 SHARE_DIR = "share"
 STATE_FILE = "data/share_images.json"
 FONT_DIR = Path(__file__).resolve().parent / "share_fonts"
-FONTS = [FONT_DIR / "DMSans-Medium.ttf", FONT_DIR / "DMSans-Bold.ttf"]
+WEIGHTS = {500: "Medium", 600: "SemiBold", 700: "Bold", 800: "ExtraBold"}
+FONTS = [FONT_DIR / f"Poppins-{style}.ttf" for style in WEIGHTS.values()]
 # Bump when the layout changes, so every card is drawn again.
-LAYOUT_VERSION = "1"
+LAYOUT_VERSION = "2"
 
-INK = "#1d1d1f"            # --text
-INK_2 = "#5a6070"          # --text-2
-BRAND = "#e8531a"          # --brand
-PAPER = "#ffffff"          # --surface
-RULE = "#e2e5e9"           # --border-soft
-MARGIN = 80
+# The HoopsMatic share-card palette (nba-trade-card).
+BG_TOP = "#0d0a22"
+BG_BOTTOM = "#241f4d"
+BRAND_A = "#8B7CFF"
+BRAND_B = "#FF5CA8"
+INK = "#f2f0ff"
+LAVENDER = "#a29bfe"
+MARGIN = 64
+FOOTER = "hoopsmatic.com/how-to-watch"
+KICKER = "HOOPSMATIC · HOW TO WATCH"
 
 
 @dataclass(frozen=True)
 class Card:
     name: str                       # file stem: share/<name>.png
-    headline: str
-    subline: str
+    headline: str                   # the big line (a pair card's is "A vs. B")
+    label: str = ""                 # over the detail line, drawn in capitals: "Next game · vs Heat"
+    line: str = ""                  # "Fri Dec 25 · 5:00 pm ET · ABC or ESPN"
     images: tuple[str, ...] = ()    # paths under assets/: logos/bos.svg, flags/es.svg
-    accents: tuple[str, ...] = ()   # top bar colours, one per band
+    names: tuple[str, ...] = ()     # a pair card's two team names, left then right
     kind: str = "plain"             # plain, team, flag, pair
 
     @property
@@ -59,7 +68,10 @@ class Card:
 
     @property
     def alt(self) -> str:
-        return f"{self.headline}, {self.subline}"
+        parts = [self.headline]
+        if self.line:
+            parts.append(f"{self.label}: {self.line}" if self.label else self.line)
+        return ". ".join(parts)
 
 
 def meta(card: Card) -> dict[str, str]:
@@ -72,147 +84,239 @@ def meta(card: Card) -> dict[str, str]:
 # The cards
 # --------------------------------------------------------------------------
 
-def _subline(ctx) -> str:
-    return f"{ctx.season} · {ctx.copy.get('site_name', 'HoopsMatic')}"
+def join_or(names: list[str]) -> str:
+    """'ABC', 'ABC or ESPN', 'ABC, ESPN or NBA TV': alternatives, never 'and'."""
+    names = [n for n in names if n]
+    if len(names) <= 1:
+        return "".join(names)
+    return ", ".join(names[:-1]) + " or " + names[-1]
 
 
-def _logo(team) -> str:
-    return f"logos/{team.tricode.lower()}.svg"
+def game_line(date: str, time: str, channels: list[str]) -> str:
+    """'<date> · <time> ET · <channel>', the channel part fitted later."""
+    return " · ".join(x for x in (date, time, join_or(channels)) if x)
 
 
 def hub_card(ctx) -> Card:
-    return Card("hub", "How to watch the NBA", _subline(ctx), accents=(BRAND,))
+    return Card("hub", "How to watch the NBA", f"{ctx.season} season",
+                "TV and streaming for all 30 teams")
 
 
 def tonight_card(ctx) -> Card:
-    return Card("tonight", "How to watch tonight's NBA games", _subline(ctx), accents=(BRAND,))
+    return Card("tonight", "How to watch tonight's NBA games", "Tonight",
+                "Every game ranked, with where to watch it")
 
 
-def team_card(ctx, team) -> Card:
-    return Card(team.slug, f"How to watch the {team.full_name}", _subline(ctx),
-                images=(_logo(team),), accents=(ctx.team_accent(team.tricode) or BRAND,), kind="team")
+def team_card(ctx, team, next_game=None, opponent: str = "", line: str = "") -> Card:
+    """`line` is the next game's date, time and channels (game_line)."""
+    label = ""
+    if next_game is not None and opponent:
+        where = "vs" if next_game.is_home_for(team.tricode) else "at"
+        label = f"Next game · {where} {opponent}"
+    return Card(team.slug, f"How to watch the {team.full_name}", label,
+                line or f"{ctx.season} season", images=(_logo(team),), kind="team")
 
 
 def country_card(ctx, country) -> Card:
     # The same place phrase as the page's H1 ("the UK", "Spain").
     place = (ctx.copy.get("country", {}).get("places") or {}).get(country.slug, country.name)
     images = (f"flags/{country.flag}.svg",) if country.flag else ()
-    return Card(country.slug, f"How to watch the NBA in {place}", _subline(ctx),
-                images=images, accents=(BRAND,), kind="flag" if images else "plain")
+    return Card(country.slug, f"How to watch the NBA in {place}", f"{ctx.season} season",
+                "TV, streaming and tip-off times", images=images, kind="flag" if images else "plain")
 
 
-def pair_card(ctx, slug: str, away, home) -> Card:
-    return Card(slug, f"{away.short_name} vs. {home.short_name}: how to watch", _subline(ctx),
-                images=(_logo(away), _logo(home)),
-                accents=(ctx.team_accent(away.tricode) or BRAND, ctx.team_accent(home.tricode) or BRAND),
+def pair_card(ctx, slug: str, first, second, line: str = "") -> Card:
+    """`first` and `second` in the page title's order."""
+    return Card(slug, f"{first.short_name} vs. {second.short_name}",
+                "Next meeting" if line else f"{ctx.season} season series",
+                line or "Every meeting with TV channels and streaming",
+                images=(_logo(first), _logo(second)), names=(first.short_name, second.short_name),
                 kind="pair")
 
 
+def _logo(team) -> str:
+    return f"logos/{team.tricode.lower()}.svg"
+
+
 # --------------------------------------------------------------------------
-# Text measuring (DM Sans advance widths, so lines wrap and fit)
+# Text measuring (Poppins advance widths, so lines wrap and fit)
 # --------------------------------------------------------------------------
 
 @lru_cache(maxsize=None)
-def _metrics(weight: str) -> tuple[dict[int, int], int]:
+def _metrics(weight: int) -> tuple[dict[int, int], int]:
     from fontTools.ttLib import TTFont
-    font = TTFont(FONT_DIR / f"DMSans-{weight}.ttf")
+    font = TTFont(FONT_DIR / f"Poppins-{WEIGHTS[weight]}.ttf")
     cmap = font.getBestCmap()
     hmtx = font["hmtx"].metrics
     return {cp: hmtx[glyph][0] for cp, glyph in cmap.items()}, font["head"].unitsPerEm
 
 
-def text_width(text: str, size: float, weight: str = "Bold") -> float:
+def text_width(text: str, size: float, weight: int = 800, spacing: float = 0) -> float:
     """Width in pixels. Raises ValueError for a character the font lacks,
     since resvg would draw nothing for it."""
     advances, upm = _metrics(weight)
     missing = sorted({ch for ch in text if ord(ch) not in advances})
     if missing:
-        raise ValueError(f"DM Sans has no glyph for {''.join(missing)!r} in {text!r}")
-    return sum(advances[ord(ch)] for ch in text) * size / upm
+        raise ValueError(f"Poppins has no glyph for {''.join(missing)!r} in {text!r}")
+    return sum(advances[ord(ch)] for ch in text) * size / upm + spacing * max(len(text) - 1, 0)
 
 
-def fit(text: str, width: float, sizes=(68, 62, 56, 50, 44), max_lines: int = 2) -> tuple[float, list[str]]:
+def fit(text: str, width: float, sizes, weight: int = 800, max_lines: int = 2) -> tuple[float, list[str]]:
     """The biggest size at which `text` wraps into at most `max_lines` lines
     of `width` pixels, and those lines."""
     for size in sizes:
         lines: list[str] = []
         for word in text.split():
             trial = f"{lines[-1]} {word}" if lines else word
-            if lines and text_width(trial, size) <= width:
+            if lines and text_width(trial, size, weight) <= width:
                 lines[-1] = trial
             else:
                 lines.append(word)
-        if len(lines) <= max_lines and all(text_width(l, size) <= width for l in lines):
+        if len(lines) <= max_lines and all(text_width(l, size, weight) <= width for l in lines):
             return size, lines
     raise ValueError(f"{text!r} does not fit in {max_lines} lines of {width}px")
+
+
+def fit_line(text: str, width: float, sizes=(30, 28, 26, 24, 22), weight: int = 600) -> tuple[float, str]:
+    """One line: the biggest size that fits; past the smallest, channels are
+    dropped from the end ('ABC, ESPN or NBA TV' -> 'ABC, ESPN + 1 more'),
+    and as a last resort only counted ('3 channels'), so a long channel
+    name never stops a build."""
+    for size in sizes:
+        if text_width(text, size, weight) <= width:
+            return size, text
+    head, sep, channels = text.rpartition(" · ")
+    names = channels.replace(" or ", ", ").split(", ")
+    for keep in range(len(names) - 1, 0, -1):
+        short = f"{head}{sep}{', '.join(names[:keep])} + {len(names) - keep} more"
+        if text_width(short, sizes[-1], weight) <= width:
+            return sizes[-1], short
+    counted = f"{head}{sep}{len(names)} channels" if sep else text
+    if text_width(counted, sizes[-1], weight) <= width:
+        return sizes[-1], counted
+    raise ValueError(f"{text!r} does not fit in {width}px")
 
 
 # --------------------------------------------------------------------------
 # SVG and PNG
 # --------------------------------------------------------------------------
 
-def _image(rel: str, x: float, y: float, w: float, h: float) -> str:
+DEFS = (
+    '<defs>'
+    f'<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BG_TOP}"/>'
+    f'<stop offset="1" stop-color="{BG_BOTTOM}"/></linearGradient>'
+    f'<linearGradient id="brand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{BRAND_A}"/>'
+    f'<stop offset="1" stop-color="{BRAND_B}"/></linearGradient>'
+    f'<linearGradient id="vs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BRAND_A}"/>'
+    f'<stop offset="1" stop-color="{BRAND_B}"/></linearGradient>'
+    f'<radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="{BRAND_A}" stop-opacity="0.32"/>'
+    f'<stop offset="1" stop-color="{BRAND_A}" stop-opacity="0"/></radialGradient>'
+    f'<radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="{BRAND_B}" stop-opacity="0.26"/>'
+    f'<stop offset="1" stop-color="{BRAND_B}" stop-opacity="0"/></radialGradient>'
+    '</defs>'
+)
+
+
+def _image(rel: str, x: float, y: float, w: float, h: float, fill: bool = False, clip: str = "") -> str:
     data = base64.b64encode((config.ASSET_DIR / rel).read_bytes()).decode("ascii")
-    return (f'<image x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" '
-            f'preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,{data}"/>')
+    aspect = "xMidYMid slice" if fill else "xMidYMid meet"
+    clipped = f' clip-path="url(#{clip})"' if clip else ""
+    return (f'<image x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}"{clipped} '
+            f'preserveAspectRatio="{aspect}" href="data:image/svg+xml;base64,{data}"/>')
 
 
-def _text(lines: list[str], x: float, y: float, size: float, weight: int, fill: str,
-          anchor: str = "start") -> tuple[str, float]:
-    """<text> elements for `lines`, first baseline at y; returns the markup
-    and the baseline after the last line."""
+def _text(text: str, x: float, y: float, size: float, weight: int, fill: str,
+          anchor: str = "start", spacing: float = 0, opacity: float = 1) -> str:
+    extra = f' letter-spacing="{spacing:g}"' if spacing else ""
+    extra += f' fill-opacity="{opacity:g}"' if opacity != 1 else ""
+    return (f'<text x="{x:g}" y="{y:g}" font-family="Poppins" font-weight="{weight}" '
+            f'font-size="{size:g}" fill="{fill}" text-anchor="{anchor}"{extra}>{escape(text)}</text>')
+
+
+def _panel(x: float, y: float, w: float, h: float, image: str, pad: float) -> str:
+    """A rounded light panel with a brand-gradient edge; logos stay readable
+    whatever their colours. pad 0 is a flag, which fills the panel."""
+    if pad:
+        inner = _image(image, x + pad, y + pad, w - 2 * pad, h - 2 * pad)
+    else:
+        inner = (f'<clipPath id="panel"><rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="28"/></clipPath>'
+                 + _image(image, x, y, w, h, fill=True, clip="panel"))
+    return (f'<rect x="{x - 4:g}" y="{y - 4:g}" width="{w + 8:g}" height="{h + 8:g}" rx="32" fill="url(#brand)" fill-opacity="0.85"/>'
+            f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="28" fill="#ffffff"/>' + inner)
+
+
+def _frame(body: str) -> str:
+    kicker_w = text_width(KICKER, 22, 600, 3)
+    parts = [
+        f'<rect width="{WIDTH}" height="{HEIGHT}" fill="url(#bg)"/>',
+        f'<ellipse cx="160" cy="80" rx="520" ry="380" fill="url(#glowA)"/>',
+        f'<ellipse cx="1100" cy="600" rx="560" ry="400" fill="url(#glowB)"/>',
+        f'<circle cx="{MARGIN + 8}" cy="62" r="8" fill="{BRAND_B}"/>',
+        _text(KICKER, MARGIN + 28, 70, 22, 600, "#ffffff", spacing=3, opacity=0.75),
+        body,
+        f'<rect x="{MARGIN}" y="548" width="{WIDTH - 2 * MARGIN}" height="2" fill="#ffffff" fill-opacity="0.12"/>',
+        _text(FOOTER, WIDTH / 2, 597, 24, 600, "#ffffff", "middle", opacity=0.6),
+    ]
+    assert kicker_w < WIDTH - 2 * MARGIN
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
+            f'viewBox="0 0 {WIDTH} {HEIGHT}">' + DEFS + "".join(parts) + "</svg>")
+
+
+def _detail(card: Card, x: float, y: float, width: float, anchor: str = "start") -> str:
+    """The small-caps label and the detail line under it."""
     out = []
-    for line in lines:
-        out.append(f'<text x="{x:g}" y="{y:g}" font-family="DM Sans" font-weight="{weight}" '
-                   f'font-size="{size:g}" fill="{fill}" text-anchor="{anchor}">{escape(line)}</text>')
-        y += size * 1.12
-    return "".join(out), y - size * 1.12
+    if card.label:
+        out.append(_text(card.label.upper(), x, y, 20, 700, LAVENDER, anchor, spacing=2.5))
+        y += 46
+    if card.line:
+        size, line = fit_line(card.line, width)
+        out.append(_text(line, x, y, size, 600, INK, anchor))
+    return "".join(out)
 
 
 def svg(card: Card) -> str:
-    parts = [f'<rect width="{WIDTH}" height="{HEIGHT}" fill="{PAPER}"/>']
-    band = WIDTH / max(len(card.accents), 1)
-    for i, colour in enumerate(card.accents or (BRAND,)):
-        parts.append(f'<rect x="{i * band:g}" y="0" width="{band:g}" height="14" fill="{colour}"/>')
-    sub_size = 34
-
+    body: list[str] = []
     if card.kind == "pair":
-        box = 230
-        parts.append(_image(card.images[0], WIDTH / 2 - 120 - box, 70, box, box))
-        parts.append(_image(card.images[1], WIDTH / 2 + 120, 70, box, box))
-        vs, _ = _text(["vs."], WIDTH / 2, 70 + box / 2 + 18, 48, 500, INK_2, "middle")
-        parts.append(vs)
-        size, lines = fit(card.headline, WIDTH - 2 * MARGIN, max_lines=1, sizes=(64, 58, 52, 46))
-        head, last = _text(lines, WIDTH / 2, 420, size, 700, INK, "middle")
-        sub, _ = _text([card.subline], WIDTH / 2, last + 70, sub_size, 500, INK_2, "middle")
-        parts += [head, sub]
+        box, top = 220, 112
+        centres = (WIDTH / 2 - 300, WIDTH / 2 + 300)
+        for centre, image, name in zip(centres, card.images, card.names):
+            body.append(_panel(centre - box / 2, top, box, box, image, 26))
+            size, lines = fit(name, 420, (50, 46, 42, 38), max_lines=1)
+            body.append(_text(lines[0], centre, top + box + 66, size, 800, "#ffffff", "middle"))
+            bar = min(text_width(lines[0], size), 300)
+            body.append(f'<rect x="{centre - bar / 2:g}" y="{top + box + 84}" width="{bar:g}" height="6" rx="3" fill="url(#brand)"/>')
+        cy = top + box / 2
+        body.append(f'<circle cx="{WIDTH / 2:g}" cy="{cy:g}" r="50" fill="url(#vs)"/>'
+                    f'<circle cx="{WIDTH / 2:g}" cy="{cy:g}" r="50" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>')
+        body.append(_text("VS", WIDTH / 2, cy + 13, 36, 800, "#ffffff", "middle"))
+        body.append(_detail(card, WIDTH / 2, 470, WIDTH - 2 * MARGIN, "middle"))
     elif card.kind in ("team", "flag"):
         if card.kind == "team":
-            box_w = box_h = 300
+            w = h = 330
+            pad = 34
         else:
-            box_w, box_h = 300, 200
-        top = (HEIGHT - box_h) / 2 + 7
-        parts.append(_image(card.images[0], MARGIN, top, box_w, box_h))
-        if card.kind == "flag":
-            parts.append(f'<rect x="{MARGIN}" y="{top:g}" width="{box_w}" height="{box_h}" '
-                         f'fill="none" stroke="{RULE}" stroke-width="2"/>')
-        x = MARGIN + box_w + 60
-        size, lines = fit(card.headline, WIDTH - x - MARGIN)
-        block = size * 1.12 * (len(lines) - 1) + 70 + sub_size
-        y = (HEIGHT - block) / 2 + size * 0.72
-        head, last = _text(lines, x, y, size, 700, INK)
-        sub, _ = _text([card.subline], x, last + 70, sub_size, 500, INK_2)
-        parts += [head, sub]
+            w, h, pad = 330, 220, 0
+        top = 108 + (330 - h) / 2
+        body.append(_panel(MARGIN + 4, top, w, h, card.images[0], pad))
+        x = MARGIN + 4 + w + 64
+        width = WIDTH - x - MARGIN
+        size, lines = fit(card.headline, width, (60, 56, 52, 48, 44))
+        y = 200 if len(lines) == 2 else 230
+        for line in lines:
+            body.append(_text(line, x, y, size, 800, "#ffffff"))
+            y += size * 1.18
+        body.append(f'<rect x="{x}" y="{y - size * 0.62:g}" width="180" height="6" rx="3" fill="url(#brand)"/>')
+        body.append(_detail(card, x, y + 44, width))
     else:
-        size, lines = fit(card.headline, WIDTH - 2 * MARGIN, sizes=(84, 76, 68, 60))
-        block = size * 1.12 * (len(lines) - 1) + 80 + sub_size
-        y = (HEIGHT - block) / 2 + size * 0.72
-        head, last = _text(lines, MARGIN, y, size, 700, INK)
-        sub, _ = _text([card.subline], MARGIN, last + 80, sub_size, 500, INK_2)
-        parts += [head, sub]
-
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
-            f'viewBox="0 0 {WIDTH} {HEIGHT}">' + "".join(parts) + "</svg>")
+        width = WIDTH - 2 * MARGIN
+        size, lines = fit(card.headline, width, (84, 76, 68, 60))
+        y = 230 if len(lines) == 1 else 190
+        for line in lines:
+            body.append(_text(line, MARGIN, y, size, 800, "#ffffff"))
+            y += size * 1.15
+        body.append(f'<rect x="{MARGIN}" y="{y - size * 0.7:g}" width="220" height="7" rx="3.5" fill="url(#brand)"/>')
+        body.append(_detail(card, MARGIN, y + 40, width))
+    return _frame("".join(body))
 
 
 @lru_cache(maxsize=1)
