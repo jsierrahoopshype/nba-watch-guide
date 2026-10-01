@@ -37,6 +37,9 @@
   <div class="gb-watch" data-part="watch">
     <h4>{{ game_text.watch_heading }}</h4>
     <p class="chips">{% with channels = watch.chips %}{% include "partials/channels.html" %}{% endwith %}</p>
+    {%- if watch.cable_note %}
+    <p class="gb-cable small muted" data-cable-numbers>{{ watch.cable_note }}</p>
+    {%- endif %}
     {%- if watch.everyone %}
     <p class="gb-everyone" data-everyone><strong>{{ game_text.everyone }}:</strong> {{ watch.everyone }}</p>
     {%- else %}

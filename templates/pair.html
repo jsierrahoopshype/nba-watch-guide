@@ -48,5 +48,8 @@
     {%- endfor %}
   </tbody>
 </table>
+{% if meetings_cable_note %}
+<p class="small muted" data-cable-numbers>{{ meetings_cable_note }}</p>
+{% endif %}
 </section>
 {% endblock %}

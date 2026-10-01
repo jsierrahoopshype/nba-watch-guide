@@ -251,6 +251,8 @@
     "everyone": "Everyone in the US",
     "chip_free_ota": "free over the air",
     "chip_local": "{team} market",
+    "chip_antenna": "antenna ch. {channel}",
+    "cable_numbers": "Cable and satellite channel numbers vary by provider; check your guide.",
     "players_heading": "Players to watch",
     "countdown_today": "Today",
     "countdown_tonight": "Tonight",

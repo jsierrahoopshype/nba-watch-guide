@@ -35,6 +35,9 @@
     {%- set watch = row.watch %}
     <div class="hg-watch" data-part="watch">
       <div class="hg-channels">{% with channels = watch.chips %}{% include "partials/channels.html" %}{% endwith %}</div>
+      {%- if watch.cable_note %}
+      <p class="hg-cable small muted" data-cable-numbers>{{ watch.cable_note }}</p>
+      {%- endif %}
       {%- if watch.everyone %}
       <p class="hg-everyone small" data-everyone><strong>{{ game_text.everyone }}:</strong> {{ watch.everyone }}</p>
       {%- else %}

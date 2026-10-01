@@ -15,7 +15,7 @@ from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
 from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
-from .common import (chips, crumb_trail, empty_players_label, game_view,
+from .common import (cable_note, chips, crumb_trail, empty_players_label, game_view,
                      has_affiliate_link, updated_label)
 
 JSONLD_GAME_LIMIT = 10
@@ -119,6 +119,13 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
     }
 
 
+def _with_antenna(ctx: SiteContext, name: str) -> str:
+    """"WPLG Local 10 · antenna ch. 10.1" when the station's antenna channel
+    is confirmed, otherwise the name as it is."""
+    virtual = ctx.antenna_channel(name)
+    return f"{name} · {ctx.copy.get('game', {})['chip_antenna'].format(channel=virtual)}" if virtual else name
+
+
 def _watching(ctx: SiteContext, local, text: dict) -> dict | None:
     """The 'Watching in' section, straight from data/local_tv.json."""
     if local is None:
@@ -129,7 +136,9 @@ def _watching(ctx: SiteContext, local, text: dict) -> dict | None:
         "confidence": local.confidence,
         "low_line": labels.get("local_low", "") if local.confidence == "low" else "",
         "notes": local.notes,
-        "broadcasters": local.local_broadcasters,
+        "broadcasters": [_with_antenna(ctx, name) for name in local.local_broadcasters],
+        "cable_note": ctx.copy.get("game", {})["cable_numbers"]
+        if any(ctx.antenna_channel(name) for name in local.local_broadcasters) else "",
         "ota_note": local.ota.note,
         "streaming": local.streaming,
         "live_tv_carriers": local.live_tv_carriers,
@@ -216,6 +225,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             team=team,
             views=views,
             schedule=schedule,
+            schedule_cable_note=cable_note(ctx, *[row["channels"] for row in schedule]),
             next_game=next_card,
             game_text=ctx.copy.get("game", {}),
             show_pair_link=True,

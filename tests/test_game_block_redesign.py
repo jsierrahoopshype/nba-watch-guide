@@ -250,11 +250,12 @@ def test_no_cable_line_and_one_check_line_per_block(built_site, fixture_games):
     page = read(built_site, "tonight")
     espn = next(g for g in fixture_games if g.date_et == TODAY and "ESPN" in g.national_codes)
     watch = part(block_for(page, espn.game_id), "watch")
-    assert "data-cable" not in page and "Also on cable" not in page
+    # The old "Also on cable" line (data-cable); data-cable-numbers is the antenna note.
+    assert "data-cable>" not in page and "Also on cable" not in page
     assert htmllib.unescape(watch).count(CHECK) == 1 and watch.count("data-live-tv-check") == 1
     assert "or on live TV with" in watch
     hub = (built_site / "index.html").read_text(encoding="utf-8")
-    assert "data-cable" not in hub
+    assert "data-cable>" not in hub
 
 
 # -- 3. "Why ...?" only when someone is blocked, worded for the case -----------------------
@@ -456,7 +457,9 @@ def test_chips_show_the_short_name_with_the_full_one_in_title(fixture_games, bui
     assert (chip["label"], chip["title"], chip["how"]) == \
         ("Scripps Detroit 20", "WMYD The Spot Detroit 20 (Scripps)", "Pistons market")
     page = read(built_site, "detroit-pistons")
-    assert '<span class="badge badge-local" title="WMYD The Spot Detroit 20 (Scripps)">Scripps Detroit 20</span>' in page
+    # WMYD's confirmed antenna channel follows the short name.
+    assert ('<span class="badge badge-local" title="WMYD The Spot Detroit 20 (Scripps)">Scripps Detroit 20'
+            ' <span data-antenna>· antenna ch. 20.1</span></span>') in page
     assert ">WMYD The Spot Detroit 20 (Scripps)</span>" not in page
 
 

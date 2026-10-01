@@ -8,6 +8,7 @@
       "low": "Conflicting or stale sources. Never counts in coverage maths. Page shows what is known plus 'Local details for 2026-27 not confirmed yet.'",
       "unknown": "Not announced. Never counts. Page says so plainly."
     },
+    "antenna_channels": "Optional per team: over-the-air stations with their virtual (antenna) channel, e.g. \"32.1\". names are the channel names the station appears under (the schedule feed's codes and local_broadcasters), matched exactly. Shown on chips and the team page only when status is \"confirmed\", virtual looks like \"32.1\" and checked is set. A number counts as confirmed when FCC data agrees with Wikipedia: sources hold an FCC URL (the LMS facility page) and a Wikipedia URL (a permanent revision). FCC records only the major number, so it confirms a station's main programming, not a subchannel. RabbitEars.info may stand in for FCC only when FCC can't be read, never paired with Wikipedia alone (Wikipedia cites RabbitEars), so it needs a third site; otherwise it is recorded as supporting, not counted. Sources that disagree, or only one, leave it unset. Never a cable or satellite number; streaming apps and regional networks get no entry. not_applicable marks a name that covers several stations, or one with no single number.",
     "short_names": "Optional per team: {full name: short name} for a local broadcaster or streaming option whose name is too long for a channel chip. Chips show the short name with the full name in the title attribute; every other place keeps the full name.",
     "coverage_rules": {
       "scope": "Local options only cover the team's games that have no national broadcaster, and only for a reader in the team's market.",
@@ -44,6 +45,10 @@
     "atlanta-hawks": {
       "confidence": "moderate",
       "local_broadcasters": ["WANF (Gray)", "Peachtree Sports Network (WPCH subchannel)"],
+      "antenna_channels": [
+        {"station": "WANF", "names": ["WANF (Gray)"], "virtual": "46.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WANF on virtual channel 46 and Wikipedia lists main programming on 46.1. FCC records only the major number; RabbitEars.info shows WANF's main programming as 46-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WANF&oldid=1375620857", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=72120", "read": "2026-10-01", "says": "WANF, facility ID 72120, licensed, Virtual Channel: 46"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=72120", "read": "2026-10-01", "role": "supporting, not counted", "says": "WANF main programming on display channel 46-1"}], "checked": "2026-10-01"},
+        {"station": "WPCH-TV (Peachtree Sports Network subchannel)", "names": ["Peachtree Sports Network (WPCH subchannel)"], "virtual": null, "status": "unset", "reason": "FCC LMS lists WPCH-TV on virtual channel 17, but FCC data does not list subchannels, so it cannot confirm Peachtree Sports Network on 17.2 (Wikipedia). RabbitEars.info shows PSN as 17-2 on WXIA-TV's signal, but RabbitEars stands in for FCC only when FCC can't be read.", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WPCH-TV&oldid=1375258326", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=64033", "read": "2026-10-01", "says": "WPCH-TV, facility ID 64033, licensed, Virtual Channel: 17"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=64033", "read": "2026-10-01", "role": "supporting, not counted", "says": "PSN on display channel 17-2 (physical 10.4, WXIA-TV's signal)"}], "checked": ""}
+      ],
       "short_names": {"WANF (Gray)": "WANF", "Peachtree Sports Network (WPCH subchannel)": "Peachtree Sports"},
       "ota": {"status": "all", "games": null, "note": "Local games air free over the air on WANF and Peachtree Sports Network."},
       "streaming": [],
@@ -80,6 +85,10 @@
     "charlotte-hornets": {
       "confidence": "high",
       "local_broadcasters": ["WSOC-TV 9", "TV64 (Cox Media Group)"],
+      "antenna_channels": [
+        {"station": "WSOC-TV", "names": ["WSOC-TV 9"], "virtual": "9.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WSOC-TV on virtual channel 9 and Wikipedia lists main programming on 9.1. FCC records only the major number; RabbitEars.info shows WSOC-TV's main programming as 9-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WSOC-TV&oldid=1369063454", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=74070", "read": "2026-10-01", "says": "WSOC-TV, facility ID 74070, licensed, Virtual Channel: 9"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=74070", "read": "2026-10-01", "role": "supporting, not counted", "says": "WSOC-TV main programming on display channel 9-1"}], "checked": "2026-10-01"},
+        {"station": "WAXN-TV (TV64)", "names": ["TV64 (Cox Media Group)"], "virtual": "64.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WAXN-TV on virtual channel 64 and Wikipedia lists main programming on 64.1. FCC records only the major number; RabbitEars.info shows WAXN-TV's main programming as 64-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WAXN-TV&oldid=1369063253", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=12793", "read": "2026-10-01", "says": "WAXN-TV, facility ID 12793, licensed, Virtual Channel: 64"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=12793", "read": "2026-10-01", "role": "supporting, not counted", "says": "WAXN-TV main programming on display channel 64-1"}], "checked": "2026-10-01"}
+      ],
       "short_names": {"TV64 (Cox Media Group)": "TV64"},
       "ota": {"status": "all", "games": null, "note": "Every non-national game is free over the air in the Charlotte market."},
       "streaming": [
@@ -105,6 +114,11 @@
     "cleveland-cavaliers": {
       "confidence": "high",
       "local_broadcasters": ["DAZN (produced by Rock Entertainment Sports Network)", "WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"],
+      "antenna_channels": [
+        {"station": "WOIO", "names": ["WOIO"], "virtual": "19.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WOIO on virtual channel 19 and Wikipedia lists main programming on 19.1. FCC records only the major number; RabbitEars.info shows WOIO's main programming as 19-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WOIO&oldid=1374437305", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=39746", "read": "2026-10-01", "says": "WOIO, facility ID 39746, licensed, Virtual Channel: 19"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=39746", "read": "2026-10-01", "role": "supporting, not counted", "says": "WOIO main programming on display channel 19-1"}], "checked": "2026-10-01"},
+        {"station": "WUAB", "names": ["WUAB"], "virtual": "43.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WUAB on virtual channel 43 and Wikipedia lists main programming on 43.1. FCC records only the major number; RabbitEars.info shows WUAB's main programming as 43-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WUAB&oldid=1374437585", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=8532", "read": "2026-10-01", "says": "WUAB, facility ID 8532, licensed, Virtual Channel: 43"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=8532", "read": "2026-10-01", "role": "supporting, not counted", "says": "WUAB main programming on display channel 43-1"}], "checked": "2026-10-01"},
+        {"station": "Gray stations in Cincinnati, Lima and Parkersburg", "names": ["Gray stations in Cincinnati, Lima and Parkersburg (15 games)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"DAZN (produced by Rock Entertainment Sports Network)": "DAZN", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)": "Gray stations (15 games)"},
       "ota": {"status": "partial", "games": 15, "note": "15 games are also free over the air on Gray stations and RESN."},
       "streaming": [
@@ -142,6 +156,10 @@
     "detroit-pistons": {
       "confidence": "high",
       "local_broadcasters": ["WMYD The Spot Detroit 20 (Scripps)", "Statewide Scripps and partner stations"],
+      "antenna_channels": [
+        {"station": "WMYD", "names": ["WMYD The Spot Detroit 20 (Scripps)"], "virtual": "20.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WMYD on virtual channel 20 and Wikipedia lists main programming on 20.1. FCC records only the major number; RabbitEars.info shows WMYD's main programming as 20-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WMYD&oldid=1377265997", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=74211", "read": "2026-10-01", "says": "WMYD, facility ID 74211, licensed, Virtual Channel: 20"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=74211", "read": "2026-10-01", "role": "supporting, not counted", "says": "WMYD main programming on display channel 20-1"}], "checked": "2026-10-01"},
+        {"station": "Statewide Scripps and partner stations", "names": ["Statewide Scripps and partner stations"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"WMYD The Spot Detroit 20 (Scripps)": "Scripps Detroit 20", "Statewide Scripps and partner stations": "Scripps statewide"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air on Detroit 20 and partner stations across Michigan."},
       "streaming": [
@@ -226,6 +244,9 @@
     "miami-heat": {
       "confidence": "high",
       "local_broadcasters": ["WPLG Local 10"],
+      "antenna_channels": [
+        {"station": "WPLG", "names": ["WPLG Local 10", "WPLG"], "virtual": "10.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WPLG on virtual channel 10 and Wikipedia lists main programming on 10.1. FCC records only the major number; RabbitEars.info shows WPLG's main programming as 10-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WPLG&oldid=1374127990", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=53113", "read": "2026-10-01", "says": "WPLG, facility ID 53113, licensed, Virtual Channel: 10"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=53113", "read": "2026-10-01", "role": "supporting, not counted", "says": "WPLG main programming on display channel 10-1"}], "checked": "2026-10-01"}
+      ],
       "ota": {"status": "all", "games": 68, "note": "Every non-national game is free over the air on Local 10."},
       "streaming": [
         {"name": "Local 10+ Platinum", "monthly_price_usd": 0, "season_price_usd": 0, "note": "Free stream of the Local 10 broadcasts.", "price_verified": true}
@@ -238,6 +259,10 @@
     "milwaukee-bucks": {
       "confidence": "high",
       "local_broadcasters": ["MY24 (WVTV-DT2)", "Statewide affiliates"],
+      "antenna_channels": [
+        {"station": "WVTV-DT2 (MY24)", "names": ["MY24 (WVTV-DT2)"], "virtual": null, "status": "unset", "reason": "FCC data has no licensed station on virtual channel 24 in Milwaukee: LMS lists WCGV-TV (virtual 24, facility ID 71278) as cancelled since January 2018, and WVTV is on virtual 18. Wikipedia and RabbitEars.info show My 24 on 24.1 on WVTV's signal, but RabbitEars stands in for FCC only when FCC can't be read. The name stays MY24 (WVTV-DT2).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WVTV&oldid=1377477296", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=74174", "read": "2026-10-01", "says": "WVTV, facility ID 74174, licensed, Virtual Channel: 18"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=71278", "read": "2026-10-01", "says": "DWCGV-TV, facility ID 71278, LICENSE CANCELLED (status date 01/03/2018), Virtual Channel: 24"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=74174", "read": "2026-10-01", "role": "supporting, not counted", "says": "My 24 on display channel 24-1 (physical 27.4, WVTV's signal)"}], "checked": ""},
+        {"station": "Statewide affiliates", "names": ["Statewide affiliates"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"MY24 (WVTV-DT2)": "MY24"},
       "ota": {"status": "all", "games": null, "note": "Every locally available game is free over the air on MY24 and statewide affiliates."},
       "streaming": [
@@ -263,6 +288,9 @@
     "new-orleans-pelicans": {
       "confidence": "moderate",
       "local_broadcasters": ["Gulf Coast Sports & Entertainment Network (Gray)"],
+      "antenna_channels": [
+        {"station": "Gulf Coast Sports & Entertainment Network (Gray)", "names": ["Gulf Coast Sports & Entertainment Network (Gray)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"Gulf Coast Sports & Entertainment Network (Gray)": "Gulf Coast Sports"},
       "ota": {"status": "all", "games": null, "note": "Free over the air in 14 Gulf Coast markets."},
       "streaming": [
@@ -288,6 +316,11 @@
     "oklahoma-city-thunder": {
       "confidence": "high",
       "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
+      "antenna_channels": [
+        {"station": "KSBI", "names": ["KSBI (Oklahoma City)"], "virtual": "52.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KSBI on virtual channel 52 and Wikipedia lists main programming on 52.1. FCC records only the major number; RabbitEars.info shows KSBI's main programming as 52-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KSBI&oldid=1372694514", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=38214", "read": "2026-10-01", "says": "KSBI, facility ID 38214, licensed, Virtual Channel: 52"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=38214", "read": "2026-10-01", "role": "supporting, not counted", "says": "KSBI main programming on display channel 52-1"}], "checked": "2026-10-01"},
+        {"station": "KQCW-DT", "names": ["KQCW (Tulsa)"], "virtual": "19.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KQCW-DT on virtual channel 19 and Wikipedia lists main programming on 19.1. FCC records only the major number; RabbitEars.info shows KQCW-DT's main programming as 19-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KQCW-DT&oldid=1369199231", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=78322", "read": "2026-10-01", "says": "KQCW-DT, facility ID 78322, licensed, Virtual Channel: 19"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=78322", "read": "2026-10-01", "role": "supporting, not counted", "says": "KQCW-DT main programming on display channel 19-1"}], "checked": "2026-10-01"},
+        {"station": "KOTV-DT (News On 6)", "names": ["News On 6 (4 games)"], "virtual": "6.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KOTV-DT on virtual channel 6 and Wikipedia lists main programming on 6.1. FCC records only the major number; RabbitEars.info shows KOTV-DT's main programming as 6-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KOTV-DT&oldid=1372749486", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=35434", "read": "2026-10-01", "says": "KOTV-DT, facility ID 35434, licensed, Virtual Channel: 6"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=35434", "read": "2026-10-01", "role": "supporting, not counted", "says": "KOTV-DT main programming on display channel 6-1"}], "checked": "2026-10-01"}
+      ],
       "short_names": {"KSBI (Oklahoma City)": "KSBI", "KQCW (Tulsa)": "KQCW", "News On 6 (4 games)": "News On 6", "Thunder+ (NBA App)": "Thunder+"},
       "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air."},
       "streaming": [
@@ -301,6 +334,11 @@
     "orlando-magic": {
       "confidence": "high",
       "local_broadcasters": ["WRDQ 27", "WFTV 9 (Cox)", "WMOR (Tampa)"],
+      "antenna_channels": [
+        {"station": "WRDQ", "names": ["WRDQ 27"], "virtual": "27.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WRDQ on virtual channel 27 and Wikipedia lists main programming on 27.1. FCC records only the major number; RabbitEars.info shows WRDQ's main programming as 27-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WRDQ&oldid=1376212159", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=55454", "read": "2026-10-01", "says": "WRDQ, facility ID 55454, licensed, Virtual Channel: 27"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=55454", "read": "2026-10-01", "role": "supporting, not counted", "says": "WRDQ main programming on display channel 27-1"}], "checked": "2026-10-01"},
+        {"station": "WFTV", "names": ["WFTV 9 (Cox)"], "virtual": "9.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WFTV on virtual channel 9 and Wikipedia lists main programming on 9.1. FCC records only the major number; RabbitEars.info shows WFTV's main programming as 9-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WFTV&oldid=1372947228", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=72076", "read": "2026-10-01", "says": "WFTV, facility ID 72076, licensed, Virtual Channel: 9"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=72076", "read": "2026-10-01", "role": "supporting, not counted", "says": "WFTV main programming on display channel 9-1"}], "checked": "2026-10-01"},
+        {"station": "WMOR-TV", "names": ["WMOR (Tampa)"], "virtual": "32.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists WMOR-TV on virtual channel 32 and Wikipedia lists main programming on 32.1. FCC records only the major number; RabbitEars.info shows WMOR-TV's main programming as 32-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=WMOR-TV&oldid=1374797854", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=53819", "read": "2026-10-01", "says": "WMOR-TV, facility ID 53819, licensed, Virtual Channel: 32"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=53819", "read": "2026-10-01", "role": "supporting, not counted", "says": "WMOR-TV main programming on display channel 32-1"}], "checked": "2026-10-01"}
+      ],
       "short_names": {"WFTV 9 (Cox)": "WFTV 9", "WMOR (Tampa)": "WMOR"},
       "ota": {"status": "all", "games": null, "note": "Local games are free over the air in Orlando and Tampa."},
       "streaming": [
@@ -327,6 +365,10 @@
     "phoenix-suns": {
       "confidence": "high",
       "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
+      "antenna_channels": [
+        {"station": "KTVK (Arizona's Family)", "names": ["Arizona's Family (3TV/KTVK)"], "virtual": "3.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KTVK on virtual channel 3 and Wikipedia lists main programming on 3.1. FCC records only the major number; RabbitEars.info shows KTVK's main programming as 3-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KTVK&oldid=1374255488", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=40993", "read": "2026-10-01", "says": "KTVK, facility ID 40993, licensed, Virtual Channel: 3"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=40993", "read": "2026-10-01", "role": "supporting, not counted", "says": "KTVK main programming on display channel 3-1"}], "checked": "2026-10-01"},
+        {"station": "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)", "names": ["Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
+      ],
       "short_names": {"Arizona's Family (3TV/KTVK)": "Arizona's Family", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)": "Arizona's Family Sports"},
       "ota": {"status": "all", "games": 74, "note": "All 74 non-national games are free over the air."},
       "streaming": [
@@ -340,6 +382,10 @@
     "portland-trail-blazers": {
       "confidence": "moderate",
       "local_broadcasters": ["KUNP", "KATU (some games)"],
+      "antenna_channels": [
+        {"station": "KUNP", "names": ["KUNP"], "virtual": null, "status": "not_applicable", "reason": "FCC LMS lists KUNP (La Grande) on virtual channel 16, matching Wikipedia's 16.1, but FCC data does not list subchannels, so it cannot confirm that KATU's 2.2 carries KUNP or the games. Without both, no single number applies to the Portland area.", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KUNP&oldid=1375439769", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=81447", "read": "2026-10-01", "says": "KUNP, facility ID 81447, licensed, Virtual Channel: 16"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=21649", "read": "2026-10-01", "role": "supporting, not counted", "says": "KUNP on display channel 2-2 (physical 24.4, KATU's signal)"}], "checked": ""},
+        {"station": "KATU", "names": ["KATU (some games)", "KATU"], "virtual": "2.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KATU on virtual channel 2 and Wikipedia lists main programming on 2.1. FCC records only the major number; RabbitEars.info shows KATU's main programming as 2-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KATU&oldid=1374422257", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=21649", "read": "2026-10-01", "says": "KATU, facility ID 21649, licensed, Virtual Channel: 2"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=21649", "read": "2026-10-01", "role": "supporting, not counted", "says": "KATU main programming on display channel 2-1"}], "checked": "2026-10-01"}
+      ],
       "short_names": {"KATU (some games)": "KATU"},
       "ota": {"status": "most", "games": null, "note": "Most local games are free over the air."},
       "streaming": [
@@ -389,6 +435,9 @@
     "utah-jazz": {
       "confidence": "moderate",
       "local_broadcasters": ["KJZZ"],
+      "antenna_channels": [
+        {"station": "KJZZ-TV", "names": ["KJZZ"], "virtual": "14.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KJZZ-TV on virtual channel 14 and Wikipedia lists main programming on 14.1. FCC records only the major number; RabbitEars.info shows KJZZ-TV's main programming as 14-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KJZZ-TV&oldid=1375773662", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=36607", "read": "2026-10-01", "says": "KJZZ-TV, facility ID 36607, licensed, Virtual Channel: 14"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=36607", "read": "2026-10-01", "role": "supporting, not counted", "says": "KJZZ-TV main programming on display channel 14-1"}], "checked": "2026-10-01"}
+      ],
       "ota": {"status": "all", "games": 78, "note": "78 games are free over the air on KJZZ."},
       "streaming": [
         {"name": "Jazz+", "monthly_price_usd": 20.00, "season_price_usd": 126.00, "note": "SEG+ bundle with the Utah Mammoth is $175 a year.", "price_verified": false}
