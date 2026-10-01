@@ -28,7 +28,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from . import config, lastmod, seo
+from . import config, lastmod, seo, share
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
@@ -468,6 +468,11 @@ def render_pages(ctx: SiteContext, env=None) -> list[Page]:
     return pages
 
 
+def _cards(pages: list[Page]) -> list:
+    """The share-image cards of the pages being written."""
+    return [p.meta["share"] for p in pages if p.meta.get("share")]
+
+
 def write_pages(out_dir: Path, pages: list[Page]) -> None:
     for page in pages:
         target = out_dir / page.out_path
@@ -607,6 +612,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     notes.append(broadcast_summary(report))
 
     write_pages(out_dir, pages)
+    notes.append(share.write_images(out_dir, _cards(pages), full=True))
     write_manifest(out_dir, expected)
     write_json(out_dir, BROADCAST_REPORT, report)
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
@@ -672,6 +678,8 @@ def refresh_build(out_dir: Path, today: str | None = None,
     if any(p.meta.get("placeholder") for p in wanted):
         raise BuildError("refresh would write a pair page it did not render")
     write_pages(out_dir, wanted)
+    # A pair card follows the next game, so a refreshed page may need a new one.
+    notes.append(share.write_images(out_dir, _cards(wanted), full=False))
     # The refresh leaves most pages alone, but the tree it hands to publish.sh
     # still has to match the data, so the manifest is rewritten here too.
     write_manifest(out_dir, check_pages(pages, data_dir, ctx.games))

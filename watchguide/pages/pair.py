@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import re
 
-from .. import seo
+from .. import seo, share
 from ..context import SiteContext, long_date
 from ..pairs import by_name, game_teams, meetings, pair_url
 from ..render import Page, date_label, et_label, safe_format
@@ -95,10 +95,13 @@ def build(ctx: SiteContext, env) -> list[Page]:
                                 view["channels"] if view else [])
         leaf = safe_format(text["breadcrumb"], **fields)
         trail = crumb_trail(ctx, leaf, url)
+        shown = nxt or games[-1]
+        card = share.pair_card(ctx, slug, ctx.by_tricode[shown.away_tricode],
+                               ctx.by_tricode[shown.home_tricode])
         blocks = [seo.breadcrumbs(trail)]
         for g in [g for g in games if g.date_et >= ctx.today][:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(g, ctx.team_name(g.home_tricode), ctx.team_name(g.away_tricode),
-                                     url, ctx.arenas.get(g.arena))
+                                     url, ctx.arenas.get(g.arena), card.url)
             if event:
                 blocks.append(event)
 
@@ -109,6 +112,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "og_title": title,
             "og_description": desc,
             "jsonld": seo.jsonld(blocks),
+            **share.meta(card),
         }
         html = env.get_template("pair.html").render(
             page=page_meta,
@@ -125,6 +129,6 @@ def build(ctx: SiteContext, env) -> list[Page]:
             trail=trail,
         )
         pages.append(Page(out_path=f"{slug}/index.html", url=url, html=html, lastmod=ctx.today,
-                          meta={"pair": slug, "title": title,
+                          meta={"pair": slug, "title": title, "share": card,
                                 "next_game_date": nxt.date_et if nxt else ""}))
     return pages

@@ -6,7 +6,7 @@ running any JavaScript. The toggle only changes which one is on screen.
 
 from __future__ import annotations
 
-from .. import config, seo
+from .. import config, seo, share
 from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, Combination, build_state_coverage, channels_for_game,
                         moderate_carries_in, relies_on_zip)
@@ -196,6 +196,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
                  for state in (OUT_OF_MARKET, IN_MARKET)]
         missing = _missing(ctx, schedule, coverages) if remaining else None
 
+        card = share.team_card(ctx, team)
         blocks = [seo.breadcrumbs(crumb_trail(ctx, team.full_name, url))]
         for game in remaining[:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(
@@ -204,6 +205,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
                 ctx.team_name(game.away_tricode),
                 url,
                 ctx.arenas.get(game.arena),
+                card.url,
             )
             if event:
                 blocks.append(event)
@@ -215,6 +217,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "og_title": seo.title(text["title"]),
             "og_description": seo.description(text["description"]),
             "jsonld": seo.jsonld(blocks),
+            **share.meta(card),
         }
 
         html = env.get_template("team.html").render(
@@ -239,6 +242,6 @@ def build(ctx: SiteContext, env) -> list[Page]:
             trail=crumb_trail(ctx, team.full_name, url),
         )
         pages.append(Page(out_path=f"{team.slug}/index.html", url=url, html=html,
-                          lastmod=ctx.today, meta={"slug": team.slug,
+                          lastmod=ctx.today, meta={"slug": team.slug, "share": card,
                                                    "next_game_date": nxt.date_et if nxt else ""}))
     return pages

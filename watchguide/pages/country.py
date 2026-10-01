@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from .. import config, seo
+from .. import config, seo, share
 from ..context import SiteContext
 from ..countries import (Country, clock, country_players, local_tip, price_text,
                          watchable_games, when_label)
@@ -165,6 +165,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         h1 = safe_format(text["h1"], **fields)
         trail = crumb_trail(ctx, country.name, url)
 
+        card = share.country_card(ctx, country)
         page_meta = {
             "title": title,
             "description": desc,
@@ -172,6 +173,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "og_title": title,
             "og_description": desc,
             "jsonld": seo.jsonld([seo.breadcrumbs(trail)]),
+            **share.meta(card),
         }
         note = ""
         if low:
@@ -208,5 +210,5 @@ def build(ctx: SiteContext, env) -> list[Page]:
             trail=trail,
         )
         pages.append(Page(out_path=f"{country.slug}/index.html", url=url, html=html,
-                          lastmod=ctx.today, meta={"country": country.slug}))
+                          lastmod=ctx.today, meta={"country": country.slug, "share": card}))
     return pages

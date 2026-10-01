@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 
-from .. import config, seo, worth
+from .. import config, seo, share, worth
 from ..context import SiteContext
 from ..pairs import pair_path
 from ..render import Page, format_block, usd
@@ -157,6 +157,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
     if faq_block:
         blocks.append(faq_block)
 
+    card = share.hub_card(ctx)
     page_meta = {
         "title": seo.title(text["title"], season=ctx.season),
         "description": seo.description(text["description"], season=ctx.season),
@@ -164,6 +165,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         "og_title": seo.title(text["title"], season=ctx.season),
         "og_description": seo.description(text["description"], season=ctx.season),
         "jsonld": seo.jsonld(blocks),
+        **share.meta(card),
     }
 
     html = env.get_template("hub.html").render(
@@ -185,4 +187,4 @@ def build(ctx: SiteContext, env) -> list[Page]:
         countries=ctx.countries.countries,
         trail=crumb_trail(ctx),
     )
-    return [Page(out_path="index.html", url=url, html=html, lastmod=ctx.today)]
+    return [Page(out_path="index.html", url=url, html=html, lastmod=ctx.today, meta={"share": card})]

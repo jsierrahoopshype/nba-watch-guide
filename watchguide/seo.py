@@ -108,7 +108,7 @@ def _tipoff(game) -> datetime | None:
 
 
 def sports_event(game, home_name: str, away_name: str, page_url: str,
-                 address: dict[str, str] | None) -> dict[str, Any] | None:
+                 address: dict[str, str] | None, image: str = "") -> dict[str, Any] | None:
     """A single dated game, or None.
 
     None unless the game has both teams, a real tipoff with its offset and an
@@ -116,14 +116,15 @@ def sports_event(game, home_name: str, away_name: str, page_url: str,
     `address`): Google treats every Event without startDate or location as
     invalid, and a wrong address is worse than none. No nested Event types
     (BroadcastEvent is one) because they would need their own date and place.
-    Postponed games never get here; the schedule reader drops them."""
+    Postponed games never get here; the schedule reader drops them.
+    `image` is the page's og:image, when it has one."""
     tip = _tipoff(game)
     if tip is None or not address or not game.arena or not game.home_tricode or not game.away_tricode:
         return None
     name = f"{away_name} at {home_name}"
     home = {"@type": "SportsTeam", "name": home_name}
     away = {"@type": "SportsTeam", "name": away_name}
-    return {
+    event = {
         "@type": "SportsEvent",
         "name": name,
         "description": f"{name} on {tip:%B} {tip.day}, {tip.year}, at {game.arena}.",
@@ -142,6 +143,9 @@ def sports_event(game, home_name: str, away_name: str, page_url: str,
         "performer": [home, away],
         "organizer": NBA,
     }
+    if image:
+        event["image"] = [image]
+    return event
 
 
 def faq_page(entries: list[tuple[str, str]]) -> dict[str, Any] | None:
