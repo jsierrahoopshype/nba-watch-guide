@@ -128,14 +128,23 @@ def test_events_only_for_the_dated_games_a_page_lists(built_site):
     assert all(seen.values()), seen
 
 
-def test_no_event_at_an_arena_without_a_verified_address(built_site):
-    """Scotiabank Arena's postal code is in dispute, so Raptors home games
-    carry no Event; their road games still do."""
-    assert ARENAS["Scotiabank Arena"]["verified"] is False
+def test_unverified_or_incomplete_arenas_are_left_out(tmp_path):
+    """An arena that is not verified, or has no street, gets no address, so
+    its games get no Event (see test_no_event_without_a_real_dated_game)."""
+    good = {"streetAddress": "1 Test Way", "addressLocality": "Testville", "addressCountry": "US"}
+    (tmp_path / "arenas.json").write_text(json.dumps({"arenas": {
+        "Verified": {"verified": True, "address": good},
+        "Unverified": {"verified": False, "address": good},
+        "No street": {"verified": True, "address": {**good, "streetAddress": ""}},
+    }}), encoding="utf-8")
+    assert set(load_arenas(tmp_path)) == {"Verified"}
+    assert load_arenas(tmp_path / "missing") == {}
+
+
+def test_raptors_home_games_carry_scotiabank_arena(built_site):
     events = _events(built_site / "toronto-raptors" / "index.html")
-    assert events, "Raptors road games should still carry Events"
-    assert all(e["location"]["name"] != "Scotiabank Arena" for e in events)
-    assert all(e["homeTeam"]["name"] != "Toronto Raptors" for e in events)
+    home = [e for e in events if e["homeTeam"]["name"] == "Toronto Raptors"]
+    assert home and all(e["location"]["address"]["postalCode"] == "M5J 2X2" for e in home)
 
 
 def test_two_pages_parse_to_the_expected_markup(built_site):

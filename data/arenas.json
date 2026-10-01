@@ -82,15 +82,16 @@
         "streetAddress": "40 Bay Street",
         "addressLocality": "Toronto",
         "addressRegion": "ON",
+        "postalCode": "M5J 2X2",
         "addressCountry": "CA"
       },
-      "verified": false,
+      "verified": true,
       "sources": [
         "https://www.scotiabankarena.com/venue-information/contact-us",
         "https://www.ticketmaster.ca/scotiabank-arena-tickets-toronto/venue/131157"
       ],
       "last_checked": "2026-10-01",
-      "note": "Postal code conflict: official-domain search gives M5J 2L2, Ticketmaster.ca, AXS and Live Nation give M5J 2X2. No Event until resolved."
+      "note": "Postal code M5J 2X2 as Ticketmaster.ca, AXS and Live Nation list it; a search of the official site returned M5J 2L2. The site owner chose M5J 2X2 on 2026-10-01."
     },
     "United Center": {
       "home": "CHI",
