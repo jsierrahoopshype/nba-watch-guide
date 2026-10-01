@@ -7,7 +7,7 @@ place and nothing can leak the Pages host into the output.
 from __future__ import annotations
 
 import json
-from datetime import date
+from datetime import date, datetime, timedelta
 from typing import Any
 from xml.sax.saxutils import escape
 
@@ -90,35 +90,58 @@ def breadcrumbs(trail: list[tuple[str, str]]) -> dict[str, Any]:
     }
 
 
-def sports_event(game, home_name: str, away_name: str,
-                 channels: list[dict[str, str]], page_url: str) -> dict[str, Any] | None:
-    """A single game. Broadcast info is only added when the feed has a channel."""
-    if not game.tipoff_utc:
+GAME_LENGTH = timedelta(hours=2, minutes=30)   # endDate is tipoff plus this
+NBA = {"@type": "Organization", "name": "NBA", "url": "https://www.nba.com"}
+
+
+def _tipoff(game) -> datetime | None:
+    """The feed's Eastern tipoff as an aware datetime, or None when the game
+    has no real time yet: no tipoff, no offset, or a TBD placeholder (the
+    feed parks those at midnight)."""
+    if "TBD" in (game.status_text or "").upper():
         return None
-    event: dict[str, Any] = {
+    try:
+        tip = datetime.fromisoformat(game.tipoff_et or "")
+    except ValueError:
+        return None
+    return tip if tip.utcoffset() is not None else None
+
+
+def sports_event(game, home_name: str, away_name: str, page_url: str,
+                 address: dict[str, str] | None) -> dict[str, Any] | None:
+    """A single dated game, or None.
+
+    None unless the game has both teams, a real tipoff with its offset and an
+    arena whose address is verified in data/arenas.json (passed in as
+    `address`): Google treats every Event without startDate or location as
+    invalid, and a wrong address is worse than none. No nested Event types
+    (BroadcastEvent is one) because they would need their own date and place.
+    Postponed games never get here; the schedule reader drops them."""
+    tip = _tipoff(game)
+    if tip is None or not address or not game.arena or not game.home_tricode or not game.away_tricode:
+        return None
+    name = f"{away_name} at {home_name}"
+    home = {"@type": "SportsTeam", "name": home_name}
+    away = {"@type": "SportsTeam", "name": away_name}
+    return {
         "@type": "SportsEvent",
-        "name": f"{away_name} at {home_name}",
-        "startDate": game.tipoff_utc,
+        "name": name,
+        "description": f"{name} on {tip:%B} {tip.day}, {tip.year}, at {game.arena}.",
+        "startDate": tip.isoformat(),
+        "endDate": (tip + GAME_LENGTH).isoformat(),
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "url": page_url,
-        "homeTeam": {"@type": "SportsTeam", "name": home_name},
-        "awayTeam": {"@type": "SportsTeam", "name": away_name},
+        "location": {
+            "@type": "Place",
+            "name": game.arena,
+            "address": {"@type": "PostalAddress", **address},
+        },
+        "homeTeam": home,
+        "awayTeam": away,
+        "performer": [home, away],
+        "organizer": NBA,
     }
-    if game.arena:
-        event["location"] = {"@type": "Place", "name": game.arena}
-    real = [c["name"] for c in channels if c.get("kind") != "tba" and c.get("name")]
-    if real:
-        event["subEvent"] = [
-            {
-                "@type": "BroadcastEvent",
-                "isLiveBroadcast": True,
-                "broadcastOfEvent": {"@type": "SportsEvent", "name": f"{away_name} at {home_name}"},
-                "publishedOn": {"@type": "BroadcastService", "name": channel},
-            }
-            for channel in real
-        ]
-    return event
 
 
 def faq_page(entries: list[tuple[str, str]]) -> dict[str, Any] | None:

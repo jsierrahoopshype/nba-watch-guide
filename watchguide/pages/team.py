@@ -202,8 +202,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
                 game,
                 ctx.team_name(game.home_tricode),
                 ctx.team_name(game.away_tricode),
-                channels_for_game(game, team.tricode, local, tba),
                 url,
+                ctx.arenas.get(game.arena),
             )
             if event:
                 blocks.append(event)

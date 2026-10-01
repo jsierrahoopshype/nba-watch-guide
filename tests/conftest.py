@@ -23,6 +23,11 @@ from watchguide.model import BlackoutRule, Game, Service, ServiceData, load_team
 TODAY = "2027-01-15"
 NATIONAL_CYCLE = [[], ["ESPN"], ["ABC"], [], ["NBC"], [], ["NBA TV"], []]
 LOCAL_BY_TRICODE = {"BOS": "TESTLOCAL1", "LAL": "TESTLOCAL2"}
+# Each team's regular arena as data/arenas.json names it, so the fixture games
+# carry real arenas and the Event JSON-LD gets built (and tested).
+HOME_ARENA = {e["home"]: name for name, e in json.loads(
+    (Path(__file__).resolve().parent.parent / "data" / "arenas.json").read_text(encoding="utf-8")
+)["arenas"].items() if e["kind"] == "home"}
 
 
 def _game(index: int, home: str, away: str, day: date) -> Game:
@@ -40,7 +45,7 @@ def _game(index: int, home: str, away: str, day: date) -> Game:
         national=national,
         home_tv=[LOCAL_BY_TRICODE[home]] if home in LOCAL_BY_TRICODE else [],
         away_tv=[LOCAL_BY_TRICODE[away]] if away in LOCAL_BY_TRICODE else [],
-        arena="Test Arena",
+        arena=HOME_ARENA.get(home, "Test Arena"),
         week=1,
     )
 
@@ -102,7 +107,7 @@ def _copy_data(tmp_path_factory, label: str):
     src = Path(__file__).resolve().parent.parent / "data"
     for name in ("teams.json", "services.json", "local_tv.json", "copy.json",
                  "star_power_weights.json", "player_aliases.json", "recent_awards.json",
-                 "countries.json", "team_colors.json"):
+                 "countries.json", "team_colors.json", "arenas.json"):
         if (src / name).exists():
             (data_dir / name).write_text((src / name).read_text(encoding="utf-8"), encoding="utf-8")
     return data_dir

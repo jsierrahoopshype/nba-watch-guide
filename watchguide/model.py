@@ -653,6 +653,33 @@ def load_team_colors(data_dir: Path | None = None) -> dict[str, str]:
 
 
 # --------------------------------------------------------------------------
+# Arenas
+# --------------------------------------------------------------------------
+
+ADDRESS_FIELDS = ("streetAddress", "addressLocality", "addressRegion", "postalCode", "addressCountry")
+
+
+def load_arenas(data_dir: Path | None = None) -> dict[str, dict[str, str]]:
+    """{feed arena name: PostalAddress fields} from data/arenas.json, verified
+    entries only. A missing file, an unverified entry or one without a street,
+    city and country leaves that arena out, and its games get no Event."""
+    data_dir = data_dir or config.DATA_DIR
+    try:
+        raw = json.loads((data_dir / "arenas.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    out: dict[str, dict[str, str]] = {}
+    for name, entry in (raw.get("arenas") or {}).items():
+        if not isinstance(entry, dict) or entry.get("verified") is not True:
+            continue
+        address = entry.get("address") or {}
+        fields = {k: address[k] for k in ADDRESS_FIELDS if isinstance(address.get(k), str) and address[k]}
+        if all(k in fields for k in ("streetAddress", "addressLocality", "addressCountry")):
+            out[name] = fields
+    return out
+
+
+# --------------------------------------------------------------------------
 # Copy
 # --------------------------------------------------------------------------
 
