@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import replace
 from datetime import date, timedelta
 
 import pytest
@@ -83,16 +84,33 @@ def test_moderate_confidence_counts_and_flags_the_combination(services, local):
     assert [h["service"].name for h in hits] == ["Local TV (free over the air)"]
 
 
-@pytest.mark.parametrize("slug", ["golden-state-warriors", "dallas-mavericks", "la-clippers"])
-def test_low_and_unknown_confidence_never_count(services, local, slug):
-    assert local[slug].confidence in ("low", "unknown")
-    assert local_services(local[slug], services) == []
-    cov = build_state_coverage([game(0)], "GSW", services, local[slug], IN_MARKET)
+@pytest.mark.parametrize("slug,forced", [("dallas-mavericks", ""), ("la-clippers", ""),
+                                         ("golden-state-warriors", "low")])
+def test_low_and_unknown_confidence_never_count(services, local, slug, forced):
+    # The Warriors' entry is moderate now; forced back to low it must stop
+    # counting, priced add-on and all.
+    info = replace(local[slug], confidence=forced) if forced else local[slug]
+    assert info.confidence in ("low", "unknown")
+    assert local_services(info, services) == []
+    cov = build_state_coverage([game(0)], "GSW", services, info, IN_MARKET)
     assert local_counts(cov) == {}
     assert cov.cheapest_full is None
 
 
-def test_low_confidence_page_shows_broadcasters_and_the_line(built_site):
+@pytest.fixture(scope="module")
+def built_site_warriors_low(tmp_path_factory, fixture_games):
+    """The site with the Warriors' local entry forced back to low confidence,
+    so a low team with a named broadcaster is on the page."""
+    from conftest import _build, _copy_data
+    data_dir = _copy_data(tmp_path_factory, "data-warriors-low")
+    raw = json.loads((data_dir / "local_tv.json").read_text(encoding="utf-8"))
+    raw["teams"]["golden-state-warriors"]["confidence"] = "low"
+    (data_dir / "local_tv.json").write_text(json.dumps(raw), encoding="utf-8")
+    return _build(tmp_path_factory, fixture_games, "site-warriors-low", data_dir=data_dir)
+
+
+def test_low_confidence_page_shows_broadcasters_and_the_line(built_site_warriors_low):
+    built_site = built_site_warriors_low
     inside = panel(built_site, "golden-state-warriors", "in_market")
     assert LOW_LINE in inside
     watching = page(built_site, "golden-state-warriors")
