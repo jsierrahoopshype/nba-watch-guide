@@ -1,0 +1,7340 @@
+{
+ "fetched_at": "2026-10-03T14:37:46+00:00",
+ "source_id": "hoopsmatic-nba-career-map",
+ "teams": {
+  "DEN": [
+   {
+    "player": "Nikola Joki\u0107",
+    "all_star": 8,
+    "past": []
+   },
+   {
+    "player": "DeMar DeRozan",
+    "all_star": 6,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "CHI",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "SAS",
+      "end": 2021,
+      "seasons": 3
+     },
+     {
+      "team": "TOR",
+      "end": 2018,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Jamal Murray",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Aaron Gordon",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ORL",
+      "end": 2021,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Alpha Diallo",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bryce Hopkins",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Cam Whitmore",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2025,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Cameron Johnson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "PHX",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Christian Braun",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "DaRon Holmes II",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Julian Strawther",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Lonnie Walker IV",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Marvin Bagley III",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "SAC",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ryan Nembhard",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Spencer Jones",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Trevon Brazile",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tyus Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2023,
+      "seasons": 4
+     },
+     {
+      "team": "MIN",
+      "end": 2019,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Zeke Nnaji",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "IND": [
+   {
+    "player": "Pascal Siakam",
+    "all_star": 4,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Tyrese Haliburton",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2022,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Aaron Nesmith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2022,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Andrew Nembhard",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ben Shephard",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Braden Smith",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ivica Zubac",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 7
+     },
+     {
+      "team": "LAL",
+      "end": 2019,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jalen Slawson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "James Johnson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "DAL",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2020,
+      "seasons": 4
+     },
+     {
+      "team": "MIN",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2016,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2014,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2013,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2011,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jarace Walker",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jay Huff",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DEN",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Johnny Furphy",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kelly Oubre Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "CHA",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "GSW",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2020,
+      "seasons": 2
+     },
+     {
+      "team": "WAS",
+      "end": 2018,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Kobe Brown",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Larry Nance Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "POR",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2018,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Obi Toppin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2023,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Quenton Jackson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Rienk Mast",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "T. J. McConnell",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2019,
+      "seasons": 4
+     }
+    ]
+   }
+  ],
+  "ATL": [
+   {
+    "player": "Jalen Johnson",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Aaron Wiggins",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Asa Newell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "CJ McCollum",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "POR",
+      "end": 2022,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Corey Kispert",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Dorian Finney-Smith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "HOU",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "DAL",
+      "end": 2023,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Dyson Daniels",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Henri Veesaar",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jalen Wilson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jock Landale",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "PHX",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Keshon Gilbert",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Kingston Flemings",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Luguentz Dort",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Mouhamed Gueye",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nickeil Alexander-Walker",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2022,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Onyeka Okongwu",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "RayJ Dennis",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Zuby Ejiofor",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "SAC": [
+   {
+    "player": "Ben Simmons",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2022,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Domantas Sabonis",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2022,
+      "seasons": 5
+     },
+     {
+      "team": "OKC",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Zach LaVine",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2025,
+      "seasons": 8
+     },
+     {
+      "team": "MIN",
+      "end": 2017,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Adam Flagler",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Alex Karaban",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Daeqwon Plowden",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Darius Acuff Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "De'Andre Hunter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Dylan Cardwell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Elfrid Payton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "NYK",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "ORL",
+      "end": 2018,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Emanuel Sharp",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jonathan Mogbo",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Keegan Murray",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Malik Monk",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "CHA",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Maxime Raynaud",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nique Clifford",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Precious Achiuwa",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "TOR",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "MIA",
+      "end": 2021,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "MIL": [
+   {
+    "player": "Tyler Herro",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "A. J. Green",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bogoljub Markovi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Brayden Burries",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Caris LeVert",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "CLE",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "IND",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2021,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Cormac Ryan",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Gary Trent Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "POR",
+      "end": 2021,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jaime Jaquez Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jericho Sims",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2025,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "John Butler",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Kam Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Kasparas Jaku\u010dionis",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Kel'el Ware",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Kyle Kuzma",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2025,
+      "seasons": 4
+     },
+     {
+      "team": "LAL",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Myles Turner",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2025,
+      "seasons": 10
+     }
+    ]
+   },
+   {
+    "player": "Nate Ament",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ousmane Dieng",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Pete Nance",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "CLE",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Ryan Rollins",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "GSW": [
+   {
+    "player": "Stephen Curry",
+    "all_star": 12,
+    "past": []
+   },
+   {
+    "player": "Jimmy Butler",
+    "all_star": 6,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2025,
+      "seasons": 6
+     },
+     {
+      "team": "PHI",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2018,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2017,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Al Horford",
+    "all_star": 5,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 4
+     },
+     {
+      "team": "OKC",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2016,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Draymond Green",
+    "all_star": 4,
+    "past": []
+   },
+   {
+    "player": "Kristaps Porzi\u0146\u0123is",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "DAL",
+      "end": 2022,
+      "seasons": 3
+     },
+     {
+      "team": "NYK",
+      "end": 2019,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Brandin Podziemski",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Brandon Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "POR",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Charles Bassey",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Dalen Terry",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 4
+     },
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "De'Anthony Melton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2022,
+      "seasons": 3
+     },
+     {
+      "team": "PHX",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Gary Payton II",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2018,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Georges Niang",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "CLE",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "PHI",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2021,
+      "seasons": 3
+     },
+     {
+      "team": "IND",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Graham Ike",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Gui Santos",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "LJ Cryer",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Malevy Leons",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Moses Moody",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Will Richard",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Yaxel Lendeborg",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "OKC": [
+   {
+    "player": "Shai Gilgeous-Alexander",
+    "all_star": 4,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Chet Holmgren",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Jalen Williams",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Aday Mara",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ajay Mitchell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Alex Caruso",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "LAL",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Bennett Stirtz",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Brooks Barnhizer",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Cason Wallace",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Isaiah Hartenstein",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "LAC",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "CLE",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "DEN",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2020,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jared McCain",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jaylin Williams",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Josh Dix",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kenrich Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2020,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Nikola Topi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Otega Oweh",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Thomas Sorber",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "HOU": [
+   {
+    "player": "Kevin Durant",
+    "all_star": 16,
+    "past": [
+     {
+      "team": "PHX",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "BKN",
+      "end": 2023,
+      "seasons": 4
+     },
+     {
+      "team": "GSW",
+      "end": 2019,
+      "seasons": 3
+     },
+     {
+      "team": "OKC",
+      "end": 2016,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Alperen \u015eeng\u00fcn",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "Fred VanVleet",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2023,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Amen Thompson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bogdan Bogdanovi\u0107",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 5
+     },
+     {
+      "team": "SAC",
+      "end": 2020,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Bruce Thornton",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Clint Capela",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Crawford",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jae'Sean Tate",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Julian Phillips",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Marcus Smart",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "WAS",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2023,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Oscar Tshiebwe",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "IND",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Quadir Copeland",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Rafael Castro",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Reed Sheppard",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Sean Pedulla",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Steven Adams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "NOP",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "OKC",
+      "end": 2020,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Tari Eason",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "NYK": [
+   {
+    "player": "Karl-Anthony Towns",
+    "all_star": 6,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2024,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Jalen Brunson",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Andre Drummond",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "CHI",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "BKN",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "CLE",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2020,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Bruce Brown",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "IND",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2022,
+      "seasons": 2
+     },
+     {
+      "team": "DET",
+      "end": 2020,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Drew Eubanks",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Jaden Akins",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "James Wiseman",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2023,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "John Konchar",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 7
+     },
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jordan Clarkson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 6
+     },
+     {
+      "team": "CLE",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2018,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Josh Hart",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2022,
+      "seasons": 3
+     },
+     {
+      "team": "LAL",
+      "end": 2019,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jos\u00e9 Alvarado",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Kevin McCullar Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Landry Shamet",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "BKN",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Mikal Bridges",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2023,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Miles McBride",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Mohamed Diawara",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "OG Anunoby",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2023,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Ochai Agbaji",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Pac\u00f4me Dadiet",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tony Bradley",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "OKC",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2020,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Tyler Kolek",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tyler Nickel",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "TOR": [
+   {
+    "player": "Kawhi Leonard",
+    "all_star": 7,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 7
+     },
+     {
+      "team": "SAS",
+      "end": 2018,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Scottie Barnes",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "Alijah Martin",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Allen Graves",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Andre Jackson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Chucky Hepburn",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Collin Murray-Boyles",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Immanuel Quickley",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2023,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Ja'Kobe Walter",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaden Bradley",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jakob P\u00f6ltl",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2023,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Jamal Shead",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jamison Battle",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kyle Anderson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2018,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Malachi Smith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Nate Bittle",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "RJ Barrett",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Trayce Jackson-Davis",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "GSW",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Trey Jemison",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "MIA": [
+   {
+    "player": "Giannis Antetokounmpo",
+    "all_star": 10,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2026,
+      "seasons": 13
+     }
+    ]
+   },
+   {
+    "player": "Klay Thompson",
+    "all_star": 5,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "GSW",
+      "end": 2024,
+      "seasons": 13
+     }
+    ]
+   },
+   {
+    "player": "Bam Adebayo",
+    "all_star": 3,
+    "past": []
+   },
+   {
+    "player": "Andrew Wiggins",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "GSW",
+      "end": 2025,
+      "seasons": 5
+     },
+     {
+      "team": "MIN",
+      "end": 2020,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Bez Mbeng",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Bobby Portis",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2026,
+      "seasons": 6
+     },
+     {
+      "team": "NYK",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2019,
+      "seasons": 4
+     },
+     {
+      "team": "WAS",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Davion Mitchell",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Dru Smith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Keshad Johnson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Myron Gardner",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nick Richards",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Nikola Jovi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Pelle Larsson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ryan Conwell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Simone Fontecchio",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Tim Hardaway Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DAL",
+      "end": 2024,
+      "seasons": 5
+     },
+     {
+      "team": "NYK",
+      "end": 2019,
+      "seasons": 2
+     },
+     {
+      "team": "ATL",
+      "end": 2017,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Tre Donaldson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Vladislav Goldin",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "PHI": [
+   {
+    "player": "LeBron James",
+    "all_star": 22,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 8
+     },
+     {
+      "team": "CLE",
+      "end": 2018,
+      "seasons": 4
+     },
+     {
+      "team": "MIA",
+      "end": 2014,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Joel Embiid",
+    "all_star": 7,
+    "past": []
+   },
+   {
+    "player": "Jaylen Brown",
+    "all_star": 5,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 10
+     }
+    ]
+   },
+   {
+    "player": "Tyrese Maxey",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "Adem Bona",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Anfernee Simons",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2025,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Ariel Hukporti",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Caleb Love",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Dean Wade",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Dominick Barlow",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jabari Walker",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Justin Edwards",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kentavious Caldwell-Pope",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DEN",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "WAS",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2021,
+      "seasons": 4
+     },
+     {
+      "team": "DET",
+      "end": 2017,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Labaron Philon Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Rayan Rupert",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Tacko Fall",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2021,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "V. J. Edgecombe",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "ORL": [
+   {
+    "player": "Nikola Vu\u010devi\u0107",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 5
+     },
+     {
+      "team": "PHI",
+      "end": 2012,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Paolo Banchero",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Alex Morales",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Anthony Black",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Colin Castleton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Desmond Bane",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Franz Wagner",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Goga Bitadze",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Izaiyah Nelson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "JD Davison",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "HOU",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jalen Suggs",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jamal Cain",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jase Richardson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jevon Carter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "MIL",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jonathan Isaac",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Malaki Branham",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Noah Penda",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tristan da Silva",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Wendell Carter Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2021,
+      "seasons": 3
+     }
+    ]
+   }
+  ],
+  "WAS": [
+   {
+    "player": "Anthony Davis",
+    "all_star": 10,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 6
+     },
+     {
+      "team": "NOP",
+      "end": 2019,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Trae Young",
+    "all_star": 4,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Khris Middleton",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 12
+     },
+     {
+      "team": "DET",
+      "end": 2013,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "AJ Dybantsa",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Alex Sarr",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Anthony Gill",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bilal Coulibaly",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bub Carrington",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Deandre Ayton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "PHX",
+      "end": 2023,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Felix Okpara",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jamir Watkins",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Justin Champagnie",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Kyshawn George",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tre Mann",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "OKC",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Tre' Johnson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tristan Vuk\u010devi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Will Riley",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "MIN": [
+   {
+    "player": "Anthony Edwards",
+    "all_star": 4,
+    "past": []
+   },
+   {
+    "player": "Rudy Gobert",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2022,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "LaMelo Ball",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Antonio Reeves",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Ayo Dosunmu",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Bones Hyland",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "DEN",
+      "end": 2023,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Cody Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Donte DiVincenzo",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2022,
+      "seasons": 4
+     },
+     {
+      "team": "SAC",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Drew Timme",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Enrique Freeman",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Evans",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaden McDaniels",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaylen Clark",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Joan Beringer",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jonathan Kuminga",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Kenyon Martin Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2023,
+      "seasons": 3
+     },
+     {
+      "team": "LAC",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Rocco Zikarsky",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Terrence Shannon Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Trey Kaufman-Renn",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Trey Lyles",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "DET",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "DEN",
+      "end": 2019,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2017,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Zyon Pullin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "DET": [
+   {
+    "player": "Cade Cunningham",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "Jalen Duren",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Ausar Thompson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Chaz Lanier",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Daniss Jenkins",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Duncan Robinson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2025,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Ebuka Okorie",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Elijah Harkless",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Gary Harris",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2025,
+      "seasons": 4
+     },
+     {
+      "team": "DEN",
+      "end": 2021,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Isaac Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Joe",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 4
+     },
+     {
+      "team": "PHI",
+      "end": 2022,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Javonte Green",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2021,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "John Collins",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "ATL",
+      "end": 2023,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Kevin Huerter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "ATL",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Paul Reed",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2024,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ron Holland",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Taurean Prince",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "LAL",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "BKN",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "CLE",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2019,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Tolu Smith",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ugonna Onyenso",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "LAL": [
+   {
+    "player": "Luka Don\u010di\u0107",
+    "all_star": 6,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2025,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "AK Okereke",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Adou Thiero",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Arthur Kaluma",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Austin Reaves",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Bronny James",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Cameron Carr",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Chris Ma\u00f1on",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Collin Sexton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "CLE",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Dalton Knecht",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaden Hardy",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 4
+     },
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jake LaRavia",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jarred Vanderbilt",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2022,
+      "seasons": 2
+     },
+     {
+      "team": "DEN",
+      "end": 2020,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Kevon Looney",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2025,
+      "seasons": 10
+     }
+    ]
+   },
+   {
+    "player": "Matisse Thybulle",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "PHI",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Peter Suder",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Quentin Grimes",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "DAL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "NYK",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Sandro Mamukelashvili",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "MIL",
+      "end": 2023,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Walker Kessler",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ziaire Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   }
+  ],
+  "NOP": [
+   {
+    "player": "Zion Williamson",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "DeAndre Jordan",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "LAL",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "DAL",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "NYK",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2018,
+      "seasons": 10
+     }
+    ]
+   },
+   {
+    "player": "Dejounte Murray",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "SAS",
+      "end": 2022,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "A. J. Johnson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Bennedict Mathurin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 4
+     },
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Bryce McGowens",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "CHA",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Caleb Houstan",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Christian Koloko",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Derik Queen",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Herbert Jones",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaron Pierre Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jeremiah Fears",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jordan Poole",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "GSW",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Julian Reese",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Karlo Matkovi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kobe Bufkin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Malik Dia",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Markquis Nowell",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Saddiq Bey",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2023,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Trendon Watford",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Trey Murphy III",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Yves Missi",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "CHI": [
+   {
+    "player": "Norman Powell",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "POR",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2021,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Brandon Boston Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Buddy Hield",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "IND",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "PHI",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2022,
+      "seasons": 5
+     },
+     {
+      "team": "NOP",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Dailyn Swain",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Drew Peterson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Isaac Okoro",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2025,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Stevens",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jalen Smith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "PHX",
+      "end": 2022,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jaylin Sellers",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Josh Giddey",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2024,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Leonard Miller",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Matas Buzelis",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nic Claxton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Noa Essengue",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Orlando Robinson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ORL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Patrick Williams",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tobe Awaka",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tre Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Zach Collins",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 4
+     },
+     {
+      "team": "POR",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   }
+  ],
+  "LAC": [
+   {
+    "player": "Bradley Beal",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "PHX",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 11
+     }
+    ]
+   },
+   {
+    "player": "Brandon Ingram",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 6
+     },
+     {
+      "team": "LAL",
+      "end": 2019,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Darius Garland",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Brook Lopez",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 7
+     },
+     {
+      "team": "LAL",
+      "end": 2018,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2017,
+      "seasons": 9
+     }
+    ]
+   },
+   {
+    "player": "Baba Miller",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Blake Wesley",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Cam Christie",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Derrick Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "POR",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2020,
+      "seasons": 3
+     },
+     {
+      "team": "PHX",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Gradey Dick",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Jackson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Jalen Pickett",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Jamarion Sharp",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Johni Broome",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jordan Miller",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Keaton Wagler",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kobe Sanders",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kris Dunn",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "ATL",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2020,
+      "seasons": 3
+     },
+     {
+      "team": "MIN",
+      "end": 2017,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Max Strus",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "MIA",
+      "end": 2023,
+      "seasons": 3
+     },
+     {
+      "team": "CHI",
+      "end": 2020,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Rui Hachimura",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Yanic Konan Niederh\u00e4user",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Yuki Kawamura",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "CHA": [
+   {
+    "player": "Brandon Miller",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Christian Anderson Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Coby White",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Dennis Schr\u00f6der",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "GSW",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "OKC",
+      "end": 2020,
+      "seasons": 2
+     },
+     {
+      "team": "ATL",
+      "end": 2018,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Grant Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "BOS",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Grayson Allen",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHX",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "MIL",
+      "end": 2023,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Hannes Steinbach",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jarkel Joiner",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Josiah Allick",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kon Knueppel",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kylan Boswell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kyle Mangas",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Liam McNeeley",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Michael Ajayi",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Moussa Diabat\u00e9",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Naz Reid",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "PJ Hall",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Pat Connaughton",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 7
+     },
+     {
+      "team": "POR",
+      "end": 2018,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Rob Dillingham",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHI",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Royce O'Neale",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHX",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "BKN",
+      "end": 2024,
+      "seasons": 2
+     },
+     {
+      "team": "UTA",
+      "end": 2022,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Ryan Kalkbrenner",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Sion James",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tidjane Sala\u00fcn",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Trey Townsend",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "UTA": [
+   {
+    "player": "Jaren Jackson Jr.",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Lauri Markkanen",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ace Bailey",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Blake Hinson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Brice Sensabaugh",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Darryn Peterson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Harrison Ingram",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Isaiah Collier",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaxson Hayes",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "NOP",
+      "end": 2023,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Josh Green",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "DAL",
+      "end": 2024,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Josh Okogie",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "HOU",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "MIN",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Jusuf Nurki\u0107",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHX",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 6
+     },
+     {
+      "team": "DEN",
+      "end": 2017,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Keyonte George",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kyle Filipowski",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Matthew Murrell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Mo Bamba",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "NOP",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "PHI",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2023,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Sviatoslav Mykhailiuk",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "CHA",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "NYK",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "DET",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "OKC",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Tamar Bates",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Trey Alexander",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "DEN",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   }
+  ],
+  "DAL": [
+   {
+    "player": "Kyrie Irving",
+    "all_star": 9,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2023,
+      "seasons": 4
+     },
+     {
+      "team": "BOS",
+      "end": 2019,
+      "seasons": 2
+     },
+     {
+      "team": "CLE",
+      "end": 2017,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Caleb Martin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "CHA",
+      "end": 2021,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Cooper Flagg",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Daniel Gafford",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 3
+     },
+     {
+      "team": "CHI",
+      "end": 2021,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Dereck Lively II",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Dwight Powell",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2014,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jett Howard",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ORL",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "John Poulakidas",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Marcus Sasser",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Max Christie",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Morez Johnson Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Moussa Ciss\u00e9",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Naji Marshall",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2024,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "P. J. Washington",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2024,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Santi Aldama",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Sergio de Larrea",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tarik Biberovi\u0107",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tobi Lawal",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Vsevolod Ishchenko",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Zaccharie Risacher",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   }
+  ],
+  "PHX": [
+   {
+    "player": "Devin Booker",
+    "all_star": 5,
+    "past": []
+   },
+   {
+    "player": "C. J. Huntley",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Collin Gillespie",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2024,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Dillon Brooks",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "HOU",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "MEM",
+      "end": 2023,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Duop Reath",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Haywood Highsmith",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIA",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "PHI",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jalen Green",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "HOU",
+      "end": 2025,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Jamaree Bouyea",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "POR",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Jordan Goodwin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2023,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Khaman Maluach",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Koa Peat",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Koby Brea",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Luke Kennard",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MEM",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "LAC",
+      "end": 2023,
+      "seasons": 3
+     },
+     {
+      "team": "DET",
+      "end": 2020,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Mark Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Miles Bridges",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CHA",
+      "end": 2026,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Oso Ighodaro",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Pat Spencer",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "GSW",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Rasheer Fleming",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ryan Dunn",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "CLE": [
+   {
+    "player": "James Harden",
+    "all_star": 11,
+    "past": [
+     {
+      "team": "LAC",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "PHI",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "BKN",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "HOU",
+      "end": 2021,
+      "seasons": 9
+     },
+     {
+      "team": "OKC",
+      "end": 2012,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Donovan Mitchell",
+    "all_star": 7,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2022,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Evan Mobley",
+    "all_star": 1,
+    "past": []
+   },
+   {
+    "player": "Jarrett Allen",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "BKN",
+      "end": 2021,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Craig Porter Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Curtis Jones",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Ernest Udeh Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaylon Tyson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Khalifa Diop",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Mario Hezonja",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "NYK",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2018,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Meleek Thomas",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nae'Qwan Tomlin",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Peyton Watson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2026,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Riley Minix",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Sam Merrill",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2021,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Thomas Bryant",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIA",
+      "end": 2024,
+      "seasons": 1
+     },
+     {
+      "team": "DEN",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2022,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Tristan Enaruna",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tyrese Proctor",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "POR": [
+   {
+    "player": "Damian Lillard",
+    "all_star": 9,
+    "past": [
+     {
+      "team": "MIL",
+      "end": 2025,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Ja Morant",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "MEM",
+      "end": 2026,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Jrue Holiday",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "MIL",
+      "end": 2023,
+      "seasons": 3
+     },
+     {
+      "team": "NOP",
+      "end": 2020,
+      "seasons": 7
+     },
+     {
+      "team": "PHI",
+      "end": 2013,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Deni Avdija",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "WAS",
+      "end": 2024,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Branden Carlson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Chris Youngblood",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "OKC",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Donovan Clingan",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jayson Kent",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jeremy Sochan",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAS",
+      "end": 2026,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "John Tonje",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Micah Potter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "UTA",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "DET",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Robert Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2023,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Scoot Henderson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Shaedon Sharpe",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Sidy Cissoko",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2025,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Toumani Camara",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "V\u00edt Krej\u010d\u00ed",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "OKC",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Yang Hansen",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "BKN": [
+   {
+    "player": "Julius Randle",
+    "all_star": 3,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "NYK",
+      "end": 2024,
+      "seasons": 5
+     },
+     {
+      "team": "NOP",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "LAL",
+      "end": 2018,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ben Saraf",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Chaney Johnson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Danny Wolf",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Day'Ron Sharpe",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Drake Powell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Egor D\u00ebmin",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Grant Nelson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Josh Minott",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2025,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Joshua Jefferson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Keon Ellis",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2026,
+      "seasons": 1
+     },
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Michael Porter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DEN",
+      "end": 2025,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Mikel Brown Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Moritz Wagner",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ORL",
+      "end": 2026,
+      "seasons": 5
+     },
+     {
+      "team": "BOS",
+      "end": 2021,
+      "seasons": 1
+     },
+     {
+      "team": "WAS",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "LAL",
+      "end": 2019,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Noah Clowney",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Nolan Traor\u00e9",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Terance Mann",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "ATL",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "LAC",
+      "end": 2025,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Tyler Bilodeau",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "SAS": [
+   {
+    "player": "De'Aaron Fox",
+    "all_star": 2,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Victor Wembanyama",
+    "all_star": 2,
+    "past": []
+   },
+   {
+    "player": "Carter Bryant",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "David Jones Garc\u00eda",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Devin Vassell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Dylan Harper",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Harrison Barnes",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2024,
+      "seasons": 5
+     },
+     {
+      "team": "DAL",
+      "end": 2019,
+      "seasons": 3
+     },
+     {
+      "team": "GSW",
+      "end": 2016,
+      "seasons": 4
+     }
+    ]
+   },
+   {
+    "player": "Ja'Kobi Gillespie",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jayden Quaintance",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jon Elmore",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jordan McLaughlin",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "MIN",
+      "end": 2024,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Julian Champagnie",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Keldon Johnson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Luke Kornet",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "BOS",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "CLE",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "MIL",
+      "end": 2022,
+      "seasons": 1
+     },
+     {
+      "team": "CHI",
+      "end": 2021,
+      "seasons": 2
+     },
+     {
+      "team": "NYK",
+      "end": 2019,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Malik Williams",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "TOR",
+      "end": 2024,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Maliq Brown",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "R. J. Davis",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Stephon Castle",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Taelon Peter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "IND",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Tarris Reed Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Tobias Harris",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "PHI",
+      "end": 2024,
+      "seasons": 5
+     },
+     {
+      "team": "LAC",
+      "end": 2019,
+      "seasons": 1
+     },
+     {
+      "team": "ORL",
+      "end": 2016,
+      "seasons": 3
+     },
+     {
+      "team": "MIL",
+      "end": 2013,
+      "seasons": 2
+     }
+    ]
+   }
+  ],
+  "BOS": [
+   {
+    "player": "Paul George",
+    "all_star": 9,
+    "past": [
+     {
+      "team": "PHI",
+      "end": 2026,
+      "seasons": 2
+     },
+     {
+      "team": "LAC",
+      "end": 2024,
+      "seasons": 5
+     },
+     {
+      "team": "OKC",
+      "end": 2019,
+      "seasons": 2
+     },
+     {
+      "team": "IND",
+      "end": 2017,
+      "seasons": 7
+     }
+    ]
+   },
+   {
+    "player": "Jayson Tatum",
+    "all_star": 6,
+    "past": []
+   },
+   {
+    "player": "Mike Conley",
+    "all_star": 1,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2026,
+      "seasons": 3
+     },
+     {
+      "team": "UTA",
+      "end": 2023,
+      "seasons": 4
+     },
+     {
+      "team": "MEM",
+      "end": 2019,
+      "seasons": 12
+     }
+    ]
+   },
+   {
+    "player": "Amari Williams",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Baylor Scheierman",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Chris Cenac Jr.",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Derrick White",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAS",
+      "end": 2022,
+      "seasons": 5
+     }
+    ]
+   },
+   {
+    "player": "Devin Carter",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Dillon Mitchell",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Gabe McGlothan",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Hayden Gray",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Hugo Gonz\u00e1lez",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jordan Walsh",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Luka Garza",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "MIN",
+      "end": 2025,
+      "seasons": 3
+     },
+     {
+      "team": "DET",
+      "end": 2022,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Mitchell Robinson",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NYK",
+      "end": 2026,
+      "seasons": 8
+     }
+    ]
+   },
+   {
+    "player": "Neemias Queta",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "SAC",
+      "end": 2023,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Payton Pritchard",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Ron Harper Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2025,
+      "seasons": 1
+     },
+     {
+      "team": "TOR",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Sam Hauser",
+    "all_star": 0,
+    "past": []
+   }
+  ],
+  "MEM": [
+   {
+    "player": "Cam Spencer",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Cameron Boozer",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Carson Cooper",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Cedric Coward",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "GG Jackson",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Isaiah Stewart",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DET",
+      "end": 2026,
+      "seasons": 6
+     }
+    ]
+   },
+   {
+    "player": "Jahmai Mashack",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Javon Small",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jaylen Wells",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Jerami Grant",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 4
+     },
+     {
+      "team": "DET",
+      "end": 2022,
+      "seasons": 2
+     },
+     {
+      "team": "DEN",
+      "end": 2020,
+      "seasons": 1
+     },
+     {
+      "team": "OKC",
+      "end": 2019,
+      "seasons": 3
+     },
+     {
+      "team": "PHI",
+      "end": 2016,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Jordan Hawkins",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Karim L\u00f3pez",
+    "all_star": 0,
+    "past": []
+   },
+   {
+    "player": "Kris Murray",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "POR",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Micah Peavy",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "NOP",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Olivier-Maxence Prosper",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "DAL",
+      "end": 2025,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Quinten Post",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "GSW",
+      "end": 2026,
+      "seasons": 2
+     }
+    ]
+   },
+   {
+    "player": "Scotty Pippen Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "LAL",
+      "end": 2023,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Taylor Hendricks",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 3
+     }
+    ]
+   },
+   {
+    "player": "Ty Jerome",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "CLE",
+      "end": 2025,
+      "seasons": 2
+     },
+     {
+      "team": "GSW",
+      "end": 2023,
+      "seasons": 1
+     },
+     {
+      "team": "OKC",
+      "end": 2022,
+      "seasons": 2
+     },
+     {
+      "team": "PHX",
+      "end": 2020,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Walter Clayton Jr.",
+    "all_star": 0,
+    "past": [
+     {
+      "team": "UTA",
+      "end": 2026,
+      "seasons": 1
+     }
+    ]
+   },
+   {
+    "player": "Zach Edey",
+    "all_star": 0,
+    "past": []
+   }
+  ]
+ },
+ "active": 613,
+ "placed": 576,
+ "nationalities": {
+  "Aaron Gordon": "United States",
+  "Aaron Nesmith": "United States",
+  "Aaron Wiggins": "United States",
+  "Adam Flagler": "United States",
+  "A. J. Green": "United States",
+  "Al Horford": "Dominican Republic",
+  "Alex Caruso": "United States",
+  "Alperen \u015eeng\u00fcn": "Turkey",
+  "Amen Thompson": "United States",
+  "Andre Drummond": "United States",
+  "Andre Jackson": "United States",
+  "Andrew Nembhard": "Canada",
+  "Andrew Wiggins": "Canada",
+  "Anfernee Simons": "United States",
+  "Anthony Black": "United States",
+  "Anthony Davis": "United States",
+  "Anthony Edwards": "United States",
+  "Anthony Gill": "United States",
+  "Ausar Thompson": "United States",
+  "Austin Reaves": "United States",
+  "Ayo Dosunmu": "United States",
+  "Bam Adebayo": "United States",
+  "Ben Shephard": "United States",
+  "Ben Simmons": "Australia",
+  "Bennedict Mathurin": "Canada",
+  "Bilal Coulibaly": "France",
+  "Brandon Boston Jr.": "United States",
+  "Blake Wesley": "United States",
+  "Bobby Portis": "United States",
+  "Bogdan Bogdanovi\u0107": "Serbian",
+  "Bones Hyland": "United States",
+  "Bradley Beal": "United States",
+  "Brandin Podziemski": "United States",
+  "Brandon Ingram": "United States",
+  "Brandon Miller": "United States",
+  "Brandon Williams": "United States",
+  "Brice Sensabaugh": "United States",
+  "Brook Lopez": "United States",
+  "Bruce Brown": "United States",
+  "Bryce McGowens": "United States",
+  "Buddy Hield": "Bahamas",
+  "Cade Cunningham": "United States",
+  "Caleb Houstan": "Canada",
+  "Caleb Martin": "United States",
+  "Cam Whitmore": "United States",
+  "Cameron Johnson": "United States",
+  "Caris LeVert": "United States",
+  "Cason Wallace": "United States",
+  "Charles Bassey": "Nigeria",
+  "Chet Holmgren": "United States",
+  "Christian Braun": "United States",
+  "Christian Koloko": "Cameroon",
+  "CJ McCollum": "United States",
+  "Clint Capela": "Switzerland",
+  "Coby White": "United States",
+  "Colin Castleton": "United States",
+  "Collin Gillespie": "United States",
+  "Collin Sexton": "United States",
+  "Corey Kispert": "United States",
+  "Craig Porter Jr.": "United States",
+  "Dalen Terry": "United States",
+  "Damian Lillard": "United States",
+  "Daniel Gafford": "United States",
+  "Darius Garland": "United States",
+  "Davion Mitchell": "United States",
+  "Day'Ron Sharpe": "United States",
+  "De'Aaron Fox": "United States",
+  "De'Andre Hunter": "United States",
+  "De'Anthony Melton": "United States",
+  "Dean Wade": "United States",
+  "Deandre Ayton": "Bahamas",
+  "DeAndre Jordan": "United States",
+  "Dejounte Murray": "United States",
+  "DeMar DeRozan": "United States",
+  "Deni Avdija": "Israeli / Serbia",
+  "Dennis Schr\u00f6der": "Germany",
+  "Dereck Lively II": "United States",
+  "Derrick Jones": "United States",
+  "Derrick White": "United States",
+  "Desmond Bane": "United States",
+  "Devin Booker": "United States",
+  "Devin Vassell": "United States",
+  "Dillon Brooks": "Canada",
+  "Domantas Sabonis": "Lithuanian / American",
+  "Dominick Barlow": "United States",
+  "Donovan Mitchell": "United States",
+  "Donte DiVincenzo": "American",
+  "Dorian Finney-Smith": "United States",
+  "Draymond Green": "United States",
+  "Drew Eubanks": "United States",
+  "Drew Peterson": "United States",
+  "Dru Smith": "United States",
+  "Duncan Robinson": "United States",
+  "Duop Reath": "Australian / South Sudanese",
+  "Dwight Powell": "Canada",
+  "Dyson Daniels": "Australia",
+  "Elfrid Payton": "United States",
+  "Evan Mobley": "United States",
+  "Franz Wagner": "Germany",
+  "Fred VanVleet": "United States",
+  "Gary Harris": "United States",
+  "Gary Payton II": "United States",
+  "Gary Trent Jr.": "United States",
+  "Georges Niang": "United States",
+  "GG Jackson": "United States",
+  "Giannis Antetokounmpo": "Greek / Nigerian",
+  "Goga Bitadze": "Republic of Georgia",
+  "Gradey Dick": "United States",
+  "Grant Williams": "United States",
+  "Grayson Allen": "United States",
+  "Gui Santos": "Brazil",
+  "Harrison Barnes": "United States",
+  "Haywood Highsmith": "United States",
+  "Immanuel Quickley": "United States",
+  "Isaac Okoro": "United States",
+  "Isaiah Hartenstein": "American / German",
+  "Isaiah Jackson": "United States",
+  "Isaiah Joe": "United States",
+  "Isaiah Stewart": "United States",
+  "Ivica Zubac": "Croatian",
+  "Ja Morant": "United States",
+  "Jabari Walker": "United States",
+  "Jaden Hardy": "United States",
+  "Jaden McDaniels": "United States",
+  "Jae'Sean Tate": "United States",
+  "Jaime Jaquez Jr.": "Mexico",
+  "Jake LaRavia": "United States",
+  "Jakob P\u00f6ltl": "Austria",
+  "Jalen Brunson": "United States",
+  "Jalen Duren": "United States",
+  "Jalen Green": "United States",
+  "Jalen Johnson": "United States",
+  "Jalen Pickett": "United States",
+  "Jalen Slawson": "United States",
+  "Jalen Smith": "United States",
+  "Jalen Suggs": "United States",
+  "Jalen Williams": "United States",
+  "Jalen Wilson": "United States",
+  "Jamal Cain": "United States",
+  "Jamal Murray": "Canada",
+  "Jamaree Bouyea": "United States",
+  "James Harden": "United States",
+  "James Johnson": "United States",
+  "James Wiseman": "United States",
+  "Jarace Walker": "United States",
+  "Jaren Jackson Jr.": "United States",
+  "Jarred Vanderbilt": "United States",
+  "Jarrett Allen": "United States",
+  "Javonte Green": "American / Montenegrin",
+  "Jaxson Hayes": "American / Slovenian",
+  "Jay Huff": "United States",
+  "Jaylen Brown": "United States",
+  "Jaylin Williams": "United States",
+  "Jayson Tatum": "United States",
+  "JD Davison": "United States",
+  "Jerami Grant": "United States",
+  "Jeremy Sochan": "Polish / American",
+  "Jericho Sims": "United States",
+  "Jett Howard": "United States",
+  "Jevon Carter": "United States",
+  "Jimmy Butler": "United States",
+  "Jock Landale": "Australia",
+  "Joel Embiid": "Cameroonian / French / American",
+  "John Butler": "United States",
+  "John Collins": "United States",
+  "John Konchar": "United States",
+  "Jonathan Isaac": "United States",
+  "Jonathan Kuminga": "DR Congo",
+  "Jordan Clarkson": "American / Filipino",
+  "Jordan Goodwin": "United States",
+  "Jordan Hawkins": "United States",
+  "Jordan McLaughlin": "United States",
+  "Jordan Miller": "United States",
+  "Jordan Poole": "United States",
+  "Jordan Walsh": "United States",
+  "Jos\u00e9 Alvarado": "Puerto Rico",
+  "Josh Giddey": "Australia",
+  "Josh Green": "Australia",
+  "Josh Hart": "United States",
+  "Josh Minott": "Jamaica",
+  "Josh Okogie": "Nigeria",
+  "Jrue Holiday": "United States",
+  "Julian Champagnie": "United States",
+  "Julian Phillips": "United States",
+  "Julian Strawther": "Puerto Rico",
+  "Julius Randle": "United States",
+  "Justin Champagnie": "United States",
+  "Jusuf Nurki\u0107": "Bosnia",
+  "Karl-Anthony Towns": "American / Dominican",
+  "Kawhi Leonard": "United States",
+  "Keegan Murray": "United States",
+  "Keldon Johnson": "United States",
+  "Kelly Oubre Jr.": "United States",
+  "Kenrich Williams": "United States",
+  "Kentavious Caldwell-Pope": "United States",
+  "Keon Ellis": "United States",
+  "Kevin Durant": "United States",
+  "Kevin Huerter": "United States",
+  "Kevon Looney": "United States",
+  "Keyonte George": "United States",
+  "Khris Middleton": "United States",
+  "Kenyon Martin Jr.": "United States",
+  "Klay Thompson": "United States",
+  "Kobe Brown": "United States",
+  "Kobe Bufkin": "United States",
+  "Kris Dunn": "United States",
+  "Kris Murray": "United States",
+  "Kristaps Porzi\u0146\u0123is": "Latvia",
+  "Kyle Anderson": "American / Chinese",
+  "Kyle Kuzma": "United States",
+  "Kyrie Irving": "American",
+  "LaMelo Ball": "United States",
+  "Landry Shamet": "United States",
+  "Larry Nance Jr.": "United States",
+  "Lauri Markkanen": "Finland",
+  "LeBron James": "United States",
+  "Leonard Miller": "Canada",
+  "Lonnie Walker IV": "United States",
+  "Luguentz Dort": "Canada",
+  "Luka Don\u010di\u0107": "Slovenia",
+  "Luka Garza": "American / Bosnian",
+  "Luke Kennard": "United States",
+  "Luke Kornet": "United States",
+  "Malaki Branham": "United States",
+  "Malik Monk": "United States",
+  "Malik Williams": "United States",
+  "Marcus Sasser": "United States",
+  "Marcus Smart": "United States",
+  "Mario Hezonja": "Croatia",
+  "Mark Williams": "United States",
+  "Markquis Nowell": "United States",
+  "Marvin Bagley III": "United States",
+  "Matisse Thybulle": "Australian / American",
+  "Max Christie": "United States",
+  "Max Strus": "United States",
+  "Micah Potter": "United States",
+  "Michael Porter": "United States",
+  "Mikal Bridges": "United States",
+  "Mike Conley": "United States",
+  "Miles Bridges": "United States",
+  "Miles McBride": "United States",
+  "Mitchell Robinson": "United States",
+  "Mo Bamba": "American / Ivorian",
+  "Moritz Wagner": "Germany",
+  "Moses Moody": "United States",
+  "Mouhamed Gueye": "Senegal",
+  "Moussa Diabat\u00e9": "France",
+  "Myles Turner": "United States",
+  "Naji Marshall": "United States",
+  "Naz Reid": "United States",
+  "Neemias Queta": "Portugal",
+  "Nick Richards": "Jamaica",
+  "Nickeil Alexander-Walker": "Canada",
+  "Nic Claxton": "American / U.S. Virgin Islander",
+  "Nikola Joki\u0107": "Serbian",
+  "Nikola Jovi\u0107": "Serbian",
+  "Nikola Vu\u010devi\u0107": "Montenegrin / Belgian / American",
+  "Noah Clowney": "United States",
+  "Norman Powell": "United States",
+  "Obi Toppin": "United States",
+  "Ochai Agbaji": "United States",
+  "OG Anunoby": "Great Britain",
+  "Olivier-Maxence Prosper": "Canada",
+  "Onyeka Okongwu": "United States",
+  "Orlando Robinson": "United States",
+  "Oscar Tshiebwe": "DR Congo",
+  "Ousmane Dieng": "France",
+  "Paolo Banchero": "American / Italian",
+  "Pascal Siakam": "Cameroon",
+  "Pat Connaughton": "United States",
+  "Pat Spencer": "United States",
+  "Patrick Williams": "United States",
+  "Paul George": "United States",
+  "Paul Reed": "United States",
+  "Payton Pritchard": "United States",
+  "Pete Nance": "United States",
+  "Peyton Watson": "United States",
+  "P. J. Washington": "United States",
+  "Precious Achiuwa": "Nigeria",
+  "Quentin Grimes": "United States",
+  "Quenton Jackson": "United States",
+  "Rayan Rupert": "France",
+  "RJ Barrett": "Canada",
+  "Robert Williams": "United States",
+  "Ron Harper Jr.": "United States",
+  "Royce O'Neale": "United States",
+  "Rudy Gobert": "France",
+  "Rui Hachimura": "Japan",
+  "Ryan Rollins": "United States",
+  "Saddiq Bey": "United States",
+  "Sam Hauser": "United States",
+  "Sam Merrill": "United States",
+  "Sandro Mamukelashvili": "Georgian",
+  "Scoot Henderson": "United States",
+  "Scottie Barnes": "United States",
+  "Scotty Pippen Jr.": "United States",
+  "Shaedon Sharpe": "Canada",
+  "Shai Gilgeous-Alexander": "Canada",
+  "Sidy Cissoko": "France",
+  "Simone Fontecchio": "Italy",
+  "Stephen Curry": "United States",
+  "Steven Adams": "New Zealand",
+  "Sviatoslav Mykhailiuk": "Ukraine",
+  "Tacko Fall": "Senegal",
+  "Tari Eason": "United States",
+  "Taurean Prince": "United States",
+  "Taylor Hendricks": "United States",
+  "Terance Mann": "United States",
+  "Thomas Bryant": "United States",
+  "Tim Hardaway Jr.": "United States",
+  "T. J. McConnell": "United States",
+  "Tobias Harris": "United States",
+  "Tony Bradley": "United States",
+  "Toumani Camara": "Belgium",
+  "Trae Young": "United States",
+  "Trayce Jackson-Davis": "United States",
+  "Tre Jones": "United States",
+  "Tre Mann": "United States",
+  "Trendon Watford": "United States",
+  "Trey Jemison": "United States",
+  "Trey Lyles": "Canada",
+  "Trey Murphy III": "United States",
+  "Tristan Vuk\u010devi\u0107": "Serbian / Greek / Swedish",
+  "Ty Jerome": "United States",
+  "Tyler Herro": "United States",
+  "Tyrese Haliburton": "United States",
+  "Tyrese Maxey": "United States",
+  "Tyus Jones": "United States",
+  "Victor Wembanyama": "France",
+  "V\u00edt Krej\u010d\u00ed": "Czech Republic",
+  "Walker Kessler": "United States",
+  "Wendell Carter Jr.": "United States",
+  "Zach Collins": "United States",
+  "Zach LaVine": "United States",
+  "Zeke Nnaji": "United States",
+  "Ziaire Williams": "United States",
+  "Zion Williamson": "United States",
+  "Baylor Scheierman": "United States",
+  "Drew Timme": "United States",
+  "Tyler Kolek": "United States",
+  "Ariel Hukporti": "Germany",
+  "Pac\u00f4me Dadiet": "France",
+  "Kevin McCullar Jr.": "United States",
+  "Justin Edwards": "United States",
+  "Jared McCain": "United States",
+  "Adem Bona": "Nigerian / Turkish",
+  "Jamal Shead": "United States",
+  "Ja'Kobe Walter": "United States",
+  "Jamison Battle": "United States",
+  "Jonathan Mogbo": "United States",
+  "Matas Buzelis": "Lithuanian / American",
+  "Jaylon Tyson": "United States",
+  "Nae'Qwan Tomlin": "United States",
+  "Ron Holland": "United States",
+  "Tolu Smith": "United States",
+  "Daniss Jenkins": "United States",
+  "Johnny Furphy": "Australia",
+  "Enrique Freeman": "United States",
+  "RayJ Dennis": "United States",
+  "A. J. Johnson": "United States",
+  "Zaccharie Risacher": "French",
+  "Daeqwon Plowden": "United States",
+  "Tidjane Sala\u00fcn": "France",
+  "Kel'el Ware": "United States",
+  "Pelle Larsson": "Sweden",
+  "Keshad Johnson": "United States",
+  "Isaiah Stevens": "United States",
+  "Tristan da Silva": "German / Brazilian",
+  "Alex Sarr": "France",
+  "Bub Carrington": "United States",
+  "Kyshawn George": "Swiss / Canadian",
+  "PJ Hall": "United States",
+  "Trey Alexander": "United States",
+  "Spencer Jones": "United States",
+  "Rob Dillingham": "United States",
+  "Jaylen Clark": "United States",
+  "Terrence Shannon Jr.": "United States",
+  "Ajay Mitchell": "Belgium",
+  "Branden Carlson": "United States",
+  "Malevy Leons": "Netherlands",
+  "Donovan Clingan": "United States",
+  "Kyle Filipowski": "United States",
+  "Isaiah Collier": "United States",
+  "Cody Williams": "United States",
+  "Elijah Harkless": "United States",
+  "Quinten Post": "Netherlands",
+  "Cam Christie": "United States",
+  "Dalton Knecht": "United States",
+  "Bronny James": "United States",
+  "Ryan Dunn": "United States",
+  "Oso Ighodaro": "United States",
+  "Devin Carter": "United States",
+  "Isaac Jones": "United States",
+  "Isaiah Crawford": "United States",
+  "Reed Sheppard": "United States",
+  "Jaylen Wells": "United States",
+  "Zach Edey": "Canada",
+  "Cam Spencer": "United States",
+  "Yuki Kawamura": "Japan",
+  "Zyon Pullin": "United States",
+  "Yves Missi": "Cameroonian",
+  "Karlo Matkovi\u0107": "Croatian / Bosnian",
+  "Antonio Reeves": "United States",
+  "Stephon Castle": "United States",
+  "Harrison Ingram": "United States",
+  "Riley Minix": "United States",
+  "Ace Bailey": "United States",
+  "Adou Thiero": "United States",
+  "Alex Morales": "Puerto Rican",
+  "Alijah Martin": "United States",
+  "Amari Williams": "Great Britain",
+  "Asa Newell": "United States",
+  "Ben Saraf": "Israeli",
+  "Bez Mbeng": "United States",
+  "Blake Hinson": "United States",
+  "Bogoljub Markovi\u0107": "Serbian",
+  "Brooks Barnhizer": "United States",
+  "C. J. Huntley": "United States",
+  "Carter Bryant": "United States",
+  "Cedric Coward": "United States",
+  "Chaney Johnson": "United States",
+  "Chaz Lanier": "United States",
+  "Chris Ma\u00f1on": "United States",
+  "Chris Youngblood": "United States",
+  "Christian Anderson Jr.": "German / American",
+  "Chucky Hepburn": "United States",
+  "Collin Murray-Boyles": "United States",
+  "Cooper Flagg": "United States",
+  "Cormac Ryan": "United States",
+  "Curtis Jones": "United States",
+  "DaRon Holmes II": "United States",
+  "Danny Wolf": "American / Israeli",
+  "Derik Queen": "United States",
+  "Drake Powell": "United States",
+  "Dylan Cardwell": "United States",
+  "Dylan Harper": "United States",
+  "Egor D\u00ebmin": "Russia",
+  "Yang Hansen": "China",
+  "Hayden Gray": "United States",
+  "Herbert Jones": "United States",
+  "Hugo Gonz\u00e1lez": "Spain",
+  "Jahmai Mashack": "United States",
+  "Jamir Watkins": "United States",
+  "Jase Richardson": "United States",
+  "Javon Small": "United States",
+  "Jayson Kent": "United States",
+  "Jeremiah Fears": "United States",
+  "Joan Beringer": "French / Beninese",
+  "John Poulakidas": "United States",
+  "John Tonje": "United States",
+  "Johni Broome": "United States",
+  "Julian Reese": "United States",
+  "Kam Jones": "United States",
+  "Kasparas Jaku\u010dionis": "Lithuania",
+  "Keshon Gilbert": "United States",
+  "Khaman Maluach": "South Sudan",
+  "Kobe Sanders": "United States",
+  "Koby Brea": "American / Dominican",
+  "Kon Knueppel": "United States",
+  "LJ Cryer": "United States",
+  "Liam McNeeley": "United States",
+  "Malachi Smith": "United States",
+  "Maxime Raynaud": "France",
+  "Micah Peavy": "United States",
+  "Mohamed Diawara": "France",
+  "Moussa Ciss\u00e9": "Guinea",
+  "Myron Gardner": "United States",
+  "Nikola Topi\u0107": "Serbia",
+  "Nique Clifford": "United States",
+  "Noa Essengue": "France",
+  "Noah Penda": "France",
+  "Nolan Traor\u00e9": "France",
+  "Rasheer Fleming": "United States",
+  "Rocco Zikarsky": "Australia",
+  "Ryan Kalkbrenner": "United States",
+  "Ryan Nembhard": "Canada",
+  "Sean Pedulla": "United States",
+  "Sion James": "United States",
+  "Taelon Peter": "United States",
+  "Tre' Johnson": "United States",
+  "Tristan Enaruna": "Netherlands",
+  "Tyrese Proctor": "Australia",
+  "V. J. Edgecombe": "Bahamas",
+  "Vladislav Goldin": "Russia",
+  "Walter Clayton Jr.": "United States",
+  "Will Richard": "United States",
+  "Will Riley": "Canada",
+  "Yanic Konan Niederh\u00e4user": "Switzerland",
+  "Caleb Love": "United States",
+  "Emanuel Sharp": "American / Israeli / Canadian",
+  "Tarik Biberovi\u0107": "Bosnian / Turkish",
+  "Arthur Kaluma": "Ugandan / American",
+  "Alpha Diallo": "American / Guinean"
+ }
+}

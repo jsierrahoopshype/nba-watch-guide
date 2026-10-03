@@ -1,0 +1,41 @@
+{
+ "generated_at": "2026-10-03",
+ "source_url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+ "season": "2026-27",
+ "regular_season_games": 1206,
+ "games_with_national_tv": 303,
+ "games_with_local_tv": 652,
+ "games_with_no_broadcaster": 373,
+ "national_codes": {
+  "Peacock": 99,
+  "NBC": 69,
+  "Amazon": 66,
+  "ESPN": 62,
+  "NBA TV": 60,
+  "NBCSN": 30,
+  "ABC": 21,
+  "Telemundo": 10
+ },
+ "local_codes": {
+  "YES": 79,
+  "NBCSCA": 78,
+  "KTVK/KPHE/AZFS App": 73,
+  "CHSN": 71,
+  "WPLG": 66,
+  "NBCSBA": 66,
+  "KUNP": 65,
+  "SPECSN": 65,
+  "NBCSB": 65,
+  "KSBI": 61,
+  "ALT/ALT+": 41,
+  "ALT/ALT+/KTVD": 11,
+  "KATU/KUNP": 8,
+  "CHSN+": 7,
+  "ALT2/ALT+/KTVD": 4,
+  "KSBI/KWTV": 4,
+  "ALT2/ALT+": 4,
+  "ALT/ALT+/KTVD/KUSA": 4,
+  "KPHE/KPHO/AZFS App": 1,
+  "ALT2/ALT+/KTVD/KUSA": 1
+ }
+}
