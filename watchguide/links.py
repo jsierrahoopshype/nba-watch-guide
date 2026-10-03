@@ -140,16 +140,16 @@ def local_entry(entries: list[dict[str, Any]], name: str) -> dict[str, Any] | No
 
 def local_link(entries: list[dict[str, Any]], name: str, copy: dict[str, Any],
                display: str = "") -> Link | None:
-    """A station's or local stream's link, labelled with `display` (the name
-    the reader sees) or the name itself."""
+    """A station's or local stream's link, labelled with `display` or the
+    entry's first name (its full name, not a feed code like "NBCSB")."""
     if not enabled():
         return None
     entry = local_entry(entries, name)
     if entry is None:
         return None
     level = entry.get("level") or "home"
-    return make(display or name, level, fill(entry["url"]), copy, entry.get("kind", ""),
-                entry.get("affiliate_url", ""))
+    return make(display or (entry.get("names") or [name])[0], level, fill(entry["url"]), copy,
+                entry.get("kind", ""), entry.get("affiliate_url", ""))
 
 
 def country_link(entries: dict[str, Any], key: str, copy: dict[str, Any], display: str = "") -> Link | None:

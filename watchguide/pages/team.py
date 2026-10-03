@@ -15,7 +15,8 @@ from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
 from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
-from .common import cable_note, chips, crumb_trail, empty_players_label, game_view, updated_label
+from .common import (cable_note, chips, crumb_trail, empty_players_label, game_view, service_out,
+                     updated_label)
 
 JSONLD_GAME_LIMIT = 10
 
@@ -246,6 +247,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
             missing=missing,
             trail=crumb_trail(ctx, team.full_name, url),
             my_team_text=ctx.copy.get("my_team", {}),
+            # Each service row's outbound link, looked up after the maths.
+            service_out=lambda svc: service_out(ctx, svc),
         )
         pages.append(Page(out_path=f"{team.slug}/index.html", url=url, html=html,
                           lastmod=ctx.today, meta={"slug": team.slug, "share": card,

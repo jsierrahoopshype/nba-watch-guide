@@ -113,8 +113,9 @@ def service_out(ctx: SiteContext, svc, game=None) -> links.Link | None:
 def channel_out(ctx: SiteContext, channel: dict, game=None, slug: str = "") -> links.Link | None:
     """The outbound link for a channel chip. A national channel links to the
     service its chip names (the cheapest way to get it, as `how` says); a
-    local one to the station or stream in data/local_tv.json, the chip's own
-    team first, since "DAZN" is a different page for every team."""
+    local one to the station or stream in its own team's data/local_tv.json
+    links, never another team's, since "DAZN" is a different page for every
+    team. A local chip with no team searches every team (none does today)."""
     name = channel["name"]
     if channel["kind"] == "national":
         svc = cheapest_for(ctx, name)
@@ -122,11 +123,9 @@ def channel_out(ctx: SiteContext, channel: dict, game=None, slug: str = "") -> l
     if channel["kind"] != "local":
         return None
     own = channel.get("slug") or slug
-    order = ([ctx.local(own)] if own and ctx.local(own) else []) + \
-        [lt for s, lt in ctx.local_tv.items() if s != own]
-    display = ctx.short_channel(name)
+    order = [ctx.local(own)] if own else list(ctx.local_tv.values())
     for local in order:
-        link = links.local_link(local.links, name, ctx.copy, display=display)
+        link = links.local_link(local.links, name, ctx.copy) if local else None
         if link:
             return link
     return None

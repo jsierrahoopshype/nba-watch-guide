@@ -367,7 +367,7 @@ a.out { color: inherit; text-decoration: underline; text-decoration-thickness: 1
 a.out:hover { color: var(--accent-ink); }
 .badge { position: relative; }
 .badge a.out::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
-.hg-channels .badge { z-index: 2; }   /* above the hub card's stretched link */
+.hg-channels .badge:has(a.out) { z-index: 2; }   /* above the hub card's stretched link; other chips still open the game */
 .gb-everyone { margin: 0; padding: 10px 12px; border-radius: var(--radius-sm); background: var(--surface-2); font-size: 0.92rem; }
 .gb-fans { display: grid; grid-template-columns: 1fr; gap: 8px; }
 .gb-fan { padding: 10px 12px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); }

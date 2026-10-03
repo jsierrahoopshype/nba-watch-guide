@@ -28,14 +28,13 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from . import config, lastmod, links, seo, share
+from . import config, lastmod, seo, share
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
 from .manifest import expected_pages, mismatch, write_manifest
 from .model import Game, load_teams
 from .pages import BUILDERS
-from .pages.common import service_out
 from .pairs import game_pair_slug, meetings
 from .pages.links_block import render as render_links_block
 from .render import Page, build_env, hashed_asset_name
@@ -463,10 +462,6 @@ def render_pages(ctx: SiteContext, env=None) -> list[Page]:
     # Every page type picks this up, including ones added later, so a new
     # builder cannot forget the robots tag.
     env.globals["noindex"] = ctx.noindex
-    # Outbound "where to watch" links (watchguide/links.py): the anchor
-    # attributes, and each service row's link, looked up after the maths.
-    env.globals["outlink"] = links.OutLinks()
-    env.globals["service_out"] = lambda svc, game=None: service_out(ctx, svc, game)
     pages: list[Page] = []
     for builder in BUILDERS:
         pages.extend(builder(ctx, env))

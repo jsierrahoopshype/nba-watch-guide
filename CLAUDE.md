@@ -19,6 +19,15 @@ reporting any PR.
   every page against a build of main).
 - **Sitemap lastmod.** It moves only on real content changes. Anything that
   changes during a game day is `data-volatile` (`watchguide/lastmod.py`).
+  Outbound link anchors (`data-out`) are left out of the hash, so a link
+  change alone never moves a date.
+- **Links never change the answer.** Outbound "where to watch" links
+  (`watchguide/links.py`) never change coverage maths, the cheapest
+  combination, ordering or which services appear. Every page built with
+  links is the page built with `WATCH_GUIDE_NO_LINKS=1` plus the anchors
+  (`tests/test_outbound_links.py`). Only `verified` link entries are used.
+  Verify one by opening a real example page (the link check job), and fall
+  back a level when you can't.
 - **No third-party requests.** No new request from the reader's browser to
   any other domain; everything is fetched at build time and prerendered.
   No HoopsHype branding.

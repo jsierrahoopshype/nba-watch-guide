@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from conftest import TODAY, _build, _copy_data
+from conftest import TODAY, _build, _copy_data, without_outbound
 from watchguide import colors, config
 from watchguide.context import load_context
 from watchguide.model import load_local_tv, load_team_colors, load_teams
@@ -456,7 +456,7 @@ def test_chips_show_the_short_name_with_the_full_one_in_title(fixture_games, bui
                  priced=True)[0]
     assert (chip["label"], chip["title"], chip["how"]) == \
         ("Scripps Detroit 20", "WMYD The Spot Detroit 20 (Scripps)", "Pistons market")
-    page = read(built_site, "detroit-pistons")
+    page = without_outbound(read(built_site, "detroit-pistons"))
     # WMYD's confirmed antenna channel follows the short name.
     assert ('<span class="badge badge-local" title="WMYD The Spot Detroit 20 (Scripps)">Scripps Detroit 20'
             ' <span data-antenna>· antenna ch. 20.1</span></span>') in page

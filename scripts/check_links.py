@@ -7,9 +7,11 @@ data/countries.json, verified or not, with the same browser-like requests
 the build uses for cdn.nba.com (watchguide.sources.http.IMPERSONATE), and
 writes a table to the run summary:
 
-- ok: HTTP 2xx. The title is listed so a person can see it is the right page.
+- ok: HTTP 2xx with a title. The title is listed so a person can see it is
+  the right page (a redirect is noted).
 - broken: 404 or 410, or the host does not resolve. Fix or unverify it.
-- unverifiable: anything else (401, 403, 429, 5xx, a bot wall, a timeout).
+- unverifiable: anything else (401, 403, 429, 5xx, a 202 challenge, a bot
+  wall or geo-block page, no title, a timeout).
   Many streaming sites block automated requests; that is not a broken link.
 
 It reads the data and never changes it, and it always exits 0: it reports,
@@ -36,7 +38,8 @@ sys.path.insert(0, str(ROOT))
 DATA = ROOT / "data"
 TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 BOT_WALL = re.compile(r"captcha|are you a robot|access denied|attention required|just a moment|"
-                      r"verify you are human|request blocked|pardon our interruption", re.I)
+                      r"verify you are human|request blocked|pardon our interruption|"
+                      r"not available in your (country|region)|nicht verf\u00fcgbar|unavailable", re.I)
 BROKEN = {404, 410}
 
 
@@ -87,9 +90,11 @@ def classify(status: int, body: str, error: str) -> str:
         return "broken" if unresolved else "unverifiable"
     if status in BROKEN:
         return "broken"
-    if 200 <= status < 300:
+    if 200 <= status < 300 and status != 202:
+        # No title, or a bot wall or geo-block page, cannot show it is the
+        # right page; 202 is a bot challenge (ESPN's, for one).
         title = page_title(body)
-        return "unverifiable" if BOT_WALL.search(title) else "ok"
+        return "ok" if title and not BOT_WALL.search(title) else "unverifiable"
     return "unverifiable"
 
 
