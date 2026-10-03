@@ -155,6 +155,10 @@ def test_the_affiliate_switch_is_built_but_dormant():
         unused = links.make("Peacock", "section", "https://s.test/nba", COPY, affiliate=aff, game=_game(),
                             affiliate_level=level)
         assert (unused.href, unused.sponsored) == ("https://s.test/nba", False)
+    # Only https URLs become links.
+    assert links.make("X", "section", "javascript:alert(1)", COPY) is None
+    bad = links.make("X", "section", "https://s.test/", COPY, affiliate="data:text/html,x", affiliate_level="watch")
+    assert (bad.href, bad.sponsored) == ("https://s.test/", False)
     out = links.OutLinks()
     out.attrs(plain)
     assert not out.sponsored

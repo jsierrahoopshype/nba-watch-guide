@@ -115,6 +115,10 @@ def make(name: str, level: str, href: str, copy: dict[str, Any], kind: str = "",
     """A Link, with an affiliate_url taking over the href when it is set
     together with a valid affiliate_level, which then sets the label."""
     affiliate = fill(affiliate, game) if affiliate and affiliate_level in AFFILIATE_LEVELS else ""
+    # Only https URLs ever become an href: a javascript: or data: URL in the
+    # data files is dropped, not rendered.
+    affiliate = affiliate if affiliate.startswith("https://") else ""
+    href = href if href.startswith("https://") else ""
     if affiliate:
         landing = "signup" if affiliate_level == "signup" else "section"
         return Link(href=affiliate, label=label(name, landing, copy, kind), level=landing, sponsored=True)
