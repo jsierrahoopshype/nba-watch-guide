@@ -57,7 +57,6 @@
     "watching_heading": "Watching in the {team} market",
     "local_missing": "Local details coming.",
     "no_games": "No remaining regular-season games.",
-    "affiliate_disclosure": "Some links on this page earn HoopsMatic a commission. It does not change what you pay.",
     "coverage_none": "No service on this list carries a {team} game yet. Channels for these games are still listed as TBA in the league schedule.",
     "coverage_more": "{count} more services have no confirmed channel list yet."
   },
@@ -296,5 +295,11 @@
     "make": "Make this my team",
     "mine": "My team ✓",
     "button_hint": "Saved on this device only. The hub shows this team's next game first."
+  },
+  "links": {
+    "_note": "Outbound \"where to watch\" links (watchguide/links.py). The visible text stays the service's name; these are the links' accessible names. watch is for a link that reaches the game, a schedule, the service's NBA section or a station's site; signup for a signup page. affiliate_disclosure shows on a page with a sponsored link (an affiliate_url in the data).",
+    "watch": "Watch on {service}",
+    "signup": "Sign up for {service}",
+    "affiliate_disclosure": "Some links on this page earn HoopsMatic a commission. It does not change what you pay."
   }
 }

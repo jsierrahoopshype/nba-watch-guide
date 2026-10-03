@@ -30,14 +30,15 @@ def test_confirmed_prices_replace_the_not_confirmed_line(built_site_priced):
 
 def test_affiliate_link_and_disclosure_appear_together(built_site_priced):
     html = _html(built_site_priced)
-    assert 'rel="sponsored nofollow"' in html
+    # The League Pass row's link switched to its affiliate_url.
+    assert 'href="https://example.test/league-pass?ref=test" target="_blank" rel="sponsored nofollow noopener"' in html
     assert "earn HoopsMatic a commission" in html
 
 
 def test_disclosure_stays_off_when_no_affiliate_link_is_set(built_site):
     html = _html(built_site)
     assert "earn HoopsMatic a commission" not in html
-    assert 'rel="sponsored nofollow"' not in html
+    assert 'rel="sponsored' not in html
 
 
 def test_the_priced_build_still_keeps_the_pages_host_out(built_site_priced):

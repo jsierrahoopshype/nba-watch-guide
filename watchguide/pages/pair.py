@@ -87,7 +87,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "matchup": f"{ctx.team_name(g.away_tricode)} at {ctx.team_name(g.home_tricode)}",
             "time_label": et_label(g),
             "final": final_label(ctx, g),
-            "channels": chips(ctx, all_channels(ctx, g)),
+            "channels": chips(ctx, all_channels(ctx, g), game=g),
         } for g in games]
 
         title = pair_title(text, a.short_name, b.short_name)

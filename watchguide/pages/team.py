@@ -6,7 +6,7 @@ running any JavaScript. The toggle only changes which one is on screen.
 
 from __future__ import annotations
 
-from .. import config, seo, share
+from .. import config, links, seo, share
 from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, Combination, build_state_coverage, channels_for_game,
                         moderate_carries_in, relies_on_zip)
@@ -15,8 +15,7 @@ from ..why import explain as explain_game
 from ..model import CONFIDENCE_COUNTS, Team
 from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
-from .common import (cable_note, chips, crumb_trail, empty_players_label, game_view,
-                     has_affiliate_link, updated_label)
+from .common import cable_note, chips, crumb_trail, empty_players_label, game_view, updated_label
 
 JSONLD_GAME_LIMIT = 10
 
@@ -120,10 +119,10 @@ def _state_view(ctx: SiteContext, team: Team, games: list, state: str, text: dic
 
 
 def _with_antenna(ctx: SiteContext, name: str) -> str:
-    """"WPLG Local 10 · antenna ch. 10.1" when the station's antenna channel
-    is confirmed, otherwise the name as it is."""
+    """" · antenna ch. 10.1" to follow a station's name when its antenna
+    channel is confirmed, otherwise ""."""
     virtual = ctx.antenna_channel(name)
-    return f"{name} · {ctx.copy.get('game', {})['chip_antenna'].format(channel=virtual)}" if virtual else name
+    return f" · {ctx.copy.get('game', {})['chip_antenna'].format(channel=virtual)}" if virtual else ""
 
 
 def _watching(ctx: SiteContext, local, text: dict) -> dict | None:
@@ -136,11 +135,15 @@ def _watching(ctx: SiteContext, local, text: dict) -> dict | None:
         "confidence": local.confidence,
         "low_line": labels.get("local_low", "") if local.confidence == "low" else "",
         "notes": local.notes,
-        "broadcasters": [_with_antenna(ctx, name) for name in local.local_broadcasters],
+        # Each station's name (its link around it) and antenna channel.
+        "broadcasters": [{"name": name, "antenna": _with_antenna(ctx, name),
+                          "link": links.local_link(local.links, name, ctx.copy)}
+                         for name in local.local_broadcasters],
         "cable_note": ctx.copy.get("game", {})["cable_numbers"]
         if any(ctx.antenna_channel(name) for name in local.local_broadcasters) else "",
         "ota_note": local.ota.note,
         "streaming": local.streaming,
+        "streaming_links": [links.local_link(local.links, opt.name, ctx.copy) for opt in local.streaming],
         "live_tv_carriers": local.live_tv_carriers,
         "territory": local.territory,
         "checked": local.last_checked,
@@ -162,7 +165,6 @@ def build(ctx: SiteContext, env) -> list[Page]:
     labels = ctx.labels()
     tba = labels.get("tba", "TBA")
     pages: list[Page] = []
-    show_disclosure = has_affiliate_link(ctx)
 
     for team in ctx.teams:
         fields = {"team": team.short_name, "full_team": team.full_name, "season": ctx.season}
@@ -178,7 +180,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
                               + ctx.team_name(g.opponent_of(team.tricode)),
             "time_label": et_label(g),
             # Chips: a long local name shows short, the full one in title.
-            "channels": chips(ctx, channels_for_game(g, team.tricode, local, tba)),
+            "channels": chips(ctx, channels_for_game(g, team.tricode, local, tba), game=g, slug=team.slug),
             "pair_path": pair_path(g, ctx.by_tricode),
         } for g in remaining]
 
@@ -239,7 +241,6 @@ def build(ctx: SiteContext, env) -> list[Page]:
             updated_label=updated_label(ctx),
             stale=ctx.availability_is_stale(),
             empty_players_label=empty_players_label(ctx),
-            show_affiliate_disclosure=show_disclosure,
             prices_checked=ctx.services.prices_checked,
             watching=_watching(ctx, local, text),
             missing=missing,

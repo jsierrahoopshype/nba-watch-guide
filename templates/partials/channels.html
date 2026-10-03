@@ -1,12 +1,15 @@
 {#- Channel chips. A chip from pages.common.chips carries a label (a long
     local name shortened, the full one in title), an over-the-air station's
     confirmed antenna channel when there is one and, when priced, how to get
-    it; a plain channel dict just prints its name. -#}
+    it; a plain channel dict just prints its name. A chip with a `link` has
+    its name made tappable (the anchor's ::after covers the whole chip); the
+    rest of the chip stays outside the anchor. -#}
 {%- for channel in channels -%}
+{%- set link = channel.get('link') -%}
 <span class="badge badge-{{ channel.kind }}{% if channel.get('how') %} chip{% endif %}"{% if channel.get('title') %} title="{{ channel.title }}"{% endif %}>
-{%- if channel.get('how') %}<span class="chip-name">{{ channel.label }}</span>
+{%- if channel.get('how') %}<span class="chip-name">{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ channel.label }}{% if link %}</a>{% endif %}</span>
 {%- if channel.get('antenna') %}<span class="chip-how" data-antenna>· {{ channel.antenna }}</span>{% endif -%}
 <span class="chip-how">· {{ channel.how }}</span>
-{%- else %}{{ channel.get('label') or channel.name }}{% if channel.get('antenna') %} <span data-antenna>· {{ channel.antenna }}</span>{% endif %}{% endif -%}
+{%- else %}{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ channel.get('label') or channel.name }}{% if link %}</a>{% endif %}{% if channel.get('antenna') %} <span data-antenna>· {{ channel.antenna }}</span>{% endif %}{% endif -%}
 </span>{% if not loop.last %} {% endif %}
 {%- endfor -%}

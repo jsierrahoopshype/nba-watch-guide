@@ -1,0 +1,36 @@
+name: check-outbound-links
+
+# Weekly report on the outbound "where to watch" links (scripts/check_links.py).
+# Separate from the build: it never publishes, never edits data/ and never
+# fails (the script always exits 0, and the job is continue-on-error too).
+# It also runs on a pull request that changes the link data, so new
+# templates are opened from GitHub's runners before they merge.
+on:
+  schedule:
+    - cron: '23 7 * * 1'      # Mondays 07:23 UTC
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - data/services.json
+      - data/local_tv.json
+      - data/countries.json
+      - scripts/check_links.py
+      - .github/workflows/check-links.yml
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Check outbound links
+        run: python scripts/check_links.py

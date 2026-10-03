@@ -1,4 +1,4 @@
-<!doctype html>
+{{ outlink.reset() }}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -29,7 +29,10 @@
 <main class="wrap">
 {% block crumbs %}{% endblock %}
 {% block content %}{% endblock %}
-{% block disclosure %}{% endblock %}
+{#- The affiliate disclosure shows on any page with a sponsored outbound
+    link (an affiliate_url in the data); outlink saw every one above. #}
+{% block disclosure %}{% if outlink.sponsored %}<p class="disclosure">{{ copy.links.affiliate_disclosure }}</p>
+{% endif %}{% endblock %}
 </main>
 <script src="{{ asset('assets/watch-guide.js') }}" defer></script>
 </body>

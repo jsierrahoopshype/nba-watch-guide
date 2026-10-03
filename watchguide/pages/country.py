@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from .. import config, seo, share
+from .. import config, links, seo, share
 from ..context import SiteContext
 from ..countries import (Country, clock, country_players, local_tip, price_text,
                          watchable_games, when_label)
@@ -18,6 +18,7 @@ from .common import crumb_trail
 
 LOW = "low"
 MODERATE = "moderate"
+LEAGUE_PASS = "NBA League Pass"      # its key in a country's links
 
 
 def _fields(ctx: SiteContext, country: Country) -> dict[str, str]:
@@ -40,11 +41,12 @@ def _price(value, currency: str, period: str, verified: bool, low: bool, text: d
     return {"amount": amount, "none": "", "check": "" if verified else text["check_price"]}
 
 
-def _options(country: Country, text: dict, labels: dict, low: bool) -> list[dict]:
+def _options(ctx: SiteContext, country: Country, text: dict, labels: dict, low: bool) -> list[dict]:
     rows = []
     for opt in country.partner.get("options") or []:
         rows.append({
             "name": opt.get("name", ""),
+            "link": links.country_link(country.links, opt.get("name", ""), ctx.copy),
             "note": opt.get("note", ""),
             **_price(opt.get("price"), country.currency, opt.get("period", ""),
                      bool(opt.get("price_verified")), low, text, labels),
@@ -54,8 +56,10 @@ def _options(country: Country, text: dict, labels: dict, low: bool) -> list[dict
 
 def _prime(ctx: SiteContext, country: Country, text: dict, labels: dict, low: bool) -> dict:
     pv = country.prime_video
+    name = ctx.countries.prime_video_europe.get("name", "Prime Video")
     return {
-        "name": ctx.countries.prime_video_europe.get("name", "Prime Video"),
+        "name": name,
+        "link": links.country_link(country.links, name, ctx.copy),
         "summary": ctx.countries.prime_video_europe.get("summary", ""),
         "commentary": pv.get("commentary", ""),
         "membership": {
@@ -75,6 +79,7 @@ def league_pass(ctx: SiteContext, country: Country, text: dict, fields: dict) ->
     prices = [p for p in (price_text(lp.get("monthly_price"), country.currency, "month"),
                           price_text(lp.get("season_price"), country.currency, "season")) if p]
     return {
+        "link": links.country_link(country.links, LEAGUE_PASS, ctx.copy),
         "line": safe_format(text["league_pass_line"], **fields),
         "prices": prices,
         "unpublished": "" if prices else safe_format(text["league_pass_unpublished"], **fields),
@@ -193,7 +198,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
                 "name": country.partner.get("name", ""),
                 "carries": country.partner.get("carries", ""),
                 "commentary": country.partner.get("commentary", ""),
-                "options": _options(country, text, labels, low),
+                "options": _options(ctx, country, text, labels, low),
             },
             prime=_prime(ctx, country, text, labels, low),
             confidence_note=note,
