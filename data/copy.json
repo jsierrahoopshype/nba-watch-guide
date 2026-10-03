@@ -297,7 +297,7 @@
     "button_hint": "Saved on this device only. The hub shows this team's next game first."
   },
   "links": {
-    "_note": "Outbound \"where to watch\" links (watchguide/links.py). The visible text stays the service's name; these are the links' accessible names. watch is for a link that reaches the game, a schedule, the service's NBA section or a station's site; signup for a signup page. affiliate_disclosure shows on a page with a sponsored link (an affiliate_url in the data).",
+    "_note": "Outbound \"where to watch\" links (watchguide/links.py). The visible text stays the service's name; these are the links' accessible names. watch is for a link that reaches the game, a schedule, the service's NBA section or a station's site; signup for a signup page. An affiliate link's label follows its affiliate_level (watch or signup), not the fact that it is an affiliate link. affiliate_disclosure shows on a page with a sponsored link (an affiliate_url in the data).",
     "watch": "Watch on {service}",
     "signup": "Sign up for {service}",
     "affiliate_disclosure": "Some links on this page earn HoopsMatic a commission. It does not change what you pay."

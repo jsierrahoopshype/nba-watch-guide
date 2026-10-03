@@ -59,11 +59,11 @@
       "notes": "Sky's coverage also includes Ireland. Irish prices are in euros and were not researched.",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
       "links": {
-        "NOW Sports Membership": {"level": "signup", "url": "https://www.nowtv.com/membership/watch-sky-sports", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NOW Sports - Watch Sky Sports live”.", "affiliate_url": ""},
-        "NOW Sports Day Membership": {"level": "signup", "url": "https://www.nowtv.com/membership/watch-sky-sports", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NOW Sports - Watch Sky Sports live”.", "affiliate_url": ""},
-        "Sky TV with Sky Sports": {"level": "section", "url": "https://www.skysports.com/watch/basketball-on-sky", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Basketball - Watch Live NBA Games | TV Listings | Sky Sports”.", "affiliate_url": ""},
-        "Prime Video": {"level": "section", "url": "https://www.amazon.co.uk/gp/video/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA on Prime Video”.", "affiliate_url": ""},
-        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": ""}
+        "NOW Sports Membership": {"level": "signup", "url": "https://www.nowtv.com/membership/watch-sky-sports", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NOW Sports - Watch Sky Sports live”.", "affiliate_url": "", "affiliate_level": ""},
+        "NOW Sports Day Membership": {"level": "signup", "url": "https://www.nowtv.com/membership/watch-sky-sports", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NOW Sports - Watch Sky Sports live”.", "affiliate_url": "", "affiliate_level": ""},
+        "Sky TV with Sky Sports": {"level": "section", "url": "https://www.skysports.com/watch/basketball-on-sky", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Basketball - Watch Live NBA Games | TV Listings | Sky Sports”.", "affiliate_url": "", "affiliate_level": ""},
+        "Prime Video": {"level": "section", "url": "https://www.amazon.co.uk/gp/video/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA on Prime Video”.", "affiliate_url": "", "affiliate_level": ""},
+        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       },
       "player_overrides": []
     },
@@ -90,10 +90,10 @@
       "notes": "Movistar Plus+ and Orange customers can get DAZN's basketball channels through their operator; how many NBA games reach them is not confirmed.",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
       "links": {
-        "DAZN Plan Baloncesto": {"level": "signup", "url": "https://www.dazn.com/es-ES/signup", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""},
-        "DAZN Plan Made in USA": {"level": "signup", "url": "https://www.dazn.com/es-ES/signup", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""},
-        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/es/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Disfruta de NBA en Prime Video”.", "affiliate_url": ""},
-        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": ""}
+        "DAZN Plan Baloncesto": {"level": "signup", "url": "https://www.dazn.com/es-ES/signup", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""},
+        "DAZN Plan Made in USA": {"level": "signup", "url": "https://www.dazn.com/es-ES/signup", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""},
+        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/es/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Disfruta de NBA en Prime Video”.", "affiliate_url": "", "affiliate_level": ""},
+        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       },
       "player_overrides": ["Santi Aldama", "Aday Mara", "Sergio de Larrea"]
     },
@@ -119,9 +119,9 @@
       "notes": "The Paris game on January 14 is live and exclusive on Prime Video.",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
       "links": {
-        "beIN SPORTS": {"level": "section", "url": "https://www.beinsports.com/fr-fr/basketball/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA : en direct, vidéos et résultats NBA - beIN SPORTS”.", "affiliate_url": ""},
-        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/fr/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 503).", "affiliate_url": ""},
-        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": ""}
+        "beIN SPORTS": {"level": "section", "url": "https://www.beinsports.com/fr-fr/basketball/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA : en direct, vidéos et résultats NBA - beIN SPORTS”.", "affiliate_url": "", "affiliate_level": ""},
+        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/fr/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); the runner check 2026-10-03 could not confirm it (HTTP 503).", "affiliate_url": "", "affiliate_level": ""},
+        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       },
       "player_overrides": []
     },
@@ -148,10 +148,10 @@
       "notes": "",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
       "links": {
-        "Sky Sport package": {"level": "section", "url": "https://www.sky.de/sport/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA Live - jetzt die NBA live bei Sky streamen”.", "affiliate_url": ""},
-        "WOW Live-Sport": {"level": "section", "url": "https://www.wowtv.de/live-sport/nba", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (geo-blocked from the US runner (“nicht verfügbar”)).", "affiliate_url": ""},
-        "Prime Video": {"level": "section", "url": "https://www.amazon.de/gp/video/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA on Prime Video”.", "affiliate_url": ""},
-        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": ""}
+        "Sky Sport package": {"level": "section", "url": "https://www.sky.de/sport/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA Live - jetzt die NBA live bei Sky streamen”.", "affiliate_url": "", "affiliate_level": ""},
+        "WOW Live-Sport": {"level": "section", "url": "https://www.wowtv.de/live-sport/nba", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); the runner check 2026-10-03 could not confirm it (geo-blocked from the US runner (“nicht verfügbar”)).", "affiliate_url": "", "affiliate_level": ""},
+        "Prime Video": {"level": "section", "url": "https://www.amazon.de/gp/video/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA on Prime Video”.", "affiliate_url": "", "affiliate_level": ""},
+        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       },
       "player_overrides": ["Hannes Steinbach"]
     },
@@ -177,8 +177,9 @@
       "notes": "Sky's game count is reported as both 180 and over 300 a season; not confirmed.",
       "league_pass": {"monthly_price": null, "season_price": null, "price_verified": false, "source_url": ""},
       "links": {
-        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/it/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Guarda NBA su Prime Video”.", "affiliate_url": ""},
-        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": ""}
+        "NOW Pass Sport": {"level": "section", "url": "https://www.nowtv.it/sport/basket/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Il Basket NBA in streaming | NOW”.", "affiliate_url": "", "affiliate_level": ""},
+        "Prime Video": {"level": "section", "url": "https://www.primevideo.com/-/it/tournament/amzn1.dv.icid.cf75b42a-68cd-4a1c-993a-a0b3f0575c5f", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Guarda NBA su Prime Video”.", "affiliate_url": "", "affiliate_level": ""},
+        "NBA League Pass": {"level": "signup", "url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       },
       "player_overrides": []
     }
