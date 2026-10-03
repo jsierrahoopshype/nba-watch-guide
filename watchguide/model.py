@@ -291,6 +291,8 @@ class Service:
     family: str = ""
     # Outbound link levels (see watchguide/links.py). Never read by the maths.
     links: dict[str, Any] = field(default_factory=dict)
+    # Where affiliate_url lands, "watch" or "signup"; the link's label follows it.
+    affiliate_level: str = ""
 
     @property
     def has_price(self) -> bool:
@@ -413,6 +415,7 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             lineup=load_lineup(s.get("lineup")),
             family=s.get("family", ""),
             links=s.get("links") if isinstance(s.get("links"), dict) else {},
+            affiliate_level=s.get("affiliate_level", ""),
         ))
         if services[-1].kind == "live_tv":
             apply_lineup(services[-1])

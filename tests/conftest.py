@@ -217,5 +217,6 @@ def built_site_priced(tmp_path_factory, fixture_games):
             svc["verified"] = True
         if svc["id"] == "nba_league_pass":
             svc["affiliate_url"] = "https://example.test/league-pass?ref=test"
+            svc["affiliate_level"] = "signup"
     (data_dir / "services.json").write_text(json.dumps(services), encoding="utf-8")
     return _build(tmp_path_factory, fixture_games, "site-priced", data_dir=data_dir)

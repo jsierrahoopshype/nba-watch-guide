@@ -20,10 +20,14 @@ page and last its homepage. Without a game (a team's services list) only
 the section and below apply.
 
 Affiliate links: an `affiliate_url` (on the service in services.json, on the
-entry in local_tv.json and countries.json) replaces the href when filled in.
-The link then reads "Sign up for ..." and carries rel="sponsored nofollow
-noopener", and the page gets the disclosure line (OutLinks below). Every
-affiliate_url is empty for now, so none of that shows.
+entry in local_tv.json and countries.json) replaces the href when filled in,
+and its `affiliate_level` says where it lands: "watch" (the game, a schedule
+or the NBA section) or "signup". The label follows that level, "Watch on ..."
+or "Sign up for ...", never the fact that it is an affiliate link. An
+affiliate_url without a valid affiliate_level is not used (the data tests
+refuse it). An affiliate link carries rel="sponsored nofollow noopener", and
+the page gets the disclosure line (OutLinks below). Every affiliate_url is
+empty for now, so none of that shows.
 
 Links never change an answer: they are looked up after the coverage maths,
 by name, and the build with WATCH_GUIDE_NO_LINKS=1 is the same page minus
@@ -41,6 +45,7 @@ from markupsafe import Markup, escape
 LEVELS = ("game", "date", "section", "signup", "home")
 GAME_LEVELS = ("game", "date")          # need a game to fill in
 PLACEHOLDERS = ("{away}", "{home}", "{game_id}", "{yyyymmdd}", "{yyyy-mm-dd}")
+AFFILIATE_LEVELS = ("watch", "signup")  # where an affiliate_url lands
 REL = "noopener"
 REL_SPONSORED = "sponsored nofollow noopener"
 
@@ -106,11 +111,13 @@ def best(levels: dict[str, Any], game=None) -> tuple[str, str]:
 
 
 def make(name: str, level: str, href: str, copy: dict[str, Any], kind: str = "",
-         affiliate: str = "", game=None) -> Link | None:
-    """A Link, with an affiliate_url taking over the href when it is set."""
-    affiliate = fill(affiliate, game) if affiliate else ""
+         affiliate: str = "", game=None, affiliate_level: str = "") -> Link | None:
+    """A Link, with an affiliate_url taking over the href when it is set
+    together with a valid affiliate_level, which then sets the label."""
+    affiliate = fill(affiliate, game) if affiliate and affiliate_level in AFFILIATE_LEVELS else ""
     if affiliate:
-        return Link(href=affiliate, label=label(name, "signup", copy, kind), level="signup", sponsored=True)
+        landing = "signup" if affiliate_level == "signup" else "section"
+        return Link(href=affiliate, label=label(name, landing, copy, kind), level=landing, sponsored=True)
     if not href:
         return None
     return Link(href=href, label=label(name, level, copy, kind), level=level)
@@ -125,7 +132,8 @@ def service_link(svc, copy: dict[str, Any], game=None, name: str = "") -> Link |
     if svc is None or not enabled():
         return None
     level, href = best(getattr(svc, "links", None) or {}, game)
-    return make(name or svc.name, level, href, copy, svc.kind, svc.affiliate_url, game)
+    return make(name or svc.name, level, href, copy, svc.kind, svc.affiliate_url, game,
+                getattr(svc, "affiliate_level", ""))
 
 
 def local_entry(entries: list[dict[str, Any]], name: str) -> dict[str, Any] | None:
@@ -149,7 +157,8 @@ def local_link(entries: list[dict[str, Any]], name: str, copy: dict[str, Any],
         return None
     level = entry.get("level") or "home"
     return make(display or (entry.get("names") or [name])[0], level, fill(entry["url"]), copy,
-                entry.get("kind", ""), entry.get("affiliate_url", ""))
+                entry.get("kind", ""), entry.get("affiliate_url", ""),
+                affiliate_level=entry.get("affiliate_level", ""))
 
 
 def country_link(entries: dict[str, Any], key: str, copy: dict[str, Any], display: str = "") -> Link | None:
@@ -160,7 +169,7 @@ def country_link(entries: dict[str, Any], key: str, copy: dict[str, Any], displa
     if not _usable(entry):
         return None
     return make(display or key, entry.get("level") or "section", fill(entry["url"]), copy, "",
-                entry.get("affiliate_url", ""))
+                entry.get("affiliate_url", ""), affiliate_level=entry.get("affiliate_level", ""))
 
 
 # --------------------------------------------------------------------------

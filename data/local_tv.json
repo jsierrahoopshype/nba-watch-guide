@@ -54,8 +54,8 @@
       "ota": {"status": "all", "games": null, "note": "Local games air free over the air on WANF and Peachtree Sports Network."},
       "streaming": [],
       "links": [
-        {"names": ["WANF (Gray)", "WANF"], "kind": "station", "level": "home", "url": "https://www.atlantanewsfirst.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “WANF | Atlanta News First”.", "affiliate_url": ""},
-        {"names": ["Peachtree Sports Network (WPCH subchannel)"], "kind": "station", "level": "home", "url": "https://www.peachtreetv.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “PeachtreeTV”.", "affiliate_url": ""}
+        {"names": ["WANF (Gray)", "WANF"], "kind": "station", "level": "home", "url": "https://www.atlantanewsfirst.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “WANF | Atlanta News First”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Peachtree Sports Network (WPCH subchannel)"], "kind": "station", "level": "home", "url": "https://www.peachtreetv.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “PeachtreeTV”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["YouTube TV", "Fubo", "DirecTV"],
       "territory": "Hawks local market",
@@ -71,8 +71,8 @@
         {"name": "NBC Sports Boston on Peacock", "monthly_price_usd": 15.00, "season_price_usd": null, "requires_service": "peacock_premium", "note": "$15 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus).", "price_verified": false}
       ],
       "links": [
-        {"names": ["NBC Sports Boston", "NBCSB"], "kind": "station", "level": "section", "url": "https://www.nbcsportsboston.com/nba/boston-celtics/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Boston Celtics – NBC Sports Boston”.", "affiliate_url": ""},
-        {"names": ["NBC Sports Boston on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-boston", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Boston on Peacock | Peacock”.", "affiliate_url": ""}
+        {"names": ["NBC Sports Boston", "NBCSB"], "kind": "station", "level": "section", "url": "https://www.nbcsportsboston.com/nba/boston-celtics/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Boston Celtics – NBC Sports Boston”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["NBC Sports Boston on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-boston", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Boston on Peacock | Peacock”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV Stream", "Hulu + Live TV"],
       "territory": "Celtics local market",
@@ -87,8 +87,8 @@
         {"name": "YES on DAZN", "monthly_price_usd": null, "season_price_usd": null, "note": "DAZN replaces the Gotham Sports app. Pay-TV subscribers who get YES get it on DAZN at no extra cost. Standalone 2026-27 price not confirmed by an official page or two independent sources.", "price_verified": false, "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["YES Network", "YES"], "kind": "station", "level": "section", "url": "https://yesnetwork.com/nets-schedule/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Nets Schedule – YES Network”.", "affiliate_url": ""},
-        {"names": ["YES on DAZN"], "kind": "stream", "level": "signup", "url": "https://www.dazn.com/signup", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["YES Network", "YES"], "kind": "station", "level": "section", "url": "https://yesnetwork.com/nets-schedule/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Nets Schedule – YES Network”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["YES on DAZN"], "kind": "stream", "level": "signup", "url": "https://www.dazn.com/signup", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Nets local market",
@@ -108,9 +108,9 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store and 20% off select tickets."}
       ],
       "links": [
-        {"names": ["WSOC-TV 9"], "kind": "station", "level": "section", "url": "https://www.wsoctv.com/sports/nba/charlotte-hornets/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “WSOC TV”).", "affiliate_url": ""},
-        {"names": ["TV64 (Cox Media Group)"], "kind": "station", "level": "section", "url": "https://www.wsoctv.com/sports/nba/charlotte-hornets/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “WSOC TV”).", "affiliate_url": ""},
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/hornets", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["WSOC-TV 9"], "kind": "station", "level": "section", "url": "https://www.wsoctv.com/sports/nba/charlotte-hornets/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “WSOC TV”).", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["TV64 (Cox Media Group)"], "kind": "station", "level": "section", "url": "https://www.wsoctv.com/sports/nba/charlotte-hornets/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “WSOC TV”).", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/hornets", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "North Carolina and South Carolina",
@@ -125,8 +125,8 @@
         {"name": "CHSN app", "monthly_price_usd": 19.99, "season_price_usd": null, "note": "Bulls only. $29.99 a month bundled with the Blackhawks and White Sox.", "price_verified": false}
       ],
       "links": [
-        {"names": ["CHSN"], "kind": "station", "level": "section", "url": "https://www.chsn.com/schedule", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Schedule”).", "affiliate_url": ""},
-        {"names": ["CHSN app"], "kind": "stream", "level": "signup", "url": "https://subscribe.chsn.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Subscribe to CHSN”.", "affiliate_url": ""}
+        {"names": ["CHSN"], "kind": "station", "level": "section", "url": "https://www.chsn.com/schedule", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Schedule”).", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["CHSN app"], "kind": "stream", "level": "signup", "url": "https://subscribe.chsn.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Subscribe to CHSN”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV", "Fubo"],
       "territory": "Bulls local market",
@@ -147,9 +147,9 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "15 regular-season games free with a DAZN account."}
       ],
       "links": [
-        {"names": ["DAZN (produced by Rock Entertainment Sports Network)", "DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/Cavaliers", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""},
-        {"names": ["WOIO"], "kind": "station", "level": "section", "url": "https://www.cleveland19.com/sports/nba/cavaliers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Cleveland Cavaliers”.", "affiliate_url": ""},
-        {"names": ["WUAB"], "kind": "station", "level": "section", "url": "https://www.cleveland19.com/sports/nba/cavaliers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Cleveland Cavaliers”.", "affiliate_url": ""}
+        {"names": ["DAZN (produced by Rock Entertainment Sports Network)", "DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/Cavaliers", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["WOIO"], "kind": "station", "level": "section", "url": "https://www.cleveland19.com/sports/nba/cavaliers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Cleveland Cavaliers”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["WUAB"], "kind": "station", "level": "section", "url": "https://www.cleveland19.com/sports/nba/cavaliers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Cleveland Cavaliers”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Cavaliers local market",
@@ -164,7 +164,7 @@
         {"name": "MavsTV", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
       ],
       "links": [
-        {"names": ["MavsTV"], "kind": "stream", "level": "signup", "url": "https://www.mavs.com/mavstv/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200 at nba.com/mavs/mavstv with no title).", "affiliate_url": ""}
+        {"names": ["MavsTV"], "kind": "stream", "level": "signup", "url": "https://www.mavs.com/mavstv/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200 at nba.com/mavs/mavstv with no title).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Mavericks local market",
@@ -179,8 +179,8 @@
         {"name": "Altitude+", "monthly_price_usd": 20.00, "season_price_usd": null, "note": "", "price_verified": false}
       ],
       "links": [
-        {"names": ["Altitude", "ALT"], "kind": "station", "level": "section", "url": "https://www.altitudesports.com/pages/denver-nuggets-tv-schedule/", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: not the right page, it redirects to the Altitude+ homepage, not a Nuggets TV schedule.", "affiliate_url": ""},
-        {"names": ["Altitude+"], "kind": "stream", "level": "home", "url": "https://www.altitudeplus.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Home (landed here from altitudesports.com/pages/altitude-plus/)”.", "affiliate_url": ""}
+        {"names": ["Altitude", "ALT"], "kind": "station", "level": "section", "url": "https://www.altitudesports.com/how-to-watch", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; not checked by the runner.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Altitude+"], "kind": "stream", "level": "home", "url": "https://www.altitudeplus.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Home (landed here from altitudesports.com/pages/altitude-plus/)”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV Stream"],
       "territory": "Nuggets local market",
@@ -200,8 +200,8 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 15% off at the team store."}
       ],
       "links": [
-        {"names": ["WMYD The Spot Detroit 20 (Scripps)"], "kind": "station", "level": "section", "url": "https://www.thespottv.com/detroit-20/detroit-pistons", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Detroit Pistons”.", "affiliate_url": ""},
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/pistons", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["WMYD The Spot Detroit 20 (Scripps)"], "kind": "station", "level": "section", "url": "https://www.thespottv.com/detroit-20/detroit-pistons", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Detroit Pistons”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/pistons", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Michigan",
@@ -217,8 +217,8 @@
         {"name": "NBC Sports Bay Area on Peacock", "monthly_price_usd": 17.95, "season_price_usd": null, "note": "$17.95 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus); in-market only.", "price_verified": true, "requires_service": "peacock_premium", "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["NBC Sports Bay Area", "NBCSBA"], "kind": "station", "level": "section", "url": "https://www.nbcsportsbayarea.com/streaming-faqs-warriors/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to stream the Golden State Warriors – NBC Sports Bay Area & California”.", "affiliate_url": ""},
-        {"names": ["NBC Sports Bay Area on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-bayarea", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Bay Area on Peacock | Peacock”.", "affiliate_url": ""}
+        {"names": ["NBC Sports Bay Area", "NBCSBA"], "kind": "station", "level": "section", "url": "https://www.nbcsportsbayarea.com/streaming-faqs-warriors/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to stream the Golden State Warriors – NBC Sports Bay Area & California”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["NBC Sports Bay Area on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-bayarea", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Bay Area on Peacock | Peacock”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Warriors local market",
@@ -233,7 +233,8 @@
         {"name": "SCHN+", "monthly_price_usd": 19.99, "season_price_usd": null, "note": "Space City Home Network's streaming app: $19.99 a month or $199.99 a year; free with a pay-TV login that includes SCHN. In-market only.", "price_verified": true, "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["Space City Home Network"], "kind": "station", "level": "home", "url": "https://www.spacecityhomenetwork.com/", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (no response).", "affiliate_url": ""}
+        {"names": ["Space City Home Network"], "kind": "station", "level": "section", "url": "https://www.schnplus.com/rockets", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; not checked by the runner.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["SCHN+"], "kind": "stream", "level": "home", "url": "https://www.schnplus.com/", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and not checked by the runner.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV", "Fubo"],
       "territory": "Rockets local market",
@@ -248,7 +249,7 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Early Bird Season Pass $59.99 if bought by October 15. 22 regular-season games free with a DAZN account. Season ticket holders get a free Season Pass."}
       ],
       "links": [
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/Pacers", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/Pacers", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Indiana, Kentucky, Iowa, Illinois and Missouri (ZIP checker on the Pacers site)",
@@ -273,7 +274,8 @@
         {"name": "Spectrum SportsNet+", "monthly_price_usd": 20.00, "season_price_usd": null, "note": "Sold in-market through the NBA app. Season price reported inconsistently.", "price_verified": false}
       ],
       "links": [
-        {"names": ["Spectrum SportsNet", "SPECSN"], "kind": "station", "level": "home", "url": "https://www.spectrumsportsnet.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Spectrum SportsNet | Lakers, Dodgers, Sparks - Live & On Demand”.", "affiliate_url": ""}
+        {"names": ["Spectrum SportsNet", "SPECSN"], "kind": "station", "level": "home", "url": "https://www.spectrumsportsnet.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Spectrum SportsNet | Lakers, Dodgers, Sparks - Live & On Demand”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Spectrum SportsNet+"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/lakers", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; not checked by the runner.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV"],
       "territory": "Southern California, Hawaii and Southern Nevada",
@@ -288,7 +290,7 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Carries 78 of 80 non-national regular-season games."}
       ],
       "links": [
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/grizzlies", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://dazn.com/grizzlies", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Parts of Tennessee, Mississippi, Kentucky, Alabama, Missouri, Illinois and Arkansas",
@@ -306,8 +308,8 @@
         {"name": "Local 10+ Platinum", "monthly_price_usd": 0, "season_price_usd": 0, "note": "Free stream of the Local 10 broadcasts.", "price_verified": true}
       ],
       "links": [
-        {"names": ["WPLG Local 10", "WPLG"], "kind": "station", "level": "section", "url": "https://www.local10.com/topic/Miami_Heat/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Miami Heat Headlines | WPLG Local 10”.", "affiliate_url": ""},
-        {"names": ["Local 10+ Platinum"], "kind": "stream", "level": "section", "url": "https://www.local10.com/tech/2026/07/18/how-to-download-and-use-the-free-local-10-platinum-app/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to download and use the free Local 10+ Platinum app”.", "affiliate_url": ""}
+        {"names": ["WPLG Local 10", "WPLG"], "kind": "station", "level": "section", "url": "https://www.local10.com/topic/Miami_Heat/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Miami Heat Headlines | WPLG Local 10”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Local 10+ Platinum"], "kind": "stream", "level": "section", "url": "https://www.local10.com/tech/2026/07/18/how-to-download-and-use-the-free-local-10-platinum-app/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to download and use the free Local 10+ Platinum app”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Miami-Dade, Broward and Monroe counties (Palm Beach partner pending)",
@@ -327,8 +329,8 @@
         {"name": "Bucks streaming service", "monthly_price_usd": null, "season_price_usd": null, "note": "To be announced.", "price_verified": false}
       ],
       "links": [
-        {"names": ["MY24 (WVTV-DT2)"], "kind": "station", "level": "section", "url": "https://www.cw18milwaukee.com/my24/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in/article_3fe145f5-3af8-490d-9d9f-fb815de44f82.html", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Milwaukee Bucks Return to My24 for 2026-27 Season | MY24 | cw18milwaukee.com”.", "affiliate_url": ""},
-        {"names": ["Bucks streaming service"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/bucks/plus", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Bucks+ | Milwaukee Bucks”.", "affiliate_url": ""}
+        {"names": ["MY24 (WVTV-DT2)"], "kind": "station", "level": "section", "url": "https://www.cw18milwaukee.com/my24/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in/article_3fe145f5-3af8-490d-9d9f-fb815de44f82.html", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Milwaukee Bucks Return to My24 for 2026-27 Season | MY24 | cw18milwaukee.com”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Bucks streaming service"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/bucks/plus", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Bucks+ | Milwaukee Bucks”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["YouTube TV"],
       "territory": "Wisconsin",
@@ -343,7 +345,7 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "15 games free with a DAZN account."}
       ],
       "links": [
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/Timberwolves", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/Timberwolves", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Minnesota, Iowa, Nebraska, North Dakota and South Dakota, plus parts of Kansas and Wisconsin",
@@ -362,8 +364,8 @@
         {"name": "Pelicans+", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
       ],
       "links": [
-        {"names": ["Gulf Coast Sports & Entertainment Network (Gray)"], "kind": "station", "level": "section", "url": "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “FOX 8 to simulcast 20 Pelicans games free during 2026-27 season”.", "affiliate_url": ""},
-        {"names": ["Pelicans+"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/pelicans", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “New Orleans Pelicans | Watch The Pelicans Online At Home Or On The Go | NBA.com”.", "affiliate_url": ""}
+        {"names": ["Gulf Coast Sports & Entertainment Network (Gray)"], "kind": "station", "level": "section", "url": "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “FOX 8 to simulcast 20 Pelicans games free during 2026-27 season”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Pelicans+"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/pelicans", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “New Orleans Pelicans | Watch The Pelicans Online At Home Or On The Go | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Gulf Coast markets",
@@ -378,8 +380,8 @@
         {"name": "MSG on DAZN", "monthly_price_usd": 29.99, "season_price_usd": null, "note": "MSG on DAZN: $29.99 a month ($19.99 the first month). Free with a pay-TV package that includes MSG. Yearly price not confirmed.", "price_verified": false, "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["MSG Network"], "kind": "station", "level": "section", "url": "https://www.msgnetworks.com/teams/knicks/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""},
-        {"names": ["MSG on DAZN"], "kind": "stream", "level": "signup", "url": "https://www.dazn.com/signup", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["MSG Network"], "kind": "station", "level": "section", "url": "https://www.msgnetworks.com/teams/knicks/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["MSG on DAZN"], "kind": "stream", "level": "signup", "url": "https://www.dazn.com/signup", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["Fubo", "DirecTV Stream"],
       "territory": "Knicks local market",
@@ -400,10 +402,10 @@
         {"name": "Thunder+ (NBA App)", "monthly_price_usd": 19.99, "season_price_usd": 108.99, "note": "Season pass $99.99 if bought by September 30. Carries all 67 non-national games.", "price_verified": true}
       ],
       "links": [
-        {"names": ["KSBI (Oklahoma City)", "KSBI"], "kind": "station", "level": "section", "url": "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “67 Thunder Games Coming To KSBI, News 9 - News9.com”.", "affiliate_url": ""},
-        {"names": ["KQCW (Tulsa)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “News On 6 Announces Oklahoma City Thunder Broadcasts - NewsOn6.com”.", "affiliate_url": ""},
-        {"names": ["News On 6 (4 games)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder - NewsOn6.com”.", "affiliate_url": ""},
-        {"names": ["Thunder+ (NBA App)"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder | Watch The Thunder Online At Home Or On The Go | NBA.com”.", "affiliate_url": ""}
+        {"names": ["KSBI (Oklahoma City)", "KSBI"], "kind": "station", "level": "section", "url": "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “67 Thunder Games Coming To KSBI, News 9 - News9.com”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["KQCW (Tulsa)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “News On 6 Announces Oklahoma City Thunder Broadcasts - NewsOn6.com”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["News On 6 (4 games)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder - NewsOn6.com”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Thunder+ (NBA App)"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder | Watch The Thunder Online At Home Or On The Go | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["Cox", "Spectrum", "DirecTV", "DirecTV Stream"],
       "territory": "Oklahoma, Kansas, Arkansas, Missouri and Nebraska",
@@ -424,9 +426,9 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 20% off at the team store."}
       ],
       "links": [
-        {"names": ["WRDQ 27"], "kind": "station", "level": "section", "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Orlando Magic select WFTV 9 and WRDQ 27 for 2026-27 season - WFTV”.", "affiliate_url": ""},
-        {"names": ["WFTV 9 (Cox)"], "kind": "station", "level": "section", "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Orlando Magic select WFTV 9 and WRDQ 27 for 2026-27 season - WFTV”.", "affiliate_url": ""},
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/magic", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["WRDQ 27"], "kind": "station", "level": "section", "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Orlando Magic select WFTV 9 and WRDQ 27 for 2026-27 season - WFTV”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["WFTV 9 (Cox)"], "kind": "station", "level": "section", "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Orlando Magic select WFTV 9 and WRDQ 27 for 2026-27 season - WFTV”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/magic", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Magic local market",
@@ -442,8 +444,8 @@
         {"name": "NBC Sports Philadelphia on Peacock", "monthly_price_usd": 24.95, "season_price_usd": null, "note": "$24.95 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus); in-market only.", "price_verified": true, "requires_service": "peacock_premium", "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["NBC Sports Philadelphia"], "kind": "station", "level": "section", "url": "https://www.nbcsportsphiladelphia.com/streaming-faqs-sixers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to stream the Philadelphia 76ers – NBC Sports Philadelphia”.", "affiliate_url": ""},
-        {"names": ["NBC Sports Philadelphia on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-philadelphia", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Philadelphia on Peacock | Peacock”.", "affiliate_url": ""}
+        {"names": ["NBC Sports Philadelphia"], "kind": "station", "level": "section", "url": "https://www.nbcsportsphiladelphia.com/streaming-faqs-sixers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “How to stream the Philadelphia 76ers – NBC Sports Philadelphia”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["NBC Sports Philadelphia on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-philadelphia", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports Philadelphia on Peacock | Peacock”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "76ers local market",
@@ -463,9 +465,9 @@
         {"name": "Suns+", "monthly_price_usd": null, "season_price_usd": null, "note": "Inside the Arizona's Family Sports app. Subscriptions open October 1.", "price_verified": false}
       ],
       "links": [
-        {"names": ["Arizona's Family (3TV/KTVK)"], "kind": "station", "level": "section", "url": "https://www.azfamily.com/sports/how-to-watch/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Sports - How to Watch”.", "affiliate_url": ""},
-        {"names": ["Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"], "kind": "station", "level": "section", "url": "https://www.azfamily.com/programming/sports-network/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Arizona’s Family Sports”.", "affiliate_url": ""},
-        {"names": ["Suns+"], "kind": "stream", "level": "signup", "url": "https://azfamilysports.com/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Home Page”).", "affiliate_url": ""}
+        {"names": ["Arizona's Family (3TV/KTVK)"], "kind": "station", "level": "section", "url": "https://www.azfamily.com/sports/how-to-watch/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Sports - How to Watch”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"], "kind": "station", "level": "section", "url": "https://www.azfamily.com/programming/sports-network/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Arizona’s Family Sports”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Suns+"], "kind": "stream", "level": "signup", "url": "https://azfamilysports.com/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Home Page”).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Arizona",
@@ -485,9 +487,9 @@
         {"name": "BlazerVision", "monthly_price_usd": 19.99, "season_price_usd": 120.0, "note": "$19.99 a month or $120 for the season; one source says monthly billing starts November 1. In-market only.", "price_verified": false, "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["KUNP"], "kind": "station", "level": "section", "url": "https://katu.com/topic/KUNP", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Portland Topic Kunp | News, Weather, Sports, Breaking News”.", "affiliate_url": ""},
-        {"names": ["KATU (some games)", "KATU"], "kind": "station", "level": "section", "url": "https://katu.com/sports/trail-blazers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Trail Blazers”.", "affiliate_url": ""},
-        {"names": ["BlazerVision"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/blazers", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “BlazerVision | Watch Trail Blazers Online At Home Or On The Go | NBA.com”.", "affiliate_url": ""}
+        {"names": ["KUNP"], "kind": "station", "level": "section", "url": "https://katu.com/topic/KUNP", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Portland Topic Kunp | News, Weather, Sports, Breaking News”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["KATU (some games)", "KATU"], "kind": "station", "level": "section", "url": "https://katu.com/sports/trail-blazers/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Trail Blazers”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["BlazerVision"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/blazers", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “BlazerVision | Watch Trail Blazers Online At Home Or On The Go | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Blazers local market",
@@ -503,8 +505,8 @@
         {"name": "NBC Sports California on Peacock", "monthly_price_usd": 17.95, "season_price_usd": null, "note": "$17.95 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus); in-market only.", "price_verified": true, "requires_service": "peacock_premium", "checked": "2026-10-01"}
       ],
       "links": [
-        {"names": ["NBC Sports California", "NBCSCA"], "kind": "station", "level": "section", "url": "https://www.nbcsportsbayarea.com/nba/sacramento-kings/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Sacramento Kings – NBC Sports Bay Area & California”.", "affiliate_url": ""},
-        {"names": ["NBC Sports California on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-california", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports California on Peacock | Peacock”.", "affiliate_url": ""}
+        {"names": ["NBC Sports California", "NBCSCA"], "kind": "station", "level": "section", "url": "https://www.nbcsportsbayarea.com/nba/sacramento-kings/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Sacramento Kings – NBC Sports Bay Area & California”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["NBC Sports California on Peacock"], "kind": "stream", "level": "signup", "url": "https://www.peacocktv.com/sports/nbcsports-california", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC Sports California on Peacock | Peacock”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Kings local market",
@@ -519,7 +521,7 @@
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Ultimate tier adds 25% off at the team store."}
       ],
       "links": [
-        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/Spurs", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": ""}
+        {"names": ["DAZN"], "kind": "stream", "level": "section", "url": "https://www.dazn.com/Spurs", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 403).", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Central, South and West Texas",
@@ -532,8 +534,8 @@
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [],
       "links": [
-        {"names": ["TSN"], "kind": "station", "level": "section", "url": "https://www.tsn.ca/nba/article/2025-26-raptors-on-tsn-schedule/", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: not the right page, it is titled “2025-26 Toronto Raptors on TSN Schedule”, last season's.", "affiliate_url": ""},
-        {"names": ["Sportsnet"], "kind": "station", "level": "section", "url": "https://www.sportsnet.ca/basketball/nba/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA News, Scores and Highlights - Sportsnet.ca”.", "affiliate_url": ""}
+        {"names": ["TSN"], "kind": "station", "level": "section", "url": "https://www.tsn.ca/nba/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; not checked by the runner.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Sportsnet"], "kind": "station", "level": "section", "url": "https://www.sportsnet.ca/basketball/nba/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA News, Scores and Highlights - Sportsnet.ca”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": [],
       "territory": "Canada",
@@ -552,8 +554,8 @@
         {"name": "Jazz+", "monthly_price_usd": 20.00, "season_price_usd": 126.00, "note": "SEG+ bundle with the Utah Mammoth is $175 a year.", "price_verified": false}
       ],
       "links": [
-        {"names": ["KJZZ"], "kind": "station", "level": "section", "url": "https://kjzz.com/sports/utah-jazz", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Utah Jazz”.", "affiliate_url": ""},
-        {"names": ["Jazz+"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/jazz", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: not the right page, it redirects to nba.com/league-pass-purchase, not Jazz+.", "affiliate_url": ""}
+        {"names": ["KJZZ"], "kind": "station", "level": "section", "url": "https://kjzz.com/sports/utah-jazz", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Utah Jazz”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Jazz+"], "kind": "stream", "level": "signup", "url": "https://www.segplus.com/", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and not checked by the runner.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["Fubo (parts of Idaho and Wyoming)"],
       "territory": "Jazz local market",
@@ -569,8 +571,8 @@
         {"name": "Monumental+", "monthly_price_usd": 19.99, "season_price_usd": 179.99, "note": "Also sold as a subscription through DAZN.", "price_verified": false}
       ],
       "links": [
-        {"names": ["Monumental Sports Network"], "kind": "station", "level": "section", "url": "https://www.monumentalsportsnetwork.com/wizards-app-live", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch Wizards Games Live | Monumental Sports”.", "affiliate_url": ""},
-        {"names": ["Monumental+"], "kind": "stream", "level": "home", "url": "https://www.monumentalsportsnetwork.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch Capitals, Wizards & Mystics games live online | Stream Monumental Sports Network”.", "affiliate_url": ""}
+        {"names": ["Monumental Sports Network"], "kind": "station", "level": "section", "url": "https://www.monumentalsportsnetwork.com/wizards-app-live", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch Wizards Games Live | Monumental Sports”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["Monumental+"], "kind": "stream", "level": "home", "url": "https://www.monumentalsportsnetwork.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch Capitals, Wizards & Mystics games live online | Stream Monumental Sports Network”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["DirecTV Stream", "Fubo"],
       "territory": "South of Richmond, Va., to Delaware",

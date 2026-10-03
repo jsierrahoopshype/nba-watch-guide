@@ -136,14 +136,29 @@ def test_labels_watch_signup_and_never_sign_up_for_a_station():
 def test_the_affiliate_switch_is_built_but_dormant():
     plain = links.make("Peacock", "section", "https://s.test/nba", COPY)
     assert (plain.rel, plain.sponsored, plain.label) == ("noopener", False, "Watch on Peacock")
-    paid = links.make("Peacock", "section", "https://s.test/nba", COPY, affiliate="https://aff.test/?id={game_id}",
-                      game=_game())
-    assert paid.href == "https://aff.test/?id=0022600001"
-    assert (paid.rel, paid.sponsored, paid.label) == ("sponsored nofollow noopener", True, "Sign up for Peacock")
+    aff = "https://aff.test/?id={game_id}"
+    # The label follows the affiliate_level stored with the URL, not the
+    # fact that it is an affiliate link.
+    watch = links.make("Peacock", "section", "https://s.test/nba", COPY, affiliate=aff, game=_game(),
+                       affiliate_level="watch")
+    assert watch.href == "https://aff.test/?id=0022600001"
+    assert (watch.rel, watch.sponsored, watch.label) == ("sponsored nofollow noopener", True, "Watch on Peacock")
+    signup = links.make("Peacock", "section", "https://s.test/nba", COPY, affiliate=aff, game=_game(),
+                        affiliate_level="signup")
+    assert (signup.sponsored, signup.label) == (True, "Sign up for Peacock")
+    # A station never says sign up, even through an affiliate link.
+    station = links.make("WPLG", "section", "https://w.test/", COPY, kind="station", affiliate=aff,
+                         game=_game(), affiliate_level="signup")
+    assert station.label == "Watch on WPLG"
+    # Without a valid level the affiliate_url is not used at all.
+    for level in ("", "nope"):
+        unused = links.make("Peacock", "section", "https://s.test/nba", COPY, affiliate=aff, game=_game(),
+                            affiliate_level=level)
+        assert (unused.href, unused.sponsored) == ("https://s.test/nba", False)
     out = links.OutLinks()
     out.attrs(plain)
     assert not out.sponsored
-    assert 'rel="sponsored nofollow noopener"' in out.attrs(paid) and out.sponsored
+    assert 'rel="sponsored nofollow noopener"' in out.attrs(signup) and out.sponsored
     assert out.reset() == "" and not out.sponsored
 
 
@@ -151,6 +166,9 @@ def test_an_affiliate_url_brings_the_disclosure(built_site_priced):
     """conftest's priced build sets League Pass's affiliate_url."""
     html = (built_site_priced / "boston-celtics/index.html").read_text(encoding="utf-8")
     assert 'rel="sponsored nofollow noopener"' in html and "earn HoopsMatic a commission" in html
+    # Its affiliate_level is "signup", so the label says so.
+    assert re.search(r'href="https://example\.test/league-pass\?ref=test"[^>]*aria-label="Sign up for NBA League Pass"',
+                     html)
     hub = (built_site_priced / "uk/index.html").read_text(encoding="utf-8")
     assert "sponsored" not in hub and "earn HoopsMatic a commission" not in hub
 
@@ -182,11 +200,20 @@ def test_a_local_chip_links_only_to_its_own_teams_page(built_site):
 
 # -- the data ---------------------------------------------------------------------------------
 
+def _affiliate(where, record):
+    """Every affiliate_url sits beside an affiliate_level; a filled-in URL
+    needs a level ("watch" or "signup"), or the link's label would guess."""
+    assert "affiliate_url" in record and "affiliate_level" in record, where
+    if record["affiliate_url"]:
+        assert record["affiliate_level"] in links.AFFILIATE_LEVELS, where
+        assert record["affiliate_url"].startswith("https://"), where
+
+
 def _entries():
     """(where, entry, placeholders allowed) for every link entry in the data."""
     services = json.loads((config.DATA_DIR / "services.json").read_text(encoding="utf-8"))
     for svc in services["services"]:
-        assert "affiliate_url" in svc, svc["id"]
+        _affiliate(svc["id"], svc)
         for level, entry in svc.get("links", {}).items():
             assert level in LEVELS, (svc["id"], level)
             yield f"{svc['id']}.{level}", entry, level in links.GAME_LEVELS
@@ -196,7 +223,7 @@ def _entries():
         for entry in team.get("links") or []:
             assert entry["names"][0] in own, (slug, entry["names"])    # a name the page shows
             assert entry["kind"] in ("station", "stream") and entry["level"] in LEVELS, (slug, entry)
-            assert "affiliate_url" in entry, slug
+            _affiliate(slug, entry)
             yield f"{slug} {entry['names'][0]}", entry, False
     countries = json.loads((config.DATA_DIR / "countries.json").read_text(encoding="utf-8"))
     for slug, country in countries["countries"].items():
@@ -204,7 +231,8 @@ def _entries():
         assert "NBA League Pass" in country.get("links", {}), slug
         for name, entry in country.get("links", {}).items():
             assert name in shown, (slug, name)
-            assert "affiliate_url" in entry and entry["level"] in LEVELS, (slug, name)
+            assert entry["level"] in LEVELS, (slug, name)
+            _affiliate(f"{slug} {name}", entry)
             yield f"{slug} {name}", entry, False
 
 
