@@ -289,6 +289,8 @@ class Service:
     # Live TV only: the service a plan belongs to ("Fubo" for Fubo Pro and
     # Elite), so an answer can name the service once.
     family: str = ""
+    # Outbound link levels (see watchguide/links.py). Never read by the maths.
+    links: dict[str, Any] = field(default_factory=dict)
 
     @property
     def has_price(self) -> bool:
@@ -410,6 +412,7 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
             carries_confidence_note=s.get("carries_confidence_note", ""),
             lineup=load_lineup(s.get("lineup")),
             family=s.get("family", ""),
+            links=s.get("links") if isinstance(s.get("links"), dict) else {},
         ))
         if services[-1].kind == "live_tv":
             apply_lineup(services[-1])
@@ -550,6 +553,8 @@ class LocalTV:
     # {full name: short name} for channel chips; see short_name().
     short_names: dict[str, str] = field(default_factory=dict)
     antenna_channels: list[AntennaChannel] = field(default_factory=list)
+    # Outbound links for the stations and streams (see watchguide/links.py).
+    links: list[dict[str, Any]] = field(default_factory=list)
 
     def antenna_channel(self, name: str) -> str:
         """The confirmed virtual channel for a channel name, or ""."""
@@ -624,6 +629,7 @@ def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
                 reason=a.get("reason", ""),
                 sources=[x for x in a.get("sources") or [] if isinstance(x, dict)],
                 checked=a.get("checked", "")) for a in t.get("antenna_channels") or []],
+            links=[e for e in t.get("links") or [] if isinstance(e, dict)],
         )
     return out
 

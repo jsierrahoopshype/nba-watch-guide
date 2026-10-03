@@ -11,6 +11,7 @@ from datetime import date, timedelta
 
 import pytest
 
+from conftest import without_outbound
 from watchguide.coverage import (IN_MARKET, OUT_OF_MARKET, build_state_coverage,
                                  channels_for_game, local_services, moderate_carries_in)
 from watchguide.model import Game, load_local_tv, load_services
@@ -207,7 +208,7 @@ def test_add_on_costs_its_price_plus_the_required_service(services, local):
 
 
 def test_add_on_renders_with_its_own_price_and_the_required_service(built_site_priced):
-    inside = panel(built_site_priced, "boston-celtics", "in_market")
+    inside = without_outbound(panel(built_site_priced, "boston-celtics", "in_market"))
     cheapest = inside[inside.index("Cheapest way to watch"):inside.index("Services and prices")]
     assert '<span>NBC Sports Boston on Peacock</span><span class="price">$15</span>' in cheapest
     assert '<span>Peacock Premium</span><span class="price">$12.99</span>' in cheapest
@@ -278,7 +279,7 @@ def test_schedule_fallback_shows_stations_when_all_games_are_over_the_air(local)
 
 
 def test_schedule_fallback_on_the_cavaliers_page(built_site):
-    html = page(built_site, "cleveland-cavaliers")
+    html = without_outbound(page(built_site, "cleveland-cavaliers"))
     sched = html[html.index('<table class="sched"'):html.index("</table>")]
     assert '<span class="badge badge-local">DAZN</span>' in sched
     for station in ("WOIO", "WUAB", "Gray stations"):

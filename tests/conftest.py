@@ -8,6 +8,7 @@ checked without touching the network.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from dataclasses import asdict
 from datetime import date, datetime, timedelta, timezone
@@ -64,6 +65,16 @@ def no_headshot_downloads(monkeypatch):
     from watchguide.sources import matchups, referees
     monkeypatch.setattr(referees, "get", refuse)
     monkeypatch.setattr(matchups, "get", refuse)
+
+
+OUTBOUND = re.compile(r'<a [^>]*\bdata-out(?=[\s>])[^>]*>(.*?)</a>', re.S)
+
+
+def without_outbound(html: str) -> str:
+    """The page as it reads without the outbound "where to watch" anchors
+    (watchguide/links.py), for tests that pin the markup around a service
+    or channel name."""
+    return OUTBOUND.sub(r"\1", html)
 
 
 def expected_page_count(data_dir=None, games=None) -> int:

@@ -25,6 +25,10 @@
       "carries_verified": true,
       "signup_url": "",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://abc.com/news/4c35c607-b08a-4829-81e4-70da35ce781f/category/4249627", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “ESPN on ABC News & Blogs | ABC”."},
+        "home": {"url": "https://abc.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “ABC Network - ABC.com”."}
+      },
       "source_url": "https://www.nba.com/league-pass-purchase",
       "last_verified": "2026-09-25",
       "verified": true
@@ -39,6 +43,10 @@
       "carries_verified": true,
       "signup_url": "",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.nbc.com/sports/league/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Sport Landing Page - NBA”."},
+        "home": {"url": "https://www.nbc.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBC TV Network - Shows, Episodes, Schedule”."}
+      },
       "source_url": "https://www.nba.com/league-pass-purchase",
       "last_verified": "2026-09-25",
       "verified": true
@@ -52,6 +60,12 @@
       "carries_verified": true,
       "signup_url": "https://www.espn.com/espnplus/",
       "affiliate_url": "",
+      "links": {
+        "date": {"url": "https://www.espn.com/nba/schedule/_/date/{yyyymmdd}", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 202 bot challenge).", "sample": "https://www.espn.com/nba/schedule/_/date/20261020"},
+        "section": {"url": "https://www.espn.com/nba/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 202 bot challenge)."},
+        "signup": {"url": "https://plus.espn.com/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200 with no title)."},
+        "home": {"url": "https://www.espn.com/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 202 bot challenge)."}
+      },
       "source_url": "https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices",
       "last_verified": "2026-09-25",
       "verified": true
@@ -66,6 +80,11 @@
       "carries_source_url": "https://www.nba.com/news/nbc-broadcaster-assignments-first-2-weeks-2025-26",
       "signup_url": "https://www.peacocktv.com/plans",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.peacocktv.com/sports/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA Basketball | Peacock”."},
+        "signup": {"url": "https://www.peacocktv.com/plans/all-monthly", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Peacock - Choose a Plan”."},
+        "home": {"url": "https://www.peacocktv.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Peacock: Stream TV and Movies Online, Watch Live News and Sports”."}
+      },
       "source_url": "https://www.peacocktv.com/help/article/price-increase",
       "last_verified": "2026-09-25",
       "verified": true
@@ -80,6 +99,11 @@
       "carries_source_url": "https://aboutamazon.com/news/entertainment/stream-nba-prime-video",
       "signup_url": "https://www.amazon.com/primevideo",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.amazon.com/salp/nba", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Prime Video: Watch NBA on Prime”."},
+        "signup": {"url": "https://www.amazon.com/gp/video/offers", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Amazon.com”)."},
+        "home": {"url": "https://www.amazon.com/gp/video/storefront", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Prime Video: Watch movies, TV shows, sports, and live TV”."}
+      },
       "source_url": "https://aboutamazon.com/news/entertainment/stream-nba-prime-video",
       "last_verified": "2026-09-25",
       "verified": true
@@ -97,6 +121,13 @@
       "carries_check": "NBA TV inclusion is from secondary sources, not the NBA's own purchase page. Verify at checkout.",
       "signup_url": "https://www.nba.com/league-pass-purchase",
       "affiliate_url": "",
+      "links": {
+        "game": {"url": "https://www.nba.com/game/{away}-vs-{home}-{game_id}", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Boston Celtics vs Detroit Pistons Oct 20, 2026 Game Summary | NBA.com”.", "sample": "https://www.nba.com/game/bos-vs-det-0022600001"},
+        "date": {"url": "https://www.nba.com/games?date={yyyy-mm-dd}", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Only weak or no search evidence for this exact URL, and the runner check 2026-10-03 could not confirm it (HTTP 200, title “NBA Games - All NBA matchups” does not show the date).", "sample": "https://www.nba.com/games?date=2026-10-20"},
+        "section": {"url": "https://www.nba.com/watch/league-pass-stream", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: not the right page, it redirects to the purchase page, nba.com/league-pass-purchase."},
+        "signup": {"url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”."},
+        "home": {"url": "https://www.nba.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “The official site of the NBA for the latest NBA Scores, Stats & News. | NBA.com”."}
+      },
       "source_url": "https://www.nba.com/league-pass-purchase",
       "last_verified": "2026-09-25",
       "verified": true
@@ -110,6 +141,12 @@
       "carries_verified": true,
       "signup_url": "https://www.nba.com/league-pass-purchase",
       "affiliate_url": "",
+      "links": {
+        "game": {"url": "https://www.nba.com/game/{away}-vs-{home}-{game_id}", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Boston Celtics vs Detroit Pistons Oct 20, 2026 Game Summary | NBA.com”.", "sample": "https://www.nba.com/game/bos-vs-det-0022600001"},
+        "section": {"url": "https://www.nba.com/watch/nba-tv", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA TV - Live Basketball Streaming, Original NBA Shows & on-demand video content of classi”."},
+        "signup": {"url": "https://www.nba.com/league-pass-purchase", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “NBA League Pass | Experience Live NBA Games Anytime, Anywhere | NBA.com”."},
+        "home": {"url": "https://www.nba.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “The official site of the NBA for the latest NBA Scores, Stats & News. | NBA.com”."}
+      },
       "source_url": "https://www.nba.com/league-pass-purchase",
       "last_verified": "2026-09-25",
       "verified": false
@@ -153,6 +190,11 @@
       },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://tv.youtube.com/browse/nba-basketball-UCfCI17CQpic3xo2Q_S50UVA", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA Basketball online | YouTube TV (Free Trial)”."},
+        "signup": {"url": "https://tv.youtube.com/welcome/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “YouTube TV - Watch & DVR Live Sports, Shows & News”."},
+        "home": {"url": "https://tv.youtube.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “YouTube TV - Watch & DVR Live Sports, Shows & News”."}
+      },
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
       "last_verified": "2026-09-25",
       "verified": true
@@ -196,6 +238,11 @@
       },
       "signup_url": "https://tv.youtube.com/",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://tv.youtube.com/browse/nba-basketball-UCfCI17CQpic3xo2Q_S50UVA", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA Basketball online | YouTube TV (Free Trial)”."},
+        "signup": {"url": "https://tv.youtube.com/learn/sportsplan/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch live sports with YouTube TV | YouTube TV (Free Trial)”."},
+        "home": {"url": "https://tv.youtube.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “YouTube TV - Watch & DVR Live Sports, Shows & News”."}
+      },
       "source_url": "https://tv.youtube.com/learn/nbaplayoffs/",
       "last_verified": "2026-09-25",
       "verified": true
@@ -239,6 +286,11 @@
       },
       "signup_url": "https://www.hulu.com/live-tv",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.hulu.com/nba", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200 with no title)."},
+        "signup": {"url": "https://www.hulu.com/live-tv", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Stream Live Sports, News, TV Shows, and Movies | Hulu + Live TV”."},
+        "home": {"url": "https://www.hulu.com/welcome", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Stream TV and Movies Live and Online | Hulu”."}
+      },
       "source_url": "https://www.hulu.com/live-tv",
       "last_verified": "2026-09-25",
       "verified": true
@@ -307,6 +359,11 @@
       },
       "signup_url": "https://www.sling.com/",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.sling.com/sports/basketball", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Watch NBA Games Live Online | Stream Live Sports with Sling TV”."},
+        "signup": {"url": "https://www.sling.com/service/compare-plans", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Compare Our Live TV Plans | Sling TV”."},
+        "home": {"url": "https://www.sling.com/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search index shows this URL with the right title, or an official page names it; the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Home”)."}
+      },
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
       "last_verified": "2026-09-25",
       "verified": true
@@ -350,6 +407,10 @@
       },
       "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.fubo.tv/welcome/leagues/448623", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: HTTP 404."},
+        "home": {"url": "https://www.fubo.tv/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “fubo - Watch Live Sports & TV Without Cable TV | Try It Free”."}
+      },
       "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
       "price_sources": [{"url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/", "published": "2026"}, {"url": "https://thestreamable.com/live-tv-streaming/fubotv/channels", "published": "2026"}],
       "price_note": "Two 2026 sources give $88.99 (Cord Cutters News on the July increase, thestreamable.com's channel guide). cabletv.com's pages disagree with each other ($79.99, $85 and the pre-increase $73.99).",
@@ -395,6 +456,10 @@
       },
       "signup_url": "https://www.fubo.tv/",
       "affiliate_url": "",
+      "links": {
+        "section": {"url": "https://www.fubo.tv/welcome/leagues/448623", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: HTTP 404."},
+        "home": {"url": "https://www.fubo.tv/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “fubo - Watch Live Sports & TV Without Cable TV | Try It Free”."}
+      },
       "source_url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
       "price_sources": [],
       "price_note": "Not confirmed: Cord Cutters News says $98.99 and thestreamable.com $99 in one article but $84.99 in its channel guide; cabletv.com says $89.99; Fubo's own plans page as indexed says $88.99.",
@@ -440,6 +505,10 @@
       },
       "signup_url": "https://www.directv.com/stream/",
       "affiliate_url": "",
+      "links": {
+        "signup": {"url": "https://www.directv.com/stream/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Streaming Live TV from DIRECTV (formerly DIRECTV STREAM)”."},
+        "home": {"url": "https://www.directv.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “DIRECTV: Live TV Streaming, Sports, Local Channels & Genre Packs”."}
+      },
       "source_url": "https://cordcuttersnews.com/youtube-tv-vs-directv-vs-fubo-vs-hulu-vs-sling-tv-vs-philo-which-streaming-service-is-best-for-september-2026/",
       "last_verified": "2026-09-25",
       "verified": true

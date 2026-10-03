@@ -10,7 +10,7 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from . import config
+from . import config, links
 
 MONTHS = ("January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December")
@@ -144,4 +144,7 @@ def build_env(template_dir: Path | None = None) -> Environment:
     env.globals["asset"] = asset
     env.globals["site_path"] = config.site_path
     env.globals["site_base"] = config.SITE_BASE
+    # Writes every outbound link's attributes and tells base.html whether
+    # the page needs the affiliate disclosure (watchguide/links.py).
+    env.globals["outlink"] = links.OutLinks()
     return env

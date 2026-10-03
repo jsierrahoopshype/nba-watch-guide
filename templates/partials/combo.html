@@ -5,7 +5,8 @@
   </div>
   <ul class="combo-parts">
     {%- for svc in combo.parts %}
-    <li><span>{{ svc.name }}</span><span class="price">{% if svc.list_price_usd == 0 %}{{ labels.price_free }}{% else %}{{ svc.list_price_usd|usd }}{% endif %}</span></li>
+    {% set link = service_out(svc) %}
+    <li><span>{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ svc.name }}{% if link %}</a>{% endif %}</span><span class="price">{% if svc.list_price_usd == 0 %}{{ labels.price_free }}{% else %}{{ svc.list_price_usd|usd }}{% endif %}</span></li>
     {%- endfor %}
   </ul>
   <p class="small muted combo-note">

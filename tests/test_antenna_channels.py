@@ -11,7 +11,7 @@ import re
 
 import pytest
 
-from conftest import TODAY, _build, _copy_data
+from conftest import TODAY, _build, _copy_data, without_outbound
 from watchguide.context import load_context
 from watchguide.model import AntennaChannel, load_local_tv, load_teams
 from watchguide.pages.common import chips, watch_view
@@ -121,7 +121,7 @@ def test_chip_reads_station_antenna_channel_then_market(tmp_path_factory, fixtur
 def test_game_block_shows_it_once_with_the_cable_line(antenna_site, fixture_games):
     game = heat_game(fixture_games)
     team = BY_TRICODE["MIA"]
-    page = (antenna_site / team.slug / "index.html").read_text(encoding="utf-8")
+    page = without_outbound((antenna_site / team.slug / "index.html").read_text(encoding="utf-8"))
     block = page[page.index("data-game-block"):page.index("</article>")]
     assert ('<span class="chip-name">WPLG Local 10</span><span class="chip-how" data-antenna>· antenna ch. 10.1</span>'
             '<span class="chip-how">· Heat market</span>') in block
@@ -131,7 +131,7 @@ def test_game_block_shows_it_once_with_the_cable_line(antenna_site, fixture_game
 
 
 def test_team_page_row_and_schedule_note(antenna_site):
-    page = (antenna_site / "miami-heat" / "index.html").read_text(encoding="utf-8")
+    page = without_outbound((antenna_site / "miami-heat" / "index.html").read_text(encoding="utf-8"))
     watching = page[page.index('id="watching"'):]
     watching = watching[:watching.index("</section>")]
     assert "WPLG Local 10 · antenna ch. 10.1" in watching and watching.count(CABLE) == 1

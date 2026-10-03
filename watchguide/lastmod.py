@@ -14,6 +14,9 @@ the page says:
   availability lists and badges the page script refreshes, and on the hub
   and tonight page the ranking (order, lines, Top pick badges, headshots,
   Out lists), which moves with the injury report;
+- outbound "where to watch" anchors (data-out, see watchguide/links.py)
+  are dropped, tags only, so the service name inside still counts but a
+  new link template, level or affiliate URL does not redate a page;
 - content-hashed asset names (watch-guide.<hash>.css) are reduced to their
   plain name, so a stylesheet change does not redate every page;
 - runs of whitespace count as one space.
@@ -34,6 +37,7 @@ from pathlib import Path
 
 STATE_FILE = "data/sitemap_lastmod.json"
 VOLATILE_ATTR = "data-volatile"
+OUTBOUND_ATTR = "data-out"
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
         "source", "track", "wbr"}
 HASHED_ASSET = re.compile(r"(/assets/[\w/.-]+?)\.[0-9a-f]{10}\.(css|js|svg|woff2)\b")
@@ -46,6 +50,7 @@ class _Stripper(HTMLParser):
         super().__init__(convert_charrefs=False)
         self.out: list[str] = []
         self.skip = 0                     # depth inside a volatile element
+        self.outbound = 0                 # open outbound anchors (never nested)
 
     def handle_starttag(self, tag, attrs):
         volatile = any(name == VOLATILE_ATTR for name, _ in attrs)
@@ -56,6 +61,9 @@ class _Stripper(HTMLParser):
         if volatile:
             if tag not in VOID:
                 self.skip = 1
+            return
+        if tag == "a" and any(name == OUTBOUND_ATTR for name, _ in attrs):
+            self.outbound += 1
             return
         self.out.append(self.get_starttag_text() or "")
 
@@ -68,6 +76,9 @@ class _Stripper(HTMLParser):
         if self.skip:
             if tag not in VOID:
                 self.skip -= 1
+            return
+        if tag == "a" and self.outbound:
+            self.outbound -= 1
             return
         self.out.append(f"</{tag}>")
 

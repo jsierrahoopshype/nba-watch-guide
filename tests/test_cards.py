@@ -93,7 +93,9 @@ def test_game_card_team_links_stay_separate_and_work(built_site, teams):
     for card in (c for c in cards_of(built_site / "index.html") if c["kind"] == "game"):
         team_links = [l for l in card["links"] if "hg-team-link" in l["classes"]]
         assert len(team_links) == 2, card
-        assert len(card["links"]) == 3                  # the primary link plus the two teams
+        # The primary link plus the two teams; outbound channel links
+        # (data-out, watchguide/links.py) sit on the chips, above the card.
+        assert len([l for l in card["links"] if "out" not in l["classes"]]) == 3
         for link in team_links:
             assert link["href"] in paths
             assert (built_site / link["href"][len("/how-to-watch/"):] / "index.html").is_file()

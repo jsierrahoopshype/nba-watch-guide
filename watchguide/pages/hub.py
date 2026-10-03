@@ -83,7 +83,8 @@ def my_team_cards(ctx: SiteContext) -> list[dict]:
         if game:
             card["away"] = ctx.by_tricode.get(game.away_tricode)
             card["home"] = ctx.by_tricode.get(game.home_tricode)
-            card["channels"] = chips(ctx, channels_for_game(game, team.tricode, ctx.local(team.slug), tba))
+            card["channels"] = chips(ctx, channels_for_game(game, team.tricode, ctx.local(team.slug), tba),
+                                     game=game, slug=team.slug)
             card["pair_path"] = pair_path(game, ctx.by_tricode)
         cards.append(card)
     return cards

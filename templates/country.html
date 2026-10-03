@@ -22,7 +22,7 @@
     {%- for opt in partner.options %}
     <div class="row" data-country-option>
       <div class="row-main">
-        <div class="row-title">{{ opt.name }}</div>
+        <div class="row-title">{% if opt.link %}<a {{ outlink.attrs(opt.link) }}>{% endif %}{{ opt.name }}{% if opt.link %}</a>{% endif %}</div>
         {%- if opt.note %}<div class="row-note">{{ opt.note }}</div>{% endif %}
         {%- if opt.check %}<div class="row-note small muted" data-check-price>{{ opt.check }}</div>{% endif %}
       </div>
@@ -34,7 +34,7 @@
   </div>
 </div>
 <div class="card">
-  <h3>{{ prime.name }}</h3>
+  <h3>{% if prime.link %}<a {{ outlink.attrs(prime.link) }}>{% endif %}{{ prime.name }}{% if prime.link %}</a>{% endif %}</h3>
   <p>{{ prime.summary }}</p>
   <p><strong>{{ text.commentary_label }}:</strong> {{ prime.commentary }}</p>
   <div class="rows">
@@ -59,7 +59,7 @@
 </section>
 
 <section id="league-pass" data-league-pass>
-<h2>{{ text.league_pass_heading }}</h2>
+<h2>{% if league_pass.link %}<a {{ outlink.attrs(league_pass.link) }}>{% endif %}{{ text.league_pass_heading }}{% if league_pass.link %}</a>{% endif %}</h2>
 <div class="card">
   <p>{{ league_pass.line }}</p>
   {%- if league_pass.prices %}

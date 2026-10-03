@@ -10,7 +10,7 @@
   <div class="rows">
     <div class="row"><div class="row-main">
       <div class="row-title">{{ labels.local_broadcasters_label }}</div>
-      <div class="row-note">{% if watching.broadcasters %}{{ watching.broadcasters|join(", ") }}{% else %}{{ labels.local_none_listed }}{% endif %}</div>
+      <div class="row-note">{% if watching.broadcasters %}{% for b in watching.broadcasters %}{% if b.link %}<a {{ outlink.attrs(b.link) }}>{% endif %}{{ b.name }}{% if b.link %}</a>{% endif %}{{ b.antenna }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}{{ labels.local_none_listed }}{% endif %}</div>
       {% if watching.cable_note %}
       <div class="row-note small muted" data-cable-numbers>{{ watching.cable_note }}</div>
       {% endif %}
@@ -24,7 +24,8 @@
     {%- for opt in watching.streaming %}
     <div class="row" data-local-option>
       <div class="row-main">
-        <div class="row-title">{{ opt.name }}</div>
+        {% set link = watching.streaming_links[loop.index0] %}
+        <div class="row-title">{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ opt.name }}{% if link %}</a>{% endif %}</div>
         {%- if opt.note %}<div class="row-note">{{ opt.note }}</div>{% endif %}
         {%- if opt.billing_note %}<div class="row-note small muted">{{ opt.billing_note }}</div>{% endif %}
       </div>

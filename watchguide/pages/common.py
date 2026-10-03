@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from .. import config, worth
+from .. import config, links, worth
 from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, carriers_for_game, channels_for_game, league_pass_blocked,
                         local_reaches, with_local_options)
@@ -28,10 +28,6 @@ def updated_label(ctx: SiteContext) -> str:
     if not ctx.injuries_updated_at:
         return ""
     return f"{labels.get('updated_prefix', 'Updated')} {ctx.injuries_updated_at[:16].replace('T', ' ')} ET"
-
-
-def has_affiliate_link(ctx: SiteContext) -> bool:
-    return any(s.affiliate_url for s in ctx.services.services)
 
 
 def empty_players_label(ctx: SiteContext) -> str:
@@ -59,7 +55,7 @@ def all_channels(ctx: SiteContext, game) -> list[dict[str, str]]:
         for channel in channels_for_game(game, tricode, ctx.local(team.slug) if team else None, tba):
             if channel["kind"] != "tba" and channel["name"] not in {c["name"] for c in out}:
                 if channel["kind"] == "local" and team:
-                    channel = {**channel, "team": team.short_name}
+                    channel = {**channel, "team": team.short_name, "slug": team.slug}
                 out.append(channel)
     return out or [{"name": tba, "kind": "tba"}]
 
@@ -87,12 +83,63 @@ def cheapest_for(ctx: SiteContext, code: str):
     return min(candidates, key=lambda s: (s.price, s.kind != "ota", s.name))
 
 
-def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False) -> list[dict[str, str]]:
+def _ota_name(svc) -> str:
+    """"ABC" for "ABC (free over the air)": the station a link names."""
+    return svc.name.split(" (")[0] if svc.kind == "ota" else svc.name
+
+
+def service_out(ctx: SiteContext, svc, game=None) -> links.Link | None:
+    """The outbound link for a service row: a national service from
+    data/services.json, a team's local option from its data/local_tv.json
+    links (the free over-the-air option goes to its first station's site).
+    Looked up by id and name after the maths, so it cannot change them."""
+    if svc is None:
+        return None
+    if not svc.local_option:
+        return links.service_link(svc, ctx.copy, game, name=_ota_name(svc))
+    prefix, _, which = svc.id.rpartition("-")
+    local = ctx.local(prefix[len("local-"):])
+    if local is None:
+        return None
+    if which == "ota":
+        for name in local.local_broadcasters:
+            link = links.local_link(local.links, name, ctx.copy)
+            if link:
+                return link
+        return None
+    return links.local_link(local.links, svc.name, ctx.copy)
+
+
+def channel_out(ctx: SiteContext, channel: dict, game=None, slug: str = "") -> links.Link | None:
+    """The outbound link for a channel chip. A national channel links to the
+    service its chip names (the cheapest way to get it, as `how` says); a
+    local one to the station or stream in its own team's data/local_tv.json
+    links, never another team's, since "DAZN" is a different page for every
+    team. A local chip with no team searches every team (none does today)."""
+    name = channel["name"]
+    if channel["kind"] == "national":
+        svc = cheapest_for(ctx, name)
+        return links.service_link(svc, ctx.copy, game, name=_ota_name(svc)) if svc else None
+    if channel["kind"] != "local":
+        return None
+    own = channel.get("slug") or slug
+    order = [ctx.local(own)] if own else list(ctx.local_tv.values())
+    for local in order:
+        link = links.local_link(local.links, name, ctx.copy) if local else None
+        if link:
+            return link
+    return None
+
+
+def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False,
+          game=None, slug: str = "") -> list[dict[str, str]]:
     """Channels as chips: `label` (the short name for a long local channel),
     `title` (the full name, only when it differs from the label) and, with
     priced=True, `how`: for a national channel the cheapest way to get it
     from data/services.json ("ESPN Unlimited · $31.99/mo", "NBC · free over
-    the air"); for a local channel whose market it is."""
+    the air"); for a local channel whose market it is. `link` is the chip's
+    outbound link (channel_out) or None; `slug` is the team whose page or
+    card this is, for local channels."""
     text = ctx.copy.get("game", {})
     out = []
     for channel in channels:
@@ -116,7 +163,8 @@ def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False
         # or satellite number, and none for streaming apps or regional networks.
         virtual = ctx.antenna_channel(name) if channel["kind"] == "local" else ""
         antenna = text["chip_antenna"].format(channel=virtual) if virtual else ""
-        out.append({**channel, "label": label, "title": title, "how": how, "antenna": antenna})
+        out.append({**channel, "label": label, "title": title, "how": how, "antenna": antenna,
+                    "link": channel_out(ctx, channel, game, slug) if channel["kind"] != "tba" else None})
     return out
 
 
@@ -219,7 +267,7 @@ def watch_view(ctx: SiteContext, game) -> dict:
         else:
             key = "summary_league_pass"
         why = {"summary": why_text[key], "lines": [r["line"] for r in reasons], "kinds": sorted(kinds)}
-    game_chips = chips(ctx, all_channels(ctx, game), priced=True)
+    game_chips = chips(ctx, all_channels(ctx, game), priced=True, game=game)
     return {
         "chips": game_chips,
         "cable_note": cable_note(ctx, game_chips),

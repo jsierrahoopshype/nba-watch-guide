@@ -44,6 +44,7 @@ class Country:
     league_pass: dict[str, Any]
     player_overrides: list[str]
     flag: str = ""                 # file name in assets/flags/, without .svg
+    links: dict[str, Any] = field(default_factory=dict)   # option name to link entry (watchguide/links.py)
 
     @property
     def zone(self) -> ZoneInfo:
@@ -92,6 +93,7 @@ def load_countries(data_dir: Path | None = None) -> CountryData:
             league_pass=c.get("league_pass") or {},
             player_overrides=list(c.get("player_overrides") or []),
             flag=c.get("flag", ""),
+            links=c.get("links") if isinstance(c.get("links"), dict) else {},
         ))
     return CountryData(
         countries=countries,

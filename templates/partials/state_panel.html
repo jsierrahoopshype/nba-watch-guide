@@ -13,7 +13,8 @@
       {%- for item in view.covering %}
       <div class="row">
         <div class="row-main">
-          <div class="row-title">{{ item.service.name }}</div>
+          {% set link = service_out(item.service) %}
+          <div class="row-title">{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ item.service.name }}{% if link %}</a>{% endif %}</div>
           {%- if item.service.id in view.blacked_out_ids %}
           <div class="row-note" data-blacked-out>{{ labels.blacked_out_market }}</div>
           {%- else %}
@@ -63,7 +64,8 @@
       {%- for item in view.per_service %}
       <div class="row">
         <div class="row-main">
-          <div class="row-title">{% if item.service.link %}<a class="svc-link" href="{{ item.service.link }}"{% if item.service.is_affiliate %} rel="sponsored nofollow"{% endif %}>{{ item.service.name }}</a>{% else %}{{ item.service.name }}{% endif %}</div>
+          {% set link = service_out(item.service) %}
+          <div class="row-title">{% if link %}<a {{ outlink.attrs(link) }}>{% endif %}{{ item.service.name }}{% if link %}</a>{% endif %}</div>
           {%- if item.service.billing_note %}
           <div class="row-note">{{ item.service.billing_note }}</div>
           {%- endif %}
