@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-04T15:12:48+00:00",
+ "fetched_at": "2026-10-05T19:08:31+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5477,
+ "row_count": 5479,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38222,6 +38222,20 @@
    "date": "2026-10-01",
    "prevStatus": "Out",
    "eta": "4-6 weeks"
+  },
+  {
+   "player": "Tobias Harris",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-04",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tobias Harris",
+   "status": "Questionable",
+   "injury": "Left Calf Strain",
+   "date": "2026-10-04",
+   "prevStatus": "Available"
   }
  ]
 }
