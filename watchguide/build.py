@@ -28,7 +28,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from . import config, lastmod, seo, share
+from . import config, lastmod, links, seo, share
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
@@ -610,6 +610,8 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
 
     report = broadcast_report(games, ctx.today)
     notes.append(broadcast_summary(report))
+    notes.append(links.unmatched_summary(links.unmatched_codes(ctx.games, ctx.local_tv, ctx.services,
+                                                               ctx.by_tricode)))
 
     write_pages(out_dir, pages)
     notes.append(share.write_images(out_dir, _cards(pages), full=True))

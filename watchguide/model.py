@@ -582,12 +582,17 @@ class LocalTV:
 
     @property
     def primary_carriers(self) -> list[str]:
-        """Where a local game with no channel in the feed is most likely on:
-        the stations when every local game is over the air, otherwise the
-        first streaming option. Stations from a 'partial' or 'most' list only
-        carry some games, so they are never offered here."""
+        """Where a local game with no channel in the feed is most likely on,
+        for its channel chip: the stations when every local game is over the
+        air, otherwise the team's primary local station (its first local
+        broadcaster: Space City Home Network, not the SCHN+ app that streams
+        it), and the first streaming option only for a team with no station.
+        Chips only: the answers, the cheapest combination and the services
+        list name what you buy (SCHN+), from the coverage maths."""
         if self.ota.status == "all":
             return list(self.local_broadcasters)
+        if self.local_broadcasters:
+            return [self.local_broadcasters[0]]
         return [self.streaming[0].name] if self.streaming else []
 
 

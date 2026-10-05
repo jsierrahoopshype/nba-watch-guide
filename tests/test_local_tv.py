@@ -264,11 +264,12 @@ def test_hub_lists_every_team_with_ota_all(built_site, local, teams):
 
 def test_schedule_fallback_never_shows_partial_ota_stations(local):
     # Cavaliers over the air is 'partial' (15 games on Gray and RESN), so a
-    # game with no channel in the feed shows DAZN, their primary carrier.
+    # game with no channel in the feed shows DAZN, their primary local
+    # carrier (the first local broadcaster), never a part-season station.
     cavs = local["cleveland-cavaliers"]
     assert cavs.ota.status == "partial"
     channels = channels_for_game(game(0, team="CLE"), "CLE", cavs)
-    assert channels == [{"name": "DAZN", "kind": "local"}]
+    assert channels == [{"name": "DAZN (produced by Rock Entertainment Sports Network)", "kind": "local"}]
     names = {c["name"] for c in channels}
     assert not names & {"WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"}
 
@@ -281,7 +282,9 @@ def test_schedule_fallback_shows_stations_when_all_games_are_over_the_air(local)
 def test_schedule_fallback_on_the_cavaliers_page(built_site):
     html = without_outbound(page(built_site, "cleveland-cavaliers"))
     sched = html[html.index('<table class="sched"'):html.index("</table>")]
-    assert '<span class="badge badge-local">DAZN</span>' in sched
+    # The chip shows the short name, the full one in its title.
+    assert ('<span class="badge badge-local" title="DAZN (produced by Rock Entertainment Sports Network)">'
+            'DAZN</span>') in sched
     for station in ("WOIO", "WUAB", "Gray stations"):
         assert station not in sched
 
