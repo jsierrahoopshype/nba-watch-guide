@@ -126,7 +126,8 @@
       ],
       "links": [
         {"names": ["CHSN"], "kind": "station", "level": "section", "url": "https://www.chsn.com/schedule", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); the runner check 2026-10-03 could not confirm it (HTTP 200, generic title “Schedule”).", "affiliate_url": "", "affiliate_level": ""},
-        {"names": ["CHSN app"], "kind": "stream", "level": "signup", "url": "https://subscribe.chsn.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Subscribe to CHSN”.", "affiliate_url": "", "affiliate_level": ""}
+        {"names": ["CHSN app"], "kind": "stream", "level": "signup", "url": "https://subscribe.chsn.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Subscribe to CHSN”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["CHSN+"], "kind": "station", "level": "section", "url": "https://www.chsn.com/tv", "verified": true, "checked": "2026-10-05", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); not checked by the runner.", "affiliate_url": "", "affiliate_level": "", "names_source": {"names": ["CHSN+"], "url": "https://www.chsn.com/tv", "checked": "2026-10-05", "says": "CHSN Main and Plus Linear Channel: CHSN+ carries a game when two overlap"}}
       ],
       "live_tv_carriers": ["DirecTV", "Fubo"],
       "territory": "Bulls local market",
@@ -180,7 +181,8 @@
       ],
       "links": [
         {"names": ["Altitude", "ALT"], "kind": "station", "level": "section", "url": "https://www.altitudesports.com/how-to-watch", "verified": false, "checked": "2026-10-03", "confidence": "", "how": "Runner check 2026-10-03: not the right page, it redirects to the Altitude+ app (app.altitudeplus.com), not a page about the channel.", "affiliate_url": "", "affiliate_level": ""},
-        {"names": ["Altitude+"], "kind": "stream", "level": "home", "url": "https://www.altitudeplus.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Home (landed here from altitudesports.com/pages/altitude-plus/)”.", "affiliate_url": "", "affiliate_level": ""}
+        {"names": ["Altitude+", "ALT+"], "kind": "stream", "level": "home", "url": "https://www.altitudeplus.com/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Home (landed here from altitudesports.com/pages/altitude-plus/)”.", "affiliate_url": "", "affiliate_level": "", "names_source": {"names": ["ALT+"], "url": "https://www.altitudeplus.com/", "checked": "2026-10-05", "says": "Altitude+ is Altitude Sports' own streaming service; the feed lists it as ALT+ beside ALT and ALT2"}},
+        {"names": ["Altitude 2", "ALT2"], "kind": "station", "level": "section", "url": "https://www.altitudesports.com/altitude-2-information", "verified": true, "checked": "2026-10-05", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); not checked by the runner.", "affiliate_url": "", "affiliate_level": "", "names_source": {"names": ["Altitude 2", "ALT2"], "url": "https://www.altitudesports.com/altitude-2-information", "checked": "2026-10-05", "says": "About Altitude 2: Altitude's overflow channel for games that clash with one on Altitude, Nuggets included"}}
       ],
       "live_tv_carriers": ["DirecTV Stream"],
       "territory": "Nuggets local market",
