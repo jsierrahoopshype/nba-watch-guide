@@ -202,6 +202,67 @@ def test_a_local_chip_links_only_to_its_own_teams_page(built_site):
     assert checked
 
 
+SCHN_STATION = "https://www.schnplus.com/rockets"
+SCHN_PLUS = "https://www.schnplus.com/"
+
+
+def _anchors(html: str) -> list[tuple[str, str]]:
+    """(name the link's label gives, href) for every outbound anchor."""
+    out = []
+    for attrs, _ in ANCHOR.findall(html):
+        label = re.search(r'aria-label="([^"]+)"', attrs).group(1)
+        out.append((re.sub(r"^(Watch on|Sign up for) ", "", label.replace("&amp;", "&").replace("&#39;", "'")),
+                    re.search(r'href="([^"]+)"', attrs).group(1)))
+    return out
+
+
+def test_space_city_home_network_and_schn_plus_keep_their_own_links(built_site):
+    """The Rockets' station and its streaming add-on share a name stem but
+    never a link: the station goes to its Rockets page, SCHN+ to its home."""
+    found = _anchors((built_site / "houston-rockets" / "index.html").read_text(encoding="utf-8"))
+    station = {href for name, href in found if name == "Space City Home Network"}
+    plus = {href for name, href in found if name == "SCHN+"}
+    assert station == {SCHN_STATION}, station
+    assert plus == {SCHN_PLUS}, plus
+
+
+def test_every_local_link_carries_its_own_entrys_name(built_site):
+    """On every page, a link to a station or stream URL is labelled with a
+    name from that URL's own data/local_tv.json entry, so a station and an
+    add-on with a shared name stem (NBC Sports Bay Area and NBC Sports Bay
+    Area on Peacock, YES and YES on DAZN, Altitude and Altitude+) can never
+    swap links."""
+    local = json.loads((config.DATA_DIR / "local_tv.json").read_text(encoding="utf-8"))["teams"]
+    owners: dict[str, set[str]] = {}
+    for team in local.values():
+        for entry in team.get("links") or []:
+            owners.setdefault(entry["url"], set()).update(entry["names"])
+    checked = 0
+    for rel in _pages(built_site):
+        for name, href in _anchors((built_site / rel).read_text(encoding="utf-8")):
+            if href in owners:
+                assert name in owners[href], (rel, name, href)
+                checked += 1
+    assert checked
+
+
+def test_a_station_or_stream_name_only_matches_its_own_entry():
+    """Every station and streaming name in data/local_tv.json resolves to the
+    entry that lists that exact name, never to a look-alike: matching is
+    exact, and a feed code like "KATU/KUNP" falls back only to its first
+    station."""
+    from watchguide.model import load_local_tv
+    for slug, team in load_local_tv().items():
+        for name in team.local_broadcasters + [o.name for o in team.streaming]:
+            entry = links.local_entry(team.links, name)
+            if entry is not None:
+                assert name in entry["names"], (slug, name, entry["names"])
+    rockets = load_local_tv()["houston-rockets"]
+    assert links.local_entry(rockets.links, "Space City Home Network")["url"] == SCHN_STATION
+    assert links.local_entry(rockets.links, "SCHN+")["url"] == SCHN_PLUS
+    assert links.local_entry(rockets.links, "SCHN") is None          # no stem matching
+
+
 # -- the data ---------------------------------------------------------------------------------
 
 def _affiliate(where, record):
