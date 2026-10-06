@@ -263,6 +263,87 @@ def test_a_station_or_stream_name_only_matches_its_own_entry():
     assert links.local_entry(rockets.links, "SCHN") is None          # no stem matching
 
 
+def test_a_local_chip_with_no_feed_code_names_the_teams_primary_station(built_site):
+    """With no channel in the feed, a game chip falls back to the team's
+    primary local station (its first local broadcaster), not the streaming
+    app: Space City Home Network, linking to its Rockets page. The answers,
+    the cheapest combination and the services list still name SCHN+, what
+    you buy."""
+    from watchguide.model import PART_SEASON_OTA, load_local_tv
+    teams = load_local_tv()
+    for slug, local in teams.items():
+        if local.ota.status not in ("all",) + PART_SEASON_OTA and local.local_broadcasters:
+            assert local.primary_carriers == [local.local_broadcasters[0]], slug
+    # Part-season over-the-air main stations are never named for an unknown
+    # game: the Thunder and Blazers fall back to their streaming option.
+    assert teams["oklahoma-city-thunder"].primary_carriers == ["Thunder+ (NBA App)"]
+    assert teams["portland-trail-blazers"].primary_carriers == ["BlazerVision"]
+    for slug, local in teams.items():
+        if local.ota.status in PART_SEASON_OTA:
+            assert local.primary_carriers == [local.streaming[0].name], slug
+    html = (built_site / "houston-rockets" / "index.html").read_text(encoding="utf-8")
+    table = html[html.index('<table class="sched"'):html.index("</table>")]
+    local_chips = re.findall(r'<span class="badge badge-local"[^>]*>(.*?)</span>', table, re.S)
+    chips = [a for chip in local_chips for a in _anchors(chip)]
+    assert chips and set(chips) == {("Space City Home Network", SCHN_STATION)}
+    inside = html[html.index('id="panel-in_market"'):html.index('id="watching"')]
+    local_links = {(name, href) for name, href in _anchors(inside) if "schnplus" in href}
+    assert local_links == {("SCHN+", SCHN_PLUS)}, local_links
+
+
+def test_feed_codes_ktvk_and_kphe_reach_the_arizonas_family_entries():
+    from watchguide.model import load_local_tv
+    suns = load_local_tv()["phoenix-suns"]
+    assert links.local_entry(suns.links, "KTVK/KPHE/AZFS App")["url"] == "https://www.azfamily.com/sports/how-to-watch/"
+    assert links.local_entry(suns.links, "KPHE/KPHO/AZFS App")["url"] == \
+        "https://www.azfamily.com/programming/sports-network/"
+    # A feed-code alias records the official page that ties it to the station.
+    for entry in suns.links:
+        aliases = [n for n in entry["names"][1:] if n in ("KTVK", "KPHE")]
+        if aliases:
+            source = entry["names_source"]
+            assert set(aliases) <= set(source["names"]) and source["url"].startswith("https://www.azfamily.com/")
+
+
+def test_overflow_and_streaming_feed_codes_reach_their_own_entries():
+    """ALT2 is Altitude 2 (Altitude's overflow channel), ALT+ is Altitude+,
+    CHSN+ is CHSN's second channel: each its own entry, never the main
+    network's. A link only when the entry is verified."""
+    from watchguide.model import load_local_tv
+    teams = load_local_tv()
+    nuggets, bulls = teams["denver-nuggets"].links, teams["chicago-bulls"].links
+    found = {code: links.local_entry(entries, code, usable_only=False)
+             for entries, code in ((nuggets, "ALT2/ALT+"), (nuggets, "ALT2/ALT+/KTVD/KUSA"), (nuggets, "ALT+"),
+                                   (bulls, "CHSN+"))}
+    assert found["ALT2/ALT+"]["names"][0] == found["ALT2/ALT+/KTVD/KUSA"]["names"][0] == "Altitude 2"
+    assert found["ALT+"]["names"][0] == "Altitude+"
+    assert found["CHSN+"]["names"][0] == "CHSN+"
+    assert links.local_entry(bulls, "CHSN")["names"][0] == "CHSN"         # not the overflow channel
+    for entry in found.values():
+        assert entry.get("names_source") or entry["names"][0] in ("Altitude+",)
+        linked = links.local_entry([entry], entry["names"][0]) is not None
+        assert linked == entry["verified"], entry["names"]
+
+
+def test_unmatched_channel_codes_surface_in_the_build_summary():
+    from watchguide.model import load_local_tv, load_services, load_teams
+    by_tricode = {t.tricode: t for t in load_teams()}
+
+    def game(i, **kw):
+        return Game(game_id=f"00226{i:05d}", game_code="", date_et="2026-10-20", tipoff_et="", tipoff_utc="",
+                    status_text="", home_tricode="DEN", away_tricode="PHX", **kw)
+    games = [game(1, national=["NBCSN"], home_tv=["ALT/ALT+"], away_tv=["KTVK/KPHE/AZFS App"]),
+             game(2, home_tv=["ALT9/ALT+"], away_tv=["NEWCODE"]),
+             game(3, national=["ESPN"], home_tv=["ALT9/ALT+"]),
+             game(4, home_tv=["ALT2/ALT+"])]                  # Altitude 2: matched
+    found = links.unmatched_codes(games, load_local_tv(), load_services(), by_tricode)
+    assert found == {"ALT9/ALT+ (denver-nuggets)": 2, "NBCSN (national)": 1, "NEWCODE (phoenix-suns)": 1}
+    assert links.unmatched_summary(found).startswith("Unmatched channel codes: 3 (ALT9/ALT+ (denver-nuggets), 2 games;")
+    assert links.unmatched_summary({}) == "Unmatched channel codes: 0"
+    build = (config.REPO_ROOT / "watchguide" / "build.py").read_text(encoding="utf-8")
+    assert "links.unmatched_summary(links.unmatched_codes(" in build
+
+
 # -- the data ---------------------------------------------------------------------------------
 
 def _affiliate(where, record):
@@ -286,7 +367,10 @@ def _entries():
     for slug, team in local["teams"].items():
         own = set(team.get("local_broadcasters") or []) | {o.get("name") for o in team.get("streaming") or []}
         for entry in team.get("links") or []:
-            assert entry["names"][0] in own, (slug, entry["names"])    # a name the page shows
+            # A name the page shows, or a channel only the schedule feed names
+            # (Altitude 2, CHSN+) whose official page is recorded.
+            assert entry["names"][0] in own or entry.get("names_source", {}).get("url", "").startswith("https://"), \
+                (slug, entry["names"])
             assert entry["kind"] in ("station", "stream") and entry["level"] in LEVELS, (slug, entry)
             _affiliate(slug, entry)
             yield f"{slug} {entry['names'][0]}", entry, False

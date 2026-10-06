@@ -264,7 +264,8 @@ def test_hub_lists_every_team_with_ota_all(built_site, local, teams):
 
 def test_schedule_fallback_never_shows_partial_ota_stations(local):
     # Cavaliers over the air is 'partial' (15 games on Gray and RESN), so a
-    # game with no channel in the feed shows DAZN, their primary carrier.
+    # game with no channel in the feed shows DAZN, their streaming option,
+    # never a part-season station.
     cavs = local["cleveland-cavaliers"]
     assert cavs.ota.status == "partial"
     channels = channels_for_game(game(0, team="CLE"), "CLE", cavs)

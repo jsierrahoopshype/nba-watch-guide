@@ -140,14 +140,49 @@ def service_link(svc, copy: dict[str, Any], game=None, name: str = "") -> Link |
                 getattr(svc, "affiliate_level", ""))
 
 
-def local_entry(entries: list[dict[str, Any]], name: str) -> dict[str, Any] | None:
+def local_entry(entries: list[dict[str, Any]], name: str, usable_only: bool = True) -> dict[str, Any] | None:
     """The data/local_tv.json link entry for a channel or option name: an
-    exact match first, then the first part of a feed code like "ALT/ALT+"."""
+    exact match first, then the first part of a feed code like "ALT/ALT+".
+    usable_only=False also finds unverified entries (for the build summary's
+    unmatched-codes line, which asks whether a code is known at all)."""
     for candidate in [name] + [p for p in (name or "").split("/") if p and p != name][:1]:
         for entry in entries:
-            if candidate in (entry.get("names") or []) and _usable(entry):
+            if candidate in (entry.get("names") or []) and (_usable(entry) or not usable_only):
                 return entry
     return None
+
+
+def unmatched_codes(games, local_tv: dict, services, by_tricode: dict) -> dict[str, int]:
+    """{"CODE (who)": games} for every channel code in the schedule feed that
+    matches no entry: a local code with no entry in its team's
+    data/local_tv.json links (verified or not), a national code that no
+    service in data/services.json carries. New codes surface here on their
+    own, in the build summary."""
+    norm = lambda c: "".join(ch for ch in (c or "").lower() if ch.isalnum())
+    carried = {norm(c) for svc in services.services for c in svc.carries}
+    out: dict[str, int] = {}
+    for game in games:
+        for code in game.national_codes:
+            if norm(code) not in carried:
+                key = f"{code} (national)"
+                out[key] = out.get(key, 0) + 1
+        for tricode, codes in ((game.home_tricode, game.home_tv), (game.away_tricode, game.away_tv)):
+            team = by_tricode.get(tricode)
+            local = local_tv.get(team.slug) if team else None
+            for code in codes:
+                if local is None or local_entry(local.links, code, usable_only=False) is None:
+                    key = f"{code} ({team.slug if team else tricode})"
+                    out[key] = out.get(key, 0) + 1
+    return dict(sorted(out.items()))
+
+
+def unmatched_summary(found: dict[str, int]) -> str:
+    """The build-summary line: "Unmatched channel codes: 2 (NBCSN (national),
+    30 games; ...)"."""
+    if not found:
+        return "Unmatched channel codes: 0"
+    listed = "; ".join(f"{key}, {n} game{'s' if n != 1 else ''}" for key, n in found.items())
+    return f"Unmatched channel codes: {len(found)} ({listed})"
 
 
 def local_link(entries: list[dict[str, Any]], name: str, copy: dict[str, Any],

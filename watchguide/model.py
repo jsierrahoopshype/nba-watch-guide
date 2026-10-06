@@ -474,6 +474,8 @@ def _league_pass_blackouts(block: dict[str, Any] | None) -> list[BlackoutRule]:
 # --------------------------------------------------------------------------
 
 CONFIDENCE_COUNTS = ("high", "moderate")
+# Over-the-air statuses where only some local games are on a station.
+PART_SEASON_OTA = ("partial", "most")
 
 
 @dataclass
@@ -582,12 +584,22 @@ class LocalTV:
 
     @property
     def primary_carriers(self) -> list[str]:
-        """Where a local game with no channel in the feed is most likely on:
-        the stations when every local game is over the air, otherwise the
-        first streaming option. Stations from a 'partial' or 'most' list only
-        carry some games, so they are never offered here."""
+        """Where a local game with no channel in the feed is most likely on,
+        for its channel chip:
+        - every local game over the air ("all"): the stations;
+        - over-the-air coverage "partial" or "most": the first streaming
+          option, since the main station may be a part-season one (KSBI for
+          the Thunder, KUNP for the Blazers) and naming it would guess;
+        - otherwise the team's primary local station, its first local
+          broadcaster, which carries every local game (Space City Home
+          Network, not the SCHN+ app that streams it);
+        - the first streaming option for a team with no station.
+        Chips only: the answers, the cheapest combination and the services
+        list name what you buy (SCHN+), from the coverage maths."""
         if self.ota.status == "all":
             return list(self.local_broadcasters)
+        if self.local_broadcasters and self.ota.status not in PART_SEASON_OTA:
+            return [self.local_broadcasters[0]]
         return [self.streaming[0].name] if self.streaming else []
 
 
