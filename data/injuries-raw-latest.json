@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-09T16:53:14+00:00",
+ "fetched_at": "2026-10-10T15:48:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5490,
+ "row_count": 5493,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38316,6 +38316,28 @@
    "date": "2026-10-07",
    "prevStatus": "Out",
    "eta": "4-6 weeks"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-09",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-09",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
   }
  ]
 }
