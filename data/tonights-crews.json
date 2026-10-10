@@ -1,0 +1,83 @@
+{
+ "date": "2026-10-09",
+ "generated_at": "2026-10-09T19:35:57Z",
+ "source": "https://official.nba.com/wp-json/api/v1/get-game-officials?date=2026-10-09",
+ "game_count": 2,
+ "games": [
+  {
+   "away": "HOU",
+   "home": "DAL",
+   "tipoff_et": "",
+   "crew": [
+    {
+     "name": "Jacyn Goble",
+     "slug": "jacyn-goble",
+     "official_code": "1627962"
+    },
+    {
+     "name": "Andy Nagy",
+     "slug": "andy-nagy",
+     "official_code": "1627534"
+    },
+    {
+     "name": "Matt Myers",
+     "slug": "matt-myers",
+     "official_code": "202901"
+    }
+   ],
+   "game_id": "0012600012",
+   "game_code": "20261009/HOUDAL"
+  },
+  {
+   "away": "MEM",
+   "home": "CHI",
+   "tipoff_et": "",
+   "crew": [
+    {
+     "name": "James Williams",
+     "slug": "james-williams",
+     "official_code": "202058"
+    },
+    {
+     "name": "Eric Lewis",
+     "slug": "eric-lewis",
+     "official_code": "2715"
+    },
+    {
+     "name": "Gina Catanzariti",
+     "slug": "gina-catanzariti",
+     "official_code": "1641518"
+    }
+   ],
+   "game_id": "0012600037",
+   "game_code": "20261009/MEMCHI"
+  }
+ ],
+ "official_code_index": {
+  "1627962": {
+   "name": "Jacyn Goble",
+   "slug": "jacyn-goble"
+  },
+  "1627534": {
+   "name": "Andy Nagy",
+   "slug": "andy-nagy"
+  },
+  "202901": {
+   "name": "Matt Myers",
+   "slug": "matt-myers"
+  },
+  "202058": {
+   "name": "James Williams",
+   "slug": "james-williams"
+  },
+  "2715": {
+   "name": "Eric Lewis",
+   "slug": "eric-lewis"
+  },
+  "1641518": {
+   "name": "Gina Catanzariti",
+   "slug": "gina-catanzariti"
+  }
+ },
+ "unmatched": []
+}
