@@ -105,11 +105,14 @@ def write_schedule_cache(path: Path, games: list[Game], season: str) -> None:
     }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
-# Training camp and pre-season sit-outs matter in the days before opening
-# night, so the availability cut-off reaches back a month from the first
-# regular-season game. The previous season ended months earlier, so nothing
-# from it slips through.
-AVAILABILITY_LOOKBACK_DAYS = 30
+# The availability feed only logs changes, so a long injury may have been
+# logged once in the offseason and never again: Jimmy Butler's torn ACL was
+# last logged on July 30, 2026, and a one-month cut-off showed him (and
+# DiVincenzo, Moody, Knueppel and others) as available. The cut-off reaches
+# back 120 days from the first regular-season game, to late June, so every
+# offseason update counts. Rows from the end of last season (April) stay out:
+# short injuries from then often never got a later "available" row.
+AVAILABILITY_LOOKBACK_DAYS = 120
 
 
 def broadcast_report(games: list[Game], today: str) -> dict[str, Any]:
