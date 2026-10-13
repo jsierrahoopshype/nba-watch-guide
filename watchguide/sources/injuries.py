@@ -189,8 +189,9 @@ def normalize(raw: list[dict[str, Any]], player_teams: dict[str, str],
               since: str = "", until: str = "") -> dict[str, Any]:
     """Current status per player, grouped by team tricode.
 
-    `since` is normally the first game date of the season, so last season's
-    entries never carry over. `until` is the day after the build date: rows
+    `since` is normally 120 days before the first regular-season game (see
+    AVAILABILITY_LOOKBACK_DAYS in build.py), so offseason updates count and
+    last season's entries never carry over. `until` is the day after the build date: rows
     dated later are invalid and count for neither statuses nor as_of.
     """
     by_team: dict[str, list[dict[str, str]]] = {}
