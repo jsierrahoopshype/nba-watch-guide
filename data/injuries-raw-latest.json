@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-14T14:56:34+00:00",
+ "fetched_at": "2026-10-15T14:45:45+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5498,
+ "row_count": 5501,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38375,6 +38375,28 @@
    "date": "2026-10-13",
    "prevStatus": "Available",
    "eta": "2-3 weeks"
+  },
+  {
+   "player": "Otega Oweh",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Otega Oweh",
+   "status": "Out",
+   "injury": "Right Achilles Rupture",
+   "date": "2026-10-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Otega Oweh",
+   "status": "Out",
+   "injury": "Right Achilles Rupture",
+   "date": "2026-10-14",
+   "prevStatus": "Out",
+   "eta": "9-12 months"
   }
  ]
 }
