@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-16T14:39:27+00:00",
+ "fetched_at": "2026-10-17T13:31:17+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5501,
+ "row_count": 5503,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38397,6 +38397,21 @@
    "date": "2026-10-14",
    "prevStatus": "Out",
    "eta": "9-12 months"
+  },
+  {
+   "player": "Julian Strawther",
+   "status": "Out",
+   "injury": "Left Knee Sprain",
+   "date": "2026-10-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Julian Strawther",
+   "status": "Out",
+   "injury": "Left Knee Sprain",
+   "date": "2026-10-17",
+   "prevStatus": "Available",
+   "eta": "6-8 weeks"
   }
  ]
 }
