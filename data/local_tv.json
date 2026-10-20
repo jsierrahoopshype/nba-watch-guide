@@ -9,6 +9,7 @@
       "unknown": "Not announced. Never counts. Page says so plainly."
     },
     "antenna_channels": "Optional per team: over-the-air stations with their virtual (antenna) channel, e.g. \"32.1\". names are the channel names the station appears under (the schedule feed's codes and local_broadcasters), matched exactly. Shown on chips and the team page only when status is \"confirmed\", virtual looks like \"32.1\" and checked is set. A number counts as confirmed when FCC data agrees with Wikipedia: sources hold an FCC URL (the LMS facility page) and a Wikipedia URL (a permanent revision). FCC records only the major number, so it confirms a station's main programming, not a subchannel. RabbitEars.info may stand in for FCC only when FCC can't be read, never paired with Wikipedia alone (Wikipedia cites RabbitEars), so it needs a third site; otherwise it is recorded as supporting, not counted. Sources that disagree, or only one, leave it unset. Never a cable or satellite number; streaming apps and regional networks get no entry. not_applicable marks a name that covers several stations, or one with no single number.",
+    "code_names": "Optional per team: {schedule feed code: entry} for a code that no links entry names. A feed code like \"WSOC/DAZN-CHA\" is split at \"/\" and each part is looked up. An entry shows its name only with status \"confirmed\", which needs the data rule: an official page naming it for the current season, or two independent sources dated in the current season, recorded in sources (url, site, read, says). Any other status never shows the code: the page uses copy.json channels.fallback_app for kind stream or team_stream, otherwise channels.fallback_tv. candidate and leads (search hits, not read) are notes for the next check and never shown.",
     "short_names": "Optional per team: {full name: short name} for a local broadcaster or streaming option whose name is too long for a channel chip. Chips show the short name with the full name in the title attribute; every other place keeps the full name.",
     "coverage_rules": {
       "scope": "Local options only cover the team's games that have no national broadcaster, and only for a reader in the team's market.",
@@ -44,6 +45,32 @@
   },
   "teams": {
     "atlanta-hawks": {
+      "code_names": {
+        "WPCH": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Peachtree TV",
+          "leads": [
+            "https://www.waff.com/2026/07/16/gray-media-atlanta-hawks-reach-tv-deal-2026-27-season/",
+            "https://www.sportsvideo.org/2026/07/16/gray-media-and-atlanta-hawks-announce-georgia-wide-broadcast-partnership-for-2026-27-nba-season/",
+            "https://www.ajc.com/sports/2026/07/hawks-reach-broadcast-agreement-with-gray-media-for-2026-27-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WPCH.2": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Peachtree Sports Network (WPCH subchannel)",
+          "leads": [
+            "https://www.waff.com/2026/07/16/gray-media-atlanta-hawks-reach-tv-deal-2026-27-season/",
+            "https://www.sportsvideo.org/2026/07/16/gray-media-and-atlanta-hawks-announce-georgia-wide-broadcast-partnership-for-2026-27-nba-season/",
+            "https://www.wrdw.com/2026/08/13/hawks-2026-27-schedule-young-risacher-could-make-returns-state-farm-arena/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["WANF (Gray)", "Peachtree Sports Network (WPCH subchannel)"],
       "antenna_channels": [
@@ -63,6 +90,21 @@
       "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/atlanta-hawks/"]
     },
     "boston-celtics": {
+      "code_names": {
+        "PCK-BOS": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports Boston on Peacock",
+          "leads": [
+            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/",
+            "https://www.cabletv.com/sports/watch-boston-celtics",
+            "https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/",
+            "https://www.peacocktv.com/sports/nbcsports-boston"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["NBC Sports Boston"],
       "short_names": {"NBC Sports Boston on Peacock": "NBCS Boston on Peacock"},
@@ -80,6 +122,22 @@
       "sources": ["https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/"]
     },
     "brooklyn-nets": {
+      "code_names": {
+        "DAZN-YES": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "YES on DAZN",
+          "leads": [
+            "https://yesnetwork.com/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+            "https://s23.q4cdn.com/910947899/files/doc_news/DAZN-TO-BE-THE-EXCLUSIVE-DIRECT-TO-CONSUMER-STREAMING-HOME-OF-THE-YES-NETWORK-AND-MSG-NETWORKS-2026.pdf",
+            "https://www.sportsvideo.org/2026/07/29/dazn-to-become-exclusive-dtc-streaming-home-of-yes-network-msg-networks-gotham-app-to-shut-down/",
+            "https://roundtable.io/sports/nba/nets/news/brooklyn-nets-streaming-shifts-from-gotham-to-dazn"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["YES Network"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -96,6 +154,45 @@
       "sources": ["https://yesnetwork.com/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/", "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/"]
     },
     "charlotte-hornets": {
+      "code_names": {
+        "DAZN-CHA": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.sportsvideo.org/2026/09/18/charlotte-hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/",
+            "https://www.wsoctv.com/news/local/hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/WT3BGDVPQBHQBPC77LNIUNHMHQ/",
+            "https://www.nba.com/hornets/watch",
+            "https://cordcuttersnews.com/dazn-quietly-reveals-a-new-way-to-watch-charlotte-hornets-games-this-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WAXN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "TV64",
+          "leads": [
+            "https://www.wsoctv.com/news/local/everyone-can-watch-channel-9-tv64-announced-new-home-charlotte-hornets/SRIVTROMT5BI3PRH6SLM26YL24/",
+            "https://www.nba.com/hornets/watch",
+            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WSOC": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "WSOC-TV 9",
+          "leads": [
+            "https://www.wsoctv.com/news/local/everyone-can-watch-channel-9-tv64-announced-new-home-charlotte-hornets/SRIVTROMT5BI3PRH6SLM26YL24/",
+            "https://www.nba.com/hornets/watch",
+            "https://cordcuttersnews.com/charlotte-hornets-games-are-coming-to-free-tv-this-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["WSOC-TV 9", "TV64 (Cox Media Group)"],
       "antenna_channels": [
@@ -118,6 +215,19 @@
       "sources": ["https://www.sportsvideo.org/2026/09/18/charlotte-hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/"]
     },
     "chicago-bulls": {
+      "code_names": {
+        "CHSN App": {
+          "kind": "team_stream",
+          "status": "unconfirmed",
+          "candidate": "CHSN app",
+          "leads": [
+            "https://subscribe.chsn.com/",
+            "https://www.mlb.com/whitesox/schedule/watch"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["CHSN"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -135,6 +245,33 @@
       "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/chicago-bulls/"]
     },
     "cleveland-cavaliers": {
+      "code_names": {
+        "DAZN-CLE": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260901",
+            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260910",
+            "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
+            "https://www.news5cleveland.com/sports/basketball/cavaliers/cavaliers-dazn-announce-multi-year-broadcast-partnership"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "RESN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Rock Entertainment Sports Network",
+          "leads": [
+            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260901",
+            "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
+            "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["DAZN (produced by Rock Entertainment Sports Network)", "WOIO", "WUAB", "Gray stations in Cincinnati, Lima and Parkersburg (15 games)"],
       "antenna_channels": [
@@ -158,6 +295,30 @@
       "sources": ["https://www.globenewswire.com/news-release/2026/09/15/3361838/0/en/cleveland-cavaliers-games-return-to-free-over-the-air-television-on-gray-media-stations.html"]
     },
     "dallas-mavericks": {
+      "code_names": {
+        "KFAA": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "KFAA 29",
+          "leads": [
+            "https://wfaa.com/article/sports/nba/mavericks/wfaa-sister-station-kfaa-29-dallas-mavericks-broadcast-partner/287-a337315d-6957-4e66-ba0f-b1c8c00ed530",
+            "https://www.dmagazine.com/micropost/the-mavs-solved-their-channel-29-issue/",
+            "https://cordcuttersnews.com/tegna-expands-free-over-the-air-broadcast-of-dallas-mavericks-games-across-texas/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WFAA": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "WFAA 8",
+          "leads": [
+            "https://wfaa.com/article/sports/nba/mavericks/wfaa-sister-station-kfaa-29-dallas-mavericks-broadcast-partner/287-a337315d-6957-4e66-ba0f-b1c8c00ed530"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "low",
       "local_broadcasters": [],
       "ota": {"status": "unknown", "games": null, "note": "Last season every local game was free over the air on KFAA and WFAA. 2026-27 not confirmed."},
@@ -173,6 +334,29 @@
       "sources": ["https://www.nba.com/mavs/wheretowatch", "https://www.nba.com/mavs/mavstv"]
     },
     "denver-nuggets": {
+      "code_names": {
+        "KTVD": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "My20",
+          "leads": [
+            "https://www.barchart.com/story/news/34960030/altitude-sports-extends-partnership-with-tegna-stations-9news-my20-for-second-consecutive-year-bringing-20-nuggets-games-20-avalanche-games-free-to-denver-fans",
+            "https://9news.com/article/sports/local-sports/watch-nuggets-avalanche-free-digital-antenna-how/73-73ef9515-9efb-46eb-8aba-edb05c6c925a"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "KUSA": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "9NEWS",
+          "leads": [
+            "https://www.barchart.com/story/news/34960030/altitude-sports-extends-partnership-with-tegna-stations-9news-my20-for-second-consecutive-year-bringing-20-nuggets-games-20-avalanche-games-free-to-denver-fans"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["Altitude"],
       "ota": {"status": "unknown", "games": null, "note": "Some games aired on KTVD and KUSA in past seasons; not confirmed for 2026-27."},
@@ -190,6 +374,34 @@
       "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/denver-nuggets/"]
     },
     "detroit-pistons": {
+      "code_names": {
+        "DAZN-DET": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.dazn.com/en-US/welcome/detroit-pistons",
+            "https://thedesk.net/2026/09/detroit-pistons-more-broadcast-partners-dazn/",
+            "https://roundtable.io/sports/nba/pistons/players/detroit-pistons-announce-new-streaming-deal-with-dazn",
+            "https://www.detroitnews.com/story/sports/nba/pistons/2026/09/22/how-to-watch-the-detroit-pistons-on-their-new-streaming-home/91891542007/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WMYD": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "WMYD The Spot Detroit 20",
+          "leads": [
+            "https://www.wxyz.com/sports/basketball/pistons/the-spot-detroit-20-to-air-71-regular-season-detroit-pistons-games-heres-the-full-schedule",
+            "https://scripps.com/wp-content/uploads/2026/05/Scripps-Pistons-Announcement-Press-Release-final-5.13.2630.pdf",
+            "https://www.sportsvideo.org/2026/05/14/detroit-pistons-inks-local-media-rights-deal-with-scripps-sports/",
+            "https://www.thespottv.com/detroit-20/detroit-pistons"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["WMYD The Spot Detroit 20 (Scripps)", "Statewide Scripps and partner stations"],
       "antenna_channels": [
@@ -211,6 +423,20 @@
       "sources": ["https://www.detroitnews.com/story/sports/nba/pistons/2026/09/22/how-to-watch-the-detroit-pistons-on-their-new-streaming-home/91891542007/"]
     },
     "golden-state-warriors": {
+      "code_names": {
+        "PCK-GSW": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports Bay Area on Peacock",
+          "leads": [
+            "https://www.nba.com/warriors/news/warriors-announce-2026-27-television-radio-broadcast-schedules-20260824",
+            "https://www.peacocktv.com/sports/nbcsports-bayarea",
+            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/golden-state-warriors/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["NBC Sports Bay Area"],
       "short_names": {"NBC Sports Bay Area on Peacock": "NBCS Bay Area on Peacock"},
@@ -228,6 +454,19 @@
       "sources": ["https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsbayarea.com/streaming-faqs-warriors/", "https://www.sportsmediawatch.com/2026/03/smw-faq-mlb-local-broadcasts-where-watch-breakdown/"]
     },
     "houston-rockets": {
+      "code_names": {
+        "SCHN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Space City Home Network",
+          "leads": [
+            "https://www.schnplus.com/rockets",
+            "https://www.thehrr.com/Houston_Rockets/News_and_Info/2026/8/13_Rockets_announce_2026-27_schedule.html"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["Space City Home Network"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -244,6 +483,43 @@
       "sources": ["https://support.schnplus.com/support/solutions/articles/43000773896-what-plans-are-available-for-schn-", "https://support.schnplus.com/support/solutions/articles/43000772721-space-city-home-network-schn-about", "https://www.schnplus.com/rockets", "https://www.prnewswire.com/news-releases/space-city-home-networks-streaming-platform-gains-early-momentum-with-the-houston-rockets-ahead-of-astros-spring-training-302695580.html", "https://www.houstonpublicmedia.org/articles/news/sports/2025/12/04/537687/rockets-astros-streaming-space-city-home-network/"]
     },
     "indiana-pacers": {
+      "code_names": {
+        "DAZN-IND": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.nba.com/pacers/where-to-watch/dazn",
+            "https://www.sportsvideo.org/2026/08/20/indiana-pacers-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
+            "https://www.sportcal.com/news/dazn-continues-us-local-broadcast-sweep-with-nba-pacers-deal/",
+            "https://www.fieldhousefiles.com/p/inside-pacers-move-to-dazn-2026-27-zander-berlinski"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WTTV": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "CBS4",
+          "leads": [
+            "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
+            "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WXIN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "FOX59",
+          "leads": [
+            "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
+            "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["DAZN"],
       "ota": {"status": "partial", "games": 15, "note": "15 games expected to air free over the air; partner not yet named."},
@@ -259,6 +535,31 @@
       "sources": ["https://www.nba.com/pacers/where-to-watch/dazn"]
     },
     "la-clippers": {
+      "code_names": {
+        "ClipperVision": {
+          "kind": "team_stream",
+          "status": "unconfirmed",
+          "candidate": "ClipperVision",
+          "leads": [
+            "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
+            "https://frontofficesports.com/article/los-angeles-clippers-clippervision-streaming/",
+            "https://www.directv.com/insider/news/clippervision-on-directv/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "KTLA": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "KTLA 5",
+          "leads": [
+            "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
+            "https://ktla.com/sports/clippers/ktla-to-broadcast-10-l-a-clippers-games-this-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "unknown",
       "local_broadcasters": [],
       "ota": {"status": "unknown", "games": null, "note": ""},
@@ -285,6 +586,32 @@
       "sources": ["https://corporate.charter.com/newsroom/spectrum-sportsnet-lakers-2026-27-schedule", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/los-angeles-lakers/"]
     },
     "memphis-grizzlies": {
+      "code_names": {
+        "DAZN-MEM": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.sportsvideo.org/2026/09/10/memphis-grizzlies-name-dazn-exclusive-streaming-partner-for-2026-27-season/",
+            "https://www.sportcal.com/media/grizzlies-join-dazn-in-latest-local-multi-year-rights-tie-up/",
+            "https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html",
+            "https://cordcuttersnews.com/dazn-adds-another-nba-team-with-15-free-games-and-a-seven-state-reach/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WATN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "ABC24",
+          "leads": [
+            "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/",
+            "https://www.sportsvideo.org/2026/09/10/memphis-grizzlies-name-dazn-exclusive-streaming-partner-for-2026-27-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["DAZN"],
       "ota": {"status": "partial", "games": 15, "note": "15 games free on DAZN and also over the air."},
@@ -300,6 +627,20 @@
       "sources": ["https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html"]
     },
     "miami-heat": {
+      "code_names": {
+        "Local10+": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "Local 10+ Platinum",
+          "leads": [
+            "https://www.local10.com/sports/local/2026/06/08/wplg-local-10-becomes-the-home-of-the-miami-heat/",
+            "https://www.local10.com/tech/2026/07/18/how-to-download-and-use-the-free-local-10-platinum-app/",
+            "https://www.sportsvideo.org/2026/06/08/miami-heat-ink-new-deal-with-wplg-local-10-join-nbas-growing-ota-crowd/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["WPLG Local 10"],
       "antenna_channels": [
@@ -319,6 +660,22 @@
       "sources": ["https://www.local10.com/sports/local/2026/06/08/wplg-local-10-becomes-the-home-of-the-miami-heat/"]
     },
     "milwaukee-bucks": {
+      "code_names": {
+        "WCGV": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "MY24 (WVTV-DT2)",
+          "leads": [
+            "https://milwaukeerecord.com/press-release/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/",
+            "https://urbanmilwaukee.com/pressrelease/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/",
+            "https://www.milwaukeemag.com/milwaukee-bucks-tv-2026/",
+            "https://cbs58.com/news/bucks-returning-to-over-the-air-tv-for-first-full-season-in-31-years",
+            "https://www.cw18milwaukee.com/my24/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in/article_3fe145f5-3af8-490d-9d9f-fb815de44f82.html"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["MY24 (WVTV-DT2)", "Statewide affiliates"],
       "antenna_channels": [
@@ -340,6 +697,35 @@
       "sources": ["https://urbanmilwaukee.com/pressrelease/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/"]
     },
     "minnesota-timberwolves": {
+      "code_names": {
+        "DAZN-MIN": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.sportsvideo.org/2026/07/30/minnesota-timberwolves-ink-local-media-rights-deal-with-dazn/",
+            "https://www.fox9.com/sports/timberwolves-dazn-how-watch-2026-27-season-subscription-prices",
+            "https://kstp.com/?p=3988021",
+            "https://www.dazn.com/en-US/help/articles/37999777893789",
+            "https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "KARE": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "KARE 11",
+          "leads": [
+            "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes",
+            "https://fox9.com/news/timberwolves-launch-new-streaming-service-dazn-will-offer-15-games-free-july-2026",
+            "https://kstp.com/?p=3988021",
+            "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["DAZN"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -355,6 +741,30 @@
       "sources": ["https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174"]
     },
     "new-orleans-pelicans": {
+      "code_names": {
+        "GCSEN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Gulf Coast Sports & Entertainment Network (Gray)",
+          "leads": [
+            "https://www.wafb.com/2026/09/14/pelicans-preseason-games-air-gcsen/",
+            "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WVUE": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "FOX 8",
+          "leads": [
+            "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/",
+            "https://www.nba.com/pelicans/broadcasting"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["Gulf Coast Sports & Entertainment Network (Gray)"],
       "antenna_channels": [
@@ -375,6 +785,34 @@
       "sources": ["https://www.wafb.com/2026/09/14/pelicans-preseason-games-air-gcsen/"]
     },
     "new-york-knicks": {
+      "code_names": {
+        "DAZN-MSG": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "MSG on DAZN",
+          "leads": [
+            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+            "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+            "https://www.hollywoodreporter.com/tv/tv-news/gotham-sports-app-shuttering-yankees-knicks-stream-on-dazn-1236659020/",
+            "https://www.cnbc.com/2026/07/29/yes-network-msg-networks-dazn-streaming.html",
+            "https://sports.yahoo.com/articles/watch-knicks-dazn-prices-plans-181342227.html"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "MSG": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "MSG Network",
+          "leads": [
+            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+            "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+            "https://sny.tv/articles/knicks-2026-27-nba-regular-season-schedule"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["MSG Network"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -391,6 +829,19 @@
       "sources": ["https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/", "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/", "https://sports.yahoo.com/articles/watch-knicks-dazn-prices-plans-181342227.html", "https://www.nhl.com/sabres/news/how-to-watch-buffalo-sabres-on-dazn", "https://www.cnbc.com/2026/07/29/yes-network-msg-networks-dazn-streaming.html"]
     },
     "oklahoma-city-thunder": {
+      "code_names": {
+        "KWTV": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "News 9",
+          "leads": [
+            "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts",
+            "https://www.news9.com/thunder-on-griffin"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
       "antenna_channels": [
@@ -415,6 +866,44 @@
       "sources": ["https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts"]
     },
     "orlando-magic": {
+      "code_names": {
+        "DAZN-ORL": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.nba.com/magic/news/orlando-magic-names-dazn-as-exclusive-direct-to-consumer-streaming-partner-for-2026-27",
+            "https://barrettmedia.com/2026/09/03/orlando-magic-dazn-partner-streaming/",
+            "https://cordcuttersnews.com/dazn-is-adding-nba-games-to-its-streaming-service-this-fall/",
+            "https://www.dazn.com/magic"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WRDQ": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "WRDQ 27",
+          "leads": [
+            "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
+            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/",
+            "https://business.seminolebusiness.org/news/details/orlando-magic-names-cox-media-group-for-magic-television-broadcasts-for-2026-27"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WFTV": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "WFTV 9",
+          "leads": [
+            "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
+            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["WRDQ 27", "WFTV 9 (Cox)", "WMOR (Tampa)"],
       "antenna_channels": [
@@ -438,6 +927,43 @@
       "sources": ["https://www.nba.com/magic/news/orlando-magic-names-dazn-as-exclusive-direct-to-consumer-streaming-partner-for-2026-27"]
     },
     "philadelphia-76ers": {
+      "code_names": {
+        "PCK-PHI": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports Philadelphia on Peacock",
+          "leads": [
+            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
+            "https://thesixersense.com/where-watch-every-76ers-game-2026-27-tv-streaming-radio",
+            "https://www.cabletv.com/sports/watch-philadelphia-76ers",
+            "https://www.peacocktv.com/sports/nbcsports-philadelphia"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "NBCSP": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports Philadelphia",
+          "leads": [
+            "https://www.inquirer.com/sixers/nbc-sports-philadelphia-sixers-broadcast-team-tom-haberstroh-20261015.html",
+            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
+            "https://www.nbcsportsphiladelphia.com/nba/philadelphia-76ers/sixers-preseason-schedule-2026-27-nba/747127/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "NBCSP+": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports Philadelphia+",
+          "leads": [
+            "https://www.cabletv.com/sports/watch-philadelphia-76ers"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["NBC Sports Philadelphia"],
       "short_names": {"NBC Sports Philadelphia on Peacock": "NBCS Philly on Peacock"},
@@ -455,6 +981,30 @@
       "sources": ["https://www.nbcsportsphiladelphia.com/news/sports/faq-nbc-sports-philadelphia-peacock/655697/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsphiladelphia.com/streaming-faqs-sixers/", "https://www.sportsmediawatch.com/2026/09/smw-faq-nhl-broadcasts-2026-27/", "https://www.antennaland.com/how-to-watch-nbc-sports-philadelphia/"]
     },
     "phoenix-suns": {
+      "code_names": {
+        "AZFS App": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "Suns+",
+          "leads": [
+            "https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/",
+            "https://www.azfamily.com/2026/05/22/arizonas-family-sports-launches-direct-to-consumer-streaming-app/",
+            "https://www.sportsvideo.org/2026/05/29/arizonas-family-sports-debuts-direct-to-consumer-streaming-app/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "KPHO": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "CBS 5",
+          "leads": [
+            "https://azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
       "antenna_channels": [
@@ -499,6 +1049,21 @@
       "sources": ["https://kval.com/sports/sports-newsletter/nba-announces-2026-27-schedule-for-the-portland-trail-blazers-oregon-portland-nba-national-basketball-association-moda-rose-center-season-2026-27-black-friday-ja-morant-dame-lillard-damian-rip-city", "https://support.watch.nba.com/hc/en-us/articles/26513701946263-BlazerVision", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/portland-trail-blazers/", "https://ripcityproject.com/how-to-watch-trail-blazers-2026-27-tv-streaming-radio"]
     },
     "sacramento-kings": {
+      "code_names": {
+        "PCK-SAC": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "NBC Sports California on Peacock",
+          "leads": [
+            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/sacramento-kings/",
+            "https://www.cabletv.com/sports/watch-sacramento-kings",
+            "https://www.peacocktv.com/sports/nbcsports-california",
+            "https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["NBC Sports California"],
       "short_names": {"NBC Sports California on Peacock": "NBCS California on Peacock"},
@@ -516,6 +1081,31 @@
       "sources": ["https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsbayarea.com/streaming-faqs-kings/", "https://www.sportsmediawatch.com/2026/09/smw-faq-nhl-broadcasts-2026-27/"]
     },
     "san-antonio-spurs": {
+      "code_names": {
+        "DAZN-SAS": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "DAZN",
+          "leads": [
+            "https://www.sportsvideo.org/2026/09/02/san-antonio-spurs-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
+            "https://www.tvtechnology.com/business/partnerships/san-antonio-spurs-dazn-ink-exclusive-streaming-deal",
+            "https://news4sanantonio.com/sports/spurs-games-to-stream-live-on-dazn-for-2026-27-season-san-antonio-texas-nba-basketball-victor-wembanyama-stephon-castle-dillon-harper-david-robinson",
+            "https://www.axios.com/local/san-antonio/2026/09/02/spurs-name-dazn-new-streaming-games"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "WOAI.2": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "leads": [
+            "https://news4sanantonio.com/sports/spurs-games-to-stream-live-on-dazn-for-2026-27-season-san-antonio-texas-nba-basketball-victor-wembanyama-stephon-castle-dillon-harper-david-robinson",
+            "https://www.sportsvideo.org/2026/09/02/san-antonio-spurs-name-dazn-exclusive-streaming-home-beginning-2026-27-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["DAZN"],
       "ota": {"status": "partial", "games": 22, "note": "22 games will be free over the air; partner not yet named."},
@@ -531,6 +1121,37 @@
       "sources": ["https://www.axios.com/local/san-antonio/2026/09/02/spurs-name-dazn-new-streaming-games"]
     },
     "toronto-raptors": {
+      "code_names": {
+        "SN": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Sportsnet",
+          "leads": [
+            "https://www.sportsnet.ca/basketball/nba/",
+            "https://mobilesyrup.com/2026/04/18/where-to-watch-the-toronto-raptors-in-the-nba-playoffs/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "SN+": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "Sportsnet+",
+          "leads": [
+            "https://www.iphoneincanada.ca/2026/07/23/rogers-is-hiking-sportsnet-prices-again-just-ahead-of-the-nhl-season/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "TSN+": {
+          "kind": "stream",
+          "status": "unconfirmed",
+          "candidate": "TSN+",
+          "leads": [],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["TSN", "Sportsnet"],
       "ota": {"status": "none", "games": 0, "note": ""},
@@ -565,6 +1186,27 @@
       "sources": ["https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/utah-jazz/"]
     },
     "washington-wizards": {
+      "code_names": {
+        "MNMT": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Monumental Sports Network",
+          "leads": [
+            "https://www.monumentalsportsnetwork.com/wizards-app-live",
+            "https://dazngroup.com/press-room/monumental-sports-network-and-dazn-partner-to-expand-access-to-live-capitals-wizards-mystics-games-and-other-d-c-sports-content/"
+          ],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        },
+        "MNMT2": {
+          "kind": "tv",
+          "status": "unconfirmed",
+          "candidate": "Monumental Sports Network 2",
+          "leads": [],
+          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
+          "checked": "2026-10-20"
+        }
+      },
       "confidence": "high",
       "local_broadcasters": ["Monumental Sports Network"],
       "short_names": {"Monumental Sports Network": "Monumental Sports"},

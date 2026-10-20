@@ -6,6 +6,7 @@ Page records, so nothing else in the generator has to change.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from pathlib import Path
@@ -158,6 +159,62 @@ class SiteContext:
             if name in local.short_names:
                 return local.short_names[name]
         return name
+
+    def channel_names(self, name: str, kind: str, slug: str = "", chip: bool = False,
+                      short: bool = True) -> list[str]:
+        """A channel as fans read it, never as a feed code. The schedule feed
+        codes a local channel like "WSOC/DAZN-CHA": each part takes, in order,
+        the first name of the team's data/local_tv.json link entry that lists
+        it, its confirmed name in the team's code_names, or the plain fallback
+        in copy.json channels (the team's streaming app for a code_names entry
+        of kind stream or team_stream, otherwise the team's local broadcast). A part that is
+        already one of the team's recorded names stays as it is. A national
+        code takes its confirmed name in data/services.json code_names.
+        chip=True gives the chip forms: names as recorded, owner note kept,
+        shortened by data/local_tv.json short_names unless short=False, and
+        the fallback without "the"."""
+        text = self.copy.get("channels", {})
+        prefix = "chip_" if chip else ""
+
+        def plain(value: str) -> str:
+            # A chip keeps its short name (or the full one, owner note and
+            # all); a sentence drops the owner note ("WANF (Gray)").
+            if chip:
+                return self.short_channel(value) if short else value
+            return re.sub(r"\s*\([^)]*\)", "", value)
+
+        if kind == "national":
+            entry = self.services.code_names.get(name)
+            if entry is None:
+                return [name]           # a network's own name: ESPN, NBC, Peacock
+            if entry.get("status") == "confirmed" and entry.get("name"):
+                return [entry["name"]]
+            return [text[prefix + "fallback_national"]]
+        if kind != "local":
+            return [name]
+        local = self.local(slug)
+        team = next((t.short_name for t in self.teams if t.slug == slug), "")
+        if local is None:
+            return [plain(name)]
+        known = set(local.local_broadcasters) | {o.name for o in local.streaming}
+        out: list[str] = []
+        # A recorded name may hold a "/" itself ("Arizona's Family (3TV/KTVK)").
+        whole = name in known or any(name in (e.get("names") or []) for e in local.links)
+        for part in [name] if whole else name.split("/"):
+            entry = next((e for e in local.links if part in (e.get("names") or [])), None)
+            code = local.code_names.get(part)
+            if part in known:
+                found = plain(part)
+            elif entry is not None:
+                found = plain(entry["names"][0])
+            elif code and code.get("status") == "confirmed" and code.get("name"):
+                found = plain(code["name"])
+            else:
+                which = "fallback_app" if (code or {}).get("kind") in ("stream", "team_stream") else "fallback_tv"
+                found = text[prefix + which].format(team=team)
+            if found and found not in out:
+                out.append(found)
+        return out
 
     def antenna_channel(self, name: str) -> str:
         """A local channel's confirmed antenna (virtual) channel, "32.1", from

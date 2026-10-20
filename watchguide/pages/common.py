@@ -144,13 +144,16 @@ def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False
     out = []
     for channel in channels:
         name = channel["name"]
-        label = ctx.short_channel(name) if channel["kind"] == "local" else name
+        # Never a feed code: "WSOC/DAZN-CHA" shows its names (ctx.channel_names).
+        owner = channel.get("slug") or slug     # a local channel's team
+        full = " or ".join(ctx.channel_names(name, channel["kind"], owner, chip=True, short=False))
+        label = " or ".join(ctx.channel_names(name, channel["kind"], owner, chip=True))
         how = ""
         if priced and channel["kind"] == "national":
             svc = cheapest_for(ctx, name)
             if svc is not None and svc.kind == "ota" and svc.is_free:
                 how = text["chip_free_ota"]
-            elif svc is not None and _norm(svc.name).startswith(_norm(name)):
+            elif svc is not None and _norm(svc.name).startswith(_norm(label)):
                 label, how = svc.name, price_text(ctx, svc)
             elif svc is not None:
                 how = f"{svc.name} {price_text(ctx, svc)}"
@@ -158,7 +161,7 @@ def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False
             how = text["chip_local"].format(team=channel["team"])
         # title carries a shortened local name in full; a national chip
         # relabelled with its service needs none.
-        title = name if channel["kind"] == "local" and label != name else ""
+        title = full if channel["kind"] == "local" and label != full else ""
         # An over-the-air station's confirmed antenna channel; never a cable
         # or satellite number, and none for streaming apps or regional networks.
         virtual = ctx.antenna_channel(name) if channel["kind"] == "local" else ""

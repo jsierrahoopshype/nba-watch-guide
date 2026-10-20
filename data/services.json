@@ -537,5 +537,22 @@
       "source_url": "https://www.nba.com/league-pass-purchase",
       "last_verified": "2026-09-25"
     }
+  },
+  "code_names": {
+    "_note": "What a national code in the schedule feed is called on the pages (SiteContext.channel_names). status confirmed needs the evidence rule: an official page, or two independent current-season sources, recorded in sources. Any other status shows copy.json channels.fallback_national instead of the code.",
+    "Amazon": {
+      "name": "Prime Video",
+      "status": "confirmed",
+      "basis": "official",
+      "sources": [
+        {"url": "https://aboutamazon.com/news/entertainment/stream-nba-prime-video", "site": "About Amazon", "read": "2026-09-25", "says": "Prime Video's NBA games; the prime_video service above carries this code (carries_verified)."}
+      ],
+      "checked": "2026-09-25"
+    },
+    "NBCSN": {
+      "status": "unconfirmed",
+      "reason": "What this code means in 2026-27 is unconfirmed (see _meta.unmapped_broadcaster_codes). No page could be opened from the 2026-10-20 session to confirm it.",
+      "checked": "2026-10-20"
+    }
   }
 }

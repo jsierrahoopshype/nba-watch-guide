@@ -54,29 +54,14 @@ def tip_time(game) -> str:
 
 
 def readable_channels(ctx: SiteContext, channels) -> list[str]:
-    """Channel names as a fan reads them, national first (all_channels'
-    order). A feed code like "NBCSB/PCK-BOS" is split at "/" and each part
-    takes the first name of the team's data/local_tv.json link entry that
-    lists it; a national code takes copy.json pair.network_names. A part
-    with no recorded name stays as the code: never guessed."""
-    networks = ctx.copy["pair"].get("network_names", {})
+    """Every channel's names as a fan reads them (ctx.channel_names), national
+    first (all_channels' order), each name once."""
     out: list[str] = []
     for channel in channels:
         if channel["kind"] == "tba":
             continue
-        if channel["kind"] == "national":
-            names = [networks.get(channel["name"], channel["name"])]
-        else:
-            local = ctx.local(channel.get("slug", ""))
-            entries = local.links if local else []
-            names = []
-            for part in channel["name"].split("/"):
-                entry = next((e for e in entries if part in (e.get("names") or [])), None)
-                names.append(entry["names"][0] if entry else part)
-        for name in names:
-            # Without the owner notes some local names carry ("WANF (Gray)").
-            name = re.sub(r"\s*\([^)]*\)", "", name)
-            if name and name not in out:
+        for name in ctx.channel_names(channel["name"], channel["kind"], channel.get("slug", "")):
+            if name not in out:
                 out.append(name)
     return out
 

@@ -469,8 +469,8 @@ def test_national_chips_carry_the_service_and_price(fixture_games):
         {"name": code, "kind": "national"} for code in ("ESPN", "NBC", "Peacock", "ABC", "Amazon", "NBA TV", "NBCSN")],
         priced=True)]
     assert got == [("ESPN Unlimited", "$31.99/mo"), ("NBC", "free over the air"), ("Peacock Premium", "$12.99/mo"),
-                   ("ABC", "free over the air"), ("Amazon", "Prime Video $14.99/mo"),
-                   ("NBA TV", "NBA League Pass $16.99/mo"), ("NBCSN", "")]
+                   ("ABC", "free over the air"), ("Prime Video", "$14.99/mo"),
+                   ("NBA TV", "NBA League Pass $16.99/mo"), ("National broadcast", "")]
 
 
 # -- matchup head: date chip, countdown, local time ----------------------------------------

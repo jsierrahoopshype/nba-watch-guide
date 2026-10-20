@@ -202,7 +202,8 @@ def build(ctx: SiteContext, env) -> list[Page]:
         card = share.team_card(
             ctx, team, nxt, ctx.by_tricode[nxt.opponent_of(team.tricode)].short_name if nxt else "",
             share.game_line(date_label(nxt.date_et), et_label(nxt),
-                            [c["label"] for c in chips(ctx, channels_for_game(nxt, team.tricode, local, tba))])
+                            [c["label"] for c in chips(ctx, channels_for_game(nxt, team.tricode, local, tba),
+                                                       slug=team.slug)])
             if nxt else "")
         blocks = [seo.breadcrumbs(crumb_trail(ctx, team.full_name, url))]
         for game in remaining[:JSONLD_GAME_LIMIT]:

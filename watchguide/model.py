@@ -340,6 +340,8 @@ class ServiceData:
     blackouts: list[BlackoutRule]
     league_pass_service_id: str
     prices_checked: str = ""     # _meta.all_prices_checked, YYYY-MM-DD
+    # {national feed code: {name, status, sources}}, as LocalTV.code_names.
+    code_names: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def by_id(self, sid: str) -> Service | None:
         for s in self.services:
@@ -446,6 +448,8 @@ def load_services(data_dir: Path | None = None) -> ServiceData:
         blackouts=blackouts,
         league_pass_service_id=lp_id,
         prices_checked=meta.get("all_prices_checked", ""),
+        code_names={str(k): v for k, v in (raw.get("code_names") or {}).items()
+                    if isinstance(v, dict) and not str(k).startswith("_")},
     )
 
 
@@ -560,6 +564,9 @@ class LocalTV:
     antenna_channels: list[AntennaChannel] = field(default_factory=list)
     # Outbound links for the stations and streams (see watchguide/links.py).
     links: list[dict[str, Any]] = field(default_factory=list)
+    # {feed code: {name, kind, status, sources}}: what a schedule feed code
+    # is called, recorded with its sources (see SiteContext.channel_names).
+    code_names: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def antenna_channel(self, name: str) -> str:
         """The confirmed virtual channel for a channel name, or ""."""
@@ -645,6 +652,7 @@ def load_local_tv(data_dir: Path | None = None) -> dict[str, LocalTV]:
                 sources=[x for x in a.get("sources") or [] if isinstance(x, dict)],
                 checked=a.get("checked", "")) for a in t.get("antenna_channels") or []],
             links=[e for e in t.get("links") or [] if isinstance(e, dict)],
+            code_names={str(k): v for k, v in (t.get("code_names") or {}).items() if isinstance(v, dict)},
         )
     return out
 
