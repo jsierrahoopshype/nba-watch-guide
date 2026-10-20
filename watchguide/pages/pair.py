@@ -11,7 +11,7 @@ import re
 from datetime import date
 
 from .. import seo, share
-from ..context import SiteContext, long_date
+from ..context import SiteContext
 from ..pairs import by_name, game_teams, meetings, pair_url
 from ..render import Page, date_label, et_label, safe_format
 from .common import all_channels, cable_note, chips, crumb_trail, game_view, updated_label
@@ -41,18 +41,67 @@ def pair_title(text: dict, a: str, b: str, next_date: str = "") -> str:
     return text["title_done"].format(a=a, b=b) + seo.BRAND_SUFFIX
 
 
+def tip_time(game) -> str:
+    """The Eastern tip-off in AP style, '7 p.m.', '7:30 p.m.' or 'noon';
+    "" when the feed has no real time yet (see seo._tipoff)."""
+    tip = seo._tipoff(game)
+    if tip is None:
+        return ""
+    if (tip.hour, tip.minute) == (12, 0):
+        return "noon"
+    clock = str(tip.hour % 12 or 12) + (f":{tip.minute:02d}" if tip.minute else "")
+    return f"{clock} {'a.m.' if tip.hour < 12 else 'p.m.'}"
+
+
+def readable_channels(ctx: SiteContext, channels) -> list[str]:
+    """Channel names as a fan reads them, national first (all_channels'
+    order). A feed code like "NBCSB/PCK-BOS" is split at "/" and each part
+    takes the first name of the team's data/local_tv.json link entry that
+    lists it; a national code takes copy.json pair.network_names. A part
+    with no recorded name stays as the code: never guessed."""
+    networks = ctx.copy["pair"].get("network_names", {})
+    out: list[str] = []
+    for channel in channels:
+        if channel["kind"] == "tba":
+            continue
+        if channel["kind"] == "national":
+            names = [networks.get(channel["name"], channel["name"])]
+        else:
+            local = ctx.local(channel.get("slug", ""))
+            entries = local.links if local else []
+            names = []
+            for part in channel["name"].split("/"):
+                entry = next((e for e in entries if part in (e.get("names") or [])), None)
+                names.append(entry["names"][0] if entry else part)
+        for name in names:
+            # Without the owner notes some local names carry ("WANF (Gray)").
+            name = re.sub(r"\s*\([^)]*\)", "", name)
+            if name and name not in out:
+                out.append(name)
+    return out
+
+
+def or_list(names: list[str]) -> str:
+    """'A', 'A or B', 'A, B or C': alternatives, never joined with 'and'."""
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " or " + names[-1]
+
+
 def pair_description(ctx: SiteContext, text: dict, a: str, b: str, nxt, channels) -> str:
-    """Unique per pair: both names, the next date and its channel. Long local
-    channel names can crowd the 155 characters, so it tries two channels,
-    then one, then copy.json pair.description_short, before cutting."""
+    """Unique per pair: both names, the next meeting's date, tip-off and
+    every channel, in copy.json pair.description. Over 155 characters it
+    drops the second sentence's tail (pair.description_short), then
+    channels from the end, before cutting."""
     fields = {"a": a, "b": b, "season": ctx.season}
     if nxt is None:
         return seo.description(safe_format(text["description_done"], **fields))
-    # Without the owner notes some local names carry ("WANF (Gray)").
-    named = [re.sub(r"\s*\([^)]*\)", "", c["name"]) for c in channels if c["kind"] != "tba"]
-    attempts = [(text["description"], 2), (text["description"], 1), (text["description_short"], 1)]
-    candidates = [safe_format(template, date=long_date(nxt.date_et),
-                              channel=" and ".join(named[:n]) if named else text["channel_tba"], **fields)
+    clock = tip_time(nxt)
+    fields["date"] = title_date(nxt.date_et)
+    fields["time"] = text["description_time"].format(time=clock) if clock else ""
+    named = readable_channels(ctx, channels)
+    attempts = [(text["description"], len(named))] + \
+        [(text["description_short"], n) for n in range(len(named), 0, -1)]
+    candidates = [safe_format(template, channels=or_list(named[:n]) if named else text["channel_tba"],
+                              **fields)
                   for template, n in attempts]
     return next((c for c in candidates if len(c) <= seo.DESCRIPTION_MAX),
                 seo.description(candidates[-1]))

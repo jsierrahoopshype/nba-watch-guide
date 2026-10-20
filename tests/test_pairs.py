@@ -22,7 +22,8 @@ from watchguide.build import full_build
 from watchguide.context import load_context
 from watchguide.manifest import expected_pages
 from watchguide.model import load_copy, load_teams
-from watchguide.pages.pair import pair_title, title_date
+from watchguide.pages.pair import (or_list, pair_description, pair_title, readable_channels, tip_time,
+                                   title_date)
 from watchguide.sources import schedule as schedule_source
 
 TEAMS = load_teams()
@@ -125,6 +126,67 @@ def test_built_titles_and_descriptions(built_site):
         if (built_site / "new-york-knicks-vs-philadelphia-76ers").exists() else None
     if knicks:
         assert "<title>Where to Watch 76ers vs. Knicks (" in knicks
+
+
+def _game(**kw):
+    base = next(g for g in fixture_schedule() if g.home_tricode == "CHA" or g.away_tricode == "CHA")
+    return replace(base, **kw)
+
+
+@pytest.mark.parametrize("tip, want", [
+    ("2026-11-06T19:00:00-05:00", "7 p.m."), ("2026-11-06T19:30:00-05:00", "7:30 p.m."),
+    ("2026-11-06T12:00:00-05:00", "noon"), ("2026-11-06T11:00:00-05:00", "11 a.m."), ("", ""),
+])
+def test_tip_time_is_ap_style_and_never_invented(tip, want):
+    assert tip_time(_game(tipoff_et=tip, status_text="7:00 pm ET")) == want
+
+
+def test_alternatives_join_with_or():
+    assert or_list(["ESPN"]) == "ESPN"
+    assert or_list(["ESPN", "NBC Sports Boston"]) == "ESPN or NBC Sports Boston"
+    assert or_list(["A", "B", "C"]) == "A, B or C"
+
+
+def test_readable_channels_name_known_codes_and_keep_unknown_ones():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    channels = [{"name": "Amazon", "kind": "national"},
+                {"name": "NBCSB/PCK-BOS", "kind": "local", "slug": "boston-celtics"},
+                {"name": "WANF/WPCH.2", "kind": "local", "slug": "atlanta-hawks"},
+                {"name": "TBA", "kind": "tba"}]
+    # Prime Video leads; NBCSB and WANF have names in data/local_tv.json, the
+    # owner note is dropped, and PCK-BOS and WPCH.2 have none, so they stay.
+    assert readable_channels(ctx, channels) == ["Prime Video", "NBC Sports Boston", "PCK-BOS", "WANF", "WPCH.2"]
+
+
+def test_description_trims_the_second_sentence_first():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    text = load_copy()["pair"]
+    game = _game(tipoff_et="2026-11-06T19:00:00-05:00", date_et="2026-11-06")
+    short = [{"name": "ESPN", "kind": "national"}]
+    assert pair_description(ctx, text, "Celtics", "Hornets", game, short) == (
+        "Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on ESPN, "
+        "plus every 2026-27 meeting with TV and streaming options.")
+    long = [{"name": n, "kind": "national"} for n in ("Station Number One", "Station Number Two",
+                                                       "Station Number Three", "Station Number Four")]
+    got = pair_description(ctx, text, "Celtics", "Hornets", game, long)
+    assert got == ("Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on Station Number One, "
+                   "Station Number Two, Station Number Three or Station Number Four.")
+    many = long + [{"name": f"Extra Channel {i}", "kind": "national"} for i in range(5)]
+    got = pair_description(ctx, text, "Celtics", "Hornets", game, many)
+    assert len(got) <= 155 and got.endswith(".") and "plus every" not in got and " or " in got
+
+
+def test_built_descriptions_lead_with_the_date_and_join_channels_with_or(built_site):
+    for page in built_site.glob("*-vs-*/index.html"):
+        markup = page.read_text(encoding="utf-8")
+        desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', markup).group(1))
+        og = htmllib.unescape(re.search(r'<meta property="og:description" content="([^"]*)"', markup).group(1))
+        assert og == desc
+        assert re.match(r".+ vs\. .+ is next on [A-Z][a-z]{2}, \S+ \d{1,2}( at .+ ET)?\. Watch on ", desc), desc
+        channels = desc.split("Watch on ", 1)[1].split(", plus every")[0].rstrip(".")
+        # A joiner would put "and" before the next name; some names hold one
+        # themselves ("Statewide Scripps and partner stations").
+        assert not re.search(r" and [A-Z0-9]", channels), desc
 
 
 # -- the page: next meeting in full, then every meeting ------------------------------------
