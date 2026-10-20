@@ -265,10 +265,11 @@
     "head_to_head": "{pair}: {possessions} possessions guarding each other through {season}"
   },
   "pair": {
-    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. title gets ' | HoopsMatic' and {date}, the next meeting as 'Fri, Nov. 6' (AP months); title_done replaces it after the season's last meeting. Pair titles are the one exception to the 60-character title limit: they lead with the words people search and Google cuts the end.",
+    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names. In the descriptions {date} is the next meeting as 'Fri, Nov. 6', {time} its AP-style tip-off ('7 p.m.', from description_time, empty when the feed has none) and {channels} every channel joined with 'or', national first. Local codes take the names in data/local_tv.json links; network_names renames a national feed code (Amazon is Prime Video in data/services.json); a code with no recorded name stays as it is. title gets ' | HoopsMatic' and {date}, the next meeting as 'Fri, Nov. 6' (AP months); title_done replaces it after the season's last meeting. Pair titles are the one exception to the 60-character title limit: they lead with the words people search and Google cuts the end.",
     "title": "Where to Watch {a} vs. {b} ({date}): TV Channel and Streaming",
     "title_done": "Where to Watch {a} vs. {b}: TV Channel and Streaming",
-    "description": "{a} vs. {b} next on {date} on {channel}. Every {season} meeting with TV channels, streaming and who's out.",
+    "description": "{a} vs. {b} is next on {date}{time}. Watch on {channels}, plus every {season} meeting with TV and streaming options.",
+    "description_time": " at {time} ET",
     "description_done": "Every {season} {a} vs. {b} game with TV channels and streaming. The two teams have no meetings left this season.",
     "h1": "{full_a} vs. {full_b}: how to watch",
     "breadcrumb": "{a} vs. {b}",
@@ -277,7 +278,8 @@
     "meetings_heading": "Every {season} meeting",
     "meetings_caption": "{count} games",
     "channel_tba": "a channel still to be announced",
-    "description_short": "{a} vs. {b} next on {date} on {channel}. TV and streaming for every {season} meeting."
+    "description_short": "{a} vs. {b} is next on {date}{time}. Watch on {channels}.",
+    "network_names": {"Amazon": "Prime Video"}
   },
   "my_team": {
     "_note": "\"My team\": a team the reader saves on this device (localStorage hm-watch-team). Nothing is sent anywhere.",
