@@ -22,7 +22,7 @@ from watchguide.build import full_build
 from watchguide.context import load_context
 from watchguide.manifest import expected_pages
 from watchguide.model import load_copy, load_teams
-from watchguide.pages.pair import pair_title
+from watchguide.pages.pair import pair_title, title_date
 from watchguide.sources import schedule as schedule_source
 
 TEAMS = load_teams()
@@ -87,14 +87,26 @@ def test_pair_pages_are_in_the_manifest_sitemap_and_self_canonical(built_site_in
 
 # -- titles and descriptions -------------------------------------------------------------
 
-def test_every_possible_pair_title_fits_and_keeps_names_and_how_to_watch():
+def test_every_possible_pair_title_leads_with_where_to_watch():
+    """'Where to Watch Celtics vs. Hornets (Fri, Nov. 6): TV Channel and
+    Streaming | HoopsMatic', no date after the last meeting. Never shortened,
+    so it may run past seo.TITLE_MAX."""
     text_block = load_copy()["pair"]
     for x, y in itertools.combinations(TEAMS, 2):
         a, b = pairs.by_name(x, y)
-        title = pair_title(text_block, a.short_name, b.short_name)
-        assert len(title) <= 60, title
-        assert title.endswith(" | HoopsMatic"), title
-        assert a.short_name in title and b.short_name in title and "How to Watch" in title, title
+        head = f"Where to Watch {a.short_name} vs. {b.short_name}"
+        assert pair_title(text_block, a.short_name, b.short_name, "2026-11-06") == \
+            f"{head} (Fri, Nov. 6): TV Channel and Streaming | HoopsMatic"
+        assert pair_title(text_block, a.short_name, b.short_name) == \
+            f"{head}: TV Channel and Streaming | HoopsMatic"
+
+
+@pytest.mark.parametrize("value, want", [
+    ("2026-11-06", "Fri, Nov. 6"), ("2027-03-01", "Mon, March 1"), ("2027-04-18", "Sun, April 18"),
+    ("2026-09-30", "Wed, Sept. 30"), ("2026-12-25", "Fri, Dec. 25"), ("2027-01-15", "Fri, Jan. 15"),
+])
+def test_title_date_uses_ap_months(value, want):
+    assert title_date(value) == want
 
 
 def test_built_titles_and_descriptions(built_site):
@@ -102,7 +114,9 @@ def test_built_titles_and_descriptions(built_site):
     for page in built_site.glob("*-vs-*/index.html"):
         html = page.read_text(encoding="utf-8")
         title = htmllib.unescape(re.search(r"<title>(.*?)</title>", html).group(1))
-        assert len(title) <= 60 and title.endswith(" | HoopsMatic")
+        og_title = htmllib.unescape(re.search(r'<meta property="og:title" content="([^"]*)"', html).group(1))
+        assert title.startswith("Where to Watch ") and title.endswith(": TV Channel and Streaming | HoopsMatic")
+        assert og_title == title
         desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', html).group(1))
         assert len(desc) <= 155 and " next on " in desc
         descriptions.append(desc)
@@ -110,7 +124,7 @@ def test_built_titles_and_descriptions(built_site):
     knicks = read(built_site, "new-york-knicks-vs-philadelphia-76ers") \
         if (built_site / "new-york-knicks-vs-philadelphia-76ers").exists() else None
     if knicks:
-        assert "<title>76ers vs. Knicks: How to Watch, TV &amp; Streaming | HoopsMatic</title>" in knicks
+        assert "<title>Where to Watch 76ers vs. Knicks (" in knicks
 
 
 # -- the page: next meeting in full, then every meeting ------------------------------------

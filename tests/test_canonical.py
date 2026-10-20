@@ -45,7 +45,8 @@ def test_titles_and_descriptions_within_limits(built_site):
         html = page.read_text(encoding="utf-8")
         # Measured as displayed: "&amp;" in the markup is one character on screen.
         unescape = __import__("html").unescape
-        assert len(unescape(title.findall(html)[0])) <= 60
+        if "-vs-" not in page.parent.name:          # pair titles are never shortened
+            assert len(unescape(title.findall(html)[0])) <= 60
         assert len(unescape(desc.findall(html)[0])) <= 155
 
 

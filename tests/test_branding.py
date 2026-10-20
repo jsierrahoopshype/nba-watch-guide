@@ -24,7 +24,8 @@ def test_every_title_and_og_title_ends_with_the_brand(fixture, request):
             found = [html.unescape(t) for t in pattern.findall(markup)]
             assert len(found) == 1, (page, pattern.pattern)
             assert found[0].endswith(" | HoopsMatic"), (page, found[0])
-            assert len(found[0]) <= seo.TITLE_MAX, (page, found[0])
+            if "-vs-" not in page.parent.name:      # pair titles are never shortened
+                assert len(found[0]) <= seo.TITLE_MAX, (page, found[0])
             assert len(found[0]) > len(" | HoopsMatic") + 10, (page, found[0])
 
 

@@ -283,8 +283,11 @@ of teams in the schedule, the two slugs from `data/teams.json` in alphabetical
 order (`new-york-knicks-vs-philadelphia-76ers`). The reversed order has no
 page and nothing links to it, since the Worker cannot redirect it; every link
 goes through `watchguide/pairs.py`. Titles name the teams by short name, also
-alphabetically ("76ers vs. Knicks"), trying each of `pair.titles` in
-`data/copy.json` until one fits 60 characters. Each page shows the next
+alphabetically, after the words people search and with the next meeting's
+date: "Where to Watch 76ers vs. Knicks (Fri, Nov. 6): TV Channel and
+Streaming | HoopsMatic" (`pair.title` in `data/copy.json`; `pair.title_done`
+drops the date after the season's last meeting). They are the one exception
+to the 60-character title limit and are never shortened. Each page shows the next
 meeting in full (the game block above) and then every meeting this season
 with its channels (compact cards on phones, the next meeting highlighted and
 played games showing the final score once the feed has it; a table from

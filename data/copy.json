@@ -265,12 +265,9 @@
     "head_to_head": "{pair}: {possessions} possessions guarding each other through {season}"
   },
   "pair": {
-    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. titles are tried in order until one fits 60 characters with ' | HoopsMatic'; every one keeps both names and 'How to Watch'.",
-    "titles": [
-      "{a} vs. {b}: How to Watch, TV & Streaming",
-      "{a} vs. {b}: How to Watch on TV",
-      "{a} vs. {b}: How to Watch"
-    ],
+    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names, {date} and {channel} the next meeting's date and first channel. title gets ' | HoopsMatic' and {date}, the next meeting as 'Fri, Nov. 6' (AP months); title_done replaces it after the season's last meeting. Pair titles are the one exception to the 60-character title limit: they lead with the words people search and Google cuts the end.",
+    "title": "Where to Watch {a} vs. {b} ({date}): TV Channel and Streaming",
+    "title_done": "Where to Watch {a} vs. {b}: TV Channel and Streaming",
     "description": "{a} vs. {b} next on {date} on {channel}. Every {season} meeting with TV channels, streaming and who's out.",
     "description_done": "Every {season} {a} vs. {b} game with TV channels and streaming. The two teams have no meetings left this season.",
     "h1": "{full_a} vs. {full_b}: how to watch",
