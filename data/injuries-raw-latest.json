@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-19T16:52:40+00:00",
+ "fetched_at": "2026-10-20T07:46:46+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5506,
+ "row_count": 5529,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -38434,6 +38434,176 @@
    "date": "2026-10-17",
    "prevStatus": "Out",
    "eta": "3-6 weeks"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Out",
+   "injury": "Lumbar Spine Bone Stress",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Out",
+   "injury": "Lumbar Spine Bone Stress",
+   "date": "2026-10-19",
+   "prevStatus": "Available",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Devin Carter",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Devin Carter",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-10-19",
+   "prevStatus": "Available",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Devin Carter",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-10-19",
+   "prevStatus": "Left Game",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Taurean Prince",
+   "status": "Questionable",
+   "injury": "Personal Reasons",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Out",
+   "injury": "Tacko Fall",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Out",
+   "injury": "Tacko Fall",
+   "date": "2026-10-19",
+   "prevStatus": "Available",
+   "eta": "7-10 days"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Out",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-19",
+   "prevStatus": "Out",
+   "eta": "7-10 days"
+  },
+  {
+   "player": "Anfernee Simons",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Anfernee Simons",
+   "status": "Questionable",
+   "injury": "Left Hamstring Tireness / Soreness",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Adem Bona",
+   "status": "Questionable",
+   "injury": "Left Foot Sprain",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Otega Oweh",
+   "status": "Out",
+   "injury": "Right Achilles Tendon Surgery",
+   "date": "2026-10-14",
+   "prevStatus": "Out",
+   "eta": "9-12 months"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-19",
+   "prevStatus": "Out",
+   "eta": "2-4 weeks"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Out",
+   "injury": "Low Back Surgery",
+   "date": "2026-10-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Out",
+   "injury": "Low Back Surgery",
+   "date": "2026-10-19",
+   "prevStatus": "Available",
+   "eta": "2-4 weeks"
+  },
+  {
+   "player": "Tobias Harris",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-10-19",
+   "prevStatus": "Questionable",
+   "eta": "Day-to-Day"
   }
  ]
 }
