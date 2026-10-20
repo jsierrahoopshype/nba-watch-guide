@@ -8,6 +8,7 @@ tonight page; every meeting this season follows with its channels.
 from __future__ import annotations
 
 import re
+from datetime import date
 
 from .. import seo, share
 from ..context import SiteContext, long_date
@@ -18,16 +19,26 @@ from .common import all_channels, cable_note, chips, crumb_trail, game_view, upd
 JSONLD_GAME_LIMIT = 10
 
 
-def pair_title(text: dict, a: str, b: str) -> str:
-    """The first template in copy.json pair.titles that fits TITLE_MAX with
-    the brand suffix. The last one is short enough for any two names; if a
-    rename ever breaks that, seo.branded still keeps it inside the limit."""
-    budget = seo.TITLE_MAX - len(seo.BRAND_SUFFIX)
-    candidates = [t.format(a=a, b=b) for t in text["titles"]]
-    for candidate in candidates:
-        if len(candidate) <= budget:
-            return candidate + seo.BRAND_SUFFIX
-    return seo.branded(candidates[-1])
+# AP style: five months are never abbreviated, September is "Sept."
+AP_MONTHS = ("Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.",
+             "Oct.", "Nov.", "Dec.")
+
+
+def title_date(value: str) -> str:
+    """'2026-11-06' becomes 'Fri, Nov. 6'."""
+    parsed = date.fromisoformat(value)
+    return f"{parsed:%a}, {AP_MONTHS[parsed.month - 1]} {parsed.day}"
+
+
+def pair_title(text: dict, a: str, b: str, next_date: str = "") -> str:
+    """copy.json pair.title with the next meeting's date, or pair.title_done
+    once the season's last meeting has passed. Pair titles lead with the
+    words people search and are deliberately longer than seo.TITLE_MAX
+    (Google cuts the end, not the names or the date), so they are not run
+    through seo.branded."""
+    if next_date:
+        return text["title"].format(a=a, b=b, date=title_date(next_date)) + seo.BRAND_SUFFIX
+    return text["title_done"].format(a=a, b=b) + seo.BRAND_SUFFIX
 
 
 def pair_description(ctx: SiteContext, text: dict, a: str, b: str, nxt, channels) -> str:
@@ -90,7 +101,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "channels": chips(ctx, all_channels(ctx, g), game=g),
         } for g in games]
 
-        title = pair_title(text, a.short_name, b.short_name)
+        title = pair_title(text, a.short_name, b.short_name, nxt.date_et if nxt else "")
         desc = pair_description(ctx, text, a.short_name, b.short_name, nxt,
                                 view["channels"] if view else [])
         leaf = safe_format(text["breadcrumb"], **fields)

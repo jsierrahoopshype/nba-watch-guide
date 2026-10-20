@@ -66,7 +66,7 @@ def test_pair_card_follows_the_page_title_and_names_the_next_meeting(built_site)
     checked = 0
     for page in sorted(built_site.glob(f"*{SEPARATOR}*/index.html")):
         html = page.read_text(encoding="utf-8")
-        a, b = re.search(r"<title>(.+?) vs\. (.+?):", html).groups()
+        a, b = re.search(r"<title>Where to Watch (.+?) vs\. (.+?)(?: \(|:)", html).groups()
         alt = OG[":alt"].findall(html)[0]
         assert alt.startswith(f"{a} vs. {b}. "), (page, alt)
         if "Next meeting: " in alt:
