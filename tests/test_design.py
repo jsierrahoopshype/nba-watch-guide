@@ -50,13 +50,24 @@ def shipped_ctx(fixture_games):
     ("oklahoma-city-thunder", "Thunder+ (NBA App) from $19.99/mo", ""),          # partial OTA does not count
     ("boston-celtics", "Local games on NBC Sports Boston", ""),                   # price not verified
     ("toronto-raptors", "Local games on TSN and Sportsnet", ""),                  # not for US maths
-    ("dallas-mavericks", "Local TV not confirmed yet", ""),                       # low
-    ("la-clippers", "Local TV not announced yet", ""),                            # unknown
+    ("dallas-mavericks", "Local games on KFAA 29", ""),                           # high, part-season OTA
+    ("la-clippers", "Local games on ClipperVision", ""),                          # moderate
 ])
 def test_team_summary_follows_the_confidence_rules(shipped_ctx, slug, line, note):
     team = shipped_ctx.by_slug[slug]
     summary = team_summary(shipped_ctx, team)
     assert (summary["text"], summary["note"]) == (line, note)
+
+
+@pytest.mark.parametrize("slug, confidence, line", [
+    ("dallas-mavericks", "low", "Local TV not confirmed yet"),
+    ("la-clippers", "unknown", "Local TV not announced yet"),
+])
+def test_team_summary_for_low_and_unknown_confidence(fixture_games, slug, confidence, line):
+    # No team is low or unknown today; forced back, the summary says so.
+    ctx = ctx_for(fixture_games)
+    ctx.local_tv = {**ctx.local_tv, slug: replace(ctx.local_tv[slug], confidence=confidence)}
+    assert team_summary(ctx, ctx.by_slug[slug])["text"] == line
 
 
 def test_team_cards_on_the_hub(built_site, teams):

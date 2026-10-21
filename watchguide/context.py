@@ -162,58 +162,157 @@ class SiteContext:
 
     def channel_names(self, name: str, kind: str, slug: str = "", chip: bool = False,
                       short: bool = True) -> list[str]:
-        """A channel as fans read it, never as a feed code. The schedule feed
-        codes a local channel like "WSOC/DAZN-CHA": each part takes, in order,
-        the first name of the team's data/local_tv.json link entry that lists
-        it, its confirmed name in the team's code_names, or the plain fallback
-        in copy.json channels (the team's streaming app for a code_names entry
-        of kind stream or team_stream, otherwise the team's local broadcast). A part that is
-        already one of the team's recorded names stays as it is. A national
-        code takes its confirmed name in data/services.json code_names.
-        chip=True gives the chip forms: names as recorded, owner note kept,
-        shortened by data/local_tv.json short_names unless short=False, and
-        the fallback without "the"."""
+        """One channel as fans read it, never as a feed code: channel_parts
+        joined by join_channels."""
+        return self.join_channels(self.channel_parts(name, kind, slug, chip, short), chip)
+
+    def channel_parts(self, name: str, kind: str, slug: str = "", chip: bool = False,
+                      short: bool = True) -> list[dict[str, Any]]:
+        """The names behind one channel, as {name, full, team, stream, fallback}.
+
+        The schedule feed codes a local channel like "WSOC/DAZN-CHA". Each "/"
+        part takes, in order: its confirmed entry in the team's code_names
+        (its names, as written, or its name), the part itself when it is one
+        of the team's recorded names, the first name of the team's
+        data/local_tv.json links entry that lists it, or the plain fallback
+        in copy.json channels (fallback_app for a code_names entry of kind
+        stream or team_stream, otherwise fallback_tv). A national code takes
+        its confirmed name in data/services.json code_names. A sentence drops
+        the owner notes recorded names carry ("WANF (Gray)"); chip=True keeps
+        them, shortens by short_names unless short=False, and gives the
+        fallback without "the". full is the unshortened name, for matching."""
         text = self.copy.get("channels", {})
         prefix = "chip_" if chip else ""
 
-        def plain(value: str) -> str:
-            # A chip keeps its short name (or the full one, owner note and
-            # all); a sentence drops the owner note ("WANF (Gray)").
+        def shown(value: str, verbatim: bool = False) -> str:
             if chip:
                 return self.short_channel(value) if short else value
-            return re.sub(r"\s*\([^)]*\)", "", value)
+            return value if verbatim else re.sub(r"\s*\([^)]*\)", "", value)
+
+        def part(value: str, full: str, team: str = "", stream: bool = False, fallback: str = "") -> dict:
+            return {"name": value, "full": full, "team": team, "stream": stream, "fallback": fallback}
 
         if kind == "national":
             entry = self.services.code_names.get(name)
             if entry is None:
-                return [name]           # a network's own name: ESPN, NBC, Peacock
+                return [part(name, name)]          # a network's own name: ESPN, NBC, Peacock
             if entry.get("status") == "confirmed" and entry.get("name"):
-                return [entry["name"]]
-            return [text[prefix + "fallback_national"]]
-        if kind != "local":
-            return [name]
-        local = self.local(slug)
-        team = next((t.short_name for t in self.teams if t.slug == slug), "")
+                return [part(entry["name"], entry["name"])]
+            return [part(text[prefix + "fallback_national"], name, fallback="national")]
+        local = self.local(slug) if kind == "local" else None
         if local is None:
-            return [plain(name)]
-        known = set(local.local_broadcasters) | {o.name for o in local.streaming}
-        out: list[str] = []
+            return [part(shown(name), name)]
+        team = next((t.short_name for t in self.teams if t.slug == slug), "")
+        streams = {o.name for o in local.streaming}
+        known = set(local.local_broadcasters) | streams
+        out: list[dict[str, Any]] = []
         # A recorded name may hold a "/" itself ("Arizona's Family (3TV/KTVK)").
         whole = name in known or any(name in (e.get("names") or []) for e in local.links)
-        for part in [name] if whole else name.split("/"):
-            entry = next((e for e in local.links if part in (e.get("names") or [])), None)
-            code = local.code_names.get(part)
-            if part in known:
-                found = plain(part)
+        for code in [name] if whole else name.split("/"):
+            entry = next((e for e in local.links if code in (e.get("names") or [])), None)
+            # A recorded name ("WANF (Gray)") answers to its links entry's codes too.
+            aliases = [code] + [n for n in (entry or {}).get("names") or [] if n != code]
+            named = next((local.code_names[a] for a in aliases if (local.code_names.get(a) or {}).get("status")
+                          == "confirmed"), None) or local.code_names.get(code) or {}
+            is_stream = named.get("kind") in ("stream", "team_stream")
+            if named.get("status") == "confirmed" and (named.get("names") or named.get("name")):
+                for value in named.get("names") or [named["name"]]:
+                    out.append(part(shown(value, verbatim=bool(named.get("names"))), value, team,
+                                    is_stream or value in streams))
+                continue
+            if code in known:
+                full = code
             elif entry is not None:
-                found = plain(entry["names"][0])
-            elif code and code.get("status") == "confirmed" and code.get("name"):
-                found = plain(code["name"])
+                full = entry["names"][0]
+                is_stream = is_stream or entry.get("kind") == "stream"
             else:
-                which = "fallback_app" if (code or {}).get("kind") in ("stream", "team_stream") else "fallback_tv"
-                found = text[prefix + which].format(team=team)
-            if found and found not in out:
-                out.append(found)
+                which = "app" if is_stream else "tv"
+                out.append(part(text[prefix + "fallback_" + which].format(team=team), code, team,
+                                is_stream, fallback=which))
+                continue
+            out.append(part(shown(full), full, team, is_stream or full in streams))
+        return out
+
+    def join_channels(self, parts: list[dict[str, Any]], chip: bool = False) -> list[str]:
+        """Names for a list of channel_parts, each channel or service once:
+        - a team's TV channel and its own stream sharing a brand word read as
+          one ("NBC Sports Boston (TV or Peacock)", "MSG Network (TV or MSG
+          on DAZN)", copy.json channels.merged);
+        - a team's two fallbacks read as one (channels.fallback_both);
+        - two of a team's own channels under one brand read as one
+          (channels.merged_main);
+        - a team's add-on on a streamer the list already names is left out,
+          and two teams' channels on one add-on service share it
+          (channels.merged_shared);
+        - a team's streaming service another entry also mentions takes the
+          team's name ("Hornets on DAZN", channels.team_on);
+        - an exact repeat is dropped."""
+        text = self.copy.get("channels", {})
+        prefix = "chip_" if chip else ""
+
+        def base(value: str) -> str:
+            return re.sub(r"\s*\([^)]*\)", "", value)
+
+        def words(value: str) -> list[str]:
+            return [w.strip("+").lower() for w in re.findall(r"[\w'+]+", value) if w.strip("+")]
+
+        items = [dict(p) for p in parts]
+        national = {p["name"] for p in items if not p["team"] and not p["fallback"]}
+        merged: list[dict[str, Any]] = []
+        for item in items:
+            if any(m["name"] == item["name"] and m["team"] == item["team"] for m in merged):
+                continue
+            # A team's add-on on a streamer already in the list (NBC Sports
+            # Philadelphia on Peacock next to Peacock) adds nothing.
+            if item["team"] and item["stream"] and any(item["full"].endswith(" on " + n) for n in national):
+                continue
+            pair = next((m for m in merged if m["team"] and m["team"] == item["team"] and not m.get("joined")
+                         and not m["fallback"] and not item["fallback"] and m["stream"] != item["stream"]
+                         and (words(m["full"])[:1] and words(m["full"])[0] in words(item["full"])
+                              or words(item["full"])[:1] and words(item["full"])[0] in words(m["full"]))),
+                        None)
+            if pair is not None:
+                tv, stream = (pair, item) if not pair["stream"] else (item, pair)
+                tv_base, stream_base = base(tv["full"]), base(stream["full"])
+                rest = stream_base[len(tv_base):] if stream_base.startswith(tv_base + " ") else ""
+                label = re.sub(r"^ (on )?", "", rest) if rest else stream["name"]
+                pair.update(name=text["merged"].format(tv=tv["name"], stream=label), joined=True,
+                            tv_name=tv["name"], stream_label=label)
+                continue
+            # Two of a team's own channels under one brand: "Arizona's Family
+            # (main channel or Sports)".
+            sibling = next((m for m in merged if m["team"] and m["team"] == item["team"] and not m.get("joined")
+                            and not m["fallback"] and not item["fallback"] and not m["stream"] and not item["stream"]
+                            and base(item["full"]).startswith(base(m["full"]) + " ")), None)
+            if sibling is not None:
+                sibling.update(name=text["merged_main"].format(tv=sibling["name"],
+                                                              rest=base(item["full"])[len(base(sibling["full"])) + 1:]),
+                               joined=True)
+                continue
+            both = next((m for m in merged if m["fallback"] in ("tv", "app") and item["fallback"] in ("tv", "app")
+                         and m["team"] == item["team"] and m["fallback"] != item["fallback"]), None)
+            if both is not None:
+                both.update(name=text[prefix + "fallback_both"].format(team=item["team"]), fallback="both")
+                continue
+            merged.append(item)
+        # Two teams' channels on the same add-on service: "NBC Sports Bay Area
+        # or NBC Sports California (each on TV or Peacock)".
+        for label in {m.get("stream_label") for m in merged if m.get("stream_label")}:
+            group = [m for m in merged if m.get("stream_label") == label]
+            if len(group) > 1:
+                group[0].update(name=text["merged_shared"].format(
+                    tvs=" or ".join(m["tv_name"] for m in group), stream=label))
+                merged = [m for m in merged if m not in group[1:]]
+        names = [m["name"] for m in merged]
+        out: list[str] = []
+        for i, m in enumerate(merged):
+            others = [n for j, n in enumerate(names) if j != i]
+            mentioned = any(re.search(r"(?<![\w-])" + re.escape(m["name"]) + r"(?![\w+-])", n) for n in others)
+            name = text["team_on"].format(team=m["team"], service=m["name"]) \
+                if mentioned and m["team"] and m["stream"] and not m["fallback"] and not m.get("joined") \
+                else m["name"]
+            if name not in out:
+                out.append(name)
         return out
 
     def antenna_channel(self, name: str) -> str:

@@ -14,7 +14,7 @@ from .. import seo, share
 from ..context import SiteContext
 from ..pairs import by_name, game_teams, meetings, pair_url
 from ..render import Page, date_label, et_label, safe_format
-from .common import all_channels, cable_note, chips, crumb_trail, game_view, updated_label
+from .common import all_channels, cable_note, chips, crumb_trail, game_view, share_channels, updated_label
 
 JSONLD_GAME_LIMIT = 10
 
@@ -54,16 +54,12 @@ def tip_time(game) -> str:
 
 
 def readable_channels(ctx: SiteContext, channels) -> list[str]:
-    """Every channel's names as a fan reads them (ctx.channel_names), national
-    first (all_channels' order), each name once."""
-    out: list[str] = []
-    for channel in channels:
-        if channel["kind"] == "tba":
-            continue
-        for name in ctx.channel_names(channel["name"], channel["kind"], channel.get("slug", "")):
-            if name not in out:
-                out.append(name)
-    return out
+    """Every channel's names as a fan reads them, national first
+    (all_channels' order), joined across the whole list so each channel or
+    service is named once (ctx.join_channels)."""
+    parts = [p for channel in channels if channel["kind"] != "tba"
+             for p in ctx.channel_parts(channel["name"], channel["kind"], channel.get("slug", ""))]
+    return ctx.join_channels(parts)
 
 
 def or_list(names: list[str]) -> str:
@@ -143,7 +139,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         card = share.pair_card(
             ctx, slug, a, b,
             share.game_line(date_label(nxt.date_et), et_label(nxt),
-                            [c["label"] for c in chips(ctx, all_channels(ctx, nxt))]) if nxt else "")
+                            share_channels(ctx, all_channels(ctx, nxt))) if nxt else "")
         blocks = [seo.breadcrumbs(trail)]
         for g in [g for g in games if g.date_et >= ctx.today][:JSONLD_GAME_LIMIT]:
             event = seo.sports_event(g, ctx.team_name(g.home_tricode), ctx.team_name(g.away_tricode),

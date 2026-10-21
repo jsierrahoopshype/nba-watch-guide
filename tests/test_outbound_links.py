@@ -280,7 +280,7 @@ def test_a_local_chip_with_no_feed_code_names_the_teams_primary_station(built_si
     assert teams["portland-trail-blazers"].primary_carriers == ["BlazerVision"]
     for slug, local in teams.items():
         if local.ota.status in PART_SEASON_OTA:
-            assert local.primary_carriers == [local.streaming[0].name], slug
+            assert local.primary_carriers == ([local.streaming[0].name] if local.streaming else []), slug
     html = (built_site / "houston-rockets" / "index.html").read_text(encoding="utf-8")
     table = html[html.index('<table class="sched"'):html.index("</table>")]
     local_chips = re.findall(r'<span class="badge badge-local"[^>]*>(.*?)</span>', table, re.S)

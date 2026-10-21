@@ -268,8 +268,17 @@ def _no_blackouts(tmp_path_factory):
     return data_dir
 
 
+def _not_counted(ctx):
+    """The Clippers and Mavericks entries as they were before their 2026-27
+    plans were confirmed (unknown and low): their local TV never counts."""
+    ctx.local_tv = {**ctx.local_tv,
+                    "la-clippers": replace(ctx.local_tv["la-clippers"], confidence="unknown"),
+                    "dallas-mavericks": replace(ctx.local_tv["dallas-mavericks"], confidence="low")}
+    return ctx
+
+
 def test_why_is_worded_for_the_block(fixture_games):
-    ctx = ctx_for(fixture_games)
+    ctx = _not_counted(ctx_for(fixture_games))
     # National game, neither team's local TV counts (Clippers unknown,
     # Mavericks low): only League Pass is in the way.
     why = watch_view(ctx, a_game(fixture_games, "LAC", "DAL", ["ESPN"]))["why"]
@@ -287,7 +296,7 @@ def test_why_is_worded_for_the_block(fixture_games):
 
 def test_no_why_when_nothing_blocks_anyone(fixture_games, tmp_path_factory):
     data_dir = _no_blackouts(tmp_path_factory)
-    ctx = ctx_for(fixture_games, data_dir=data_dir)
+    ctx = _not_counted(ctx_for(fixture_games, data_dir=data_dir))
     assert watch_view(ctx, a_game(fixture_games, "LAC", "DAL", []))["why"] is None
     assert watch_view(ctx, a_game(fixture_games, "LAC", "DAL", ["ESPN"]))["why"] is None
     # The regional reason alone still shows, worded for local TV.

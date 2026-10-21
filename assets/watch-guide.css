@@ -287,6 +287,9 @@ a:hover { color: var(--accent); }
 .sched .badge-next { background: var(--accent-ink); color: #fff; }
 .meetings td.mt-date, .meetings td.mt-time { font-family: var(--sans); font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .meetings .mt-final { white-space: normal; }
+/* A merged channel name ("Monumental Sports (TV or Monumental+)") may wrap
+   inside a table cell instead of widening the table. */
+.sched td .badge-local, .sched td .badge-national, .meetings td .badge-local, .meetings td .badge-national { white-space: normal; }
 .meetings .game-when { font-family: var(--sans); font-size: inherit; color: inherit; }
 .meetings tr.is-next td { background: #eef4ff; }
 .meetings tr.is-past .mt-date, .meetings tr.is-past .mt-time { color: var(--text-2); }
