@@ -604,7 +604,9 @@ class LocalTV:
         Chips only: the answers, the cheapest combination and the services
         list name what you buy (SCHN+), from the coverage maths."""
         if self.ota.status == "all":
-            return list(self.local_broadcasters)
+            # A station marked "(some games)" is never named for a game the
+            # feed gives no channel for.
+            return [b for b in self.local_broadcasters if "(some games)" not in b] or list(self.local_broadcasters)
         if self.local_broadcasters and self.ota.status not in PART_SEASON_OTA:
             return [self.local_broadcasters[0]]
         return [self.streaming[0].name] if self.streaming else []

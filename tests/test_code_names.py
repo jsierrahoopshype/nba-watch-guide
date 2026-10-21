@@ -33,7 +33,8 @@ def test_every_code_entry_is_well_formed_and_confirmed_ones_carry_sources():
         if entry.get("status") == "confirmed":
             sources = [s for s in entry.get("sources") or [] if str(s.get("url", "")).startswith("https://")]
             # The data rule: an official page, or two independent current-season sources.
-            assert entry.get("name") and (entry.get("basis") == "official" and sources or len(sources) >= 2), \
+            assert (entry.get("name") or entry.get("names")) and \
+                (entry.get("basis") == "official" and sources or len(sources) >= 2), \
                 (slug, code)
 
 
@@ -64,7 +65,7 @@ def test_a_chip_never_shows_a_code_and_keeps_its_link():
                     "WSOC": {"kind": "tv", "status": "unconfirmed"}})
     chip = chips(ctx, [{"name": "WSOC/DAZN-CHA", "kind": "local", "team": "Hornets", "slug": "charlotte-hornets"}],
                  priced=True)[0]
-    assert chip["label"] == "Hornets local broadcast or Hornets streaming app"
+    assert chip["label"] == "Hornets local broadcast (TV or streaming app)"
     assert "WSOC" not in chip["title"] and "DAZN-CHA" not in chip["title"]
     assert chip["name"] == "WSOC/DAZN-CHA"          # links and coverage still key on the code
 
@@ -97,3 +98,48 @@ def test_the_built_site_shows_no_recorded_code(built_site):
         alt = re.search(r'<meta property="og:image:alt" content="([^"]*)"', markup)
         if alt and " · " in alt.group(1):
             assert not _pieces(html.unescape(alt.group(1)).rsplit(" · ", 1)[1]) & codes, (page, alt.group(1))
+
+
+# -- each channel or service once per list --------------------------------------------
+
+def _names(ctx, *channels):
+    from watchguide.pages.pair import readable_channels
+    return readable_channels(ctx, [{"name": n, "kind": k, "slug": s} for n, k, s in channels])
+
+
+def test_a_channel_and_its_own_stream_read_as_one():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    assert ctx.channel_names("NBCSB/PCK-BOS", "local", "boston-celtics") == ["NBC Sports Boston (TV or Peacock)"]
+    assert ctx.channel_names("MSG/DAZN-MSG", "local", "new-york-knicks") == ["MSG Network (TV or MSG on DAZN)"]
+    assert ctx.channel_names("CHSN/CHSN App", "local", "chicago-bulls") == ["CHSN (TV or app)"]
+
+
+def test_a_teams_dazn_next_to_another_dazn_names_the_team():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    assert _names(ctx, ("MSG/DAZN-MSG", "local", "new-york-knicks"), ("WSOC/DAZN-CHA", "local", "charlotte-hornets")) \
+        == ["MSG Network (TV or MSG on DAZN)", "WSOC-TV 9", "Hornets on DAZN"]
+    assert _names(ctx, ("DAZN-ORL", "local", "orlando-magic"), ("DAZN-CHA", "local", "charlotte-hornets")) \
+        == ["Magic on DAZN", "Hornets on DAZN"]
+    # Alone, DAZN needs no team.
+    assert _names(ctx, ("WSOC/DAZN-CHA", "local", "charlotte-hornets")) == ["WSOC-TV 9", "DAZN"]
+
+
+def test_shared_add_ons_brands_and_fallbacks_are_named_once():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    # A team's add-on on a streamer already listed adds nothing.
+    assert _names(ctx, ("NBC", "national", ""), ("Peacock", "national", ""),
+                  ("NBCSP/PCK-PHI", "local", "philadelphia-76ers")) == ["NBC", "Peacock", "NBC Sports Philadelphia"]
+    # Two teams on the same add-on service share it.
+    assert _names(ctx, ("NBCSBA/PCK-GSW", "local", "golden-state-warriors"),
+                  ("NBCSCA/PCK-SAC", "local", "sacramento-kings")) == \
+        ["NBC Sports Bay Area or NBC Sports California (each on TV or Peacock)"]
+    # Two of a team's channels under one brand.
+    assert _names(ctx, ("KTVK/KPHE", "local", "phoenix-suns")) == ["Arizona's Family (main channel or Sports)"]
+    # A team's two fallbacks.
+    assert _names(ctx, ("SN/SN+", "local", "toronto-raptors")) == ["the Raptors local broadcast (TV or streaming app)"]
+
+
+def test_thunder_names_both_stations_with_their_cities():
+    ctx = load_context(fixture_schedule(), today=TODAY)
+    assert ctx.channel_names("KWTV", "local", "oklahoma-city-thunder") == \
+        ["News 9 (Oklahoma City)", "News On 6 (Tulsa)"]

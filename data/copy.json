@@ -281,13 +281,19 @@
     "description_short": "{a} vs. {b} is next on {date}{time}. Watch on {channels}."
   },
   "channels": {
-    "_note": "Plain names for a schedule feed code with no confirmed name (SiteContext.channel_names). {team} is the team's short name. fallback_* go in sentences, chip_fallback_* on channel chips. fallback_app is for a code_names entry of kind stream or team_stream; every other code takes fallback_tv. fallback_national is for a national code listed in data/services.json code_names without a confirmed name.",
+    "_note": "Plain names for a schedule feed code with no confirmed name (SiteContext.channel_names). {team} is the team's short name. fallback_* go in sentences, chip_fallback_* on channel chips. fallback_app is for a code_names entry of kind stream or team_stream; every other code takes fallback_tv. fallback_national is for a national code listed in data/services.json code_names without a confirmed name. Each channel or service is named once per list (SiteContext.join_channels): a team's TV channel and its own stream read as merged, two of a team's channels under one brand as merged_main, two teams' channels on one add-on service as merged_shared, a team's two fallbacks as fallback_both, and a name another entry also mentions takes team_on.",
     "fallback_tv": "the {team} local broadcast",
     "fallback_app": "the {team} streaming app",
     "chip_fallback_tv": "{team} local broadcast",
     "chip_fallback_app": "{team} streaming app",
     "fallback_national": "the national broadcast",
-    "chip_fallback_national": "National broadcast"
+    "chip_fallback_national": "National broadcast",
+    "fallback_both": "the {team} local broadcast (TV or streaming app)",
+    "chip_fallback_both": "{team} local broadcast (TV or streaming app)",
+    "merged": "{tv} (TV or {stream})",
+    "merged_main": "{tv} (main channel or {rest})",
+    "merged_shared": "{tvs} (each on TV or {stream})",
+    "team_on": "{team} on {service}"
   },
   "my_team": {
     "_note": "\"My team\": a team the reader saves on this device (localStorage hm-watch-team). Nothing is sent anywhere.",

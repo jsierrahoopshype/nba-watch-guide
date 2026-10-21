@@ -171,6 +171,14 @@ def chips(ctx: SiteContext, channels: list[dict[str, str]], priced: bool = False
     return out
 
 
+def share_channels(ctx: SiteContext, channels: list[dict[str, str]], slug: str = "") -> list[str]:
+    """A share card's channel names: the chip forms, joined across the list
+    so each channel or service is named once (ctx.join_channels)."""
+    parts = [p for c in channels if c["kind"] != "tba"
+             for p in ctx.channel_parts(c["name"], c["kind"], c.get("slug") or slug, chip=True)]
+    return ctx.join_channels(parts, chip=True) if parts else [c["name"] for c in channels[:1]]
+
+
 def cable_note(ctx: SiteContext, *chip_lists: list[dict]) -> str:
     """The once-per-block line under chips that show an antenna channel:
     the same stations sit on other numbers on cable and satellite."""

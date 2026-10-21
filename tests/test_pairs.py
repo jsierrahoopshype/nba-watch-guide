@@ -155,9 +155,11 @@ def test_readable_channels_name_known_codes_and_keep_unknown_ones():
                 {"name": "TBA", "kind": "tba"}]
     # Prime Video leads; NBCSB and WANF have names in data/local_tv.json links,
     # PCK-BOS and WPCH.2 confirmed ones in its code_names; owner notes are
-    # dropped. (Fallbacks for unconfirmed codes: tests/test_code_names.py.)
-    assert readable_channels(ctx, channels) == ["Prime Video", "NBC Sports Boston", "NBC Sports Boston on Peacock",
-                                                "WANF", "Peachtree Sports Network"]
+    # dropped, and the Celtics' channel and its own Peacock add-on read as one.
+    # (Fallbacks for unconfirmed codes: tests/test_code_names.py.)
+    got = readable_channels(ctx, channels)
+    assert got[:2] == ["Prime Video", "NBC Sports Boston (TV or Peacock)"]
+    assert got[-1] == "Peachtree Sports Network" and len(got) == 4
 
 
 def test_description_trims_the_second_sentence_first():

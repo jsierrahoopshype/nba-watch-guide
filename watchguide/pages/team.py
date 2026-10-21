@@ -16,7 +16,7 @@ from ..model import CONFIDENCE_COUNTS, Team
 from ..pairs import pair_path
 from ..render import Page, date_label, et_label, format_block
 from .common import (cable_note, chips, crumb_trail, empty_players_label, game_view, service_out,
-                     updated_label)
+                     share_channels, updated_label)
 
 JSONLD_GAME_LIMIT = 10
 
@@ -202,8 +202,7 @@ def build(ctx: SiteContext, env) -> list[Page]:
         card = share.team_card(
             ctx, team, nxt, ctx.by_tricode[nxt.opponent_of(team.tricode)].short_name if nxt else "",
             share.game_line(date_label(nxt.date_et), et_label(nxt),
-                            [c["label"] for c in chips(ctx, channels_for_game(nxt, team.tricode, local, tba),
-                                                       slug=team.slug)])
+                            share_channels(ctx, channels_for_game(nxt, team.tricode, local, tba), slug=team.slug))
             if nxt else "")
         blocks = [seo.breadcrumbs(crumb_trail(ctx, team.full_name, url))]
         for game in remaining[:JSONLD_GAME_LIMIT]:

@@ -85,11 +85,11 @@ def test_moderate_confidence_counts_and_flags_the_combination(services, local):
     assert [h["service"].name for h in hits] == ["Local TV (free over the air)"]
 
 
-@pytest.mark.parametrize("slug,forced", [("dallas-mavericks", ""), ("la-clippers", ""),
+@pytest.mark.parametrize("slug,forced", [("dallas-mavericks", "low"), ("la-clippers", "unknown"),
                                          ("golden-state-warriors", "low")])
 def test_low_and_unknown_confidence_never_count(services, local, slug, forced):
-    # The Warriors' entry is moderate now; forced back to low it must stop
-    # counting, priced add-on and all.
+    # No team is low or unknown today (the Mavericks and Clippers were until
+    # 2026-10-21); forced back, an entry must stop counting, priced add-on and all.
     info = replace(local[slug], confidence=forced) if forced else local[slug]
     assert info.confidence in ("low", "unknown")
     assert local_services(info, services) == []
@@ -120,10 +120,26 @@ def test_low_confidence_page_shows_broadcasters_and_the_line(built_site_warriors
     assert LOW_LINE in watching
 
 
-def test_unknown_confidence_page_shows_the_notes(built_site):
-    notes = "The Clippers have not announced where local games will air in 2026-27."
-    assert notes in panel(built_site, "la-clippers", "in_market")
-    assert notes in page(built_site, "la-clippers")[page(built_site, "la-clippers").index("data-watching"):]
+@pytest.fixture(scope="module")
+def built_site_clippers_unknown(tmp_path_factory, fixture_games):
+    """The site with the Clippers' entry as it was before their 2026-27 plan:
+    unknown confidence, nothing named, only notes."""
+    from conftest import _build, _copy_data
+    data_dir = _copy_data(tmp_path_factory, "data-clippers-unknown")
+    raw = json.loads((data_dir / "local_tv.json").read_text(encoding="utf-8"))
+    raw["teams"]["la-clippers"].update(confidence="unknown", local_broadcasters=[], notes=UNKNOWN_NOTES,
+                                      ota={"status": "unknown", "games": None, "note": ""})
+    (data_dir / "local_tv.json").write_text(json.dumps(raw), encoding="utf-8")
+    return _build(tmp_path_factory, fixture_games, "site-clippers-unknown", data_dir=data_dir)
+
+
+UNKNOWN_NOTES = "The Clippers have not announced where local games will air in 2026-27."
+
+
+def test_unknown_confidence_page_shows_the_notes(built_site_clippers_unknown):
+    built_site = built_site_clippers_unknown
+    assert UNKNOWN_NOTES in panel(built_site, "la-clippers", "in_market")
+    assert UNKNOWN_NOTES in page(built_site, "la-clippers")[page(built_site, "la-clippers").index("data-watching"):]
 
 
 def test_moderate_note_renders_under_an_in_market_combination(built_site_priced, local):
@@ -188,8 +204,8 @@ def test_add_on_costs_its_price_plus_the_required_service(services, local):
     celtics = local["boston-celtics"]
     addon = local_services(celtics, services)[0]
     assert addon.name == "NBC Sports Boston on Peacock"
-    assert addon.own_price_usd == 15.0
-    assert addon.monthly_price_usd == round(15.0 + services.by_id("peacock_premium").price, 2)
+    assert addon.own_price_usd == 14.95
+    assert addon.monthly_price_usd == round(14.95 + services.by_id("peacock_premium").price, 2)
 
     # One local game and one Peacock game: the add-on brings Peacock with it,
     # so it covers both, and the combination lists and charges Peacock once.
@@ -199,18 +215,18 @@ def test_add_on_costs_its_price_plus_the_required_service(services, local):
     combo = cov.cheapest_full
     assert [s.name for s in combo.services] == ["NBC Sports Boston on Peacock"]
     assert [s.id for s in combo.parts] == [addon.id, "peacock_premium"]
-    assert combo.total_price == 27.99
+    assert combo.total_price == 27.94
     assert sum(s.list_price_usd for s in combo.parts) == pytest.approx(combo.total_price)
 
     # Local games only: Peacock is still paid for, because the add-on needs it.
     cov = build_state_coverage([game(0)], "BOS", services, celtics, IN_MARKET)
-    assert cov.cheapest_full.total_price == 27.99
+    assert cov.cheapest_full.total_price == 27.94
 
 
 def test_add_on_renders_with_its_own_price_and_the_required_service(built_site_priced):
     inside = without_outbound(panel(built_site_priced, "boston-celtics", "in_market"))
     cheapest = inside[inside.index("Cheapest way to watch"):inside.index("Services and prices")]
-    assert '<span>NBC Sports Boston on Peacock</span><span class="price">$15</span>' in cheapest
+    assert '<span>NBC Sports Boston on Peacock</span><span class="price">$14.95</span>' in cheapest
     assert '<span>Peacock Premium</span><span class="price">$12.99</span>' in cheapest
     assert MODERATE_NOTE in cheapest
 
@@ -235,8 +251,8 @@ def test_watching_section_renders_from_the_file(built_site):
     section = section[:section.index("</section>")]
     assert "Watching in the Celtics market" in section
     assert "NBC Sports Boston" in section
-    assert "NBC Sports Boston on Peacock" in section and "$15" in section
-    assert "$15 a month add-on on top of a Peacock plan" in section
+    assert "NBC Sports Boston on Peacock" in section and "$14.95" in section
+    assert "$14.95 a month add-on on top of a Peacock Premium or Premium Plus plan" in section
     assert "DirecTV Stream, Hulu + Live TV" in section
     assert "Celtics local market" in section
     assert "data-local-checked>Checked September 2026<" in section

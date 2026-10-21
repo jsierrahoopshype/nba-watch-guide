@@ -18,16 +18,15 @@
       "streaming": "A streaming option with a non-null monthly_price_usd covers every non-national game at that monthly price. A null price means it is listed but cannot enter a priced combination."
     },
     "recheck_before_tipoff": [
-      "la-clippers (not announced)",
-      "dallas-mavericks (2026-27 not confirmed; MavsTV prices conflict)",
+      "dallas-mavericks (MavsTV prices conflict)",
       "YES on DAZN standalone price (Nets; one source only)",
       "MSG on DAZN yearly price (Knicks; sources conflict)",
-      "NBC Sports regional Peacock add-ons: official pages not labelled 2026-27 (Warriors, Kings, 76ers, Celtics)",
+      "NBC Sports regional Peacock add-ons: official pages not labelled 2026-27 (Warriors, Kings, 76ers)",
       "BlazerVision price from an official page (Trail Blazers)",
       "Suns+ price (subscriptions open Oct 1)",
       "Pelicans+ price",
       "Bucks streaming service (TBA)",
-      "Pacers and Spurs over-the-air partner names"
+      "Spurs over-the-air partner name"
     ]
   },
   "shared_services": {
@@ -46,6 +45,57 @@
   "teams": {
     "atlanta-hawks": {
       "code_names": {
+        "WANF": {
+          "name": "Atlanta News First (WANF)",
+          "kind": "tv",
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.atlantanewsfirst.com/2026/10/21/how-watch-atlanta-hawks-anf/",
+              "site": "Atlanta News First (WANF, station's own site)",
+              "date": "2026-10-21",
+              "read": "2026-10-21",
+              "says": "The Atlanta Hawks will air exclusively on Atlanta News First (ANF) this season."
+            },
+            {
+              "url": "https://www.atlantanewsfirst.com/2026/10/21/how-watch-atlanta-hawks-anf/",
+              "site": "Atlanta News First (WANF, station's own site)",
+              "date": "2026-10-21",
+              "read": "2026-10-21",
+              "says": "Fans across the Atlanta market can watch Hawks games on WANF’s free over-the-air signal (channel 46.1), as well as through WANF’s carriage on major pay-TV systems including Xfinity, Spectrum, DirecTV, and DISH Network."
+            },
+            {
+              "url": "https://www.atlantanewsfirst.com/2026/09/30/atlanta-hawks-atlanta-news-first-announce-broadcast-sponsorship-fueled-by-georgia-natural-gas/",
+              "site": "Atlanta News First (WANF, station's own site; call-sign tie)",
+              "date": "2026-09-30",
+              "read": "2026-10-21",
+              "says": "The Atlanta Hawks and Atlanta News First (WANF) today jointly announced that Georgia Natural Gas (GNG) will serve as an official broadcast sponsor for Hawks game telecasts on ANF throughout the season"
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/07/16/gray-media-and-atlanta-hawks-announce-georgia-wide-broadcast-partnership-for-2026-27-nba-season/",
+              "site": "Sports Video Group (supporting)",
+              "date": "2026-07-16",
+              "read": "2026-10-21",
+              "says": "Gray Media and the Atlanta Hawks have announced a broadcast partnership that will bring all non-nationally televised Atlanta Hawks regular season games to WANF (Atlanta News First) and Peachtree Sports Network free over the air during the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.ajc.com/sports/2026/07/hawks-reach-broadcast-agreement-with-gray-media-for-2026-27-season/",
+              "site": "Atlanta Journal-Constitution (supporting)",
+              "date": "2026-07-16",
+              "read": "2026-10-21",
+              "says": "With Atlanta News First as the official broadcast partner of the Hawks, fans can watch games that aren’t nationally televised for free."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/WANF",
+              "site": "Wikipedia (call-sign tie only)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "Virtual : 46 Branding Atlanta News First"
+            }
+          ],
+          "checked": "2026-10-21"
+        },
         "WPCH": {
           "kind": "tv",
           "status": "unconfirmed",
@@ -166,7 +216,7 @@
       "short_names": {"NBC Sports Boston on Peacock": "NBCS Boston on Peacock"},
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
-        {"name": "NBC Sports Boston on Peacock", "monthly_price_usd": 15.00, "season_price_usd": null, "requires_service": "peacock_premium", "note": "$15 a month add-on on top of a Peacock plan (Select, Premium or Premium Plus).", "price_verified": false}
+        {"name": "NBC Sports Boston on Peacock", "monthly_price_usd": 14.95, "season_price_usd": null, "requires_service": "peacock_premium", "note": "$14.95 a month add-on on top of a Peacock Premium or Premium Plus plan (NBC Sports Boston FAQ, updated 2026-10-08).", "price_verified": true}
       ],
       "links": [
         {"names": ["NBC Sports Boston", "NBCSB"], "kind": "station", "level": "section", "url": "https://www.nbcsportsboston.com/nba/boston-celtics/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Boston Celtics – NBC Sports Boston”.", "affiliate_url": "", "affiliate_level": ""},
@@ -174,7 +224,7 @@
       ],
       "live_tv_carriers": ["DirecTV Stream", "Hulu + Live TV"],
       "territory": "Celtics local market",
-      "notes": "Add-on price is from secondary reporting.",
+      "notes": "Add-on price from the official NBC Sports Boston FAQ (https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/), which says: \"In addition to a Peacock Premium or Premium Plus Plan, the cost of NBC Sports Boston is $14.95/mo.\"",
       "sources": ["https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/"]
     },
     "brooklyn-nets": {
@@ -376,6 +426,66 @@
     },
     "cleveland-cavaliers": {
       "code_names": {
+        "WUAB": {
+          "name": "Cleveland's 43 (WUAB)",
+          "kind": "tv",
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "Cleveland19.com (WOIO/WUAB, station's own site)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "HOW TO WATCH 19 News and Cleveland’s 43 are free if you use an antenna."
+            },
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "Cleveland19.com (WOIO/WUAB, station's own site)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "The games will air locally in Cleveland on Gray Media’s stations, WOIO (CBS 19) and WUAB (MyNet 43), and statewide on Rock Entertainment Sports Network, giving fans unprecedented access to one of the NBA’s premier teams."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/WUAB",
+              "site": "Wikipedia (call-sign tie only)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "Virtual : 43 Branding Cleveland's 43; 19 News"
+            }
+          ],
+          "checked": "2026-10-21"
+        },
+        "WOIO": {
+          "name": "CBS 19 (WOIO)",
+          "kind": "tv",
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "Cleveland19.com (WOIO/WUAB, station's own site)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "The games will air locally in Cleveland on Gray Media’s stations, WOIO (CBS 19) and WUAB (MyNet 43), and statewide on Rock Entertainment Sports Network, giving fans unprecedented access to one of the NBA’s premier teams."
+            },
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "Cleveland19.com (WOIO/WUAB, station's own site)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "HOW TO WATCH 19 News and Cleveland’s 43 are free if you use an antenna."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/WOIO",
+              "site": "Wikipedia (call-sign tie only)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "Virtual : 19 Branding 19 WOIO; 19 News Programming Affiliations 19.1: CBS"
+            }
+          ],
+          "checked": "2026-10-21"
+        },
         "DAZN-CLE": {
           "name": "DAZN",
           "kind": "stream",
@@ -508,9 +618,9 @@
           "checked": "2026-10-21"
         }
       },
-      "confidence": "low",
-      "local_broadcasters": [],
-      "ota": {"status": "unknown", "games": null, "note": "Last season every local game was free over the air on KFAA and WFAA. 2026-27 not confirmed."},
+      "confidence": "high",
+      "local_broadcasters": ["KFAA 29", "WFAA 8"],
+      "ota": {"status": "partial", "games": null, "note": "KFAA 29 and WFAA 8 carry Mavericks games free over the air in 2026-27 (the Mavericks' where-to-watch page). Which games air on each is not listed."},
       "streaming": [
         {"name": "MavsTV", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
       ],
@@ -519,7 +629,7 @@
       ],
       "live_tv_carriers": [],
       "territory": "Mavericks local market",
-      "notes": "TEGNA (KFAA, WFAA) is a multi-year deal, but no official page or two 2026 sources confirm 2026-27. MavsTV prices conflict across sources ($14.99 a month; $64.99, $124.99 or $14.99 a season).",
+      "notes": "KFAA 29 and WFAA 8 are confirmed for 2026-27 by the Mavericks' where-to-watch page (checked 2026-10-21). MavsTV prices conflict across sources ($14.99 a month; $64.99, $124.99 or $14.99 a season).",
       "sources": ["https://www.nba.com/mavs/wheretowatch", "https://www.nba.com/mavs/mavstv"]
     },
     "denver-nuggets": {
@@ -815,8 +925,8 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["DAZN"],
-      "ota": {"status": "partial", "games": 15, "note": "15 games expected to air free over the air; partner not yet named."},
+      "local_broadcasters": ["DAZN", "CBS4", "FOX59"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games free over the air on CBS4 (WTTV) and FOX59 (WXIN)."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Early Bird Season Pass $59.99 if bought by October 15. 22 regular-season games free with a DAZN account. Season ticket holders get a free Season Pass."}
       ],
@@ -826,7 +936,7 @@
       "live_tv_carriers": [],
       "territory": "Indiana, Kentucky, Iowa, Illinois and Missouri (ZIP checker on the Pacers site)",
       "notes": "",
-      "sources": ["https://www.nba.com/pacers/where-to-watch/dazn"]
+      "sources": ["https://www.nba.com/pacers/where-to-watch/dazn", "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/", "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-broadcast-15-indiana-pacers-games"]
     },
     "la-clippers": {
       "code_names": {
@@ -884,14 +994,14 @@
           "checked": "2026-10-21"
         }
       },
-      "confidence": "unknown",
-      "local_broadcasters": [],
-      "ota": {"status": "unknown", "games": null, "note": ""},
+      "confidence": "moderate",
+      "local_broadcasters": ["ClipperVision", "KTLA 5"],
+      "ota": {"status": "partial", "games": 10, "note": "10 games are simulcast free on KTLA 5."},
       "streaming": [],
       "live_tv_carriers": [],
       "territory": "Clippers local market",
-      "notes": "The Clippers have not announced where local games will air in 2026-27.",
-      "sources": ["https://frontofficesports.com/article/clippers-sanctions-pair-with-already-bleak-media-outlook/", "https://awfulannouncing.com/nba/ohm-youngmisuk-espn-clippers-sideline-reporter.html"]
+      "notes": "ClipperVision carries 77 games (Sports Video Group, 2026-10-15; DIRECTV Insider, 2026-10-14), 10 of them simulcast on KTLA 5.",
+      "sources": ["https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/", "https://www.directv.com/insider/news/clippervision-on-directv/"]
     },
     "los-angeles-lakers": {
       "confidence": "moderate",
@@ -966,8 +1076,8 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["DAZN"],
-      "ota": {"status": "partial", "games": 15, "note": "15 games free on DAZN and also over the air."},
+      "local_broadcasters": ["DAZN", "ABC24"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games free on DAZN and also over the air on ABC24 (WATN)."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "Carries 78 of 80 non-national regular-season games."}
       ],
@@ -977,7 +1087,7 @@
       "live_tv_carriers": [],
       "territory": "Parts of Tennessee, Mississippi, Kentucky, Alabama, Missouri, Illinois and Arkansas",
       "notes": "",
-      "sources": ["https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html"]
+      "sources": ["https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html", "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/", "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes"]
     },
     "miami-heat": {
       "code_names": {
@@ -1147,8 +1257,8 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["DAZN"],
-      "ota": {"status": "none", "games": 0, "note": ""},
+      "local_broadcasters": ["DAZN", "KARE 11"],
+      "ota": {"status": "partial", "games": 15, "note": "15 games free over the air on KARE 11."},
       "streaming": [
         {"name": "DAZN", "shared_service": "dazn_team", "note": "15 games free with a DAZN account."}
       ],
@@ -1158,7 +1268,7 @@
       "live_tv_carriers": [],
       "territory": "Minnesota, Iowa, Nebraska, North Dakota and South Dakota, plus parts of Kansas and Wisconsin",
       "notes": "",
-      "sources": ["https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174"]
+      "sources": ["https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174", "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/", "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes"]
     },
     "new-orleans-pelicans": {
       "code_names": {
@@ -1316,7 +1426,7 @@
     "oklahoma-city-thunder": {
       "code_names": {
         "KWTV": {
-          "name": "News 9",
+          "names": ["News 9 (Oklahoma City)", "News On 6 (Tulsa)"],
           "kind": "tv",
           "status": "confirmed",
           "basis": "official",
@@ -1347,21 +1457,21 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News On 6 (4 games)"],
+      "local_broadcasters": ["KSBI (Oklahoma City)", "KQCW (Tulsa)", "News 9 (Oklahoma City)", "News On 6 (Tulsa)"],
       "antenna_channels": [
         {"station": "KSBI", "names": ["KSBI (Oklahoma City)"], "virtual": "52.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KSBI on virtual channel 52 and Wikipedia lists main programming on 52.1. FCC records only the major number; RabbitEars.info shows KSBI's main programming as 52-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KSBI&oldid=1372694514", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=38214", "read": "2026-10-01", "says": "KSBI, facility ID 38214, licensed, Virtual Channel: 52"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=38214", "read": "2026-10-01", "role": "supporting, not counted", "says": "KSBI main programming on display channel 52-1"}], "checked": "2026-10-01"},
         {"station": "KQCW-DT", "names": ["KQCW (Tulsa)"], "virtual": "19.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KQCW-DT on virtual channel 19 and Wikipedia lists main programming on 19.1. FCC records only the major number; RabbitEars.info shows KQCW-DT's main programming as 19-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KQCW-DT&oldid=1369199231", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=78322", "read": "2026-10-01", "says": "KQCW-DT, facility ID 78322, licensed, Virtual Channel: 19"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=78322", "read": "2026-10-01", "role": "supporting, not counted", "says": "KQCW-DT main programming on display channel 19-1"}], "checked": "2026-10-01"},
-        {"station": "KOTV-DT (News On 6)", "names": ["News On 6 (4 games)"], "virtual": "6.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KOTV-DT on virtual channel 6 and Wikipedia lists main programming on 6.1. FCC records only the major number; RabbitEars.info shows KOTV-DT's main programming as 6-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KOTV-DT&oldid=1372749486", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=35434", "read": "2026-10-01", "says": "KOTV-DT, facility ID 35434, licensed, Virtual Channel: 6"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=35434", "read": "2026-10-01", "role": "supporting, not counted", "says": "KOTV-DT main programming on display channel 6-1"}], "checked": "2026-10-01"}
+        {"station": "KOTV-DT (News On 6)", "names": ["News On 6 (Tulsa)"], "virtual": "6.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KOTV-DT on virtual channel 6 and Wikipedia lists main programming on 6.1. FCC records only the major number; RabbitEars.info shows KOTV-DT's main programming as 6-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KOTV-DT&oldid=1372749486", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=35434", "read": "2026-10-01", "says": "KOTV-DT, facility ID 35434, licensed, Virtual Channel: 6"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=35434", "read": "2026-10-01", "role": "supporting, not counted", "says": "KOTV-DT main programming on display channel 6-1"}], "checked": "2026-10-01"}
       ],
-      "short_names": {"KSBI (Oklahoma City)": "KSBI", "KQCW (Tulsa)": "KQCW", "News On 6 (4 games)": "News On 6", "Thunder+ (NBA App)": "Thunder+"},
-      "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air."},
+      "short_names": {"KSBI (Oklahoma City)": "KSBI", "KQCW (Tulsa)": "KQCW", "Thunder+ (NBA App)": "Thunder+"},
+      "ota": {"status": "partial", "games": 10, "note": "10 games are free over the air; 4 of them also air on News 9 (Oklahoma City) and News On 6 (Tulsa)."},
       "streaming": [
         {"name": "Thunder+ (NBA App)", "monthly_price_usd": 19.99, "season_price_usd": 108.99, "note": "Season pass $99.99 if bought by September 30. Carries all 67 non-national games.", "price_verified": true}
       ],
       "links": [
         {"names": ["KSBI (Oklahoma City)", "KSBI"], "kind": "station", "level": "section", "url": "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “67 Thunder Games Coming To KSBI, News 9 - News9.com”.", "affiliate_url": "", "affiliate_level": ""},
         {"names": ["KQCW (Tulsa)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “News On 6 Announces Oklahoma City Thunder Broadcasts - NewsOn6.com”.", "affiliate_url": "", "affiliate_level": ""},
-        {"names": ["News On 6 (4 games)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder - NewsOn6.com”.", "affiliate_url": "", "affiliate_level": ""},
+        {"names": ["News On 6 (Tulsa)"], "kind": "station", "level": "section", "url": "https://www.newson6.com/oklahoma-city-thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder - NewsOn6.com”.", "affiliate_url": "", "affiliate_level": ""},
         {"names": ["Thunder+ (NBA App)"], "kind": "stream", "level": "signup", "url": "https://www.nba.com/watch/league-pass-stream/thunder", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Oklahoma City Thunder | Watch The Thunder Online At Home Or On The Go | NBA.com”.", "affiliate_url": "", "affiliate_level": ""}
       ],
       "live_tv_carriers": ["Cox", "Spectrum", "DirecTV", "DirecTV Stream"],
@@ -1637,12 +1747,12 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"],
+      "local_broadcasters": ["Arizona's Family (3TV/KTVK)", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)", "CBS 5 (some games)"],
       "antenna_channels": [
         {"station": "KTVK (Arizona's Family)", "names": ["Arizona's Family (3TV/KTVK)"], "virtual": "3.1", "status": "confirmed", "reason": "Confirmed: FCC LMS lists KTVK on virtual channel 3 and Wikipedia lists main programming on 3.1. FCC records only the major number; RabbitEars.info shows KTVK's main programming as 3-1 (supporting, not counted).", "sources": [{"site": "Wikipedia", "url": "https://en.wikipedia.org/w/index.php?title=KTVK&oldid=1374255488", "read": "2026-10-01"}, {"site": "FCC LMS", "url": "https://enterpriseefiling.fcc.gov/dataentry/public/tv/publicFacilityDetails.html?facilityId=40993", "read": "2026-10-01", "says": "KTVK, facility ID 40993, licensed, Virtual Channel: 3"}, {"site": "RabbitEars.info", "url": "https://www.rabbitears.info/market.php?request=station_search&callsign=40993", "read": "2026-10-01", "role": "supporting, not counted", "says": "KTVK main programming on display channel 3-1"}], "checked": "2026-10-01"},
         {"station": "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)", "names": ["Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)"], "virtual": null, "status": "not_applicable", "reason": "Several stations under one name, each on its own channel; no single number applies.", "sources": [], "checked": ""}
       ],
-      "short_names": {"Arizona's Family (3TV/KTVK)": "Arizona's Family", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)": "Arizona's Family Sports"},
+      "short_names": {"Arizona's Family (3TV/KTVK)": "Arizona's Family", "Arizona's Family Sports (KPHE, KAZF, KOLD, KAZS)": "Arizona's Family Sports", "CBS 5 (some games)": "CBS 5"},
       "ota": {"status": "all", "games": 74, "note": "All 74 non-national games are free over the air."},
       "streaming": [
         {"name": "Suns+", "monthly_price_usd": null, "season_price_usd": null, "note": "Inside the Arizona's Family Sports app. Subscriptions open October 1.", "price_verified": false}
@@ -1658,6 +1768,38 @@
       "sources": ["https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/"]
     },
     "portland-trail-blazers": {
+      "code_names": {
+        "KUNP": {
+          "name": "KUNP 2.2",
+          "kind": "tv",
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://katu.com/sports/rip-city-wrap-up/portland-trail-blazers-to-host-phoenix-suns-in-home-opener-wednesday-watch-on-kunp-rip-city-wrap-up-nba-game-where",
+              "site": "KATU.com (Sinclair; KATU/KUNP's own site)",
+              "date": "2026-10-20",
+              "read": "2026-10-21",
+              "says": "The Portland Trail Blazers have their NBA season home opener Wednesday night hosting the Phoenix Suns, and you can catch all the action on KUNP 2.2!"
+            },
+            {
+              "url": "https://katu.com/sports/rip-city-wrap-up/portland-trail-blazers-to-host-phoenix-suns-in-home-opener-wednesday-watch-on-kunp-rip-city-wrap-up-nba-game-where",
+              "site": "KATU.com (Sinclair; KATU/KUNP's own site)",
+              "date": "2026-10-20",
+              "read": "2026-10-21",
+              "says": "KATU News is your home of the Blazers, and you can catch almost every game live on our secondary channel, KUNP 2.2"
+            },
+            {
+              "url": "https://www.nba.com/blazers/watch",
+              "site": "nba.com/blazers (official team page)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "In Portland, watch on the Trail Blazers flagship station, KUNP and tune in across the region on the Rip City Television Network via the KATU family of affiliates."
+            }
+          ],
+          "checked": "2026-10-21"
+        }
+      },
       "confidence": "moderate",
       "local_broadcasters": ["KUNP", "KATU (some games)"],
       "antenna_channels": [
