@@ -153,9 +153,11 @@ def test_readable_channels_name_known_codes_and_keep_unknown_ones():
                 {"name": "NBCSB/PCK-BOS", "kind": "local", "slug": "boston-celtics"},
                 {"name": "WANF/WPCH.2", "kind": "local", "slug": "atlanta-hawks"},
                 {"name": "TBA", "kind": "tba"}]
-    # Prime Video leads; NBCSB and WANF have names in data/local_tv.json, the
-    # owner note is dropped, and PCK-BOS and WPCH.2 have none, so they stay.
-    assert readable_channels(ctx, channels) == ["Prime Video", "NBC Sports Boston", "PCK-BOS", "WANF", "WPCH.2"]
+    # Prime Video leads; NBCSB and WANF have names in data/local_tv.json links,
+    # PCK-BOS and WPCH.2 confirmed ones in its code_names; owner notes are
+    # dropped. (Fallbacks for unconfirmed codes: tests/test_code_names.py.)
+    assert readable_channels(ctx, channels) == ["Prime Video", "NBC Sports Boston", "NBC Sports Boston on Peacock",
+                                                "WANF", "Peachtree Sports Network"]
 
 
 def test_description_trims_the_second_sentence_first():

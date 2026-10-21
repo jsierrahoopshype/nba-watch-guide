@@ -106,8 +106,9 @@ def test_footnote_shows_only_when_those_codes_are_in_the_feed(tmp_path_factory, 
     games = [replace(g, national=["NBC", "NBCSN"]) if i == 0 else g for i, g in enumerate(fixture_games)]
     with_codes = (_build(tmp_path_factory, games, "hub-footnote") / "index.html").read_text(encoding="utf-8")
     box = with_codes[with_codes.index('id="national"'):with_codes.index("</section>", with_codes.index('id="national"'))]
-    assert ("NBCSN simulcasts Peacock&#39;s Monday games; Telemundo carries NBC games in Spanish." in box)
+    assert ("NBC Sports Network simulcasts Peacock&#39;s Monday games; Telemundo carries NBC games in Spanish." in box)
     assert '<span class="badge badge-national">NBCSN</span>' not in box
+    assert '<span class="badge badge-national">NBC Sports Network</span>' not in box
     without = (_build(tmp_path_factory, fixture_games, "hub-no-footnote") / "index.html").read_text(encoding="utf-8")
     assert "data-national-footnote" not in without
 
