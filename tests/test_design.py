@@ -51,7 +51,7 @@ def shipped_ctx(fixture_games):
     ("boston-celtics", "Local games on NBC Sports Boston", ""),                   # price not verified
     ("toronto-raptors", "Local games on TSN and Sportsnet", ""),                  # not for US maths
     ("dallas-mavericks", "Free over the air on KFAA 29", ""),                     # high, every game on an antenna
-    ("la-clippers", "ClipperVision from $14.95/mo", "Check before you buy"),     # moderate, priced
+    ("la-clippers", "ClipperVision from $14.95/mo", ""),                          # high, priced
 ])
 def test_team_summary_follows_the_confidence_rules(shipped_ctx, slug, line, note):
     team = shipped_ctx.by_slug[slug]

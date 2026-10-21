@@ -995,7 +995,7 @@
           "checked": "2026-10-21"
         }
       },
-      "confidence": "moderate",
+      "confidence": "high",
       "local_broadcasters": ["ClipperVision", "KTLA 5"],
       "ota": {"status": "partial", "games": 10, "note": "10 games are simulcast free on KTLA 5."},
       "streaming": [
