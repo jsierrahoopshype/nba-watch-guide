@@ -265,7 +265,7 @@
     "head_to_head": "{pair}: {possessions} possessions guarding each other through {season}"
   },
   "pair": {
-    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names. In the descriptions {date} is the next meeting as 'Fri, Nov. 6', {time} its AP-style tip-off ('7 p.m.', from description_time, empty when the feed has none) and {channels} every channel joined with 'or', national first. Feed codes take their names from SiteContext.channel_names (data/local_tv.json links and code_names, or the copy.json channels fallback); a national code takes its confirmed name in data/services.json code_names; title gets ' | HoopsMatic' and {date}, the next meeting as 'Fri, Nov. 6' (AP months); title_done replaces it after the season's last meeting. Pair titles are the one exception to the 60-character title limit: they lead with the words people search and Google cuts the end.",
+    "_note": "Team-vs-team pages at /how-to-watch/<slug-a>-vs-<slug-b>. {a} and {b} are short names in alphabetical order, {full_a} and {full_b} full names. In the descriptions {date} is the next meeting as 'Fri, Nov. 6', {time} its AP-style tip-off ('7 p.m.', from description_time, empty when the feed has none) and {channels} every channel joined with 'or', national first; no channel is ever left out. Over 155 characters description_short, then description_tight ({date_tight} 'Nov. 6', {time_tight} ', 7 p.m. ET') are used, and a list still too long runs past 155. Feed codes take their names from SiteContext.channel_names (data/local_tv.json links and code_names, or the copy.json channels fallback); a national code takes its confirmed name in data/services.json code_names; title gets ' | HoopsMatic' and {date}, the next meeting as 'Fri, Nov. 6' (AP months); title_done replaces it after the season's last meeting. Pair titles are the one exception to the 60-character title limit: they lead with the words people search and Google cuts the end.",
     "title": "Where to Watch {a} vs. {b} ({date}): TV Channel and Streaming",
     "title_done": "Where to Watch {a} vs. {b}: TV Channel and Streaming",
     "description": "{a} vs. {b} is next on {date}{time}. Watch on {channels}, plus every {season} meeting with TV and streaming options.",
@@ -278,7 +278,9 @@
     "meetings_heading": "Every {season} meeting",
     "meetings_caption": "{count} games",
     "channel_tba": "a channel still to be announced",
-    "description_short": "{a} vs. {b} is next on {date}{time}. Watch on {channels}."
+    "description_short": "{a} vs. {b} is next on {date}{time}. Watch on {channels}.",
+    "description_tight": "{a} vs. {b} next {date_tight}{time_tight}. Watch on {channels}.",
+    "description_time_tight": ", {time} ET"
   },
   "channels": {
     "_note": "Plain names for a schedule feed code with no confirmed name (SiteContext.channel_names). {team} is the team's short name. fallback_* go in sentences, chip_fallback_* on channel chips. fallback_app is for a code_names entry of kind stream or team_stream; every other code takes fallback_tv. fallback_national is for a national code listed in data/services.json code_names without a confirmed name. Each channel or service is named once per list (SiteContext.join_channels): a team's TV channel and its own stream read as merged, two of a team's channels under one brand as merged_main, two teams' channels on one add-on service as merged_shared, a team's two fallbacks as fallback_both, and a name another entry also mentions takes team_on.",

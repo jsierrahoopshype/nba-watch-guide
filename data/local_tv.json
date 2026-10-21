@@ -619,8 +619,9 @@
         }
       },
       "confidence": "high",
-      "local_broadcasters": ["KFAA 29", "WFAA 8"],
-      "ota": {"status": "partial", "games": null, "note": "KFAA 29 and WFAA 8 carry Mavericks games free over the air in 2026-27 (the Mavericks' where-to-watch page). Which games air on each is not listed."},
+      "local_broadcasters": ["KFAA 29", "WFAA 8 (some games)"],
+      "short_names": {"WFAA 8 (some games)": "WFAA 8"},
+      "ota": {"status": "all", "games": 69, "note": "Every local game is free over the air: the NBA schedule lists KFAA 29 on all 69 of them, and WFAA 8 on 5 (the Mavericks' where-to-watch page names both)."},
       "streaming": [
         {"name": "MavsTV", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
       ],
@@ -998,10 +999,10 @@
       "local_broadcasters": ["ClipperVision", "KTLA 5"],
       "ota": {"status": "partial", "games": 10, "note": "10 games are simulcast free on KTLA 5."},
       "streaming": [],
-      "live_tv_carriers": [],
+      "live_tv_carriers": ["Spectrum", "DirecTV", "DirecTV Stream", "Fubo"],
       "territory": "Clippers local market",
-      "notes": "ClipperVision carries 77 games (Sports Video Group, 2026-10-15; DIRECTV Insider, 2026-10-14), 10 of them simulcast on KTLA 5.",
-      "sources": ["https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/", "https://www.directv.com/insider/news/clippervision-on-directv/"]
+      "notes": "ClipperVision carries 77 games, 10 of them simulcast on KTLA 5. It comes with eligible Spectrum cable, DIRECTV (satellite and streaming) and Fubo packages (the Clippers' 2026-27 broadcast announcement, 2026-10-14, and watch page).",
+      "sources": ["https://www.nba.com/clippers/news/la-clippers-announce-2026-27-television-broadcast-plan", "https://www.nba.com/clippers/watch", "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/", "https://www.directv.com/insider/news/clippervision-on-directv/"]
     },
     "los-angeles-lakers": {
       "confidence": "moderate",

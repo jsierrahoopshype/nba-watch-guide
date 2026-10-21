@@ -162,7 +162,7 @@ def test_readable_channels_name_known_codes_and_keep_unknown_ones():
     assert got[-1] == "Peachtree Sports Network" and len(got) == 4
 
 
-def test_description_trims_the_second_sentence_first():
+def test_description_tightens_its_wording_and_never_drops_a_channel():
     ctx = load_context(fixture_schedule(), today=TODAY)
     text = load_copy()["pair"]
     game = _game(tipoff_et="2026-11-06T19:00:00-05:00", date_et="2026-11-06")
@@ -172,12 +172,20 @@ def test_description_trims_the_second_sentence_first():
         "plus every 2026-27 meeting with TV and streaming options.")
     long = [{"name": n, "kind": "national"} for n in ("Station Number One", "Station Number Two",
                                                        "Station Number Three", "Station Number Four")]
-    got = pair_description(ctx, text, "Celtics", "Hornets", game, long)
-    assert got == ("Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on Station Number One, "
-                   "Station Number Two, Station Number Three or Station Number Four.")
+    # First the second sentence's tail goes...
+    assert pair_description(ctx, text, "Celtics", "Hornets", game, long) == (
+        "Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on Station Number One, "
+        "Station Number Two, Station Number Three or Station Number Four.")
+    # ...then the date and time tighten...
+    five = long + [{"name": "Station Five", "kind": "national"}]
+    assert pair_description(ctx, text, "Celtics", "Hornets", game, five) == (
+        "Celtics vs. Hornets next Nov. 6, 7 p.m. ET. Watch on Station Number One, Station Number Two, "
+        "Station Number Three, Station Number Four or Station Five.")
+    # ...and a list still too long runs past 155 rather than lose a channel.
     many = long + [{"name": f"Extra Channel {i}", "kind": "national"} for i in range(5)]
     got = pair_description(ctx, text, "Celtics", "Hornets", game, many)
-    assert len(got) <= 155 and got.endswith(".") and "plus every" not in got and " or " in got
+    assert len(got) > 155 and got.startswith("Celtics vs. Hornets next Nov. 6, 7 p.m. ET. Watch on ")
+    assert all(c["name"] in got for c in many)
 
 
 def test_built_descriptions_lead_with_the_date_and_join_channels_with_or(built_site):
@@ -545,3 +553,19 @@ def test_team_next_game_card_is_the_shared_game_block(built_site, fixture_games)
         head_to_watch = section[section.index("data-game-block"):section.index('data-part="watch"')]
         assert "data-updated" not in head_to_watch and "data-stale-notice" not in head_to_watch
         assert f'href="/how-to-watch/{canonical_slug(nxt)}#game-{nxt.game_id}" data-pair-link' in section
+
+
+def test_every_built_description_names_every_channel_of_the_next_meeting(built_site, fixture_games):
+    from watchguide.pages.common import all_channels
+    ctx = load_context(fixture_games, today=TODAY)
+    checked = 0
+    for slug, games in pairs.meetings(ctx.games, ctx.teams).items():
+        nxt = next((g for g in games if g.date_et >= TODAY), None)
+        if nxt is None:
+            continue
+        markup = read(built_site, slug)
+        desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', markup).group(1))
+        for name in readable_channels(ctx, all_channels(ctx, nxt)):
+            assert name in desc, (slug, name, desc)
+        checked += 1
+    assert checked
