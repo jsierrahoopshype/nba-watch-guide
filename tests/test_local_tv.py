@@ -366,3 +366,17 @@ def test_nba_tv_rule_is_in_market_only(services, local):
     cov = build_state_coverage(HEAT_NBA_TV, "MIA", services, local["miami-heat"], OUT_OF_MARKET)
     assert local_counts(cov) == {}
     assert counts(cov)["nba_league_pass"] == 6
+
+
+def test_clippervision_direct_enters_the_maths_at_its_monthly_price(services, local):
+    """The Clippers' own watch page: $14.95 a month or $89.95 a season. The
+    coverage maths is monthly, so the season price is shown, never used."""
+    clippers = local["la-clippers"]
+    option = clippers.streaming[0]
+    assert (option.name, option.monthly_price_usd, option.season_price_usd, option.price_verified) == \
+        ("ClipperVision", 14.95, 89.95, True)
+    svc = local_services(clippers, services)[0]
+    assert svc.name == "ClipperVision" and svc.price == 14.95
+    cov = build_state_coverage([game(0, team="LAC"), game(1, team="LAC")], "LAC", services, clippers, IN_MARKET)
+    assert [s.name for s in cov.cheapest_full.services] == ["ClipperVision"]
+    assert cov.cheapest_full.total_price == 14.95

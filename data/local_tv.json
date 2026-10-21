@@ -998,10 +998,12 @@
       "confidence": "moderate",
       "local_broadcasters": ["ClipperVision", "KTLA 5"],
       "ota": {"status": "partial", "games": 10, "note": "10 games are simulcast free on KTLA 5."},
-      "streaming": [],
+      "streaming": [
+        {"name": "ClipperVision", "monthly_price_usd": 14.95, "season_price_usd": 89.95, "note": "Direct streaming subscription for fans without an eligible TV package, in the LA Clippers + Intuit Dome App, on NBA.com or in the NBA App.", "price_verified": true}
+      ],
       "live_tv_carriers": ["Spectrum", "DirecTV", "DirecTV Stream", "Fubo"],
       "territory": "Clippers local market",
-      "notes": "ClipperVision carries 77 games, 10 of them simulcast on KTLA 5. It comes with eligible Spectrum cable, DIRECTV (satellite and streaming) and Fubo packages (the Clippers' 2026-27 broadcast announcement, 2026-10-14, and watch page).",
+      "notes": "ClipperVision carries 77 games, 10 of them simulcast on KTLA 5. It comes with eligible Spectrum cable, DIRECTV (satellite and streaming) and Fubo packages, or as a direct subscription: \"Direct ClipperVision streaming plans are $14.95 per month or $89.95 for the full season\" (the Clippers' watch page, checked 2026-10-21; announcement 2026-10-14).",
       "sources": ["https://www.nba.com/clippers/news/la-clippers-announce-2026-27-television-broadcast-plan", "https://www.nba.com/clippers/watch", "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/", "https://www.directv.com/insider/news/clippervision-on-directv/"]
     },
     "los-angeles-lakers": {
