@@ -50,7 +50,7 @@ def shipped_ctx(fixture_games):
     ("oklahoma-city-thunder", "Thunder+ (NBA App) from $19.99/mo", ""),          # partial OTA does not count
     ("boston-celtics", "Local games on NBC Sports Boston", ""),                   # price not verified
     ("toronto-raptors", "Local games on TSN and Sportsnet", ""),                  # not for US maths
-    ("dallas-mavericks", "Local games on KFAA 29", ""),                           # high, part-season OTA
+    ("dallas-mavericks", "Free over the air on KFAA 29", ""),                     # high, every game on an antenna
     ("la-clippers", "Local games on ClipperVision", ""),                          # moderate
 ])
 def test_team_summary_follows_the_confidence_rules(shipped_ctx, slug, line, note):

@@ -69,23 +69,25 @@ def or_list(names: list[str]) -> str:
 
 def pair_description(ctx: SiteContext, text: dict, a: str, b: str, nxt, channels) -> str:
     """Unique per pair: both names, the next meeting's date, tip-off and
-    every channel, in copy.json pair.description. Over 155 characters it
-    drops the second sentence's tail (pair.description_short), then
-    channels from the end, before cutting."""
+    every channel, in copy.json pair.description. A channel is never left
+    out: over 155 characters the wording tightens instead
+    (pair.description_short drops the second sentence's tail,
+    pair.description_tight shortens the date and time), and a list still
+    too long runs past 155, since search engines trim the snippet."""
     fields = {"a": a, "b": b, "season": ctx.season}
     if nxt is None:
         return seo.description(safe_format(text["description_done"], **fields))
     clock = tip_time(nxt)
+    day = date.fromisoformat(nxt.date_et)
     fields["date"] = title_date(nxt.date_et)
+    fields["date_tight"] = f"{AP_MONTHS[day.month - 1]} {day.day}"
     fields["time"] = text["description_time"].format(time=clock) if clock else ""
+    fields["time_tight"] = text["description_time_tight"].format(time=clock) if clock else ""
     named = readable_channels(ctx, channels)
-    attempts = [(text["description"], len(named))] + \
-        [(text["description_short"], n) for n in range(len(named), 0, -1)]
-    candidates = [safe_format(template, channels=or_list(named[:n]) if named else text["channel_tba"],
-                              **fields)
-                  for template, n in attempts]
-    return next((c for c in candidates if len(c) <= seo.DESCRIPTION_MAX),
-                seo.description(candidates[-1]))
+    fields["channels"] = or_list(named) if named else text["channel_tba"]
+    candidates = [safe_format(text[key], **fields)
+                  for key in ("description", "description_short", "description_tight")]
+    return next((c for c in candidates if len(c) <= seo.DESCRIPTION_MAX), candidates[-1])
 
 
 def final_label(ctx: SiteContext, game) -> dict | None:
