@@ -59,16 +59,41 @@
           "checked": "2026-10-20"
         },
         "WPCH.2": {
+          "name": "Peachtree Sports Network (WPCH subchannel)",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "Peachtree Sports Network (WPCH subchannel)",
-          "leads": [
-            "https://www.waff.com/2026/07/16/gray-media-atlanta-hawks-reach-tv-deal-2026-27-season/",
-            "https://www.sportsvideo.org/2026/07/16/gray-media-and-atlanta-hawks-announce-georgia-wide-broadcast-partnership-for-2026-27-nba-season/",
-            "https://www.wrdw.com/2026/08/13/hawks-2026-27-schedule-young-risacher-could-make-returns-state-farm-arena/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/07/16/gray-media-and-atlanta-hawks-announce-georgia-wide-broadcast-partnership-for-2026-27-nba-season/",
+              "site": "Sports Video Group",
+              "date": "2026-07-16",
+              "read": "2026-10-21",
+              "says": "Gray Media and the Atlanta Hawks have announced a broadcast partnership that will bring all non-nationally televised Atlanta Hawks regular season games to WANF (Atlanta News First) and Peachtree Sports Network free over the air during the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.ajc.com/sports/2026/07/hawks-reach-broadcast-agreement-with-gray-media-for-2026-27-season/",
+              "site": "Atlanta Journal-Constitution",
+              "date": "2026-07-16",
+              "read": "2026-10-21",
+              "says": "On Thursday, the Hawks announced they entered a broadcast partnership with Gray Media that brings all non-nationally televised regular-season games to Gray Media’s Atlanta broadcast television station WANF and Peachtree Sports Network during the 2026-27 NBA season."
+            },
+            {
+              "url": "https://tvtechnology.com/news/grays-peachtree-sports-network-sets-oct-1-launch-launch-in-georgia",
+              "site": "TV Tech (call-sign tie)",
+              "date": "2023-09-26",
+              "read": "2026-10-21",
+              "says": "Gray Television has announced that its new sports broadcast channel, Peachtree Sports Network, will launch Sunday, October 1st on WPCH 17.2."
+            },
+            {
+              "url": "https://www.atlantanewsfirst.com/2023/09/25/peachtree-sports-network-launches-statewide-gray-television-stations",
+              "site": "Atlanta News First (Gray, call-sign tie)",
+              "date": "2023-09-25",
+              "read": "2026-10-21",
+              "says": "Over the air, PSN is available on 17.2"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -92,17 +117,48 @@
     "boston-celtics": {
       "code_names": {
         "PCK-BOS": {
+          "name": "NBC Sports Boston on Peacock",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "NBC Sports Boston on Peacock",
-          "leads": [
-            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/",
-            "https://www.cabletv.com/sports/watch-boston-celtics",
-            "https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/",
-            "https://www.peacocktv.com/sports/nbcsports-boston"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/",
+              "site": "NBC Sports Boston (official)",
+              "date": "2026-10-08 (last updated; published 2025-03-18)",
+              "read": "2026-10-21",
+              "says": "What live games are included on NBC Sports Boston on Peacock? NBC Sports Boston’s Boston Celtics game schedule includes non-nationally exclusive regular season and postseason games, as well as select preseason matchups."
+            },
+            {
+              "url": "https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/",
+              "site": "NBC Sports Boston (official)",
+              "date": "2026-10-08 (last updated; published 2025-03-18)",
+              "read": "2026-10-21",
+              "says": "In addition to a Peacock Premium or Premium Plus Plan, the cost of NBC Sports Boston is $14.95/mo."
+            },
+            {
+              "url": "https://www.peacocktv.com/sports/nbcsports-boston",
+              "site": "Peacock (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Add NBC Sports Boston to your Peacock subscription. Stream LIVE games, exclusive interviews, and more featuring the NBA’s Boston Celtics."
+            },
+            {
+              "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/",
+              "site": "Sports Media Watch",
+              "date": "2026-10-19 (modified; published 2026-08-23)",
+              "read": "2026-10-21",
+              "says": "Peacock (in-market only): NBC Sports Boston is available as an add-on subscription for Peacock users priced at $14.95/month."
+            },
+            {
+              "url": "https://www.cabletv.com/sports/watch-boston-celtics",
+              "site": "CableTV.com",
+              "date": "2026-09-16",
+              "read": "2026-10-21",
+              "says": "You can also get NBC Sports Boston as an add-on with any Peacock subscription."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -124,18 +180,34 @@
     "brooklyn-nets": {
       "code_names": {
         "DAZN-YES": {
+          "name": "YES on DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "YES on DAZN",
-          "leads": [
-            "https://yesnetwork.com/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
-            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
-            "https://s23.q4cdn.com/910947899/files/doc_news/DAZN-TO-BE-THE-EXCLUSIVE-DIRECT-TO-CONSUMER-STREAMING-HOME-OF-THE-YES-NETWORK-AND-MSG-NETWORKS-2026.pdf",
-            "https://www.sportsvideo.org/2026/07/29/dazn-to-become-exclusive-dtc-streaming-home-of-yes-network-msg-networks-gotham-app-to-shut-down/",
-            "https://roundtable.io/sports/nba/nets/news/brooklyn-nets-streaming-shifts-from-gotham-to-dazn"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://yesnetwork.com/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+              "site": "yesnetwork.com (official)",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "New York (July 29, 2026) – MSG Networks and YES Network have entered into a landmark partnership that will make DAZN, the world’s leading sports entertainment platform, the exclusive direct-to consumer streaming home of MSG Networks and YES Network during the 2026-2027 NBA and NHL seasons."
+            },
+            {
+              "url": "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+              "site": "DAZN Group press room (official)",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "Subscribers who receive MSG Networks or the YES Network as part of their pay TV subscription will continue to receive MSG and YES content, as applicable, via the DAZN platform at no additional cost."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/07/29/dazn-to-become-exclusive-dtc-streaming-home-of-yes-network-msg-networks-gotham-app-to-shut-down/",
+              "site": "Sports Video Group",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "On Wednesday, it was announced that DAZN will become the exclusive in-market, direct-to-consumer streaming home of YES Network and MSG Networks under a new agreement covering the 2026-27 NBA and NHL seasons."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -156,41 +228,80 @@
     "charlotte-hornets": {
       "code_names": {
         "DAZN-CHA": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.sportsvideo.org/2026/09/18/charlotte-hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/",
-            "https://www.wsoctv.com/news/local/hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/WT3BGDVPQBHQBPC77LNIUNHMHQ/",
-            "https://www.nba.com/hornets/watch",
-            "https://cordcuttersnews.com/dazn-quietly-reveals-a-new-way-to-watch-charlotte-hornets-games-this-season/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/hornets/watch",
+              "site": "nba.com/hornets (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "The Hornets have a new partnership with DAZN, the world's leading sports entertainment platform, as the team’s exclusive direct-to-consumer streaming home of Hornets basketball for the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/09/18/charlotte-hornets-name-dazn-exclusive-direct-to-consumer-streaming-partner/",
+              "site": "Sports Video Group",
+              "date": "2026-09-18",
+              "read": "2026-10-21",
+              "says": "The Charlotte Hornets have announced DAZN as their exclusive direct-to-consumer streaming partner for the 2026-27 NBA season."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WAXN": {
+          "name": "TV64 (Cox Media Group)",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "TV64",
-          "leads": [
-            "https://www.wsoctv.com/news/local/everyone-can-watch-channel-9-tv64-announced-new-home-charlotte-hornets/SRIVTROMT5BI3PRH6SLM26YL24/",
-            "https://www.nba.com/hornets/watch",
-            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/hornets/watch",
+              "site": "nba.com/hornets (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "If you receive WSOC Channel 9 and WAXN TV64 over the air with a physical or digital antenna, you can watch without cable."
+            },
+            {
+              "url": "https://www.nba.com/hornets/watch",
+              "site": "nba.com/hornets (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Beginning in October, WSOC Channel 9 and TV64 are new home for Hornets basketball in Charlotte during the 2026-27 season, providing all fans the opportunity and access to watch Hornets regular-season games."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/",
+              "site": "Sports Video Group",
+              "date": "2026-08-13",
+              "read": "2026-10-21",
+              "says": "In Charlotte and across the Carolinas, CMG will air Charlotte Hornets regular-season games on WAXN-TV 64 and WSOC-TV — the first time in 27 years that Hornets games will be broadcast free over-the-air."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WSOC": {
+          "name": "WSOC-TV 9",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "WSOC-TV 9",
-          "leads": [
-            "https://www.wsoctv.com/news/local/everyone-can-watch-channel-9-tv64-announced-new-home-charlotte-hornets/SRIVTROMT5BI3PRH6SLM26YL24/",
-            "https://www.nba.com/hornets/watch",
-            "https://cordcuttersnews.com/charlotte-hornets-games-are-coming-to-free-tv-this-season/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/hornets/watch",
+              "site": "nba.com/hornets (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Beginning in October, WSOC Channel 9 and TV64 are new home for Hornets basketball in Charlotte during the 2026-27 season, providing all fans the opportunity and access to watch Hornets regular-season games."
+            },
+            {
+              "url": "https://www.wsoctv.com/news/local/everyone-can-watch-channel-9-tv64-announced-new-home-charlotte-hornets/SRIVTROMT5BI3PRH6SLM26YL24/",
+              "site": "WSOCTV.com (station's own site)",
+              "date": "2026-08-12",
+              "read": "2026-10-21",
+              "says": "Starting this fall, you’ll be able to see every non-nationally televised Charlotte Hornets game on WSOC Channel 9 or TV64."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -217,15 +328,34 @@
     "chicago-bulls": {
       "code_names": {
         "CHSN App": {
+          "name": "CHSN app",
           "kind": "team_stream",
-          "status": "unconfirmed",
-          "candidate": "CHSN app",
-          "leads": [
-            "https://subscribe.chsn.com/",
-            "https://www.mlb.com/whitesox/schedule/watch"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://subscribe.chsn.com/",
+              "site": "CHSN (official subscribe page)",
+              "date": "undated official page (© 2026)",
+              "read": "2026-10-21",
+              "says": "Bulls Only $19.99/Month Live Bulls Games on CHSN Exclusive Shows & Daily Coverage"
+            },
+            {
+              "url": "https://www.mlb.com/whitesox/schedule/watch",
+              "site": "Chicago White Sox (official; CHSN sister team)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "CHSN is currently available via web and mobile web browsers, and the app can be downloaded on Apple (iOS, tvOS), Amazon Fire TV, Android (mobile and TV), Roku, and SamsungTV. Subscriptions include: Live streams of Blackhawks, Bulls and White Sox games"
+            },
+            {
+              "url": "https://roundtable.io/sports/nba/bulls/news/chicago-bulls-announce-rotation-of-color-commentators-for-2026-27",
+              "site": "Roundtable",
+              "date": "2026-09-25",
+              "read": "2026-10-21",
+              "says": "The Bulls will continue to utilize the Chicago Sports Network (CHSN) as their television broadcast home, and Audacy 104.3 FM as their radio broadcast home for all locally broadcast Bulls basketball games."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -247,29 +377,64 @@
     "cleveland-cavaliers": {
       "code_names": {
         "DAZN-CLE": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260901",
-            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260910",
-            "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
-            "https://www.news5cleveland.com/sports/basketball/cavaliers/cavaliers-dazn-announce-multi-year-broadcast-partnership"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
+              "site": "Sports Video Group",
+              "date": "2026-09-01",
+              "read": "2026-10-21",
+              "says": "The Cleveland Cavaliers and DAZN have announced a multi-year partnership making DAZN the exclusive streaming destination for Cavaliers basketball beginning with the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.news5cleveland.com/sports/basketball/cavaliers/cavaliers-dazn-announce-multi-year-broadcast-partnership",
+              "site": "News 5 Cleveland (WEWS)",
+              "date": "2026-09-01",
+              "read": "2026-10-21",
+              "says": "Beginning with the 2026-27 NBA season, DAZN will become the new destination for Cavs games and team-produced original programming."
+            },
+            {
+              "url": "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260901",
+              "site": "nba.com/cavaliers (official)",
+              "date": "2026-09-01",
+              "read": "2026-10-21",
+              "says": "Cleveland Cavaliers and DAZN Announce Exclusive Multi-Year Local Broadcast Partnership"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "RESN": {
+          "name": "Rock Entertainment Sports Network",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "Rock Entertainment Sports Network",
-          "leads": [
-            "https://www.nba.com/cavaliers/news/releases-cavaliers-dazn-260901",
-            "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
-            "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "19 News WOIO (Gray; RESN co-owner)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "The games will air locally in Cleveland on Gray Media’s stations, WOIO (CBS 19) and WUAB (MyNet 43), and statewide on Rock Entertainment Sports Network, giving fans unprecedented access to one of the NBA’s premier teams."
+            },
+            {
+              "url": "https://www.cleveland19.com/2026/09/15/cleveland-cavaliers-games-return-free-over-the-air-television-19-news/",
+              "site": "19 News WOIO (Gray; RESN co-owner)",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "Rock Entertainment Sports Network is a collaboration between Gray Media and Rock Entertainment Group, which owns the Cleveland Cavaliers, Cleveland Sirens, Cleveland Monsters, and Cleveland Charge."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/09/01/cleveland-cavaliers-make-dazn-exclusive-streaming-home-bring-game-production-in-house",
+              "site": "Sports Video Group",
+              "date": "2026-09-01",
+              "read": "2026-10-21",
+              "says": "As part of the agreement, the Cavaliers will move game production in-house through Rock Entertainment Sports Network (RESN)."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -297,26 +462,50 @@
     "dallas-mavericks": {
       "code_names": {
         "KFAA": {
+          "name": "KFAA 29",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "KFAA 29",
-          "leads": [
-            "https://wfaa.com/article/sports/nba/mavericks/wfaa-sister-station-kfaa-29-dallas-mavericks-broadcast-partner/287-a337315d-6957-4e66-ba0f-b1c8c00ed530",
-            "https://www.dmagazine.com/micropost/the-mavs-solved-their-channel-29-issue/",
-            "https://cordcuttersnews.com/tegna-expands-free-over-the-air-broadcast-of-dallas-mavericks-games-across-texas/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/mavs/wheretowatch",
+              "site": "nba.com/mavs (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Wednesday Oct 14 7:00 PM CDT vs. New Orleans Pelicans American Airlines Center Dallas, TX TV MavsTV+ · KFAA · NBA TV"
+            },
+            {
+              "url": "https://www.nba.com/mavs/wheretowatch",
+              "site": "nba.com/mavs (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Find Your Local Listing Dallas-Ft. Worth WFAA 8.1 | KFAA 29.1"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WFAA": {
+          "name": "WFAA 8",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "WFAA 8",
-          "leads": [
-            "https://wfaa.com/article/sports/nba/mavericks/wfaa-sister-station-kfaa-29-dallas-mavericks-broadcast-partner/287-a337315d-6957-4e66-ba0f-b1c8c00ed530"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/mavs/wheretowatch",
+              "site": "nba.com/mavs (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Find Your Local Listing Dallas-Ft. Worth WFAA 8.1 | KFAA 29.1"
+            },
+            {
+              "url": "https://www.nba.com/mavs/wheretowatch",
+              "site": "nba.com/mavs (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Why have the Mavs chosen to partner with TEGNA/WFAA Ch. 8? +"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "low",
@@ -376,30 +565,50 @@
     "detroit-pistons": {
       "code_names": {
         "DAZN-DET": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.dazn.com/en-US/welcome/detroit-pistons",
-            "https://thedesk.net/2026/09/detroit-pistons-more-broadcast-partners-dazn/",
-            "https://roundtable.io/sports/nba/pistons/players/detroit-pistons-announce-new-streaming-deal-with-dazn",
-            "https://www.detroitnews.com/story/sports/nba/pistons/2026/09/22/how-to-watch-the-detroit-pistons-on-their-new-streaming-home/91891542007/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://thedesk.net/2026/09/detroit-pistons-more-broadcast-partners-dazn/",
+              "site": "The Desk",
+              "date": "2026-09-28",
+              "read": "2026-10-21",
+              "says": "Games will also be available on radio partner WXYT (97.1 FM) in Detroit and stream through sports platform DAZN."
+            },
+            {
+              "url": "https://roundtable.io/sports/nba/pistons/players/detroit-pistons-announce-new-streaming-deal-with-dazn",
+              "site": "Roundtable",
+              "date": "2026-09-22",
+              "read": "2026-10-21",
+              "says": "With a monthly price tag of $20 or a full season option of $120, DAZN will create a team-branded streaming service with the Pistons that is direct-to-consumer in format."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WMYD": {
+          "name": "WMYD The Spot Detroit 20 (Scripps)",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "WMYD The Spot Detroit 20",
-          "leads": [
-            "https://www.wxyz.com/sports/basketball/pistons/the-spot-detroit-20-to-air-71-regular-season-detroit-pistons-games-heres-the-full-schedule",
-            "https://scripps.com/wp-content/uploads/2026/05/Scripps-Pistons-Announcement-Press-Release-final-5.13.2630.pdf",
-            "https://www.sportsvideo.org/2026/05/14/detroit-pistons-inks-local-media-rights-deal-with-scripps-sports/",
-            "https://www.thespottv.com/detroit-20/detroit-pistons"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/05/14/detroit-pistons-inks-local-media-rights-deal-with-scripps-sports/",
+              "site": "Sports Video Group",
+              "date": "2026-05-14",
+              "read": "2026-10-21",
+              "says": "Under a new local-media–rights agreement with Scripps Sports, WMYD Detroit will be the team’s official broadcast home beginning with the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.wxyz.com/sports/basketball/pistons/the-spot-detroit-20-to-air-71-regular-season-detroit-pistons-games-heres-the-full-schedule",
+              "site": "WXYZ (Scripps sister station of WMYD)",
+              "date": "2026 (article undated in text; covers 2026-27 schedule)",
+              "read": "2026-10-21",
+              "says": "The Detroit Pistons unveiled the 2026-27 broadcast schedule, featuring 71 games with free, over-the-air broadcasts on The Spot - Detroit 20."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -425,16 +634,34 @@
     "golden-state-warriors": {
       "code_names": {
         "PCK-GSW": {
+          "name": "NBC Sports Bay Area on Peacock",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "NBC Sports Bay Area on Peacock",
-          "leads": [
-            "https://www.nba.com/warriors/news/warriors-announce-2026-27-television-radio-broadcast-schedules-20260824",
-            "https://www.peacocktv.com/sports/nbcsports-bayarea",
-            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/golden-state-warriors/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/",
+              "site": "NBC Sports Bay Area & California (official)",
+              "date": "2026-10-19 (last updated; published 2025-03-18)",
+              "read": "2026-10-21",
+              "says": "NBC Sports Bay Area: Live Golden State Warriors and San Francisco Giants games, comprehensive pregame and postgame coverage, and extensive San Francisco 49ers programming, highlighted by live gameday shows."
+            },
+            {
+              "url": "https://www.peacocktv.com/sports/nbcsports-bayarea",
+              "site": "Peacock (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Add NBC Sports Bay Area to your Peacock subscription. Stream LIVE games, exclusive interviews, and more featuring the NBA’s Golden State Warriors and MLB’s San Francisco Giants."
+            },
+            {
+              "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/golden-state-warriors/",
+              "site": "Sports Media Watch",
+              "date": "2026-10-20 (modified; published 2026-08-23)",
+              "read": "2026-10-21",
+              "says": "Peacock (in market only): NBC Sports Bay Area is available as an add-on subscription for Peacock users priced at $17.95/month."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -456,15 +683,34 @@
     "houston-rockets": {
       "code_names": {
         "SCHN": {
+          "name": "Space City Home Network",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "Space City Home Network",
-          "leads": [
-            "https://www.schnplus.com/rockets",
-            "https://www.thehrr.com/Houston_Rockets/News_and_Info/2026/8/13_Rockets_announce_2026-27_schedule.html"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.fox26houston.com/news/houston-rockets-announce-2026-27-regular-season-schedule",
+              "site": "FOX 26 Houston",
+              "date": "2026-08-13",
+              "read": "2026-10-21",
+              "says": "Broadcast Coverage: Space City Home Network and SCHN+ will carry every preseason and regular season game (except nine exclusive national broadcasts), with radio coverage on SportsTalk 790 KBME and NewsRadio 740 KTRH."
+            },
+            {
+              "url": "https://www.thehrr.com/Houston_Rockets/News_and_Info/2026/8/13_Rockets_announce_2026-27_schedule.html",
+              "site": "The Houston Roundball Review",
+              "date": "2026-08-13",
+              "read": "2026-10-21",
+              "says": "Space City Home Network and SCHN+ will carry every preseason game and all scheduled regular season games, except for nine that are designated as exclusive national broadcasts."
+            },
+            {
+              "url": "https://www.galvnews.com/news_reuters/texas/houston-rockets-release-complete-schedule-for-nba-s-2026-27-season/article_9348dd62-7777-58d5-b9d9-b442d4de20f0.html",
+              "site": "The Galveston County Daily News",
+              "date": "undated on page (2026-27 schedule story; read 2026-10-21)",
+              "read": "2026-10-21",
+              "says": "Regionally, Space City Home Network (SCHN) and SCHN+ will carry every preseason game and all scheduled regular season games, except for nine that are designated as exclusive national broadcasts."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -485,39 +731,87 @@
     "indiana-pacers": {
       "code_names": {
         "DAZN-IND": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.nba.com/pacers/where-to-watch/dazn",
-            "https://www.sportsvideo.org/2026/08/20/indiana-pacers-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
-            "https://www.sportcal.com/news/dazn-continues-us-local-broadcast-sweep-with-nba-pacers-deal/",
-            "https://www.fieldhousefiles.com/p/inside-pacers-move-to-dazn-2026-27-zander-berlinski"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/pacers/where-to-watch/dazn",
+              "site": "nba.com/pacers (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Pacers on DAZN will launch in early September, ahead of the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/08/20/indiana-pacers-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
+              "site": "Sports Video Group",
+              "date": "2026-08-20",
+              "read": "2026-10-21",
+              "says": "Pacers Sports and Entertainment has announced a partnership with DAZN, making it the exclusive streaming home of Indiana Pacers basketball."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WTTV": {
+          "name": "CBS4",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "CBS4",
-          "leads": [
-            "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
-            "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana",
+              "site": "Nexstar/DAZN release via Business Wire (finviz.com)",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "Nexstar-owned WTTV-TV (CBS) and WXIN-TV (FOX) in Indianapolis will serve as the television home for the 15 games"
+            },
+            {
+              "url": "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana",
+              "site": "Nexstar/DAZN release via Business Wire (finviz.com)",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "Oct. 23 Fri Dallas 7:00 PM WTTV CBS4 DAZN"
+            },
+            {
+              "url": "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
+              "site": "TheDesk.net",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "In Indianapolis, WTTV (Channel 4) and WXIN (Channel 59) will serve as the television homes for the 15-game package."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WXIN": {
+          "name": "FOX59",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "FOX59",
-          "leads": [
-            "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
-            "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana",
+              "site": "Nexstar/DAZN release via Business Wire (finviz.com)",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "Nexstar-owned WTTV-TV (CBS) and WXIN-TV (FOX) in Indianapolis will serve as the television home for the 15 games"
+            },
+            {
+              "url": "https://finviz.com/news/397907/nexstar-media-group-and-dazn-announce-agreement-to-televise-and-live-stream-15-indiana-pacers-games-for-fans-across-central-indiana",
+              "site": "Nexstar/DAZN release via Business Wire (finviz.com)",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "Mar. 4 Thu at Orlando 7:00 PM WXIN FOX59 DAZN"
+            },
+            {
+              "url": "https://thedesk.net/2026/10/nexstar-broadcast-tv-indiana-pacers-games/",
+              "site": "TheDesk.net",
+              "date": "2026-10-01",
+              "read": "2026-10-21",
+              "says": "In Indianapolis, WTTV (Channel 4) and WXIN (Channel 59) will serve as the television homes for the 15-game package."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -537,27 +831,57 @@
     "la-clippers": {
       "code_names": {
         "ClipperVision": {
-          "kind": "team_stream",
-          "status": "unconfirmed",
-          "candidate": "ClipperVision",
-          "leads": [
-            "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
-            "https://frontofficesports.com/article/los-angeles-clippers-clippervision-streaming/",
-            "https://www.directv.com/insider/news/clippervision-on-directv/"
+          "name": "ClipperVision",
+          "kind": "tv",
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
+              "site": "Sports Video Group",
+              "date": "2026-10-15",
+              "read": "2026-10-21",
+              "says": "ClipperVision, which takes over from FanDuel Sports Network SoCal, will broadcast 77 Clippers games, with 10 simulcast on KTLA 5."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
+              "site": "Sports Video Group",
+              "date": "2026-10-15",
+              "read": "2026-10-21",
+              "says": "ClipperVision will be available through Spectrum (cable), DIRECTV (satellite and streaming), and Fubo, the same providers fans in Southern California, Hawaii, and parts of Nevada have traditionally used."
+            },
+            {
+              "url": "https://www.directv.com/insider/news/clippervision-on-directv/",
+              "site": "DIRECTV Insider",
+              "date": "2026-10-14",
+              "read": "2026-10-21",
+              "says": "ClipperVision will televise every Clippers game not selected for national TV exclusives, with 10 games simulcast on local broadcast station KTLA 5 in Los Angeles."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "KTLA": {
+          "name": "KTLA 5",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "KTLA 5",
-          "leads": [
-            "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
-            "https://ktla.com/sports/clippers/ktla-to-broadcast-10-l-a-clippers-games-this-season/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/",
+              "site": "Sports Video Group",
+              "date": "2026-10-15",
+              "read": "2026-10-21",
+              "says": "ClipperVision, which takes over from FanDuel Sports Network SoCal, will broadcast 77 Clippers games, with 10 simulcast on KTLA 5."
+            },
+            {
+              "url": "https://www.directv.com/insider/news/clippervision-on-directv/",
+              "site": "DIRECTV Insider",
+              "date": "2026-10-14",
+              "read": "2026-10-21",
+              "says": "ClipperVision will televise every Clippers game not selected for national TV exclusives, with 10 games simulcast on local broadcast station KTLA 5 in Los Angeles."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "unknown",
@@ -588,28 +912,57 @@
     "memphis-grizzlies": {
       "code_names": {
         "DAZN-MEM": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.sportsvideo.org/2026/09/10/memphis-grizzlies-name-dazn-exclusive-streaming-partner-for-2026-27-season/",
-            "https://www.sportcal.com/media/grizzlies-join-dazn-in-latest-local-multi-year-rights-tie-up/",
-            "https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html",
-            "https://cordcuttersnews.com/dazn-adds-another-nba-team-with-15-free-games-and-a-seven-state-reach/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/09/10/memphis-grizzlies-name-dazn-exclusive-streaming-partner-for-2026-27-season/",
+              "site": "Sports Video Group",
+              "date": "2026-09-10",
+              "read": "2026-10-21",
+              "says": "DAZN will stream 78 of the 80 announced 2026-27 regular season games, all four preseason games, and team-produced original programming including Grind City Media content and select Memphis Hustle games."
+            },
+            {
+              "url": "https://www.hoopsrumors.com/2026/09/grizzlies-partner-with-dazn-for-local-broadcasts.html",
+              "site": "Hoops Rumors",
+              "date": "2026-09-10",
+              "read": "2026-10-21",
+              "says": "The Grizzlies have reached a multiyear deal with DAZN to be their new local broadcast partner, according to a press release from the team."
+            },
+            {
+              "url": "https://cordcuttersnews.com/dazn-adds-another-nba-team-with-15-free-games-and-a-seven-state-reach/",
+              "site": "Cord Cutters News",
+              "date": "2026-09-15",
+              "read": "2026-10-21",
+              "says": "Grizzlies MVP Season Ticket Members get an even bigger perk: a free DAZN Season Pass for the 2026-27 season."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WATN": {
+          "name": "ABC24",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "ABC24",
-          "leads": [
-            "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/",
-            "https://www.sportsvideo.org/2026/09/10/memphis-grizzlies-name-dazn-exclusive-streaming-partner-for-2026-27-season/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/",
+              "site": "TheDesk.net",
+              "date": "2026-10-05",
+              "read": "2026-10-21",
+              "says": "In Memphis, games from the Grizzlies will be offered by WATN (Channel 24, ABC), making the station a new local broadcast partner for in-market games from the team."
+            },
+            {
+              "url": "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes",
+              "site": "MarketScale",
+              "date": "2026-10-06",
+              "read": "2026-10-21",
+              "says": "On October 2, TVNewsCheck reported that the Memphis Grizzlies , WATN/ABC24 and DAZN are widening their arrangement."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -629,16 +982,34 @@
     "miami-heat": {
       "code_names": {
         "Local10+": {
+          "name": "Local 10+ Platinum",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "Local 10+ Platinum",
-          "leads": [
-            "https://www.local10.com/sports/local/2026/06/08/wplg-local-10-becomes-the-home-of-the-miami-heat/",
-            "https://www.local10.com/tech/2026/07/18/how-to-download-and-use-the-free-local-10-platinum-app/",
-            "https://www.sportsvideo.org/2026/06/08/miami-heat-ink-new-deal-with-wplg-local-10-join-nbas-growing-ota-crowd/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/06/08/miami-heat-ink-new-deal-with-wplg-local-10-join-nbas-growing-ota-crowd/",
+              "site": "Sports Video Group",
+              "date": "2026-06-08",
+              "read": "2026-10-21",
+              "says": "In addition to broadcast coverage, HEAT games will also be available on Local 10’s new DTC free streaming platform, LOCAL 10 Plus Platinum"
+            },
+            {
+              "url": "https://awfulannouncing.com/nba/miami-heat-strike-over-the-air-deal-wplg.html",
+              "site": "Awful Announcing",
+              "date": "2026-06-08",
+              "read": "2026-10-21",
+              "says": "In addition to the over-the-air option, WPLG will launch a free, direct-to-consumer app called Local 10 Plus Platinum that will allow in-market fans to stream Heat games without any form of subscription."
+            },
+            {
+              "url": "https://www.local10.com/tech/2026/07/18/how-to-download-and-use-the-free-local-10-platinum-app/",
+              "site": "WPLG Local 10 (official, page title only)",
+              "date": "2026-07-18",
+              "read": "2026-10-21",
+              "says": "How to download and use the free Local 10+ Platinum app"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -662,18 +1033,41 @@
     "milwaukee-bucks": {
       "code_names": {
         "WCGV": {
+          "name": "MY24 (WVTV-DT2)",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "MY24 (WVTV-DT2)",
-          "leads": [
-            "https://milwaukeerecord.com/press-release/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/",
-            "https://urbanmilwaukee.com/pressrelease/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in-31-years/",
-            "https://www.milwaukeemag.com/milwaukee-bucks-tv-2026/",
-            "https://cbs58.com/news/bucks-returning-to-over-the-air-tv-for-first-full-season-in-31-years",
-            "https://www.cw18milwaukee.com/my24/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in/article_3fe145f5-3af8-490d-9d9f-fb815de44f82.html"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.cw18milwaukee.com/my24/milwaukee-bucks-to-return-to-full-season-over-the-air-television-for-first-time-in/article_3fe145f5-3af8-490d-9d9f-fb815de44f82.html",
+              "site": "cw18milwaukee.com (CW18/MY24, station's own site)",
+              "date": "2026-07-10",
+              "read": "2026-10-21",
+              "says": "The Milwaukee Bucks will return to full-season over-the-air television for the first time in 31 years, with 2026-27 preseason and regular season games airing on My24 and statewide affiliates in partnership with Rincon Broadcasting Group."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/WCGV-TV",
+              "site": "Wikipedia (WCGV-TV)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "What was WCGV-TV's primary subchannel continues under the WVTV license as My24."
+            },
+            {
+              "url": "https://www.milwaukeemag.com/milwaukee-bucks-tv-2026/",
+              "site": "Milwaukee Magazine",
+              "date": "2026-07-10",
+              "read": "2026-10-21",
+              "says": "with 2026-27 games airing on MY24 (WVTV-DT2) and statewide affiliates."
+            },
+            {
+              "url": "https://cbs58.com/news/bucks-returning-to-over-the-air-tv-for-first-full-season-in-31-years",
+              "site": "CBS 58 (WDJT)",
+              "date": "2026-07-10",
+              "read": "2026-10-21",
+              "says": "The Bucks announced Friday that all preseason and regular season games will air on MY24 and affiliated stations across Wisconsin."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -699,31 +1093,57 @@
     "minnesota-timberwolves": {
       "code_names": {
         "DAZN-MIN": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.sportsvideo.org/2026/07/30/minnesota-timberwolves-ink-local-media-rights-deal-with-dazn/",
-            "https://www.fox9.com/sports/timberwolves-dazn-how-watch-2026-27-season-subscription-prices",
-            "https://kstp.com/?p=3988021",
-            "https://www.dazn.com/en-US/help/articles/37999777893789",
-            "https://www.startribune.com/minnesota-timberwolves-how-to-watch-games-dazn-tv-channel-streaming-pricing-nba-schedule-2026-27/601873174"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://kstp.com/?p=3988021",
+              "site": "KSTP",
+              "date": "2026-07-30",
+              "read": "2026-10-21",
+              "says": "Minnesota Timberwolves games will be exclusively streamed on DAZN this upcoming season, according to announcement by the team Wednesday to make the global sports partner the Wolves exclusive local partner for the upcoming 2026-2027 season."
+            },
+            {
+              "url": "https://www.fox9.com/sports/timberwolves-dazn-how-watch-2026-27-season-subscription-prices",
+              "site": "FOX 9 Minneapolis-St. Paul",
+              "date": "2026-09-10",
+              "read": "2026-10-21",
+              "says": "The Minnesota Timberwolves and DAZN launched a new direct-to-fan streaming service for the 2026-27 season on Sept"
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/07/30/minnesota-timberwolves-ink-local-media-rights-deal-with-dazn/",
+              "site": "Sports Video Group",
+              "date": "2026-07-30",
+              "read": "2026-10-21",
+              "says": "The Minnesota Timberwolves today announced a new local-media–rights agreement with DAZN and will launch a team-branded subscription service later this summer."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "KARE": {
+          "name": "KARE 11",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "KARE 11",
-          "leads": [
-            "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes",
-            "https://fox9.com/news/timberwolves-launch-new-streaming-service-dazn-will-offer-15-games-free-july-2026",
-            "https://kstp.com/?p=3988021",
-            "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://thedesk.net/2026/10/tegna-memphis-grizzlies-minnesota-timberwolves-dazn-deal/",
+              "site": "TheDesk.net",
+              "date": "2026-10-05",
+              "read": "2026-10-21",
+              "says": "In Minneapolis, KARE (Channel 11, NBC) will continue its partnership with the Minnesota Timberwolves for a third consecutive season, offering 15 games throughout the season, starting October 28."
+            },
+            {
+              "url": "https://www.marketscale.com/industries/sports-entertainment/dazns-timberwolves-deal-puts-15-free-games-on-kare-11-for-15-million-homes",
+              "site": "MarketScale",
+              "date": "2026-10-06",
+              "read": "2026-10-21",
+              "says": "This is KARE 11's third straight season as the Wolves' free broadcast home."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -743,26 +1163,57 @@
     "new-orleans-pelicans": {
       "code_names": {
         "GCSEN": {
+          "name": "Gulf Coast Sports & Entertainment Network",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "Gulf Coast Sports & Entertainment Network (Gray)",
-          "leads": [
-            "https://www.wafb.com/2026/09/14/pelicans-preseason-games-air-gcsen/",
-            "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/",
+              "site": "FOX 8 WVUE (Gray; same GM as GCSEN)",
+              "date": "2026-09-30",
+              "read": "2026-10-21",
+              "says": "The 20 FOX 8 simulcasts are in addition to the Pelicans’ full slate of locally televised games available on GCSEN throughout the season."
+            },
+            {
+              "url": "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/",
+              "site": "FOX 8 WVUE (Gray; same GM as GCSEN)",
+              "date": "2026-09-30",
+              "read": "2026-10-21",
+              "says": "The Gulf Coast Sports & Entertainment Network announced Wednesday that FOX 8 will simulcast 20 Pelicans games this season, giving viewers across the New Orleans region another way to watch the team without a cable or streaming subscription."
+            },
+            {
+              "url": "https://www.wafb.com/2026/09/14/pelicans-preseason-games-air-gcsen/",
+              "site": "WAFB (Gray)",
+              "date": "2026-09-14",
+              "read": "2026-10-21",
+              "says": "All four of the New Orleans Pelicans’ preseason games will air on the Gulf Coast Sports and Entertainment Network."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WVUE": {
+          "name": "FOX 8",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "FOX 8",
-          "leads": [
-            "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/",
-            "https://www.nba.com/pelicans/broadcasting"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.fox8live.com/2026/09/30/fox-8-simulcast-20-pelicans-games-free-during-2026-27-season/",
+              "site": "fox8live.com (WVUE, station's own site)",
+              "date": "2026-09-30",
+              "read": "2026-10-21",
+              "says": "NEW ORLEANS (WVUE) - New Orleans Pelicans fans will be able to watch 20 games free over the air on FOX 8 during the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.nba.com/pelicans/broadcasting",
+              "site": "nba.com/pelicans (team's official site)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "All 17 Wednesday Night Hoops games will air on Gulf Coast Sports & Entertainment Network (GCSEN), with 11 games also simulcast locally on WVUE FOX 8 in New Orleans."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -787,30 +1238,64 @@
     "new-york-knicks": {
       "code_names": {
         "DAZN-MSG": {
+          "name": "MSG on DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "MSG on DAZN",
-          "leads": [
-            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
-            "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
-            "https://www.hollywoodreporter.com/tv/tv-news/gotham-sports-app-shuttering-yankees-knicks-stream-on-dazn-1236659020/",
-            "https://www.cnbc.com/2026/07/29/yes-network-msg-networks-dazn-streaming.html",
-            "https://sports.yahoo.com/articles/watch-knicks-dazn-prices-plans-181342227.html"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.msgnetworks.com/",
+              "site": "msgnetworks.com (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "MSG+ has moved to DAZN! Stream your favorite teams on DAZN starting in the 2026-27 season!"
+            },
+            {
+              "url": "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+              "site": "msgnetworks.com press release (official)",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "New York (July 29, 2026) – MSG Networks and YES Network have entered into a landmark partnership that will make DAZN, the world’s leading sports entertainment platform, the exclusive direct-to-consumer streaming home of MSG Networks and YES Network during the 2026-2027 NBA and NHL seasons."
+            },
+            {
+              "url": "https://sports.yahoo.com/articles/watch-knicks-dazn-prices-plans-181342227.html",
+              "site": "Yahoo Sports / The Sporting News",
+              "date": "2026-09-30",
+              "read": "2026-10-21",
+              "says": "All of the reigning NBA champions' games that are not selected for exclusive national broadcast will be available to stream regionally on DAZN, the new direct-to-consumer platform for the MSG networks."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "MSG": {
+          "name": "MSG Network",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "MSG Network",
-          "leads": [
-            "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
-            "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
-            "https://sny.tv/articles/knicks-2026-27-nba-regular-season-schedule"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+              "site": "MSG Networks (official press release)",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "MSG Networks and YES Network have entered into a landmark partnership that will make DAZN, the world’s leading sports entertainment platform, the exclusive direct-to-consumer streaming home of MSG Networks and YES Network during the 2026-2027 NBA and NHL seasons."
+            },
+            {
+              "url": "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/",
+              "site": "MSG Networks (official press release)",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "The networks feature a wide range of compelling sports content, including exclusive live local games and other programming of the New York Knicks, New York Rangers, New York Islanders, New Jersey Devils and Buffalo Sabres"
+            },
+            {
+              "url": "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/",
+              "site": "DAZN Group press room",
+              "date": "2026-07-29",
+              "read": "2026-10-21",
+              "says": "Subscribers within the networks’ respective regional coverage territories will have access to live Yankees, Knicks, Nets, Rangers, Devils, Islanders and Sabres games, as well as 24/7 feeds of the MSG, MSG Sportsnet, and YES Network"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -831,15 +1316,34 @@
     "oklahoma-city-thunder": {
       "code_names": {
         "KWTV": {
+          "name": "News 9",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "News 9",
-          "leads": [
-            "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts",
-            "https://www.news9.com/thunder-on-griffin"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.news9.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts",
+              "site": "News9.com (KWTV, station's own site)",
+              "date": "2026-08-27",
+              "read": "2026-10-21",
+              "says": "Four additional games will air on News 9everywhere those stations are carried. Those games are scheduled for Oct. 31, Nov. 28, Jan. 18, and April 9."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/KWTV-DT",
+              "site": "Wikipedia (KWTV-DT, call-sign tie)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "Virtual : 9 Branding News 9 News 9 Now (9.2)"
+            },
+            {
+              "url": "https://www.newson6.com/oklahoma-city-thunder/oklahoma-city-thunder-griffin-media-broadcasts",
+              "site": "NewsOn6.com (KOTV, Tulsa)",
+              "date": "2026-08-27",
+              "read": "2026-10-21",
+              "says": "Four additional games will air on News On 6 everywhere the station is carried. Those games are scheduled for Oct. 31, Nov. 28, Jan. 18 and April 9."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -868,40 +1372,80 @@
     "orlando-magic": {
       "code_names": {
         "DAZN-ORL": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.nba.com/magic/news/orlando-magic-names-dazn-as-exclusive-direct-to-consumer-streaming-partner-for-2026-27",
-            "https://barrettmedia.com/2026/09/03/orlando-magic-dazn-partner-streaming/",
-            "https://cordcuttersnews.com/dazn-is-adding-nba-games-to-its-streaming-service-this-fall/",
-            "https://www.dazn.com/magic"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nba.com/magic/news/orlando-magic-names-dazn-as-exclusive-direct-to-consumer-streaming-partner-for-2026-27",
+              "site": "nba.com/magic (official)",
+              "date": "2026-09-03",
+              "read": "2026-10-21",
+              "says": "Orlando Magic Names DAZN as Exclusive Direct-to-Consumer Streaming Partner for 2026-27 | Orlando Magic"
+            },
+            {
+              "url": "https://barrettmedia.com/2026/09/03/orlando-magic-dazn-partner-streaming/",
+              "site": "Barrett Media",
+              "date": "2026-09-03",
+              "read": "2026-10-21",
+              "says": "What We Know : The Magic named DAZN their exclusive direct-to-consumer streaming partner for 2026-27."
+            },
+            {
+              "url": "https://cordcuttersnews.com/dazn-is-adding-nba-games-to-its-streaming-service-this-fall/",
+              "site": "Cord Cutters News",
+              "date": "2026-09-03",
+              "read": "2026-10-21",
+              "says": "Beginning later this month, Magic fans in Central and North Florida will be able to stream locally broadcast games through a new Magic subscription on DAZN ."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WRDQ": {
+          "name": "WRDQ 27",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "WRDQ 27",
-          "leads": [
-            "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
-            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/",
-            "https://business.seminolebusiness.org/news/details/orlando-magic-names-cox-media-group-for-magic-television-broadcasts-for-2026-27"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
+              "site": "WFTV.com (WFTV/WRDQ, Cox; station's own site)",
+              "date": "2026-08-12",
+              "read": "2026-10-21",
+              "says": "Under the agreement, all locally distributed Orlando Magic regular-season games, excluding nationally exclusive broadcasts, will air on WRDQ-TV 27."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/",
+              "site": "Sports Video Group",
+              "date": "2026-08-13",
+              "read": "2026-10-21",
+              "says": "CMG will air Orlando Magic games in Orlando and across Central Florida on WRDQ-TV 27 and WFTV Channel 9."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WFTV": {
+          "name": "WFTV 9 (Cox)",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "WFTV 9",
-          "leads": [
-            "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
-            "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.wftv.com/news/local/orlando-magic-select-wftv-channel-9-tv-27-new-broadcast-home/5VCEXXYFD5AHDJDMJMOBNO23EM/",
+              "site": "WFTV.com (station's own site)",
+              "date": "2026-08-12",
+              "read": "2026-10-21",
+              "says": "Select games will also air on WFTV Channel 9."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/08/13/cox-media-group-announces-local-broadcast-deals-with-orlando-magic-and-charlotte-hornets/",
+              "site": "Sports Video Group",
+              "date": "2026-08-13",
+              "read": "2026-10-21",
+              "says": "CMG will air Orlando Magic games in Orlando and across Central Florida on WRDQ-TV 27 and WFTV Channel 9."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -929,29 +1473,85 @@
     "philadelphia-76ers": {
       "code_names": {
         "PCK-PHI": {
+          "name": "NBC Sports Philadelphia on Peacock",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "NBC Sports Philadelphia on Peacock",
-          "leads": [
-            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
-            "https://thesixersense.com/where-watch-every-76ers-game-2026-27-tv-streaming-radio",
-            "https://www.cabletv.com/sports/watch-philadelphia-76ers",
-            "https://www.peacocktv.com/sports/nbcsports-philadelphia"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.peacocktv.com/sports/nbcsports-philadelphia",
+              "site": "Peacock (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Add NBC Sports Philadelphia to your Peacock subscription. Stream LIVE games, exclusive interviews, and more featuring the NBA’s Philadelphia 76ers, NHL’s Philadelphia Flyers, and MLB’s Philadelphia Phillies."
+            },
+            {
+              "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
+              "site": "Sports Media Watch",
+              "date": "2026-10-20 (modified; published 2026-08-23)",
+              "read": "2026-10-21",
+              "says": "Peacock (in-market only): NBC Sports Philadelphia is available as an add-on subscription for Peacock users priced at $24.95/month."
+            },
+            {
+              "url": "https://www.cabletv.com/sports/watch-philadelphia-76ers",
+              "site": "CableTV.com",
+              "date": "2026-09-24 (modified; published 2026-09-16)",
+              "read": "2026-10-21",
+              "says": "In a huge win for local cord-cutters, you can now stream NBC Sports Philadelphia directly through Peacock for $24.95 per month."
+            },
+            {
+              "url": "https://www.cabletv.com/sports/watch-philadelphia-76ers",
+              "site": "CableTV.com",
+              "date": "2026-09-24 (modified; published 2026-09-16)",
+              "read": "2026-10-21",
+              "says": "It gives you 24/7 access to the main NBC Sports Philadelphia channel and its overflow network (NBCSP+)."
+            },
+            {
+              "url": "https://www.nbcsportsphiladelphia.com/news/sports/faq-nbc-sports-philadelphia-peacock/655697/",
+              "site": "NBC Sports Philadelphia (official)",
+              "date": "2025-07-23 (last updated; not labelled 2026-27)",
+              "read": "2026-10-21",
+              "says": "Subscribers have access to the 24/7 stream of the network, plus live games programmed on ‘plus’ or ‘overflow’ channels."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "NBCSP": {
+          "name": "NBC Sports Philadelphia",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "NBC Sports Philadelphia",
-          "leads": [
-            "https://www.inquirer.com/sixers/nbc-sports-philadelphia-sixers-broadcast-team-tom-haberstroh-20261015.html",
-            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
-            "https://www.nbcsportsphiladelphia.com/nba/philadelphia-76ers/sixers-preseason-schedule-2026-27-nba/747127/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nbcsportsphiladelphia.com/nba/philadelphia-76ers/tom-haberstroh-joins-nbc-sports-philadelphia-as-sixers-sideline-reporter/758717/",
+              "site": "NBC Sports Philadelphia (official)",
+              "date": "2026-10-15",
+              "read": "2026-10-21",
+              "says": "The Emmy Award-winning NBA reporter and analyst will report during the 76ers’ final preseason game on Friday, Oct. 16, before making his official debut on NBC Sports Philadelphia’s first regular-season telecast on Oct. 24, when the 76ers host the Milwaukee Bucks."
+            },
+            {
+              "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/philadelphia-76ers/",
+              "site": "Sports Media Watch",
+              "date": "2026-10-20 (modified; published 2026-08-23)",
+              "read": "2026-10-21",
+              "says": "Milwaukee Bucks vs Philadelphia 76ers NBA TV | A WCGV-My24, Bucks+ | H NBCSP, Peacock"
+            },
+            {
+              "url": "https://www.inquirer.com/sixers/nbc-sports-philadelphia-sixers-broadcast-team-tom-haberstroh-20261015.html",
+              "site": "The Philadelphia Inquirer",
+              "date": "2026-10-15",
+              "read": "2026-10-21",
+              "says": "NBC Sports Philadelphia announced Tom Haberstroh as the new sideline reporter for its 76ers coverage on Thursday, ahead of the team’s final preseason game on Friday."
+            },
+            {
+              "url": "https://www.nbcsportsphiladelphia.com/nba/philadelphia-76ers/sixers-preseason-schedule-2026-27-nba/747127/",
+              "site": "NBC Sports Philadelphia (official)",
+              "date": "2026-08-17",
+              "read": "2026-10-21",
+              "says": "All games will air on NBC Sports Philadelphia and 97.5 The Fanatic."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "NBCSP+": {
           "kind": "tv",
@@ -983,26 +1583,57 @@
     "phoenix-suns": {
       "code_names": {
         "AZFS App": {
+          "name": "Suns+",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "Suns+",
-          "leads": [
-            "https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/",
-            "https://www.azfamily.com/2026/05/22/arizonas-family-sports-launches-direct-to-consumer-streaming-app/",
-            "https://www.sportsvideo.org/2026/05/29/arizonas-family-sports-debuts-direct-to-consumer-streaming-app/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/",
+              "site": "Arizona's Family (Gray; Suns broadcast partner)",
+              "date": "2026-09-16",
+              "read": "2026-10-21",
+              "says": "All locally available broadcasts will stream on Suns+ in the Arizona’s Family Sports app with a paid subscription."
+            },
+            {
+              "url": "https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/",
+              "site": "Arizona's Family (Gray; Suns broadcast partner)",
+              "date": "2026-09-16",
+              "read": "2026-10-21",
+              "says": "This year, 74 non-national exclusive games will be broadcast on Arizona’s Family and Suns+ within the Arizona’s Family Sports app."
+            },
+            {
+              "url": "https://www.sportsvideo.org/2026/05/29/arizonas-family-sports-debuts-direct-to-consumer-streaming-app/",
+              "site": "Sports Video Group",
+              "date": "2026-05-29",
+              "read": "2026-10-21",
+              "says": "Arizona’s Family has launched the Arizona’s Family Sports (AZFS) streaming app, a new direct-to-consumer destination for live, local sports."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "KPHO": {
+          "name": "CBS 5",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "CBS 5",
-          "leads": [
-            "https://azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.azfamily.com/2026/09/16/phoenix-suns-announce-2026-27-local-broadcast-schedule-arizonas-family/",
+              "site": "azfamily.com (KTVK/KPHO, station's own site)",
+              "date": "2026-09-16",
+              "read": "2026-10-21",
+              "says": "CBS 5 and Arizona’s Family Sports will air the Suns home opener against the Golden State Warriors on Saturday, Oct. 24."
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/KPHO-TV",
+              "site": "Wikipedia (KPHO-TV, call-sign tie)",
+              "date": "undated reference page (call-sign tie only)",
+              "read": "2026-10-21",
+              "says": "Virtual : 5 Branding CBS 5; Arizona's Family"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "high",
@@ -1051,17 +1682,41 @@
     "sacramento-kings": {
       "code_names": {
         "PCK-SAC": {
+          "name": "NBC Sports California on Peacock",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "NBC Sports California on Peacock",
-          "leads": [
-            "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/sacramento-kings/",
-            "https://www.cabletv.com/sports/watch-sacramento-kings",
-            "https://www.peacocktv.com/sports/nbcsports-california",
-            "https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/",
+              "site": "NBC Sports Bay Area & California (official)",
+              "date": "2026-10-19",
+              "read": "2026-10-21",
+              "says": "NBC Sports California: Live Athletics , Sacramento Kings and San Jose Sharks games, and comprehensive pregame and postgame coverage."
+            },
+            {
+              "url": "https://www.peacocktv.com/sports/nbcsports-california",
+              "site": "Peacock (official)",
+              "date": "undated official page",
+              "read": "2026-10-21",
+              "says": "Add NBC Sports California to your Peacock subscription. Stream LIVE games, exclusive interviews, and more featuring the NBA’s Sacramento Kings, NHL’s San Jose Sharks, and MLB’s Athletics."
+            },
+            {
+              "url": "https://www.cabletv.com/sports/watch-sacramento-kings",
+              "site": "CableTV.com",
+              "date": "2026-09-18",
+              "read": "2026-10-21",
+              "says": "For local cord-cutters, NBC Sports California is also available to stream directly through Peacock . This is a fantastic option if you don’t want a big, expensive live TV package. For $17.95 per month on top of a base Peacock Premium plan, you’ll get access to almost every regular-season Kings game this campaign."
+            },
+            {
+              "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/sacramento-kings/",
+              "site": "Sports Media Watch",
+              "date": "2026-10-19 (modified; published 2026-08-22)",
+              "read": "2026-10-21",
+              "says": "Sacramento Kings vs Los Angeles Clippers NBA League Pass | A NBCSCA, Peacock | H KTLA-CW, ClipperVision"
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         }
       },
       "confidence": "moderate",
@@ -1083,17 +1738,34 @@
     "san-antonio-spurs": {
       "code_names": {
         "DAZN-SAS": {
+          "name": "DAZN",
           "kind": "stream",
-          "status": "unconfirmed",
-          "candidate": "DAZN",
-          "leads": [
-            "https://www.sportsvideo.org/2026/09/02/san-antonio-spurs-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
-            "https://www.tvtechnology.com/business/partnerships/san-antonio-spurs-dazn-ink-exclusive-streaming-deal",
-            "https://news4sanantonio.com/sports/spurs-games-to-stream-live-on-dazn-for-2026-27-season-san-antonio-texas-nba-basketball-victor-wembanyama-stephon-castle-dillon-harper-david-robinson",
-            "https://www.axios.com/local/san-antonio/2026/09/02/spurs-name-dazn-new-streaming-games"
+          "status": "confirmed",
+          "basis": "two_sources",
+          "sources": [
+            {
+              "url": "https://www.sportsvideo.org/2026/09/02/san-antonio-spurs-name-dazn-exclusive-streaming-home-beginning-2026-27-season/",
+              "site": "Sports Video Group",
+              "date": "2026-09-02",
+              "read": "2026-10-21",
+              "says": "The San Antonio Spurs have announced DAZN as their exclusive direct-to-consumer media partner beginning with the 2026-27 NBA season."
+            },
+            {
+              "url": "https://www.tvtechnology.com/business/partnerships/san-antonio-spurs-dazn-ink-exclusive-streaming-deal",
+              "site": "TV Technology",
+              "date": "2026-09-02",
+              "read": "2026-10-21",
+              "says": "Spurs games to stream live on DAZN beginning with 2026-27 season"
+            },
+            {
+              "url": "https://news4sanantonio.com/sports/spurs-games-to-stream-live-on-dazn-for-2026-27-season-san-antonio-texas-nba-basketball-victor-wembanyama-stephon-castle-dillon-harper-david-robinson",
+              "site": "News 4 San Antonio (WOAI)",
+              "date": "2026-09-02",
+              "read": "2026-10-21",
+              "says": "The Spurs are partnering with DAZN, a global sports streaming service, to bring live games and exclusive team programming directly to viewers."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "WOAI.2": {
           "kind": "tv",
@@ -1188,15 +1860,34 @@
     "washington-wizards": {
       "code_names": {
         "MNMT": {
+          "name": "Monumental Sports Network",
           "kind": "tv",
-          "status": "unconfirmed",
-          "candidate": "Monumental Sports Network",
-          "leads": [
-            "https://www.monumentalsportsnetwork.com/wizards-app-live",
-            "https://dazngroup.com/press-room/monumental-sports-network-and-dazn-partner-to-expand-access-to-live-capitals-wizards-mystics-games-and-other-d-c-sports-content/"
+          "status": "confirmed",
+          "basis": "official",
+          "sources": [
+            {
+              "url": "https://monumentalsports.com/2026/10/monumental-sports-network-announces-2026-27-washington-wizards-local-tv-radio-schedule-john-walls-return-to-broadcast-team/",
+              "site": "Monumental Sports & Entertainment (official release)",
+              "date": "2026-10-14",
+              "read": "2026-10-21",
+              "says": "MNMT also announced that 76 regular season Washington Wizards games will air on the award-winning local media platform during the upcoming season."
+            },
+            {
+              "url": "https://monumentalsports.com/2026/10/monumental-sports-network-announces-2026-27-washington-wizards-local-tv-radio-schedule-john-walls-return-to-broadcast-team/",
+              "site": "Monumental Sports & Entertainment (official release)",
+              "date": "2026-10-14",
+              "read": "2026-10-21",
+              "says": "All preseason and regular season Wizards games will be televised locally on MNMT, with the exception of exclusive nationally broadcast games."
+            },
+            {
+              "url": "https://www.sportsvideo.org/?p=321920",
+              "site": "Sports Video Group",
+              "date": "2026-09-18",
+              "read": "2026-10-21",
+              "says": "Monumental Sports Network (MNMT) has announced that its Monumental+ streaming service is now available as a subscription through Prime Video, giving Capitals and Wizards fans an additional way to access live games and original programming ahead of the 2026-27 season."
+            }
           ],
-          "reason": "Not confirmed: no source page could be opened from the 2026-10-20 session (network blocked). leads are search hits, not read.",
-          "checked": "2026-10-20"
+          "checked": "2026-10-21"
         },
         "MNMT2": {
           "kind": "tv",

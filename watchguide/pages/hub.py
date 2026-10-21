@@ -25,7 +25,9 @@ def national_partners(ctx: SiteContext) -> list[dict]:
     for game in ctx.games:
         for code in game.national_codes:
             counts[code] += 1
-    return [{"code": code, "games": n} for code, n in counts.most_common() if code not in skip]
+    # name: what readers see, never the feed code (Amazon is Prime Video).
+    return [{"code": code, "name": ctx.channel_names(code, "national")[0], "games": n}
+            for code, n in counts.most_common() if code not in skip]
 
 
 def national_footnote(ctx: SiteContext) -> str:

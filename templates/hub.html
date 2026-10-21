@@ -158,7 +158,7 @@
   {%- if national_partners %}
   <ul class="chip-list">
     {%- for partner in national_partners %}
-    <li><span class="badge badge-national">{{ partner.code }}</span> <span class="small muted">{{ partner.games }} games</span></li>
+    <li><span class="badge badge-national">{{ partner.name }}</span> <span class="small muted">{{ partner.games }} games</span></li>
     {%- endfor %}
   </ul>
   {%- else %}

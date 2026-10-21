@@ -4,7 +4,7 @@
     "currency": "USD",
     "all_prices_checked": "2026-09-25",
     "unmapped_broadcaster_codes": {
-      "NBCSN": "30 games in the NBA schedule feed. Deliberately not mapped to any service: the original NBC Sports Network shut down in 2021 and what this code refers to in 2026-27 is unconfirmed. These games render TBA until verified.",
+      "NBCSN": "30 games in the NBA schedule feed. Deliberately not mapped to any service: which live TV services carry it in 2026-27 is not verified. Its name (NBC Sports Network, simulcasting the Peacock-exclusive Monday games) is confirmed in code_names below, so pages name it but it never counts as coverage.",
       "Telemundo": "10 games. Spanish-language coverage. Deliberately not counted as coverage for an English-language reader; show it as a separate note on those games."
     },
     "lineup_note": "Live TV services only. lineup.packages lists each package (Sling Orange and Sling Blue separately) with one entry per channel in lineup_channels. status is carried, not_carried, zip_dependent (sources say it depends on the ZIP code or market; recorded, never guessed) or unchecked. confidence is high when the entry comes from the service's own lineup page (a source on one of official_domains, published 'official'), or moderate when at least two independent sources (different sites) published in 2026 say the same about that channel in that specific plan; one source, older sources or disagreeing sources leave it unchecked. checked is the date the sources were read. The game block's cable line names a package for a channel marked carried at high or moderate confidence, and a moderate one adds a check-before-you-buy line. For live TV services the lineup also replaces the service-level carries and carries_verified in the coverage maths: a service covers a national game when one of the game's channels is carried at high or moderate confidence in one of its packages, and local ABC and NBC marked zip_dependent count for national ABC and NBC games (the pages then say availability varies by ZIP code). Regional networks, unchecked and not_carried never count.",
@@ -550,9 +550,47 @@
       "checked": "2026-09-25"
     },
     "NBCSN": {
-      "status": "unconfirmed",
-      "reason": "What this code means in 2026-27 is unconfirmed (see _meta.unmapped_broadcaster_codes). No page could be opened from the 2026-10-20 session to confirm it.",
-      "checked": "2026-10-20"
+      "name": "NBC Sports Network",
+      "status": "confirmed",
+      "basis": "official",
+      "sources": [
+        {
+          "url": "https://www.nbcsports.com/pressbox/press-releases/nbc-sports-announces-its-complete-2026-27-nba-regular-season-schedule-featuring-100-games-across-nbc-peacock-and-nbcsn",
+          "site": "NBC Sports Pressbox (official)",
+          "date": "2026-08-13",
+          "read": "2026-10-21",
+          "says": "All NBA games presented by NBC Sports will stream live on Peacock and all Peacock-exclusive games on Monday nights will also be presented on NBCSN"
+        },
+        {
+          "url": "https://www.nba.com/news/how-to-watch-games-2026-27-season",
+          "site": "NBA.com (official)",
+          "date": "2026-09-22 (modified; published 2026-08-13)",
+          "read": "2026-10-21",
+          "says": "These exclusive matchups will also be available on NBC Sports Network."
+        },
+        {
+          "url": "https://www.nbcuniversal.com/article/how-watch-everything-2026-fall-sports-lineup-across-nbcuniversal",
+          "site": "NBCUniversal (official)",
+          "date": "2026-10-07",
+          "read": "2026-10-21",
+          "says": "All NBA games presented by NBC Sports will stream live on Peacock, and all Peacock-exclusive games on Monday nights will also be presented on NBCSN."
+        },
+        {
+          "url": "https://www.cabletv.com/sports/watch-philadelphia-76ers",
+          "site": "CableTV.com",
+          "date": "2026-09-24 (modified; published 2026-09-16)",
+          "read": "2026-10-21",
+          "says": "But only Fubo and YouTube TV carry NBCSN."
+        },
+        {
+          "url": "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/golden-state-warriors/",
+          "site": "Sports Media Watch",
+          "date": "2026-10-20 (modified; published 2026-08-23)",
+          "read": "2026-10-21",
+          "says": "Some Peacock-exclusive games will be available via NBCSN."
+        }
+      ],
+      "checked": "2026-10-21"
     }
   }
 }
