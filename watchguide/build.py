@@ -28,7 +28,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from . import config, lastmod, links, seo, share
+from . import config, lastmod, links, seo, share, storylines
 from .context import SiteContext, load_context, today_et
 from .countries import country_players
 from .coverage import channel_names, channels_for_game
@@ -604,6 +604,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
         raise BuildError("expected 30 teams in data/teams.json")
     notes.extend(load_faces(out_dir, ctx, allow_fetch=not offline))
     notes.extend(load_worth(out_dir, ctx, allow_fetch=not offline))
+    ctx.storylines = storylines.load(Path(data_dir) / "storylines.json" if data_dir else storylines.PATH)
 
     pages = render_pages(ctx)
     expected = check_pages(pages, data_dir, ctx.games)
@@ -672,6 +673,7 @@ def refresh_build(out_dir: Path, today: str | None = None,
     # refresh always reads the file; matchup pages come from the same fetch
     # (pair files already on disk are not downloaded again).
     notes.extend(load_worth(out_dir, ctx, allow_fetch=True))
+    ctx.storylines = storylines.load(Path(data_dir) / "storylines.json" if data_dir else storylines.PATH)
     pages = render_pages(ctx)
     slugs_today = {ctx.by_tricode[t].slug for t in playing if t in ctx.by_tricode}
     pairs_today = ctx.render_pairs
