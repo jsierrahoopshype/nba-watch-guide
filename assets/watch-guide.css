@@ -411,7 +411,7 @@ a.out:hover { color: var(--accent-ink); }
 .gb-story { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
 .gb-story ul { margin: 0; padding-left: 18px; }
 .gb-story li + li { margin-top: 6px; }
-.gb-story-link { overflow-wrap: anywhere; }
+.gb-story-link { text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---------- expandables: "Why isn't this on League Pass?" and friends ----
    A bordered button-like row with a chevron, so it reads as tappable. */
