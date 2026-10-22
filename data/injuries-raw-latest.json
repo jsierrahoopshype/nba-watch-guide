@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-22T20:58:06+00:00",
+ "fetched_at": "2026-10-22T21:23:24+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5638,
+ "row_count": 5656,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -39430,6 +39430,137 @@
    "injury": "Personal Reasons",
    "date": "2026-10-22",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Probable",
+   "injury": "Left MCL Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zach Collins",
+   "status": "Probable",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zach Collins",
+   "status": "Probable",
+   "injury": "Right Quadriceps Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Josh Giddey",
+   "status": "Probable",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan Hawkins",
+   "status": "Questionable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Questionable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Doubtful",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Kobe Brown",
+   "status": "Probable",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Josh Giddey",
+   "status": "Probable",
+   "injury": "Left Wrist Spra",
+   "date": "2026-10-22",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Kobe Brown",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Kobe Brown",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kobe Brown",
+   "status": "Available",
+   "injury": "",
+   "date": "",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Questionable",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Ben Sheppard",
+   "status": "Questionable",
+   "injury": "Left Knee Soreness",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Felix Okpara",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Questionable",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Questionable",
+   "injury": "LeftKneeContusion/ BoneBruise",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Questionable",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
   }
  ]
 }
