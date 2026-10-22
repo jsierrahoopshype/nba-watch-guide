@@ -8,7 +8,9 @@ players far above their norm against this opponent, active player streaks
 with their all-time rank, career milestones in reach, birthdays.
 
 Every line links to its HoopsMatic page (Stat-Streaks player or team page,
-Born & Died birthday page), printed underneath it. Lines that "Also worth
+Born & Died birthday page) inside the sentence: the item's "anchor" (the
+player's or team's name) carries the link. With no anchor, or one the text
+doesn't contain, the whole line is the link. Lines that "Also worth
 knowing" already covers (back-to-backs, revenge games, season series) are
 left out by the bots. The block shows at most MAX_LINES, in the order the
 file gives (strongest first), and only for games on the file's date.
@@ -39,7 +41,9 @@ def load(path: Path = PATH) -> dict:
 
 
 def lines(data: dict, game: Game) -> list[dict]:
-    """[{"text", "url"}] for this game, or [] (wrong day, no file, no lines)."""
+    """[{"text", "url", "before", "anchor", "after"}] for this game, or [] (wrong
+    day, no file, no lines). before + anchor + after == text; the template
+    links the anchor when there is a url."""
     if not data or data.get("date") != game.date_et:
         return []
     out = []
@@ -50,5 +54,11 @@ def lines(data: dict, game: Game) -> list[dict]:
             continue
         if url and not url.startswith(ALLOWED_HOSTS):
             url = ""      # only HoopsMatic pages, never another domain
-        out.append({"text": text, "url": url})
+        anchor = str(item.get("anchor", "")).strip()
+        at = text.find(anchor) if anchor else -1
+        if at < 0:
+            before, anchor, after = "", text, ""
+        else:
+            before, after = text[:at], text[at + len(anchor):]
+        out.append({"text": text, "url": url, "before": before, "anchor": anchor, "after": after})
     return out

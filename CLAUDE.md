@@ -11,7 +11,8 @@ reporting any PR.
   knowing" stays last, at most four lines (`watchguide/worth.py`). Storylines
   (`watchguide/storylines.py`, data/storylines.json written each game-day
   morning by nba-editorial-bots) sit just above it, at most four lines, each
-  with its HoopsMatic link underneath; never on the hub cards.
+  linking to its HoopsMatic page on the player's or team's name inside the
+  sentence; never on the hub cards.
 - **Answer wording.** Alternatives join with "or", never "and". Free options
   say "(free over the air)".
 - **Data claims.** Every claim needs an official page, or two independent

@@ -46,3 +46,25 @@ def test_block_renders_between_whos_out_and_also_worth_knowing(tmp_path_factory,
     if 'data-part="worth"' in block:
         assert block.index('data-part="story"') < block.index('data-part="worth"')
     assert block.index('data-part="watch"') < block.index('data-part="story"')
+
+
+def test_link_sits_on_the_name_inside_the_sentence(tmp_path_factory, fixture_games):
+    data = {"date": TODAY, "games": {"0022600001": [
+        {"text": "Jaylen Brown averages 30.4 points against the Celtics", "anchor": "Jaylen Brown",
+         "url": "https://hoopsmatic.com/streaks-droughts/players/jaylen-brown-1627759.html"},
+        {"text": "76ers have won 3 straight", "anchor": "Knicks", "url": "https://hoopsmatic.com/t"},
+    ]}}
+    a, b = storylines.lines(data, _game())
+    assert (a["before"], a["anchor"], a["after"]) == ("", "Jaylen Brown", " averages 30.4 points against the Celtics")
+    assert (b["before"], b["anchor"], b["after"]) == ("", "76ers have won 3 straight", "")   # anchor not in text
+
+    g = [g for g in fixture_games if g.date_et == TODAY][0]
+    data_dir = _copy_data(tmp_path_factory, "data-storylines-inline")
+    url = "https://hoopsmatic.com/streaks-droughts/teams/boston-celtics.html"
+    (data_dir / "storylines.json").write_text(json.dumps({"date": TODAY, "games": {g.game_id: [
+        {"text": "Last met in 2023: Celtics won the series 4-3", "anchor": "Celtics", "url": url}]}}),
+        encoding="utf-8")
+    site = _build(tmp_path_factory, fixture_games, "site-storylines-inline", data_dir=data_dir)
+    tonight = (site / "tonight" / "index.html").read_text(encoding="utf-8")
+    assert f'Last met in 2023: <a class="gb-story-link" href="{url}">Celtics</a> won the series 4-3' in tonight
+    assert "hoopsmatic.com/streaks-droughts/teams/boston-celtics.html</a>" not in tonight   # no bare URL line
