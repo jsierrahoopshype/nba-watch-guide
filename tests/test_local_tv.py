@@ -188,7 +188,12 @@ def test_shared_dazn_price(services, local):
 
 
 def test_null_price_is_listed_but_never_in_a_combination(services, local):
+    # The Nets' YES on DAZN with its price blanked: a stream nobody has
+    # priced yet (the real entry got its 2026-27 price on Oct 22, 2026).
+    from dataclasses import replace
     nets = local["brooklyn-nets"]
+    nets = replace(nets, streaming=[replace(o, monthly_price_usd=None, season_price_usd=None, price_verified=False)
+                                    for o in nets.streaming])
     games = [game(0, team="BKN"), game(1, team="BKN")]
     cov = build_state_coverage(games, "BKN", services, nets, IN_MARKET)
     assert local_counts(cov) == {"YES on DAZN": 2}          # listed and counted

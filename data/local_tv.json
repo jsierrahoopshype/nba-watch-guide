@@ -264,7 +264,7 @@
       "local_broadcasters": ["YES Network"],
       "ota": {"status": "none", "games": 0, "note": ""},
       "streaming": [
-        {"name": "YES on DAZN", "monthly_price_usd": null, "season_price_usd": null, "note": "DAZN replaces the Gotham Sports app. Pay-TV subscribers who get YES get it on DAZN at no extra cost. Standalone 2026-27 price not confirmed by an official page or two independent sources.", "price_verified": false, "checked": "2026-10-01"}
+        {"name": "YES on DAZN", "monthly_price_usd": 19.99, "season_price_usd": 119.99, "note": "DAZN replaces the Gotham Sports app. Pay-TV subscribers who get YES get it on DAZN at no extra cost. Standalone: Monthly Flex Pass $19.99 (Yankees and Nets) or the Nets Season Pass at $119.99.", "price_verified": true, "checked": "2026-10-22", "price_sources": [{"url": "https://www.dazn.com/en-US/news/basketball/brooklyn-nets-how-to-watch-online-subscription-pricing-schedule/1pf3h8a1t84uj1hjwhxsdo5kbi", "site": "dazn.com (official)", "date": "2026-10-20", "read": "2026-10-22", "says": "Modified Nets Season Pass: $119.99/Season. Monthly Flex Pass - cancel anytime: $19.99/Month"}, {"url": "https://sports.yahoo.com/articles/watch-nets-dazn-prices-plans-141811367.html", "site": "The Sporting News (on Yahoo Sports)", "date": "2026-09-30", "read": "2026-10-22", "says": "Nets Season Pass: $119.99 per season. Monthly Flex Pass: $19.99 per month."}]}
       ],
       "links": [
         {"names": ["YES Network", "YES"], "kind": "station", "level": "section", "url": "https://yesnetwork.com/nets-schedule/", "verified": true, "checked": "2026-10-03", "confidence": "high", "how": "Runner check 2026-10-03: HTTP 200, title “Nets Schedule – YES Network”.", "affiliate_url": "", "affiliate_level": ""},
@@ -623,7 +623,7 @@
       "short_names": {"WFAA 8 (some games)": "WFAA 8"},
       "ota": {"status": "all", "games": 69, "note": "Every local game is free over the air: the NBA schedule lists KFAA 29 on all 69 of them, and WFAA 8 on 5 (the Mavericks' where-to-watch page names both)."},
       "streaming": [
-        {"name": "MavsTV", "monthly_price_usd": null, "season_price_usd": null, "note": "2026-27 price not confirmed.", "price_verified": false}
+        {"name": "MavsTV", "monthly_price_usd": 14.99, "season_price_usd": 99.99, "note": "MavsTV+ on nba.com/mavs/stream: $14.99 a month or $99.99 for the season (the Dallas Morning News gives the season rate as $99.88; the official page's price is used).", "price_verified": true, "checked": "2026-10-22", "price_sources": [{"url": "https://www.nba.com/mavs/stream", "site": "nba.com/mavs (team's official site)", "date": "undated official page", "read": "2026-10-22", "says": "Season-Long $99.99/ Season. Monthly $14.99/ Monthly"}, {"url": "https://sports.yahoo.com/articles/watch-dallas-mavericks-games-2026-015226065.html", "site": "Dallas Morning News (on Yahoo Sports)", "date": "2026-10-13", "read": "2026-10-22", "says": "MavsTV+ is available to purchase as a monthly subscription for $14.99 or for season-long rate of $99.88."}]}
       ],
       "links": [
         {"names": ["MavsTV"], "kind": "stream", "level": "signup", "url": "https://www.mavs.com/mavstv/", "verified": true, "checked": "2026-10-03", "confidence": "moderate", "how": "Search evidence for this exact URL (indexed with the right title, named by an official page, or named by two independent 2026 sources); the runner check 2026-10-03 could not confirm it (HTTP 200 at nba.com/mavs/mavstv with no title).", "affiliate_url": "", "affiliate_level": ""}
