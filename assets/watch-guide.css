@@ -408,6 +408,10 @@ a.out:hover { color: var(--accent-ink); }
 .game-side .out-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 4px 3px 10px; border: 1px solid var(--border-soft); border-radius: 999px; font-size: 0.85rem; }
 .gb-worth { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
 .gb-worth ul { margin: 0; padding-left: 18px; }
+.gb-story { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
+.gb-story ul { margin: 0; padding-left: 18px; }
+.gb-story li + li { margin-top: 6px; }
+.gb-story-link { overflow-wrap: anywhere; }
 
 /* ---------- expandables: "Why isn't this on League Pass?" and friends ----
    A bordered button-like row with a chevron, so it reads as tappable. */

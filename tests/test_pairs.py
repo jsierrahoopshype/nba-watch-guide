@@ -29,7 +29,7 @@ from watchguide.sources import schedule as schedule_source
 TEAMS = load_teams()
 BY_TRICODE = {t.tricode: t for t in TEAMS}
 TAGS = re.compile(r"<[^>]+>")
-PARTS = ("watch", "when", "players", "out", "worth")
+PARTS = ("watch", "when", "players", "out", "story", "worth")
 
 
 def read(site, rel: str) -> str:
@@ -287,7 +287,7 @@ def test_layout_order_on_a_phone_in_a_real_browser(built_site, tmp_path):
             for path in ("tonight", slug, TEAMS[0].slug):
                 page.goto(f"http://127.0.0.1:{server.server_port}/how-to-watch/{path}")
                 tops = page.eval_on_selector_all("[data-game-block]", """els => els.map(el =>
-                    ['watch', 'when', 'players', 'out', 'worth'].map(k => {
+                    ['watch', 'when', 'players', 'out', 'story', 'worth'].map(k => {
                       const n = el.querySelector('[data-part="' + k + '"]');
                       if (!n) return null;
                       const r = n.getBoundingClientRect();

@@ -60,6 +60,8 @@ class SiteContext:
     crews: dict[str, Any] = field(default_factory=dict)
     referee_slugs: set[str] = field(default_factory=set)
     matchups: Any = None
+    # Pre-game angles from the editorial bots (storylines.py), set by the build.
+    storylines: dict[str, Any] = field(default_factory=dict)
     # Pair pages to render in full; None means all. The 30-minute refresh
     # sets it to today's pairs, and the rest come back as placeholders
     # (see pages/pair.py) so the manifest, sitemap and lastmod still see them.

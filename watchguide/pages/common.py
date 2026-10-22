@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from .. import config, links, worth
+from .. import config, links, storylines, worth
 from ..context import SiteContext
 from ..coverage import (IN_MARKET, OUT_OF_MARKET, carriers_for_game, channels_for_game, league_pass_blocked,
                         local_reaches, with_local_options)
@@ -365,7 +365,7 @@ def accent_style(ctx: SiteContext, game) -> str:
 def game_view(ctx: SiteContext, game, line: str | None = None) -> dict:
     """Everything the game block partial prints, in its fixed order:
     where to watch, then tip time, then players to watch with the ranking
-    line, then who's out, then "Also worth knowing"."""
+    line, then who's out, then the storylines, then "Also worth knowing"."""
     teams = game_teams(game, ctx.by_tricode)
     away, home = (teams if teams else (ctx.by_tricode.get(game.away_tricode),
                                        ctx.by_tricode.get(game.home_tricode)))
@@ -394,5 +394,6 @@ def game_view(ctx: SiteContext, game, line: str | None = None) -> dict:
         "players": players_to_watch(ctx, game, row["stars"] if row else None),
         "out": out_block(ctx, game),
         "line": (row["line"] if row else "") if line is None else line,
+        "story": storylines.lines(getattr(ctx, "storylines", {}) or {}, game),
         "worth": worth.lines(ctx, game),
     }

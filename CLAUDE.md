@@ -8,7 +8,10 @@ reporting any PR.
 
 - **Game view order.** Where to watch comes first in every game view (pair
   pages, the tonight page, hub cards, the team pages' next game). "Also worth
-  knowing" stays last, at most four lines (`watchguide/worth.py`).
+  knowing" stays last, at most four lines (`watchguide/worth.py`). Storylines
+  (`watchguide/storylines.py`, data/storylines.json written each game-day
+  morning by nba-editorial-bots) sit just above it, at most four lines, each
+  with its HoopsMatic link underneath; never on the hub cards.
 - **Answer wording.** Alternatives join with "or", never "and". Free options
   say "(free over the air)".
 - **Data claims.** Every claim needs an official page, or two independent

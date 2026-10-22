@@ -11,7 +11,9 @@
          the page script), ET small beside it
       3. players to watch, with the ranking line
       4. who's out
-      5. "Also worth knowing", last: at most four short lines (worth.py),
+      5. storylines: at most four pre-game angles from the editorial bots
+         (storylines.py), each with its HoopsMatic link underneath
+      6. "Also worth knowing", last: at most four short lines (worth.py),
          each marked data-volatile only when it can change during the day
     The head above them is the matchup: both logos, both names linking to
     the team pages and the date chip. Nothing sits between the head and
@@ -123,6 +125,17 @@
     </div>
     {%- endif %}
   </div>
+
+  {%- if view.story %}
+  <div class="gb-story small" data-part="story">
+    <h4>{{ game_text.story_heading }}</h4>
+    <ul>
+      {%- for item in view.story %}
+      <li>{{ item.text }}{% if item.url %}<br><a class="gb-story-link" href="{{ item.url }}">{{ item.url | replace("https://", "") }}</a>{% endif %}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
 
   {%- if view.worth %}
   <div class="gb-worth small" data-part="worth">
