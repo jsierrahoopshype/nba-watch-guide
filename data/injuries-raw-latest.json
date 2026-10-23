@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-23T17:57:26+00:00",
+ "fetched_at": "2026-10-23T19:37:41+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5684,
+ "row_count": 5685,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -39768,6 +39768,13 @@
    "injury": "Gastrointestinal Illness",
    "date": "2026-10-23",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "Tony Bradley",
+   "status": "Available",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
   }
  ]
 }
