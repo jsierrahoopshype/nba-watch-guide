@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-23T02:11:05+00:00",
+ "fetched_at": "2026-10-23T07:44:48+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5656,
+ "row_count": 5674,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -39561,6 +39561,140 @@
    "injury": "Left Knee Contusion / Bone Bruise",
    "date": "2026-10-22",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Jayden Quaintance",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-07-15",
+   "prevStatus": "Out",
+   "eta": "6 months"
+  },
+  {
+   "player": "Keldon Johnson",
+   "status": "Questionable",
+   "injury": "Mouth Laceration",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Trey Alexander",
+   "status": "Available",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jusuf Nurkic",
+   "status": "Out",
+   "injury": "Right 2nd Plantar Plate Tear",
+   "date": "2026-10-07",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Tony Bradley",
+   "status": "Questionable",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Tony Bradley",
+   "status": "Available",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jarrett Allen",
+   "status": "Available",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Questionable",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Collin Sexton",
+   "status": "Available",
+   "injury": "Right Soleus Strain",
+   "date": "2026-10-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jake LaRavia",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jake LaRavia",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Cedric Coward",
+   "status": "Doubtful",
+   "injury": "",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cedric Coward",
+   "status": "Doubtful",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Questionable",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Questionable",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Malik Monk",
+   "status": "Probable",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-10-22",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Spencer Jones",
+   "status": "Out",
+   "injury": "Bilateral Hamstring Injury Management",
+   "date": "2026-10-22",
+   "prevStatus": "Questionable",
+   "eta": "Day-to-Day"
   }
  ]
 }
