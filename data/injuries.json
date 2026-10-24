@@ -1,0 +1,702 @@
+{
+ "updated_at": "2026-10-24T09:53:58-04:00",
+ "as_of": "2026-10-23",
+ "source_id": "hoopsmatic-depth-charts-injuries",
+ "date_et": "2026-10-24",
+ "has_games_today": true,
+ "players": [
+  {
+   "player": "Henri Veesaar",
+   "status": "Out",
+   "injury": "Right ACL Tear",
+   "date": "2026-09-21",
+   "team": "ATL"
+  },
+  {
+   "player": "Mouhamed Gueye",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "ATL"
+  },
+  {
+   "player": "Jock Landale",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "ATL"
+  },
+  {
+   "player": "Kingston Flemings",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "ATL"
+  },
+  {
+   "player": "Tyler Bilodeau",
+   "status": "Out",
+   "injury": "Right Shoulder Sprain",
+   "date": "2026-10-21",
+   "team": "BKN"
+  },
+  {
+   "player": "Danny Wolf",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Day'Ron Sharpe",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-10-21",
+   "team": "BKN"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Josh Minott",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Michael Porter",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Noah Clowney",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Terance Mann",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "BKN"
+  },
+  {
+   "player": "Coby White",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-10-21",
+   "team": "CHA"
+  },
+  {
+   "player": "Grant Williams",
+   "status": "Out",
+   "injury": "Right Hamstring Injury",
+   "date": "2026-09-25",
+   "team": "CHA"
+  },
+  {
+   "player": "Kon Knueppel",
+   "status": "Out",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-09-25",
+   "team": "CHA"
+  },
+  {
+   "player": "Kylan Boswell",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-21",
+   "team": "CHA"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Available",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-10-23",
+   "team": "CHI"
+  },
+  {
+   "player": "Isaac Okoro",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "CHI"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "CHI"
+  },
+  {
+   "player": "Jordan Hawkins",
+   "status": "Available",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-10-23",
+   "team": "CHI"
+  },
+  {
+   "player": "Josh Giddey",
+   "status": "Available",
+   "injury": "Left Wrist Spra",
+   "date": "2026-10-23",
+   "team": "CHI"
+  },
+  {
+   "player": "Matas Buzelis",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "CHI"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "CHI"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Available",
+   "injury": "Left MCL Sprain",
+   "date": "2026-10-23",
+   "team": "CHI"
+  },
+  {
+   "player": "Zach Collins",
+   "status": "Available",
+   "injury": "Right Quadriceps Sprain",
+   "date": "2026-10-23",
+   "team": "CHI"
+  },
+  {
+   "player": "Khalifa Diop",
+   "status": "Out",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-21",
+   "team": "CLE"
+  },
+  {
+   "player": "Nae'Qwan Tomlin",
+   "status": "Out",
+   "injury": "Low Back Stress Reaction",
+   "date": "2026-10-20",
+   "team": "CLE"
+  },
+  {
+   "player": "Jarrett Allen",
+   "status": "Available",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-22",
+   "team": "CLE"
+  },
+  {
+   "player": "Peyton Watson",
+   "status": "Available",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-08-19",
+   "team": "CLE"
+  },
+  {
+   "player": "Caleb Martin",
+   "status": "Out",
+   "injury": "Right Thumb Sprain",
+   "date": "2026-10-21",
+   "team": "DAL"
+  },
+  {
+   "player": "Dereck Lively",
+   "status": "Out",
+   "injury": "Right Foot Surgery",
+   "date": "2026-10-21",
+   "team": "DAL"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Out",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-23",
+   "team": "DAL"
+  },
+  {
+   "player": "Tarik Biberovic",
+   "status": "Out",
+   "injury": "Right Heel Bursitis",
+   "date": "2026-10-21",
+   "team": "DAL"
+  },
+  {
+   "player": "Daniel Gafford",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DAL"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DAL"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DAL"
+  },
+  {
+   "player": "Walter Clayton",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DAL"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-23",
+   "team": "DEN"
+  },
+  {
+   "player": "Julian Strawther",
+   "status": "Out",
+   "injury": "Left Knee Sprain",
+   "date": "2026-10-17",
+   "team": "DEN"
+  },
+  {
+   "player": "Spencer Jones",
+   "status": "Out",
+   "injury": "Bilateral Hamstring Injury Management",
+   "date": "2026-10-22",
+   "team": "DEN"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-23",
+   "team": "DEN"
+  },
+  {
+   "player": "Aaron Gordon",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DEN"
+  },
+  {
+   "player": "Cam Whitmore",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DEN"
+  },
+  {
+   "player": "DeMar DeRozan",
+   "status": "Available",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-09-13",
+   "team": "DEN"
+  },
+  {
+   "player": "Marvin Bagley",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "DEN"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Out",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-23",
+   "team": "GSW"
+  },
+  {
+   "player": "Jimmy Butler",
+   "status": "Out",
+   "injury": "Torn Right ACL",
+   "date": "2026-07-30",
+   "team": "GSW"
+  },
+  {
+   "player": "Kristaps Porzingis",
+   "status": "Out",
+   "injury": "Not With Team",
+   "date": "2026-10-20",
+   "team": "GSW"
+  },
+  {
+   "player": "Moses Moody",
+   "status": "Out",
+   "injury": "Left Patellar Tendon Rupture",
+   "date": "2026-07-30",
+   "team": "GSW"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Available",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-23",
+   "team": "GSW"
+  },
+  {
+   "player": "Brandon Williams",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-09-13",
+   "team": "GSW"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Out",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-23",
+   "team": "HOU"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "HOU"
+  },
+  {
+   "player": "Kevin Durant",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "HOU"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Available",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-23",
+   "team": "HOU"
+  },
+  {
+   "player": "Bam Adebayo",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIA"
+  },
+  {
+   "player": "Bobby Portis",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIA"
+  },
+  {
+   "player": "Dru Smith",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIA"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIA"
+  },
+  {
+   "player": "Nick Richards",
+   "status": "Available",
+   "injury": "Right Elbow Sprain",
+   "date": "2026-09-28",
+   "team": "MIA"
+  },
+  {
+   "player": "Nikola Jovic",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIA"
+  },
+  {
+   "player": "Gary Trent Jr",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIL"
+  },
+  {
+   "player": "Kyle Kuzma",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIL"
+  },
+  {
+   "player": "Myles Turner",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIL"
+  },
+  {
+   "player": "Pete Nance",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIL"
+  },
+  {
+   "player": "Ryan Rollins",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "MIL"
+  },
+  {
+   "player": "Bryce McGowens",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Dejounte Murray",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Herb Jones",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Karlo Matkovic",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Saddiq Bey",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Zion Williamson",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "NOP"
+  },
+  {
+   "player": "Ariel Hukporti",
+   "status": "Out",
+   "injury": "Right Knee Achilles Tear",
+   "date": "2026-10-06",
+   "team": "PHI"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Out",
+   "injury": "Lumbar Spine Bone Stress",
+   "date": "2026-10-19",
+   "team": "PHI"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Out",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-19",
+   "team": "PHI"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-23",
+   "team": "PHI"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Questionable",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-10-23",
+   "team": "PHI"
+  },
+  {
+   "player": "Adem Bona",
+   "status": "Available",
+   "injury": "Left Foot Sprain",
+   "date": "2026-10-21",
+   "team": "PHI"
+  },
+  {
+   "player": "Anfernee Simons",
+   "status": "Available",
+   "injury": "Left Hamstring Tireness / Soreness",
+   "date": "2026-10-20",
+   "team": "PHI"
+  },
+  {
+   "player": "Kentavious Caldwell-Pope",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "PHI"
+  },
+  {
+   "player": "Mark Williams",
+   "status": "Out",
+   "injury": "Left Shoulder Torn Labrum",
+   "date": "2026-09-11",
+   "team": "PHX"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Doubtful",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-23",
+   "team": "PHX"
+  },
+  {
+   "player": "Luke Kennard",
+   "status": "Questionable",
+   "injury": "Left Knee Tendinopathy",
+   "date": "2026-10-23",
+   "team": "PHX"
+  },
+  {
+   "player": "Jordan Goodwin",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "PHX"
+  },
+  {
+   "player": "Jayden Quaintance",
+   "status": "Out",
+   "injury": "Right Knee Meniscus Surgery",
+   "date": "2026-07-30",
+   "team": "SAS"
+  },
+  {
+   "player": "Tobias Harris",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-10-19",
+   "team": "SAS"
+  },
+  {
+   "player": "Keldon Johnson",
+   "status": "Available",
+   "injury": "Mouth Laceration",
+   "date": "2026-10-23",
+   "team": "SAS"
+  },
+  {
+   "player": "AJ Dybantsa",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-21",
+   "team": "WAS"
+  },
+  {
+   "player": "Jamir Watkins",
+   "status": "Out",
+   "injury": "Left Knee Torn ACL Repair",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Tristan Vukcevic",
+   "status": "Out",
+   "injury": "Left Hip Impingement",
+   "date": "2026-10-01",
+   "team": "WAS"
+  },
+  {
+   "player": "Alex Sarr",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Anthony Davis",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Bilal Coulibaly",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Felix Okpara",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-23",
+   "team": "WAS"
+  },
+  {
+   "player": "Kyshawn George",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Trae Young",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  },
+  {
+   "player": "Tre Johnson",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-07-30",
+   "team": "WAS"
+  }
+ ]
+}
