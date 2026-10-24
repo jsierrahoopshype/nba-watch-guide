@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-24T02:09:55+00:00",
+ "fetched_at": "2026-10-24T07:27:16+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5689,
+ "row_count": 5716,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -39801,6 +39801,201 @@
    "player": "Cooper Flagg",
    "status": "Left Game",
    "injury": "Left Shoulder Soreness",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ben Sheppard",
+   "status": "Out",
+   "injury": "Left Knee Torn Meniscus",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ben Sheppard",
+   "status": "Out",
+   "injury": "Left Knee Torn Meniscus",
+   "date": "2026-10-23",
+   "prevStatus": "Out",
+   "eta": "3-6 months"
+  },
+  {
+   "player": "Ben Sheppard",
+   "status": "Out",
+   "injury": "Left Knee Torn Meniscus",
+   "date": "2026-10-23",
+   "prevStatus": null,
+   "eta": "3-6 months"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Out",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-23",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Available",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Felix Okpara",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Available",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Out",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Keldon Johnson",
+   "status": "Available",
+   "injury": "Mouth Laceration",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jake LaRavia",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Cedric Coward",
+   "status": "Out",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Available",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Out",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Malik Monk",
+   "status": "Available",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-10-23",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Questionable",
+   "injury": "Low Back Sciatica",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Questionable",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-10-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Doubtful",
+   "injury": "",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Doubtful",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Luke Kennard",
+   "status": "Questionable",
+   "injury": "Left Knee Tendinopathy",
+   "date": "2026-10-23",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Yves Missi",
+   "status": "Left Game",
+   "injury": "Left Knee Injury",
    "date": "2026-10-23",
    "prevStatus": "Available"
   }
