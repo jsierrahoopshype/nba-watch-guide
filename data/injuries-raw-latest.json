@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-24T19:01:58+00:00",
+ "fetched_at": "2026-10-24T21:01:12+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5742,
+ "row_count": 5760,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40189,6 +40189,140 @@
    "date": "2026-10-23",
    "prevStatus": "Left Game",
    "eta": "6-8 weeks"
+  },
+  {
+   "player": "Yves Missi",
+   "status": "Left Game",
+   "injury": "Left Knee Contusion/ Bone Bruise",
+   "date": "2026-10-23",
+   "prevStatus": "Left Game",
+   "eta": "6-8 weeks"
+  },
+  {
+   "player": "Yves Missi",
+   "status": "Out",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-24",
+   "prevStatus": "Left Game",
+   "eta": "6-8 weeks"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Questionable",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Duren",
+   "status": "Out",
+   "injury": "Right Thigh Injury",
+   "date": "2026-10-24",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Duren",
+   "status": "Out",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Ausar Thompson",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Out",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Out",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Jalen Duren",
+   "status": "Out",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Out",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Out",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Available",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Al Horford",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Al Horford",
+   "status": "Out",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Al Horford",
+   "status": "Out",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Available",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Doubtful",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Out",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Available",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Questionable",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-24",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Christian Anderson",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Probable"
   }
  ]
 }
