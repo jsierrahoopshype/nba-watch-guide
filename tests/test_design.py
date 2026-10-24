@@ -185,30 +185,67 @@ INDEX = {"players": [
 WEBP = b"RIFF\x00\x00\x00\x00WEBPVP8 fake"
 
 
+def _cutout_png() -> bytes:
+    """A small transparent cutout, like the files under players/headshots/face/."""
+    import io
+
+    from PIL import Image
+
+    im = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+    im.paste((180, 120, 90, 255), (64, 32, 192, 256))
+    buf = io.BytesIO()
+    im.save(buf, "PNG")
+    return buf.getvalue()
+
+
 def test_index_maps_names_to_face2_files():
     idx = headshots.index_from(INDEX)
     assert idx == {"star alpha": "1-star-alpha", "star bravo": "2-star-bravo"}
 
 
 def test_faces_are_downloaded_once_and_failures_fall_back(tmp_path, monkeypatch):
+    from PIL import Image
+
     calls = []
+    png = _cutout_png()
 
     def fake_get(url, **kw):
         calls.append(url)
-        if url.endswith("2-star-bravo.webp"):
+        if url.endswith("2-star-bravo.png"):
             raise headshots.FetchError("404")
-        return WEBP
+        return png
 
     monkeypatch.setattr(headshots, "get", fake_get)
     idx = headshots.index_from(INDEX)
     found, note = headshots.ensure_faces(tmp_path, ["Star Alpha", "Star Bravo", "Nobody"], idx)
     assert found == {"star alpha": "assets/faces/1-star-alpha.webp"}
-    assert (tmp_path / "assets/faces/1-star-alpha.webp").read_bytes() == WEBP
+    saved = tmp_path / "assets/faces/1-star-alpha.webp"
+    assert saved.read_bytes()[:4] == b"RIFF"
+    with Image.open(saved) as im:                                  # transparent cutout, no baked-in background
+        assert im.format == "WEBP" and im.size == (160, 160)
+        assert im.convert("RGBA").getpixel((0, 0))[3] == 0
     assert "1 failed (silhouette shown)" in note
-    assert calls[0].endswith("/players/headshots/face2-160/1-star-alpha.webp")
+    assert calls[0].endswith("/players/headshots/face/1-star-alpha.png")
     calls.clear()
     found, _ = headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
     assert found and not calls                                     # already on disk, not fetched again
+
+
+def test_old_faces_are_replaced_once(tmp_path, monkeypatch):
+    """A face kept from the old dark face2-160 source (no mark) is fetched
+    again from the cutouts; offline it is kept rather than dropped."""
+    old = tmp_path / "assets/faces/1-star-alpha.webp"
+    old.parent.mkdir(parents=True)
+    old.write_bytes(WEBP)
+    calls = []
+    monkeypatch.setattr(headshots, "get", lambda url, **kw: calls.append(url) or _cutout_png())
+    idx = headshots.index_from(INDEX)
+    found, _ = headshots.ensure_faces(tmp_path, ["Star Alpha"], idx, allow_fetch=False)
+    assert found and not calls and old.read_bytes() == WEBP
+    headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
+    assert len(calls) == 1 and old.read_bytes() != WEBP
+    headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
+    assert len(calls) == 1
 
 
 def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch):

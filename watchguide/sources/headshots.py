@@ -2,8 +2,12 @@
 
 Source: jsierrahoopshype/nba-headshots.
   players/metadata/players_all.json lists every player with a headshot
-  record whose "filename" is "<nba_id>-<slug>.png"; the same stem under
-  players/headshots/face2-160/ is the 160x160 WebP the pages use.
+  record whose "filename" is "<nba_id>-<slug>.png"; the same file under
+  players/headshots/face/ is a 256x256 transparent cutout (head and
+  shoulders, no background). The build shrinks it to a 160x160 WebP that
+  keeps the transparency, so the face sits on the page's own light circle.
+  (face2-160, used before Oct 2026, had a dark baked-in background and,
+  on some players, a black band across the bottom.)
 
 Nothing on a page loads from that repo. The build downloads the faces it
 needs into assets/faces/ in the published tree, which the restore step
@@ -25,9 +29,17 @@ from .http import FetchError, get
 
 DEFAULT_BASE = "https://raw.githubusercontent.com/jsierrahoopshype/nba-headshots/main"
 INDEX_PATH = "players/metadata/players_all.json"
-FACE_DIR = "players/headshots/face2-160"
+FACE_DIR = "players/headshots/face"
+FACE_SIZE = 160
 INDEX_CACHE = "data/headshots-index.json"
 FACES = "assets/faces"
+# Which source each file in assets/faces came from, kept per file in
+# assets/faces/sources.json. The published tree keeps faces between runs, so
+# a file without the current mark is fetched again the next time a page
+# needs it (same file name, so no page HTML changes). An offline run keeps
+# the old file rather than dropping to a silhouette.
+SOURCE_MARK = "face-cutout-160-v1"
+SOURCE_FILE = "sources.json"
 MIN_INDEX = 300          # fewer entries than this is treated as a broken index
 
 
@@ -70,12 +82,36 @@ def load_index(out_dir: Path, allow_fetch: bool = True) -> tuple[dict[str, str],
         return {}, f"headshots: {reason}; no index, silhouettes only"
 
 
+def cutout_webp(png: bytes) -> bytes:
+    """A transparent PNG cutout as a FACE_SIZE square WebP that keeps its alpha."""
+    import io
+
+    from PIL import Image
+
+    with Image.open(io.BytesIO(png)) as im:
+        im = im.convert("RGBA")
+        if im.size != (FACE_SIZE, FACE_SIZE):
+            im = im.resize((FACE_SIZE, FACE_SIZE), Image.LANCZOS)
+        buf = io.BytesIO()
+        im.save(buf, "WEBP", quality=82, method=6, exact=False)
+    return buf.getvalue()
+
+
 def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
                  allow_fetch: bool = True) -> tuple[dict[str, str], str]:
     """({match_key(name): 'assets/faces/<stem>.webp'}, note) for the names
-    whose face is on disk after this call. Downloads only what is missing."""
+    whose face is on disk after this call. Downloads only what is missing,
+    or one not yet taken from the current source (SOURCE_MARK)."""
     found: dict[str, str] = {}
     fetched = failed = 0
+    mark_path = out_dir / FACES / SOURCE_FILE
+    try:
+        marks = json.loads(mark_path.read_text(encoding="utf-8"))
+        if not isinstance(marks, dict):
+            marks = {}
+    except (OSError, ValueError):
+        marks = {}
+    changed = False
     for name in names:
         key = match_key(name or "")
         stem = index.get(key)
@@ -83,18 +119,27 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
             continue
         rel = f"{FACES}/{stem}.webp"
         target = out_dir / rel
-        if not target.is_file() and allow_fetch:
+        need = not target.is_file() or marks.get(stem) != SOURCE_MARK
+        if need and allow_fetch:
             try:
-                data = get(f"{base_url()}/{FACE_DIR}/{stem}.webp")
-                if not isinstance(data, (bytes, bytearray)) or data[:4] != b"RIFF":
-                    raise FetchError("not a WebP file")
+                data = get(f"{base_url()}/{FACE_DIR}/{stem}.png")
+                if not isinstance(data, (bytes, bytearray)) or data[:8] != b"\x89PNG\r\n\x1a\n":
+                    raise FetchError("not a PNG file")
+                webp = cutout_webp(bytes(data))
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(data)
+                target.write_bytes(webp)
+                marks[stem] = SOURCE_MARK
+                changed = True
                 fetched += 1
             except Exception:
                 failed += 1
         if target.is_file():
             found[key] = rel
+    if changed:
+        try:
+            mark_path.write_text(json.dumps(marks, sort_keys=True, indent=0), encoding="utf-8")
+        except OSError:
+            pass
     note = f"headshots: {len(found)} faces on the game cards, {fetched} downloaded"
     if failed:
         note += f", {failed} failed (silhouette shown)"
