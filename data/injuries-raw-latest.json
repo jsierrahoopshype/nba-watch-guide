@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-24T21:01:12+00:00",
+ "fetched_at": "2026-10-24T23:27:38+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5760,
+ "row_count": 5774,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40323,6 +40323,106 @@
    "injury": "Left Ankle Sprain",
    "date": "2026-10-24",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Probable",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "Right Adductor/Groin Soreness/Tightness",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "Right Adductor / Groin Soreness/Tightness",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "Right Adductor / Groin Soreness / Tightness",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Questionable",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Pelle Larsson",
+   "status": "Available",
+   "injury": "Left Finger Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jose Alvarado",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jose Alvarado",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zaccharie Risacher",
+   "status": "Probable",
+   "injury": "Right Hip Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Probable",
+   "injury": "Right Shin Splints",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Doubtful",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Questionable",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Questionable",
+   "injury": "Right Calf Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable",
+   "eta": "Day-to-day"
   }
  ]
 }
