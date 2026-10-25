@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T21:18:17+00:00",
+ "fetched_at": "2026-10-25T23:23:23+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5833,
+ "row_count": 5849,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40840,6 +40840,120 @@
    "injury": "Right Patellar Tendinopathy",
    "date": "2026-10-25",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Anthony Black",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Available",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-25",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Out",
+   "injury": "Right Soleus Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Out",
+   "eta": "Day-to-Day"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Available",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Questionable",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Available",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jose Alvarado",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ausar Thompson",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "status": "Out",
+   "injury": " Left Knee Effusion / Swelling",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Doubtful",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-25",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Doubtful",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Doubtful",
+   "injury": "Right Wrist Sprain / Personal Reasons",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Doubtful",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "VJ Edgecombe",
+   "status": "Out",
+   "injury": "Abdominal Contusion",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Out",
+   "injury": "Left Ankle Capsulitis",
+   "date": "2026-10-25",
+   "prevStatus": "Doubtful"
   }
  ]
 }
