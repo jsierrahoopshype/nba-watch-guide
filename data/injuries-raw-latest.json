@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T18:36:30+00:00",
+ "fetched_at": "2026-10-25T21:18:17+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5815,
+ "row_count": 5833,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40713,6 +40713,133 @@
    "injury": "Right Adductor / Groin Soreness / Tightness",
    "date": "2026-10-25",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Doubtful",
+   "injury": "Left Ankle Capsulitis",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jake LaRavia",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Karim Lopez",
+   "status": "Questionable",
+   "injury": "Right Knee Contusion / Bone Bruise",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Available",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Caleb Martin",
+   "status": "Doubtful",
+   "injury": "Right Thumb Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cooper Flagg",
+   "status": "Questionable",
+   "injury": "Left Shoulder Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Kylan Boswell",
+   "status": "Available",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "VJ Edgecombe",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "VJ Edgecombe",
+   "status": "Questionable",
+   "injury": "Abdominal Contusion",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandin Podziemski",
+   "status": "Available",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Al Horford",
+   "status": "Available",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Available",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Available",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Brandon Williams",
+   "status": "Probable",
+   "injury": "Illness",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Questionable",
+   "injury": "Left Knee ",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Questionable",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Probable",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
   }
  ]
 }
