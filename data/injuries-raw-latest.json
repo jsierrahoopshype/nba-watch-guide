@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T17:08:07+00:00",
+ "fetched_at": "2026-10-25T18:36:30+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5805,
+ "row_count": 5815,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40639,6 +40639,78 @@
    "player": "Joel Embiid",
    "status": "Out",
    "injury": "Right Plantarfasciitis Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Mikel Brown",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Mikel Brown",
+   "status": "Out",
+   "injury": "Back Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "RightPlantarfasciitis injurymanagement",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "RightPlantar Fasciitis Injurymanagement",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "RightPlantar Fasciitis Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "Right Plantar Fasciitis Injury Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Nae'Qwan Tomlin",
+   "status": "Out",
+   "injury": "LeftLowBackStress Reaction",
+   "date": "2026-10-20",
+   "prevStatus": "Out",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Nae'Qwan Tomlin",
+   "status": "Out",
+   "injury": "Left Low Back Stress Reaction",
+   "date": "2026-10-20",
+   "prevStatus": "Out",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Questionable",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "Right Adductor / Groin Soreness / Tightness",
    "date": "2026-10-25",
    "prevStatus": "Out"
   }
