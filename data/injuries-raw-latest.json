@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T01:56:07+00:00",
+ "fetched_at": "2026-10-25T07:05:35+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5774,
+ "row_count": 5799,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40423,6 +40423,181 @@
    "date": "2026-10-24",
    "prevStatus": "Questionable",
    "eta": "Day-to-day"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Left Game",
+   "injury": "R",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Left Game",
+   "injury": "Right Knee Injury",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zaccharie Risacher",
+   "status": "Available",
+   "injury": "Right Hip Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Available",
+   "injury": "Right Shin Splints",
+   "date": "2026-10-24",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Out",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Jett Howard",
+   "status": "Available",
+   "injury": "Right Calf Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Max Christie",
+   "status": "Available",
+   "injury": "Right Shin Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Out",
+   "injury": "Right Adductor / Groin Soreness / Tightness",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Out",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Doubtful",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Available",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Out",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Out",
+   "injury": "Right Head Contusion",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Out",
+   "injury": "Bilateral Low Back Soreness",
+   "date": "2026-10-24",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Charles Bassey",
+   "status": "Available",
+   "injury": "Right Patellar Tendinopathy",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Luke Kennard",
+   "status": "Available",
+   "injury": "Left Knee Tendinopathy",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Out",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Questionable",
+   "injury": "Left Anklecapsulitis",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Out",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-10-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Cedric Coward",
+   "status": "Questionable",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Available",
+   "injury": "Left Knee Contusion / Bone Bruise",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Out",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Questionable"
   }
  ]
 }
