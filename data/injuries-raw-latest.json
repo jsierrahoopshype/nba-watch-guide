@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T14:10:41+00:00",
+ "fetched_at": "2026-10-25T17:08:07+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5799,
+ "row_count": 5805,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40598,6 +40598,49 @@
    "injury": "Left Forearm Strain",
    "date": "2026-10-24",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jalen Duren",
+   "status": "Out",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-10-24",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Available",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Out",
+   "injury": "Right Knee Injury",
+   "date": "2026-10-25",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Out",
+   "injury": "Left Knee Soreness",
+   "date": "2026-10-25",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "Right Plantarfasciitis Management",
+   "date": "2026-10-25",
+   "prevStatus": "Out"
   }
  ]
 }
