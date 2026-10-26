@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-25T23:23:23+00:00",
+ "fetched_at": "2026-10-26T01:25:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5849,
+ "row_count": 5859,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -40954,6 +40954,76 @@
    "injury": "Left Ankle Capsulitis",
    "date": "2026-10-25",
    "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Ivica Zubac",
+   "status": "Left Game",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cedric Coward",
+   "status": "Available",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Karim Lopez",
+   "status": "Out",
+   "injury": "Right Knee Contusion / Bone Bruise",
+   "date": "2026-10-25",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaylin Williams",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylin Williams",
+   "status": "Left Game",
+   "injury": "Right Wrist Soreness",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cason Wallace",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cason Wallace",
+   "status": "Left Game",
+   "injury": "Left Shoulder Soreness",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Left Game",
+   "injury": "Hip Contusion",
+   "date": "2026-10-25",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Williams",
+   "status": "Left Game",
+   "injury": "Ankle ",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
   }
  ]
 }
