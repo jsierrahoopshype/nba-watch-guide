@@ -44,16 +44,17 @@ reporting any PR.
 Never publish (push to gh-pages) from a session unless asked. Publishing is
 the build workflow's job.
 
-## Merge from chat
+## Merging
 
-Merge a PR only when the user replies "merge" in the session. Never merge
-without that word, and approval for one PR never carries over to another.
-When they do:
+Merge your own PR once its checks are done and the report is written; the
+user does not need to say "merge" (his standing rule since Oct 27 2026).
+Every merge is guarded by the head SHA you report, and the report says what
+went live:
 
 1. Merge through the GitHub API (`merge_pull_request`), passing
    `expectedHeadSha` = the head SHA you last reported for that PR. If the tip
-   moved since then, the API refuses; report that and do not retry with the
-   new SHA without a fresh "merge".
+   moved since then, the API refuses; find out why (another session's push?)
+   before reporting the new tip and merging that.
 2. The merge commit on main starts `build-watch-guide-daily` (push trigger;
    doc-only changes to README.md or CLAUDE.md don't). Find that run: list the
    workflow's runs filtered to event `push` on `main` and take the one whose
