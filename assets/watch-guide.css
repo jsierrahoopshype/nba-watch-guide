@@ -790,3 +790,4 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 }
 .meetings .badge-national::before { background: var(--accent); }
 .meetings .badge-local::before { background: var(--green); }
+.game-side .out-chip[hidden] { display: none; }
