@@ -120,7 +120,11 @@
         {%- endfor %}
       </ul>
       {%- endif %}
-      <div class="hg-line small" data-volatile>{{ row.line }}</div>
+      {#- The line only repeats the faces above until teams have records
+          (stakes need five games each, star_power_weights.json); marked so
+          the stylesheet hides it then. #}
+      {%- set face_names = row.players|map(attribute='name')|join(' vs. ') %}
+      <div class="hg-line small" data-volatile{% if row.players and row.line == face_names %} data-repeats-faces{% endif %}>{{ row.line }}</div>
     </div>
     {%- if row.out %}
     <details class="hg-out small" data-volatile>

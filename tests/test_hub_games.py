@@ -228,7 +228,9 @@ def test_heading_lines_and_basis_unchanged(staggered_site):
     assert "<h2 data-rank-heading>Most star power tonight</h2>" in block
     assert "counting only players in uniform tonight" in block
     star_row = next(r for r in rows(block) if r.startswith(f'data-game="{last_three[-1].game_id}"'))
-    assert '<div class="hg-line small" data-volatile>Star Charlie</div>' in star_row
+    # The line only repeats the one face, so it is marked for the stylesheet
+    # to hide (it shows again once it carries records or who is out).
+    assert '<div class="hg-line small" data-volatile data-repeats-faces>Star Charlie</div>' in star_row
 
 
 def test_off_day_list_is_also_in_tip_order_with_badges(off_day_site, fixture_games):

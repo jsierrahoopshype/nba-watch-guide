@@ -98,7 +98,8 @@
     </ul>
     {%- endif %}
     {%- if view.line %}
-    <p class="gb-line small" data-rank-line>{{ view.line }}</p>
+    {%- set face_names = view.players|map(attribute='name')|join(' vs. ') %}
+    <p class="gb-line small" data-rank-line{% if view.players and view.line == face_names %} data-repeats-faces{% endif %}>{{ view.line }}</p>
     {%- endif %}
   </div>
 

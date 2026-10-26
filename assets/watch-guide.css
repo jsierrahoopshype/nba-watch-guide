@@ -771,3 +771,22 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 .hg-pname { white-space: normal; overflow: visible; text-overflow: clip; }
 .hg-line { font-family: var(--sans); font-size: 0.76rem; }
 .myt-pick select { max-width: 22rem; }
+
+/* Follow-up (Oct 26 2026) */
+/* The ranking line is hidden while it only repeats the names on the faces
+   (no team records yet); it comes back once it says more ("2-3 vs. 4-1: ..."
+   or who is out). */
+.hg-line[data-repeats-faces], .gb-line[data-repeats-faces] { display: none; }
+/* A lone player to watch takes the full row on game pages too. */
+.pw li:only-child { grid-column: 1 / -1; }
+/* "Every meeting" table: channels as plain lines with the national/local
+   dot, like the cards, instead of green pills. */
+.meetings .badge-local, .meetings .badge-national, .meetings .badge-tba {
+  display: flex; align-items: center; gap: 6px; background: none; padding: 1px 0;
+  color: var(--text); font-size: 0.82rem; font-weight: 500; border-radius: 0;
+}
+.meetings .badge-local::before, .meetings .badge-national::before, .meetings .badge-tba::before {
+  content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted);
+}
+.meetings .badge-national::before { background: var(--accent); }
+.meetings .badge-local::before { background: var(--green); }
