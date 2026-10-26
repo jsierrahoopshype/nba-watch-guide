@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-26T01:25:09+00:00",
+ "fetched_at": "2026-10-26T01:58:01+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5859,
+ "row_count": 5862,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -41024,6 +41024,27 @@
    "injury": "Ankle ",
    "date": "2026-10-25",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Williams",
+   "status": "Left Game",
+   "injury": "Left Ankle Injury",
+   "date": "2026-10-25",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Suggs",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-25",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Suggs",
+   "status": "Left Game",
+   "injury": "Right Knee Injury",
+   "date": "2026-10-25",
+   "prevStatus": "Left Game"
   }
  ]
 }
