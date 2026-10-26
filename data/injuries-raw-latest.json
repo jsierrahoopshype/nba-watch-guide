@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-26T16:38:04+00:00",
+ "fetched_at": "2026-10-26T19:25:17+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5864,
+ "row_count": 5894,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -41059,6 +41059,219 @@
    "injury": "Left Forearm Strain",
    "date": "2026-10-26",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Anthony Edwards",
+   "status": "Questionable",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cooper Flagg",
+   "status": "Probable",
+   "injury": "Left Shoulder Sprain",
+   "date": "2026-10-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Caleb Martin",
+   "status": "Out",
+   "injury": "Right Thumb Sprain",
+   "date": "2026-10-26",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Ivica Zubac",
+   "status": "Out",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Probable",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Questionable",
+   "injury": "Neck Stiffness / ",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Questionable",
+   "injury": "Neck Stiffness / Soreness",
+   "date": "2026-10-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Available",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Available",
+   "injury": "Low Back Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jalen Williams",
+   "status": "Out",
+   "injury": "Left Lower Leg Injury",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Cason Wallace",
+   "status": "Out",
+   "injury": "Left Shoulder Soreness",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jaylin Williams",
+   "status": "Available",
+   "injury": "Right Wrist Soreness",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Chet Holmgren",
+   "status": "Out",
+   "injury": "Right Patellar Tendonitis",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Chet Holmgren",
+   "status": "Out",
+   "injury": "Right Patellar Tendinitis",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Out",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-26",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Jalen Suggs",
+   "status": "Out",
+   "injury": "Right Knee Injury",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Suggs",
+   "status": "Out",
+   "injury": "Right Knee Bone Bruise",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Suggs",
+   "status": "Out",
+   "injury": "Right Knee Bone Bruise",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Out",
+   "injury": "Right Wrist Sprain / Personal Reasons",
+   "date": "2026-10-26",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Questionable",
+   "injury": "Right Shoulder Soreness",
+   "date": "2026-10-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Karim Lopez",
+   "status": "Questionable",
+   "injury": "Right Knee Contusion / Bone Bruise",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Available",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Questionable",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-10-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Out",
+   "injury": "Low Back Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nikola Topic",
+   "status": "Out",
+   "injury": "Low Back Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Thomas Sorber",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out"
   }
  ]
 }
