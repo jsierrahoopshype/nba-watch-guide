@@ -72,7 +72,13 @@
           {%- if not item.service.carries_verified %}
           <div class="row-note" data-coverage-unconfirmed>{{ labels.coverage_unconfirmed }}</div>
           {%- endif %}
-          <div class="row-note">{% if item.service.verified and item.service.last_verified %}{{ labels.prices_checked.format(month_year=item.service.last_verified|month_year) }}{% else %}{{ labels.prices_unchecked }}{% endif %}</div>
+          {#- The card's first line already says when prices were checked; a
+              row repeats it only when its own date differs or it is unchecked. #}
+          {%- if not (item.service.verified and item.service.last_verified) %}
+          <div class="row-note">{{ labels.prices_unchecked }}</div>
+          {%- elif not prices_checked or (item.service.last_verified|month_year) != (prices_checked|month_year) %}
+          <div class="row-note">{{ labels.prices_checked.format(month_year=item.service.last_verified|month_year) }}</div>
+          {%- endif %}
         </div>
         <div class="row-side">
           {% with svc = item.service %}{% include "partials/price.html" %}{% endwith %}

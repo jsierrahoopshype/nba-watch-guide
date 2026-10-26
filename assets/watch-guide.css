@@ -791,3 +791,33 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 .meetings .badge-national::before { background: var(--accent); }
 .meetings .badge-local::before { background: var(--green); }
 .game-side .out-chip[hidden] { display: none; }
+
+/* Team page polish (Oct 27 2026) */
+/* Full schedule: channels as plain lines with the national/local dot. */
+.sched .badge-local, .sched .badge-national, .sched .badge-tba {
+  display: flex; align-items: center; gap: 6px; background: none; padding: 1px 0;
+  color: var(--text); font-size: 0.82rem; font-weight: 500; border-radius: 0; white-space: normal;
+}
+.sched .badge-local::before, .sched .badge-national::before, .sched .badge-tba::before {
+  content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted);
+}
+.sched .badge-national::before { background: var(--accent); }
+.sched .badge-local::before { background: var(--green); }
+/* "Why can't I watch this game?" on every row: a quiet line, still a 44px tap target. */
+.sched .why > summary { font-size: 0.76rem; color: var(--text-muted); font-weight: 500; }
+.sched .why > summary:hover { color: var(--accent-ink); }
+.sched .why-body { font-size: 0.8rem; color: var(--text-2); }
+.sched .why-body p { margin: 0 0 6px; }
+/* "What am I missing?": the services as tappable chips, not a run of bare checkboxes. */
+.missing { margin: 4px 0 20px; }
+.missing h2 { margin-top: 8px; }
+.missing-options { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+.missing-option { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 0 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 0.85rem; cursor: pointer; }
+.missing-option:hover { border-color: var(--accent); }
+.missing-option input { margin: 0; accent-color: var(--accent); }
+.missing-option:has(input:checked) { border-color: var(--accent); background: var(--accent-dim); color: var(--accent-ink); font-weight: 600; }
+.missing-result { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+.missing-result:empty { display: none; }
+.missing-result p:last-child { margin-bottom: 0; }
+.sched caption { white-space: nowrap; }
