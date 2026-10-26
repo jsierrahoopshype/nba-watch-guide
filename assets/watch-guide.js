@@ -275,6 +275,9 @@
       if (!slot || slot.textContent.trim() === status) return;
       slot.textContent = status;
       slot.className = 'badge ' + (BADGE_CLASS[status] || 'badge-tba');
+      // Who's out leaves Available players off; one cleared since the build
+      // is hidden until the next refresh rebuilds the list.
+      if (node.classList.contains('out-chip')) node.hidden = status === 'Available';
     });
   }
 

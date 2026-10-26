@@ -304,7 +304,10 @@ def out_block(ctx: SiteContext, game) -> dict:
         message = text["injury_report_missing"]
     else:
         empty = empty_players_label(ctx)
-        sides = [{"name": ctx.team_name(t), "players": ctx.players_for(t), "empty": empty}
+        # Players the report lists as Available are left off: the list is
+        # who might miss the game, not the whole roster on the report.
+        sides = [{"name": ctx.team_name(t), "empty": empty,
+                  "players": [p for p in ctx.players_for(t) if p.get("status") != "Available"]}
                  for t in (game.away_tricode, game.home_tricode)]
     return {"is_today": today, "message": message, "sides": sides}
 

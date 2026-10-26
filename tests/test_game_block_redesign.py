@@ -374,6 +374,19 @@ def test_whos_out_shows_chips_or_the_message(tmp_path_factory, fixture_games):
                      r'<span class="badge badge-out" data-status-slot>Out</span></li>', out)
 
 
+def test_whos_out_leaves_available_players_off(tmp_path_factory, fixture_games):
+    game = next(g for g in fixture_games if g.date_et == TODAY)
+    injuries = {"updated_at": f"{TODAY}T11:00:00-05:00", "as_of": TODAY, "players": [
+        {"player": "Hurt Guy", "status": "Questionable", "injury": "Knee", "date": TODAY, "team": game.home_tricode},
+        {"player": "Fine Guy", "status": "Available", "injury": "", "date": TODAY, "team": game.home_tricode},
+        {"player": "Also Fine", "status": "Available", "injury": "", "date": TODAY, "team": game.away_tricode}]}
+    site = _build(tmp_path_factory, fixture_games, "site-out-available", injuries=injuries)
+    out = part(blocks(read(site, slug(game)))[0], "out")
+    assert 'data-player="Hurt Guy"' in out
+    assert "Fine Guy" not in out and "Also Fine" not in out
+    assert "Nobody listed." in out                       # the away side had only an Available player
+
+
 # -- 5. every meeting: cards on phones, table from tablet width -----------------------------
 
 @pytest.fixture(scope="module")
