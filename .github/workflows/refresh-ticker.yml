@@ -1,0 +1,82 @@
+name: refresh-ticker
+
+# GitHub drops or delays many scheduled runs, worst on :00 and :30. On
+# Oct 26 2026 the 30-minute injury refresh asked for ~25 evening runs and got
+# 2, so the pages showed "Status may be out of date" (data over 90 minutes
+# old, watchguide/config.py STALE_MINUTES) through the evening.
+#
+# This workflow does not refresh anything itself. It stays awake through a
+# game-day evening and starts refresh-watch-guide-injuries every 30 minutes
+# with a workflow_dispatch. A dispatch made with GITHUB_TOKEN is one of the
+# two events GitHub lets that token start, so no extra token or secret is
+# needed. It holds no publish lock while it sleeps (its own concurrency
+# group), so merges and the daily build are never held up behind it.
+#
+# One run lasts at most about 5h40m (job limit is 6h), so it is kicked off
+# several times at odd minutes. A kickoff that arrives while one is running
+# waits as the single pending run and takes over when the first one ends, so
+# one surviving kickoff per stretch is enough. Outside 16:00-05:00 UTC, or on
+# a day with no games, a run exits at once. The old 30-minute crons in
+# refresh-watch-guide-injuries stay as a second source of runs.
+
+on:
+  schedule:
+    - cron: '7 16 * * *'
+    - cron: '37 18 * * *'
+    - cron: '7 21 * * *'
+    - cron: '37 23 * * *'
+    - cron: '7 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: watch-guide-refresh-ticker
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - name: Start a refresh every 30 minutes through the evening
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -u
+          start=$(date +%s)
+          # Stop starting new refreshes after ~5h35m so the job ends on its own.
+          budget=$((335 * 60))
+
+          in_window() {
+            # 16:00-04:59 UTC covers every NBA tip-off and finish.
+            h=$((10#$(date -u +%H)))
+            [ "$h" -ge 16 ] || [ "$h" -le 4 ]
+          }
+
+          games_today() {
+            # Today's ET date against the published schedule; no NBA call.
+            today=$(TZ=America/New_York date +%F)
+            gh api "repos/$REPO/contents/data/schedule.json?ref=gh-pages" \
+              -H "Accept: application/vnd.github.raw" 2>/dev/null \
+              | python3 -c "import json,sys; d=json.load(sys.stdin); print(sum(1 for g in d['games'] if g.get('date_et')=='$today'))" \
+              2>/dev/null || echo 1   # unknown: assume games rather than go quiet
+          }
+
+          if ! in_window; then echo "Outside the evening window, nothing to do."; exit 0; fi
+          n=$(games_today)
+          echo "Games today (ET): $n"
+          if [ "$n" = "0" ]; then echo "No games today, nothing to do."; exit 0; fi
+
+          while in_window && [ $(( $(date +%s) - start )) -lt "$budget" ]; do
+            if gh workflow run refresh-watch-guide-injuries.yml --repo "$REPO" --ref main; then
+              echo "$(date -u +%H:%M) UTC: refresh started"
+            else
+              echo "$(date -u +%H:%M) UTC: could not start a refresh, trying again next tick"
+            fi
+            sleep 1800
+          done
+          echo "Done for this run."
