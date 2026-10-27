@@ -11,7 +11,7 @@
   </ul>
   <p class="small muted combo-note">
     {%- if combo.missed %}{{ labels.misses_prefix }} {{ combo.missed|length }} of {{ combo.total }}:
-      {{ combo.missed[:6]|map(attribute='date_et')|join(', ') }}{% if combo.missed|length > 6 %} and more{% endif %}.
+      {{ combo.missed[:6]|map(attribute='date_et')|map('short_date')|join(', ') }}{% if combo.missed|length > 6 %} and more{% endif %}.
     {%- else %}{{ labels.misses_none }}{% endif %}
   </p>
   {%- for note in combo_notes %}

@@ -224,7 +224,8 @@
       ],
       "live_tv_carriers": ["DirecTV Stream", "Hulu + Live TV"],
       "territory": "Celtics local market",
-      "notes": "Add-on price from the official NBC Sports Boston FAQ (https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/), which says: \"In addition to a Peacock Premium or Premium Plus Plan, the cost of NBC Sports Boston is $14.95/mo.\"",
+      "notes": "",
+      "research_notes": "Add-on price from the official NBC Sports Boston FAQ (https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/), which says: \"In addition to a Peacock Premium or Premium Plus Plan, the cost of NBC Sports Boston is $14.95/mo.\"",
       "sources": ["https://www.nbcsportsboston.com/news/sports/faq-nbc-sports-boston-on-peacock/696847/", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/boston-celtics/"]
     },
     "brooklyn-nets": {
@@ -272,7 +273,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "Nets local market",
-      "notes": "Only Yahoo Sports lists DAZN-era YES prices ($19.99 a month); its copies on other sites are not independent. Recheck for an official DAZN or YES price.",
+      "notes": "YES on DAZN's monthly price is not confirmed by DAZN or YES yet; check before you buy.",
+      "research_notes": "Only Yahoo Sports lists DAZN-era YES prices ($19.99 a month); its copies on other sites are not independent. Recheck for an official DAZN or YES price.",
       "sources": ["https://yesnetwork.com/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/", "https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/"]
     },
     "charlotte-hornets": {
@@ -630,7 +632,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "Mavericks local market",
-      "notes": "KFAA 29 and WFAA 8 are confirmed for 2026-27 by the Mavericks' where-to-watch page (checked 2026-10-21). MavsTV prices conflict across sources ($14.99 a month; $64.99, $124.99 or $14.99 a season).",
+      "notes": "KFAA 29 and WFAA 8 carry Mavericks games in 2026-27. MavsTV prices differ between sources; check before you buy.",
+      "research_notes": "KFAA 29 and WFAA 8 are confirmed for 2026-27 by the Mavericks' where-to-watch page (checked 2026-10-21). MavsTV prices conflict across sources ($14.99 a month; $64.99, $124.99 or $14.99 a season).",
       "sources": ["https://www.nba.com/mavs/wheretowatch", "https://www.nba.com/mavs/mavstv"]
     },
     "denver-nuggets": {
@@ -788,7 +791,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "Warriors local market",
-      "notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Sports Media Watch's 2026-27 Warriors page says $15 and Heavy says $24.95; both look like copied errors.",
+      "notes": "The add-on price is from the network's own FAQ; check it before you buy.",
+      "research_notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Sports Media Watch's 2026-27 Warriors page says $15 and Heavy says $24.95; both look like copied errors.",
       "sources": ["https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsbayarea.com/streaming-faqs-warriors/", "https://www.sportsmediawatch.com/2026/03/smw-faq-mlb-local-broadcasts-where-watch-breakdown/"]
     },
     "houston-rockets": {
@@ -836,7 +840,8 @@
       ],
       "live_tv_carriers": ["DirecTV", "Fubo"],
       "territory": "Rockets local market",
-      "notes": "SCHN+ launched in December 2025 with Rockets games (SCHN's own 2026 release). Sports Media Watch's 2026-27 page still says SCHN has no streaming service; the official SCHN+ pages say otherwise. No free over-the-air partner found for 2026-27.",
+      "notes": "SCHN+ streams Rockets games. We found no free over-the-air partner for 2026-27.",
+      "research_notes": "SCHN+ launched in December 2025 with Rockets games (SCHN's own 2026 release). Sports Media Watch's 2026-27 page still says SCHN has no streaming service; the official SCHN+ pages say otherwise. No free over-the-air partner found for 2026-27.",
       "sources": ["https://support.schnplus.com/support/solutions/articles/43000773896-what-plans-are-available-for-schn-", "https://support.schnplus.com/support/solutions/articles/43000772721-space-city-home-network-schn-about", "https://www.schnplus.com/rockets", "https://www.prnewswire.com/news-releases/space-city-home-networks-streaming-platform-gains-early-momentum-with-the-houston-rockets-ahead-of-astros-spring-training-302695580.html", "https://www.houstonpublicmedia.org/articles/news/sports/2025/12/04/537687/rockets-astros-streaming-space-city-home-network/"]
     },
     "indiana-pacers": {
@@ -1003,7 +1008,8 @@
       ],
       "live_tv_carriers": ["Spectrum", "DirecTV", "DirecTV Stream", "Fubo"],
       "territory": "Clippers local market",
-      "notes": "ClipperVision carries 77 games, 10 of them simulcast on KTLA 5. It comes with eligible Spectrum cable, DIRECTV (satellite and streaming) and Fubo packages, or as a direct subscription: \"Direct ClipperVision streaming plans are $14.95 per month or $89.95 for the full season\" (the Clippers' watch page, checked 2026-10-21; announcement 2026-10-14).",
+      "notes": "ClipperVision carries 77 games, 10 of them also on KTLA 5. It comes with eligible Spectrum cable, DIRECTV and Fubo packages, or on its own for $14.95 a month or $89.95 for the season.",
+      "research_notes": "ClipperVision carries 77 games, 10 of them simulcast on KTLA 5. It comes with eligible Spectrum cable, DIRECTV (satellite and streaming) and Fubo packages, or as a direct subscription: \"Direct ClipperVision streaming plans are $14.95 per month or $89.95 for the full season\" (the Clippers' watch page, checked 2026-10-21; announcement 2026-10-14).",
       "sources": ["https://www.nba.com/clippers/news/la-clippers-announce-2026-27-television-broadcast-plan", "https://www.nba.com/clippers/watch", "https://www.sportsvideo.org/2026/10/15/la-clippers-announce-2026-27-television-broadcast-plan/", "https://www.directv.com/insider/news/clippervision-on-directv/"]
     },
     "los-angeles-lakers": {
@@ -1423,7 +1429,8 @@
       ],
       "live_tv_carriers": ["Fubo", "DirecTV Stream"],
       "territory": "Knicks local market",
-      "notes": "Knicks games on DAZN in 2026-27 are official (MSG and DAZN releases, 2026-07-29). The monthly price is from Yahoo Sports and the Sabres' site; sources disagree on the yearly price ($119 vs $249.99).",
+      "notes": "Knicks games stream on DAZN in 2026-27. Sources disagree on the yearly price; check before you buy.",
+      "research_notes": "Knicks games on DAZN in 2026-27 are official (MSG and DAZN releases, 2026-07-29). The monthly price is from Yahoo Sports and the Sabres' site; sources disagree on the yearly price ($119 vs $249.99).",
       "sources": ["https://www.msgnetworks.com/press-release/dazn-exclusive-direct-to-consumer-streaming-home-of-msg-and-yes-networks/", "https://dazngroup.com/press-room/dazn-to-be-the-exclusive-direct-to-consumer-streaming-home-of-the-yes-network-and-msg-networks/", "https://sports.yahoo.com/articles/watch-knicks-dazn-prices-plans-181342227.html", "https://www.nhl.com/sabres/news/how-to-watch-buffalo-sabres-on-dazn", "https://www.cnbc.com/2026/07/29/yes-network-msg-networks-dazn-streaming.html"]
     },
     "oklahoma-city-thunder": {
@@ -1690,7 +1697,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "76ers local market",
-      "notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Two independent 2026 sources (Sports Media Watch, Antennaland) agree on $24.95.",
+      "notes": "The add-on price is from the network's own FAQ; check it before you buy.",
+      "research_notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Two independent 2026 sources (Sports Media Watch, Antennaland) agree on $24.95.",
       "sources": ["https://www.nbcsportsphiladelphia.com/news/sports/faq-nbc-sports-philadelphia-peacock/655697/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsphiladelphia.com/streaming-faqs-sixers/", "https://www.sportsmediawatch.com/2026/09/smw-faq-nhl-broadcasts-2026-27/", "https://www.antennaland.com/how-to-watch-nbc-sports-philadelphia/"]
     },
     "phoenix-suns": {
@@ -1821,7 +1829,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "Blazers local market",
-      "notes": "KUNP, KATU and BlazerVision carry 2026-27 games (KVAL, Sinclair). BlazerVision carries every game not exclusive to national TV (NBA help page). The price is from two 2026-27 pages, not an official one, and matches the 2024 launch price. Whether every local game is free over the air in 2026-27 is not confirmed.",
+      "notes": "KUNP, KATU and BlazerVision carry 2026-27 games. BlazerVision has every game not exclusive to national TV. Its price is not from an official page, and whether every local game is free over the air is not confirmed.",
+      "research_notes": "KUNP, KATU and BlazerVision carry 2026-27 games (KVAL, Sinclair). BlazerVision carries every game not exclusive to national TV (NBA help page). The price is from two 2026-27 pages, not an official one, and matches the 2024 launch price. Whether every local game is free over the air in 2026-27 is not confirmed.",
       "sources": ["https://kval.com/sports/sports-newsletter/nba-announces-2026-27-schedule-for-the-portland-trail-blazers-oregon-portland-nba-national-basketball-association-moda-rose-center-season-2026-27-black-friday-ja-morant-dame-lillard-damian-rip-city", "https://support.watch.nba.com/hc/en-us/articles/26513701946263-BlazerVision", "https://www.sportsmediawatch.com/tv-schedules/nba-tv-schedule/portland-trail-blazers/", "https://ripcityproject.com/how-to-watch-trail-blazers-2026-27-tv-streaming-radio"]
     },
     "sacramento-kings": {
@@ -1877,7 +1886,8 @@
       ],
       "live_tv_carriers": [],
       "territory": "Kings local market",
-      "notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Sports Media Watch's 2026-27 Kings page says $15; its September 2026 FAQ says $17.95.",
+      "notes": "The add-on price is from the network's own FAQ; check it before you buy.",
+      "research_notes": "Add-on price from the network's own FAQ and Peacock's help page, which are not labelled 2026-27. Sports Media Watch's 2026-27 Kings page says $15; its September 2026 FAQ says $17.95.",
       "sources": ["https://www.nbcsportsbayarea.com/news/sports/faq-nbc-sports-bay-area-nbc-sports-california-on-peacock/1835955/", "https://www.peacocktv.com/help/article/regional-sports-networks", "https://www.nbcsportsbayarea.com/streaming-faqs-kings/", "https://www.sportsmediawatch.com/2026/09/smw-faq-nhl-broadcasts-2026-27/"]
     },
     "san-antonio-spurs": {
