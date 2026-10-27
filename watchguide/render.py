@@ -83,6 +83,15 @@ def date_label(value: str) -> str:
     return parsed.strftime("%a %b ") + str(parsed.day)
 
 
+def short_date(value: str) -> str:
+    """'2026-12-16' as 'Dec 16' (the year is implied by the season)."""
+    try:
+        parsed = datetime.strptime((value or "")[:10], "%Y-%m-%d")
+    except ValueError:
+        return value or ""
+    return parsed.strftime("%b ") + str(parsed.day)
+
+
 def et_label(game, with_date: bool = False) -> str:
     """Eastern tip-off exactly as the feed states it. Never invented."""
     if not game.tipoff_et:
@@ -139,6 +148,7 @@ def build_env(template_dir: Path | None = None) -> Environment:
     env.filters["month_year"] = month_year
     env.filters["to_path"] = to_path
     env.filters["date_label"] = date_label
+    env.filters["short_date"] = short_date
     env.filters["et_label"] = et_label
     env.filters["et_clock"] = et_clock
     env.globals["asset"] = asset

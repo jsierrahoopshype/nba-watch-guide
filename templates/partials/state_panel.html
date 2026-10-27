@@ -75,7 +75,7 @@
           {#- The card's first line already says when prices were checked; a
               row repeats it only when its own date differs or it is unchecked. #}
           {%- if not (item.service.verified and item.service.last_verified) %}
-          <div class="row-note">{{ labels.prices_unchecked }}</div>
+          {%- if item.service.has_price %}<div class="row-note">{{ labels.prices_unchecked }}</div>{% endif %}
           {%- elif not prices_checked or (item.service.last_verified|month_year) != (prices_checked|month_year) %}
           <div class="row-note">{{ labels.prices_checked.format(month_year=item.service.last_verified|month_year) }}</div>
           {%- endif %}
