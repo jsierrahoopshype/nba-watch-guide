@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-27T18:46:02+00:00",
+ "fetched_at": "2026-10-27T20:17:52+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 5943,
+ "row_count": 5955,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -41626,6 +41626,91 @@
    "player": "Derrick White",
    "status": "Probable",
    "injury": "Right Hip Synovitis",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaren Jackson Jr",
+   "status": "Out",
+   "injury": "Right Knee Injury",
+   "date": "2026-10-27",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jaren Jackson Jr",
+   "status": "Out",
+   "injury": "Right Knee Torn MCL",
+   "date": "2026-10-27",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jaren Jackson Jr",
+   "status": "Out",
+   "injury": "Right Knee Torn MCL",
+   "date": "2026-10-27",
+   "prevStatus": "Left Game",
+   "eta": "6-8 weeks"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Probable",
+   "injury": "",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Probable",
+   "injury": "Illness",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Rui Hachimura",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Rui Hachimura",
+   "status": "Out",
+   "injury": "Left Quadriceps Soreness",
+   "date": "2026-10-27",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Simone Fontecchio",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Left Game",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Branden Carlson",
+   "status": "Available",
+   "injury": "Concussion Protocol",
+   "date": "2026-10-27",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Pelle Larsson",
+   "status": "Probable",
+   "injury": "Left Finger Sprain",
+   "date": "2026-10-27",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Pelle Larsson",
+   "status": "Probable",
+   "injury": "Right Ankle Sprain",
    "date": "2026-10-27",
    "prevStatus": "Available"
   }
