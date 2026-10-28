@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-28T16:30:06+00:00",
+ "fetched_at": "2026-10-28T18:57:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6005,
+ "row_count": 6018,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42072,6 +42072,102 @@
    "injury": "Right Ankle Sprain",
    "date": "2026-10-28",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "Aaron Wiggins",
+   "status": "Available",
+   "injury": "Left Knee Contusion",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "AJ Dybantsa",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ausar Thompson",
+   "status": "Probable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Out",
+   "eta": "2-4 weeks"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Out",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-28",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Santiago Aldama",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-28",
+   "prevStatus": "Doubtful",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Tarik Biberovic",
+   "status": "Out",
+   "injury": "Right Heel Bursitis",
+   "date": "2026-10-28",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Justin Champagnie",
+   "status": "Out",
+   "injury": "Right Foot Fracture",
+   "date": "2026-10-27",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Justin Champagnie",
+   "status": "Out",
+   "injury": "Right Foot Fracture",
+   "date": "2026-10-27",
+   "prevStatus": "Out",
+   "eta": "4-5 monts"
+  },
+  {
+   "player": "Justin Champagnie",
+   "status": "Out",
+   "injury": "Right Foot Fracture",
+   "date": "2026-10-27",
+   "prevStatus": "Out",
+   "eta": "4-5 months"
   }
  ]
 }
