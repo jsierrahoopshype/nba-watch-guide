@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-28T18:57:09+00:00",
+ "fetched_at": "2026-10-28T20:40:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6018,
+ "row_count": 6022,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42168,6 +42168,35 @@
    "date": "2026-10-27",
    "prevStatus": "Out",
    "eta": "4-5 months"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Out",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Adou Thiero",
+   "status": "Out",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-21",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Luka Doncic",
+   "status": "Out",
+   "injury": "Back Tightness",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
   }
  ]
 }
