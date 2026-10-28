@@ -350,8 +350,8 @@ listing nobody, and the build summary gets a `WARNING injury report not
 available yet` line. The warning does not fail the job.
 
 **Logos, flags, headshots and fonts.** Nothing on a page loads from another
-domain. Team logos (`assets/logos/<tricode>.svg`) and the player silhouette
-come from jsierrahoopshype/nba-headshots; the country flags
+domain. Team logos (`assets/logos/<tricode>.svg`) come from
+jsierrahoopshype/nba-headshots; the country flags
 (`assets/flags/`, flag-icons, MIT) and the self-hosted DM Sans and JetBrains
 Mono fonts (`assets/fonts/`, SIL OFL) from jsierrahoopshype/nba-born-died,
 whose design language the pages follow. All are in the repo and published
@@ -359,10 +359,12 @@ under `/how-to-watch/assets/` with content-hashed names (the fonts keep plain
 names because the stylesheet names them). Player headshots for the game cards'
 "Players to watch" (hub, tonight, each team's next game, each pair's next
 meeting) are fetched at build time: `players/metadata/players_all.json` gives each
-player's file name, the 160px WebP comes from `players/headshots/face2-160/`,
-and it is saved to `assets/faces/` in the published tree, which the restore
-step brings back, so each face is downloaded once. A player with no headshot,
-or a failed download, gets the silhouette. `HEADSHOTS_BASE` points the fetch at
+player's file name, `players/headshots/face-fill/.hashes.json` says who has a
+face-fill file (the one HoopsMatic headshot look: the face fills a light grey
+circle), the 160px WebP comes from `players/headshots/face-fill/`, and it is
+saved to `assets/faces/` in the published tree, which the restore step brings
+back, so each face is downloaded once. A player with no face-fill file, or a
+failed download, gets his initials in the same circle. `HEADSHOTS_BASE` points the fetch at
 another copy of that repo.
 
 **Prices, local TV and blackout rules.** Hand-edited data files. Nothing is

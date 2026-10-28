@@ -2,17 +2,18 @@
 
 Source: jsierrahoopshype/nba-headshots.
   players/metadata/players_all.json lists every player with a headshot
-  record whose "filename" is "<nba_id>-<slug>.png"; the same file under
-  players/headshots/face/ is a 256x256 transparent cutout (head and
-  shoulders, no background). The build shrinks it to a 160x160 WebP that
-  keeps the transparency, so the face sits on the page's own light circle.
-  (face2-160, used before Oct 2026, had a dark baked-in background and,
-  on some players, a black band across the bottom.)
+  record whose "filename" is "<nba_id>-<slug>.png"; players/headshots/
+  face-fill/<nba_id>-<slug>.webp is the one HoopsMatic headshot look (Oct
+  2026): a 160x160 transparent WebP whose face fills the circle, chin
+  inside, no neck or jersey line. face-fill/.hashes.json lists the players
+  that have one. The file is saved as it comes and sits on the page's own
+  light grey circle. (Before: face/ cutouts shrunk here, and before that
+  face2-160 with a dark baked-in background.)
 
 Nothing on a page loads from that repo. The build downloads the faces it
 needs into assets/faces/ in the published tree, which the restore step
 brings back on every run, so each face is fetched once. A player with no
-headshot, or one that fails to download, gets the silhouette instead.
+face-fill file, or one that fails to download, gets his initials instead.
 Set HEADSHOTS_BASE to read a different copy of the repo.
 """
 
@@ -29,16 +30,17 @@ from .http import FetchError, get
 
 DEFAULT_BASE = "https://raw.githubusercontent.com/jsierrahoopshype/nba-headshots/main"
 INDEX_PATH = "players/metadata/players_all.json"
-FACE_DIR = "players/headshots/face"
-FACE_SIZE = 160
+FACE_DIR = "players/headshots/face-fill"
+FILL_LIST = f"{FACE_DIR}/.hashes.json"   # {"files": {stem: ...}}: who has a face-fill file
 INDEX_CACHE = "data/headshots-index.json"
 FACES = "assets/faces"
 # Which source each file in assets/faces came from, kept per file in
 # assets/faces/sources.json. The published tree keeps faces between runs, so
 # a file without the current mark is fetched again the next time a page
 # needs it (same file name, so no page HTML changes). An offline run keeps
-# the old file rather than dropping to a silhouette.
-SOURCE_MARK = "face-cutout-160-v1"
+# the old file rather than dropping to initials; an online run whose fetch
+# fails drops a file without the current mark (initials, never the old look).
+SOURCE_MARK = "face-fill-160-v1"
 SOURCE_FILE = "sources.json"
 MIN_INDEX = 300          # fewer entries than this is treated as a broken index
 
@@ -47,16 +49,23 @@ def base_url() -> str:
     return (os.environ.get("HEADSHOTS_BASE") or DEFAULT_BASE).rstrip("/")
 
 
-def index_from(payload: Any) -> dict[str, str]:
-    """{match_key(name): file stem} for every player whose record has a face."""
+def index_from(payload: Any, fill: Any = None) -> dict[str, str]:
+    """{match_key(name): file stem} for every player whose record has a face
+    and, when the face-fill list is given, a face-fill file."""
     players = payload.get("players", []) if isinstance(payload, dict) else []
+    have = None
+    if fill is not None:
+        have = set((fill.get("files") or {}) if isinstance(fill, dict) else ())
     out: dict[str, str] = {}
     for p in players:
         shot = p.get("headshot") or {}
         filename = shot.get("filename") or ""
         if not (shot.get("face") and filename and p.get("full_name")):
             continue
-        out.setdefault(match_key(p["full_name"]), filename.rsplit(".", 1)[0])
+        stem = filename.rsplit(".", 1)[0]
+        if have is not None and stem not in have:
+            continue
+        out.setdefault(match_key(p["full_name"]), stem)
     return out
 
 
@@ -66,7 +75,8 @@ def load_index(out_dir: Path, allow_fetch: bool = True) -> tuple[dict[str, str],
     reason = "not fetched on this run"
     if allow_fetch:
         try:
-            built = index_from(get(f"{base_url()}/{INDEX_PATH}", expect_json=True))
+            built = index_from(get(f"{base_url()}/{INDEX_PATH}", expect_json=True),
+                               get(f"{base_url()}/{FILL_LIST}", expect_json=True))
             if len(built) < MIN_INDEX:
                 raise FetchError(f"headshot index has only {len(built)} faces")
             cache.parent.mkdir(parents=True, exist_ok=True)
@@ -79,22 +89,11 @@ def load_index(out_dir: Path, allow_fetch: bool = True) -> tuple[dict[str, str],
         faces = json.loads(cache.read_text(encoding="utf-8")).get("faces") or {}
         return faces, f"headshots: {reason}; kept the last index ({len(faces)} faces)"
     except (OSError, ValueError, AttributeError):
-        return {}, f"headshots: {reason}; no index, silhouettes only"
+        return {}, f"headshots: {reason}; no index, initials only"
 
 
-def cutout_webp(png: bytes) -> bytes:
-    """A transparent PNG cutout as a FACE_SIZE square WebP that keeps its alpha."""
-    import io
-
-    from PIL import Image
-
-    with Image.open(io.BytesIO(png)) as im:
-        im = im.convert("RGBA")
-        if im.size != (FACE_SIZE, FACE_SIZE):
-            im = im.resize((FACE_SIZE, FACE_SIZE), Image.LANCZOS)
-        buf = io.BytesIO()
-        im.save(buf, "WEBP", quality=82, method=6, exact=False)
-    return buf.getvalue()
+def is_webp(data: Any) -> bool:
+    return isinstance(data, (bytes, bytearray)) and data[:4] == b"RIFF" and data[8:12] == b"WEBP"
 
 
 def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
@@ -122,17 +121,18 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
         need = not target.is_file() or marks.get(stem) != SOURCE_MARK
         if need and allow_fetch:
             try:
-                data = get(f"{base_url()}/{FACE_DIR}/{stem}.png")
-                if not isinstance(data, (bytes, bytearray)) or data[:8] != b"\x89PNG\r\n\x1a\n":
-                    raise FetchError("not a PNG file")
-                webp = cutout_webp(bytes(data))
+                data = get(f"{base_url()}/{FACE_DIR}/{stem}.webp")
+                if not is_webp(data):
+                    raise FetchError("not a WebP file")
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(webp)
+                target.write_bytes(bytes(data))
                 marks[stem] = SOURCE_MARK
                 changed = True
                 fetched += 1
             except Exception:
                 failed += 1
+                if marks.get(stem) != SOURCE_MARK:     # an old-look file: initials instead
+                    continue
         if target.is_file():
             found[key] = rel
     if changed:
@@ -142,5 +142,5 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
             pass
     note = f"headshots: {len(found)} faces on the game cards, {fetched} downloaded"
     if failed:
-        note += f", {failed} failed (silhouette shown)"
+        note += f", {failed} failed (initials shown)"
     return found, note
