@@ -312,12 +312,22 @@ def out_block(ctx: SiteContext, game) -> dict:
     return {"is_today": today, "message": message, "sides": sides}
 
 
+NAME_SUFFIXES = {"Jr", "Sr", "II", "III", "IV", "V"}
+
+
+def initials(name: str) -> str:
+    """'Shai Gilgeous-Alexander' -> 'SG'; 'Gary Trent Jr.' -> 'GT'."""
+    w = [x for x in name.replace(".", " ").split() if x not in NAME_SUFFIXES]
+    return (w[0][0] + (w[-1][0] if len(w) > 1 else "")).upper() if w else "?"
+
+
 def face(ctx: SiteContext, name: str | None) -> dict | None:
-    """The headshot (or silhouette) for a player the ranking line names."""
+    """The headshot (or, with no face-fill file, the initials) for a player
+    the ranking line names."""
     if not name:
         return None
     rel = ctx.faces.get(match_key(name))
-    return {"name": name, "src": rel or "assets/silhouette.svg", "is_face": bool(rel)}
+    return {"name": name, "src": rel, "is_face": bool(rel), "initials": initials(name)}
 
 
 def players_to_watch(ctx: SiteContext, game, stars: list | None) -> list[dict]:

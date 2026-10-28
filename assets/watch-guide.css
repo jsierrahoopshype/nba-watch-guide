@@ -727,8 +727,11 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 .hg-out-msg { margin: 6px 0 0; }
 .hg-worth { padding-top: 8px; margin-top: 4px; font-size: 0.78rem; color: var(--text-muted); }
 
-/* Headshots: transparent cutouts on a light circle. */
-.av { background: var(--surface-hover); object-fit: cover; object-position: center top; }
+/* Headshots: nba-headshots face-fill (the face fills the circle) on a light
+   grey circle; a player with no photo gets his initials in the same circle. */
+.av { background: #e8e8ed; object-fit: cover; object-position: center; }
+.av-ini { display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; line-height: 1; color: #55555c; }
+.pw-face.av-ini { font-size: 1.1rem; }
 
 /* ---- hub team and country grids ---- */
 .team-grid a.tcard { border-color: var(--border); min-height: 60px; transition: border-color .12s; }
@@ -764,7 +767,7 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 .gb-fan { border: 0; background: var(--surface-hover); }
 .gb-why { border-bottom: 1px solid var(--border-soft); }
 .pw li { border: 0; background: var(--surface-hover); }
-.pw-face { width: 56px; height: 56px; background: var(--surface); }
+.pw-face { width: 56px; height: 56px; background: #e8e8ed; }
 .game-side .out-chip { border-color: var(--border); }
 /* Players: a lone star takes the full row; long names wrap, never cut. */
 .hg-faces li:only-child { grid-column: 1 / -1; }

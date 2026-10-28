@@ -116,7 +116,7 @@
       {%- if row.players %}
       <ul class="hg-faces">
         {%- for p in row.players %}
-        <li><img class="av" src="{{ asset(p.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="" data-volatile><span class="hg-pname">{{ p.name }}</span><span class="hg-pteam">{{ p.team }}</span></li>
+        <li>{% if p.is_face %}<img class="av" src="{{ asset(p.src) }}" width="40" height="40" loading="lazy" decoding="async" alt="" data-volatile>{% else %}<span class="av av-ini" aria-hidden="true" data-volatile>{{ p.initials }}</span>{% endif %}<span class="hg-pname">{{ p.name }}</span><span class="hg-pteam">{{ p.team }}</span></li>
         {%- endfor %}
       </ul>
       {%- endif %}

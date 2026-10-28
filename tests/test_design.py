@@ -165,14 +165,15 @@ def test_no_page_asks_another_domain_for_anything(built_site):
     assert "http" not in re.sub(r"/\*.*?\*/", "", css, flags=re.S), "the stylesheet loads something remote"
 
 
-def test_hub_cards_show_the_named_players_or_a_silhouette(built_site, fixture_games):
-    """No headshots on this offline build, so every named player gets the silhouette."""
+def test_hub_cards_show_the_named_players_or_their_initials(built_site, fixture_games):
+    """No headshots on this offline build, so every named player gets his initials."""
     hub = (built_site / "index.html").read_text(encoding="utf-8")
     block = hub[hub.index("data-hub-games"):hub.index("</section>", hub.index("data-hub-games"))]
     for row in block.split('<li class="hg-row" ')[1:]:
         assert row.count('<img class="logo"') == 2
-        for tag in re.findall(r'<img class="av"[^>]*>', row):
-            assert re.search(r'src="/how-to-watch/assets/silhouette\.[0-9a-f]{10}\.svg"', tag)
+        assert '<img class="av"' not in row and "silhouette" not in row
+        for ini in re.findall(r'<span class="av av-ini" aria-hidden="true" data-volatile>([^<]*)</span>', row):
+            assert re.fullmatch(r"[A-Z?]{1,2}", ini)
 
 
 # -- headshot source -------------------------------------------------------------------
@@ -185,60 +186,65 @@ INDEX = {"players": [
 WEBP = b"RIFF\x00\x00\x00\x00WEBPVP8 fake"
 
 
-def _cutout_png() -> bytes:
-    """A small transparent cutout, like the files under players/headshots/face/."""
+def _fill_webp() -> bytes:
+    """A small transparent 160px WebP, like the files under players/headshots/face-fill/."""
     import io
 
     from PIL import Image
 
-    im = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
-    im.paste((180, 120, 90, 255), (64, 32, 192, 256))
+    im = Image.new("RGBA", (160, 160), (0, 0, 0, 0))
+    im.paste((180, 120, 90, 255), (20, 10, 140, 160))
     buf = io.BytesIO()
-    im.save(buf, "PNG")
+    im.save(buf, "WEBP", lossless=True)
     return buf.getvalue()
 
 
-def test_index_maps_names_to_face2_files():
+def test_index_maps_names_to_face_files():
     idx = headshots.index_from(INDEX)
     assert idx == {"star alpha": "1-star-alpha", "star bravo": "2-star-bravo"}
+
+
+def test_index_keeps_only_players_with_a_face_fill_file():
+    idx = headshots.index_from(INDEX, {"files": {"2-star-bravo": {}}})
+    assert idx == {"star bravo": "2-star-bravo"}
 
 
 def test_faces_are_downloaded_once_and_failures_fall_back(tmp_path, monkeypatch):
     from PIL import Image
 
     calls = []
-    png = _cutout_png()
+    webp = _fill_webp()
 
     def fake_get(url, **kw):
         calls.append(url)
-        if url.endswith("2-star-bravo.png"):
+        if url.endswith("2-star-bravo.webp"):
             raise headshots.FetchError("404")
-        return png
+        return webp
 
     monkeypatch.setattr(headshots, "get", fake_get)
     idx = headshots.index_from(INDEX)
     found, note = headshots.ensure_faces(tmp_path, ["Star Alpha", "Star Bravo", "Nobody"], idx)
     assert found == {"star alpha": "assets/faces/1-star-alpha.webp"}
     saved = tmp_path / "assets/faces/1-star-alpha.webp"
-    assert saved.read_bytes()[:4] == b"RIFF"
-    with Image.open(saved) as im:                                  # transparent cutout, no baked-in background
+    assert saved.read_bytes() == webp                               # saved as it comes
+    with Image.open(saved) as im:                                  # transparent, no baked-in background
         assert im.format == "WEBP" and im.size == (160, 160)
         assert im.convert("RGBA").getpixel((0, 0))[3] == 0
-    assert "1 failed (silhouette shown)" in note
-    assert calls[0].endswith("/players/headshots/face/1-star-alpha.png")
+    assert "1 failed (initials shown)" in note
+    assert calls[0].endswith("/players/headshots/face-fill/1-star-alpha.webp")
     calls.clear()
     found, _ = headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
     assert found and not calls                                     # already on disk, not fetched again
 
 
 def test_old_faces_are_replaced_once(tmp_path, monkeypatch):
-    """A face kept from the old dark face2-160 source (no mark) is fetched
-    again from the cutouts; offline it is kept rather than dropped."""
+    """A face kept from an older source (no current mark) is fetched again
+    from face-fill; offline it is kept rather than dropped."""
     old = tmp_path / "assets/faces/1-star-alpha.webp"
     old.parent.mkdir(parents=True)
     old.write_bytes(WEBP)
     calls = []
-    monkeypatch.setattr(headshots, "get", lambda url, **kw: calls.append(url) or _cutout_png())
+    monkeypatch.setattr(headshots, "get", lambda url, **kw: calls.append(url) or _fill_webp())
     idx = headshots.index_from(INDEX)
     found, _ = headshots.ensure_faces(tmp_path, ["Star Alpha"], idx, allow_fetch=False)
     assert found and not calls and old.read_bytes() == WEBP
@@ -246,6 +252,21 @@ def test_old_faces_are_replaced_once(tmp_path, monkeypatch):
     assert len(calls) == 1 and old.read_bytes() != WEBP
     headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
     assert len(calls) == 1
+
+
+def test_an_old_look_face_that_fails_to_refetch_shows_initials(tmp_path, monkeypatch):
+    """Online, a face without the current mark whose face-fill fetch fails is
+    not used: the player gets his initials, never the old look."""
+    old = tmp_path / "assets/faces/1-star-alpha.webp"
+    old.parent.mkdir(parents=True)
+    old.write_bytes(WEBP)
+
+    def fail(url, **kw):
+        raise headshots.FetchError("404")
+
+    monkeypatch.setattr(headshots, "get", fail)
+    found, note = headshots.ensure_faces(tmp_path, ["Star Alpha"], headshots.index_from(INDEX))
+    assert found == {} and "1 failed (initials shown)" in note
 
 
 def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch):
@@ -276,8 +297,8 @@ def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch)
     assert ('<li><img class="av" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="40" height="40" '
             'loading="lazy" decoding="async" alt="" data-volatile><span class="hg-pname">Star Alpha</span>') in players
     other = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[1].game_id}"'))
-    assert re.search(r'<img class="av" src="/how-to-watch/assets/silhouette\.[0-9a-f]{10}\.svg"[^>]*>'
-                     r'<span class="hg-pname">Star Bravo</span>', other)             # no face on disk: silhouette
+    assert ('<span class="av av-ini" aria-hidden="true" data-volatile>SB</span>'
+            '<span class="hg-pname">Star Bravo</span>') in other            # no face on disk: initials
     # The pair page's game block uses the same face, 56px.
     pair = (site / pairs_slug(today[0]) / "index.html").read_text(encoding="utf-8")
     assert '<img class="av pw-face" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="56" height="56"' in pair

@@ -93,7 +93,7 @@
     {%- if view.players %}
     <ul class="pw">
       {%- for p in view.players %}
-      <li><img class="av pw-face" src="{{ asset(p.src) }}" width="56" height="56" loading="lazy" decoding="async" alt=""><span class="pw-name">{{ p.name }}</span><span class="pw-team">{{ p.team }}</span></li>
+      <li>{% if p.is_face %}<img class="av pw-face" src="{{ asset(p.src) }}" width="56" height="56" loading="lazy" decoding="async" alt="">{% else %}<span class="av av-ini pw-face" aria-hidden="true">{{ p.initials }}</span>{% endif %}<span class="pw-name">{{ p.name }}</span><span class="pw-team">{{ p.team }}</span></li>
       {%- endfor %}
     </ul>
     {%- endif %}
