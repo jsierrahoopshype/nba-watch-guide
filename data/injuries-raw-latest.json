@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-29T16:43:46+00:00",
+ "fetched_at": "2026-10-29T19:01:57+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6049,
+ "row_count": 6059,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42389,6 +42389,76 @@
    "date": "2026-10-29",
    "prevStatus": "Out",
    "eta": "1-2 weeks"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Doubtful",
+   "injury": "Left Ankle Injury",
+   "date": "2026-10-29",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Doubtful",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-29",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Questionable",
+   "injury": "Cervical Strain",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Meleek Thomas",
+   "status": "Questionable",
+   "injury": "Right Foot Inflammation / Soreness",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Questionable",
+   "injury": "Right Adductor Strain",
+   "date": "2026-10-29",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-29",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Questionable",
+   "injury": "Left Finger Sprain",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Robert Williams",
+   "status": "Doubtful",
+   "injury": "",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Robert Williams",
+   "status": "Doubtful",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
   }
  ]
 }
