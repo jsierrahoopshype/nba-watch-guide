@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-29T21:33:36+00:00",
+ "fetched_at": "2026-10-29T22:03:33+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6075,
+ "row_count": 6077,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42573,6 +42573,20 @@
    "player": "Jaylen Brown",
    "status": "Questionable",
    "injury": "Left Knee Soreness",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dennis Schroeder",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dennis Schroeder",
+   "status": "Questionable",
+   "injury": "Right Foot Soreness",
    "date": "2026-10-29",
    "prevStatus": "Available"
   }
