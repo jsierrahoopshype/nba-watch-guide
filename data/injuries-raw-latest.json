@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-29T10:14:24+00:00",
+ "fetched_at": "2026-10-29T16:43:46+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6044,
+ "row_count": 6049,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42352,6 +42352,43 @@
    "injury": "Right Ankle Sprain",
    "date": "2026-10-28",
    "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Kawhi Leonard",
+   "status": "Out",
+   "injury": " Left Knee Swelling",
+   "date": "2026-10-25",
+   "prevStatus": "Out",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Out",
+   "injury": "Right Leg Contusion",
+   "date": "2026-10-29",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Out",
+   "injury": "Right Le",
+   "date": "2026-10-29",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Out",
+   "injury": "Right Leg Bone Bruise",
+   "date": "2026-10-29",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Out",
+   "injury": "Right Leg Bone Bruise",
+   "date": "2026-10-29",
+   "prevStatus": "Out",
+   "eta": "1-2 weeks"
   }
  ]
 }
