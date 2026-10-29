@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-29T04:50:53+00:00",
+ "fetched_at": "2026-10-29T10:14:24+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6035,
+ "row_count": 6044,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42289,6 +42289,69 @@
    "injury": "Right Adductor Strain",
    "date": "2026-10-28",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Left Game",
+   "injury": "Illness",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Left Game",
+   "injury": "Left Ankle Injury",
+   "date": "2026-10-28",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ajay Mitchell",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Out",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Available",
+   "injury": "Right Shoulder Soreness",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Available",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Caleb Martin",
+   "status": "Available",
+   "injury": "Right Thumb Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-10-28",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-28",
+   "prevStatus": "Doubtful"
   }
  ]
 }
