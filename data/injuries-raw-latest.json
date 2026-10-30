@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T16:35:29+00:00",
+ "fetched_at": "2026-10-30T18:42:18+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6100,
+ "row_count": 6101,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42753,6 +42753,13 @@
    "player": "Dennis Schroeder",
    "status": "Probable",
    "injury": "Right Foot Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Rui Hachimura",
+   "status": "Probable",
+   "injury": "Left Quadriceps Soreness",
    "date": "2026-10-30",
    "prevStatus": "Questionable"
   }
