@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T20:14:30+00:00",
+ "fetched_at": "2026-10-30T20:42:50+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6104,
+ "row_count": 6114,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42784,6 +42784,76 @@
    "injury": "Left Foot Inflammation / Soreness",
    "date": "2026-10-30",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Out",
+   "injury": "Right Hip Contusion",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Doubtful",
+   "injury": "Left Knee Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Probable",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Probable",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Questionable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Questionable",
+   "injury": "Right Low Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Questionable",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Simone Fontecchio",
+   "status": "Probable",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Doubtful",
+   "injury": "Right Wrist Sprain / Personal Reasons",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Obi Toppin",
+   "status": "Questionable",
+   "injury": "Low Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
   }
  ]
 }
