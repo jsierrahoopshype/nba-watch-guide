@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T22:42:54+00:00",
+ "fetched_at": "2026-10-30T23:13:03+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6138,
+ "row_count": 6143,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43025,6 +43025,42 @@
    "date": "2026-10-26",
    "prevStatus": "Out",
    "eta": "6-9 months"
+  },
+  {
+   "player": "Obi Toppin",
+   "status": "Out",
+   "injury": "Low Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alperen Sengun",
+   "status": "Out",
+   "injury": "Low Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Probable",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Available",
+   "injury": "Neck Stiffness / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Available",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
   }
  ]
 }
