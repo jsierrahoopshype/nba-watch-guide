@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T21:42:53+00:00",
+ "fetched_at": "2026-10-30T22:12:53+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6117,
+ "row_count": 6125,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42875,6 +42875,62 @@
    "injury": "Personal Reasons",
    "date": "2026-10-30",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Dennis Schroeder",
+   "status": "Available",
+   "injury": "Right Foot Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Out",
+   "injury": " Left Patellar Tendinopathy",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Available",
+   "injury": "Right Adductor Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Out",
+   "injury": "Right Low Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Available",
+   "injury": "Left Finger Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Noah Clowney",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tre Johnson",
+   "status": "Available",
+   "injury": "Right Achilles Soreness / Tightness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
   }
  ]
 }
