@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T04:54:17+00:00",
+ "fetched_at": "2026-10-30T10:15:52+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6085,
+ "row_count": 6098,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42649,6 +42649,98 @@
    "injury": "Personal Reasons",
    "date": "2026-10-29",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Ja Morant",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ja Morant",
+   "status": "Left Game",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Quinten Post",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Quinten Post",
+   "status": "Left Game",
+   "injury": "Right Ankle Injury",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Luka Doncic",
+   "status": "Available",
+   "injury": "Back Tightness",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Available",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Questionable",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Doubtful",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Questionable",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain / Personal Reasons",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Available",
+   "injury": "Cervical Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Meleek Thomas",
+   "status": "Out",
+   "injury": "Right Foot Inflammation / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
   }
  ]
 }
