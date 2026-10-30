@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T21:12:52+00:00",
+ "fetched_at": "2026-10-30T21:42:53+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6114,
+ "row_count": 6117,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42854,6 +42854,27 @@
    "injury": "Low Back Soreness",
    "date": "2026-10-30",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Doubtful",
+   "injury": " Left Patellar Tendinopathy",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Meleek Thomas",
+   "status": "Questionable",
+   "injury": "Right Foot Inflammation / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Dejounte Murray",
+   "status": "Available",
+   "injury": "Personal Reasons",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
   }
  ]
 }
