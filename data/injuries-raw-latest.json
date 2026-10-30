@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T18:42:18+00:00",
+ "fetched_at": "2026-10-30T20:14:30+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6101,
+ "row_count": 6104,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42760,6 +42760,28 @@
    "player": "Rui Hachimura",
    "status": "Probable",
    "injury": "Left Quadriceps Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ja Morant",
+   "status": "Left Game",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Ja Morant",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Left Game",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Out",
+   "injury": "Left Foot Inflammation / Soreness",
    "date": "2026-10-30",
    "prevStatus": "Questionable"
   }
