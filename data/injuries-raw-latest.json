@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T10:15:52+00:00",
+ "fetched_at": "2026-10-30T16:35:29+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6098,
+ "row_count": 6100,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42739,6 +42739,20 @@
    "player": "Meleek Thomas",
    "status": "Out",
    "injury": "Right Foot Inflammation / Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Noah Clowney",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dennis Schroeder",
+   "status": "Probable",
+   "injury": "Right Foot Soreness",
    "date": "2026-10-30",
    "prevStatus": "Questionable"
   }
