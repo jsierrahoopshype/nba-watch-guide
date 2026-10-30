@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-30T22:12:53+00:00",
+ "fetched_at": "2026-10-30T22:42:54+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6125,
+ "row_count": 6138,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -42931,6 +42931,100 @@
    "injury": "Right Achilles Soreness / Tightness",
    "date": "2026-10-30",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Santiago Aldama",
+   "status": "Out",
+   "injury": "Right Knee Surgery",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Tarik Biberovic",
+   "status": "Out",
+   "injury": "Right Heel Bursitis",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Naji Marshall",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Simone Fontecchio",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Karim Lopez",
+   "status": "Available",
+   "injury": "Right Knee Contusion",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Quinten Post",
+   "status": "Doubtful",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Available",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ty Jerome",
+   "status": "Questionable",
+   "injury": "Upper Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Scotty Pippen Jr",
+   "status": "Questionable",
+   "injury": "Lower Back Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Karim Lopez",
+   "status": "Available",
+   "injury": "Right Knee Contusion",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Available",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-10-29",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Available",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jalen Williams",
+   "status": "Out",
+   "injury": "Left Ankle Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out",
+   "eta": "6-9 months"
   }
  ]
 }
