@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-31T19:37:17+00:00",
+ "fetched_at": "2026-10-31T19:55:36+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6176,
+ "row_count": 6179,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43295,6 +43295,27 @@
    "player": "Stephon Castle",
    "status": "Questionable",
    "injury": "Migraine",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Out",
+   "injury": " Right Knee Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Out",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Probable",
+   "injury": "Left Knee Tendinitis",
    "date": "2026-10-31",
    "prevStatus": "Available"
   }
