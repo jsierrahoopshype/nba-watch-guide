@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-31T04:33:36+00:00",
+ "fetched_at": "2026-10-31T08:59:59+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6143,
+ "row_count": 6156,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43059,6 +43059,101 @@
    "player": "Aaron Nesmith",
    "status": "Available",
    "injury": "Left Hamstring Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Chet Holmgren",
+   "status": "Out",
+   "injury": "Right Patellar Tendinitis",
+   "date": "2026-10-26",
+   "prevStatus": "Out",
+   "eta": "8-10 weeks"
+  },
+  {
+   "player": "Cason Wallace",
+   "status": "Out",
+   "injury": " Left Shoulder Labral Tear",
+   "date": "2026-10-26",
+   "prevStatus": "Out",
+   "eta": "6-9 months"
+  },
+  {
+   "player": "Jalen Williams",
+   "status": "Out",
+   "injury": "Left Ankle Surgery",
+   "date": "2026-10-26",
+   "prevStatus": "Out",
+   "eta": "5-8 months"
+  },
+  {
+   "player": "Cason Wallace",
+   "status": "Out",
+   "injury": " Left Shoulder Labral Tear",
+   "date": "2026-10-26",
+   "prevStatus": "Out",
+   "eta": "5-8 months"
+  },
+  {
+   "player": "Chris Youngblood",
+   "status": "Questionable",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-10-30",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Robert Williams",
+   "status": "Questionable",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Available",
+   "injury": "Left Forearm Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alpha Diallo",
+   "status": "Out",
+   "injury": "Right Wrist Sprain / Personal Reasons",
+   "date": "2026-10-30",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Oso Ighodaro",
+   "status": "Available",
+   "injury": "Right Oblique Strain",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Available",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-10-30",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Rui Hachimura",
+   "status": "Available",
+   "injury": "Left Quadriceps Soreness",
    "date": "2026-10-30",
    "prevStatus": "Probable"
   }
