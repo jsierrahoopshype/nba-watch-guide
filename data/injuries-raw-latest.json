@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-31T21:25:37+00:00",
+ "fetched_at": "2026-10-31T21:55:40+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6184,
+ "row_count": 6187,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43353,6 +43353,27 @@
    "injury": " Left Patellar Tendinopathy",
    "date": "2026-10-31",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Available",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-31",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Available",
+   "injury": " Left Patellar Tendinopathy",
+   "date": "2026-10-31",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dejounte Murray",
+   "status": "Out",
+   "injury": "Personal Reasons",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
   }
  ]
 }
