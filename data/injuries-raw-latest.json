@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-10-31T15:39:58+00:00",
+ "fetched_at": "2026-10-31T17:51:03+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6156,
+ "row_count": 6167,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43156,6 +43156,84 @@
    "injury": "Left Quadriceps Soreness",
    "date": "2026-10-30",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Out",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Out",
+   "injury": "Back Management",
+   "date": "2026-10-31",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Out",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-10-31",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Out",
+   "injury": "Right Foot Plantar Fascia Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Questionable",
+   "injury": " Left Patellar Tendinopathy",
+   "date": "2026-10-31",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tacko Fall",
+   "status": "Questionable",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-10-31",
+   "prevStatus": "Out",
+   "eta": "7-10 days"
+  },
+  {
+   "player": "Jabari Walker",
+   "status": "Questionable",
+   "injury": " Left Patellar Tendinopathy",
+   "date": "2026-10-31",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Questionable",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Out",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Out",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-10-31",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Alperen Sengun",
+   "status": "Available",
+   "injury": "Low Back Soreness",
+   "date": "2026-10-31",
+   "prevStatus": "Out"
   }
  ]
 }
