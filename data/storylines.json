@@ -1,162 +1,126 @@
 {
- "date": "2026-10-31",
+ "date": "2026-11-01",
  "games": {
-  "0022600147": [
+  "0022600154": [
    {
-    "text": "Jrue Holiday (POR) needs 5 assists to pass Mike Conley for 25th all-time (6,778 now; averaging 4.0)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/jrue-holiday-201950.html",
+    "text": "Paul George (BOS) needs 16 points to pass Terry Cummings for 60th all-time (19,445 now; averaging 21.4)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/paul-george-202331.html",
     "kind": "milestone",
-    "anchor": "Jrue Holiday"
+    "anchor": "Paul George"
    },
    {
-    "text": "Jrue Holiday (POR) needs 1 point to pass Kevin McHale for 101st all-time (17,335 now; averaging 12.0)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/jrue-holiday-201950.html",
+    "text": "Nikola Vučević (ORL) needs 4 points to pass Shawn Marion for 92nd all-time (17,697 now; averaging 2.6)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/nikola-vucevic-202696.html",
     "kind": "milestone",
-    "anchor": "Jrue Holiday"
+    "anchor": "Nikola Vučević"
    },
    {
-    "text": "Jazz have lost 3 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/utah-jazz.html",
+    "text": "Celtics have won 4 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/boston-celtics.html",
     "kind": "team_streak",
-    "anchor": "Jazz"
+    "anchor": "Celtics"
    },
    {
-    "text": "Last met in the 2000 playoffs: Trail Blazers won the series 4-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/portland-trail-blazers.html",
+    "text": "Last met in the 2025 playoffs: Celtics won the series 4-1",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/boston-celtics.html",
     "kind": "playoffs",
-    "anchor": "Trail Blazers"
+    "anchor": "Celtics"
    },
    {
-    "text": "Jazz lead the all-time series 116-99 (regular season); Jazz 4-6 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/utah-jazz.html",
+    "text": "Celtics lead the all-time series 79-58 (regular season); Magic 4-6 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/boston-celtics.html",
     "kind": "series",
-    "anchor": "Jazz"
+    "anchor": "Celtics"
    }
   ],
-  "0022600148": [
+  "0022600155": [
    {
-    "text": "LeBron James averages 28.1 points in his last 10 games against the Hornets (23.3 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/lebron-james-2544.html",
-    "kind": "vs_opponent",
-    "anchor": "LeBron James"
-   },
-   {
-    "text": "Last met in the 2000 playoffs: 76ers won the series 3-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/philadelphia-76ers.html",
-    "kind": "playoffs",
-    "anchor": "76ers"
-   },
-   {
-    "text": "76ers lead the all-time series 69-61 (regular season); Hornets 1-9 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/philadelphia-76ers.html",
-    "kind": "series",
-    "anchor": "76ers"
-   }
-  ],
-  "0022600149": [
-   {
-    "text": "DeAndre Jordan (NOP) needs 2 blocks to pass Benoit Benjamin for 36th all-time (1,580 now; averaging 0.8)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/deandre-jordan-201599.html",
-    "kind": "milestone",
-    "anchor": "DeAndre Jordan"
-   },
-   {
-    "text": "Zion Williamson averages 27.4 points in his last 5 games against the Hawks (22.5 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/zion-williamson-1629627.html",
-    "kind": "vs_opponent",
-    "anchor": "Zion Williamson"
-   },
-   {
-    "text": "Hawks lead the all-time series 27-22 (regular season); Pelicans 3-7 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/atlanta-hawks.html",
-    "kind": "series",
-    "anchor": "Hawks"
-   }
-  ],
-  "0022600150": [
-   {
-    "text": "Zach LaVine averages 26.3 points in his last 10 games against the Grizzlies (22.3 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/zach-lavine-203897.html",
-    "kind": "vs_opponent",
-    "anchor": "Zach LaVine"
-   },
-   {
-    "text": "Kings have lost 6 straight dating to last season",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/sacramento-kings.html",
+    "text": "Nets have lost 8 straight dating to last season",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/brooklyn-nets.html",
     "kind": "team_streak",
-    "anchor": "Kings"
+    "anchor": "Nets"
    },
    {
-    "text": "Grizzlies have won 5 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/memphis-grizzlies.html",
+    "text": "Pacers have lost 3 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/indiana-pacers.html",
     "kind": "team_streak",
-    "anchor": "Grizzlies"
+    "anchor": "Pacers"
    },
    {
-    "text": "Kings lead the all-time series 60-54 (regular season); Grizzlies 5-5 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/sacramento-kings.html",
+    "text": "Last met in the 2006 playoffs: Nets won the series 4-2",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/brooklyn-nets.html",
+    "kind": "playoffs",
+    "anchor": "Nets"
+   },
+   {
+    "text": "Pacers lead the all-time series 118-85 (regular season); Pacers 7-3 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/indiana-pacers.html",
     "kind": "series",
-    "anchor": "Kings"
+    "anchor": "Pacers"
    }
   ],
-  "0022600151": [
+  "0022600156": [
    {
-    "text": "Bucks lead the all-time series 133-108 (regular season); Bucks 2-8 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/milwaukee-bucks.html",
-    "kind": "series",
-    "anchor": "Bucks"
-   }
-  ],
-  "0022600152": [
-   {
-    "text": "Anthony Edwards (MIN) is 13 points from 11,000 career points, which would make him the 351st player to get there (10,987 now; averaging 33.2)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/anthony-edwards-1630162.html",
+    "text": "Stephen Curry (GSW) needs 37 points to pass Oscar Robertson for 17th all-time (26,674 now; averaging 29.2)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/stephen-curry-201939.html",
     "kind": "milestone",
-    "anchor": "Anthony Edwards"
+    "anchor": "Stephen Curry"
    },
    {
-    "text": "De'Aaron Fox averages 27.7 points in his last 10 games against the Timberwolves (21.5 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/deaaron-fox-1628368.html",
+    "text": "Draymond Green (GSW) needs 1 steal to pass Grant Hill for 87th all-time (1,248 now; averaging 0.8)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/draymond-green-203110.html",
+    "kind": "milestone",
+    "anchor": "Draymond Green"
+   },
+   {
+    "text": "Brook Lopez (LAC) needs 4 rebounds to pass Spencer Haywood for 121st all-time (7,035 now; averaging 5.0)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/brook-lopez-201572.html",
+    "kind": "milestone",
+    "anchor": "Brook Lopez"
+   },
+   {
+    "text": "Clippers have lost 4 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/la-clippers.html",
+    "kind": "team_streak",
+    "anchor": "Clippers"
+   },
+   {
+    "text": "Warriors have won 3 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/golden-state-warriors.html",
+    "kind": "team_streak",
+    "anchor": "Warriors"
+   },
+   {
+    "text": "Last met in the 2019 playoffs: Warriors won the series 4-2",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/golden-state-warriors.html",
+    "kind": "playoffs",
+    "anchor": "Warriors"
+   },
+   {
+    "text": "Warriors lead the all-time series 139-104 (regular season); Warriors 1-9 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/golden-state-warriors.html",
+    "kind": "series",
+    "anchor": "Warriors"
+   }
+  ],
+  "0022600157": [
+   {
+    "text": "Scottie Barnes averages 24.0 points in his last 7 games against the Lakers (18.8 over his last two seasons)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/scottie-barnes-1630567.html",
     "kind": "vs_opponent",
-    "anchor": "De'Aaron Fox"
+    "anchor": "Scottie Barnes"
    },
    {
-    "text": "Spurs have won 3 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/san-antonio-spurs.html",
-    "kind": "team_streak",
-    "anchor": "Spurs"
+    "text": "Luka Dončić brings 3 straight 35-point games into tonight",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/luka-doncic-1629029.html",
+    "kind": "player_streak",
+    "anchor": "Luka Dončić"
    },
    {
-    "text": "Last met in last season's playoffs: Spurs won the series 4-2",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/san-antonio-spurs.html",
-    "kind": "playoffs",
-    "anchor": "Spurs"
-   },
-   {
-    "text": "Spurs lead the all-time series 96-46 (regular season); Spurs 3-7 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/san-antonio-spurs.html",
+    "text": "Lakers lead the all-time series 37-22 (regular season); Lakers 8-2 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/los-angeles-lakers.html",
     "kind": "series",
-    "anchor": "Spurs"
-   }
-  ],
-  "0022600153": [
-   {
-    "text": "Kevin Durant (HOU) needs 2 blocks to pass Al Horford for 49th all-time (1,353 now; averaging 1.5)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/kevin-durant-201142.html",
-    "kind": "milestone",
-    "anchor": "Kevin Durant"
-   },
-   {
-    "text": "Last met in the 2020 playoffs: Rockets won the series 4-3",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/houston-rockets.html",
-    "kind": "playoffs",
-    "anchor": "Rockets"
-   },
-   {
-    "text": "Thunder lead the all-time series 126-120 (regular season); Rockets 4-6 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/oklahoma-city-thunder.html",
-    "kind": "series",
-    "anchor": "Thunder"
+    "anchor": "Lakers"
    }
   ]
  }
