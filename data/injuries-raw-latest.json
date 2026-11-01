@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-01T20:27:40+00:00",
+ "fetched_at": "2026-11-01T20:57:43+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6203,
+ "row_count": 6206,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43486,6 +43486,27 @@
    "injury": "Low Back Soreness",
    "date": "2026-11-01",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Available",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-11-01",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Reed Sheppard",
+   "status": "Questionable",
+   "injury": "Low Back Soreness",
+   "date": "2026-11-01",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Clint Capela",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-01",
+   "prevStatus": "Available"
   }
  ]
 }
