@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-01T19:57:16+00:00",
+ "fetched_at": "2026-11-01T20:27:40+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6198,
+ "row_count": 6203,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43449,6 +43449,41 @@
    "player": "Mitchell Robinson",
    "status": "Out",
    "injury": "Rest",
+   "date": "2026-11-01",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dejounte Murray",
+   "status": "Available",
+   "injury": "Personal Reasons",
+   "date": "2026-11-01",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jordan Poole",
+   "status": "Out",
+   "injury": "Left Ankle Tendinopathy",
+   "date": "2026-10-29",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Probable",
+   "injury": " Bilateral Patella Tendinopathy",
+   "date": "2026-11-01",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Probable",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-01",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Obi Toppin",
+   "status": "Out",
+   "injury": "Low Back Soreness",
    "date": "2026-11-01",
    "prevStatus": "Questionable"
   }
