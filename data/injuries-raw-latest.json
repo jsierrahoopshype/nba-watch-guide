@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-02T20:02:17+00:00",
+ "fetched_at": "2026-11-02T22:25:04+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6250,
+ "row_count": 6286,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -43820,6 +43820,260 @@
    "date": "2026-11-02",
    "prevStatus": "Out",
    "eta": "3-4 weeks"
+  },
+  {
+   "player": "Anthony Black",
+   "status": "Out",
+   "injury": "Personal Reasons",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Anthony Black",
+   "status": "Out",
+   "injury": "Right Ankle Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Questionable",
+   "injury": "Right Hip Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Questionable",
+   "injury": "Right Hip Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Out",
+   "injury": "Right Hip Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Out",
+   "injury": "Right Hip Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Mikel Brown",
+   "status": "Available",
+   "injury": "Back Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Alex Sarr",
+   "status": "Out",
+   "injury": "Left Knee Soreness",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Anthony Gill",
+   "status": "Out",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Obi Toppin",
+   "status": "Questionable",
+   "injury": "Low Back Soreness",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Pascal Siakam",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Out",
+   "injury": "Left Hamstring Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Out",
+   "injury": "Cervical Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Larry Nance Jr",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dejounte Murray",
+   "status": "Questionable",
+   "injury": "Personal Reasons",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Available",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-02",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Doubtful",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Clint Capela",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "LaMelo Ball",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "LaMelo Ball",
+   "status": "Questionable",
+   "injury": "Right Wrist Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Terrence Shannon",
+   "status": "Questionable",
+   "injury": "Left Hip Contusion",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Mitchell Robinson",
+   "status": "Available",
+   "injury": "Rest",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Paul George",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Dylan Cardwell",
+   "status": "Probable",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Tim Hardaway Jr",
+   "status": "Available",
+   "injury": "Personal Reasons",
+   "date": "2026-11-02",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jakob Poeltl",
+   "status": "Questionable",
+   "injury": "Left Shoulder Bursitis",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Dylan Cardwell",
+   "status": "Questionable",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-02",
+   "prevStatus": "Probable",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Ziaire Williams",
+   "status": "Available",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Available",
+   "injury": " Right Knee Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Available",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Max Strus",
+   "status": "Available",
+   "injury": "Right Plantar Fascia Tear",
+   "date": "2026-11-02",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Derrick Jones",
+   "status": "Out",
+   "injury": "Right Knee Injury",
+   "date": "2026-11-02",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Derrick Jones",
+   "status": "Out",
+   "injury": "Right Knee Soreness",
+   "date": "2026-11-02",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Rui Hachimura",
+   "status": "Out",
+   "injury": "Left Quadriceps Soreness",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Scottie Barnes",
+   "status": "Questionable",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-02",
+   "prevStatus": "Available"
   }
  ]
 }
