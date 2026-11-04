@@ -12,7 +12,7 @@ from datetime import date
 
 from .. import seo, share
 from ..context import SiteContext
-from ..pairs import by_name, game_teams, meetings, pair_url
+from ..pairs import by_name, game_teams, meetings, ordered, pair_url
 from ..render import Page, date_label, et_label, safe_format
 from .common import all_channels, cable_note, chips, crumb_trail, game_view, share_channels, updated_label
 
@@ -30,14 +30,20 @@ def title_date(value: str) -> str:
     return f"{parsed:%a}, {AP_MONTHS[parsed.month - 1]} {parsed.day}"
 
 
+def month_day(value: str) -> str:
+    """'2026-11-15' becomes 'Nov. 15' (AP months, no weekday)."""
+    parsed = date.fromisoformat(value)
+    return f"{AP_MONTHS[parsed.month - 1]} {parsed.day}"
+
+
 def pair_title(text: dict, a: str, b: str, next_date: str = "") -> str:
     """copy.json pair.title with the next meeting's date, or pair.title_done
-    once the season's last meeting has passed. Pair titles lead with the
-    words people search and are deliberately longer than seo.TITLE_MAX
-    (Google cuts the end, not the names or the date), so they are not run
-    through seo.branded."""
+    once the season's last meeting has passed. `a` and `b` are short names
+    in URL order. Pair titles lead with the words people search and are
+    deliberately longer than seo.TITLE_MAX (Google cuts the end, not the
+    names or the date), so they are not run through seo.branded."""
     if next_date:
-        return text["title"].format(a=a, b=b, date=title_date(next_date)) + seo.BRAND_SUFFIX
+        return text["title"].format(a=a, b=b, date=month_day(next_date)) + seo.BRAND_SUFFIX
     return text["title_done"].format(a=a, b=b) + seo.BRAND_SUFFIX
 
 
@@ -67,27 +73,43 @@ def or_list(names: list[str]) -> str:
     return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " or " + names[-1]
 
 
-def pair_description(ctx: SiteContext, text: dict, a: str, b: str, nxt, channels) -> str:
-    """Unique per pair: both names, the next meeting's date, tip-off and
-    every channel, in copy.json pair.description. A channel is never left
-    out: over 155 characters the wording tightens instead
-    (pair.description_short drops the second sentence's tail,
-    pair.description_tight shortens the date and time), and a list still
-    too long runs past 155, since search engines trim the snippet."""
-    fields = {"a": a, "b": b, "season": ctx.season}
-    if nxt is None:
-        return seo.description(safe_format(text["description_done"], **fields))
+def and_list(items: list[str]) -> str:
+    """'A', 'A and B', 'A, B and C': the parts of the page a description
+    names (not alternatives, so not or_list)."""
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def pair_description(text: dict, a: str, b: str, nxt, view: dict | None,
+                     done_fields: dict | None = None) -> str:
+    """'<A> vs <B> on <Mon. D> at <time> ET: national TV, local channels in
+    each market and streaming options, plus League Pass blackout rules.'
+
+    Only what the next-game block (`view`, from game_view) actually shows is
+    named: national TV only when the game has a national channel, local
+    channels per team that has one, the blackout clause only when the
+    block's "Why ...?" gives a League Pass rule. The time is left out when
+    the feed has none. Never shortened: a long one runs past 155 and search
+    engines trim the snippet. No meeting left: pair.description_done, as
+    before (`done_fields` fills it)."""
+    if nxt is None or view is None:
+        return seo.description(safe_format(text["description_done"], **(done_fields or {})))
     clock = tip_time(nxt)
-    day = date.fromisoformat(nxt.date_et)
-    fields["date"] = title_date(nxt.date_et)
-    fields["date_tight"] = f"{AP_MONTHS[day.month - 1]} {day.day}"
-    fields["time"] = text["description_time"].format(time=clock) if clock else ""
-    fields["time_tight"] = text["description_time_tight"].format(time=clock) if clock else ""
-    named = readable_channels(ctx, channels)
-    fields["channels"] = or_list(named) if named else text["channel_tba"]
-    candidates = [safe_format(text[key], **fields)
-                  for key in ("description", "description_short", "description_tight")]
-    return next((c for c in candidates if len(c) <= seo.DESCRIPTION_MAX), candidates[-1])
+    channels = view["channels"]
+    parts = []
+    if any(c["kind"] == "national" for c in channels):
+        parts.append(text["description_national"])
+    local_teams = list(dict.fromkeys(c["team"] for c in channels if c["kind"] == "local" and c.get("team")))
+    if len(local_teams) >= 2:
+        parts.append(text["description_local_both"])
+    elif local_teams:
+        parts.append(text["description_local_one"].format(team=local_teams[0]))
+    parts.append(text["description_streaming"])
+    why = view["watch"]["why"]
+    blackouts = text["description_blackouts"] if why and "league_pass" in why["kinds"] else ""
+    return text["description"].format(
+        a=a, b=b, date=month_day(nxt.date_et),
+        time=text["description_time"].format(time=clock) if clock else "",
+        parts=and_list(parts), blackouts=blackouts)
 
 
 def final_label(ctx: SiteContext, game) -> dict | None:
@@ -133,9 +155,13 @@ def build(ctx: SiteContext, env) -> list[Page]:
             "channels": chips(ctx, all_channels(ctx, g), game=g),
         } for g in games]
 
-        title = pair_title(text, a.short_name, b.short_name, nxt.date_et if nxt else "")
-        desc = pair_description(ctx, text, a.short_name, b.short_name, nxt,
-                                view["channels"] if view else [])
+        # Title and description name the teams in URL order ("Pacers vs
+        # 76ers" on indiana-pacers-vs-philadelphia-76ers); the page itself
+        # keeps the alphabetical-by-name order above.
+        url_a, url_b = ordered(a, b)
+        title = pair_title(text, url_a.short_name, url_b.short_name, nxt.date_et if nxt else "")
+        desc = pair_description(text, url_a.short_name, url_b.short_name, nxt, view,
+                                {"a": a.short_name, "b": b.short_name, "season": ctx.season})
         leaf = safe_format(text["breadcrumb"], **fields)
         trail = crumb_trail(ctx, leaf, url)
         card = share.pair_card(

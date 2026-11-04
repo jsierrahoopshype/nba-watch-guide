@@ -22,8 +22,8 @@ from watchguide.build import full_build
 from watchguide.context import load_context
 from watchguide.manifest import expected_pages
 from watchguide.model import load_copy, load_teams
-from watchguide.pages.pair import (or_list, pair_description, pair_title, readable_channels, tip_time,
-                                   title_date)
+from watchguide.pages.pair import (and_list, month_day, or_list, pair_description, pair_title,
+                                   readable_channels, tip_time, title_date)
 from watchguide.sources import schedule as schedule_source
 
 TEAMS = load_teams()
@@ -89,17 +89,25 @@ def test_pair_pages_are_in_the_manifest_sitemap_and_self_canonical(built_site_in
 # -- titles and descriptions -------------------------------------------------------------
 
 def test_every_possible_pair_title_leads_with_where_to_watch():
-    """'Where to Watch Celtics vs. Hornets (Fri, Nov. 6): TV Channel and
-    Streaming | HoopsMatic', no date after the last meeting. Never shortened,
-    so it may run past seo.TITLE_MAX."""
+    """'Where to watch Pacers vs 76ers: TV channel and stream for Nov. 6 |
+    HoopsMatic', teams in URL order, the streaming-options wording after the
+    last meeting. Never shortened, so it may run past seo.TITLE_MAX."""
     text_block = load_copy()["pair"]
     for x, y in itertools.combinations(TEAMS, 2):
-        a, b = pairs.by_name(x, y)
-        head = f"Where to Watch {a.short_name} vs. {b.short_name}"
+        a, b = pairs.ordered(x, y)
+        head = f"Where to watch {a.short_name} vs {b.short_name}"
         assert pair_title(text_block, a.short_name, b.short_name, "2026-11-06") == \
-            f"{head} (Fri, Nov. 6): TV Channel and Streaming | HoopsMatic"
+            f"{head}: TV channel and stream for Nov. 6 | HoopsMatic"
         assert pair_title(text_block, a.short_name, b.short_name) == \
-            f"{head}: TV Channel and Streaming | HoopsMatic"
+            f"{head}: TV channel and streaming options | HoopsMatic"
+
+
+@pytest.mark.parametrize("value, want", [
+    ("2026-11-06", "Nov. 6"), ("2027-03-01", "March 1"), ("2027-04-18", "April 18"),
+    ("2026-09-30", "Sept. 30"), ("2027-06-02", "June 2"), ("2027-01-15", "Jan. 15"),
+])
+def test_month_day_uses_ap_months(value, want):
+    assert month_day(value) == want
 
 
 @pytest.mark.parametrize("value, want", [
@@ -110,22 +118,38 @@ def test_title_date_uses_ap_months(value, want):
     assert title_date(value) == want
 
 
-def test_built_titles_and_descriptions(built_site):
+TITLE = re.compile(r"Where to watch (.+) vs (.+): TV channel and "
+                   r"(?:stream for ((?:Jan|Feb|Aug|Sept|Oct|Nov|Dec)\. \d{1,2}|(?:March|April|May|June|July) \d{1,2})"
+                   r"|streaming options) \| HoopsMatic")
+
+
+def _url_names(slug: str) -> tuple[str, str]:
+    by_slug = {t.slug: t for t in TEAMS}
+    first, second = slug.split(pairs.SEPARATOR)
+    return by_slug[first].short_name, by_slug[second].short_name
+
+
+def test_built_titles_and_descriptions(built_site, fixture_games):
+    """URL-order names and the next meeting's date in every pair title."""
+    ctx = load_context(fixture_games, today=TODAY)
     descriptions = []
-    for page in built_site.glob("*-vs-*/index.html"):
-        html = page.read_text(encoding="utf-8")
+    for slug, games in pairs.meetings(ctx.games, ctx.teams).items():
+        html = read(built_site, slug)
         title = htmllib.unescape(re.search(r"<title>(.*?)</title>", html).group(1))
         og_title = htmllib.unescape(re.search(r'<meta property="og:title" content="([^"]*)"', html).group(1))
-        assert title.startswith("Where to Watch ") and title.endswith(": TV Channel and Streaming | HoopsMatic")
+        m = TITLE.fullmatch(title)
+        assert m, title
+        assert m.group(1, 2) == _url_names(slug)
+        nxt = next((g for g in games if g.date_et >= TODAY), None)
+        assert m.group(3) == (month_day(nxt.date_et) if nxt else None), (slug, title)
         assert og_title == title
         desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', html).group(1))
-        assert len(desc) <= 155 and " next on " in desc
         descriptions.append(desc)
     assert len(set(descriptions)) == len(descriptions)
     knicks = read(built_site, "new-york-knicks-vs-philadelphia-76ers") \
         if (built_site / "new-york-knicks-vs-philadelphia-76ers").exists() else None
     if knicks:
-        assert "<title>Where to Watch 76ers vs. Knicks (" in knicks
+        assert "<title>Where to watch Knicks vs 76ers: " in knicks
 
 
 def _game(**kw):
@@ -162,43 +186,84 @@ def test_readable_channels_name_known_codes_and_keep_unknown_ones():
     assert got[-1] == "Peachtree Sports Network" and len(got) == 4
 
 
-def test_description_tightens_its_wording_and_never_drops_a_channel():
-    ctx = load_context(fixture_schedule(), today=TODAY)
+def _view(channels, why_kinds=()):
+    why = {"summary": "", "lines": ["x"], "kinds": sorted(why_kinds)} if why_kinds else None
+    return {"channels": channels, "watch": {"why": why}}
+
+
+NATIONAL = {"name": "ESPN", "kind": "national"}
+LOCAL_CHA = {"name": "FDSSE", "kind": "local", "team": "Hornets", "slug": "charlotte-hornets"}
+LOCAL_BOS = {"name": "NBCSB", "kind": "local", "team": "Celtics", "slug": "boston-celtics"}
+
+
+def test_description_names_only_what_the_block_shows():
     text = load_copy()["pair"]
     game = _game(tipoff_et="2026-11-06T19:00:00-05:00", date_et="2026-11-06")
-    short = [{"name": "ESPN", "kind": "national"}]
-    assert pair_description(ctx, text, "Celtics", "Hornets", game, short) == (
-        "Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on ESPN, "
-        "plus every 2026-27 meeting with TV and streaming options.")
-    long = [{"name": n, "kind": "national"} for n in ("Station Number One", "Station Number Two",
-                                                       "Station Number Three", "Station Number Four")]
-    # First the second sentence's tail goes...
-    assert pair_description(ctx, text, "Celtics", "Hornets", game, long) == (
-        "Celtics vs. Hornets is next on Fri, Nov. 6 at 7 p.m. ET. Watch on Station Number One, "
-        "Station Number Two, Station Number Three or Station Number Four.")
-    # ...then the date and time tighten...
-    five = long + [{"name": "Station Five", "kind": "national"}]
-    assert pair_description(ctx, text, "Celtics", "Hornets", game, five) == (
-        "Celtics vs. Hornets next Nov. 6, 7 p.m. ET. Watch on Station Number One, Station Number Two, "
-        "Station Number Three, Station Number Four or Station Five.")
-    # ...and a list still too long runs past 155 rather than lose a channel.
-    many = long + [{"name": f"Extra Channel {i}", "kind": "national"} for i in range(5)]
-    got = pair_description(ctx, text, "Celtics", "Hornets", game, many)
-    assert len(got) > 155 and got.startswith("Celtics vs. Hornets next Nov. 6, 7 p.m. ET. Watch on ")
-    assert all(c["name"] in got for c in many)
+    full = _view([NATIONAL, LOCAL_BOS, LOCAL_CHA], ["league_pass"])
+    assert pair_description(text, "Celtics", "Hornets", game, full) == (
+        "Celtics vs Hornets on Nov. 6 at 7 p.m. ET: national TV, local channels in each market "
+        "and streaming options, plus League Pass blackout rules.")
+    # No national channel, no blackout rule shown: neither is claimed.
+    assert pair_description(text, "Celtics", "Hornets", game, _view([LOCAL_BOS, LOCAL_CHA], ["local"])) == (
+        "Celtics vs Hornets on Nov. 6 at 7 p.m. ET: local channels in each market and streaming options.")
+    # Only one market has a local channel; national-only games name no local TV.
+    assert pair_description(text, "Celtics", "Hornets", game, _view([NATIONAL, LOCAL_BOS])) == (
+        "Celtics vs Hornets on Nov. 6 at 7 p.m. ET: national TV, local channels in the Celtics market "
+        "and streaming options.")
+    assert pair_description(text, "Celtics", "Hornets", game, _view([NATIONAL], ["league_pass"])) == (
+        "Celtics vs Hornets on Nov. 6 at 7 p.m. ET: national TV and streaming options, "
+        "plus League Pass blackout rules.")
+    # No real tip-off in the feed: no time is invented.
+    tbd = _game(tipoff_et="", date_et="2026-11-06")
+    assert pair_description(text, "Celtics", "Hornets", tbd, _view([LOCAL_BOS, LOCAL_CHA])) == (
+        "Celtics vs Hornets on Nov. 6: local channels in each market and streaming options.")
 
 
-def test_built_descriptions_lead_with_the_date_and_join_channels_with_or(built_site):
-    for page in built_site.glob("*-vs-*/index.html"):
-        markup = page.read_text(encoding="utf-8")
+def test_description_after_the_last_meeting_is_unchanged():
+    text = load_copy()["pair"]
+    assert pair_description(text, "Hawks", "Rockets", None, None,
+                            {"a": "Hawks", "b": "Rockets", "season": "2026-27"}) == (
+        "Every 2026-27 Hawks vs. Rockets game with TV channels and streaming. "
+        "The two teams have no meetings left this season.")
+
+
+def test_and_list():
+    assert and_list(["A"]) == "A"
+    assert and_list(["A", "B"]) == "A and B"
+    assert and_list(["A", "B", "C"]) == "A, B and C"
+
+
+DESCRIPTION = re.compile(r"(.+) vs (.+) on (\S+ \d{1,2})( at .+ ET)?: (.+?)(, plus League Pass blackout rules)?\.")
+
+
+def test_built_descriptions_match_the_next_game_block(built_site, fixture_games):
+    """Each part of the description is on the page: national TV only with a
+    national chip, the blackout clause only with a League Pass "Why ...?"."""
+    from watchguide.pages.common import all_channels
+    ctx = load_context(fixture_games, today=TODAY)
+    checked = 0
+    for slug, games in pairs.meetings(ctx.games, ctx.teams).items():
+        nxt = next((g for g in games if g.date_et >= TODAY), None)
+        markup = read(built_site, slug)
         desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', markup).group(1))
         og = htmllib.unescape(re.search(r'<meta property="og:description" content="([^"]*)"', markup).group(1))
         assert og == desc
-        assert re.match(r".+ vs\. .+ is next on [A-Z][a-z]{2}, \S+ \d{1,2}( at .+ ET)?\. Watch on ", desc), desc
-        channels = desc.split("Watch on ", 1)[1].split(", plus every")[0].rstrip(".")
-        # A joiner would put "and" before the next name; some names hold one
-        # themselves ("Statewide Scripps and partner stations").
-        assert not re.search(r" and [A-Z0-9]", channels), desc
+        if nxt is None:
+            assert "no meetings left" in desc
+            continue
+        m = DESCRIPTION.fullmatch(desc)
+        assert m, desc
+        assert m.group(1, 2) == _url_names(slug) and m.group(3) == month_day(nxt.date_et)
+        assert bool(m.group(4)) == bool(tip_time(nxt)), desc
+        channels = all_channels(ctx, nxt)
+        assert ("national TV" in m.group(5)) == any(c["kind"] == "national" for c in channels), desc
+        locals_ = {c["team"] for c in channels if c["kind"] == "local"}
+        assert ("in each market" in m.group(5)) == (len(locals_) >= 2), desc
+        assert m.group(5).endswith("streaming options")
+        why = re.search(r'data-why="([^"]*)"', markup)
+        assert bool(m.group(6)) == bool(why and "league_pass" in why.group(1).split()), desc
+        checked += 1
+    assert checked
 
 
 # -- the page: next meeting in full, then every meeting ------------------------------------
@@ -553,19 +618,3 @@ def test_team_next_game_card_is_the_shared_game_block(built_site, fixture_games)
         head_to_watch = section[section.index("data-game-block"):section.index('data-part="watch"')]
         assert "data-updated" not in head_to_watch and "data-stale-notice" not in head_to_watch
         assert f'href="/how-to-watch/{canonical_slug(nxt)}#game-{nxt.game_id}" data-pair-link' in section
-
-
-def test_every_built_description_names_every_channel_of_the_next_meeting(built_site, fixture_games):
-    from watchguide.pages.common import all_channels
-    ctx = load_context(fixture_games, today=TODAY)
-    checked = 0
-    for slug, games in pairs.meetings(ctx.games, ctx.teams).items():
-        nxt = next((g for g in games if g.date_et >= TODAY), None)
-        if nxt is None:
-            continue
-        markup = read(built_site, slug)
-        desc = htmllib.unescape(re.search(r'<meta name="description" content="([^"]*)"', markup).group(1))
-        for name in readable_channels(ctx, all_channels(ctx, nxt)):
-            assert name in desc, (slug, name, desc)
-        checked += 1
-    assert checked
