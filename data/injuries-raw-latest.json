@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-04T17:51:41+00:00",
+ "fetched_at": "2026-11-04T20:30:32+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6373,
+ "row_count": 6384,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -44689,6 +44689,84 @@
    "injury": "Bilateral Patella Tendinopathy",
    "date": "2026-11-03",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Kam Jones",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-04",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kam Jones",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-04",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jayson Tatum",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-04",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Bilal Coulibaly",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-04",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Bilal Coulibaly",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-04",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Out",
+   "injury": "Right Ankle Soreness",
+   "date": "2026-11-04",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kon Knueppel",
+   "status": "Available",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-11-04",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Terrence Shannon",
+   "status": "Out",
+   "injury": "Left Hip Contusion",
+   "date": "2026-11-04",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Questionable",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-04",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Santiago Aldama",
+   "status": "Doubtful",
+   "injury": "Right Knee Surgery",
+   "date": "2026-11-04",
+   "prevStatus": "Questionable",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Anthony Black",
+   "status": "Available",
+   "injury": "Right Ankle Injury Management",
+   "date": "2026-11-04",
+   "prevStatus": "Out"
   }
  ]
 }
