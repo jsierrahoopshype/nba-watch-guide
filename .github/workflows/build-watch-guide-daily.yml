@@ -3,6 +3,9 @@ name: build-watch-guide-daily
 on:
   schedule:
     - cron: '0 10 * * *'
+    # Second daily run, after the night's games, so pair-page titles move on
+    # to the next meeting's date sooner.
+    - cron: '0 5 * * *'
   # Every merge to main rebuilds and publishes, then checks the live site.
   # Doc-only changes don't. The bots' own commits (raw availability copy,
   # recent awards) are pushed with GITHUB_TOKEN, which never starts a run.

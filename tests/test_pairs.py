@@ -219,11 +219,11 @@ def test_description_names_only_what_the_block_shows():
         "Celtics vs Hornets on Nov. 6: local channels in each market and streaming options.")
 
 
-def test_description_after_the_last_meeting_is_unchanged():
+def test_description_after_the_last_meeting_follows_the_new_style():
     text = load_copy()["pair"]
     assert pair_description(text, "Hawks", "Rockets", None, None,
                             {"a": "Hawks", "b": "Rockets", "season": "2026-27"}) == (
-        "Every 2026-27 Hawks vs. Rockets game with TV channels and streaming. "
+        "Every 2026-27 Hawks vs Rockets game with TV channels and streaming. "
         "The two teams have no meetings left this season.")
 
 

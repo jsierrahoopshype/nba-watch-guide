@@ -33,6 +33,7 @@ def test_build_runs_on_push_to_main_but_not_for_doc_only_changes():
     on = WORKFLOW[WORKFLOW.index("\non:"):WORKFLOW.index("\npermissions:")]
     assert re.search(r"push:\n\s+branches: \[main\]\n\s+paths-ignore:\n\s+- README\.md\n\s+- CLAUDE\.md", on)
     assert "cron: '0 10 * * *'" in on and "workflow_dispatch:" in on      # the old triggers stay
+    assert "cron: '0 5 * * *'" in on                                      # post-game rebuild
 
 
 def test_live_check_runs_after_publish_and_before_the_final_failure():
