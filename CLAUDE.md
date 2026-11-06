@@ -78,7 +78,7 @@ went live:
 
 ## How the loop works
 
-- `build-watch-guide-daily` runs daily at 10:00 UTC, on manual dispatch and
+- `build-watch-guide-daily` runs daily at 05:00 and 10:00 UTC, on manual dispatch and
   on every push to main except README.md and CLAUDE.md changes. The bots'
   own commits (raw availability copy, recent awards) are pushed with
   GITHUB_TOKEN, which never starts a run.

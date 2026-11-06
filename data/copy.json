@@ -276,7 +276,7 @@
     "description_streaming": "streaming options",
     "description_blackouts": ", plus League Pass blackout rules",
     "description_time": " at {time} ET",
-    "description_done": "Every {season} {a} vs. {b} game with TV channels and streaming. The two teams have no meetings left this season.",
+    "description_done": "Every {season} {a} vs {b} game with TV channels and streaming. The two teams have no meetings left this season.",
     "h1": "{full_a} vs. {full_b}: how to watch",
     "breadcrumb": "{a} vs. {b}",
     "next_heading": "Next game",

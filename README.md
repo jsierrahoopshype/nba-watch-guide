@@ -408,7 +408,7 @@ availability feed somewhere else. Both are optional and neither is a secret.
 
 ## Automation
 
-- `build-watch-guide-daily.yml` runs at 10:00 UTC, on manual dispatch and on
+- `build-watch-guide-daily.yml` runs at 05:00 and 10:00 UTC, on manual dispatch and on
   every push to main (except changes to README.md or CLAUDE.md only), and
   rebuilds everything. After publishing, its "Live check" step
   (`scripts/live_check.py`, browser-like requests through curl_cffi) polls

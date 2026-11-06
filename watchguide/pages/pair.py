@@ -89,8 +89,8 @@ def pair_description(text: dict, a: str, b: str, nxt, view: dict | None,
     channels per team that has one, the blackout clause only when the
     block's "Why ...?" gives a League Pass rule. The time is left out when
     the feed has none. Never shortened: a long one runs past 155 and search
-    engines trim the snippet. No meeting left: pair.description_done, as
-    before (`done_fields` fills it)."""
+    engines trim the snippet. No meeting left: pair.description_done, in the
+    same "A vs B" style (`done_fields` fills it)."""
     if nxt is None or view is None:
         return seo.description(safe_format(text["description_done"], **(done_fields or {})))
     clock = tip_time(nxt)
