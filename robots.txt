@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hoopsmatic.com/how-to-watch/sitemap.xml
