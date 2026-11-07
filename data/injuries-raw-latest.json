@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-07T18:06:46+00:00",
+ "fetched_at": "2026-11-07T19:42:47+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6518,
+ "row_count": 6521,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -45712,6 +45712,27 @@
    "injury": "Left Ankle Sprain",
    "date": "2026-11-07",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Anthony Davis",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Desmond Bane",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Desmond Bane",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
   }
  ]
 }
