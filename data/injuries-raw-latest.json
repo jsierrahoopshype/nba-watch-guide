@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-07T04:47:48+00:00",
+ "fetched_at": "2026-11-07T10:30:20+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6483,
+ "row_count": 6512,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -45463,6 +45463,210 @@
    "player": "Jalen Johnson",
    "status": "Out",
    "injury": "Left Ankle Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Joan Beringer",
+   "status": "Left Game",
+   "injury": "Nasal Fracture",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Immanuel Quickley",
+   "status": "Out",
+   "injury": "Right Hamstring Tightness / Soreness",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jakob Poeltl",
+   "status": "Available",
+   "injury": "Left Shoulder Bursitis",
+   "date": "2026-11-06",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Scottie Barnes",
+   "status": "Out",
+   "injury": "Left Adductor / Groin Soreness / Tightness",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kyle Anderson",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Anthony Davis",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kelly Oubre",
+   "status": "Questionable",
+   "injury": "Left Calf Contusion",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Questionable",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-06",
+   "prevStatus": "Out",
+   "eta": "Day-to-day"
+  },
+  {
+   "player": "Adem Bona",
+   "status": "Out",
+   "injury": "Cervical Spine Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Jordan Goodwin",
+   "status": "Doubtful",
+   "injury": "Right Calf Soreness",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Rasheer Fleming",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Questionable",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Questionable",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Questionable",
+   "injury": "Bilateral Low Back Injury Management",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Questionable",
+   "injury": "Right Elbow Inflammation / Soreness",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Peyton Watson",
+   "status": "Available",
+   "injury": "Right Hamstring Injury Management",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tyrese Proctor",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jarrett Allen",
+   "status": "Out",
+   "injury": "Right Knee Contusion",
+   "date": "2026-11-06",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Spencer Jones",
+   "status": "Available",
+   "injury": "Bilateral Hamstring Injury Management",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "DeMar DeRozan",
+   "status": "Probable",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-06",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Santiago Aldama",
+   "status": "Available",
+   "injury": "Right Knee Surgery",
+   "date": "2026-11-06",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Max Christie",
+   "status": "Available",
+   "injury": "Right Hip Soreness / Tightness",
+   "date": "2026-11-06",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-06",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Sam Merrill",
+   "status": "Left Game",
+   "injury": "Right Elbow Injury",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandon Miller",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandon Miller",
+   "status": "Left Game",
+   "injury": "Right Groin Soreness",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Out",
+   "injury": "Cervical Strain",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-06",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Out",
+   "injury": "Illness",
    "date": "2026-11-06",
    "prevStatus": "Questionable"
   }
