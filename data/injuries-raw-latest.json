@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-07T16:10:24+00:00",
+ "fetched_at": "2026-11-07T18:06:46+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6515,
+ "row_count": 6518,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -45691,6 +45691,27 @@
    "injury": "Illness",
    "date": "2026-11-07",
    "prevStatus": "Left Game"
+  },
+  {
+   "player": "Sam Merrill",
+   "status": "Out",
+   "injury": "Right Elbow Injury",
+   "date": "2026-11-07",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Sam Merrill",
+   "status": "Out",
+   "injury": "Right Elbow Injury Management",
+   "date": "2026-11-07",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jalen Johnson",
+   "status": "Probable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Out"
   }
  ]
 }
