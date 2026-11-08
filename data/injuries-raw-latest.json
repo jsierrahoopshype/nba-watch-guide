@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-08T18:25:39+00:00",
+ "fetched_at": "2026-11-08T20:01:46+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6556,
+ "row_count": 6562,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -45981,6 +45981,48 @@
    "injury": "Illness",
    "date": "2026-11-08",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Gary Trent Jr",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nicolas Claxton",
+   "status": "Available",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-11-08",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Norman Powell",
+   "status": "Out",
+   "injury": "Right Shoulder Inflammation / Soreness",
+   "date": "2026-11-08",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Mikel Brown",
+   "status": "Out",
+   "injury": "Back Injury Management",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Available",
+   "injury": "Left MCL Sprain",
+   "date": "2026-11-08",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Available",
+   "injury": "Left Finger Sprain",
+   "date": "2026-11-08",
+   "prevStatus": "Probable"
   }
  ]
 }
