@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-08T04:31:38+00:00",
+ "fetched_at": "2026-11-08T09:38:28+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6533,
+ "row_count": 6550,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -45818,6 +45818,126 @@
    "injury": "Low Back Tightness",
    "date": "2026-11-07",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Deandre Ayton",
+   "status": "Left Game",
+   "injury": "Lower Leg Injury",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Terrence Shannon",
+   "status": "Available",
+   "injury": "Left Hip Contusion",
+   "date": "2026-11-07",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Joan Beringer",
+   "status": "Questionable",
+   "injury": "Nasal Fracture",
+   "date": "2026-11-07",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Joan Beringer",
+   "status": "Questionable",
+   "injury": "Nasal Fracture",
+   "date": "2026-11-07",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Gui Santos",
+   "status": "Available",
+   "injury": "Left Knee Tendinitis",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Available",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Available",
+   "injury": "Right Elbow Inflammation / Soreness",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jalen Johnson",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Anthony Davis",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jordan Goodwin",
+   "status": "Out",
+   "injury": "Right Calf Soreness",
+   "date": "2026-11-07",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Rasheer Fleming",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Probable",
+   "injury": "Right Foot Plantar Fascia Injury Management",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Jackson",
+   "status": "Out",
+   "injury": "Left Groin Soreness",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-11-07",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Noah Clowney",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-07",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-07",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Questionable",
+   "injury": "Left Ankle Capsulitis",
+   "date": "2026-11-07",
+   "prevStatus": "Out",
+   "eta": "10-20 days"
   }
  ]
 }
