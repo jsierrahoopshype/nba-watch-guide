@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-08T22:25:21+00:00",
+ "fetched_at": "2026-11-08T22:55:21+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6574,
+ "row_count": 6583,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46109,6 +46109,69 @@
    "injury": "Right Ankle Sprain",
    "date": "2026-11-08",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Jamal Murray",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jamal Murray",
+   "status": "Questionable",
+   "injury": "Left Shin/Tibia Contusion",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jamal Murray",
+   "status": "Questionable",
+   "injury": "Left Shin / Tibia Contusion",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nikola Jokic",
+   "status": "Questionable",
+   "injury": "Right Elbow Sprain",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Questionable",
+   "injury": "Lower Body Injury Management",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Gordon",
+   "status": "Questionable",
+   "injury": "Lower Body Injury Management",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "DeMar DeRozan",
+   "status": "Questionable",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Christian Braun",
+   "status": "Questionable",
+   "injury": "Left Calf Contusion/Illness",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Christian Braun",
+   "status": "Questionable",
+   "injury": "Left Calf Contusion / Illness",
+   "date": "2026-11-08",
+   "prevStatus": "Available"
   }
  ]
 }
