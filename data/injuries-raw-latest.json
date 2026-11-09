@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-09T13:40:34+00:00",
+ "fetched_at": "2026-11-09T20:31:53+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6602,
+ "row_count": 6621,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46307,6 +46307,139 @@
    "injury": "Illness",
    "date": "2026-11-08",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Oscar Tshiebwe",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Moussa Diabate",
+   "status": "Doubtful",
+   "injury": "Right Quadriceps Tendinopathy",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Luka Doncic",
+   "status": "Available",
+   "injury": "Low Back Tightness",
+   "date": "2026-11-09",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Quentin Grimes",
+   "status": "Out",
+   "injury": "Right Finger Sprain",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Collin Murray-Boyles",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Collin Murray-Boyles",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Devin Vassell",
+   "status": "Out",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Bilal Coulibaly",
+   "status": "Questionable",
+   "injury": "Left Hand Soreness",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Questionable",
+   "injury": "Left Shin/Tibia Contusion",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Questionable",
+   "injury": "Left Shin / Tibia Contusion",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Christian Braun",
+   "status": "Probable",
+   "injury": "Left Calf Contusion / Illness",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "DeMar DeRozan",
+   "status": "Probable",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Aaron Gordon",
+   "status": "Probable",
+   "injury": "Lower Body Injury Management",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Cameron Johnson",
+   "status": "Probable",
+   "injury": "Lower Body Injury Management",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Nikola Jokic",
+   "status": "Probable",
+   "injury": "Right Elbow Sprain",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jamal Murray",
+   "status": "Probable",
+   "injury": "Left Shin / Tibia Contusion",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Questionable",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Questionable",
+   "injury": "Left Knee Inflammation",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
   }
  ]
 }
