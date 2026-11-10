@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-10T22:46:37+00:00",
+ "fetched_at": "2026-11-10T23:16:40+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6690,
+ "row_count": 6699,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46925,6 +46925,70 @@
    "injury": "Low Back Tightness",
    "date": "2026-11-10",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Mikel Brown",
+   "status": "Available",
+   "injury": "Back Injury Management",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Questionable",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Egor Demin",
+   "status": "Probable",
+   "injury": "Right Leg Bone Bruise",
+   "date": "2026-11-10",
+   "prevStatus": "Out",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Devin Vassell",
+   "status": "Questionable",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-10",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Quentin Grimes",
+   "status": "Questionable",
+   "injury": "Right Finger Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Questionable",
+   "injury": "Right Knee Bone Bruise",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Quinten Post",
+   "status": "Out",
+   "injury": "Concussion Protocol",
+   "date": "2026-11-10",
+   "prevStatus": "Left Game"
   }
  ]
 }
