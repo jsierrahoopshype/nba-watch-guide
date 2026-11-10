@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-10T17:34:12+00:00",
+ "fetched_at": "2026-11-10T20:31:25+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6667,
+ "row_count": 6672,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46762,6 +46762,41 @@
    "injury": "Left Ankle Sprain",
    "date": "2026-11-10",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Out",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zion Williamson",
+   "status": "Available",
+   "injury": "Rest",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Probable",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jordan Goodwin",
+   "status": "Available",
+   "injury": "Right Calf Injury Management",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
   }
  ]
 }
