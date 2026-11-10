@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-10T13:17:51+00:00",
+ "fetched_at": "2026-11-10T17:34:12+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6663,
+ "row_count": 6667,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46734,6 +46734,34 @@
    "injury": "Left Knee Tendinitis",
    "date": "2026-11-09",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-09",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tristan Da Silva",
+   "status": "Questionable",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kel'el Ware",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kel'el Ware",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
   }
  ]
 }
