@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-11T04:36:55+00:00",
+ "fetched_at": "2026-11-11T11:15:32+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6699,
+ "row_count": 6712,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -46989,6 +46989,97 @@
    "injury": "Concussion Protocol",
    "date": "2026-11-10",
    "prevStatus": "Left Game"
+  },
+  {
+   "player": "Jayson Kent",
+   "status": "Left Game",
+   "injury": "",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Quinten Post",
+   "status": "Out",
+   "injury": "Concussion Protoco",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jayson Kent",
+   "status": "Available",
+   "injury": "",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Chris Youngblood",
+   "status": "Left Game",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Chris Youngblood",
+   "status": "Left Game",
+   "injury": "Right Foot Injury",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tyler Herro",
+   "status": "Out",
+   "injury": "Right Knee Contusion",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Kel'el Ware",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Available",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tristan Da Silva",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-10",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Keyonte George",
+   "status": "Out",
+   "injury": "Right Ankle Injury",
+   "date": "2026-11-10",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Left Game",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Left Game",
+   "injury": "Left Lower Leg Contusion",
+   "date": "2026-11-10",
+   "prevStatus": "Available"
   }
  ]
 }
