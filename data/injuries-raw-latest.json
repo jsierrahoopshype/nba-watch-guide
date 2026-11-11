@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-11T17:46:53+00:00",
+ "fetched_at": "2026-11-11T20:17:03+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6718,
+ "row_count": 6735,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -47122,6 +47122,128 @@
    "injury": "Illness",
    "date": "2026-11-11",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Probable",
+   "injury": "Illness",
+   "date": "2026-11-11",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Questionable",
+   "injury": "Left Wrist Sprain",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Questionable",
+   "injury": "Left Calf Soreness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Paul George",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Caleb Wilson",
+   "status": "Questionable",
+   "injury": "Right Hip Soreness / Tightness",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tobe Awaka",
+   "status": "Out",
+   "injury": "Low Back Tightness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Out",
+   "injury": "Right Hand Non-Displaced Fracture",
+   "date": "2026-11-10",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Lauri Markkanen",
+   "status": "Out",
+   "injury": "Right Hand Non-Displaced Fracture",
+   "date": "2026-11-10",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Quentin Grimes",
+   "status": "Out",
+   "injury": "Right Finger Sprain",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Will Richard",
+   "status": "Probable",
+   "injury": "Left Thumb UCL Tear",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable",
+   "eta": "6-8 weeks"
+  },
+  {
+   "player": "Myles Turner",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tyler Herro",
+   "status": "Questionable",
+   "injury": "Right Knee Contusion",
+   "date": "2026-11-11",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tristan Da Silva",
+   "status": "Questionable",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-11",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jamal Cain",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jamal Cain",
+   "status": "Questionable",
+   "injury": "Left Shoulder Contusion",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Vit Krejci",
+   "status": "Out",
+   "injury": "Left Ankle Fracture",
+   "date": "2026-11-05",
+   "prevStatus": "Out",
+   "eta": "8-12 weeks"
+  },
+  {
+   "player": "Keyonte George",
+   "status": "Questionable",
+   "injury": "Right Ankle Injury",
+   "date": "2026-11-11",
+   "prevStatus": "Out"
   }
  ]
 }
