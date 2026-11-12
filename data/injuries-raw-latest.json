@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-12T04:59:20+00:00",
+ "fetched_at": "2026-11-12T13:34:56+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6743,
+ "row_count": 6776,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -47300,6 +47300,242 @@
    "injury": "Right Calf Tightness / Soreness",
    "date": "2026-11-11",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Left Game",
+   "injury": " Right Knee Injury Management",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Stephen Curry",
+   "status": "Left Game",
+   "injury": "Right Abdominal Soreness",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Out",
+   "eta": " weeks"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Tyrese Haliburton",
+   "status": "Out",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-10-28",
+   "prevStatus": "Out",
+   "eta": "4-5 weeks"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Left Game",
+   "injury": "Left Hamstring Injury Management",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Left Game",
+   "injury": "Right Knee Soreness",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Caleb Wilson",
+   "status": "Available",
+   "injury": "Right Hip Soreness / Tightness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Caleb Wilson",
+   "status": "Left Game",
+   "injury": "Right Hip Soreness / Tightness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Caleb Wilson",
+   "status": "Left Game",
+   "injury": "Right Hand Injury",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Left Game",
+   "injury": "Left Heel Injury",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Immanuel Quickley",
+   "status": "Available",
+   "injury": "Right Hamstring Injury Management",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Collin Murray-Boyles",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Josh Hart",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-11",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Available",
+   "injury": "Left Calf Soreness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Out",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-11",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Grant Williams",
+   "status": "Probable",
+   "injury": "Right Hamstring Injury",
+   "date": "2026-11-11",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Grant Williams",
+   "status": "Probable",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-11",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Moussa Diabate",
+   "status": "Probable",
+   "injury": "Right Quadriceps Tendinopathy",
+   "date": "2026-11-11",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Will Richard",
+   "status": "Available",
+   "injury": "Left Thumb UCL Tear",
+   "date": "2026-11-11",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Dailyn Swain",
+   "status": "Out",
+   "injury": "Right Disc Irritation",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Norman Powell",
+   "status": "Out",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach Collins",
+   "status": "Available",
+   "injury": "Respiratory Illness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Available",
+   "injury": "Right Knee Bone Bruise",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Available",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Devin Vassell",
+   "status": "Out",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tyler Herro",
+   "status": "Available",
+   "injury": "Right Knee Contusion",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Keyonte George",
+   "status": "Available",
+   "injury": "Right Ankle Injury",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tristan Da Silva",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jamal Cain",
+   "status": "Out",
+   "injury": "Left Shoulder Contusion",
+   "date": "2026-11-11",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Available",
+   "injury": "LeftKnee Inflammation",
+   "date": "2026-11-09",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Gary Payton II",
+   "status": "Out",
+   "injury": "Left Knee Inflammation",
+   "date": "2026-11-11",
+   "prevStatus": "Available"
   }
  ]
 }
