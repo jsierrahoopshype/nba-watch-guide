@@ -23,7 +23,8 @@ WORKFLOWS = sorted(WORKFLOW_DIR.glob("*.yml"))
 # Step outputs a publishing step may depend on, set to the run that must
 # publish: a game day for the 30-minute refresh. Any other reference fails the
 # test, so a new condition has to be added here on purpose.
-STEP_OUTPUTS = {"steps.games.outputs.has_games": "true"}
+STEP_OUTPUTS = {"steps.games.outputs.has_games": "true",
+                "steps.games.outputs.recent": "false"}
 
 
 # --------------------------------------------------------------------------

@@ -1,12 +1,19 @@
 name: ci
 
+# Branch pushes with an open PR used to run twice (push + pull_request).
+# Now: every push to main, and pull requests; a newer push to the same PR
+# cancels the older run, which nobody reads.
 on:
   push:
-    branches-ignore: [gh-pages]
+    branches: [main]
   pull_request:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   test:
