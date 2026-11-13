@@ -20,6 +20,11 @@ on:
 permissions:
   contents: read
 
+# A newer push to the same PR replaces the older check.
+concurrency:
+  group: check-links-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   check:
     runs-on: ubuntu-24.04

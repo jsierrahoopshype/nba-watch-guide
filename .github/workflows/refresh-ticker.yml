@@ -77,6 +77,13 @@ jobs:
             else
               echo "$(date -u +%H:%M) UTC: could not start a refresh, trying again next tick"
             fi
+            # The last dispatch of the evening: don't keep a runner (billed by
+            # the minute) asleep for a tick that would fall outside the window.
+            next_h=$((10#$(date -u -d '+30 minutes' +%H)))
+            if ! { [ "$next_h" -ge 16 ] || [ "$next_h" -le 4 ]; }; then
+              echo "Next tick is outside the evening window, stopping now."
+              break
+            fi
             sleep 1800
           done
           echo "Done for this run."

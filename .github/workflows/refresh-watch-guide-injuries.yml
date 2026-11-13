@@ -30,6 +30,8 @@ jobs:
 
       - name: Any games today?
         id: games
+        env:
+          RECENT_MINUTES: '5'
         run: |
           # Reads the published schedule only. No network call, so a quiet day
           # costs a couple of seconds.
@@ -42,16 +44,33 @@ jobs:
           games = json.loads(path.read_text())["games"] if path.exists() else []
           count = sum(1 for g in games if g.get("date_et") == today)
           print(f"{today}: {count} games")
+          # The ticker's dispatch and the backup crons sometimes land a few
+          # minutes apart. When the published availability was refreshed less
+          # than RECENT_MINUTES ago, this run would only republish the same
+          # data with a newer time, so it stops here (saves the run and a
+          # Pages deploy). The 30-minute rhythm is unchanged.
+          recent = False
+          inj = pathlib.Path("site/data/injuries.json")
+          try:
+              updated = datetime.fromisoformat(json.loads(inj.read_text())["updated_at"])
+              age = (datetime.now(updated.tzinfo) - updated).total_seconds() / 60
+              recent = 0 <= age < int(os.environ["RECENT_MINUTES"])
+              print(f"availability refreshed {age:.0f} minutes ago")
+          except (OSError, ValueError, KeyError, TypeError):
+              pass   # unknown: refresh
+          if count and recent:
+              print("Refreshed moments ago, nothing to do.")
           with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
               fh.write(f"has_games={'true' if count else 'false'}\n")
+              fh.write(f"recent={'true' if recent else 'false'}\n")
           PY
 
-      - if: steps.games.outputs.has_games == 'true'
+      - if: steps.games.outputs.has_games == 'true' && steps.games.outputs.recent != 'true'
         run: pip install -r requirements.txt
 
       - name: Refresh availability
         id: refresh
-        if: steps.games.outputs.has_games == 'true'
+        if: steps.games.outputs.has_games == 'true' && steps.games.outputs.recent != 'true'
         env:
           NBA_PROXY_BASE: ${{ vars.NBA_PROXY_BASE }}
           INJURY_FEED_URL: ${{ vars.INJURY_FEED_URL }}
@@ -63,16 +82,16 @@ jobs:
           if [ "$code" -ne 0 ] && [ "$code" -ne 3 ]; then exit "$code"; fi
 
       - name: Check the output
-        if: steps.games.outputs.has_games == 'true'
+        if: steps.games.outputs.has_games == 'true' && steps.games.outputs.recent != 'true'
         run: |
           ! grep -rl 'github\.io' site/ || (echo 'Pages host leaked into the output' && exit 1)
 
       - name: Commit the raw availability copy
-        if: steps.games.outputs.has_games == 'true'
+        if: steps.games.outputs.has_games == 'true' && steps.games.outputs.recent != 'true'
         run: ./scripts/commit-raw-injuries.sh
 
       - name: Publish to gh-pages
-        if: steps.games.outputs.has_games == 'true'
+        if: steps.games.outputs.has_games == 'true' && steps.games.outputs.recent != 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
