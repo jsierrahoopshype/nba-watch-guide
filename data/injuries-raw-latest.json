@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-14T23:40:00+00:00",
+ "fetched_at": "2026-11-14T23:59:52+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6910,
+ "row_count": 6911,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48485,6 +48485,13 @@
    "injury": "Low Back Injury Management",
    "date": "2026-11-14",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Available",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-14",
+   "prevStatus": "Probable"
   }
  ]
 }
