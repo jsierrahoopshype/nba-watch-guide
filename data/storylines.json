@@ -1,262 +1,104 @@
 {
- "date": "2026-11-13",
+ "date": "2026-11-14",
  "games": {
-  "0022600034": [
+  "0022600231": [
    {
-    "text": "Andre Drummond (NYK) needs 7 rebounds to pass Patrick Ewing for 26th all-time (11,601 now; averaging 8.0)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/andre-drummond-203083.html",
+    "text": "DeMar DeRozan (DEN) needs 6 points to pass Stephen Curry for 16th all-time (26,801 now; averaging 10.0)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/demar-derozan-201942.html",
     "kind": "milestone",
-    "anchor": "Andre Drummond"
+    "anchor": "DeMar DeRozan"
    },
    {
-    "text": "Karl-Anthony Towns averages 27.7 points in his last 10 games against the Pacers (21.8 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/karl-anthony-towns-1626157.html",
-    "kind": "vs_opponent",
-    "anchor": "Karl-Anthony Towns"
-   },
-   {
-    "text": "Karl-Anthony Towns brings 15 straight double-doubles into tonight",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/karl-anthony-towns-1626157.html",
-    "kind": "player_streak",
-    "anchor": "Karl-Anthony Towns"
-   },
-   {
-    "text": "Last met in the 2025 playoffs: Pacers won the series 4-2",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/indiana-pacers.html",
-    "kind": "playoffs",
-    "anchor": "Pacers"
-   },
-   {
-    "text": "Knicks lead the all-time series 105-97 (regular season); Pacers 4-6 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/new-york-knicks.html",
-    "kind": "series",
-    "anchor": "Knicks"
-   }
-  ],
-  "0022600035": [
-   {
-    "text": "Bucks have lost 8 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/milwaukee-bucks.html",
+    "text": "Pelicans have lost 5 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/new-orleans-pelicans.html",
     "kind": "team_streak",
-    "anchor": "Bucks"
+    "anchor": "Pelicans"
    },
    {
-    "text": "Last met in the 2020 playoffs: Bucks won the series 4-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/milwaukee-bucks.html",
+    "text": "Last met in the 2009 playoffs: Nuggets won the series 4-1",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/denver-nuggets.html",
     "kind": "playoffs",
-    "anchor": "Bucks"
+    "anchor": "Nuggets"
    },
    {
-    "text": "Bucks lead the all-time series 77-58 (regular season); Magic 4-6 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/milwaukee-bucks.html",
+    "text": "Nuggets lead the all-time series 51-33 (regular season); Pelicans 1-9 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/denver-nuggets.html",
     "kind": "series",
-    "anchor": "Bucks"
+    "anchor": "Nuggets"
    }
   ],
-  "0022600036": [
+  "0022600232": [
    {
-    "text": "Giannis Antetokounmpo (MIA) needs 5 rebounds to pass Russell Westbrook for 61st all-time (9,021 now; averaging 12.6)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/giannis-antetokounmpo-203507.html",
-    "kind": "milestone",
-    "anchor": "Giannis Antetokounmpo"
-   },
-   {
-    "text": "Giannis Antetokounmpo (MIA) needs 2 blocks to pass Buck Williams, Bob Lanier and Andrew Lang for 85th all-time (1,099 now; averaging 1.0)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/giannis-antetokounmpo-203507.html",
-    "kind": "milestone",
-    "anchor": "Giannis Antetokounmpo"
-   },
-   {
-    "text": "Giannis Antetokounmpo (MIA) needs 1 assist to pass Jamal Crawford for 91st all-time (4,541 now; averaging 5.2)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/giannis-antetokounmpo-203507.html",
-    "kind": "milestone",
-    "anchor": "Giannis Antetokounmpo"
-   },
-   {
-    "text": "Donovan Mitchell (CLE) is 6 assists from 3,000 career assists, which would make him the 247th player to get there (2,994 now; averaging 5.5)",
+    "text": "Donovan Mitchell (CLE) needs 23 points to pass Lou Williams, Terry Porter and Walt Frazier and 2 more for 145th all-time (15,571 now; averaging 23.0)",
     "url": "https://hoopsmatic.com/streaks-droughts/players/donovan-mitchell-1628378.html",
     "kind": "milestone",
     "anchor": "Donovan Mitchell"
    },
    {
-    "text": "Giannis Antetokounmpo brings 8 straight 20-point, 10-rebound games into tonight",
+    "text": "Cavaliers lead the all-time series 48-41 (regular season); Cavaliers 8-2 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/cleveland-cavaliers.html",
+    "kind": "series",
+    "anchor": "Cavaliers"
+   }
+  ],
+  "0022600233": [
+   {
+    "text": "Giannis Antetokounmpo (MIA) needs 11 rebounds to pass Elton Brand for 60th all-time (9,030 now; averaging 12.3)",
     "url": "https://hoopsmatic.com/streaks-droughts/players/giannis-antetokounmpo-203507.html",
-    "kind": "player_streak",
+    "kind": "milestone",
     "anchor": "Giannis Antetokounmpo"
    },
    {
-    "text": "Last met in the 2025 playoffs: Cavaliers won the series 4-0",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/cleveland-cavaliers.html",
-    "kind": "playoffs",
-    "anchor": "Cavaliers"
+    "text": "Giannis Antetokounmpo (MIA) needs 1 block to pass Buck Williams and Bob Lanier for 85th all-time (1,100 now; averaging 1.0)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/giannis-antetokounmpo-203507.html",
+    "kind": "milestone",
+    "anchor": "Giannis Antetokounmpo"
    },
    {
-    "text": "Heat lead the all-time series 82-55 (regular season); Heat 5-5 in the last 10 meetings",
+    "text": "Heat have won 3 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/miami-heat.html",
+    "kind": "team_streak",
+    "anchor": "Heat"
+   },
+   {
+    "text": "Last met in the 2006 playoffs: Heat won the series 4-2",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/miami-heat.html",
+    "kind": "playoffs",
+    "anchor": "Heat"
+   },
+   {
+    "text": "Heat lead the all-time series 74-62 (regular season); Heat 5-5 in the last 10 meetings",
     "url": "https://hoopsmatic.com/streaks-droughts/teams/miami-heat.html",
     "kind": "series",
     "anchor": "Heat"
    }
   ],
-  "0022600037": [
+  "0022600234": [
    {
-    "text": "Bulls have lost 8 straight",
+    "text": "Grizzlies lead the all-time series 32-28 (regular season); Grizzlies 5-5 in the last 10 meetings",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/memphis-grizzlies.html",
+    "kind": "series",
+    "anchor": "Grizzlies"
+   }
+  ],
+  "0022600235": [
+   {
+    "text": "Anthony Edwards (MIN) is 13 points from 11,000 career points, which would make him the 352nd player to get there (10,987 now; averaging 33.2)",
+    "url": "https://hoopsmatic.com/streaks-droughts/players/anthony-edwards-1630162.html",
+    "kind": "milestone",
+    "anchor": "Anthony Edwards"
+   },
+   {
+    "text": "Timberwolves have won 5 straight",
+    "url": "https://hoopsmatic.com/streaks-droughts/teams/minnesota-timberwolves.html",
+    "kind": "team_streak",
+    "anchor": "Timberwolves"
+   },
+   {
+    "text": "Bulls lead the all-time series 40-31 (regular season); Timberwolves 4-6 in the last 10 meetings",
     "url": "https://hoopsmatic.com/streaks-droughts/teams/chicago-bulls.html",
-    "kind": "team_streak",
-    "anchor": "Bulls"
-   },
-   {
-    "text": "Last met in the 2011 playoffs: Bulls won the series 4-2",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/chicago-bulls.html",
-    "kind": "playoffs",
-    "anchor": "Bulls"
-   },
-   {
-    "text": "Bulls lead the all-time series 144-122 (regular season); Bulls 7-3 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/chicago-bulls.html",
     "kind": "series",
     "anchor": "Bulls"
-   }
-  ],
-  "0022600038": [
-   {
-    "text": "DeAndre Jordan (NOP) needs 2 blocks to pass Benoit Benjamin for 36th all-time (1,580 now; averaging 1.0)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/deandre-jordan-201599.html",
-    "kind": "milestone",
-    "anchor": "DeAndre Jordan"
-   },
-   {
-    "text": "Pelicans have lost 4 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/new-orleans-pelicans.html",
-    "kind": "team_streak",
-    "anchor": "Pelicans"
-   },
-   {
-    "text": "Pelicans lead the all-time series 47-44 (regular season); Pelicans 4-6 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/new-orleans-pelicans.html",
-    "kind": "series",
-    "anchor": "Pelicans"
-   }
-  ],
-  "0022600039": [
-   {
-    "text": "Kevin Durant (HOU) needs 2 blocks to pass Al Horford for 49th all-time (1,359 now; averaging 1.2)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/kevin-durant-201142.html",
-    "kind": "milestone",
-    "anchor": "Kevin Durant"
-   },
-   {
-    "text": "Fred VanVleet averages 26.2 points in his last 10 games against the Jazz (16.1 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/fred-vanvleet-1627832.html",
-    "kind": "vs_opponent",
-    "anchor": "Fred VanVleet"
-   },
-   {
-    "text": "Jazz have lost 10 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/utah-jazz.html",
-    "kind": "team_streak",
-    "anchor": "Jazz"
-   },
-   {
-    "text": "Last met in the 2019 playoffs: Rockets won the series 4-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/houston-rockets.html",
-    "kind": "playoffs",
-    "anchor": "Rockets"
-   },
-   {
-    "text": "Jazz lead the all-time series 117-108 (regular season); Rockets 7-3 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/utah-jazz.html",
-    "kind": "series",
-    "anchor": "Jazz"
-   }
-  ],
-  "0022600040": [
-   {
-    "text": "Stephen Curry (GSW) needs 3 assists to pass Mike Conley for 26th all-time (6,782 now; averaging 3.9)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/stephen-curry-201939.html",
-    "kind": "milestone",
-    "anchor": "Stephen Curry"
-   },
-   {
-    "text": "Stephen Curry (GSW) needs 2 steals to pass Thaddeus Young for 37th all-time (1,611 now; averaging 0.9)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/stephen-curry-201939.html",
-    "kind": "milestone",
-    "anchor": "Stephen Curry"
-   },
-   {
-    "text": "Victor Wembanyama averages 28.8 points in his last 8 games against the Warriors (24.7 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/victor-wembanyama-1641705.html",
-    "kind": "vs_opponent",
-    "anchor": "Victor Wembanyama"
-   },
-   {
-    "text": "Spurs have won 10 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/san-antonio-spurs.html",
-    "kind": "team_streak",
-    "anchor": "Spurs"
-   },
-   {
-    "text": "Last met in the 2018 playoffs: Warriors won the series 4-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/golden-state-warriors.html",
-    "kind": "playoffs",
-    "anchor": "Warriors"
-   },
-   {
-    "text": "Spurs lead the all-time series 119-74 (regular season); Spurs 5-5 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/san-antonio-spurs.html",
-    "kind": "series",
-    "anchor": "Spurs"
-   }
-  ],
-  "0022600041": [
-   {
-    "text": "Domantas Sabonis (SAC) needs 15 rebounds to pass Dan Roundfield and Derrick Coleman for 110th all-time (7,229 now; averaging 13.3)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/domantas-sabonis-1627734.html",
-    "kind": "milestone",
-    "anchor": "Domantas Sabonis"
-   },
-   {
-    "text": "Zach LaVine averages 26.3 points in his last 10 games against the Trail Blazers (21.8 over his last two seasons)",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/zach-lavine-203897.html",
-    "kind": "vs_opponent",
-    "anchor": "Zach LaVine"
-   },
-   {
-    "text": "Kings have lost 4 straight",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/sacramento-kings.html",
-    "kind": "team_streak",
-    "anchor": "Kings"
-   },
-   {
-    "text": "Last met in the 1981 playoffs: Kings won the series 2-1",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/sacramento-kings.html",
-    "kind": "playoffs",
-    "anchor": "Kings"
-   },
-   {
-    "text": "Trail Blazers lead the all-time series 148-90 (regular season); Kings 3-7 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/portland-trail-blazers.html",
-    "kind": "series",
-    "anchor": "Trail Blazers"
-   }
-  ],
-  "0022600042": [
-   {
-    "text": "Shai Gilgeous-Alexander brings 10 straight 20-point games into tonight",
-    "url": "https://hoopsmatic.com/streaks-droughts/players/shai-gilgeous-alexander-1628983.html",
-    "kind": "player_streak",
-    "anchor": "Shai Gilgeous-Alexander"
-   },
-   {
-    "text": "Last met in the 2014 playoffs: Thunder won the series 4-2",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/oklahoma-city-thunder.html",
-    "kind": "playoffs",
-    "anchor": "Thunder"
-   },
-   {
-    "text": "Thunder lead the all-time series 153-86 (regular season); Clippers 1-9 in the last 10 meetings",
-    "url": "https://hoopsmatic.com/streaks-droughts/teams/oklahoma-city-thunder.html",
-    "kind": "series",
-    "anchor": "Thunder"
    }
   ]
  }
