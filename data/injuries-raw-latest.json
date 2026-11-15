@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-15T00:10:11+00:00",
+ "fetched_at": "2026-11-15T00:40:04+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6911,
+ "row_count": 6925,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48492,6 +48492,104 @@
    "injury": "Right Calf Tightness / Soreness",
    "date": "2026-11-14",
    "prevStatus": "Probable"
+  },
+  {
+   "player": "Jerami Grant",
+   "status": "Out",
+   "injury": "Head Injury",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Out",
+   "injury": "Left Heel Injury",
+   "date": "2026-11-14",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Out",
+   "injury": "Left Heel Bruise",
+   "date": "2026-11-14",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Cameron Carr",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Quentin Grimes",
+   "status": "Available",
+   "injury": "Right Finger Sprain",
+   "date": "2026-11-14",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Bronny James",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Adou Thiero",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Collin Sexton",
+   "status": "Questionable",
+   "injury": "Right Soleus Strain",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Collin Sexton",
+   "status": "Questionable",
+   "injury": "Right Orbital Laceration",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Out",
+   "injury": "Left Knee Strain",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Devin Vassell",
+   "status": "Available",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "De'Aaron Fox",
+   "status": "Available",
+   "injury": "Left Hip Soreness",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Michael Porter",
+   "status": "Out",
+   "injury": "Personal Reasons",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Out",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
   }
  ]
 }
