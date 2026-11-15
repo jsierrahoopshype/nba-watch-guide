@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-15T01:10:02+00:00",
+ "fetched_at": "2026-11-15T01:40:03+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6930,
+ "row_count": 6933,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48625,6 +48625,27 @@
    "injury": "Left Hip Soreness / Tightness",
    "date": "2026-11-14",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Out",
+   "injury": "Left Shin / Tibia Contusion",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Morez Johnson",
+   "status": "Out",
+   "injury": "Left Shin / Tibia Contusion",
+   "date": "2026-11-14",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ajay Mitchell",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-14",
+   "prevStatus": "Out"
   }
  ]
 }
