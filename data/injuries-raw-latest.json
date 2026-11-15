@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-15T16:52:10+00:00",
+ "fetched_at": "2026-11-15T19:26:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6938,
+ "row_count": 6950,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48681,6 +48681,90 @@
    "injury": "Left Hip Soreness / Tightness",
    "date": "2026-11-15",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Available",
+   "injury": "Left Hand Sprain",
+   "date": "2026-11-15",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Available",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-15",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Ryan Rollins",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ryan Rollins",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Available",
+   "injury": "Right Soleus Strain",
+   "date": "2026-11-15",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jock Landale",
+   "status": "Questionable",
+   "injury": "Left Hip Strain",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jock Landale",
+   "status": "Questionable",
+   "injury": "Right Hip Inflammation",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Questionable",
+   "injury": "IllnessLeft Knee Injury Management",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kyrie Irving",
+   "status": "Questionable",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Daniel Gafford",
+   "status": "Probable",
+   "injury": "Right Shoulder Stinger",
+   "date": "2026-11-15",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Max Christie",
+   "status": "Doubtful",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-15",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Santiago Aldama",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
   }
  ]
 }
