@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-15T02:10:08+00:00",
+ "fetched_at": "2026-11-15T03:23:44+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6936,
+ "row_count": 6937,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48665,6 +48665,13 @@
    "player": "Jaylen Clark",
    "status": "Left Game",
    "injury": "Right Hamstring Soreness",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Daniel Gafford",
+   "status": "Left Game",
+   "injury": "Stinger",
    "date": "2026-11-14",
    "prevStatus": "Available"
   }
