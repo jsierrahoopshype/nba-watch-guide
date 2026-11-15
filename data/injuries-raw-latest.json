@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-15T00:40:04+00:00",
+ "fetched_at": "2026-11-15T01:10:02+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6925,
+ "row_count": 6930,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -48590,6 +48590,41 @@
    "injury": "Left Ankle Injury Management",
    "date": "2026-11-14",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Available",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-11-14",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Keegan Murray",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandon Miller",
+   "status": "Available",
+   "injury": "Right Hip Strain",
+   "date": "2026-11-14",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Questionable",
+   "injury": "Cervical Injury Management",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Questionable",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-14",
+   "prevStatus": "Available"
   }
  ]
 }
