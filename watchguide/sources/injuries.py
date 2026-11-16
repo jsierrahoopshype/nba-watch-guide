@@ -54,6 +54,10 @@ STATUS_ORDER = {s: i for i, s in enumerate(ALLOWED_STATUSES)}
 
 _SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 
+# The last player index fetch_player_teams() read in this process, for
+# data/live-base.json (watchguide/live.py). Empty until a fetch succeeds.
+LAST_PLAYER_TEAMS: dict[str, str] = {}
+
 
 def feed_url() -> str:
     return os.environ.get("INJURY_FEED_URL") or DEFAULT_FEED_URL
@@ -73,6 +77,11 @@ def _aliases() -> dict[str, str]:
     except (OSError, ValueError):
         return {}
     return {" ".join(_fold(k)): " ".join(_fold(v)) for k, v in (raw.get("aliases") or {}).items()}
+
+
+def folded_aliases() -> dict[str, str]:
+    """data/player_aliases.json as normalize_name applies it (for live-base.json)."""
+    return dict(_aliases())
 
 
 def normalize_name(name: str) -> str:
@@ -122,6 +131,8 @@ def fetch_player_teams() -> dict[str, str]:
             out[key] = tricode
     if not out:
         raise FetchError("player index produced no usable rows")
+    LAST_PLAYER_TEAMS.clear()
+    LAST_PLAYER_TEAMS.update(out)
     return out
 
 

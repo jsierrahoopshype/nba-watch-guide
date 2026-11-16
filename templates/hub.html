@@ -126,6 +126,12 @@
       {%- set face_names = row.players|map(attribute='name')|join(' vs. ') %}
       <div class="hg-line small" data-volatile{% if row.players and row.line == face_names %} data-repeats-faces{% endif %}>{{ row.line }}</div>
     </div>
+    {%- if showcase.is_today %}
+    {#- The page script rebuilds this from the live availability data
+        (watch-guide.js renderHubOut), so a player listed after the build
+        still shows. Volatile as a whole, like the list it holds. #}
+    <div data-hub-out data-volatile data-date="{{ row.out_live.date }}" data-teams="{{ row.out_live.teams }}" data-names="{{ row.out_live.names }}" data-l-summary="{{ tonight_text.out_summary }}" data-l-missing="{{ row.out_live.missing }}">
+    {%- endif %}
     {%- if row.out %}
     <details class="hg-out small" data-volatile>
       <summary>{{ tonight_text.out_summary.format(count=row.out_count) }}</summary>
@@ -137,6 +143,9 @@
     </details>
     {%- elif row.out_message %}
     <p class="hg-out-msg small muted" data-volatile>{{ row.out_message }}</p>
+    {%- endif %}
+    {%- if showcase.is_today %}
+    </div>
     {%- endif %}
     {%- if row.worth %}
     <ul class="hg-worth small" data-part="worth" aria-label="{{ game_text.worth_heading }}">

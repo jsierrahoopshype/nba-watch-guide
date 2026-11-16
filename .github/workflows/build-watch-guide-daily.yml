@@ -6,6 +6,15 @@ on:
     # Second daily run, after the night's games, so pair-page titles move on
     # to the next meeting's date sooner.
     - cron: '0 5 * * *'
+    # Two game-evening rebuilds (17:47 and 20:47 ET in winter), October to
+    # June only, so no offseason minutes. The how-to-watch-live Worker
+    # refreshes availability every 30 minutes but cannot re-render pages:
+    # these pick up the referee crews in "Also worth knowing", the injury-
+    # driven ranking on the hub and tonight page, and the HTML that readers
+    # without JavaScript and crawlers see. Off the hour, where GitHub drops
+    # fewer scheduled runs.
+    - cron: '47 22 * 10-12,1-6 *'
+    - cron: '47 1 * 10-12,1-6 *'
   # Every merge to main rebuilds and publishes, then checks the live site.
   # Doc-only changes don't. The bots' own commits (raw availability copy,
   # recent awards) are pushed with GITHUB_TOKEN, which never starts a run.

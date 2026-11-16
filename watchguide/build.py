@@ -44,6 +44,7 @@ from .sources import injuries as injuries_source
 from .sources import matchups as matchups_source
 from .sources import referees as referees_source
 from .sources import schedule as schedule_source
+from .live import LIVE_BASE_FILE, live_base_payload
 from .guard import RAW_FILE, FeedGuardError, check_shrink, read_raw, snapshot_now, write_raw
 from .sources.careers import match_key
 from .sources.http import FetchError
@@ -309,6 +310,7 @@ def injuries_payload(ctx: SiteContext) -> dict[str, Any]:
         "source_id": injuries_source.SOURCE_ID,
         "date_et": ctx.today,
         "has_games_today": bool(today),
+        "has_injury_data": ctx.has_injury_data,
         "players": _player_rows(ctx, playing),
     }
 
@@ -335,6 +337,7 @@ def tonight_payload(ctx: SiteContext) -> dict[str, Any]:
         "source_id": injuries_source.SOURCE_ID,
         "date_et": ctx.today,
         "has_games_today": bool(games),
+        "has_injury_data": ctx.has_injury_data,
         "games": games,
     }
 
@@ -587,6 +590,7 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     else:
         games, note = load_schedule(out_dir)
         notes.extend(note.splitlines())
+        injuries_source.LAST_PLAYER_TEAMS.clear()
         injuries, updated_at, as_of, inote, complaint = load_injuries(
             out_dir, repo_root=repo_root, since=season_start(games), today=today or today_et())
         notes.extend(inote.splitlines())
@@ -624,6 +628,11 @@ def full_build(out_dir: Path, today: str | None = None, offline: bool = False,
     write_json(out_dir, INJURIES_FILE, injuries_payload(ctx))
     write_json(out_dir, TONIGHT_FILE, tonight_payload(ctx))
     write_json(out_dir, BUILD_FILE, build_payload(ctx, "build"))
+    if not offline and injuries_source.LAST_PLAYER_TEAMS:
+        raw = read_raw((repo_root or config.REPO_ROOT) / RAW_FILE)
+        write_json(out_dir, LIVE_BASE_FILE, live_base_payload(
+            ctx, injuries_source.LAST_PLAYER_TEAMS, season_start(games), raw.count if raw else 0))
+        notes.append(f"live-base: {len(injuries_source.LAST_PLAYER_TEAMS)} players for the live Worker")
     update_lastmod(out_dir, pages, ctx.today)
     write_sitemap(out_dir, pages, noindex=ctx.noindex)
     copy_assets(out_dir)

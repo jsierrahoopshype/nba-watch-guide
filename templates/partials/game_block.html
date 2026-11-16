@@ -103,7 +103,8 @@
     {%- endif %}
   </div>
 
-  <div class="gb-out" data-part="out" data-volatile>
+  {%- set lv = view.out.live %}
+  <div class="gb-out" data-part="out" data-volatile data-live-out data-date="{{ lv.date }}" data-teams="{{ lv.teams }}" data-names="{{ lv.names }}" data-l-listed="{{ lv.listed }}" data-l-none="{{ lv.none }}" data-l-missing="{{ lv.missing }}">
     <h4>{{ game_text.out_heading }}</h4>
     {%- if view.out.message %}
     <p class="small muted" data-out-message>{{ view.out.message }}</p>

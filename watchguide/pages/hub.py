@@ -148,6 +148,11 @@ def showcase_rows(ctx: SiteContext) -> dict:
             "line": r["line_core"],
             "out": out,
             "out_count": sum(len(side["players"]) for side in out),
+            # For the page script's rebuild of the Out list (watch-guide.js).
+            "out_live": {"date": game.date_et,
+                         "teams": f"{game.away_tricode} {game.home_tricode}",
+                         "names": f"{ctx.team_name(game.away_tricode)}|{ctx.team_name(game.home_tricode)}",
+                         "missing": ctx.copy["game"]["injury_report_missing"]},
             "top_pick": r["rank"] <= TOP_PICKS,
             "players": players_to_watch(ctx, game, r.get("stars")),
         })
