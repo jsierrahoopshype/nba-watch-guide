@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-16T13:24:44+00:00",
+ "fetched_at": "2026-11-16T20:04:19+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7000,
+ "row_count": 7016,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -49116,6 +49116,121 @@
    "injury": "Left Hip Soreness / Tightness",
    "date": "2026-11-15",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "GG Jackson",
+   "status": "Out",
+   "injury": "Left Foot Fifth Metatarsal Fracture",
+   "date": "2026-11-15",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "GG Jackson",
+   "status": "Out",
+   "injury": "Left Foot Fifth Metatarsal Fracture",
+   "date": "2026-11-15",
+   "prevStatus": "Out",
+   "eta": "2-3 months"
+  },
+  {
+   "player": "Scotty Pippen Jr",
+   "status": "Out",
+   "injury": "Lumbar Disc Herniation",
+   "date": "2026-11-02",
+   "prevStatus": "Out",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Pelle Larsson",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Nikola Jovic",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Doubtful",
+   "injury": "Right Ankle Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tre Johnson",
+   "status": "Questionable",
+   "injury": "Low Back Soreness",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Fred VanVleet",
+   "status": "Available",
+   "injury": "Right Knee Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Amen Thompson",
+   "status": "Questionable",
+   "injury": "Left Knee Soreness",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Out",
+   "injury": "Right Soleus Strain",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Out",
+   "injury": "Left Lower Leg Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "GG Jackson",
+   "status": "Out",
+   "injury": "Left 5th Metatarsal Fracture",
+   "date": "2026-11-15",
+   "prevStatus": "Out",
+   "eta": "2-3 months"
+  },
+  {
+   "player": "LeBron James",
+   "status": "Out",
+   "injury": "Low Back Sciatica Management",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Questionable",
+   "injury": "Right Foot Plantar Fascia Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Neemias Queta",
+   "status": "Questionable",
+   "injury": "Rest",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
   }
  ]
 }
