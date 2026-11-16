@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-16T20:04:19+00:00",
+ "fetched_at": "2026-11-16T22:58:03+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7016,
+ "row_count": 7036,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -49231,6 +49231,150 @@
    "injury": "Rest",
    "date": "2026-11-16",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Ryan Dunn",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ryan Dunn",
+   "status": "Questionable",
+   "injury": "Right Thumb Soreness",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Neemias Queta",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Evan Mobley",
+   "status": "Out",
+   "injury": "Left Great Toe Sprain",
+   "date": "2026-11-12",
+   "prevStatus": "Out",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Evan Mobley",
+   "status": "Out",
+   "injury": "Left Great Toe Sprain",
+   "date": "2026-11-12",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Evan Mobley",
+   "status": "Out",
+   "injury": "Left Great Toe Sprain",
+   "date": "2026-11-12",
+   "prevStatus": "Out",
+   "eta": "10-14 days"
+  },
+  {
+   "player": "Evan Mobley",
+   "status": "Out",
+   "injury": "Left Great Toe Sprain",
+   "date": "2026-11-12",
+   "prevStatus": "Out",
+   "eta": "15-20 days"
+  },
+  {
+   "player": "Tre Johnson",
+   "status": "Available",
+   "injury": "Low Back Soreness",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "De'Aaron Fox",
+   "status": "Available",
+   "injury": "Left Hip Tightness",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Peyton Watson",
+   "status": "Available",
+   "injury": "Right Hamstring Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Out",
+   "injury": "Right Ankle Injury Management",
+   "date": "2026-11-16",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Duncan Robinson",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Duncan Robinson",
+   "status": "Out",
+   "injury": "Left Quadriceps Strain",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Taurean Prince",
+   "status": "Out",
+   "injury": "Right Knee Soreness",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Joe",
+   "status": "Doubtful",
+   "injury": "Right Hip Contusion",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Ron Holland",
+   "status": "Out",
+   "injury": " Left Knee Contusion/ Bone Bruise",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ron Holland",
+   "status": "Out",
+   "injury": " Left Knee Contusion / Bone Bruise",
+   "date": "2026-11-16",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nikola Jovic",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Pelle Larsson",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-16",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Available",
+   "injury": "Left Finger Sprain",
+   "date": "2026-11-16",
+   "prevStatus": "Questionable"
   }
  ]
 }
