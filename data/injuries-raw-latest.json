@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-16T00:31:22+00:00",
+ "fetched_at": "2026-11-16T03:24:56+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 6997,
+ "row_count": 7000,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -49093,6 +49093,27 @@
    "player": "Precious Achiuwa",
    "status": "Out",
    "injury": "Left Ankle Soreness",
+   "date": "2026-11-15",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach LaVine",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-15",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ajay Mitchell",
+   "status": "Available",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-15",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Out",
+   "injury": "Left Hip Soreness / Tightness",
    "date": "2026-11-15",
    "prevStatus": "Questionable"
   }
