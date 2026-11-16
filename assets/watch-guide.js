@@ -281,18 +281,184 @@
     });
   }
 
+  /* ---------------- who's out, rebuilt from the live data ----------------
+     The same list pages.common.out_block() and the hub's Out detail render
+     at build time, from the same rules: today's game only, Available left
+     off, "Injury report not available yet" when nobody on today's teams is
+     listed after 3 pm ET and the feed has not reached today. A part is only
+     replaced when what it would show differs from what is there, so an
+     unchanged page never moves. tests/test_live_out.py renders both ways and
+     compares them. */
+
+  var GUARD_START_HOUR = 15;   // config.INJURY_GUARD_START_HOUR
+
+  function mk(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // Tag, class, the attributes that carry meaning and leaf text, ignoring
+  // whitespace, so a server-rendered part and a rebuilt one compare equal.
+  function shape(node) {
+    if (node.nodeType === 3) return node.nodeValue.replace(/\s+/g, ' ').trim();
+    if (node.nodeType !== 1) return '';
+    var keep = ['class', 'data-player', 'data-status-slot', 'data-out-message', 'hidden', 'open'];
+    var attrs = keep.filter(function (a) { return node.hasAttribute(a); })
+      .map(function (a) { return a + '=' + node.getAttribute(a); }).join(',');
+    var kids = Array.prototype.map.call(node.childNodes, shape).filter(Boolean).join('');
+    return '<' + node.tagName + ' ' + attrs + '>' + kids + '</>';
+  }
+
+  function etHour(iso) {
+    var when = new Date(iso);
+    if (isNaN(when.getTime())) return null;
+    try {
+      var h = parseInt(part(fmt('en-US', { timeZone: EASTERN, hour: 'numeric', hour12: false }, 'et-hour')
+        .formatToParts(when), 'hour'), 10);
+      return isNaN(h) ? null : h % 24;
+    } catch (e) { return null; }
+  }
+
+  // context.injury_report_missing(), on the data the page fetched.
+  function reportMissing(data, anyListed) {
+    if (!data.has_games_today || anyListed) return false;
+    var hour = etHour(data.updated_at);
+    if (hour === null || hour < GUARD_START_HOUR) return false;
+    return (data.as_of || '').slice(0, 10) !== data.date_et;
+  }
+
+  function availability(data) {
+    var byTeam = {}, any = false;
+    function add(p) {
+      if (!p || !p.team) return;
+      (byTeam[p.team] = byTeam[p.team] || []).push(p);
+      any = true;
+    }
+    (data.players || []).forEach(add);
+    (data.games || []).forEach(function (g) { (g.players || []).forEach(add); });
+    var hasData = data.has_injury_data === undefined ? any : !!data.has_injury_data;
+    return { byTeam: byTeam, any: any, hasData: hasData, missing: reportMissing(data, any) };
+  }
+
+  // Swaps a part's content for `nodes` only when it would read differently.
+  // With keepFirst the first element (the heading) stays where it is.
+  function replaceIfDifferent(holder, keepFirst, nodes) {
+    var first = keepFirst ? holder.firstElementChild : null;
+    var current = Array.prototype.slice.call(holder.childNodes, 0).filter(function (n) { return n !== first; });
+    var before = current.map(shape).filter(Boolean).join('');
+    var after = nodes.map(shape).join('');
+    if (before === after) return;
+    var tail = document.createDocumentFragment();
+    nodes.forEach(function (n) { tail.appendChild(n); });
+    if (first) {
+      while (first.nextSibling) holder.removeChild(first.nextSibling);
+      holder.appendChild(tail);
+    } else {
+      holder.replaceChildren(tail);
+    }
+  }
+
+  function renderOut(data, av) {
+    $$('[data-live-out]').forEach(function (box) {
+      if (box.getAttribute('data-date') !== data.date_et) return;
+      var teams = (box.getAttribute('data-teams') || '').split(' ');
+      var names = (box.getAttribute('data-names') || '').split('|');
+      var nodes;
+      if (av.missing) {
+        var msg = mk('p', 'small muted', box.getAttribute('data-l-missing') || '');
+        msg.setAttribute('data-out-message', '');
+        nodes = [msg];
+      } else {
+        var sides = mk('div', 'game-sides');
+        teams.forEach(function (t, i) {
+          var side = mk('div', 'game-side');
+          side.appendChild(mk('h5', '', names[i] || t));
+          var players = (av.byTeam[t] || []).filter(function (p) { return p.status !== 'Available'; });
+          if (players.length) {
+            var ul = mk('ul', 'out-chips');
+            players.forEach(function (p) {
+              var li = mk('li', 'out-chip');
+              li.setAttribute('data-player', p.player);
+              li.appendChild(mk('span', '', p.player));
+              li.appendChild(document.createTextNode(' '));
+              var badge = mk('span', 'badge badge-' + String(p.status).toLowerCase(), p.status);
+              badge.setAttribute('data-status-slot', '');
+              li.appendChild(badge);
+              ul.appendChild(li);
+            });
+            side.appendChild(ul);
+          } else {
+            side.appendChild(mk('p', 'small muted',
+              box.getAttribute(av.hasData ? 'data-l-listed' : 'data-l-none') || ''));
+          }
+          sides.appendChild(side);
+        });
+        nodes = [sides];
+      }
+      replaceIfDifferent(box, true, nodes);   // the heading stays
+    });
+  }
+
+  function renderHubOut(data, av) {
+    $$('[data-hub-out]').forEach(function (box) {
+      if (box.getAttribute('data-date') !== data.date_et) return;
+      var teams = (box.getAttribute('data-teams') || '').split(' ');
+      var names = (box.getAttribute('data-names') || '').split('|');
+      var nodes = [];
+      if (av.missing) {
+        var msg = mk('p', 'hg-out-msg small muted', box.getAttribute('data-l-missing') || '');
+        msg.setAttribute('data-volatile', '');
+        nodes.push(msg);
+      } else {
+        var lines = [], count = 0;
+        teams.forEach(function (t, i) {
+          var out = (av.byTeam[t] || []).filter(function (p) { return p.status === 'Out'; })
+            .map(function (p) { return p.player; });
+          count += out.length;
+          if (out.length) lines.push((names[i] || t) + ': ' + out.join(', '));
+        });
+        if (lines.length) {
+          var det = mk('details', 'hg-out small');
+          det.setAttribute('data-volatile', '');
+          var old = box.querySelector('details');
+          if (old && old.open) det.open = true;
+          det.appendChild(mk('summary', '', (box.getAttribute('data-l-summary') || '').replace('{count}', String(count))));
+          var ul = mk('ul');
+          lines.forEach(function (line) { ul.appendChild(mk('li', '', line)); });
+          det.appendChild(ul);
+          nodes.push(det);
+        }
+      }
+      replaceIfDifferent(box, false, nodes);
+    });
+  }
+
+  // The live Worker first (same domain, /how-to-watch/live/), then the file
+  // the last build published. The Worker answers 404 when it has nothing
+  // for today, which is what sends a page to the published file.
+  function load(file) {
+    function get(url) {
+      return fetch(url, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; });
+    }
+    return get(PREFIX + '/live/' + file)
+      .catch(function () { return null; })
+      .then(function (data) { return data || get(PREFIX + '/data/' + file); });
+  }
+
   function refresh() {
     var wantsTonight = !!$('[data-tonight]');
-    var url = PREFIX + '/data/' + (wantsTonight ? 'tonight.json' : 'injuries.json');
-    fetch(url, { cache: 'no-store' }).then(function (r) {
-      return r.ok ? r.json() : null;
-    }).then(function (data) {
+    load(wantsTonight ? 'tonight.json' : 'injuries.json').then(function (data) {
       if (!data) return;
       var byPlayer = {};
       (data.players || []).forEach(function (p) { byPlayer[p.player] = p.status; });
       (data.games || []).forEach(function (g) {
         (g.players || []).forEach(function (p) { byPlayer[p.player] = p.status; });
       });
+      var av = availability(data);
+      renderOut(data, av);
+      renderHubOut(data, av);
       applyStatuses(byPlayer);
       showUpdated(data);
     }).catch(function () { /* keep the prerendered values */ });
@@ -555,7 +721,7 @@
     initCountdowns();
     initMissing();
     initMyTeam();
-    if ($('[data-player]') || $('[data-updated]')) refresh();
+    if ($('[data-player]') || $('[data-updated]') || $('[data-live-out]') || $('[data-hub-out]')) refresh();
   }
 
   if (document.readyState === 'loading') {

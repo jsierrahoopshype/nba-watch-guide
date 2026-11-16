@@ -78,7 +78,14 @@ went live:
 
 ## How the loop works
 
-- `build-watch-guide-daily` runs daily at 05:00 and 10:00 UTC, on manual dispatch and
+- Between builds, availability comes from the `how-to-watch-live` Cloudflare
+  Worker (`worker/`, route hoopsmatic.com/how-to-watch/live/*, cron every 30
+  minutes on game evenings, no tokens). Pages read /live/ first and fall back
+  to /data/. It is a separate Worker: never fold it into hoopsmatic-worker.
+  Its status is at https://hoopsmatic.com/how-to-watch/live/. Jorge deploys it
+  with `build\deploy-how-to-watch-live.bat`; merging does not deploy it.
+- `build-watch-guide-daily` runs daily at 05:00 and 10:00 UTC (plus 22:47 and
+  01:47 UTC from October to June), on manual dispatch and
   on every push to main except README.md and CLAUDE.md changes. The bots'
   own commits (raw availability copy, recent awards) are pushed with
   GITHUB_TOKEN, which never starts a run.

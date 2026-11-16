@@ -1,0 +1,4 @@
+.wrangler/
+wrangler.deploy.toml
+.account-id
+node_modules/

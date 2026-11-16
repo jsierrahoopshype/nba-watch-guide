@@ -309,7 +309,16 @@ def out_block(ctx: SiteContext, game) -> dict:
         sides = [{"name": ctx.team_name(t), "empty": empty,
                   "players": [p for p in ctx.players_for(t) if p.get("status") != "Available"]}
                  for t in (game.away_tricode, game.home_tricode)]
-    return {"is_today": today, "message": message, "sides": sides}
+    # What the page script needs to rebuild this part from the live
+    # availability data (assets/watch-guide.js renderOut), with the same
+    # wording and the same rules as above.
+    live = {"date": game.date_et,
+            "teams": f"{game.away_tricode} {game.home_tricode}",
+            "names": f"{ctx.team_name(game.away_tricode)}|{ctx.team_name(game.home_tricode)}",
+            "listed": labels.get("no_players_listed", "Nobody listed."),
+            "none": labels.get("no_injury_report", "No injury report yet."),
+            "missing": text.get("injury_report_missing", "")}
+    return {"is_today": today, "message": message, "sides": sides, "live": live}
 
 
 NAME_SUFFIXES = {"Jr", "Sr", "II", "III", "IV", "V"}

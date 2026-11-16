@@ -1,0 +1,31 @@
+# how-to-watch-live: the 30-minute "Who's out" refresh for
+# hoopsmatic.com/how-to-watch (see src/index.js and the README's
+# "Live availability" section).
+#
+# A Worker of its own, NOT the shared hoopsmatic-worker
+# (nba-trade-calculator). That one sits on the zone route hoopsmatic.com/*;
+# this one claims only the more specific hoopsmatic.com/how-to-watch/live/*,
+# so Cloudflare sends that path here and everything else there.
+#
+# No secrets. The KV namespace id is not in this file: scripts/deploy.mjs
+# finds or creates the namespace on the deploying machine and writes
+# wrangler.deploy.toml (git-ignored) with it. Deploy with
+# build\deploy-how-to-watch-live.bat, not `wrangler deploy` from here.
+
+name = "how-to-watch-live"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+routes = [
+  { pattern = "hoopsmatic.com/how-to-watch/live/*", zone_name = "hoopsmatic.com" },
+]
+
+[triggers]
+# UTC. Every 30 minutes from 16:07 to 04:37, the same evening window as the
+# old GitHub refresh, off the :00/:30 rush. Days with no games stop at once.
+crons = ["7,37 16-23 * * *", "7,37 0-4 * * *"]
+
+[vars]
+LIVE_BASE_URL = "https://jsierrahoopshype.github.io/nba-watch-guide/data/live-base.json"
+FEED_URL = "https://aderoa.github.io/Injuries/injuries.json"

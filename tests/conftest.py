@@ -52,6 +52,20 @@ def _game(index: int, home: str, away: str, day: date) -> Game:
 
 
 @pytest.fixture(autouse=True)
+def raw_feed_on_a_temp_copy(monkeypatch, tmp_path_factory):
+    """Builds that don't name a repo_root read and write a temp copy of
+    data/injuries-raw-latest.json, never the repo's own (the bots commit it)."""
+    import shutil
+    from watchguide import build, config
+    root = tmp_path_factory.mktemp("repo")
+    (root / "data").mkdir()
+    shutil.copy2(config.REPO_ROOT / build.RAW_FILE, root / build.RAW_FILE)
+    real = build.load_injuries
+    monkeypatch.setattr(build, "load_injuries",
+                        lambda out_dir, repo_root=None, **kw: real(out_dir, repo_root=repo_root or root, **kw))
+
+
+@pytest.fixture(autouse=True)
 def no_headshot_downloads(monkeypatch):
     """Builds in tests never reach the headshot repo; a test that wants faces
     patches watchguide.sources.headshots.get itself."""

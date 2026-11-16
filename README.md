@@ -408,7 +408,9 @@ availability feed somewhere else. Both are optional and neither is a secret.
 
 ## Automation
 
-- `build-watch-guide-daily.yml` runs at 05:00 and 10:00 UTC, on manual dispatch and on
+- `build-watch-guide-daily.yml` runs at 05:00 and 10:00 UTC, at 22:47 and 01:47
+  UTC on October to June evenings (referee crews, the injury-driven ranking and
+  the HTML crawlers see), on manual dispatch and on
   every push to main (except changes to README.md or CLAUDE.md only), and
   rebuilds everything. After publishing, its "Live check" step
   (`scripts/live_check.py`, browser-like requests through curl_cffi) polls
@@ -427,6 +429,44 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - Both commit `data/injuries-raw-latest.json` back to the working branch when it
   changes, and both fail at the end of the run if the availability feed could not
   be trusted.
+
+## Live availability (the how-to-watch-live Worker)
+
+Between builds, "Who's out", the badges, the "Updated" time and the "Status
+may be out of date" notice come from a Cloudflare Worker of its own,
+`how-to-watch-live` (source in `worker/`), not from GitHub Actions. It needs no
+token or secret.
+
+- It sits on the route `hoopsmatic.com/how-to-watch/live/*`. The Worker that
+  serves the rest of hoopsmatic.com (`nba-trade-calculator`, repo
+  hoopsmatic-worker) is on the zone route `hoopsmatic.com/*`; Cloudflare sends
+  the more specific route here, so that Worker is not touched.
+- Every 30 minutes from 16:07 to 04:37 UTC it reads `data/live-base.json`
+  (written by every full build: the player index, aliases and the next few
+  days of games with their channels, `watchguide/live.py`), fetches the public
+  availability feed and writes `injuries.json` and `tonight.json`, shaped
+  exactly like the build's, to its KV store. The build's guards apply: rows
+  dated more than a day ahead are dropped, and a feed that shrank by more
+  than half (or did not load) is not trusted, so the last good copy is used
+  with its own fetch time and the 90-minute stale notice fires as before.
+- The pages fetch `/how-to-watch/live/<file>` first (same domain) and fall
+  back to `/how-to-watch/data/<file>` when it answers 404, which it does on
+  any day it has nothing for. The page script then rebuilds the Who's out
+  lists from that data with the build's rules (`renderOut`, `renderHubOut` in
+  `assets/watch-guide.js`), replacing a part only when it would read
+  differently, so an unchanged page never moves.
+- `https://hoopsmatic.com/how-to-watch/live/` answers with its status: last
+  run, state (`ok`, `serving the last good copy`, `no games today`, ...),
+  games today, players listed and whether each file is being served.
+- `availability.js` is a line-for-line port of the Python;
+  `tests/test_live_worker.py` runs it under Node against the Python on the
+  same input, the real raw feed included, and `tests/test_live_out.py`
+  checks the rebuilt lists against built pages in a browser.
+- Deploy: double-click `build\deploy-how-to-watch-live.bat` (Windows). It pulls
+  main, then `worker/scripts/deploy.mjs` uses the normal `wrangler login`,
+  finds or creates the KV store, deploys and runs a first refresh. It ends
+  with "IT WORKS." when the Worker is serving. The KV id never enters the repo
+  (`worker/wrangler.deploy.toml` is generated and git-ignored).
 
 ## Adding a page type later
 

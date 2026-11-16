@@ -514,7 +514,10 @@ def test_guard_after_3pm_with_no_listings_and_an_old_feed(tmp_path_factory, fixt
 ])
 def test_guard_stays_off(tmp_path_factory, fixture_games, now, injuries):
     site, notes = _guard_site(tmp_path_factory, fixture_games, "guard-off", now, injuries)
-    assert "Injury report not available yet" not in read(site, "tonight")
+    # The page script's copy of the message sits in a data- attribute
+    # (data-l-missing); what counts is that the page does not show it.
+    shown = re.sub(r'\sdata-l-missing="[^"]*"', "", read(site, "tonight"))
+    assert "Injury report not available yet" not in shown
     assert not any("injury report not available" in n for n in notes)
 
 
