@@ -2,8 +2,8 @@
 
 - the injury refresh stops early when the published availability is only a
   few minutes old (a ticker dispatch and a backup cron landing together);
-- the ticker stops after the evening's last dispatch instead of sleeping on a
-  billed runner into the next morning;
+- the 30-minute evening refresh runs on the how-to-watch-live Worker, not on
+  GitHub: no ticker, and the refresh workflow has no schedule;
 - CI runs once per PR commit (no push + pull_request duplicates) and a newer
   push to a PR cancels the older run.
 """
@@ -72,11 +72,12 @@ def test_every_refresh_step_honours_the_skip():
     assert all("recent != 'true'" in c for c in conds)
 
 
-def test_ticker_stops_after_the_last_dispatch_of_the_evening():
-    text = (WF / "refresh-ticker.yml").read_text(encoding="utf-8")
-    loop = text.split("while in_window", 1)[1]
-    assert loop.index("break") < loop.index("sleep 1800")
-    assert "date -u -d '+30 minutes' +%H" in loop
+def test_no_github_runner_keeps_the_evening_refresh():
+    assert not (WF / "refresh-ticker.yml").exists()
+    text = (WF / "refresh-watch-guide-injuries.yml").read_text(encoding="utf-8")
+    on = text.split("\npermissions:", 1)[0]
+    assert "schedule:" not in on and "cron:" not in on
+    assert "workflow_dispatch:" in on
 
 
 def test_ci_runs_once_per_pr_commit():

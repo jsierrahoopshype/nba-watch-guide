@@ -421,9 +421,11 @@ availability feed somewhere else. Both are optional and neither is a secret.
 - Every build writes `data/build.json` (`{"build": "<short sha>", "mode":
   "build" | "refresh", "generated_at"}`). The commit is never written into the
   pages, so an unchanged page stays byte-identical between builds.
-- `refresh-watch-guide-injuries.yml` runs every 30 minutes from 16:00 to 04:30
-  UTC. It reads the published schedule first and stops within seconds when there
-  are no games on the Eastern date.
+- `refresh-watch-guide-injuries.yml` runs on manual dispatch only: it
+  re-renders today's pages from fresh availability between builds. The
+  30-minute evening refresh is the how-to-watch-live Worker (below). It reads
+  the published schedule first and stops within seconds when there are no
+  games on the Eastern date.
 - Both use `permissions: contents: write` and share the `watch-guide-publish`
   concurrency group, so they never push over each other.
 - Both commit `data/injuries-raw-latest.json` back to the working branch when it

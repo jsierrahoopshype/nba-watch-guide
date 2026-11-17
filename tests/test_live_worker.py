@@ -329,3 +329,19 @@ def test_evening_builds_are_off_the_hour_and_in_season_only():
     text = (ROOT / ".github" / "workflows" / "build-watch-guide-daily.yml").read_text(encoding="utf-8")
     assert "cron: '47 22 * 10-12,1-6 *'" in text
     assert "cron: '47 1 * 10-12,1-6 *'" in text
+
+
+@pytest.mark.parametrize("feed, index", [
+    ("Carlton Carrington", "Bub Carrington"), ("Dennis Schroeder", "Dennis Schröder"),
+    ("Nicolas Claxton", "Nic Claxton"), ("PJ Washington", "P.J. Washington"),
+    ("Ron Holland", "Ronald Holland II"), ("Santiago Aldama", "Santi Aldama"),
+    ("TJ McConnell", "T.J. McConnell"), ("Herb Jones", "Herbert Jones")])
+def test_feed_spellings_meet_the_player_index(feed, index):
+    """The feed and the NBA player index spell these players differently
+    (data/player_aliases.json); unmatched, an Out player would be missing
+    from Who's out. Same answer in the Worker."""
+    assert injuries_source.normalize_name(feed) == injuries_source.normalize_name(index)
+    js = node(f"import {{ normalizeName }} from '{LIB}';"
+              "console.log(JSON.stringify(input.names.map(n => normalizeName(n, input.aliases))));",
+              {"names": [feed, index], "aliases": injuries_source.folded_aliases()})
+    assert js[0] == js[1] == injuries_source.normalize_name(index)
