@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-17T19:00:04+00:00",
+ "fetched_at": "2026-11-17T21:51:08+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7050,
+ "row_count": 7064,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -49474,6 +49474,106 @@
    "injury": "Right Hip Contusion",
    "date": "2026-11-17",
    "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Deni Avdija",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Deni Avdija",
+   "status": "Questionable",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jonathan Kuminga",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jonathan Kuminga",
+   "status": "Out",
+   "injury": "Right Shoulder Contusion",
+   "date": "2026-11-17",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Zyon Pullin",
+   "status": "Out",
+   "injury": "Right Quadriceps Contusion",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Probable",
+   "injury": "Right Fifth Finger Injury",
+   "date": "2026-11-17",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Probable",
+   "injury": "Right Finger Dislocation",
+   "date": "2026-11-17",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Available",
+   "injury": "Left Lower Leg Injury Management",
+   "date": "2026-11-17",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Marcus Smart",
+   "status": "Available",
+   "injury": "League Suspension",
+   "date": "2026-11-17",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Amen Thompson",
+   "status": "Questionable",
+   "injury": "Left Knee Soreness",
+   "date": "2026-11-17",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "CJ McCollum",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "CJ McCollum",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-17",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "CJ McCollum",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-17",
+   "prevStatus": "Available",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Asa Newell",
+   "status": "Out",
+   "injury": "Left Great Toe Hyperextension",
+   "date": "2026-11-05",
+   "prevStatus": "Out",
+   "eta": "4-5 months"
   }
  ]
 }
