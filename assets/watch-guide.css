@@ -256,6 +256,10 @@ a:hover { color: var(--accent); }
 .sched th, .sched td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
 .sched th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); font-weight: 600; }
 .sched td.when { white-space: nowrap; font-family: var(--mono); font-size: 0.82rem; }
+/* Channel chips in a schedule wrap onto stacked lines; 2px above and below
+   puts at least 24px between their centres, the minimum spacing for a tap
+   target their size (WCAG 2.5.8). */
+.sched td .badge { margin-block: 2px; }
 
 @media (max-width: 699px) {
   .sched, .sched tbody, .sched tr, .sched td { display: block; width: 100%; }
@@ -711,7 +715,8 @@ details > summary { min-height: var(--tap); display: flex; align-items: center; 
 /* Tip time line */
 .hg-top { margin-top: 10px; min-height: 28px; }
 .hg-top .game-when { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-.badge-top { background: var(--brand); color: #fff; box-shadow: none; font-size: 0.66rem; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 6px; }
+/* brand-ink rather than brand: white on it is 5.1:1, on brand only 3.7 (under AA). */
+.badge-top { background: var(--brand-ink); color: #fff; box-shadow: none; font-size: 0.66rem; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 6px; }
 
 /* Players */
 .hg-players { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-soft); }
