@@ -1,6 +1,13 @@
 {
-  "_note": "Names that different feeds spell differently. Left: a spelling seen in a feed. Right: the spelling it should match. Matching ignores case, accents and punctuation, so only real name differences belong here.",
+  "_note": "Names that different feeds spell differently. Left: a spelling seen in a feed. Right: the spelling it should match (the NBA player index's). Matching ignores case and accents, and turns punctuation into a space, so \"P.J.\" reads as two letters and \"PJ\" as one word: initials need an entry too.",
   "aliases": {
-    "Herb Jones": "Herbert Jones"
+    "Carlton Carrington": "Bub Carrington",
+    "Dennis Schroeder": "Dennis Schröder",
+    "Herb Jones": "Herbert Jones",
+    "Nicolas Claxton": "Nic Claxton",
+    "PJ Washington": "P.J. Washington",
+    "Ron Holland": "Ronald Holland",
+    "Santiago Aldama": "Santi Aldama",
+    "TJ McConnell": "T.J. McConnell"
   }
 }

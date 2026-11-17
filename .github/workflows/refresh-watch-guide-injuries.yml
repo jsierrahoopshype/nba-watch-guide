@@ -1,10 +1,10 @@
 name: refresh-watch-guide-injuries
 
 on:
-  # Every 30 minutes from 16:00 to 04:30 UTC, which covers a full NBA evening.
-  schedule:
-    - cron: '0,30 16-23 * * *'
-    - cron: '0,30 0-4 * * *'
+  # Manual only. The 30-minute evening refresh is the how-to-watch-live
+  # Cloudflare Worker (worker/, README "Live availability") since Nov 17 2026;
+  # its crons and the refresh-ticker that dispatched it are gone. Run this by
+  # hand to re-render today's pages from fresh availability between builds.
   workflow_dispatch:
 
 permissions:
