@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-19T03:53:18+00:00",
+ "fetched_at": "2026-11-19T09:34:09+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7137,
+ "row_count": 7139,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50090,6 +50090,20 @@
    "injury": "Illness",
    "date": "2026-11-18",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Available",
+   "injury": "Left Knee Strain",
+   "date": "2026-11-18",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach LaVine",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-18",
+   "prevStatus": "Out"
   }
  ]
 }
