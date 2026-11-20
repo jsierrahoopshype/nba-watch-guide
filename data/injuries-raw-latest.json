@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-20T09:15:54+00:00",
+ "fetched_at": "2026-11-20T13:52:54+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7178,
+ "row_count": 7188,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50379,6 +50379,76 @@
    "injury": "Abdominal Soreness",
    "date": "2026-11-19",
    "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jerami Grant",
+   "status": "Left Game",
+   "injury": "Head Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jerami Grant",
+   "status": "Left Game",
+   "injury": "Left Calf Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jerami Grant",
+   "status": "Left Game",
+   "injury": "Left Calf Injury",
+   "date": "2026-11-19",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Doubtful",
+   "injury": "Left Lower Leg Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Questionable",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Doubtful",
+   "injury": "Left Lower Leg Contusion",
+   "date": "2026-11-19",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Questionable",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-19",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Out",
+   "injury": "Right Elbow Inflammation / Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Out",
+   "injury": "Right Elbow Injury Management",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Out",
+   "injury": "Right Elbow Injury Management",
+   "date": "2026-11-19",
+   "prevStatus": "Out"
   }
  ]
 }
