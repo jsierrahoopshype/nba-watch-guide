@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-21T17:11:39+00:00",
+ "fetched_at": "2026-11-21T20:11:10+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7230,
+ "row_count": 7238,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50742,6 +50742,62 @@
    "player": "OG Anunoby",
    "status": "Doubtful",
    "injury": "Left Calf Tightness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "status": "Available",
+   "injury": "Right Foot Sprain",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Available",
+   "injury": "Lumbar Spine Bone Stress",
+   "date": "2026-11-21",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Out",
+   "injury": "Bilateral Patellar Tendinopathy Injury Maintenance",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Isaiah Evans",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ty Jerome",
+   "status": "Available",
+   "injury": "Right Hip Impingement",
+   "date": "2026-11-21",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "PJ Washington",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "PJ Washington",
+   "status": "Doubtful",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "PJ Washington",
+   "status": "Doubtful",
+   "injury": "Illness",
    "date": "2026-11-21",
    "prevStatus": "Questionable"
   }
