@@ -440,7 +440,6 @@ a.out:hover { color: var(--accent-ink); }
 .block { margin: 24px 0; }
 .block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .block-head h2 { margin: 0; }
-.block-head .sub { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 .section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
 .hint { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 10px; }
 .footnote { margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--surface-hover); }

@@ -52,7 +52,8 @@
 
 <section class="hub-games block" data-hub-games data-day="{{ showcase.day }}"{% if not showcase.is_today %} data-next-day{% endif %}>
 {%- if showcase.rows %}
-<div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2><span class="sub">{{ text.games_heading_sub }}</span></div>
+<div class="block-head"><h2 data-rank-heading>{{ showcase.heading }}</h2></div>
+<p class="hint">{{ text.games_heading_sub }}</p>
 <ol class="hg-list">
   {%- for row in showcase.rows %}
   <li class="hg-row" data-game="{{ row.game.game_id }}"{% if row.accent_style %} style="{{ row.accent_style }}"{% endif %}>
