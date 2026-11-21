@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-21T03:31:42+00:00",
+ "fetched_at": "2026-11-21T08:52:15+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7225,
+ "row_count": 7227,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50707,6 +50707,20 @@
    "player": "Nolan Traore",
    "status": "Left Game",
    "injury": "Right Hamstring Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ryan Dunn",
+   "status": "Left Game",
+   "injury": "Right Quadriceps Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Left Game",
+   "injury": "Left Hamstring Injury",
    "date": "2026-11-20",
    "prevStatus": "Available"
   }
