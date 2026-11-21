@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-21T13:16:51+00:00",
+ "fetched_at": "2026-11-21T17:11:39+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7227,
+ "row_count": 7230,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50723,6 +50723,27 @@
    "injury": "Left Hamstring Injury",
    "date": "2026-11-20",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "OG Anunoby",
+   "status": "Doubtful",
+   "injury": "Left Calf Injury",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "OG Anunoby",
+   "status": "Doubtful",
+   "injury": "Left Calf Tightness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
   }
  ]
 }
