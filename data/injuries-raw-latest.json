@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-20T21:15:07+00:00",
+ "fetched_at": "2026-11-21T03:31:42+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7190,
+ "row_count": 7225,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50463,6 +50463,252 @@
    "injury": " Left Knee Contusion / Bone Bruise",
    "date": "2026-11-20",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Myles Turner",
+   "status": "Available",
+   "injury": "Left Shoulder Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Kyle Kuzma",
+   "status": "Available",
+   "injury": "Right Shoulder Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Out",
+   "injury": "Left Lower Leg Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Robert Williams",
+   "status": "Available",
+   "injury": "Rest",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Deni Avdija",
+   "status": "Questionable",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "status": "Questionable",
+   "injury": "Right Foot Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Tyrese Maxey",
+   "status": "Questionable",
+   "injury": "Right Foot Sprain",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Dominick Barlow",
+   "status": "Probable",
+   "injury": "Lumbar Spine Bone Stress",
+   "date": "2026-11-20",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Jordan Clarkson",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan Clarkson",
+   "status": "Out",
+   "injury": "Right Plantar Fasciitis",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "OG Anunoby",
+   "status": "Questionable",
+   "injury": "Left Calf Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Kingston Flemings",
+   "status": "Out",
+   "injury": "Lumbar Spasm",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Braden Smith",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Andrew Nembhard",
+   "status": "Available",
+   "injury": "Left Hip Sprain",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Cameron Boozer",
+   "status": "Out",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jerami Grant",
+   "status": "Out",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-20",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Available",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Ty Jerome",
+   "status": "Probable",
+   "injury": "Right Hip Impingement",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Javon Small",
+   "status": "Out",
+   "injury": "Personal Reasons",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Out",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alex Caruso",
+   "status": "Out",
+   "injury": "Right Hip Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Available",
+   "injury": "Bilateral Patella Tendinopathy",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Available",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-20",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Peyton Watson",
+   "status": "Available",
+   "injury": "Low Back Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Cade Cunningham",
+   "status": "Available",
+   "injury": "Right Knee Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Ron Holland",
+   "status": "Out",
+   "injury": " Left Knee Contusion / Bone Bruise",
+   "date": "2026-11-20",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Noa Essengue",
+   "status": "Available",
+   "injury": "Bilateral Wrist Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jayson Tatum",
+   "status": "Questionable",
+   "injury": "Rest",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Questionable",
+   "injury": "Right Hip Synovitis",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Questionable",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Steven Adams",
+   "status": "Available",
+   "injury": " Right Quadriceps Contusion",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Alperen Sengun",
+   "status": "Available",
+   "injury": "Left Eye Corneal Abrasion",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "De'Andre Hunter",
+   "status": "Available",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-20",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Left Game",
+   "injury": "Right Calf Tightness / Soreness",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Left Game",
+   "injury": "Right Hamstring Injury",
+   "date": "2026-11-20",
+   "prevStatus": "Available"
   }
  ]
 }
