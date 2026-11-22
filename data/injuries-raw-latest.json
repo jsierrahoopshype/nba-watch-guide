@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-22T13:07:08+00:00",
+ "fetched_at": "2026-11-22T17:41:56+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7271,
+ "row_count": 7275,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -51030,6 +51030,35 @@
    "status": "Available",
    "injury": "Left Lower Leg Contusion",
    "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Norman Powell",
+   "status": "Questionable",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable",
+   "eta": "5-10 days"
+  },
+  {
+   "player": "Deandre Ayton",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nicolas Claxton",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Probable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-22",
    "prevStatus": "Questionable"
   }
  ]
