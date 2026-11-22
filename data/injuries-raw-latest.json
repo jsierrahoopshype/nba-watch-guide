@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-21T20:11:10+00:00",
+ "fetched_at": "2026-11-22T02:41:58+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7238,
+ "row_count": 7271,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -50798,6 +50798,237 @@
    "player": "PJ Washington",
    "status": "Doubtful",
    "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Questionable",
+   "injury": "Right Wrist Sprain",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Questionable",
+   "injury": "Right Grointendinitis",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Questionable",
+   "injury": "Right Groin Tendinitis",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Myron Gardner",
+   "status": "Probable",
+   "injury": "Right Hamstring Tightness / Soreness",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jayson Tatum",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Out",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Mitchell Robinson",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Questionable",
+   "injury": "Left Lower Leg Contusion",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "OG Anunoby",
+   "status": "Out",
+   "injury": "Left Calf Tightness",
+   "date": "2026-11-21",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Taurean Prince",
+   "status": "Out",
+   "injury": "Right Knee Arthroscopy",
+   "date": "2026-11-16",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Ron Holland",
+   "status": "Questionable",
+   "injury": " Left Knee Contusion / Bone Bruise",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Cade Cunningham",
+   "status": "Probable",
+   "injury": "Right Knee Soreness",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Pascal Siakam",
+   "status": "Questionable",
+   "injury": "Rest",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Pascal Siakam",
+   "status": "Questionable",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Out",
+   "injury": "Left Hamstring Injury",
+   "date": "2026-11-21",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Out",
+   "injury": "Left Hamstring Soreness",
+   "date": "2026-11-21",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Kingston Flemings",
+   "status": "Questionable",
+   "injury": "Lumbar Spasm",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Kingston Flemings",
+   "status": "Questionable",
+   "injury": "Lumbar Strain",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jaylin Williams",
+   "status": "Out",
+   "injury": "Low Back Spasms",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "status": "Questionable",
+   "injury": "Low Back Contusion / Neck Strain",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Draymond Green",
+   "status": "Available",
+   "injury": "Right Elbow Injury Management",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Probable",
+   "injury": "Right Finger Dislocation",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Probable",
+   "injury": "Left Thumb Sprain",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Questionable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Norman Powell",
+   "status": "Questionable",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "PJ Washington",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Isaiah Evans",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Deni Avdija",
+   "status": "Available",
+   "injury": "Left Foot Inflammation / Soreness",
+   "date": "2026-11-21",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zion Williamson",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Zion Williamson",
+   "status": "Out",
+   "injury": "Left Thigh Contusion",
+   "date": "2026-11-21",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Precious Achiuwa",
+   "status": "Available",
+   "injury": "Left Lower Leg Contusion",
    "date": "2026-11-21",
    "prevStatus": "Questionable"
   }
