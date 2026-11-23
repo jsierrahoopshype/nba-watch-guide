@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-22T20:26:19+00:00",
+ "fetched_at": "2026-11-23T03:11:13+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7287,
+ "row_count": 7332,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -51145,6 +51145,323 @@
    "injury": "Low Back Tightness",
    "date": "2026-11-22",
    "prevStatus": "Out"
+  },
+  {
+   "player": "Nolan Traore",
+   "status": "Out",
+   "injury": "Right Hamstring Strain",
+   "date": "2026-11-22",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Grant Nelson",
+   "status": "Probable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Zion Williamson",
+   "status": "Probable",
+   "injury": "Left Thigh Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Probable",
+   "injury": "Bilateral Patellar Tendinopathy Injury Maintenance",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Bryce McGowens",
+   "status": "Probable",
+   "injury": "Left Elbow Infection",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jayson Tatum",
+   "status": "Available",
+   "injury": "Rest",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Left Game",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Paul George",
+   "status": "Out",
+   "injury": "Rest",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Collin Murray-Boyles",
+   "status": "Probable",
+   "injury": "Concussion Protocol",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Clint Capela",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "status": "Out",
+   "injury": "Low Back Contusion / Neck Strain",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Myron Gardner",
+   "status": "Available",
+   "injury": "Right Hamstring Tightness / Soreness",
+   "date": "2026-11-22",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Ousmane Dieng",
+   "status": "Questionable",
+   "injury": "Left Finger Fracture",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jaylon Tyson",
+   "status": "Probable",
+   "injury": "Right Ankle Injury Management",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Dean Wade",
+   "status": "Probable",
+   "injury": "Left Hamstring Tightness / Soreness.",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Adem Bona",
+   "status": "Probable",
+   "injury": "Cervical Spine Sprain",
+   "date": "2026-11-22",
+   "prevStatus": "Out",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Probable",
+   "injury": "Left Hamstring Strain",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Javon Small",
+   "status": "Available",
+   "injury": "Personal Reasons",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Out",
+   "injury": "Right Groin Tendinitis",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Brandon Miller",
+   "status": "Probable",
+   "injury": "Right Knee Contusion /Bone Bruise",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Brandon Miller",
+   "status": "Probable",
+   "injury": "Right Knee Contusion / Bone Bruise",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Patrick Williams",
+   "status": "Available",
+   "injury": "Left Thumb Sprain",
+   "date": "2026-11-22",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Available",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Walter Clayton",
+   "status": "Available",
+   "injury": "Left Patellar Tendinitis",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "PJ Washington",
+   "status": "Out",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Doubtful"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Out",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Out",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Out",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-21",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Aday Mara",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aday Mara",
+   "status": "Out",
+   "injury": "Right Shin Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Brandon Ingram",
+   "status": "Available",
+   "injury": "Right Heel Surgery",
+   "date": "2026-11-22",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Deandre Ayton",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Carlton Carrington",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Ryan Dunn",
+   "status": "Questionable",
+   "injury": "Right Quadriceps Soreness",
+   "date": "2026-11-22",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Miles McBride",
+   "status": "Out",
+   "injury": "",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Miles McBride",
+   "status": "Out",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Karl-Anthony Towns",
+   "status": "Available",
+   "injury": "Illness",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Pascal Siakam",
+   "status": "Available",
+   "injury": "Left Hip Soreness / Tightness",
+   "date": "2026-11-22",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Available",
+   "injury": "Left Ankle Injury Management",
+   "date": "2026-11-20",
+   "prevStatus": "Available",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Questionable",
+   "injury": "Left Knee Strain",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Left Game",
+   "injury": "Left Knee Injury",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "De'Aaron Fox",
+   "status": "Questionable",
+   "injury": "Right Shin Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan McLaughlin",
+   "status": "Questionable",
+   "injury": "",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jordan McLaughlin",
+   "status": "Questionable",
+   "injury": "Left Shoulder Contusion",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Victor Wembanyama",
+   "status": "Questionable",
+   "injury": "Bilateral Low Back Tightness",
+   "date": "2026-11-22",
+   "prevStatus": "Available"
   }
  ]
 }
