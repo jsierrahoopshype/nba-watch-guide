@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-23T15:44:26+00:00",
+ "fetched_at": "2026-11-23T21:57:11+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7333,
+ "row_count": 7350,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -51470,6 +51470,125 @@
    "date": "2026-11-22",
    "prevStatus": "Out",
    "eta": "8-10 weeks"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Grant Nelson",
+   "status": "Available",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-23",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Jaden Bradley",
+   "status": "Questionable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Pascal Siakam",
+   "status": "Questionable",
+   "injury": "Left Hip Injury Management",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Out",
+   "injury": "Right Foot Soreness",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ousmane Dieng",
+   "status": "Available",
+   "injury": "Left Finger Fracture",
+   "date": "2026-11-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Shai Gilgeous-Alexander",
+   "status": "Available",
+   "injury": "Low Back Contusion / Neck Strain",
+   "date": "2026-11-23",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Alex Caruso",
+   "status": "Out",
+   "injury": "python gr_allworld_page.py python gr_wnba_push.py --repo allworld-rating --file out\\allworld.html python gr_daily.py",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Alex Caruso",
+   "status": "Out",
+   "injury": "Right Hip Impingement",
+   "date": "2026-11-20",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Probable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Nicolas Claxton",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-23",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Trey Murphy",
+   "status": "Available",
+   "injury": "Bilateral Patellar Tendinopathy Injury Maintenance",
+   "date": "2026-11-23",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Bryce McGowens",
+   "status": "Available",
+   "injury": "Left Elbow Infection",
+   "date": "2026-11-23",
+   "prevStatus": "Probable"
+  },
+  {
+   "player": "Ryan Dunn",
+   "status": "Available",
+   "injury": "Right Quadriceps Soreness",
+   "date": "2026-11-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Out",
+   "injury": "Left Knee Injury",
+   "date": "2026-11-23",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Paul George",
+   "status": "Available",
+   "injury": "Rest",
+   "date": "2026-11-23",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Derrick White",
+   "status": "Available",
+   "injury": " Left AC Joint Contusion",
+   "date": "2026-11-23",
+   "prevStatus": "Out"
   }
  ]
 }
