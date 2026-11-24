@@ -13,7 +13,7 @@ Source: jsierrahoopshype/nba-headshots.
 Nothing on a page loads from that repo. The build downloads the faces it
 needs into assets/faces/ in the published tree, which the restore step
 brings back on every run, so each face is fetched once. A player with no
-face-fill file, or one that fails to download, gets his initials instead.
+face-fill file, or one that fails to download, gets no picture (just his name).
 Set HEADSHOTS_BASE to read a different copy of the repo.
 """
 
@@ -38,8 +38,8 @@ FACES = "assets/faces"
 # assets/faces/sources.json. The published tree keeps faces between runs, so
 # a file without the current mark is fetched again the next time a page
 # needs it (same file name, so no page HTML changes). An offline run keeps
-# the old file rather than dropping to initials; an online run whose fetch
-# fails drops a file without the current mark (initials, never the old look).
+# the old file rather than dropping to no picture; an online run whose fetch
+# fails drops a file without the current mark (no picture, never the old look).
 SOURCE_MARK = "face-fill-160-v1"
 SOURCE_FILE = "sources.json"
 MIN_INDEX = 300          # fewer entries than this is treated as a broken index
@@ -89,7 +89,7 @@ def load_index(out_dir: Path, allow_fetch: bool = True) -> tuple[dict[str, str],
         faces = json.loads(cache.read_text(encoding="utf-8")).get("faces") or {}
         return faces, f"headshots: {reason}; kept the last index ({len(faces)} faces)"
     except (OSError, ValueError, AttributeError):
-        return {}, f"headshots: {reason}; no index, initials only"
+        return {}, f"headshots: {reason}; no index, no pictures"
 
 
 def is_webp(data: Any) -> bool:
@@ -131,7 +131,7 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
                 fetched += 1
             except Exception:
                 failed += 1
-                if marks.get(stem) != SOURCE_MARK:     # an old-look file: initials instead
+                if marks.get(stem) != SOURCE_MARK:     # an old-look file: no picture instead
                     continue
         if target.is_file():
             found[key] = rel
@@ -142,5 +142,5 @@ def ensure_faces(out_dir: Path, names: Iterable[str], index: dict[str, str],
             pass
     note = f"headshots: {len(found)} faces on the game cards, {fetched} downloaded"
     if failed:
-        note += f", {failed} failed (initials shown)"
+        note += f", {failed} failed (name only)"
     return found, note

@@ -361,7 +361,7 @@ def test_players_row_shows_two_faces_with_name_and_team(tmp_path_factory, fixtur
     assert [(p["name"], p["team"]) for p in view["players"]] == [
         ("Away Star", BY_TRICODE[game.away_tricode].short_name),
         ("Home Star", BY_TRICODE[game.home_tricode].short_name)]
-    assert [(p["is_face"], p["initials"]) for p in view["players"]] == [(False, "AS"), (False, "HS")]  # no face on disk
+    assert [p["is_face"] for p in view["players"]] == [False, False]  # no face on disk: name only
 
 
 def test_whos_out_shows_chips_or_the_message(tmp_path_factory, fixture_games):

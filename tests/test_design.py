@@ -165,15 +165,14 @@ def test_no_page_asks_another_domain_for_anything(built_site):
     assert "http" not in re.sub(r"/\*.*?\*/", "", css, flags=re.S), "the stylesheet loads something remote"
 
 
-def test_hub_cards_show_the_named_players_or_their_initials(built_site, fixture_games):
-    """No headshots on this offline build, so every named player gets his initials."""
+def test_hub_cards_show_the_named_players_without_initials(built_site, fixture_games):
+    """No headshots on this offline build, so every named player shows his name only."""
     hub = (built_site / "index.html").read_text(encoding="utf-8")
     block = hub[hub.index("data-hub-games"):hub.index("</section>", hub.index("data-hub-games"))]
     for row in block.split('<li class="hg-row" ')[1:]:
         assert row.count('<img class="logo"') == 2
         assert '<img class="av"' not in row and "silhouette" not in row
-        for ini in re.findall(r'<span class="av av-ini" aria-hidden="true" data-volatile>([^<]*)</span>', row):
-            assert re.fullmatch(r"[A-Z?]{1,2}", ini)
+        assert "av-ini" not in row
 
 
 # -- headshot source -------------------------------------------------------------------
@@ -230,7 +229,7 @@ def test_faces_are_downloaded_once_and_failures_fall_back(tmp_path, monkeypatch)
     with Image.open(saved) as im:                                  # transparent, no baked-in background
         assert im.format == "WEBP" and im.size == (160, 160)
         assert im.convert("RGBA").getpixel((0, 0))[3] == 0
-    assert "1 failed (initials shown)" in note
+    assert "1 failed (name only)" in note
     assert calls[0].endswith("/players/headshots/face-fill/1-star-alpha.webp")
     calls.clear()
     found, _ = headshots.ensure_faces(tmp_path, ["Star Alpha"], idx)
@@ -254,9 +253,9 @@ def test_old_faces_are_replaced_once(tmp_path, monkeypatch):
     assert len(calls) == 1
 
 
-def test_an_old_look_face_that_fails_to_refetch_shows_initials(tmp_path, monkeypatch):
+def test_an_old_look_face_that_fails_to_refetch_shows_no_picture(tmp_path, monkeypatch):
     """Online, a face without the current mark whose face-fill fetch fails is
-    not used: the player gets his initials, never the old look."""
+    not used: the player gets no picture, never the old look."""
     old = tmp_path / "assets/faces/1-star-alpha.webp"
     old.parent.mkdir(parents=True)
     old.write_bytes(WEBP)
@@ -266,7 +265,7 @@ def test_an_old_look_face_that_fails_to_refetch_shows_initials(tmp_path, monkeyp
 
     monkeypatch.setattr(headshots, "get", fail)
     found, note = headshots.ensure_faces(tmp_path, ["Star Alpha"], headshots.index_from(INDEX))
-    assert found == {} and "1 failed (initials shown)" in note
+    assert found == {} and "1 failed (name only)" in note
 
 
 def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch):
@@ -297,8 +296,7 @@ def test_hub_uses_downloaded_faces(tmp_path_factory, fixture_games, monkeypatch)
     assert ('<li><img class="av" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="40" height="40" '
             'loading="lazy" decoding="async" alt="" data-volatile><span class="hg-pname">Star Alpha</span>') in players
     other = next(r for r in hub.split('<li class="hg-row" ')[1:] if r.startswith(f'data-game="{today[1].game_id}"'))
-    assert ('<span class="av av-ini" aria-hidden="true" data-volatile>SB</span>'
-            '<span class="hg-pname">Star Bravo</span>') in other            # no face on disk: initials
+    assert '<li><span class="hg-pname">Star Bravo</span>' in other and "av-ini" not in other  # no face on disk: name only
     # The pair page's game block uses the same face, 56px.
     pair = (site / pairs_slug(today[0]) / "index.html").read_text(encoding="utf-8")
     assert '<img class="av pw-face" src="/how-to-watch/assets/faces/1-star-alpha.webp" width="56" height="56"' in pair
