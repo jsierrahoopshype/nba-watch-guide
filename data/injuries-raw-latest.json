@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-24T01:00:55+00:00",
+ "fetched_at": "2026-11-24T06:27:15+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7389,
+ "row_count": 7395,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -51881,6 +51881,48 @@
    "date": "2026-07-30",
    "prevStatus": "Out",
    "eta": "9-12 months"
+  },
+  {
+   "player": "De'Aaron Fox",
+   "status": "Out",
+   "injury": "Right Shin Contusion",
+   "date": "2026-11-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Victor Wembanyama",
+   "status": "Out",
+   "injury": "Bilateral Low Back Tightness",
+   "date": "2026-11-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Julian Strawther",
+   "status": "Available",
+   "injury": "Left Knee Sprain",
+   "date": "2026-11-23",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jordan McLaughlin",
+   "status": "Available",
+   "injury": "Left Shoulder Contusion",
+   "date": "2026-11-23",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Larry Nance Jr",
+   "status": "Left Game",
+   "injury": "Right Ankle Soreness",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ryan Kalkbrenner",
+   "status": "Left Game",
+   "injury": "Left Hip Soreness",
+   "date": "2026-11-23",
+   "prevStatus": "Available"
   }
  ]
 }
