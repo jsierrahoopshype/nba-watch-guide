@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-24T15:35:38+00:00",
+ "fetched_at": "2026-11-24T20:33:15+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7395,
+ "row_count": 7401,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -51923,6 +51923,52 @@
    "injury": "Left Hip Soreness",
    "date": "2026-11-23",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Tre Mann",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jalen Smith",
+   "status": "Questionable",
+   "injury": "Gastrointestinal Illness",
+   "date": "2026-11-24",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Ebuka Okorie",
+   "status": "Out",
+   "injury": " Left Oblique Strain",
+   "date": "2026-11-19",
+   "prevStatus": "Out",
+   "eta": "1-2 weeks"
+  },
+  {
+   "player": "Ebuka Okorie",
+   "status": "Out",
+   "injury": " Left Oblique Strain",
+   "date": "2026-11-19",
+   "prevStatus": "Out",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Ebuka Okorie",
+   "status": "Out",
+   "injury": " Left Oblique Strain",
+   "date": "2026-11-19",
+   "prevStatus": "Out",
+   "eta": "3-4 weeks"
+  },
+  {
+   "player": "Taurean Prince",
+   "status": "Out",
+   "injury": "Right Knee Arthroscopy",
+   "date": "2026-11-16",
+   "prevStatus": "Out",
+   "eta": "5-6 weeks"
   }
  ]
 }
