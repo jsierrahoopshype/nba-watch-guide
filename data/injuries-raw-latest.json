@@ -1,6 +1,6 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-25T05:03:54+00:00",
+ "fetched_at": "2026-11-25T10:34:54+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
  "row_count": 7421,
  "rows": [
