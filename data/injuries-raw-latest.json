@@ -1,8 +1,8 @@
 {
  "_note": "Raw upstream availability feed, saved on every refresh so there is always a copy to fall back on and to compare the next fetch against. Not served to readers.",
- "fetched_at": "2026-11-27T04:35:05+00:00",
+ "fetched_at": "2026-11-27T10:11:48+00:00",
  "source_id": "hoopsmatic-depth-charts-injuries",
- "row_count": 7449,
+ "row_count": 7480,
  "rows": [
   {
    "player": "Fred VanVleet",
@@ -52309,6 +52309,228 @@
    "injury": "Left Ankle Injury",
    "date": "2026-11-25",
    "prevStatus": "Available"
+  },
+  {
+   "player": "Moritz Wagner",
+   "status": "Out",
+   "injury": "Left Knee Injury Management",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Mitchell Robinson",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Larry Nance Jr",
+   "status": "Questionable",
+   "injury": "Right Ankle Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Questionable",
+   "injury": "Left Hamstring Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Aaron Nesmith",
+   "status": "Available",
+   "injury": "Right Foot Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Kelly Oubre",
+   "status": "Questionable",
+   "injury": "Right Hand Laceration",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Austin Reaves",
+   "status": "Questionable",
+   "injury": "Left Heel Contusion / Bone Bruise",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Zach Edey",
+   "status": "Questionable",
+   "injury": "Left Ankle Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Left Game",
+   "eta": "2-3 weeks"
+  },
+  {
+   "player": "Isaiah Stewart",
+   "status": "Questionable",
+   "injury": "Right Hip Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "status": "Probable",
+   "injury": "Right Groin Tendinitis",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Andrew Wiggins",
+   "status": "Probable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "LaMelo Ball",
+   "status": "Questionable",
+   "injury": "Left Ankle Injury",
+   "date": "2026-11-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Bennedict Mathurin",
+   "status": "Doubtful",
+   "injury": "Left Plantar Fasciitis",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Trendon Watford",
+   "status": "Probable",
+   "injury": "Right Ankle Sprain",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "OG Anunoby",
+   "status": "Doubtful",
+   "injury": "Left Calf Strain",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jordan Clarkson",
+   "status": "Questionable",
+   "injury": "Right Plantar Fasciitis",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Andre Drummond",
+   "status": "Questionable",
+   "injury": "Head",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Miles McBride",
+   "status": "Questionable",
+   "injury": "Left Adductor Tightness",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Out",
+   "injury": "Left Hamstring Tightness",
+   "date": "2026-11-26",
+   "prevStatus": "Left Game"
+  },
+  {
+   "player": "Joel Embiid",
+   "status": "Questionable",
+   "injury": "Illness",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Dylan Harper",
+   "status": "Questionable",
+   "injury": "Left Hip External Rotator Strain",
+   "date": "2026-11-26",
+   "prevStatus": "Out",
+   "eta": "1-3 weeks"
+  },
+  {
+   "player": "Alijah Martin",
+   "status": "Questionable",
+   "injury": "Left Knee Soreness",
+   "date": "2026-11-26",
+   "prevStatus": "Available"
+  },
+  {
+   "player": "Jaxson Hayes",
+   "status": "Questionable",
+   "injury": "Left Knee Strain",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Jusuf Nurkic",
+   "status": "Questionable",
+   "injury": "Right 2nd Plantar Plate Tear",
+   "date": "2026-11-26",
+   "prevStatus": "Out",
+   "eta": "4-6 weeks"
+  },
+  {
+   "player": "Henri Veesaar",
+   "status": "Out",
+   "injury": "Right ACL Repair / Surgery",
+   "date": "2026-09-21",
+   "prevStatus": "Out",
+   "eta": "9-12 months"
+  },
+  {
+   "player": "Cade Cunningham",
+   "status": "Out",
+   "injury": "Right Knee Tendinopathy",
+   "date": "2026-11-24",
+   "prevStatus": "Out"
+  },
+  {
+   "player": "Taurean Prince",
+   "status": "Out",
+   "injury": "Right Arthroscopy",
+   "date": "2026-11-16",
+   "prevStatus": "Out",
+   "eta": "5-6 weeks"
+  },
+  {
+   "player": "Larry Nance Jr",
+   "status": "Questionable",
+   "injury": "Right Ankle Bruise",
+   "date": "2026-11-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "TJ McConnell",
+   "status": "Questionable",
+   "injury": "Left Hamstring Injury Management",
+   "date": "2026-11-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "LaMelo Ball",
+   "status": "Questionable",
+   "injury": "Left Ankle Sprain",
+   "date": "2026-11-26",
+   "prevStatus": "Questionable"
+  },
+  {
+   "player": "Jaylen Brown",
+   "status": "Out",
+   "injury": "Left Hamstring Injury Management",
+   "date": "2026-11-26",
+   "prevStatus": "Out"
   }
  ]
 }
