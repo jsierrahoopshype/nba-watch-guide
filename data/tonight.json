@@ -1,0 +1,918 @@
+{
+ "updated_at": "2026-11-28T08:56:57-05:00",
+ "as_of": "2026-11-27",
+ "source_id": "hoopsmatic-depth-charts-injuries",
+ "date_et": "2026-11-28",
+ "has_games_today": true,
+ "has_injury_data": true,
+ "games": [
+  {
+   "game_id": "0022600297",
+   "home": "WAS",
+   "away": "ORL",
+   "tipoff_utc": "2026-11-28T22:00:00+00:00",
+   "tipoff_et": "2026-11-28T17:00:00-05:00",
+   "channels": [
+    "MNMT2/Monumental+"
+   ],
+   "players": [
+    {
+     "player": "Izaiyah Nelson",
+     "status": "Out",
+     "injury": "Left Ankle Fracture",
+     "date": "2026-07-30",
+     "team": "ORL"
+    },
+    {
+     "player": "Jonathan Isaac",
+     "status": "Out",
+     "injury": "Left Knee Injury Management",
+     "date": "2026-10-21",
+     "team": "ORL"
+    },
+    {
+     "player": "Kevin Porter",
+     "status": "Out",
+     "injury": "Returnto Competition Reconditioning",
+     "date": "2026-11-27",
+     "team": "ORL"
+    },
+    {
+     "player": "Noah Penda",
+     "status": "Out",
+     "injury": "Right Partiallytorn hamstring",
+     "date": "2026-10-17",
+     "team": "ORL"
+    },
+    {
+     "player": "Paolo Banchero",
+     "status": "Out",
+     "injury": "Right High Ankle Sprain",
+     "date": "2026-10-24",
+     "team": "ORL"
+    },
+    {
+     "player": "Anthony Black",
+     "status": "Questionable",
+     "injury": "Back Soreness",
+     "date": "2026-11-27",
+     "team": "ORL"
+    },
+    {
+     "player": "Colin Castleton",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-10-31",
+     "team": "ORL"
+    },
+    {
+     "player": "Desmond Bane",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-09",
+     "team": "ORL"
+    },
+    {
+     "player": "Franz Wagner",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "ORL"
+    },
+    {
+     "player": "Jalen Suggs",
+     "status": "Available",
+     "injury": "Right Knee Contusion / Bone Bruise",
+     "date": "2026-11-13",
+     "team": "ORL"
+    },
+    {
+     "player": "Jamal Cain",
+     "status": "Available",
+     "injury": "Left Shoulder Contusion",
+     "date": "2026-11-13",
+     "team": "ORL"
+    },
+    {
+     "player": "Tristan Da Silva",
+     "status": "Available",
+     "injury": "Left Calf Strain",
+     "date": "2026-11-13",
+     "team": "ORL"
+    },
+    {
+     "player": "Jamir Watkins",
+     "status": "Out",
+     "injury": "Left ACL Repair / Surgery",
+     "date": "2026-07-30",
+     "team": "WAS"
+    },
+    {
+     "player": "Justin Champagnie",
+     "status": "Out",
+     "injury": "Right Foot Surgery",
+     "date": "2026-10-27",
+     "team": "WAS"
+    },
+    {
+     "player": "Reece Beekman",
+     "status": "Out",
+     "injury": "Right AC Joint Sprain / Separation",
+     "date": "2026-11-02",
+     "team": "WAS"
+    },
+    {
+     "player": "Tristan Vukcevic",
+     "status": "Out",
+     "injury": "Left Hip Impingement",
+     "date": "2026-10-01",
+     "team": "WAS"
+    },
+    {
+     "player": "AJ Dybantsa",
+     "status": "Available",
+     "injury": "Left Ankle Sprain",
+     "date": "2026-10-28",
+     "team": "WAS"
+    },
+    {
+     "player": "Alex Sarr",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-15",
+     "team": "WAS"
+    },
+    {
+     "player": "Anthony Davis",
+     "status": "Available",
+     "injury": "Right Ankle Sprain",
+     "date": "2026-11-09",
+     "team": "WAS"
+    },
+    {
+     "player": "Anthony Gill",
+     "status": "Available",
+     "injury": "Low Back Spasms",
+     "date": "2026-11-04",
+     "team": "WAS"
+    },
+    {
+     "player": "Bilal Coulibaly",
+     "status": "Available",
+     "injury": "Left Hand Soreness",
+     "date": "2026-11-10",
+     "team": "WAS"
+    },
+    {
+     "player": "Carlton Carrington",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-22",
+     "team": "WAS"
+    },
+    {
+     "player": "Deandre Ayton",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-22",
+     "team": "WAS"
+    },
+    {
+     "player": "Felix Okpara",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-10-23",
+     "team": "WAS"
+    },
+    {
+     "player": "Kyshawn George",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "WAS"
+    },
+    {
+     "player": "Trae Young",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "WAS"
+    },
+    {
+     "player": "Tre Johnson",
+     "status": "Available",
+     "injury": "Low Back Soreness",
+     "date": "2026-11-16",
+     "team": "WAS"
+    },
+    {
+     "player": "Tre Mann",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-24",
+     "team": "WAS"
+    }
+   ]
+  },
+  {
+   "game_id": "0022600298",
+   "home": "CHA",
+   "away": "BKN",
+   "tipoff_utc": "2026-11-28T23:00:00+00:00",
+   "tipoff_et": "2026-11-28T18:00:00-05:00",
+   "channels": [
+    "WAXN/DAZN-CHA"
+   ],
+   "players": [
+    {
+     "player": "Moritz Wagner",
+     "status": "Out",
+     "injury": "Left Knee Injury Management",
+     "date": "2026-11-26",
+     "team": "BKN"
+    },
+    {
+     "player": "Nolan Traore",
+     "status": "Out",
+     "injury": "Right Hamstring Strain",
+     "date": "2026-11-22",
+     "team": "BKN"
+    },
+    {
+     "player": "Danny Wolf",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "BKN"
+    },
+    {
+     "player": "Day'Ron Sharpe",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-10-21",
+     "team": "BKN"
+    },
+    {
+     "player": "Egor Demin",
+     "status": "Available",
+     "injury": "Right Leg Bone Bruise",
+     "date": "2026-11-11",
+     "team": "BKN"
+    },
+    {
+     "player": "Grant Nelson",
+     "status": "Available",
+     "injury": "Right Ankle Sprain",
+     "date": "2026-11-23",
+     "team": "BKN"
+    },
+    {
+     "player": "Josh Minott",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "BKN"
+    },
+    {
+     "player": "Michael Porter",
+     "status": "Available",
+     "injury": "Personal Reasons",
+     "date": "2026-11-15",
+     "team": "BKN"
+    },
+    {
+     "player": "Mikel Brown",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-14",
+     "team": "BKN"
+    },
+    {
+     "player": "Noah Clowney",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-07",
+     "team": "BKN"
+    },
+    {
+     "player": "Terance Mann",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "BKN"
+    },
+    {
+     "player": "Tyler Bilodeau",
+     "status": "Available",
+     "injury": "Right Shoulder Sprain",
+     "date": "2026-10-26",
+     "team": "BKN"
+    },
+    {
+     "player": "Dennis Schroeder",
+     "status": "Out",
+     "injury": "Left Hamstring Strain",
+     "date": "2026-11-06",
+     "team": "CHA"
+    },
+    {
+     "player": "Kon Knueppel",
+     "status": "Out",
+     "injury": "Left Hamstring Strain",
+     "date": "2026-11-05",
+     "team": "CHA"
+    },
+    {
+     "player": "Grayson Allen",
+     "status": "Questionable",
+     "injury": "Concussion Protocol",
+     "date": "2026-11-27",
+     "team": "CHA"
+    },
+    {
+     "player": "Ryan Kalkbrenner",
+     "status": "Probable",
+     "injury": "Left Hip Soreness / Tightness",
+     "date": "2026-11-27",
+     "team": "CHA"
+    },
+    {
+     "player": "Brandon Miller",
+     "status": "Available",
+     "injury": "Right Knee Contusion / Bone Bruise",
+     "date": "2026-11-23",
+     "team": "CHA"
+    },
+    {
+     "player": "Christian Anderson",
+     "status": "Available",
+     "injury": "Left Ankle Sprain",
+     "date": "2026-10-24",
+     "team": "CHA"
+    },
+    {
+     "player": "Coby White",
+     "status": "Available",
+     "injury": "Left Calf Injury Management",
+     "date": "2026-11-04",
+     "team": "CHA"
+    },
+    {
+     "player": "Grant Williams",
+     "status": "Available",
+     "injury": "Right Hamstring Injury Management",
+     "date": "2026-11-24",
+     "team": "CHA"
+    },
+    {
+     "player": "Kylan Boswell",
+     "status": "Available",
+     "injury": "Right Knee Surgery",
+     "date": "2026-10-25",
+     "team": "CHA"
+    },
+    {
+     "player": "Moussa Diabate",
+     "status": "Available",
+     "injury": "Right Quadriceps Tendinopathy",
+     "date": "2026-11-12",
+     "team": "CHA"
+    },
+    {
+     "player": "Naz Reid",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-10-26",
+     "team": "CHA"
+    },
+    {
+     "player": "Sion James",
+     "status": "Available",
+     "injury": "Left Thigh Soreness",
+     "date": "2026-11-25",
+     "team": "CHA"
+    }
+   ]
+  },
+  {
+   "game_id": "0022600299",
+   "home": "CHI",
+   "away": "IND",
+   "tipoff_utc": "2026-11-29T01:00:00+00:00",
+   "tipoff_et": "2026-11-28T20:00:00-05:00",
+   "channels": [
+    "CHSN/CHSN App"
+   ],
+   "players": [
+    {
+     "player": "Ben Sheppard",
+     "status": "Out",
+     "injury": "Left Meniscus Surgery",
+     "date": "2026-10-23",
+     "team": "IND"
+    },
+    {
+     "player": "Johnny Furphy",
+     "status": "Out",
+     "injury": "Torn Right Knee ACL",
+     "date": "2026-07-30",
+     "team": "IND"
+    },
+    {
+     "player": "TJ McConnell",
+     "status": "Out",
+     "injury": "Left Hamstring Injury Management",
+     "date": "2026-11-27",
+     "team": "IND"
+    },
+    {
+     "player": "Tyrese Haliburton",
+     "status": "Out",
+     "injury": "Left Hamstring Strain",
+     "date": "2026-10-28",
+     "team": "IND"
+    },
+    {
+     "player": "Aaron Nesmith",
+     "status": "Available",
+     "injury": "Right Foot Soreness",
+     "date": "2026-11-26",
+     "team": "IND"
+    },
+    {
+     "player": "Andrew Nembhard",
+     "status": "Available",
+     "injury": "Left Hip Sprain",
+     "date": "2026-11-20",
+     "team": "IND"
+    },
+    {
+     "player": "Braden Smith",
+     "status": "Available",
+     "injury": "Right Ankle Sprain",
+     "date": "2026-11-20",
+     "team": "IND"
+    },
+    {
+     "player": "Ivica Zubac",
+     "status": "Available",
+     "injury": "Left Ankle Sprain",
+     "date": "2026-11-04",
+     "team": "IND"
+    },
+    {
+     "player": "Jarace Walker",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "IND"
+    },
+    {
+     "player": "Kelly Oubre",
+     "status": "Available",
+     "injury": "Right Hand Laceration",
+     "date": "2026-11-27",
+     "team": "IND"
+    },
+    {
+     "player": "Kobe Brown",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-10-22",
+     "team": "IND"
+    },
+    {
+     "player": "Larry Nance Jr",
+     "status": "Available",
+     "injury": "Right Ankle Bruise",
+     "date": "2026-11-27",
+     "team": "IND"
+    },
+    {
+     "player": "Obi Toppin",
+     "status": "Available",
+     "injury": "Low Back Soreness",
+     "date": "2026-11-04",
+     "team": "IND"
+    },
+    {
+     "player": "Pascal Siakam",
+     "status": "Available",
+     "injury": "Left Hip Injury Management",
+     "date": "2026-11-23",
+     "team": "IND"
+    },
+    {
+     "player": "Caleb Wilson",
+     "status": "Out",
+     "injury": "Right Metacarpal Fracture",
+     "date": "2026-11-14",
+     "team": "CHI"
+    },
+    {
+     "player": "Norman Powell",
+     "status": "Out",
+     "injury": "Right Hamstring Strain",
+     "date": "2026-11-22",
+     "team": "CHI"
+    },
+    {
+     "player": "Jalen Smith",
+     "status": "Probable",
+     "injury": "Gastrointestinal Illness",
+     "date": "2026-11-27",
+     "team": "CHI"
+    },
+    {
+     "player": "Noa Essengue",
+     "status": "Probable",
+     "injury": "Right Thumb Sprain",
+     "date": "2026-11-27",
+     "team": "CHI"
+    },
+    {
+     "player": "Dailyn Swain",
+     "status": "Available",
+     "injury": "Right Disc Irritation",
+     "date": "2026-11-14",
+     "team": "CHI"
+    },
+    {
+     "player": "Isaac Okoro",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "CHI"
+    },
+    {
+     "player": "Jordan Hawkins",
+     "status": "Available",
+     "injury": "Gastrointestinal Illness",
+     "date": "2026-10-23",
+     "team": "CHI"
+    },
+    {
+     "player": "Josh Giddey",
+     "status": "Available",
+     "injury": "Left Wrist Spra",
+     "date": "2026-10-23",
+     "team": "CHI"
+    },
+    {
+     "player": "Matas Buzelis",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "CHI"
+    },
+    {
+     "player": "Nicolas Claxton",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-23",
+     "team": "CHI"
+    },
+    {
+     "player": "Patrick Williams",
+     "status": "Available",
+     "injury": "Left Thumb Sprain",
+     "date": "2026-11-22",
+     "team": "CHI"
+    },
+    {
+     "player": "Tobe Awaka",
+     "status": "Available",
+     "injury": "Low Back Tightness",
+     "date": "2026-11-22",
+     "team": "CHI"
+    },
+    {
+     "player": "Zach Collins",
+     "status": "Available",
+     "injury": "Respiratory Illness",
+     "date": "2026-11-11",
+     "team": "CHI"
+    }
+   ]
+  },
+  {
+   "game_id": "0022600300",
+   "home": "MIL",
+   "away": "OKC",
+   "tipoff_utc": "2026-11-29T01:00:00+00:00",
+   "tipoff_et": "2026-11-28T20:00:00-05:00",
+   "channels": [
+    "WCGV"
+   ],
+   "players": [
+    {
+     "player": "Aday Mara",
+     "status": "Out",
+     "injury": "Right Shin Contusion",
+     "date": "2026-11-22",
+     "team": "OKC"
+    },
+    {
+     "player": "Cason Wallace",
+     "status": "Out",
+     "injury": "Left Shoulder Surgery",
+     "date": "2026-10-26",
+     "team": "OKC"
+    },
+    {
+     "player": "Chet Holmgren",
+     "status": "Out",
+     "injury": "Right Knee / Injury Recovery",
+     "date": "2026-10-26",
+     "team": "OKC"
+    },
+    {
+     "player": "Jalen Williams",
+     "status": "Out",
+     "injury": "Left Ankle Surgery",
+     "date": "2026-10-26",
+     "team": "OKC"
+    },
+    {
+     "player": "Jaylin Williams",
+     "status": "Out",
+     "injury": "Low Back Spasms",
+     "date": "2026-11-21",
+     "team": "OKC"
+    },
+    {
+     "player": "Nikola Topic",
+     "status": "Out",
+     "injury": "Left Hip Strain",
+     "date": "2026-11-19",
+     "team": "OKC"
+    },
+    {
+     "player": "Thomas Sorber",
+     "status": "Out",
+     "injury": "Right Knee Surgery",
+     "date": "2026-10-26",
+     "team": "OKC"
+    },
+    {
+     "player": "Ajay Mitchell",
+     "status": "Available",
+     "injury": "Left Ankle Sprain",
+     "date": "2026-11-15",
+     "team": "OKC"
+    },
+    {
+     "player": "Alex Caruso",
+     "status": "Available",
+     "injury": "Right Hip Impingement",
+     "date": "2026-11-24",
+     "team": "OKC"
+    },
+    {
+     "player": "Shai Gilgeous-Alexander",
+     "status": "Available",
+     "injury": "Low Back Contusion / Neck Strain",
+     "date": "2026-11-23",
+     "team": "OKC"
+    },
+    {
+     "player": "Kasparas Jakucionis",
+     "status": "Out",
+     "injury": "Left Ankle Tenosynovitis",
+     "date": "2026-11-27",
+     "team": "MIL"
+    },
+    {
+     "player": "Gary Trent Jr",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-09",
+     "team": "MIL"
+    },
+    {
+     "player": "Kam Jones",
+     "status": "Available",
+     "injury": "Right Ankle Sprain",
+     "date": "2026-11-04",
+     "team": "MIL"
+    },
+    {
+     "player": "Kel'el Ware",
+     "status": "Available",
+     "injury": "Left Ankle Sprain",
+     "date": "2026-11-10",
+     "team": "MIL"
+    },
+    {
+     "player": "Kyle Kuzma",
+     "status": "Available",
+     "injury": "Right Shoulder Contusion",
+     "date": "2026-11-20",
+     "team": "MIL"
+    },
+    {
+     "player": "Myles Turner",
+     "status": "Available",
+     "injury": "Left Shoulder Contusion",
+     "date": "2026-11-20",
+     "team": "MIL"
+    },
+    {
+     "player": "Ousmane Dieng",
+     "status": "Available",
+     "injury": "Left Finger Fracture",
+     "date": "2026-11-23",
+     "team": "MIL"
+    },
+    {
+     "player": "Pete Nance",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "MIL"
+    },
+    {
+     "player": "Ryan Rollins",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-19",
+     "team": "MIL"
+    },
+    {
+     "player": "Tyler Herro",
+     "status": "Available",
+     "injury": "Right Knee Contusion",
+     "date": "2026-11-11",
+     "team": "MIL"
+    }
+   ]
+  },
+  {
+   "game_id": "0022600301",
+   "home": "HOU",
+   "away": "PHI",
+   "tipoff_utc": "2026-11-29T01:30:00+00:00",
+   "tipoff_et": "2026-11-28T20:30:00-05:00",
+   "channels": [
+    "NBA TV",
+    "SCHN/SCHN+"
+   ],
+   "players": [
+    {
+     "player": "Ariel Hukporti",
+     "status": "Out",
+     "injury": "Right Achilles Tendon Rupture / Tear",
+     "date": "2026-10-06",
+     "team": "PHI"
+    },
+    {
+     "player": "Dean Wade",
+     "status": "Out",
+     "injury": "Left Hamstring Injury Management",
+     "date": "2026-11-27",
+     "team": "PHI"
+    },
+    {
+     "player": "Jaylen Brown",
+     "status": "Out",
+     "injury": "Left Hamstring Injury Management",
+     "date": "2026-11-26",
+     "team": "PHI"
+    },
+    {
+     "player": "Adem Bona",
+     "status": "Available",
+     "injury": "Cervical Spine Sprain",
+     "date": "2026-11-23",
+     "team": "PHI"
+    },
+    {
+     "player": "Anfernee Simons",
+     "status": "Available",
+     "injury": "Left Hamstring Tireness / Soreness",
+     "date": "2026-10-20",
+     "team": "PHI"
+    },
+    {
+     "player": "Dominick Barlow",
+     "status": "Available",
+     "injury": "Lumbar Spine Bone Stress",
+     "date": "2026-11-21",
+     "team": "PHI"
+    },
+    {
+     "player": "Jabari Walker",
+     "status": "Available",
+     "injury": "Left Patellar Tendinopathy",
+     "date": "2026-10-31",
+     "team": "PHI"
+    },
+    {
+     "player": "Joel Embiid",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-27",
+     "team": "PHI"
+    },
+    {
+     "player": "Kentavious Caldwell-Pope",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "PHI"
+    },
+    {
+     "player": "LeBron James",
+     "status": "Available",
+     "injury": "Low Back Sciatica Management",
+     "date": "2026-11-17",
+     "team": "PHI"
+    },
+    {
+     "player": "Tacko Fall",
+     "status": "Available",
+     "injury": "Left Quadriceps Strain",
+     "date": "2026-10-31",
+     "team": "PHI"
+    },
+    {
+     "player": "Tyrese Maxey",
+     "status": "Available",
+     "injury": "Right Foot Sprain",
+     "date": "2026-11-21",
+     "team": "PHI"
+    },
+    {
+     "player": "VJ Edgecombe",
+     "status": "Available",
+     "injury": "Abdominal Contusion",
+     "date": "2026-10-27",
+     "team": "PHI"
+    },
+    {
+     "player": "Steven Adams",
+     "status": "Questionable",
+     "injury": "Right Patellofemoral Pain",
+     "date": "2026-11-27",
+     "team": "HOU"
+    },
+    {
+     "player": "Alperen Sengun",
+     "status": "Available",
+     "injury": "Left Eye Corneal Abrasion",
+     "date": "2026-11-20",
+     "team": "HOU"
+    },
+    {
+     "player": "Amen Thompson",
+     "status": "Available",
+     "injury": "Left Knee Soreness",
+     "date": "2026-11-18",
+     "team": "HOU"
+    },
+    {
+     "player": "Clint Capela",
+     "status": "Available",
+     "injury": "Right Ankle Sprain",
+     "date": "2026-11-22",
+     "team": "HOU"
+    },
+    {
+     "player": "Fred VanVleet",
+     "status": "Available",
+     "injury": "Right Knee Injury Management",
+     "date": "2026-11-16",
+     "team": "HOU"
+    },
+    {
+     "player": "Kevin Durant",
+     "status": "Available",
+     "injury": "",
+     "date": "2026-07-30",
+     "team": "HOU"
+    },
+    {
+     "player": "Marcus Smart",
+     "status": "Available",
+     "injury": "League Suspension",
+     "date": "2026-11-17",
+     "team": "HOU"
+    },
+    {
+     "player": "Oscar Tshiebwe",
+     "status": "Available",
+     "injury": "Illness",
+     "date": "2026-11-10",
+     "team": "HOU"
+    },
+    {
+     "player": "Reed Sheppard",
+     "status": "Available",
+     "injury": "Low Back Soreness",
+     "date": "2026-11-02",
+     "team": "HOU"
+    }
+   ]
+  }
+ ]
+}
